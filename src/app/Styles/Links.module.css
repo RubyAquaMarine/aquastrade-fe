@@ -1,0 +1,448 @@
+/*  trading view */
+
+.tradeup {
+  font-size: 8px;
+  color: rgb(194, 187, 187);
+}
+.tradedown {
+  font-size: 8px;
+  color: rgb(206, 83, 83);
+}
+
+.tradeBalance {
+  font-size: 8px;
+  color: rgb(194, 187, 187);
+}
+
+.tradingView {
+  padding-left: 1px;
+  padding-right: -50px;
+  padding-top: 0px;
+}
+
+.tradingViewPara {
+  padding-left: 50px;
+  padding-top: 0px;
+  font-size: 22px;
+}
+.tradingViewText {
+  padding-left: 70px;
+  padding-top: 0px;
+  font-size: 16px;
+}
+
+/*  buttons #171717; */
+.toggleButton {
+  background-color: #171717;
+  color: white;
+  padding: 0.2rem 0.3rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+}
+
+.toggleButtonEuropa {
+  background-color: #171717;
+  color: #2196f3;
+  padding: 1rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+}
+
+.toggleNetwork {
+  background-color: #171717;
+  color: white;
+  padding: 0.2rem 0.3rem;
+  border: 0.5px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(82, 86, 109, 0.47),
+    transparent
+  );
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
+
+.p_body {
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.toggleButton:hover {
+  background-color: #2196f3;
+}
+
+.connectButton {
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
+
+.connectButtonEuropa {
+  display: flex;
+}
+
+.connectorButton {
+  padding: 0.3rem 0.5rem;
+}
+
+/* smaller than min-width */
+.connectButtons {
+  padding: 0.9rem 1.5rem;
+  padding-bottom: 6px;
+  padding-top: 8px;
+}
+
+@media (min-width: 800px) {
+  .connectButtons {
+    display: flex;
+    padding: 0.9rem 1.5rem;
+  }
+}
+
+.spaceTop {
+  margin-top: 5px;
+}
+
+.spaceNormal {
+  margin-bottom: 0;
+}
+
+.spaceDouble {
+  margin-bottom: 20px;
+  /* Double spacing */
+}
+
+/*
+ when screens are too small use these settings 
+
+  backdrop-filter: blur(20px);
+*/
+.p_styled {
+  position: static;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: auto;
+  min-width: 200px;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(82, 86, 109, 0.47),
+    transparent
+  );
+  padding-bottom: 6px;
+  padding-top: 8px;
+}
+
+/*  use some logic here and if conditions are met , then update the css 
+  if width is 1024 > use these settings */
+@media (min-width: 480px) {
+  .p_styled {
+    position: static;
+    left: 0;
+    top: 0;
+    width: auto;
+    min-width: 200px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 4px;
+  }
+}
+
+/* Add more styles as needed */
+.image_skl {
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  width: auto;
+  min-width: 300px;
+}
+
+/* Lists  */
+.customList {
+  margin-bottom: 2px;
+  /* Adjust the spacing as needed */
+}
+
+/* Light Dark */
+.lightMode {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Alignments */
+.customAlignLeft {
+  align-self: flex-start;
+  /* Adjust the spacing as needed */
+}
+
+.container {
+  display: inline-block;
+}
+
+@media (min-width: 720px) {
+  .container {
+    width: auto;
+    min-width: 480px;
+    display: flex;
+  }
+}
+
+.column {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 1rem 1rem;
+  text-align: center;
+}
+
+.textInputs {
+  border: rounded;
+  color: rgb(194, 187, 187);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.textInputSmall {
+  border: rounded;
+  color: rgb(194, 187, 187);
+  border-radius: 6px;
+  text-align: center;
+  max-width: 100px;
+}
+
+.imageAlign {
+  border: rounded;
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: auto;
+  max-width: 100%;
+}
+
+.imageCenter {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.textDesc {
+  text-align: center;
+  padding: 0.2rem 0.3rem;
+  font-size: 12px;
+  margin: 0.2rem 0.3rem;
+}
+
+.topText {
+  box-sizing: border-box;
+  font-weight: 400;
+  color: var(--white);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-family: Gellix, sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.midText {
+  box-sizing: border-box;
+  margin: 0.67em 0;
+  color: var(--white);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-family: Gellix, sans-serif;
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 110%;
+  display: block;
+}
+
+.bottomText {
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  margin-top: 0;
+  font-family: Gellix, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: center;
+  max-width: 530px;
+  color: #efefef;
+  margin-bottom: 32px;
+}
+
+.gridSix {
+  margin-top: 5px;
+  background-color: #03bada;
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) minmax(30px, 1fr);
+  grid-column-gap: 15px;
+  grid-column: flex;
+
+  width: fit-content;
+  border: rounded;
+  border-radius: 12px;
+}
+
+.buttonDisplay {
+  background-color: #1a1b1f;
+  color: white;
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 120px;
+}
+
+@media (max-width: 600px) {
+  .testAlignLeft {
+    text-align: start;
+    border: rounded;
+    border-radius: 12px;
+    background-color: #1a1b1f;
+    padding: 0.2rem 1rem;
+
+    max-width: 600px;
+  }
+}
+
+.testAlignLeft {
+  text-align: left;
+  font-size: 0.9rem;
+  border: rounded;
+  border-radius: 12px;
+  background-color: #1a1b1f;
+  min-width: 400px;
+  padding: 0.2rem 1rem;
+
+  list-style: disc;
+}
+
+.textBold {
+  text-align: left;
+  margin: 0.2rem 0.3rem;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.imageInvert {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  text-align: right;
+}
+
+/*
+trading ui 
+*/
+
+.tradeContainer {
+  background-color: #2b355c;
+  border-radius: 6px;
+  padding: 0.2rem 1rem;
+}
+
+/*
+cells rounded with padding to fit the cell around the text better
+margin top and bottom to center the cell within the nav etter
+*/
+
+.tradeContainerLight {
+  background-color: #475384;
+  border-radius: 6px;
+  padding: 0.2rem 1rem;
+}
+
+.tradeAvailAssets {
+  position: static;
+  min-width: 60px;
+  font-size: 22px;
+  background-color: #475384;
+  border-radius: 6px;
+  padding: 0.2rem 1rem;
+}
+
+/*
+cells  not used yet */
+.tradeCell {
+  background-color: #475384;
+  border-radius: 6px;
+  padding: 0.2rem 1rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.tradeChart {
+  position: static;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: auto;
+  min-width: 600px;
+  justify-content: center;
+  padding-bottom: 6px;
+  padding-top: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.tradeNav {
+  border: 0;
+  border-bottom: 1px solid rgb(213, 213, 245);
+  position: static;
+  left: 0;
+  top: 0;
+  list-style: none;
+  display: flex;
+  gap: 3.5rem;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100%;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+/*
+ justify-content: center;
+*/
+
+.tradeButtons {
+  border: 1px solid #ccc;
+  list-style: none;
+  display: flex;
+  gap: 3.5rem;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  padding: 0.2rem 1rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* Ensuring the container has a defined height for vertical alignment */
+}

@@ -1,0 +1,155 @@
+.example {
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  font-family:
+    Roboto,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    Helvetica Neue,
+    sans-serif;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
+  box-sizing: inherit;
+  position: relative;
+  /*absolute;*/
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  width: 100%;
+  height: 52px;
+  left: calc(50% - 7px);
+  background: rgb(0, 108, 255);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px 0px;
+}
+
+/* 
+
+background-color: #03bada;
+  color: rgb(2, 2, 2);
+
+*/
+
+.header {
+  background-color: #181a1d;
+  color: #f4f4f4;
+  height: 52px;
+  font-family:
+    Roboto,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    Helvetica Neue,
+    sans-serif;
+  border-bottom: 1px solid #475384;
+}
+
+.navListWide {
+  list-style: none;
+  display: flex;
+  gap: 3.5rem;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100%;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+.navListTight {
+  list-style: none;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100%;
+  margin-right: 10px;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+/*
+ border-bottom: 1px solid rgb(213, 213, 245); 
+*/
+
+.navItem {
+  font-size: 0.9rem;
+}
+
+/* #03bada    #2196f3; (new)  */
+.navItem:hover {
+  background-color: #2196f3;
+  padding: 0.2rem 0.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.navItemInvert {
+  font-size: 0.9rem;
+  -webkit-filter: invert(0.75); /* safari 6.0 - 9.0 */
+  filter: invert(0.75);
+}
+
+.navItemInvert:hover {
+  background-color: #2196f3;
+  padding: 0.2rem 0.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.navItemLogo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.connectButton:hover {
+  background-color: #2196f3;
+}
+
+.align_test {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 52px;
+}
+
+.float_left {
+  float: left;
+}
+
+.float_right {
+  float: right;
+}
+
+.float_center {
+  float: center;
+}
+
+.versionMenu {
+  background-color: #2196f3;
+  color: #070707;
+  width: 16px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}

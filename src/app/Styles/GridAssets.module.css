@@ -1,0 +1,12 @@
+/* styles/gridLayout.module.css */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 20px;
+}
+
+.grid-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-width: 444px;
+}

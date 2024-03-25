@@ -1,0 +1,57 @@
+.toggleButton {
+  background-color: #1a1b1f;
+  color: white;
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+}
+
+.buttonDisplay {
+  background-color: #1a1b1f;
+  color: white;
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+}
+
+.darkMode {
+  background-color: #1a1b1f;
+  color: white;
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+}
+
+.lightMode {
+  background-color: white;
+  color: #0d0d10;
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+}
+
+.toggleButton:hover {
+  background-color: #03bada;
+}
+
+/* Add more styles as needed */

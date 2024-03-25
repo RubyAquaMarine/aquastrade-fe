@@ -1,0 +1,27 @@
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100%;
+  margin-right: 10px;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+/* 
+
+overflow: hidden; 
+overflow-y: scroll;
+overflow-x: hidden;
+*/
+.p_body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.imageInvert {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}

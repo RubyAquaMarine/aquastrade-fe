@@ -1,0 +1,17 @@
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100%;
+  margin-right: 10px;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+.navItem {
+  font-size: 0.9rem;
+  color: #b1bbce;
+}

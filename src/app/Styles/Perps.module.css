@@ -1,0 +1,156 @@
+/*  add border to adjust padding 
+
+border-bottom: 1px solid #1034c3;
+
+hover - and Fixed Buttons
+ background-color: #2196f3;
+
+*/
+
+.tradeBalance {
+  font-size: 12px;
+  color: rgb(194, 187, 187);
+  justify-content: right;
+  /* Center horizontally */
+  align-items: center;
+}
+
+.tradeContainer {
+  background-color: #181a1d;
+  border-radius: 6px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+/*
+perps v1 : done
+*/
+.tradeChart {
+  background-color: #181a1d;
+  padding-bottom: 4px;
+  padding-left: 14px;
+}
+
+.tradeInput {
+  background-color: #181a1d;
+  border: 2px solid #222224;
+  min-width: 20px;
+  max-width: 300px;
+  width: 100%;
+  border-radius: 9px;
+}
+
+.tradeSlider {
+  border-bottom: 1px solid #475384;
+
+  width: 100%;
+  min-width: 80px;
+  max-width: 200px;
+  padding: 0.5rem 0.2rem;
+  color: #161618;
+}
+
+/*
+cells rounded with padding to fit the cell around the text better
+margin top and bottom to center the cell within the nav etter
+*/
+
+.tradeContainerLight {
+  background-color: #475384;
+  border-radius: 6px;
+  padding: 0.2rem 1rem;
+}
+
+.tradeAvailAssets {
+  position: static;
+  min-width: 60px;
+  font-size: 22px;
+  background-color: #2196f3;
+
+  border-radius: 6px;
+  padding: 0.2rem 1rem;
+}
+
+/*
+cells  not used yet */
+.tradeCell {
+  background-color: #475384;
+  border-radius: 6px;
+  padding: 0.2rem 1rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.tradeNav {
+  border: 0;
+  position: static;
+  left: 0;
+  top: 0;
+  list-style: none;
+  display: flex;
+  gap: 3.5rem;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100%;
+  padding-top: 4px;
+  padding-bottom: 8px;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+/*
+ justify-content: center;
+*/
+
+.tradeButtons {
+  border: 0;
+  border-bottom: 1px solid #475384;
+  list-style: none;
+  display: flex;
+  gap: 3.5rem;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  padding: 0.2rem 1rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+.tradeButtonBuy {
+  background-color: #222224;
+  border: 2px solid #a6f86d;
+  padding: 0.5rem 1rem;
+  border-radius: 9px;
+  width: 100%;
+  min-width: 50px;
+  max-width: 130px;
+  text-align: center;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+.tradeButtonBuy:hover {
+  background-color: #a6f86d;
+  color: #222224;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+.tradeButtonSell {
+  background-color: #222224;
+  border: 2px solid #ff5c66;
+  padding: 0.5rem 1rem;
+  border-radius: 9px;
+  width: 100%;
+  min-width: 50px;
+  max-width: 130px;
+  text-align: center;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+.tradeButtonSell:hover {
+  background-color: #ff5c66;
+  color: #222224;
+  /* Ensuring the container has a defined height for vertical alignment */
+}
