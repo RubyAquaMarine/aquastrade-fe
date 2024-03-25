@@ -15,42 +15,28 @@ const ConnectWallet = () => {
     address: address,
   });
 
-  /* Show connector buttons to the user if the user is not connected 
-    if connected: show the wallet address , and native balance(ETH,BNB,ETC) 
-    todo: if user is connected to Skale : sFuel balance 
-    */
+  let message = "";
+  if (status === "pending") {
+    message = "Connecting to wallet...";
+  } else if (status === "success") {
+    message = "Connected to wallet!";
+  } else if (status === "error") {
+    message = "Error connecting to wallet. Please try again.";
+  }
+
   return (
     <main>
       <div className={styles.connectButtons}>
-        {!isConnected ? (
-          <div> </div>
-        ) : (
+        {isConnected ? (
           <div>
             Gas Balance: {!isError && data?.formatted}{" "}
             {!isError && data?.symbol}{" "}
           </div>
+        ) : (
+          <div>{message}</div>
         )}
 
-        {!isConnected ? (
-          connectors.map((connector) => (
-            <div key={connector.uid}>
-              <ul>
-                <li className={styles.connectorButton}>
-                  <button
-                    className={styles.toggleButton}
-                    onClick={() => {
-                      connect({ connector });
-                    }}
-                  >
-                    {<FaSpinner />}
-                    {address}
-                    {connector.name}
-                  </button>
-                </li>
-              </ul>
-            </div>
-          ))
-        ) : (
+        {isConnected ? (
           <div>
             <button
               className={button_styles.toggleButton}
@@ -59,6 +45,28 @@ const ConnectWallet = () => {
               logout
             </button>
           </div>
+        ) : (
+          <>
+            {error && <div>Error: {error.message}</div>}
+            {connectors.map((connector) => (
+              <div key={connector.uid}>
+                <ul>
+                  <li className={styles.connectorButton}>
+                    <button
+                      className={styles.toggleButton}
+                      onClick={() => {
+                        connect({ connector });
+                      }}
+                    >
+                      {<FaSpinner />}
+                      {isConnected && address}
+                      {connector.name}
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ))}
+          </>
         )}
       </div>
     </main>

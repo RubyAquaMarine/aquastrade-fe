@@ -24,13 +24,16 @@ const ChartComponent: React.FC<{
   useLayoutEffect(() => {
     const handleResize = () => {
       chart?.applyOptions({
-        width: window.innerWidth - 15,
-        height: window.innerHeight - 70,
+        width: window.innerWidth - CHART_WIDTH_OFFSET,
+        height: window.innerHeight - CHART_HEIGHT_OFFSET,
       });
     };
+    const CHART_WIDTH_OFFSET = 15;
+    const CHART_HEIGHT_OFFSET = 70;
+
     var chart = createChart(chartContainerRef.current!, {
       width: window.innerWidth,
-      height: window.innerHeight - 70,
+      height: window.innerHeight - CHART_HEIGHT_OFFSET,
       rightPriceScale: {
         scaleMargins: {
           top: 0.4,
@@ -80,9 +83,11 @@ const ChartComponent: React.FC<{
       },
     });
 
-    candlestick.setData(props.data[0]);
+    const [candlestickData, volumeSeriesData] = props.data;
 
-    volumeSeries.setData(props.data[1]);
+    candlestick.setData(candlestickData);
+
+    volumeSeries.setData(volumeSeriesData);
 
     chart.applyOptions({
       handleScroll: {
@@ -116,7 +121,7 @@ const ChartComponent: React.FC<{
   return (
     <>
       <div ref={chartContainerRef}></div>
-      {props.children}
+      {props.children && props.children}
     </>
   );
 };
