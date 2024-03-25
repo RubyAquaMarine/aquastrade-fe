@@ -6,7 +6,7 @@ export const COIN_IMAGE_ENDPOINT: string =
 export const BINANCE_WEB_SOCKET_ENDPOINT: string =
   "wss://stream.binance.com:9443/ws/!ticker@arr";
 
-  export const BINANCE_WEB_SOCKET_KLINE_ENDPOINT: string =
+export const BINANCE_WEB_SOCKET_KLINE_ENDPOINT: string =
   "wss://stream.binance.com:9443/ws/ethusdt@kline_1m";
 
 export const BINANCE_API_ENDPOINT: string =

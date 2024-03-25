@@ -37,6 +37,7 @@ npx prettier . --write [docs](https://prettier.io/docs/en/install)
 - walletConnect ID
 
 # redesign
+
 - https://www.npmjs.com/package/styled-components
 
 ## notes
@@ -51,20 +52,19 @@ npx prettier . --write [docs](https://prettier.io/docs/en/install)
 
 - march 14 : /swap/[dex_names] : keep building and looking for plugins
 - - gas Wallet Balance : for the skale bridge. does user have funds within the gasWallet: show this in the navigator
-- march 23 : 
-
+- march 23 :
 
 # App
 
 - ui : loading page for home page
-- fetches data twice : server and client: double check, client seems to render 2 times 
+- fetches data twice : server and client: double check, client seems to render 2 times
 
 # aqua token
 
 - ideas
 - - airdrop $AQUA to all nft holders quarterly for the next 10 years : bullish for nft holders ==> more dump : price go down
 - - after NFTS are sold out, make new MarketPlace SC for AQUA token instead of ETH => Bullish for AQUA
-- - Aqua powers AquasTrade by being the base asset on major AMM pools, marketplace utility token, 
+- - Aqua powers AquasTrade by being the base asset on major AMM pools, marketplace utility token,
 
 # api : database
 
@@ -125,14 +125,14 @@ its working again : before there were issues with rainbowkit connection ( clicki
 
 - renders two times on refresh =/
 - slider dark mode theming
-- 
+-
 
 ## charts
-- https://tradingview.github.io/lightweight-charts/docs/api/interfaces/ISeriesApi#setdata 
+
+- https://tradingview.github.io/lightweight-charts/docs/api/interfaces/ISeriesApi#setdata
 - websocket live data for perps using binance
 - timeframe toggle
 - asset/market/ section drop down menu , needs to import a list of markets , need to fetch markets , need to design how to layout the markets : is this spot or futures api data?
-
 
 # Token List
 

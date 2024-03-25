@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
 
 import { EUROPA_ETH, MARKETPLACE_AQUADEX } from "@/app/Utils/config";
@@ -18,8 +18,6 @@ function Erc20({ name, approve, args }: ReadProps) {
   const { address, isConnected, chain } = useAccount();
   const { writeContract } = useWriteContract();
 
-  const [isMounted, setIsMounted] = useState(false);
-
   const [approveAmount, setApproveAmount] = useState(BigInt(1));
 
   const smartConrtactValue = useReadContract({
@@ -31,7 +29,7 @@ function Erc20({ name, approve, args }: ReadProps) {
 
   console.error("SC ETH Allowance", smartConrtactValue?.data);
 
-  const isApproved = () => {
+  const isApproved = useCallback(() => {
     let value;
     console.error("isApproved : ", approve, " || ", smartConrtactValue?.data);
     if (
@@ -44,9 +42,9 @@ function Erc20({ name, approve, args }: ReadProps) {
       }
     }
     console.error("Approve amount : ", value);
-  };
+  }, [approve, smartConrtactValue]);
 
-  const ApproveAmount = () => {
+  const ApproveAmount = useCallback(() => {
     console.error("Ready to write to contract ", approveAmount);
 
     writeContract({
@@ -55,20 +53,13 @@ function Erc20({ name, approve, args }: ReadProps) {
       functionName: "approve",
       args: [MARKETPLACE_AQUADEX, approveAmount],
     });
-  };
-
-  // This useEffect hook ensures that the component is only mounted on the client side
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  }, [approveAmount, writeContract]);
 
   useEffect(() => {
     isApproved();
-  }, [smartConrtactValue]);
+  }, [smartConrtactValue, isApproved]);
 
-  useEffect(() => {}, []);
-
-  if (!isMounted) {
+  if (!isConnected) {
     return null; // Don't render anything on the server side
   }
 

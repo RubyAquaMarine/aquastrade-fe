@@ -133,6 +133,7 @@ const Home = () => {
         event.preventDefault(); // Prevent the link from forwarding
         const mess = `Please switch network to ChainID ${targetChainId} to access this link.`; //Please select ChainID: {targetedChainID}
         setNotification(mess);
+        // @ts-ignore: Unreachable code error
         switchChain({ chainId: targetChainId }); // todo
       }
     }

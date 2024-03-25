@@ -34,10 +34,7 @@ const Home = () => {
   const { writeContract } = useWriteContract();
   const { address, isConnected, chain } = useAccount();
 
-  const array: (string | undefined)[] = [];
-
-  array.push(address);
-  array.push(MARKETPLACE_AQUADEX);
+  const array: (string | undefined)[] = [address, MARKETPLACE_AQUADEX];
 
   const inputs = ["0.3 ETH", "1.5 ETH", "0.03 ETH"];
   // input the Text to display on the button
@@ -106,17 +103,7 @@ const Home = () => {
   }
 
   function getInputValue(index: number) {
-    if (index === 0) {
-      return inputs[0]; //  ETHER AMOUNT
-    }
-    if (index === 1) {
-      return inputs[1]; //  ETHER AMOUNT
-    }
-
-    if (index === 2) {
-      return inputs[2]; //  ETHER AMOUNT
-    }
-    // Add more conditions as needed
+    return inputs[index];
   }
 
   function handleChangeETH() {
@@ -129,7 +116,7 @@ const Home = () => {
     switch (index) {
       case 0:
         console.error("APPROVE 0 ");
-        const minSilver = parseEther("0.5", "wei");
+        const minSilver = parseEther("0.3", "wei");
 
         if (allow) {
           if (minSilver > allow) {

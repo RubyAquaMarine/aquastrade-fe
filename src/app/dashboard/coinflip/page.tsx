@@ -14,9 +14,8 @@ import styles_button from "@/app/Styles/Toggle.module.css";
 
 const Home = () => {
   const [isClient, setIsClient] = useState(false);
-  const [inputs, setInputs] = useState([""]); // todo :add more inputs by ,''
+  const [inputs, setInputs] = useState([""]);
   const [notification, setNotification] = useState("");
-  //wagmi
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
   const { writeContract } = useWriteContract();
@@ -30,38 +29,33 @@ const Home = () => {
     setInputs(newInputs);
   };
 
-  function getInputValue(index: number) {
-    if (index === 0) {
-      return inputs[0];
-    }
-    // Add more conditions as needed
-  }
-
-  /*
-    main logic for sc interactions
-  */
   const handleButtonClick = (index: number) => {
     console.log(" this is the button to Flip Aqua", index);
-    if (index == 0) {
-      writeContract({
-        abi: COIN_FLIP_ABI,
-        address: COIN_FLIP_AQUA,
-        functionName: "flipCoin",
-        args: [parseEther(inputs[0], "wei")],
-      });
+    switch (index) {
+      case 0:
+        writeContract({
+          abi: COIN_FLIP_ABI,
+          address: COIN_FLIP_AQUA,
+          functionName: "flipCoin",
+          args: [parseEther(inputs[0], "wei")],
+        });
+        break;
+      // Add more cases as needed
     }
   };
 
   const handleButtonClickWithdraw = (index: number) => {
     console.log(" this is the button for withdrawlAll Aqua ", index);
-    if (index == 0) {
-      // bet
-      writeContract({
-        abi: COIN_FLIP_ABI,
-        address: COIN_FLIP_AQUA,
-        functionName: "WithdrawAll",
-        args: [],
-      });
+    switch (index) {
+      case 0:
+        writeContract({
+          abi: COIN_FLIP_ABI,
+          address: COIN_FLIP_AQUA,
+          functionName: "WithdrawAll",
+          args: [],
+        });
+        break;
+      // Add more cases as needed
     }
   };
 
@@ -70,17 +64,16 @@ const Home = () => {
   }, []);
 
   const handleToEuropa = (
-    // event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     targetChainId: number,
   ) => {
     if (chain) {
       if (chain.id !== targetChainId) {
-        event.preventDefault(); // Prevent the link from forwarding
-        const mess = `Please switch network to ChainID ${targetChainId} to access this link.`; //Please select ChainID: {targetedChainID}
+        event.preventDefault();
+        const mess = `Please switch network to ChainID ${targetChainId} to access this link.`;
         setNotification(mess);
-
-        switchChain({ chainId: targetChainId }); // todo
+        // @ts-ignore: Unreachable code error
+        switchChain({ chainId: targetChainId });
       }
     }
   };
@@ -110,12 +103,11 @@ const Home = () => {
             <div className={styles.gridSix}>
               <div className="p-4">
                 <div className="space-y-2">
-                  {/** Handle input values from cells */}
                   {inputs.map((value, index) => (
                     <div key={index} className="mb-4">
                       <input
                         type="text"
-                        value={getInputValue(index)} // Call a function to get the appropriate value
+                        value={inputs[index]}
                         onChange={(e) =>
                           handleInputChange(index, e.target.value)
                         }
@@ -129,9 +121,6 @@ const Home = () => {
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {/** Handle button clicks  from cells */}
-                  {/** COLOUMN 2 -- FLIP  */}
-
                   <button
                     className={styles_button.toggleButton}
                     onClick={() => handleButtonClick(0)}
@@ -143,8 +132,6 @@ const Home = () => {
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {/** Handle Wins  from cells */}
-                  {/** COLOUMN 3 -- WIN  */}
                   {address ? (
                     <CoinFlip name={"totalWins"} />
                   ) : (
@@ -155,8 +142,6 @@ const Home = () => {
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {/** Handle Wins  from cells */}
-                  {/** COLOUMN 4 -- LOSS */}
                   {address ? (
                     <CoinFlip name={"totalLoss"} />
                   ) : (
@@ -167,8 +152,6 @@ const Home = () => {
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {/** Handle Wins  from cells */}
-                  {/** COLOUMN 4 -- LOSS */}
                   {address ? (
                     <CoinFlip name="balances" />
                   ) : (
@@ -179,8 +162,6 @@ const Home = () => {
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {/** Handle withdraws from cells */}
-                  {/** COLOUMN 5 -- withdraw */}
                   <button
                     className={styles_button.toggleButton}
                     onClick={() => handleButtonClickWithdraw(0)}

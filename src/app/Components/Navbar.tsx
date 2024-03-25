@@ -139,8 +139,6 @@ const Navbar = () => {
                   <Dropdown.Item>
                     <Link href={`/user/`}>Token List</Link>
                   </Dropdown.Item>
-
-                 
                 </Dropdown.Submenu>
               </Dropdown.Item>
             </Dropdown>

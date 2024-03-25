@@ -152,41 +152,42 @@ export const wsController = (
   return { message, wsClose };
 };
 
-const ChartCandles = async (params: any) => {
-  const getDataCallBack = async () => {
-    console.error("fetching ChartCandles data ", params);
-    try {
-      const dataKlines = fetch(
-        `https://api.binance.com/api/v3/klines?symbol=${params}&interval=1m&limit=1000`,
-      );
-      const out = await dataKlines;
-      if (out) {
-        const ok = await out.json();
-        if (ok) {
-          const tv_data = ok.map((d: Candle) => ({
-            //   time: timeToTradingView(d[CandleKeysEnum.openTime]),
-            time: d[CandleKeysEnum.openTime] / 1000,
-            open: Number(d[CandleKeysEnum.open]),
-            high: Number(d[CandleKeysEnum.high]),
-            low: Number(d[CandleKeysEnum.low]),
-            close: Number(d[CandleKeysEnum.close]),
-          }));
+const getDataCallBack = async (params: any) => {
+  console.error("fetching ChartCandles data ", params);
+  try {
+    const dataKlines = fetch(
+      `https://api.binance.com/api/v3/klines?symbol=${params}&interval=1d&limit=1000`,
+    );
+    const out = await dataKlines;
+    if (out) {
+      const ok = await out.json();
+      if (ok) {
+        const tv_data = ok.map((d: Candle) => ({
+          //   time: timeToTradingView(d[CandleKeysEnum.openTime]),
+          time: d[CandleKeysEnum.openTime] / 1000,
+          open: Number(d[CandleKeysEnum.open]),
+          high: Number(d[CandleKeysEnum.high]),
+          low: Number(d[CandleKeysEnum.low]),
+          close: Number(d[CandleKeysEnum.close]),
+        }));
 
-          const tv_volume = ok.map((d: Candle) => ({
-            //    time: timeToTradingView(d[CandleKeysEnum.openTime]),
-            time: d[CandleKeysEnum.openTime] / 1000,
+        const tv_volume = ok.map((d: Candle) => ({
+          //    time: timeToTradingView(d[CandleKeysEnum.openTime]),
+          time: d[CandleKeysEnum.openTime] / 1000,
 
-            value: Number(d[CandleKeysEnum.volume]),
-          }));
+          value: Number(d[CandleKeysEnum.volume]),
+        }));
 
-          return [tv_data, tv_volume];
-        }
+        return [tv_data, tv_volume];
       }
-    } catch (error) {
-      console.error("data ", error);
     }
-  };
-  return await getDataCallBack();
+  } catch (error) {
+    console.error("data ", error);
+  }
+};
+
+const ChartCandles = async (params: any) => {
+  return await getDataCallBack(params);
 };
 
 export default ChartCandles;

@@ -11,7 +11,6 @@ import Image from "next/image";
 import { useAccount, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Perps.module.css";
 
-
 import WebSocketConnection from "@/app/Utils/WebSocketConnection";
 
 import { getWebSocket } from "@/app/Utils/web-socket";
@@ -41,11 +40,9 @@ const Home = ({ children, params }: any) => {
 
   const [renderAgain, setRenderAgain] = useState<any>();
 
-//  console.log("renderAgain--: ", typeof dataIs, dataIs.current);// Object 
-
+  //  console.log("renderAgain--: ", typeof dataIs, dataIs.current);// Object
 
   const [dataStream, setDataStream] = useState<Array<CandlestickData>>([]);
-
 
   const [inputs, setInputs] = useState(["", ""]);
   const [sliderValue, setSliderValue] = useState([30, 60]);
@@ -55,8 +52,8 @@ const Home = ({ children, params }: any) => {
   );
 
   const url = usePathname();
-  const Asset = url.slice(8).toUpperCase();// todo : /perp vs /perpTestMode ( the length of the url name can break this code)
-//  console.error(" Route Url is ", Asset);
+  const Asset = url.slice(8).toUpperCase(); // todo : /perp vs /perpTestMode ( the length of the url name can break this code)
+  //  console.error(" Route Url is ", Asset);
 
   const desc = ["0.0", "50"];
   const desctwo = ["PAY", "POSITION"];
@@ -65,7 +62,7 @@ const Home = ({ children, params }: any) => {
     try {
       const bars = await ChartCandles(Asset);
 
-     // console.error("Rendered bars: ", bars?.[0], bars?.[1]);
+      // console.error("Rendered bars: ", bars?.[0], bars?.[1]);
       setDataToTV(bars?.[0]);
       setDataToTVVolume(bars?.[1]);
     } catch {
@@ -90,26 +87,25 @@ const Home = ({ children, params }: any) => {
     if (websocket) {
       websocket.onmessage = (event) => {
         const out = JSON.parse(event.data);
-  
+
         dataIs.current = out;
 
         if (out) {
           const tv_stream = {
-//time: Date.now() /1000,
-  // time:  Number(Number(Date.now() /1000).toFixed(0)) ,
-            time:  Number(Number(out?.k?.t /1000).toFixed(0)) ,
+            //time: Date.now() /1000,
+            // time:  Number(Number(Date.now() /1000).toFixed(0)) ,
+            time: Number(Number(out?.k?.t / 1000).toFixed(0)),
             open: Number(out?.k?.o),
             high: Number(out?.k?.h),
             low: Number(out?.k?.l),
             close: Number(out?.k?.c),
           };
-         // console.log("setStream with Latest Bar Data --: ", typeof tv_stream, tv_stream);// Object 
+          // console.log("setStream with Latest Bar Data --: ", typeof tv_stream, tv_stream);// Object
           setRenderAgain(tv_stream);
         }
       };
     }
   }, [dataIs]);
-
 
   const handleInputChange = (index: number, value: string) => {
     const newInputs = [...inputs];
@@ -128,7 +124,6 @@ const Home = ({ children, params }: any) => {
     }
   }
 
-
   return (
     <main className="">
       {!addr ? (
@@ -144,7 +139,6 @@ const Home = ({ children, params }: any) => {
         </div>
       ) : (
         <div className={styles.tradeContainer}>
-
           <div>
             {/** Notes top navigation  and add li for new columns  */}
             <ul className={styles.tradeNav}>
@@ -163,8 +157,12 @@ const Home = ({ children, params }: any) => {
           {/** Notes  */}
 
           <div className={styles.tradeChart}>
-            <ChartComponent stream={renderAgain} colors={{}} data={[dataTV, dataTVVolume]}>
-            {children} 
+            <ChartComponent
+              stream={renderAgain}
+              colors={{}}
+              data={[dataTV, dataTVVolume]}
+            >
+              {children}
             </ChartComponent>
           </div>
 
@@ -256,10 +254,7 @@ const Home = ({ children, params }: any) => {
           </div>
         </div>
       )}
-      <WebSocketConnection>
-
-
-      </WebSocketConnection>
+      <WebSocketConnection></WebSocketConnection>
     </main>
   );
 };

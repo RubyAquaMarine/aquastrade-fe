@@ -11,79 +11,70 @@ const Home = ({ children, params }: any) => {
 
   const [renderAgain, setRenderAgain] = useState<any>();
 
-  console.log("renderAgain--: ", typeof dataIs, dataIs.current?.s);// Object 
-
+  console.log("renderAgain--: ", typeof dataIs, dataIs.current?.s); // Object
 
   useEffect(() => {
     const websocket = getWebSocket();
     if (websocket) {
       websocket.onmessage = (event) => {
         //  console.log("messages 1: ", typeof event.data);// String
-        const out = JSON.parse(event.data);// converts to object in json format
-        console.log("Strean ", typeof out, out);// Object 
+        const out = JSON.parse(event.data); // converts to object in json format
+        console.log("Strean ", typeof out, out); // Object
 
-        // WORKING for KLINE STREAM 
+        // WORKING for KLINE STREAM
         //  console.log("messages ==> E  , ", out.s);
         // console.log("messages ==> o  , ", out.k.o);
         // console.log("messages ==> h  , ", out.k.h);
         // console.log("messages ==> l  , ", out.k.l);
         // console.log("messages ==> c  , ", out.k.c);
-        // WORKING for TICKER STREAM 
+        // WORKING for TICKER STREAM
         // console.log("messages ==> E  , ", out[0]?.s);
         // console.log("messages ==> E  , ", out[1]?.s);
         // console.log("messages ==> E  , ", out[2]?.s);
         // console.log("messages ==> E  , ", out[4]?.s);
         dataIs.current = out;
         setRenderAgain(out);
-
       };
     }
   }, [dataIs]);
 
   return (
     <main className="">
-
-      <div >
+      <div>
         {children}
-        <WebSocketConnection>
+        <WebSocketConnection></WebSocketConnection>
 
-
-        </WebSocketConnection>
-
-
-        <h1>  Kline </h1>
-        <h2>  Market  </h2>
+        <h1> Kline </h1>
+        <h2> Market </h2>
         {dataIs.current?.s}
-        <h2>  open  </h2>
+        <h2> open </h2>
         {dataIs.current?.k?.o}
 
-        <h2>  high  </h2>
+        <h2> high </h2>
         {dataIs.current?.k?.h}
 
-        <h2>  low  </h2>
+        <h2> low </h2>
         {dataIs.current?.k?.l}
 
-        <h2>  close (tick pulse) </h2>
+        <h2> close (tick pulse) </h2>
         {dataIs.current?.k?.c}
 
-        <h2>  volume </h2>
+        <h2> volume </h2>
         {dataIs.current?.k?.v}
 
-        <h2>  Time ? .t</h2>
+        <h2> Time ? .t</h2>
         {dataIs.current?.k?.t}
 
-        <h2>  Time ? .T</h2>
+        <h2> Time ? .T</h2>
         {dataIs.current?.k?.T}
 
-        <h2>  Time ? .E</h2>
+        <h2> Time ? .E</h2>
         {dataIs.current?.E}
 
-        <h2>  Time Now </h2>
+        <h2> Time Now </h2>
         {Date.now()}
 
-
-        <p>  </p>
-
+        <p> </p>
       </div>
     </main>
   );

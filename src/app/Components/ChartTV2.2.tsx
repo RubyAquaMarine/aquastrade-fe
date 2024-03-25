@@ -68,8 +68,8 @@ const ChartComponent: React.FC<{
       },
     });
 
-    // True : live data 
-    // false : historical works 
+    // True : live data
+    // false : historical works
     // 55555
 
     var candlestick = chart.addCandlestickSeries({
@@ -87,7 +87,6 @@ const ChartComponent: React.FC<{
 
     // input historical data
     if (!props?.stream) {
-
       console.error("TV (set up) historical data ++++++++++++++++++++");
 
       if (props?.data[0] && props?.data[0].length > 1) {
@@ -112,7 +111,6 @@ const ChartComponent: React.FC<{
         },
       });
 
-
       volumeSeries.priceScale().applyOptions({
         scaleMargins: {
           top: 0.75, // highest point of the series will be 70% away from the top
@@ -128,19 +126,19 @@ const ChartComponent: React.FC<{
       });
 
       console.error("TV (set up) done ");
-
     }
 
     // input stream data
     if (props?.stream && props?.stream?.time) {
-      console.error("TV (container) update  stream", props?.stream, " ContainerID: ", chartContainerRef?.current);
+      console.error(
+        "TV (container) update  stream",
+        props?.stream,
+        " ContainerID: ",
+        chartContainerRef?.current,
+      );
 
       candlestick.update(props?.stream);
     }
-
-
-
-
 
     window.addEventListener("resize", handleResize);
     return () => {

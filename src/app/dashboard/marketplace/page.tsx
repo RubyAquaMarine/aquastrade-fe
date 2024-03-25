@@ -52,7 +52,7 @@ const Home = () => {
     if (chain) {
       if (chain.id !== targetChainId) {
         event.preventDefault(); // Prevent the link from forwarding
-
+        // @ts-ignore: Unreachable code error
         switchChain({ chainId: targetChainId }); // todo
       }
     }
