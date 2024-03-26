@@ -2,15 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 
-
-import { useMarketPlace, useERC20Token } from "@/app/Hooks/useMarketPlace";
+import Erc20 from "@/app/Components/ReadToken";
+import MarketPlace from "@/app/Components/ReadMarketPlace";
 
 import { parseEther, parseUnits } from "viem";
 import {
   useAccount,
-  useWriteContract
+  useReadContract,
+  useWriteContract,
+  useSwitchChain,
 } from "wagmi";
 
 import styles_button from "@/app/Styles/Toggle.module.css";
@@ -29,80 +31,77 @@ import {
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
 const Home = () => {
-  const allowancesTest = useRef(undefined);
+  const allowancesTest = useRef(BigInt(1));
   const { writeContract } = useWriteContract();
   const { address, isConnected, chain } = useAccount();
+
   const array: (string | undefined)[] = [address, MARKETPLACE_AQUADEX];
-
-  // Save the state and update when useBuy is called
-  const gold = useRef(-1);
-  const silver = useRef(-1);
-  const bronze = useRef(-1);
-
-  // refactor or just make useMarketPlaceRead
-  const {
-    data: MarketPlace,
-    isLoading,
-    isError,
-  } = useMarketPlace("getListedItems");
-
-  const { data: tokenAllowance } = useERC20Token("allowance", array);
 
   const inputs = ["0.3 ETH", "1.5 ETH", "0.03 ETH"];
   // input the Text to display on the button
   const buttonLogicTexts = ["Silver NFT", "Gold NFT", "Bronze NFT"];
   const supplyDescriptions = ["500", "50", "5000"];
   const feeDescriptions = ["66%", "100%", "33.3%"];
-  const allowance = [
-    "300000000000000000",
-    "1500000000000000000",
-    "30000000000000000",
-  ];
   const urlDescriptions = [
     "https://elated-tan-skat.explorer.mainnet.skalenodes.com/token/0xE4702E2Bab8702A1aA40C7757e15A9e2bc8C15D1/token-transfers",
     "https://elated-tan-skat.explorer.mainnet.skalenodes.com/token/0xcEcd42ff7eCC7b0BfF7a9CF95C6e7ce9aA052d8C/token-transfers",
     "https://elated-tan-skat.explorer.mainnet.skalenodes.com/token/0x87f23b254d59f97e7c4ceC7C14AbC7D6a1a4A0E3/token-transfers",
   ];
 
- 
+  //== ETH APPRVE
+  const allowanceOnETH = useReadContract({
+    abi: ERC20_ABI,
+    address: EUROPA_ETH,
+    functionName: "allowance",
+    args: [address as `0x${string}`, MARKETPLACE_AQUADEX],
+  });
 
-  // Once the Marketplace data exists , filter through and find , store the nfts that will be for sale. 1 of 50000
-  useEffect(() => {
-    let counter = 0;
-    if (MarketPlace) {
-      console.log(" useEffect NFTS ", gold, silver, bronze, MarketPlace);
+  if (allowanceOnETH?.data) {
+    console.error("READ CONTRACT eth allowance '", allowanceOnETH?.data);
+    allowancesTest.current = allowanceOnETH.data;
+    console.error(
+      " allowancesTest.current '",
+      allowancesTest.current,
+      typeof allowancesTest.current,
+    );
+  }
 
-      if (MarketPlace) {
-        // find and save next nft within collection
-        MarketPlace.forEach((element) => {
-          if (element.nft === MARKETPLACE_GOLD_NFT && gold.current === -1) {
-            gold.current = counter;
-          }
-          if (element.nft == MARKETPLACE_SILVER_NFT && silver.current === -1) {
-            silver.current = counter;
-          }
-          if (element.nft == MARKETPLACE_BRONZE_NFT && bronze.current === -1) {
-            bronze.current = counter;
-          }
-          counter++; // testing
-        });
+  //== getListedItems
+  const dataNftItemsAll = useReadContract({
+    abi: marketplaceABI,
+    address: MARKETPLACE_AQUADEX,
+    functionName: "getListedItems",
+  });
+  //console.error("READ CONTRACT getListedItems'", dataNftItemsAll?.data);
 
-        console.log("  NFTS ", gold, silver, bronze);
+  // todo
+  // filter by is for sale or not?
+  let gold = -1,
+    bronze = -1,
+    silver = -1;
+  let counter = 0;
+  if (dataNftItemsAll?.data) {
+    // find and save next nft within collection
+    dataNftItemsAll?.data.forEach((element) => {
+      if (element.nft === MARKETPLACE_GOLD_NFT && gold === -1) {
+        // is gold gold, bronze, silver
+        gold = counter;
       }
-    }
-
-    if (tokenAllowance) {
-      if (tokenAllowance) {
-        console.error("READ CONTRACT token allowance '", tokenAllowance);
-        allowancesTest.current = tokenAllowance;
-        console.error(
-          " allowancesTest.current '",
-          allowancesTest.current,
-          typeof allowancesTest.current,
-        );
+      if (element.nft == MARKETPLACE_SILVER_NFT && silver === -1) {
+        // is gold gold, bronze, silver
+        silver = counter;
       }
-    }
-  }, [MarketPlace, tokenAllowance]);
+      if (element.nft == MARKETPLACE_BRONZE_NFT && bronze === -1) {
+        // is gold gold, bronze, silver
+        bronze = counter;
+      }
+      counter++; // testing
+    });
+
+    //  console.error(" FOUND Next Gold NFT INDEX: ", gold);
+    //  console.error(" FOUND Next Silver NFT INDEX: ", silver);
+    //   console.error(" FOUND Next Bronze NFT INDEX: ", bronze);
+  }
 
   function getInputValue(index: number) {
     return inputs[index];
@@ -115,8 +114,6 @@ const Home = () => {
   const handleButtonClick = (index: number) => {
     const allow = allowancesTest.current;
 
-    console.error("APPROVE|BUY with Amount:  ", allow);
-
     switch (index) {
       case 0:
         console.error("APPROVE 0 ");
@@ -124,7 +121,6 @@ const Home = () => {
 
         if (allow) {
           if (minSilver > allow) {
-            console.error("APPROVE 0 ", minSilver);
             // write to approve
             writeContract({
               abi: ERC20_ABI,
@@ -134,8 +130,7 @@ const Home = () => {
             });
             // wait for transaction
           } else {
-            const str = String(silver.current);
-            console.error("BUY SILVER ", str);
+            const str = String(silver);
             writeContract({
               abi: marketplaceABI,
               address: MARKETPLACE_AQUADEX,
@@ -161,9 +156,7 @@ const Home = () => {
             });
             // wait for transaction
           } else {
-          
-            const str1 = String(gold.current);
-            console.error("BUY GOLD ", str1);
+            const str1 = String(gold);
             writeContract({
               abi: marketplaceABI,
               address: MARKETPLACE_AQUADEX,
@@ -189,8 +182,7 @@ const Home = () => {
             });
             // wait for transaction
           } else {
-            const str2 = String(bronze.current);
-            console.error("BUY BRONZE ", str2);
+            const str2 = String(bronze);
             writeContract({
               abi: marketplaceABI,
               address: MARKETPLACE_AQUADEX,
@@ -232,6 +224,7 @@ const Home = () => {
           </div>
         ) : (
           <div className={styles.container}>
+          
             {/** connected  */}
 
             {inputs.map((value, index) => (
@@ -265,9 +258,18 @@ const Home = () => {
                   />
                 </div>
 
-                {allowancesTest.current &&
-                BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
+                {BigInt(allowancesTest.current) <
+                BigInt("1500000000000000000") ? (
                   <div>
+                    <Erc20
+                      name={"allowance"}
+                      approve={BigInt("1500000000000000000")}
+                      args={[array]}
+                    ></Erc20>
+                  </div>
+                ) : (
+                  <div>
+                    {" "}
                     <button
                       className={styles_button.toggleButton}
                       onClick={() => handleButtonClick(index)}
@@ -275,17 +277,13 @@ const Home = () => {
                       {buttonLogicTexts[index]}
                     </button>
                   </div>
-                ) : (
-                  <div> <button
-                  className={styles_button.toggleButton}
-                  onClick={() => handleButtonClick(index)}
-                >
-                  Approve
-                </button></div>
                 )}
 
-              
+<p>  MarketPlace </p>
+<p>  <MarketPlace name={"getListedItems"} args={null} /> </p>
+                
               </div>
+              
             ))}
           </div>
         )}

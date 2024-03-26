@@ -32,11 +32,32 @@ function MarketPlace({ name, args }: ReadProps) {
     args: args as undefined,
   });
 
-  let valueOfString;
-
+  // todo
+  // filter by is for sale or not?
+  let gold = -1,
+    bronze = -1,
+    silver = -1;
+  let counter = 0;
   if (smartConrtactValue?.data) {
-    valueOfString = smartConrtactValue?.data;
+    // find and save next nft within collection
+    smartConrtactValue?.data.forEach((element) => {
+      if (element.nft === MARKETPLACE_GOLD_NFT && gold === -1) {
+        // is gold gold, bronze, silver
+        gold = counter;
+      }
+      if (element.nft == MARKETPLACE_SILVER_NFT && silver === -1) {
+        // is gold gold, bronze, silver
+        silver = counter;
+      }
+      if (element.nft == MARKETPLACE_BRONZE_NFT && bronze === -1) {
+        // is gold gold, bronze, silver
+        bronze = counter;
+      }
+      counter++; // testing
+    });
   }
+
+  console.log("test component", silver, gold, bronze);
 
   // This useEffect hook ensures that the component is only mounted on the client side
   useEffect(() => {
@@ -52,11 +73,22 @@ function MarketPlace({ name, args }: ReadProps) {
   return (
     <div>
       {isConnected ? (
-        <button className={styles.buttonDisplay}>
-          {name?.toUpperCase()} {valueOfString?.toString()}
-        </button>
+        <div>
+          <button className={styles.buttonDisplay}>
+            Next Gold Slot: {gold?.toString()}
+          </button>
+          <button className={styles.buttonDisplay}>
+            Next Silver Slot: {silver?.toString()}
+          </button>
+          <button className={styles.buttonDisplay}>
+            Next Bronze Slot: {bronze?.toString()}
+          </button>
+        </div>
       ) : (
-        <button className={styles.buttonDisplay}>Reload</button>
+        <div>
+          {" "}
+          <button className={styles.buttonDisplay}>Reload</button>
+        </div>
       )}
     </div>
   );
