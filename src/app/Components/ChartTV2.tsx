@@ -20,16 +20,17 @@ const ChartComponent: React.FC<{
     },
   } = props;
   const chartContainerRef = useRef<HTMLDivElement>(null);
+  const CHART_WIDTH_OFFSET = 15;
+    const CHART_HEIGHT_OFFSET = 50;
 
   useLayoutEffect(() => {
     const handleResize = () => {
       chart?.applyOptions({
-        width: window.innerWidth - CHART_WIDTH_OFFSET,
+        width: window.innerWidth ,
         height: window.innerHeight - CHART_HEIGHT_OFFSET,
       });
     };
-    const CHART_WIDTH_OFFSET = 15;
-    const CHART_HEIGHT_OFFSET = 70;
+    
 
     var chart = createChart(chartContainerRef.current!, {
       width: window.innerWidth,
