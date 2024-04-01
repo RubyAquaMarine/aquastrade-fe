@@ -1,17 +1,13 @@
 "use client";
-
+// @ts-nocheck
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useEffect } from "react";
 
-
 import { useMarketPlace, useERC20Token } from "@/app/Hooks/useMarketPlace";
 
 import { parseEther, parseUnits } from "viem";
-import {
-  useAccount,
-  useWriteContract
-} from "wagmi";
+import { useAccount, useWriteContract } from "wagmi";
 
 import styles_button from "@/app/Styles/Toggle.module.css";
 import styles from "@/app/Styles/Links.module.css";
@@ -32,7 +28,8 @@ const Home = () => {
   const allowancesTest = useRef(undefined);
   const { writeContract } = useWriteContract();
   const { address, isConnected, chain } = useAccount();
-  const array: (string | undefined)[] = [address, MARKETPLACE_AQUADEX];
+  const array: any[any] = [address, MARKETPLACE_AQUADEX];
+  const { data: tokenAllowance } = useERC20Token("allowance", array);
 
   // Save the state and update when useBuy is called
   const gold = useRef(-1);
@@ -46,7 +43,7 @@ const Home = () => {
     isError,
   } = useMarketPlace("getListedItems");
 
-  const { data: tokenAllowance } = useERC20Token("allowance", array);
+  console.log(" User Allowance ", tokenAllowance);
 
   const inputs = ["0.3 ETH", "1.5 ETH", "0.03 ETH"];
   // input the Text to display on the button
@@ -64,45 +61,34 @@ const Home = () => {
     "https://elated-tan-skat.explorer.mainnet.skalenodes.com/token/0x87f23b254d59f97e7c4ceC7C14AbC7D6a1a4A0E3/token-transfers",
   ];
 
- 
-
   // Once the Marketplace data exists , filter through and find , store the nfts that will be for sale. 1 of 50000
   useEffect(() => {
     let counter = 0;
     if (MarketPlace) {
-      console.log(" useEffect NFTS ", gold, silver, bronze, MarketPlace);
+      // find and save next nft within collection
+      MarketPlace.forEach((element) => {
+        if (element.nft === MARKETPLACE_GOLD_NFT && gold.current === -1) {
+          gold.current = counter;
+        }
+        if (element.nft == MARKETPLACE_SILVER_NFT && silver.current === -1) {
+          silver.current = counter;
+        }
+        if (element.nft == MARKETPLACE_BRONZE_NFT && bronze.current === -1) {
+          bronze.current = counter;
+        }
+        counter++; // testing
+      });
 
-      if (MarketPlace) {
-        // find and save next nft within collection
-        MarketPlace.forEach((element) => {
-          if (element.nft === MARKETPLACE_GOLD_NFT && gold.current === -1) {
-            gold.current = counter;
-          }
-          if (element.nft == MARKETPLACE_SILVER_NFT && silver.current === -1) {
-            silver.current = counter;
-          }
-          if (element.nft == MARKETPLACE_BRONZE_NFT && bronze.current === -1) {
-            bronze.current = counter;
-          }
-          counter++; // testing
-        });
-
-        console.log("  NFTS ", gold, silver, bronze);
-      }
+      console.log("  NFTS ", gold, silver, bronze);
     }
 
-    if (tokenAllowance) {
-      if (tokenAllowance) {
-        console.error("READ CONTRACT token allowance '", tokenAllowance);
-        allowancesTest.current = tokenAllowance;
-        console.error(
-          " allowancesTest.current '",
-          allowancesTest.current,
-          typeof allowancesTest.current,
-        );
-      }
-    }
-  }, [MarketPlace, tokenAllowance]);
+    allowancesTest.current = tokenAllowance;
+    console.error(
+      " allowancesTest.current '",
+      allowancesTest.current,
+      typeof allowancesTest.current,
+    );
+  }, [allowancesTest.current, tokenAllowance]);
 
   function getInputValue(index: number) {
     return inputs[index];
@@ -113,64 +99,60 @@ const Home = () => {
   }
 
   const handleButtonClick = (index: number) => {
-    const allow = allowancesTest.current;
+    const allow = BigInt(allowancesTest.current);
 
     console.error("APPROVE|BUY with Amount:  ", allow);
 
     switch (index) {
       case 0:
-        console.error("APPROVE 0 ");
+        console.error("APPROVE 0 Silver NFT", silver);
         const minSilver = parseEther("0.3", "wei");
 
-        if (allow) {
-          if (minSilver > allow) {
-            console.error("APPROVE 0 ", minSilver);
-            // write to approve
-            writeContract({
-              abi: ERC20_ABI,
-              address: EUROPA_ETH,
-              functionName: "approve",
-              args: [MARKETPLACE_AQUADEX, minSilver],
-            });
-            // wait for transaction
-          } else {
-            const str = String(silver.current);
-            console.error("BUY SILVER ", str);
-            writeContract({
-              abi: marketplaceABI,
-              address: MARKETPLACE_AQUADEX,
-              functionName: "buy",
-              args: [parseUnits(str, 0), minSilver],
-            });
-          }
+        if (minSilver > allow) {
+          console.error("APPROVE 0 ", minSilver);
+          // write to approve
+          writeContract({
+            abi: ERC20_ABI,
+            address: EUROPA_ETH,
+            functionName: "approve",
+            args: [MARKETPLACE_AQUADEX, minSilver],
+          });
+          // wait for transaction
+        } else {
+          const str = String(silver.current);
+          console.error("BUY SILVER ", str);
+          writeContract({
+            abi: marketplaceABI,
+            address: MARKETPLACE_AQUADEX,
+            functionName: "buy",
+            args: [parseUnits(str, 0), minSilver],
+          });
         }
 
         break;
       case 1:
-        console.error("APPROVE 1 ");
+        console.error("APPROVE 1 Gold NFT", gold);
 
         const minGold = parseEther("1.5", "wei");
-        if (allow) {
-          if (minGold > allow) {
-            // write to approve
-            writeContract({
-              abi: ERC20_ABI,
-              address: EUROPA_ETH,
-              functionName: "approve",
-              args: [MARKETPLACE_AQUADEX, minGold],
-            });
-            // wait for transaction
-          } else {
-          
-            const str1 = String(gold.current);
-            console.error("BUY GOLD ", str1);
-            writeContract({
-              abi: marketplaceABI,
-              address: MARKETPLACE_AQUADEX,
-              functionName: "buy",
-              args: [parseUnits(str1, 0), minGold],
-            });
-          }
+
+        if (minGold > allow) {
+          // write to approve
+          writeContract({
+            abi: ERC20_ABI,
+            address: EUROPA_ETH,
+            functionName: "approve",
+            args: [MARKETPLACE_AQUADEX, minGold],
+          });
+          // wait for transaction
+        } else {
+          const str1 = String(gold.current);
+          console.error("BUY GOLD ", str1);
+          writeContract({
+            abi: marketplaceABI,
+            address: MARKETPLACE_AQUADEX,
+            functionName: "buy",
+            args: [parseUnits(str1, 0), minGold],
+          });
         }
 
         break;
@@ -178,26 +160,25 @@ const Home = () => {
         console.error("APPROVE 2 Bronze NFT", bronze);
 
         const min = parseEther("0.03", "wei");
-        if (allow) {
-          if (min > allow) {
-            // write to approve
-            writeContract({
-              abi: ERC20_ABI,
-              address: EUROPA_ETH,
-              functionName: "approve",
-              args: [MARKETPLACE_AQUADEX, min],
-            });
-            // wait for transaction
-          } else {
-            const str2 = String(bronze.current);
-            console.error("BUY BRONZE ", str2);
-            writeContract({
-              abi: marketplaceABI,
-              address: MARKETPLACE_AQUADEX,
-              functionName: "buy",
-              args: [parseUnits(str2, 0), parseEther("0.03", "wei")],
-            });
-          }
+
+        if (min > allow) {
+          // write to approve
+          writeContract({
+            abi: ERC20_ABI,
+            address: EUROPA_ETH,
+            functionName: "approve",
+            args: [MARKETPLACE_AQUADEX, min],
+          });
+          // wait for transaction
+        } else {
+          const str2 = String(bronze.current);
+          console.error("BUY BRONZE ", str2);
+          writeContract({
+            abi: marketplaceABI,
+            address: MARKETPLACE_AQUADEX,
+            functionName: "buy",
+            args: [parseUnits(str2, 0), parseEther("0.03", "wei")],
+          });
         }
 
         break;
@@ -215,82 +196,87 @@ const Home = () => {
       <p>
         Say goodbye to tx gas fees, swap fees and hello to a new era in defi
       </p>
-      <div>
-        {!address || (chain && chain.id !== CHAIN.id) ? (
-          <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-            <div className={styles.p_styled}>
-              <ul>
-                <li>
-                  <Link href="/dashboard">
-                    {" "}
-                    <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to
-                    unlock features)
-                  </Link>
-                </li>
-              </ul>
+      <br></br>
+
+      {address && chain && chain.id === CHAIN.id ? (<div className={styles.container}>
+
+        {inputs.map((value, index) => (
+          <div key={index} className={styles.column}>
+            <div className={styles.imageCenter}>
+              <Link href={urlDescriptions[index]} target="_blank">
+                <Image
+                  src={`/NFT${index}.png`}
+                  alt="AquasTrade Logo"
+                  width={200}
+                  height={200}
+                  className={styles.imageAlign}
+                  priority
+                />
+              </Link>
+
+              <div>
+                <ul className={styles.textDesc}>
+                  <li> Collection: {supplyDescriptions[index]}</li>
+                  <li> Fee discount: {feeDescriptions[index]}</li>
+                </ul>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className={styles.container}>
-            {/** connected  */}
 
-            {inputs.map((value, index) => (
-              <div key={index} className={styles.column}>
-                <div className={styles.imageCenter}>
-                  <Link href={urlDescriptions[index]} target="_blank">
-                    <Image
-                      src={`/NFT${index}.png`}
-                      alt="AquasTrade Logo"
-                      width={200}
-                      height={200}
-                      className={styles.imageAlign}
-                      priority
-                    />
-                  </Link>
-
-                  <div>
-                    <ul className={styles.textDesc}>
-                      <li> Collection: {supplyDescriptions[index]}</li>
-                      <li> Fee discount: {feeDescriptions[index]}</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    value={getInputValue(index)} // Call a function to get the appropriate value
-                    className={styles.textInputs}
-                    onChange={handleChangeETH}
-                  />
-                </div>
-
-                {allowancesTest.current &&
-                BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
-                  <div>
-                    <button
-                      className={styles_button.toggleButton}
-                      onClick={() => handleButtonClick(index)}
-                    >
-                      {buttonLogicTexts[index]}
-                    </button>
-                  </div>
-                ) : (
-                  <div> <button
+            <div className="mb-4">
+              <input
+                type="text"
+                value={getInputValue(index)} // Call a function to get the appropriate value
+                className={styles.textInputs}
+                onChange={handleChangeETH}
+              />
+            </div>
+            {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
+            {allowancesTest.current &&
+              BigInt(allowancesTest.current) >=
+              BigInt(allowance[index]) ? (
+              <div>
+                <button
+                  className={styles_button.toggleButton}
+                  onClick={() => handleButtonClick(index)}
+                >
+                  {buttonLogicTexts[index]}
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button
                   className={styles_button.toggleButton}
                   onClick={() => handleButtonClick(index)}
                 >
                   Approve
-                </button></div>
-                )}
-
-              
+                </button>
               </div>
-            ))}
+            )}
           </div>
-        )}
+        ))}
       </div>
+
+      ) : (
+
+        <div>
+          <ul>
+            <li>
+              <Link href="/dashboard">
+                {" "}
+                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to
+                unlock features)
+              </Link>
+            </li>
+          </ul>
+
+
+        </div>)}
+
     </main>
   );
 };
 export default Home;
+/*
+
+
+*/

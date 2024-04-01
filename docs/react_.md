@@ -8,7 +8,7 @@
 
 ## useMemo
 
-for for big computating
+for big computating
 
 ## useCallBack
 
