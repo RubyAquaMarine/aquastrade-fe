@@ -8,8 +8,9 @@
 
 ## pages
 
-###
+### test
 
+(working)
 http://localhost:3000/test
 
 - client side
@@ -18,14 +19,17 @@ http://localhost:3000/test
 
 ### nft
 
+(working)
+
 http://localhost:3000/nft
 
 - nft ( `read:` marketplace contract , eth allowance, `write:` approve, write buy nft)
 
 ### coinflip
 
+(working)
+
 - `write:` approve erc20, flip , withdraw ,
 - `read:` wins, losses, balance <"Component">
 
 promiseALL : multiCall read ^^
-
