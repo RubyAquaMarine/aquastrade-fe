@@ -278,6 +278,7 @@
   font-weight: 600;
   line-height: 110%;
   display: block;
+  padding: 0.3rem 0.3rem;
 }
 
 .bottomText {
@@ -296,7 +297,7 @@
 
 .gridSix {
   margin-top: 5px;
-  background-color: #03bada;
+  background-color: #2196f3;
   display: grid;
   grid-template-columns: minmax(200px, 1fr) minmax(30px, 1fr);
   grid-column-gap: 15px;
