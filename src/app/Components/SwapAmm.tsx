@@ -47,12 +47,9 @@ const SwapAmm = () => {
                 findAddressFromSymbol(false, tokenB);
 
             }
-            if (tokenAAddress && tokenBAddress) {
-                console.log("get tokenA_balance  ", tokenA_balance, tokenA, tokenAAddress);
-                console.log("get tokenB_balance  ", tokenB_balance, tokenB, tokenBAddress);
-            }
+           
         }
-    }, [address, tokenA, tokenB, tokenAAddress, tokenBAddress]);
+    }, [address, tokenA, tokenB]);
 
     const findAddressFromSymbol = (_a: boolean, _symbol: string) => {
         console.log("findTokenAddressFromSymbol", _symbol);
