@@ -56,7 +56,8 @@ export const tokenAddresses = [
   },
 ] as const;
 
-0xE0595a049d02b7674572b0d59cd4880Db60EDC50
+// custom swap router for amm + stable swaps
+export const EUROPA_ROUTER = '0x18425939A31E35DB05358Ba4Bc85d1075ed015E5';
 
 export const getKlineRecordCount = 600;
 
@@ -70,7 +71,7 @@ export const ASSET_ETH = { symbol: "ETHUSD" };
 
 export const RUBY_STAKER = "0x2998f0b516b1eaCbb06442B1c13cB2FFc865B449";
 
-// list of router address
+// list of uniswap:router address
 export const ROUTER_AQUADEX = "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61";
 export const ROUTER_RUBYSWAP = "0xd4C0828FC3C50B75eBdcEE209c7423A7398C4d72";
 

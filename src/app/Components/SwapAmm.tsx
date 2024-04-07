@@ -1,20 +1,22 @@
 "use client";
-import { useAccount } from "wagmi";
+import { useAccount, useWriteContract } from "wagmi";
 import React, { useState, useEffect } from "react";
-import { formatUnits } from "viem";
+import { formatUnits , parseEther} from "viem";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
 import Popup from "@/app/Components/PopUp"
+import { ERC20_ABI } from "@/app/Abi/erc20";
 import { useERC20Token } from "@/app/Hooks/useAMM";
-import { tokenSymbols, tokenAddresses } from "@/app/Utils/config"
+import { EUROPA_ROUTER, tokenSymbols, tokenAddresses } from "@/app/Utils/config"
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
 
 
 const SwapAmm = () => {
     const { address, isConnected, chain } = useAccount();
+    const { writeContract } = useWriteContract();
     const path = usePathname();
     const dappType = path;
 
@@ -32,6 +34,8 @@ const SwapAmm = () => {
     const { data: tokenA_balance } = useERC20Token(tokenAAddress, "balanceOf", [address]);
     const { data: tokenB_balance } = useERC20Token(tokenBAddress, "balanceOf", [address]);
 
+    const allowanceArray: any[any] = [address, EUROPA_ROUTER];
+    const { data: tokenAllowance } = useERC20Token(tokenAAddress, "allowance", allowanceArray);
 
 
     const [amountA, setAmountA] = useState('');
@@ -47,7 +51,7 @@ const SwapAmm = () => {
                 findAddressFromSymbol(false, tokenB);
 
             }
-           
+
         }
     }, [address, tokenA, tokenB]);
 
@@ -93,6 +97,22 @@ const SwapAmm = () => {
     // Function to handle token swapping
     const handleSwap = () => {
         // Implement swapping logic here
+    };
+
+    // Function to handle token swapping
+    const handleSwapApprove = () => {
+        // Implement swapping logic here
+
+
+        console.log("Approve Token  ", tokenA, " data ", tokenAllowance)
+
+        writeContract({
+            abi: ERC20_ABI,
+            address: tokenAAddress,
+            functionName: "approve",
+            args: [EUROPA_ROUTER, parseEther(amountA)],
+          });
+
     };
 
     // Function to handle liquidity provision
@@ -228,11 +248,17 @@ const SwapAmm = () => {
 
 
                     </div>
-                    <p className={styles.amount_balance}>Balance  {!tokenB_balance ? ("0.0") : (typeof tokenB_balance === 'bigint' &&  formatUnits(tokenB_balance, 18))}     </p>
+                    <p className={styles.amount_balance}>Balance  {!tokenB_balance ? ("0.0") : (typeof tokenB_balance === 'bigint' && formatUnits(tokenB_balance, 18))}     </p>
                 </div>
 
                 <div className={styles.button_container}>
-                    <button className={styles.button_field} onClick={handleSwap}>Swap</button>
+
+
+                    {tokenAllowance && BigInt(tokenAllowance) >= parseEther(amountA) ? (<button className={styles.button_field} onClick={handleSwap}>Swap</button>) : (<button className={styles.button_field} onClick={handleSwapApprove}>Approve</button>)}
+
+
+
+
                 </div>
 
 
