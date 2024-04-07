@@ -1,25 +1,17 @@
 "use client";
-import { useAccount, usePublicClient } from "wagmi";
+import { useAccount } from "wagmi";
 import React, { useState, useEffect } from "react";
-
-import { parseUnits, hashMessage, formatUnits } from "viem";
-
-import { useERC20Token } from "@/app/Hooks/useAMM";
-
-//import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
-
-import { tokenSymbols } from "@/app/Utils/config"
-import { tokenAddresses } from "@/app/Utils/config"
-
-
-
+import { formatUnits } from "viem";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+
+import Popup from "@/app/Components/PopUp"
+import { useERC20Token } from "@/app/Hooks/useAMM";
+import { tokenSymbols, tokenAddresses } from "@/app/Utils/config"
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
 
-import Popup from "@/app/Components/PopUp"
 
 const SwapAmm = () => {
     const { address, isConnected, chain } = useAccount();
@@ -34,70 +26,51 @@ const SwapAmm = () => {
     const [showTokenListB, setShowTokenListB] = useState(false);
 
 
-    const [tokenAAddress, setTokenAAddress] = useState('' as `0x${string}`);
-    const [tokenBAddress, setTokenBAddress] = useState('' as `0x${string}`);
+    const [tokenAAddress, setTokenAAddress] = useState('0xD2Aaa00700000000000000000000000000000000' as `0x${string}`);
+    const [tokenBAddress, setTokenBAddress] = useState('0xE34A1fEF365876D4D0b55D281618768583ba4867' as `0x${string}`);
 
     const { data: tokenA_balance } = useERC20Token(tokenAAddress, "balanceOf", [address]);
     const { data: tokenB_balance } = useERC20Token(tokenBAddress, "balanceOf", [address]);
 
 
 
-
-
-
     const [amountA, setAmountA] = useState('');
     const [amountB, setAmountB] = useState('');
-
-
-
-
-
-
-
-
 
     useEffect(() => {
         if (address) {
             // with 
             if (tokenA && tokenB) {
                 console.log("set token A + B addresses ");
+                // new 
+                findAddressFromSymbol(true, tokenA);
+                findAddressFromSymbol(false, tokenB);
 
-                // use the string ETH match to map to address 
-                const addrA = findTokenAddressFromSymbol(tokenA) as unknown as `0x${string}`;
-                const addrB = findTokenAddressFromSymbol(tokenB) as unknown as `0x${string}`;
-
-                const addrBC = findTokenAddressFromSymbol(tokenB);;
-
-                console.log("output token address ", addrA, addrB, addrBC, findTokenAddressFromSymbol(tokenA));
-
-
-                if (addrA && addrB) {
-                    setTokenAAddress(addrA);
-                    setTokenBAddress(addrB);
-                    console.log("setTokenAddresses ");
-                }
             }
-
             if (tokenAAddress && tokenBAddress) {
-
                 console.log("get tokenA_balance  ", tokenA_balance, tokenA, tokenAAddress);
-
                 console.log("get tokenB_balance  ", tokenB_balance, tokenB, tokenBAddress);
-
-
-
-
             }
         }
     }, [address, tokenA, tokenB, tokenAAddress, tokenBAddress]);
 
-    const findTokenAddressFromSymbol = (_symbol: string) => {
+    const findAddressFromSymbol = (_a: boolean, _symbol: string) => {
         console.log("findTokenAddressFromSymbol", _symbol);
         if (tokenAddresses) {
             tokenAddresses.forEach((element) => {
                 if (_symbol === element.symbol) {
                     console.log(`found ${_symbol} at address: `, element.addr)
-                    return element.addr;
+
+                    if (_a === true) {
+                        setTokenAAddress(element.addr);
+
+
+                    }
+                    if (_a === false) {
+                        setTokenBAddress(element.addr);
+
+                    }
+
                 }
             });
         }
@@ -198,7 +171,7 @@ const SwapAmm = () => {
                         )}
 
                     </div>
-                    <p className={styles.amount_balance}>Balance  {!tokenA_balance ? ("ok") : (formatUnits(tokenA_balance, 18))}     </p>
+                    <p className={styles.amount_balance}>Balance  {!tokenA_balance ? ("0.0") : (typeof tokenA_balance === 'bigint' && formatUnits(tokenA_balance, 18))}     </p>
                 </div>
 
 
@@ -258,7 +231,7 @@ const SwapAmm = () => {
 
 
                     </div>
-
+                    <p className={styles.amount_balance}>Balance  {!tokenB_balance ? ("0.0") : (typeof tokenB_balance === 'bigint' &&  formatUnits(tokenB_balance, 18))}     </p>
                 </div>
 
                 <div className={styles.button_container}>
