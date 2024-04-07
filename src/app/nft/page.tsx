@@ -121,6 +121,7 @@ const Home = () => {
         } else {
           const str = String(silver.current);
           console.error("BUY SILVER ", str);
+          
           writeContract({
             abi: marketplaceABI,
             address: MARKETPLACE_AQUADEX,

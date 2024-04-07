@@ -1,5 +1,25 @@
 import { Localhost, Mainnet, DEFAULT_SUPPORTED_CHAINS } from "@usedapp/core";
 
+export const tokenSymbols = ['ETH', 'BTC', 'SKL', 'AQUA', 'USDC', 'DAI', 'USDT', 'USDP'];
+
+
+export const tokenAddresses = [
+  {
+    symbol: "USDP",
+    addr: "0x73d22d8a2D1f59Bf5Bcf62cA382481a2073FAF58"
+  },
+  {
+    symbol: "ETH",
+    addr: "0xD2Aaa00700000000000000000000000000000000"
+  },
+  {
+    symbol: "AQUA",
+    addr: "0xE34A1fEF365876D4D0b55D281618768583ba4867"
+  },
+] as const;
+
+
+
 export const getKlineRecordCount = 600;
 
 export const CHAIN = {

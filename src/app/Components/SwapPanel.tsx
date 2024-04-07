@@ -11,6 +11,7 @@ import { DAPP_CONFIG } from "../Utils/config";
 import SwapLifi from "./SwapLifi";
 import SwapAqua from "./SwapAqua";
 import SwapRuby from "./SwapRuby";
+import SwapAmm from "./SwapAmm";
 
 const SwapPanel = () => {
   const path = usePathname();
@@ -70,6 +71,9 @@ const SwapPanel = () => {
         )}
 
         {dappType == "/swap/lifi" ? <SwapLifi /> : <p></p>}
+
+
+        {dappType == "/swap/amm" ? <SwapAmm /> : <p></p>}
       </div>
     </main>
   );

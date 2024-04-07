@@ -5,6 +5,7 @@
 - AMM
 - Perps
 - Games
+- NFT MarketPlace
 
 ## tech
 
