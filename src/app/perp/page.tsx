@@ -36,8 +36,7 @@ const Home = () => {
       ) : (
         <div>
           <h4 className={styles.topText}>
-            {" "}
-            No Gas Fees - No Oracle Fees - Cross Margin{" "}
+            No Gas Fees - No Oracle Fees{" "}
           </h4>
           <h1 className={styles.midText}>Almost Free Leveraged Trading </h1>
           <p className={styles.topText}>

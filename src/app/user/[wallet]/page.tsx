@@ -95,11 +95,10 @@ const TokenList = ({ params }: any) => {
           ) : (
             <div>
               <ul>
-                <li className={styles.p_styled}>
-                  <Link href="/dashboard"> Back </Link>
-                </li>
+               
                 <li>Address : {addressWallet} </li>
                 <li>ChainID : {chain?.id}</li>
+              
                 <li>
                   <Link
                     href={
@@ -113,6 +112,7 @@ const TokenList = ({ params }: any) => {
                   </Link>
                 </li>
               </ul>
+              <br></br>
               <div className={styles_grid["grid-container"]}>
                 {/* @ts-ignore: Unreachable code error*/}
                 {assetArray &&

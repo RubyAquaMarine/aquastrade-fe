@@ -1,14 +1,46 @@
-- AMM 
-- - http://localhost:3000/swap/amm 
 
 DONE: 
 - fetch balance on token A and B 
 - token switching 
+- swap tokens 
 
 
 TODO:
-- input amount , is amount approved on Router contract? AQUA ROUTER ? 
-0x18425939A31E35DB05358Ba4Bc85d1075ed015E5
+- AMM 
+- - http://localhost:3000/swap/amm 
+- getAmountsOut : display to user + slippage stats 
+- add liquidity doesn't work for WriteContract
+- tokenList page with chainID 1 providers? http://localhost:3000/user/0xCDeb7F7974D89Fd71089487D65AA9731d7E846F5 
 
-https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/0x51e9cb54ce6bfe6d524781033d0eebf895a483afedb49e492df327d57d074d87
+- Perps Landing Page 
+- - begin trading button ( POW : faucet : sfuel and 0.000001 USDC)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Low Priority:
+
+- recode the read and write functions for http://localhost:3000/dashboard/stake/ruby 
+
+- ruby staking page  
+    <li>
+                {" "}
+                <Link href={`/dashboard/stake/ruby`}>
+                  <i>RUBY</i> Staking
+                </Link>
+              </li>
+
+
+
 

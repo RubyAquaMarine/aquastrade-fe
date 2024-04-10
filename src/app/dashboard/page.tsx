@@ -52,12 +52,7 @@ const Home = () => {
                 {" "}
                 <Link href={`/dashboard/marketplace`}>Market Place</Link>
               </li>
-              <li>
-                {" "}
-                <Link href={`/dashboard/stake/ruby`}>
-                  <i>RUBY</i> Staking
-                </Link>
-              </li>
+          
               <li>
                 {" "}
                 <Link href={`/user/${address}`}>Token List</Link>
@@ -68,16 +63,21 @@ const Home = () => {
               </p>
               <li>
                 {" "}
-                <Link href={`/swap/aquadex`}>AquasTrade</Link>
+                <Link href={`/swap/amm`}>AquasTrade</Link>
               </li>
               <li>
                 {" "}
                 <Link href={`/swap/lifi`}>Lifi</Link>
               </li>
+
+              <p>
+                <b>Perps</b>
+              </p>
               <li>
                 {" "}
-                <Link href={`/swap/rubyexchange`}>Ruby Exchange</Link>
+                <Link href={`/perp`}>AquasTrade</Link>
               </li>
+              
             </ul>
           </div>
 
