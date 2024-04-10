@@ -37,7 +37,8 @@ npx prettier . --write [docs](https://prettier.io/docs/en/install)
 - walletConnect ID
 
 # redesign
--  "styled-components": "5.3.11",
+
+- "styled-components": "5.3.11",
 - https://www.npmjs.com/package/styled-components
 
 ## notes

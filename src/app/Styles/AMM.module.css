@@ -5,8 +5,8 @@
   padding: 0.4rem 0.6rem;
   margin-bottom: 10px;
   margin-top: 10px;
-  margin-right:10px;
-  margin-left:10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .nav_right {
@@ -16,8 +16,8 @@
   padding: 0.4rem 0.6rem;
   margin-bottom: 10px;
   margin-top: 10px;
-  margin-right:10px;
-  margin-left:10px;
+  margin-right: 10px;
+  margin-left: 10px;
   float: right;
 }
 
@@ -44,8 +44,8 @@
   padding: 0.4rem 0.6rem;
   border-radius: 12px;
   background-color: #242629;
-  margin-right:10px;
-  margin-left:10px;
+  margin-right: 10px;
+  margin-left: 10px;
   margin-bottom: 10px;
   margin-top: 10px;
 }
@@ -53,26 +53,24 @@
 .token_inputs,
 .amount_inputs {
   display: flex;
-  margin-right:2px;
+  margin-right: 2px;
   padding: 0.2rem;
 }
 
 .input_amount {
   display: flex;
-  margin-right:2px;
+  margin-right: 2px;
   padding: 0.2rem;
   color: #fff;
   background-color: #242629;
-
 }
 
 .input_token {
   display: flex;
-  margin-right:2px;
+  margin-right: 2px;
   padding: 0.2rem;
   color: #fff;
   background-color: #242629;
-
 }
 
 .input_token:hover {
@@ -86,7 +84,6 @@
   background-color: #007bff;
   color: #fff;
   cursor: pointer;
-
 }
 
 .button_container {
@@ -94,7 +91,6 @@
   justify-content: center;
   padding: 0.4rem 0.6rem;
 }
-
 
 .button_field:hover {
   background-color: #0056b3;
@@ -106,7 +102,6 @@
 }
 
 .amount_balance {
- font-size: 12px;
- color: #bdb8b8;
+  font-size: 12px;
+  color: #bdb8b8;
 }
-

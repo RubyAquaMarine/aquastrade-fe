@@ -105,7 +105,6 @@ const TokenList = ({ params }: any) => {
           ) : (
             <div>
               <ul>
-              
                 <li>Address : {addressWallet} </li>
                 <li>ChainID : {chain?.id}</li>
                 <li>

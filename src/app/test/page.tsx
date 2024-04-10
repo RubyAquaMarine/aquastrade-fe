@@ -19,42 +19,47 @@ const IndexPage = () => {
   const [data, setData] = useState(null);
   const [buttonText, setButtonText] = useState("");
 
-  const toggleAMMFeatures = useRef('swap');// swap, add, list 
+  const toggleAMMFeatures = useRef("swap"); // swap, add, list
 
   useEffect(() => {
-    setButtonText(toggleAMMFeatures.current)
+    setButtonText(toggleAMMFeatures.current);
   }, [toggleAMMFeatures.current]);
 
   const testThis = (_str: string) => {
     toggleAMMFeatures.current = _str;
-    console.log("button clicked ", toggleAMMFeatures.current)
-    setButtonText(toggleAMMFeatures.current)
-  }
-
+    console.log("button clicked ", toggleAMMFeatures.current);
+    setButtonText(toggleAMMFeatures.current);
+  };
 
   return (
-    <main> <div>
-
-      <button onClick={() => testThis('swap')} >Swap </button> -
-
-      <button onClick={() => testThis('add')} > Add </button> -
-
-      <button onClick={() => testThis('list')} > List</button>
-
-      <p> ---- </p>
-      {buttonText && (<div> if True </div>)}
-      <p> ---- </p>
-     
-      {toggleAMMFeatures.current && toggleAMMFeatures.current ==='swap' ? (<div>  {toggleAMMFeatures.current} </div>) : (<div></div>) }
-      <p> ---- </p>
-      {toggleAMMFeatures.current && toggleAMMFeatures.current ==='add' ? (<div>  {toggleAMMFeatures.current} </div>) : (<div></div>) }
-      <p> ---- </p>
-      {toggleAMMFeatures.current && toggleAMMFeatures.current ==='list' ? (<div>  {toggleAMMFeatures.current} </div>) : (<div></div>) }
-
-     
-
-    </div> </main>
-
+    <main>
+      {" "}
+      <div>
+        <button onClick={() => testThis("swap")}>Swap </button> -
+        <button onClick={() => testThis("add")}> Add </button> -
+        <button onClick={() => testThis("list")}> List</button>
+        <p> ---- </p>
+        {buttonText && <div> if True </div>}
+        <p> ---- </p>
+        {toggleAMMFeatures.current && toggleAMMFeatures.current === "swap" ? (
+          <div> {toggleAMMFeatures.current} </div>
+        ) : (
+          <div></div>
+        )}
+        <p> ---- </p>
+        {toggleAMMFeatures.current && toggleAMMFeatures.current === "add" ? (
+          <div> {toggleAMMFeatures.current} </div>
+        ) : (
+          <div></div>
+        )}
+        <p> ---- </p>
+        {toggleAMMFeatures.current && toggleAMMFeatures.current === "list" ? (
+          <div> {toggleAMMFeatures.current} </div>
+        ) : (
+          <div></div>
+        )}
+      </div>{" "}
+    </main>
   );
 };
 

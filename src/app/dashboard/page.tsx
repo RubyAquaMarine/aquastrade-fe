@@ -52,7 +52,7 @@ const Home = () => {
                 {" "}
                 <Link href={`/dashboard/marketplace`}>Market Place</Link>
               </li>
-          
+
               <li>
                 {" "}
                 <Link href={`/user/${address}`}>Token List</Link>
@@ -77,7 +77,6 @@ const Home = () => {
                 {" "}
                 <Link href={`/perp`}>AquasTrade</Link>
               </li>
-              
             </ul>
           </div>
 

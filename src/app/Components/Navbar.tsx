@@ -7,7 +7,6 @@ import Image from "next/image";
 import Dropdown from "react-multilevel-dropdown";
 
 const Navbar = () => {
-  
   return (
     <header className={styles.header}>
       <nav>
@@ -67,8 +66,13 @@ const Navbar = () => {
                   <Dropdown.Item>
                     AMM
                     <Dropdown.Submenu>
-                      <Dropdown.Item>  <Link href="/swap/amm">Swap</Link></Dropdown.Item>
-                      <Dropdown.Item><Link href="/swap/amm">Liquidity</Link></Dropdown.Item>
+                      <Dropdown.Item>
+                        {" "}
+                        <Link href="/swap/amm">Swap</Link>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <Link href="/swap/amm">Liquidity</Link>
+                      </Dropdown.Item>
                     </Dropdown.Submenu>
                   </Dropdown.Item>
 

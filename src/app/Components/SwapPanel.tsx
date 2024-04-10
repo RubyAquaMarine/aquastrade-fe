@@ -72,7 +72,6 @@ const SwapPanel = () => {
 
         {dappType == "/swap/lifi" ? <SwapLifi /> : <p></p>}
 
-
         {dappType == "/swap/amm" ? <SwapAmm /> : <p></p>}
       </div>
     </main>
