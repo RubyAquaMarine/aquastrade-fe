@@ -69,10 +69,9 @@ const Home = ({ children, params }: any) => {
       console.error("unable to get ChartCandles() ");
     }
   };
-
   useEffect(() => {
     getDataCallBack();
-  }, [Asset]);
+  }, [getDataCallBack,Asset]);
 
   const { chains, switchChain } = useSwitchChain();
   const { address } = useAccount();

@@ -44,7 +44,7 @@ npx prettier . --write [docs](https://prettier.io/docs/en/install)
 Ideas
 
 - - airdrop $AQUA to all nft holders quarterly for the next 10 years : bullish for nft holders/marketPlace 
-- - after NFTS are sold out, make new MarketPlace SC for AQUA token instead of ETH => Bullish for AQUA
+- - after NFTS are sold out, make new Market       Place SC for AQUA token instead of ETH => Bullish for AQUA
 - - Aqua powers AquasTrade by being the base asset on major AMM pools, marketplace utility token,
 
 ## NFT Holders: 
@@ -55,7 +55,7 @@ The plan is to airdrop 10% of the token supply over 10 year period. This will re
 - - 2 million per year 
 - - - 500k released Quarterly (5k USD @ 0.01 per AQUA)
 
-## MarketPlace 
+## NFT Market Place 
 The marketplace will use $AQUA as the asset with router swapping to allow user to buy any nft with any asset within their wallet. 
 
 # api : database

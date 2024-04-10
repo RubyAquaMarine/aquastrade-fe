@@ -208,7 +208,7 @@ const Home = () => {
                 <div className="space-y-2">
                   {address && typeof bal === "bigint" ? (
                     <button className={styles.buttonDisplay}>
-                      You've Won: {formatUnits(bal, 18)}
+                      You Won: {formatUnits(bal, 18)}
                     </button>
                   ) : (
                     <div> No rewards</div>

@@ -85,7 +85,7 @@ const Navbar = () => {
                   </Dropdown.Item>
 
                   <Dropdown.Item>
-                    <Link href="/dashboard/marketplace">MarketPlace</Link>
+                    <Link href="/dashboard/marketplace">NFT Market Place</Link>
                   </Dropdown.Item>
 
                   <Dropdown.Item>

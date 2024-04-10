@@ -91,14 +91,16 @@ const SwapAmm = () => {
     [address],
   );
 
-  const [swap_path, setSwapPath] = useState([""]);
 
+  interface AMMData {
+    fee: undefined;
+  }
+
+
+  const [swap_path, setSwapPath] = useState(['']);
+  const feeNFT = useRef(BigInt(999));
   // Get Amounts Out  ( amountIn, Path[], 999:fee)
-  const { data: swap_out } = useAMMRouter(ROUTER_AQUADEX, "getAmountsOut", [
-    parseUnits(amountA, 18),
-    swap_path,
-    999,
-  ]);
+  const { data: swap_out } = useAMMRouter(ROUTER_AQUADEX, "getAmountsOut", [parseUnits(amountA, 18), swap_path, feeNFT.current]);
 
   useEffect(() => {
     if (address && isConnected === true) {
@@ -405,7 +407,7 @@ const SwapAmm = () => {
                 {!tokenA_balance
                   ? "0.0"
                   : typeof tokenA_balance === "bigint" &&
-                    formatUnits(tokenA_balance, 18)}{" "}
+                  formatUnits(tokenA_balance, 18)}{" "}
               </p>
             </div>
             {!showTokenListA && !showTokenListB ? (
@@ -479,12 +481,12 @@ const SwapAmm = () => {
                 {!tokenB_balance
                   ? "0.0"
                   : typeof tokenB_balance === "bigint" &&
-                    formatUnits(tokenB_balance, 18)}{" "}
+                  formatUnits(tokenB_balance, 18)}{" "}
               </p>
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-              BigInt(tokenAllowance) >= parseEther(amountA) ? (
+                BigInt(tokenAllowance) >= parseEther(amountA) ? (
                 <button className={styles.button_field} onClick={handleSwap}>
                   Swap
                 </button>
@@ -545,7 +547,7 @@ const SwapAmm = () => {
                 {!tokenA_balance
                   ? "0.0"
                   : typeof tokenA_balance === "bigint" &&
-                    formatUnits(tokenA_balance, 18)}{" "}
+                  formatUnits(tokenA_balance, 18)}{" "}
               </p>
             </div>
             {!showTokenListA && !showTokenListB ? (
@@ -611,12 +613,12 @@ const SwapAmm = () => {
                 {!tokenB_balance
                   ? "0.0"
                   : typeof tokenB_balance === "bigint" &&
-                    formatUnits(tokenB_balance, 18)}{" "}
+                  formatUnits(tokenB_balance, 18)}{" "}
               </p>
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-              BigInt(tokenAllowance) >= parseEther(amountA) ? (
+                BigInt(tokenAllowance) >= parseEther(amountA) ? (
                 <button
                   className={styles.button_field}
                   onClick={handleProvideLiquidity}
@@ -647,7 +649,7 @@ const SwapAmm = () => {
                 {!nft_gold_balance
                   ? "0.0"
                   : typeof nft_gold_balance === "bigint" &&
-                    formatUnits(nft_gold_balance, 0)}
+                  formatUnits(nft_gold_balance, 0)}
               </p>
 
               <p>Silver NFT Holder</p>
@@ -656,7 +658,7 @@ const SwapAmm = () => {
                 {!nft_silver_balance
                   ? "0.0"
                   : typeof nft_silver_balance === "bigint" &&
-                    formatUnits(nft_silver_balance, 0)}{" "}
+                  formatUnits(nft_silver_balance, 0)}{" "}
               </p>
 
               <p>Bronze NFT Holder</p>
@@ -665,7 +667,7 @@ const SwapAmm = () => {
                 {!nft_bronze_balance
                   ? "0.0"
                   : typeof nft_bronze_balance === "bigint" &&
-                    formatUnits(nft_bronze_balance, 0)}{" "}
+                  formatUnits(nft_bronze_balance, 0)}{" "}
               </p>
             </div>
           </div>

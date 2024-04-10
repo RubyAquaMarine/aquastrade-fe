@@ -49,7 +49,6 @@ const Home = ({ children, params }: any) => {
   const getDataCallBack = async () => {
     try {
       const bars = await ChartCandles(Asset);
-
       console.error("Rendered bars: ", bars?.[0], bars?.[1]);
       setDataToTV(bars?.[0]);
       setDataToTVVolume(bars?.[1]);

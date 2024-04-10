@@ -25,7 +25,7 @@ import {
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
 const Home = () => {
-  const allowancesTest = useRef(undefined);
+  const allowancesTest = useRef(BigInt(1));
   const { writeContract } = useWriteContract();
   const { address, isConnected, chain } = useAccount();
   const array: any[any] = [address, MARKETPLACE_AQUADEX];
@@ -81,14 +81,17 @@ const Home = () => {
 
       console.log("  NFTS ", gold, silver, bronze);
     }
+    if (typeof tokenAllowance === 'bigint') {
+      allowancesTest.current = tokenAllowance;
 
-    allowancesTest.current = tokenAllowance;
+    }
+
     console.error(
       " allowancesTest.current '",
       allowancesTest.current,
       typeof allowancesTest.current,
     );
-  }, [allowancesTest.current, tokenAllowance]);
+  }, [MarketPlace, tokenAllowance]);
 
   function getInputValue(index: number) {
     return inputs[index];
@@ -233,7 +236,7 @@ const Home = () => {
               </div>
               {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
               {allowancesTest.current &&
-              BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
+                BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
                 <div>
                   <button
                     className={styles_button.toggleButton}
