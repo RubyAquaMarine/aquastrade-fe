@@ -1,4 +1,85 @@
 import { Localhost, Mainnet, DEFAULT_SUPPORTED_CHAINS } from "@usedapp/core";
+// Add Token Symbol  Here
+export const tokenSymbols = [
+  "ETH",
+  "BTC",
+  "SKL",
+  "AQUA",
+  "USDC",
+  "USDT",
+  "USDP",
+  "DAI",
+  "BRAWL",
+  "EXD",
+  "RUBY",
+  "PROSPECT",
+];
+
+export const tokenAddresses = [
+  {
+    symbol: "USDC",
+    addr: "0x5F795bb52dAC3085f578f4877D450e2929D2F13d",
+    decimal: 6,
+  },
+  {
+    symbol: "USDT",
+    addr: "0x1c0491E3396AD6a35f061c62387a95d7218FC515",
+    decimal: 6,
+  },
+  {
+    symbol: "DAI",
+    addr: "0xD05C4be5f3be302d376518c9492EC0147Fa5A718",
+    decimal: 18,
+  },
+  {
+    symbol: "USDP",
+    addr: "0x73d22d8a2D1f59Bf5Bcf62cA382481a2073FAF58",
+    decimal: 18,
+  },
+  {
+    symbol: "ETH",
+    addr: "0xD2Aaa00700000000000000000000000000000000",
+    decimal: 18,
+  },
+  {
+    symbol: "BTC",
+    addr: "0xcb011E86DF014a46F4e3AC3F3cbB114A4EB80870",
+    decimal: 8,
+  },
+  {
+    symbol: "SKL",
+    addr: "0xE0595a049d02b7674572b0d59cd4880Db60EDC50",
+    decimal: 18,
+  },
+  {
+    symbol: "AQUA",
+    addr: "0xE34A1fEF365876D4D0b55D281618768583ba4867",
+    decimal: 18,
+  },
+  {
+    symbol: "BRAWL",
+    addr: "0x28c6ac22aB738BB01FC6CBA75804dC088aae6193",
+    decimal: 18,
+  },
+  {
+    symbol: "EXD",
+    addr: "0xCfEBA92BD362B2F76fC30a89C433DE50a1D62BcA",
+    decimal: 18,
+  },
+  {
+    symbol: "RUBY",
+    addr: "0x2B4e4899b53E8b7958c4591a6d02f9C0b5c50F8f",
+    decimal: 18,
+  },
+  {
+    symbol: "PROSPECT",
+    addr: "0xA30cA600b8E722E2513B7738493F410a6Ae4a373",
+    decimal: 18,
+  },
+] as const;
+
+// custom swap router for amm + stable swaps
+export const EUROPA_ROUTER = "0x18425939A31E35DB05358Ba4Bc85d1075ed015E5";
 
 export const getKlineRecordCount = 600;
 
@@ -12,7 +93,7 @@ export const ASSET_ETH = { symbol: "ETHUSD" };
 
 export const RUBY_STAKER = "0x2998f0b516b1eaCbb06442B1c13cB2FFc865B449";
 
-// list of router address
+// list of uniswap:router address
 export const ROUTER_AQUADEX = "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61";
 export const ROUTER_RUBYSWAP = "0xd4C0828FC3C50B75eBdcEE209c7423A7398C4d72";
 

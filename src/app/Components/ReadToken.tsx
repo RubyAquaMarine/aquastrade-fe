@@ -14,7 +14,7 @@ export interface ReadProps {
   args: [any];
 }
 
-function Erc20({ name, approve, args }: ReadProps) {
+function Erc20Approve({ name, approve, args }: ReadProps) {
   const { address, isConnected, chain } = useAccount();
   const { writeContract } = useWriteContract();
 
@@ -76,4 +76,4 @@ function Erc20({ name, approve, args }: ReadProps) {
   );
 }
 
-export default Erc20;
+export default Erc20Approve;

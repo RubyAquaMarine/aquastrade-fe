@@ -25,7 +25,7 @@ import {
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
 const Home = () => {
-  const allowancesTest = useRef(undefined);
+  const allowancesTest = useRef(BigInt(1));
   const { writeContract } = useWriteContract();
   const { address, isConnected, chain } = useAccount();
   const array: any[any] = [address, MARKETPLACE_AQUADEX];
@@ -81,14 +81,17 @@ const Home = () => {
 
       console.log("  NFTS ", gold, silver, bronze);
     }
+    if (typeof tokenAllowance === 'bigint') {
+      allowancesTest.current = tokenAllowance;
 
-    allowancesTest.current = tokenAllowance;
+    }
+
     console.error(
       " allowancesTest.current '",
       allowancesTest.current,
       typeof allowancesTest.current,
     );
-  }, [allowancesTest.current, tokenAllowance]);
+  }, [MarketPlace, tokenAllowance]);
 
   function getInputValue(index: number) {
     return inputs[index];
@@ -121,6 +124,7 @@ const Home = () => {
         } else {
           const str = String(silver.current);
           console.error("BUY SILVER ", str);
+
           writeContract({
             abi: marketplaceABI,
             address: MARKETPLACE_AQUADEX,
@@ -198,80 +202,75 @@ const Home = () => {
       </p>
       <br></br>
 
-      {address && chain && chain.id === CHAIN.id ? (<div className={styles.container}>
+      {address && chain && chain.id === CHAIN.id ? (
+        <div className={styles.container}>
+          {inputs.map((value, index) => (
+            <div key={index} className={styles.column}>
+              <div className={styles.imageCenter}>
+                <Link href={urlDescriptions[index]} target="_blank">
+                  <Image
+                    src={`/NFT${index}.png`}
+                    alt="AquasTrade Logo"
+                    width={200}
+                    height={200}
+                    className={styles.imageAlign}
+                    priority
+                  />
+                </Link>
 
-        {inputs.map((value, index) => (
-          <div key={index} className={styles.column}>
-            <div className={styles.imageCenter}>
-              <Link href={urlDescriptions[index]} target="_blank">
-                <Image
-                  src={`/NFT${index}.png`}
-                  alt="AquasTrade Logo"
-                  width={200}
-                  height={200}
-                  className={styles.imageAlign}
-                  priority
+                <div>
+                  <ul className={styles.textDesc}>
+                    <li> Collection: {supplyDescriptions[index]}</li>
+                    <li> Fee discount: {feeDescriptions[index]}</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <input
+                  type="text"
+                  value={getInputValue(index)} // Call a function to get the appropriate value
+                  className={styles.textInputs}
+                  onChange={handleChangeETH}
                 />
-              </Link>
-
-              <div>
-                <ul className={styles.textDesc}>
-                  <li> Collection: {supplyDescriptions[index]}</li>
-                  <li> Fee discount: {feeDescriptions[index]}</li>
-                </ul>
               </div>
+              {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
+              {allowancesTest.current &&
+                BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
+                <div>
+                  <button
+                    className={styles_button.toggleButton}
+                    onClick={() => handleButtonClick(index)}
+                  >
+                    {buttonLogicTexts[index]}
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <button
+                    className={styles_button.toggleButton}
+                    onClick={() => handleButtonClick(index)}
+                  >
+                    Approve
+                  </button>
+                </div>
+              )}
             </div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                value={getInputValue(index)} // Call a function to get the appropriate value
-                className={styles.textInputs}
-                onChange={handleChangeETH}
-              />
-            </div>
-            {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
-            {allowancesTest.current &&
-              BigInt(allowancesTest.current) >=
-              BigInt(allowance[index]) ? (
-              <div>
-                <button
-                  className={styles_button.toggleButton}
-                  onClick={() => handleButtonClick(index)}
-                >
-                  {buttonLogicTexts[index]}
-                </button>
-              </div>
-            ) : (
-              <div>
-                <button
-                  className={styles_button.toggleButton}
-                  onClick={() => handleButtonClick(index)}
-                >
-                  Approve
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
+          ))}
+        </div>
       ) : (
-
         <div>
           <ul>
             <li>
               <Link href="/dashboard">
                 {" "}
-                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to
-                unlock features)
+                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+                features)
               </Link>
             </li>
           </ul>
-
-
-        </div>)}
-
+        </div>
+      )}
     </main>
   );
 };

@@ -36,6 +36,8 @@ if these values change, then re-render
 onClick ={ () => setValueForuseState(new.value)}
 ```
 
+useState<Array<CandlestickData>>([]);
+
 ## hooks
 
 must be called at top of function components

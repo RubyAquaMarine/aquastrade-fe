@@ -117,8 +117,10 @@ const Home = () => {
         Zero Gas Fees + Zero Profit Fees = Hero Outcomes{" "}
       </h4>
       <h1 className={styles.midText}>Flip to Up your Stack</h1>
-      <h2>Prize pools and available flip assets are growing. Come back soon to flip again.</h2>
-     
+      <h2>
+        Prize pools and available flip assets are growing. Come back soon to
+        flip again.
+      </h2>
 
       {address ? (
         <div>
@@ -206,7 +208,7 @@ const Home = () => {
                 <div className="space-y-2">
                   {address && typeof bal === "bigint" ? (
                     <button className={styles.buttonDisplay}>
-                      You've Won: {formatUnits(bal, 18)}
+                      You Won: {formatUnits(bal, 18)}
                     </button>
                   ) : (
                     <div> No rewards</div>
