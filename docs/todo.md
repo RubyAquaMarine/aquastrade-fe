@@ -1,8 +1,7 @@
 # AquasTrade
+APP ROUTER Project
 
-scr/app/ Project
--- /pages
-
+- scr/app/pages (all lowercase)
 - - /Components
 - - /api (reserved specifically for nextjs) : fetch data, manipulate and return to Components
 - - /Hooks : <b> use</b>HookFuntionName , make custom useEffect for example [useHandleWrongNetwork](/src/app/Hooks/useHandleWrongNetwork.ts)
@@ -11,16 +10,9 @@ scr/app/ Project
 
 npx prettier . --write [docs](https://prettier.io/docs/en/install)
 
-- https://nextjs.org/docs/pages/building-your-application/configuring/eslint#disabling-rules
-
-- websocket bug : data doesn't refresh : connection must be disconnected then reconnected to get the next SC state. wtf skale...
-
-- /_ #03bada #2196f3; (new) _/
 
 # dependencies
 
-- slider for leverage adjustments ( default white themed)
-- dropdown-menu for navigation (default white themed)
 - https://redux.js.org/usage/nextjs
 - https://github.com/kirill-konshin/next-redux-wrapper
 
@@ -32,51 +24,46 @@ npx prettier . --write [docs](https://prettier.io/docs/en/install)
 
 # todo
 
-- navbar :europa : switch to europa : add to metamask if not added yet
-- meson widget
 - walletConnect ID
+- gas Wallet Balance : for the skale bridge. does user have funds within the gasWallet: show this in the navigator
+- slider for leverage adjustments ( default white themed)
+- dropdown-menu for navigation (default white themed)
 
-# redesign
+## redesign
 
 - "styled-components": "5.3.11",
 - https://www.npmjs.com/package/styled-components
-
-## notes
-
-- https://developers.exorde.io/
-- https://buildonchainapps.xyz/
-- https://github.com/Uniswap/smart-order-router
-- https://github.com/Uniswap/interface/tree/main/apps/web/src
-- https://docs.kyberswap.com/kyberswap-solutions/kyberswap-widget/developer-guides/integrating-the-kyberswap-widget
-
-## dates
-
-- march 14 : /swap/[dex_names] : keep building and looking for plugins
-- - gas Wallet Balance : for the skale bridge. does user have funds within the gasWallet: show this in the navigator
-- march 23 :
 
 # App
 
 - ui : loading page for home page
 - fetches data twice : server and client: double check, client seems to render 2 times
 
-# aqua token
+# AQUA token
 
-- ideas
-- - airdrop $AQUA to all nft holders quarterly for the next 10 years : bullish for nft holders ==> more dump : price go down
+Ideas
+
+- - airdrop $AQUA to all nft holders quarterly for the next 10 years : bullish for nft holders/marketPlace 
 - - after NFTS are sold out, make new MarketPlace SC for AQUA token instead of ETH => Bullish for AQUA
 - - Aqua powers AquasTrade by being the base asset on major AMM pools, marketplace utility token,
+
+## NFT Holders: 
+The plan is to airdrop 10% of the token supply over 10 year period. This will result in an one percent inflation for the next 10 years. 
+### airdrop 
+- Jan, April, July, Oct
+- - 20 million released over 10 years 
+- - 2 million per year 
+- - - 500k released Quarterly (5k USD @ 0.01 per AQUA)
+
+## MarketPlace 
+The marketplace will use $AQUA as the asset with router swapping to allow user to buy any nft with any asset within their wallet. 
 
 # api : database
 
 - what data would be userful to others : AQUA circulating supply
 - POST : when user buys nft to add to whitelist of $AQUA airdrops
 
-## chart plugins
 
-- https://github.com/tradingview/lightweight-charts/tree/0eef9d7dcc4c0ab67234003ab23f0880f82fa518/plugin-examples
-- https://tradingview.github.io/lightweight-charts/plugin-examples/
-- https://github.com/tradingview/lightweight-charts/tree/master/plugin-examples/src/plugins/trend-line/example
 
 # Coinflipper - wagmin - viem - read contracts - write contracts
 
@@ -134,10 +121,15 @@ its working again : before there were issues with rainbowkit connection ( clicki
 - websocket live data for perps using binance
 - timeframe toggle
 - asset/market/ section drop down menu , needs to import a list of markets , need to fetch markets , need to design how to layout the markets : is this spot or futures api data?
+### chart plugins
+
+- https://github.com/tradingview/lightweight-charts/tree/0eef9d7dcc4c0ab67234003ab23f0880f82fa518/plugin-examples
+- https://tradingview.github.io/lightweight-charts/plugin-examples/
+- https://github.com/tradingview/lightweight-charts/tree/master/plugin-examples/src/plugins/trend-line/example
 
 # Token List
 
-- show supported chains near header for easy switching to check balances
+- show supported chains near header for easy switching to check balances ( skale chains only for now : rpc providers for other chains ....)
 
 # type-script
 
@@ -148,9 +140,6 @@ its working again : before there were issues with rainbowkit connection ( clicki
 
 import next/nagivation with router.push('/home/')
 
-# warnings
-
-- https://github.com/vercel/next.js/discussions/41447
 
 # web socket
 
@@ -173,13 +162,6 @@ Rooms - NameSpaces :
 - group clients together : target broadcasting
 
 - NameSpaces can use the same connection across all pages and all clients ( target a specific client: nameSpace : good for notifications)
-
-## old
-
-Old Tech : usedapp/core : mui icons and ethers.js
-
--SwapPanel(c) <--- <SwapAqua /><-- import { Exchange } from "./DexAqua"; (c) <--
---<-- import {AmountIn, AmountOut, CurrencySelector} from "./Amounts"; (c)
 
 ### Errors
 

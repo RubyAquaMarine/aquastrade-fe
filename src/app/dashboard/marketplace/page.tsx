@@ -15,7 +15,7 @@ import {
 import styles_button from "@/app/Styles/Toggle.module.css";
 import styles from "@/app/Styles/Links.module.css";
 
-import { marketplaceABI } from "@/app/Abi/europaMarketPlace";
+import { MARKETPACE_ABI} from "@/app/Abi/europaMarketPlace";
 
 import {
   MARKETPLACE_AQUADEX,
@@ -25,9 +25,6 @@ import {
   MARKETPLACE_GOLD_NFT,
   CHAIN,
 } from "@/app/Utils/config";
-import { ERC20_ABI } from "@/app/Abi/erc20";
-
-import Erc20 from "@/app/Components/ReadToken";
 
 const Home = () => {
   const allowancesTest = useRef(BigInt(0));

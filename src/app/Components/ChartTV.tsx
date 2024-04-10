@@ -1,3 +1,4 @@
+// not using 
 // @ts-nocheck
 import { createChart } from "lightweight-charts";
 

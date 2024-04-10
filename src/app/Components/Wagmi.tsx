@@ -2,7 +2,7 @@
 
 import { http, createConfig, webSocket, fallback } from "wagmi";
 import { coinbaseWallet, injected, walletConnect } from "wagmi/connectors";
-
+// todo add chains here
 import {
   mainnet,
   skaleEuropa,
@@ -42,8 +42,8 @@ export const config = createConfig({
     [mainnet.id]: http(),
     [skaleEuropa.id]: fallback([
       webSocket("wss://mainnet.skalenodes.com/v1/ws/elated-tan-skat", {
-        retryCount: 2,
-        retryDelay: 5000,
+        retryCount: 4,
+        retryDelay: 1000,
       }),
       http("https://mainnet.skalenodes.com/v1/elated-tan-skat"),
     ]),

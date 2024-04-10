@@ -1,9 +1,6 @@
-// import { createChart, ColorType } from 'lightweight-charts';
+// using this on the home page
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { createChart } from "lightweight-charts";
-import { mockCandlestickData, mockVolumeData } from "@/app/api/mock";
-
-import ChartCandles from "../api/binance";
 
 const ChartComponent: React.FC<{
   colors: any;
