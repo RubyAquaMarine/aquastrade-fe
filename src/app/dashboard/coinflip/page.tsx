@@ -1,5 +1,7 @@
-"use client";
 // @ts-nocheck
+
+"use client";
+
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { parseEther, parseUnits, formatUnits } from "viem";
@@ -25,6 +27,11 @@ const Home = () => {
   const { writeContract } = useWriteContract();
 
   const array: any[any] = [address, COIN_FLIP_AQUA];
+
+  interface TokenData {
+    amount: bigint;
+  }
+
   const { data: tokenAllowance } = useERC20Token("allowance", array); // $AQUA
 
   const {

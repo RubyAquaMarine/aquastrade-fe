@@ -71,7 +71,7 @@ const Home = ({ children, params }: any) => {
   };
   useEffect(() => {
     getDataCallBack();
-  }, [getDataCallBack,Asset]);
+  }, [getDataCallBack, Asset]);
 
   const { chains, switchChain } = useSwitchChain();
   const { address } = useAccount();

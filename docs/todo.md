@@ -1,4 +1,5 @@
 # AquasTrade
+
 APP ROUTER Project
 
 - scr/app/pages (all lowercase)
@@ -9,7 +10,6 @@ APP ROUTER Project
 # prettier
 
 npx prettier . --write [docs](https://prettier.io/docs/en/install)
-
 
 # dependencies
 
@@ -43,27 +43,29 @@ npx prettier . --write [docs](https://prettier.io/docs/en/install)
 
 Ideas
 
-- - airdrop $AQUA to all nft holders quarterly for the next 10 years : bullish for nft holders/marketPlace 
-- - after NFTS are sold out, make new Market       Place SC for AQUA token instead of ETH => Bullish for AQUA
+- - airdrop $AQUA to all nft holders quarterly for the next 10 years : bullish for nft holders/marketPlace
+- - after NFTS are sold out, make new Market Place SC for AQUA token instead of ETH => Bullish for AQUA
 - - Aqua powers AquasTrade by being the base asset on major AMM pools, marketplace utility token,
 
-## NFT Holders: 
-The plan is to airdrop 10% of the token supply over 10 year period. This will result in an one percent inflation for the next 10 years. 
-### airdrop 
+## NFT Holders:
+
+The plan is to airdrop 10% of the token supply over 10 year period. This will result in an one percent inflation for the next 10 years.
+
+### airdrop
+
 - Jan, April, July, Oct
-- - 20 million released over 10 years 
-- - 2 million per year 
+- - 20 million released over 10 years
+- - 2 million per year
 - - - 500k released Quarterly (5k USD @ 0.01 per AQUA)
 
-## NFT Market Place 
-The marketplace will use $AQUA as the asset with router swapping to allow user to buy any nft with any asset within their wallet. 
+## NFT Market Place
+
+The marketplace will use $AQUA as the asset with router swapping to allow user to buy any nft with any asset within their wallet.
 
 # api : database
 
 - what data would be userful to others : AQUA circulating supply
 - POST : when user buys nft to add to whitelist of $AQUA airdrops
-
-
 
 # Coinflipper - wagmin - viem - read contracts - write contracts
 
@@ -121,6 +123,7 @@ its working again : before there were issues with rainbowkit connection ( clicki
 - websocket live data for perps using binance
 - timeframe toggle
 - asset/market/ section drop down menu , needs to import a list of markets , need to fetch markets , need to design how to layout the markets : is this spot or futures api data?
+
 ### chart plugins
 
 - https://github.com/tradingview/lightweight-charts/tree/0eef9d7dcc4c0ab67234003ab23f0880f82fa518/plugin-examples
@@ -139,7 +142,6 @@ its working again : before there were issues with rainbowkit connection ( clicki
 # useRouter()
 
 import next/nagivation with router.push('/home/')
-
 
 # web socket
 

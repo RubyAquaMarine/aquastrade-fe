@@ -1,4 +1,4 @@
-import { Localhost, Mainnet, DEFAULT_SUPPORTED_CHAINS } from "@usedapp/core";
+// EUROPA-HUB
 // Add Token Symbol  Here
 export const tokenSymbols = [
   "ETH",
@@ -163,20 +163,4 @@ const MainETH = {
     symbol: "eth",
     decimals: 18,
   },
-};
-
-/*
-export const DAPP_CONFIG = {
-  readOnlyChainId: Localhost.chainId,
-  readOnlyUrls: {
-    [Localhost.chainId]: "http://127.0.0.1:7545"
-  },
-}
-*/
-export const DAPP_CONFIG = {
-  readOnlyChainId: Europa.chainId,
-  readOnlyUrls: {
-    [Europa.chainId]: Europa.rpcUrl,
-  },
-  networks: [...DEFAULT_SUPPORTED_CHAINS, Europa],
 };

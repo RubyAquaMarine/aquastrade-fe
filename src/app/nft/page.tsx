@@ -64,7 +64,7 @@ const Home = () => {
   // Once the Marketplace data exists , filter through and find , store the nfts that will be for sale. 1 of 50000
   useEffect(() => {
     let counter = 0;
-    if (MarketPlace) {
+    if (MarketPlace && typeof MarketPlace === "object") {
       // find and save next nft within collection
       MarketPlace.forEach((element) => {
         if (element.nft === MARKETPLACE_GOLD_NFT && gold.current === -1) {
@@ -81,9 +81,8 @@ const Home = () => {
 
       console.log("  NFTS ", gold, silver, bronze);
     }
-    if (typeof tokenAllowance === 'bigint') {
+    if (typeof tokenAllowance === "bigint") {
       allowancesTest.current = tokenAllowance;
-
     }
 
     console.error(
@@ -236,7 +235,7 @@ const Home = () => {
               </div>
               {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
               {allowancesTest.current &&
-                BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
+              BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
                 <div>
                   <button
                     className={styles_button.toggleButton}

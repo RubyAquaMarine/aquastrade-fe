@@ -23,6 +23,9 @@ export const useERC20Token = (
   _functionName: string,
   _args?: [any],
 ) => {
+
+  console.error(`use ERC20 ${_functionName}  with params: ${_args}`);
+
   const { data, isError, isLoading } = useReadContract({
     abi: ERC20_ABI,
     address: _address,
@@ -38,6 +41,9 @@ export const useNFTs = (
   _functionName: string,
   _args?: [any],
 ) => {
+
+  console.error(`use NFT  ${_functionName}  with params: ${_args}`);
+
   const { data, isError, isLoading } = useReadContract({
     abi: EUROPA_NFT_ABI,
     address: _address,
@@ -53,7 +59,8 @@ export const useAMMRouter = (
   _functionName: string,
   _args?: [any],
 ) => {
-  console.log("Debug useAMMRouter  ", _args);
+
+  console.error(`use AMM Router ${_functionName}  with params: ${_args}`);
 
   const { data, isError, isLoading } = useReadContract({
     abi: EUROPA_AMM_ROUTER_ABI,
