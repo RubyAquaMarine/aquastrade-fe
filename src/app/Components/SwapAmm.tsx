@@ -409,25 +409,38 @@ const SwapAmm = () => {
             ) : (
               <div></div>
             )}
+{/**  */}
             <div className={styles.input_container}>
               <p>You receive</p>
               <div className={styles.amount_inputs}>
-                <input
-                  className={styles.input_amount}
-                  type="text"
-                  placeholder="0.0"
-                  value={amountB}
-                  onChange={(e) => setAmountB(e.target.value)}
-                />
 
+              {swap_path !== [""] && amountA !== "0.0" ? (
+                  <GetAmountsOut
+                    props={[amountA, swap_path, feeNFT.current]}
+                  ></GetAmountsOut>
+                ) : (
+                  <div className={styles.container}>
+                    <input
+                       className={styles.input_amount}
+                      type="text"
+                      placeholder="Get Amounts Out"
+                      value={"0.0"}
+                    />
+                  </div>
+                )}
+
+                {/**  */}
                 <input
-                  className={styles.input_token}
+                  className={styles.token_space}
                   type="text"
                   placeholder="Select Token"
                   value={tokenB}
                   onChange={(e) => setTokenB(e.target.value)}
                   onClick={() => setShowTokenListB(true)}
                 />
+
+
+
                 {showTokenListB && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
@@ -451,6 +464,7 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
+
               <p className={styles.amount_balance}>
                 Balance{" "}
                 {tokenBAddress.current !== "" ? (
@@ -461,7 +475,9 @@ const SwapAmm = () => {
                   <div></div>
                 )}
               </p>
+
             </div>
+{/**  Swap and Approve button  */}
             <div className={styles.button_container}>
               {tokenAllowance &&
                 BigInt(tokenAllowance) >= parseUnits(amountA, tokenADecimal.current) ? (
@@ -480,6 +496,7 @@ const SwapAmm = () => {
                 </button>
               )}
             </div>
+
           </div>
         ) : (
           <div> </div>
