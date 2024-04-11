@@ -50,8 +50,7 @@
   margin-top: 10px;
 }
 
-.token_inputs,
-.amount_inputs {
+.token_inputs {
   display: flex;
   margin-right: 2px;
   padding: 0.2rem;
@@ -60,7 +59,7 @@
 .input_amount {
   display: flex;
   margin-right: 2px;
-  padding: 0.2rem;
+  padding: 0.2rem 0.8rem;
   color: #fff;
   background-color: #242629;
 }
@@ -111,5 +110,11 @@
   color: #bdb8b8;
   display: flex;
   justify-content: center;
+}
+
+.amount_inputs {
+  display: flex;
+  margin-right: 2px;
+  padding: 0.2rem;
 }
 

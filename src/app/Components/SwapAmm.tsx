@@ -11,15 +11,11 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 import { formatUnits, parseEther, parseUnits } from "viem";
 
-
 // Make components for better rendering functionality: move hooks into these new components
-import NFTBalance from "@/app/Components/NFTBalance"
-import GetAmountsOut from "@/app/Components/GetAmountsOut"
+import NFTBalance from "@/app/Components/NFTBalance";
+import GetAmountsOut from "@/app/Components/GetAmountsOut";
 
-import TokenBalance from "@/app/Components/TokenBalance"
-
-
-
+import TokenBalance from "@/app/Components/TokenBalance";
 
 import { ERC20_ABI } from "@/app/Abi/erc20";
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
@@ -29,7 +25,6 @@ import {
   tokenSymbols,
   tokenAddresses,
   ROUTER_AQUADEX,
-
 } from "@/app/Utils/config";
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
@@ -39,7 +34,7 @@ const SwapAmm = () => {
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
   );
-  const tokenBAddress =useRef(
+  const tokenBAddress = useRef(
     "0xE34A1fEF365876D4D0b55D281618768583ba4867" as `0x${string}`,
   );
   const feeNFT = useRef(BigInt(997));
@@ -54,7 +49,6 @@ const SwapAmm = () => {
     hash,
   });
 
- 
   // default swapping pair
   const [swap_path, setSwapPath] = useState([""]);
   const [tokenA, setTokenA] = useState("USDP");
@@ -63,7 +57,6 @@ const SwapAmm = () => {
   const [amountB, setAmountB] = useState("0.0");
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
-
 
   // Allowance on Swapping Token A
   const allowanceArray: any[any] = [address, EUROPA_ROUTER];
@@ -74,21 +67,18 @@ const SwapAmm = () => {
     allowanceArray,
   );
 
-  
   console.log("Rendered AMM ");
 
-// todo : this needs to be useRef because usingState renders way too much 
+  // todo : this needs to be useRef because usingState renders way too much
   useEffect(() => {
     if (address && isConnected === true) {
       if (tokenA && tokenB) {
         findAddressFromSymbol(true, tokenA);
         findAddressFromSymbol(false, tokenB);
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
-
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
-
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -96,13 +86,10 @@ const SwapAmm = () => {
     }
   }, [contractCallDataConfirmed]);
 
-
- // todo : this needs to be useRef because usingState renders way too much 
+  // todo : this needs to be useRef because usingState renders way too much
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
     if (tokenA !== "AQUA" && tokenB !== "AQUA") {
-    
-    
-      // todo : this needs to be useRef because usingState renders way too much 
+      // todo : this needs to be useRef because usingState renders way too much
       setSwapPath([
         _tokenA,
         "0xE34A1fEF365876D4D0b55D281618768583ba4867",
@@ -284,7 +271,6 @@ const SwapAmm = () => {
     setAmountA(amountB);
     setAmountB(tempAmountA);
 
-    
     // todo : debug
     console.log("debug swap_out ", swap_out);
   };
@@ -368,7 +354,13 @@ const SwapAmm = () => {
               </div>
               <p className={styles.amount_balance}>
                 Balance{" "}
-                {tokenAAddress.current !== "" ? <TokenBalance props = {[tokenAAddress.current,18]}></TokenBalance> : <div></div>}
+                {tokenAAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenAAddress.current, 18]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
               </p>
             </div>
             {!showTokenListA && !showTokenListB ? (
@@ -390,13 +382,21 @@ const SwapAmm = () => {
             <div className={styles.input_container}>
               <p>You receive</p>
               <div className={styles.amount_inputs}>
-
-                {swap_path !== [""] && amountA !== "0.0" ? <GetAmountsOut props={[amountA, swap_path, feeNFT.current]} ></GetAmountsOut> : <div className={styles.container}> <input
-                  className={styles.input_token}
-                  type="text"
-                  placeholder="Select Token"
-                  value={"0.0"}
-                /></div>}
+                {swap_path !== [""] && amountA !== "0.0" ? (
+                  <GetAmountsOut
+                    props={[amountA, swap_path, feeNFT.current]}
+                  ></GetAmountsOut>
+                ) : (
+                  <div className={styles.container}>
+                    {" "}
+                    <input
+                      className={styles.input_token}
+                      type="text"
+                      placeholder="Select Token"
+                      value={"0.0"}
+                    />
+                  </div>
+                )}
 
                 <input
                   className={styles.input_token}
@@ -406,6 +406,7 @@ const SwapAmm = () => {
                   onChange={(e) => setTokenB(e.target.value)}
                   onClick={() => setShowTokenListB(true)}
                 />
+
                 {showTokenListB && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
@@ -427,15 +428,21 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
+
               <p className={styles.amount_balance}>
                 Balance{" "}
-                {tokenBAddress.current !== "" ? <TokenBalance props = {[tokenBAddress.current,18]}></TokenBalance> : <div></div>}
+                {tokenBAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenBAddress.current, 18]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
               </p>
-
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-                BigInt(tokenAllowance) >= parseEther(amountA) ? (
+              BigInt(tokenAllowance) >= parseEther(amountA) ? (
                 <button className={styles.button_field} onClick={handleSwap}>
                   Swap
                 </button>
@@ -491,10 +498,7 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
-              <p className={styles.amount_balance}>
-                Balance{" "}
-              
-              </p>
+              <p className={styles.amount_balance}>Balance </p>
             </div>
             {!showTokenListA && !showTokenListB ? (
               <div id="1" className={styles.button_container}>
@@ -554,14 +558,11 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
-              <p className={styles.amount_balance}>
-                Balance{" "}
-               
-              </p>
+              <p className={styles.amount_balance}>Balance </p>
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-                BigInt(tokenAllowance) >= parseEther(amountA) ? (
+              BigInt(tokenAllowance) >= parseEther(amountA) ? (
                 <button
                   className={styles.button_field}
                   onClick={handleProvideLiquidity}
