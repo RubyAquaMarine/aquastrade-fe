@@ -14,14 +14,12 @@ import { formatUnits, parseEther, parseUnits } from "viem";
 // Make components for better rendering functionality: move hooks into these new components
 import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
-
 import TokenBalance from "@/app/Components/TokenBalance";
 
 import { ERC20_ABI } from "@/app/Abi/erc20";
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 import { useERC20Token } from "@/app/Hooks/useAMM";
 import {
-  EUROPA_ROUTER,
   tokenSymbols,
   tokenAddresses,
   ROUTER_AQUADEX,
@@ -30,7 +28,7 @@ import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
 
 const SwapAmm = () => {
-  const toggleAMMFeatures = useRef("swap"); // swap, add, list
+  // Save state without rendering 
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
   );
@@ -39,17 +37,16 @@ const SwapAmm = () => {
   );
   const feeNFT = useRef(BigInt(997));
 
+  // wagmi
   const { address, isConnected, chain } = useAccount();
-
   const resultBlock = useBlock();
-
   const { data: hash, writeContract } = useWriteContract();
-
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
 
   // default swapping pair
+  const [ammFeature, setAMMFeature] = useState("swap");
   const [swap_path, setSwapPath] = useState([""]);
   const [tokenA, setTokenA] = useState("USDP");
   const [tokenB, setTokenB] = useState("AQUA");
@@ -59,7 +56,7 @@ const SwapAmm = () => {
   const [showTokenListB, setShowTokenListB] = useState(false);
 
   // Allowance on Swapping Token A
-  const allowanceArray: any[any] = [address, EUROPA_ROUTER];
+  const allowanceArray: any[any] = [address, ROUTER_AQUADEX];
 
   const { data: tokenAllowance } = useERC20Token(
     tokenAAddress.current,
@@ -85,6 +82,7 @@ const SwapAmm = () => {
       console.log("POP UP HERE");
     }
   }, [contractCallDataConfirmed]);
+
 
   // todo : this needs to be useRef because usingState renders way too much
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
@@ -206,7 +204,7 @@ const SwapAmm = () => {
       abi: ERC20_ABI,
       address: tokenAAddress.current,
       functionName: "approve",
-      args: [EUROPA_ROUTER, parseEther(amountA)],
+      args: [ROUTER_AQUADEX, parseEther(amountA)],
     });
   };
 
@@ -217,14 +215,14 @@ const SwapAmm = () => {
       abi: ERC20_ABI,
       address: tokenAAddress.current,
       functionName: "approve",
-      args: [EUROPA_ROUTER, parseEther(amountA)],
+      args: [ROUTER_AQUADEX, parseEther(amountA)],
     });
 
     writeContract({
       abi: ERC20_ABI,
       address: tokenBAddress.current,
       functionName: "approve",
-      args: [EUROPA_ROUTER, parseEther(amountB)],
+      args: [ROUTER_AQUADEX, parseEther(amountB)],
     });
   };
 
@@ -234,9 +232,10 @@ const SwapAmm = () => {
     const timeIs = resultBlock?.data?.timestamp
       ? resultBlock?.data?.timestamp + BigInt(20000)
       : BigInt(404);
-    console.log("timestamp for add Liquidity ", timeIs);
+
     console.log(
       "timestamp for add Liquidity ",
+      timeIs,
       tokenAAddress.current,
       tokenBAddress.current,
       address,
@@ -244,23 +243,24 @@ const SwapAmm = () => {
       parseEther(amountB),
     );
 
-    // todo : bug doesn't prompt metamask
-    writeContract({
-      abi: EUROPA_AMM_ROUTER_ABI,
-      address: ROUTER_AQUADEX,
-      functionName: "addLiquidity",
-      args: [
-        tokenAAddress.current,
-        tokenBAddress.current,
-        parseEther(amountA),
-        parseEther(amountB),
-        BigInt(1),
-        BigInt(1),
-        address,
-        timeIs,
-      ],
-      gas: BigInt(9999999999),
-    });
+    if (timeIs) {
+      // todo : bug doesn't prompt metamask
+      writeContract({
+        abi: EUROPA_AMM_ROUTER_ABI,
+        address: ROUTER_AQUADEX,
+        functionName: "addLiquidity",
+        args: [
+          tokenAAddress.current,
+          tokenBAddress.current,
+          parseEther(amountA),
+          parseEther(amountB),
+          BigInt(0),
+          BigInt(0),
+          address,
+          timeIs,
+        ]
+      });
+    }
   };
 
   const handleFlipTokens = () => {
@@ -271,12 +271,11 @@ const SwapAmm = () => {
     setAmountA(amountB);
     setAmountB(tempAmountA);
 
-    // todo : debug
-    console.log("debug swap_out ", swap_out);
   };
 
   const handleAMMFeatures = (_feature: string) => {
-    toggleAMMFeatures.current = _feature;
+    console.log("Toggle AMM Features ", _feature);
+    setAMMFeature(_feature);
   };
 
   return (
@@ -314,7 +313,7 @@ const SwapAmm = () => {
           </button>
         </div>
 
-        {toggleAMMFeatures.current === "swap" ? (
+        {ammFeature === "swap" ? (
           <div>
             {" "}
             <div className={styles.input_container}>
@@ -441,7 +440,7 @@ const SwapAmm = () => {
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-              BigInt(tokenAllowance) >= parseEther(amountA) ? (
+                BigInt(tokenAllowance) >= parseEther(amountA) ? (
                 <button className={styles.button_field} onClick={handleSwap}>
                   Swap
                 </button>
@@ -459,7 +458,7 @@ const SwapAmm = () => {
           <div> </div>
         )}
 
-        {toggleAMMFeatures.current === "add" ? (
+        {ammFeature === "add" ? (
           <div>
             {" "}
             <div className={styles.input_container}>
@@ -497,7 +496,22 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
-              <p className={styles.amount_balance}>Balance </p>
+
+
+
+              <p className={styles.amount_balance}>
+                Balance{" "}
+                {tokenAAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenAAddress.current, 18]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
+              </p>
+
+
+
             </div>
             {!showTokenListA && !showTokenListB ? (
               <div id="1" className={styles.button_container}>
@@ -557,11 +571,20 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
-              <p className={styles.amount_balance}>Balance </p>
+              <p className={styles.amount_balance}>
+                Balance{" "}
+                {tokenBAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenBAddress.current, 18]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
+              </p>
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-              BigInt(tokenAllowance) >= parseEther(amountA) ? (
+                BigInt(tokenAllowance) >= parseEther(amountA) ? (
                 <button
                   className={styles.button_field}
                   onClick={handleProvideLiquidity}
@@ -582,7 +605,7 @@ const SwapAmm = () => {
           <div> </div>
         )}
 
-        {toggleAMMFeatures.current === "nft" ? (
+        {ammFeature === "nft" ? (
           <div>
             <NFTBalance> </NFTBalance>
           </div>
