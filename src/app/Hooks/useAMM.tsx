@@ -23,7 +23,6 @@ export const useERC20Token = (
   _functionName: string,
   _args?: [any],
 ) => {
-
   console.error(`use ERC20 ${_functionName}  with params: ${_args}`);
 
   const { data, isError, isLoading } = useReadContract({
@@ -41,7 +40,6 @@ export const useNFTs = (
   _functionName: string,
   _args?: [any],
 ) => {
-
   console.error(`use NFT  ${_functionName}  with params: ${_args}`);
 
   const { data, isError, isLoading } = useReadContract({
@@ -59,7 +57,6 @@ export const useAMMRouter = (
   _functionName: string,
   _args?: [any],
 ) => {
-
   console.error(`use AMM Router ${_functionName}  with params: ${_args}`);
 
   const { data, isError, isLoading } = useReadContract({

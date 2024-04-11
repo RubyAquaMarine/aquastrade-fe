@@ -120,11 +120,8 @@ const Home = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h4 className={styles.topText}>
-        Zero Gas Fees + Zero Profit Fees = Hero Outcomes{" "}
-      </h4>
       <h1 className={styles.midText}>Flip to Up your Stack</h1>
-      <h2>
+      <h2 className={styles.topText}>
         Prize pools and available flip assets are growing. Come back soon to
         flip again.
       </h2>

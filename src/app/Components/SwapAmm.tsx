@@ -388,11 +388,10 @@ const SwapAmm = () => {
                   ></GetAmountsOut>
                 ) : (
                   <div className={styles.container}>
-                    {" "}
                     <input
-                      className={styles.input_token}
+                      className={styles.get_amount}
                       type="text"
-                      placeholder="Select Token"
+                      placeholder="Get Amounts Out"
                       value={"0.0"}
                     />
                   </div>

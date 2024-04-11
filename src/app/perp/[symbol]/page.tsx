@@ -187,10 +187,7 @@ const Home = ({ children, params }: any) => {
               <li className={styles.tradeButtonBuy}>
                 <button>Buy</button>
               </li>
-              <li className={styles.tradeSlider}>
-                {" "}
-               
-              </li>
+              <li className={styles.tradeSlider}> </li>
             </ul>
           </div>
         </div>
