@@ -8,4 +8,6 @@ Step 1
 
 Step 2
 
+http://localhost:3000/swap/amm
+
 - add liquidity

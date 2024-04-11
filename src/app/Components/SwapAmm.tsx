@@ -11,51 +11,45 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 import { formatUnits, parseEther, parseUnits } from "viem";
 
-
 // Make components for better rendering functionality: move hooks into these new components
-import NFTBalance from "@/app/Components/NFTBalance"
-import GetAmountsOut from "@/app/Components/GetAmountsOut"
-
-import TokenBalance from "@/app/Components/TokenBalance"
-
-
-
+import NFTBalance from "@/app/Components/NFTBalance";
+import GetAmountsOut from "@/app/Components/GetAmountsOut";
+import TokenBalance from "@/app/Components/TokenBalance";
 
 import { ERC20_ABI } from "@/app/Abi/erc20";
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 import { useERC20Token } from "@/app/Hooks/useAMM";
 import {
-  EUROPA_ROUTER,
   tokenSymbols,
   tokenAddresses,
   ROUTER_AQUADEX,
-
 } from "@/app/Utils/config";
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
 
 const SwapAmm = () => {
-  const toggleAMMFeatures = useRef("swap"); // swap, add, list
+  // Save state without rendering
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
   );
-  const tokenBAddress =useRef(
+  const tokenBAddress = useRef(
     "0xE34A1fEF365876D4D0b55D281618768583ba4867" as `0x${string}`,
   );
   const feeNFT = useRef(BigInt(997));
 
+  const tokenADecimal = useRef(BigInt(18));
+  const tokenBDecimal = useRef(BigInt(18));
+
+  // wagmi
   const { address, isConnected, chain } = useAccount();
-
   const resultBlock = useBlock();
-
   const { data: hash, writeContract } = useWriteContract();
-
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
 
- 
   // default swapping pair
+  const [ammFeature, setAMMFeature] = useState("swap");
   const [swap_path, setSwapPath] = useState([""]);
   const [tokenA, setTokenA] = useState("USDP");
   const [tokenB, setTokenB] = useState("AQUA");
@@ -64,9 +58,8 @@ const SwapAmm = () => {
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
 
-
   // Allowance on Swapping Token A
-  const allowanceArray: any[any] = [address, EUROPA_ROUTER];
+  const allowanceArray: any[any] = [address, ROUTER_AQUADEX];
 
   const { data: tokenAllowance } = useERC20Token(
     tokenAAddress.current,
@@ -74,10 +67,9 @@ const SwapAmm = () => {
     allowanceArray,
   );
 
-  
   console.log("Rendered AMM ");
 
-// todo : this needs to be useRef because usingState renders way too much 
+  // todo : this needs to be useRef because usingState renders way too much
   useEffect(() => {
     if (address && isConnected === true) {
       if (tokenA && tokenB) {
@@ -85,10 +77,11 @@ const SwapAmm = () => {
         findAddressFromSymbol(false, tokenB);
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
 
+        findSymbolDecimals(tokenA, tokenB);
+
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
-
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -96,13 +89,29 @@ const SwapAmm = () => {
     }
   }, [contractCallDataConfirmed]);
 
+  const findSymbolDecimals = (_symbolA: string, _symbolB: string,) => {
 
- // todo : this needs to be useRef because usingState renders way too much 
+    if (tokenAddresses) {
+      console.log("SET UP DECIMALS ");
+      tokenAddresses.forEach((element) => {
+
+        if (_symbolA === element.symbol) {
+          tokenADecimal.current = element.decimal;
+        }
+
+        if (_symbolB === element.symbol) {
+          tokenBDecimal.current = element.decimal;
+        }
+
+
+      });
+    }
+  };
+
+  // todo : this needs to be useRef because usingState renders way too much
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
     if (tokenA !== "AQUA" && tokenB !== "AQUA") {
-    
-    
-      // todo : this needs to be useRef because usingState renders way too much 
+      // todo : this needs to be useRef because usingState renders way too much
       setSwapPath([
         _tokenA,
         "0xE34A1fEF365876D4D0b55D281618768583ba4867",
@@ -183,7 +192,7 @@ const SwapAmm = () => {
         address: ROUTER_AQUADEX,
         functionName: "swapExactTokensForTokens",
         args: [
-          parseEther(amountA),
+          parseUnits(amountA, tokenADecimal.current),
           parseEther("0.0"),
           pathForPools(tokenAAddress.current, tokenBAddress.current),
           address,
@@ -219,7 +228,7 @@ const SwapAmm = () => {
       abi: ERC20_ABI,
       address: tokenAAddress.current,
       functionName: "approve",
-      args: [EUROPA_ROUTER, parseEther(amountA)],
+      args: [ROUTER_AQUADEX, parseUnits(amountA, tokenADecimal.current)],
     });
   };
 
@@ -230,14 +239,14 @@ const SwapAmm = () => {
       abi: ERC20_ABI,
       address: tokenAAddress.current,
       functionName: "approve",
-      args: [EUROPA_ROUTER, parseEther(amountA)],
+      args: [ROUTER_AQUADEX, parseUnits(amountA, tokenADecimal.current)],
     });
 
     writeContract({
       abi: ERC20_ABI,
       address: tokenBAddress.current,
       functionName: "approve",
-      args: [EUROPA_ROUTER, parseEther(amountB)],
+      args: [ROUTER_AQUADEX, parseUnits(amountB, tokenBDecimal.current)],
     });
   };
 
@@ -247,33 +256,35 @@ const SwapAmm = () => {
     const timeIs = resultBlock?.data?.timestamp
       ? resultBlock?.data?.timestamp + BigInt(20000)
       : BigInt(404);
-    console.log("timestamp for add Liquidity ", timeIs);
+
     console.log(
       "timestamp for add Liquidity ",
+      timeIs,
       tokenAAddress.current,
       tokenBAddress.current,
       address,
-      parseEther(amountA),
-      parseEther(amountB),
+      parseUnits(amountA, tokenADecimal.current),
+      parseUnits(amountB, tokenBDecimal.current),
     );
 
-    // todo : bug doesn't prompt metamask
-    writeContract({
-      abi: EUROPA_AMM_ROUTER_ABI,
-      address: ROUTER_AQUADEX,
-      functionName: "addLiquidity",
-      args: [
-        tokenAAddress.current,
-        tokenBAddress.current,
-        parseEther(amountA),
-        parseEther(amountB),
-        BigInt(1),
-        BigInt(1),
-        address,
-        timeIs,
-      ],
-      gas: BigInt(9999999999),
-    });
+    if (timeIs) {
+      // todo : bug doesn't prompt metamask
+      writeContract({
+        abi: EUROPA_AMM_ROUTER_ABI,
+        address: ROUTER_AQUADEX,
+        functionName: "addLiquidity",
+        args: [
+          tokenAAddress.current,
+          tokenBAddress.current,
+          parseUnits(amountA, tokenADecimal.current),
+          parseUnits(amountB, tokenBDecimal.current),
+          BigInt(0),
+          BigInt(0),
+          address,
+          timeIs,
+        ],
+      });
+    }
   };
 
   const handleFlipTokens = () => {
@@ -283,14 +294,11 @@ const SwapAmm = () => {
     const tempAmountA = amountA;
     setAmountA(amountB);
     setAmountB(tempAmountA);
-
-    
-    // todo : debug
-    console.log("debug swap_out ", swap_out);
   };
 
   const handleAMMFeatures = (_feature: string) => {
-    toggleAMMFeatures.current = _feature;
+    console.log("Toggle AMM Features ", _feature);
+    setAMMFeature(_feature);
   };
 
   return (
@@ -328,7 +336,7 @@ const SwapAmm = () => {
           </button>
         </div>
 
-        {toggleAMMFeatures.current === "swap" ? (
+        {ammFeature === "swap" ? (
           <div>
             {" "}
             <div className={styles.input_container}>
@@ -354,12 +362,20 @@ const SwapAmm = () => {
                 {showTokenListA && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                      {tokenSymbols.map((token, index) => (
+                      {tokenAddresses.map((_token, index) => (
                         <div
+                          className={styles.token_list_symbol}
                           key={index}
-                          onClick={() => handleTokenSelectionA(token)}
+                          onClick={() => handleTokenSelectionA(_token.symbol)}
                         >
-                          {token}
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
                         </div>
                       ))}
                     </div>
@@ -368,7 +384,13 @@ const SwapAmm = () => {
               </div>
               <p className={styles.amount_balance}>
                 Balance{" "}
-                {tokenAAddress.current !== "" ? <TokenBalance props = {[tokenAAddress.current,18]}></TokenBalance> : <div></div>}
+                {tokenAAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenAAddress.current, tokenADecimal.current]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
               </p>
             </div>
             {!showTokenListA && !showTokenListB ? (
@@ -387,56 +409,82 @@ const SwapAmm = () => {
             ) : (
               <div></div>
             )}
+{/**  */}
             <div className={styles.input_container}>
               <p>You receive</p>
               <div className={styles.amount_inputs}>
 
-                {swap_path !== [""] && amountA !== "0.0" ? <GetAmountsOut props={[amountA, swap_path, feeNFT.current]} ></GetAmountsOut> : <div className={styles.container}> <input
-                  className={styles.input_token}
-                  type="text"
-                  placeholder="Select Token"
-                  value={"0.0"}
-                /></div>}
+              {swap_path !== [""] && amountA !== "0.0" ? (
+                  <GetAmountsOut
+                    props={[amountA, swap_path, feeNFT.current]}
+                  ></GetAmountsOut>
+                ) : (
+                  <div className={styles.container}>
+                    <input
+                       className={styles.input_amount}
+                      type="text"
+                      placeholder="Get Amounts Out"
+                      value={"0.0"}
+                    />
+                  </div>
+                )}
 
+                {/**  */}
                 <input
-                  className={styles.input_token}
+                  className={styles.token_space}
                   type="text"
                   placeholder="Select Token"
                   value={tokenB}
                   onChange={(e) => setTokenB(e.target.value)}
                   onClick={() => setShowTokenListB(true)}
                 />
+
+
+
                 {showTokenListB && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                      {tokenSymbols.map((token, index) => (
+                      {tokenAddresses.map((_token, index) => (
                         <div
+                          className={styles.token_list_symbol}
                           key={index}
-                          onClick={() => handleTokenSelectionB(token)}
+                          onClick={() => handleTokenSelectionB(_token.symbol)}
                         >
-                          {token}
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
                         </div>
                       ))}
-
-                      <div className="selected-tokens">
-                        {tokenSymbols.map(({ id, iconUrl }) => (
-                          <img key={id} src={iconUrl}></img>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 )}
               </div>
+
               <p className={styles.amount_balance}>
                 Balance{" "}
-                {tokenBAddress.current !== "" ? <TokenBalance props = {[tokenBAddress.current,18]}></TokenBalance> : <div></div>}
+                {tokenBAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenBAddress.current, tokenBDecimal.current]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
               </p>
 
             </div>
+{/**  Swap and Approve button  */}
             <div className={styles.button_container}>
               {tokenAllowance &&
-                BigInt(tokenAllowance) >= parseEther(amountA) ? (
-                <button className={styles.button_field} onClick={handleSwap}>
+                BigInt(tokenAllowance) >= parseUnits(amountA, tokenADecimal.current) ? (
+                <button
+                  className={styles.button_field}
+                  onClick={handleSwap}
+                >
                   Swap
                 </button>
               ) : (
@@ -448,12 +496,13 @@ const SwapAmm = () => {
                 </button>
               )}
             </div>
+
           </div>
         ) : (
           <div> </div>
         )}
 
-        {toggleAMMFeatures.current === "add" ? (
+        {ammFeature === "add" ? (
           <div>
             {" "}
             <div className={styles.input_container}>
@@ -479,21 +528,36 @@ const SwapAmm = () => {
                 {showTokenListA && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                      {tokenSymbols.map((token, index) => (
+                      {tokenAddresses.map((_token, index) => (
                         <div
+                          className={styles.token_list_symbol}
                           key={index}
-                          onClick={() => handleTokenSelectionA(token)}
+                          onClick={() => handleTokenSelectionA(_token.symbol)}
                         >
-                          {token}
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
               </div>
+
               <p className={styles.amount_balance}>
                 Balance{" "}
-              
+                {tokenAAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenAAddress.current, tokenADecimal.current]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
               </p>
             </div>
             {!showTokenListA && !showTokenListB ? (
@@ -534,34 +598,40 @@ const SwapAmm = () => {
                 {showTokenListB && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                      {tokenSymbols.map((token, index) => (
+                      {tokenAddresses.map((_token, index) => (
                         <div
+                          className={styles.token_list_symbol}
                           key={index}
-                          onClick={() => handleTokenSelectionB(token)}
+                          onClick={() => handleTokenSelectionB(_token.symbol)}
                         >
-                          {token}
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
                         </div>
                       ))}
-
-                      <div className="selected-tokens">
-                        {tokenSymbols
-                          .filter(({ selected }) => selected)
-                          .map(({ id, iconUrl }) => (
-                            <img key={id} src={iconUrl}></img>
-                          ))}
-                      </div>
                     </div>
                   </div>
                 )}
               </div>
               <p className={styles.amount_balance}>
                 Balance{" "}
-               
+                {tokenBAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenBAddress.current, tokenBDecimal.current]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
               </p>
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-                BigInt(tokenAllowance) >= parseEther(amountA) ? (
+                BigInt(tokenAllowance) >= parseUnits(amountA, tokenADecimal.current) ? (
                 <button
                   className={styles.button_field}
                   onClick={handleProvideLiquidity}
@@ -582,7 +652,7 @@ const SwapAmm = () => {
           <div> </div>
         )}
 
-        {toggleAMMFeatures.current === "nft" ? (
+        {ammFeature === "nft" ? (
           <div>
             <NFTBalance> </NFTBalance>
           </div>

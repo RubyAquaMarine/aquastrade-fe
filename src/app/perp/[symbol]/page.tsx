@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation"; // for client side
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import RangeSlider from "react-range-slider-input";
+
 import "react-range-slider-input/dist/style.css";
 import Image from "next/image";
 //import { cookies} from "next/headers";// todo dynamic rendering is server side only
@@ -187,27 +187,7 @@ const Home = ({ children, params }: any) => {
               <li className={styles.tradeButtonBuy}>
                 <button>Buy</button>
               </li>
-              <li className={styles.tradeSlider}>
-                {" "}
-                <RangeSlider
-                  className={styles.tradeSlider}
-                  step={"any"}
-                  value={[sliderValue[0], sliderValue[1]]}
-                  onInput={setSliderValue}
-                  min={0}
-                  max={200}
-                  thumbsDisabled={[false]}
-                  rangeSlideDisabled={false}
-                />
-                <p className={styles.tradeBalance}>
-                  {" "}
-                  {sliderValue[0].toFixed(0)}x (longs){" "}
-                </p>
-                <p className={styles.tradeBalance}>
-                  {" "}
-                  {sliderValue[1].toFixed(1)}x (shorts){" "}
-                </p>
-              </li>
+              <li className={styles.tradeSlider}> </li>
             </ul>
           </div>
         </div>
