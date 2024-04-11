@@ -64,6 +64,14 @@
   background-color: #242629;
 }
 
+.get_amount {
+  display: flex;
+  margin-right: 2px;
+  padding: 0.4rem 0.8rem;
+  color: #fff;
+  background-color: #242629;
+}
+
 .input_token {
   display: flex;
   margin-right: 2px;
