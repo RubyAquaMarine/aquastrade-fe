@@ -37,6 +37,9 @@ const SwapAmm = () => {
   );
   const feeNFT = useRef(BigInt(997));
 
+  const tokenADecimal = useRef(BigInt(18));
+  const tokenBDecimal = useRef(BigInt(18));
+
   // wagmi
   const { address, isConnected, chain } = useAccount();
   const resultBlock = useBlock();
@@ -73,6 +76,9 @@ const SwapAmm = () => {
         findAddressFromSymbol(true, tokenA);
         findAddressFromSymbol(false, tokenB);
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
+
+        findSymbolDecimals(tokenA, tokenB);
+
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
@@ -82,6 +88,25 @@ const SwapAmm = () => {
       console.log("POP UP HERE");
     }
   }, [contractCallDataConfirmed]);
+
+  const findSymbolDecimals = (_symbolA: string, _symbolB: string,) => {
+
+    if (tokenAddresses) {
+      console.log("SET UP DECIMALS ");
+      tokenAddresses.forEach((element) => {
+
+        if (_symbolA === element.symbol) {
+          tokenADecimal.current = element.decimal;
+        }
+
+        if (_symbolB === element.symbol) {
+          tokenBDecimal.current = element.decimal;
+        }
+
+
+      });
+    }
+  };
 
   // todo : this needs to be useRef because usingState renders way too much
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
@@ -167,7 +192,7 @@ const SwapAmm = () => {
         address: ROUTER_AQUADEX,
         functionName: "swapExactTokensForTokens",
         args: [
-          parseEther(amountA),
+          parseUnits(amountA, tokenADecimal.current),
           parseEther("0.0"),
           pathForPools(tokenAAddress.current, tokenBAddress.current),
           address,
@@ -203,7 +228,7 @@ const SwapAmm = () => {
       abi: ERC20_ABI,
       address: tokenAAddress.current,
       functionName: "approve",
-      args: [ROUTER_AQUADEX, parseEther(amountA)],
+      args: [ROUTER_AQUADEX, parseUnits(amountA, tokenADecimal.current)],
     });
   };
 
@@ -214,14 +239,14 @@ const SwapAmm = () => {
       abi: ERC20_ABI,
       address: tokenAAddress.current,
       functionName: "approve",
-      args: [ROUTER_AQUADEX, parseEther(amountA)],
+      args: [ROUTER_AQUADEX, parseUnits(amountA, tokenADecimal.current)],
     });
 
     writeContract({
       abi: ERC20_ABI,
       address: tokenBAddress.current,
       functionName: "approve",
-      args: [ROUTER_AQUADEX, parseEther(amountB)],
+      args: [ROUTER_AQUADEX, parseUnits(amountB, tokenBDecimal.current)],
     });
   };
 
@@ -238,8 +263,8 @@ const SwapAmm = () => {
       tokenAAddress.current,
       tokenBAddress.current,
       address,
-      parseEther(amountA),
-      parseEther(amountB),
+      parseUnits(amountA, tokenADecimal.current),
+      parseUnits(amountB, tokenBDecimal.current),
     );
 
     if (timeIs) {
@@ -251,8 +276,8 @@ const SwapAmm = () => {
         args: [
           tokenAAddress.current,
           tokenBAddress.current,
-          parseEther(amountA),
-          parseEther(amountB),
+          parseUnits(amountA, tokenADecimal.current),
+          parseUnits(amountB, tokenBDecimal.current),
           BigInt(0),
           BigInt(0),
           address,
@@ -361,7 +386,7 @@ const SwapAmm = () => {
                 Balance{" "}
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenAAddress.current, 18]}
+                    props={[tokenAAddress.current, tokenADecimal.current]}
                   ></TokenBalance>
                 ) : (
                   <div></div>
@@ -430,7 +455,7 @@ const SwapAmm = () => {
                 Balance{" "}
                 {tokenBAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenBAddress.current, 18]}
+                    props={[tokenBAddress.current, tokenBDecimal.current]}
                   ></TokenBalance>
                 ) : (
                   <div></div>
@@ -439,17 +464,17 @@ const SwapAmm = () => {
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-              BigInt(tokenAllowance) >= parseEther(amountA) ? (
+                BigInt(tokenAllowance) >= parseUnits(amountA, tokenADecimal.current) ? (
                 <button
                   className={styles.button_field}
-                  onClick={handleProvideLiquidity}
+                  onClick={handleSwap}
                 >
-                  Add Liquidity
+                  Swap
                 </button>
               ) : (
                 <button
                   className={styles.button_field}
-                  onClick={handleLiquidityApprove}
+                  onClick={handleSwapApprove}
                 >
                   Approve
                 </button>
@@ -511,7 +536,7 @@ const SwapAmm = () => {
                 Balance{" "}
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenAAddress.current, 18]}
+                    props={[tokenAAddress.current, tokenADecimal.current]}
                   ></TokenBalance>
                 ) : (
                   <div></div>
@@ -580,7 +605,7 @@ const SwapAmm = () => {
                 Balance{" "}
                 {tokenBAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenBAddress.current, 18]}
+                    props={[tokenBAddress.current, tokenBDecimal.current]}
                   ></TokenBalance>
                 ) : (
                   <div></div>
@@ -589,7 +614,7 @@ const SwapAmm = () => {
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-              BigInt(tokenAllowance) >= parseEther(amountA) ? (
+                BigInt(tokenAllowance) >= parseUnits(amountA, tokenADecimal.current) ? (
                 <button
                   className={styles.button_field}
                   onClick={handleProvideLiquidity}
