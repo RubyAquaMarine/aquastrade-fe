@@ -20,73 +20,73 @@ export const tokenAddresses = [
     symbol: "USDC",
     addr: "0x5F795bb52dAC3085f578f4877D450e2929D2F13d",
     decimal: 6,
-    logo: "/USDC.svg"
+    logo: "/USDC.svg",
   },
   {
     symbol: "USDT",
     addr: "0x1c0491E3396AD6a35f061c62387a95d7218FC515",
     decimal: 6,
-    logo: "/USDT.svg"
+    logo: "/USDT.svg",
   },
   {
     symbol: "DAI",
     addr: "0xD05C4be5f3be302d376518c9492EC0147Fa5A718",
     decimal: 18,
-    logo: "/DAI.svg"
+    logo: "/DAI.svg",
   },
   {
     symbol: "USDP",
     addr: "0x73d22d8a2D1f59Bf5Bcf62cA382481a2073FAF58",
     decimal: 18,
-    logo: "/USDP.svg"
+    logo: "/USDP.svg",
   },
   {
     symbol: "ETH",
     addr: "0xD2Aaa00700000000000000000000000000000000",
     decimal: 18,
-    logo: "/ETH.svg"
+    logo: "/ETH.svg",
   },
   {
     symbol: "BTC",
     addr: "0xcb011E86DF014a46F4e3AC3F3cbB114A4EB80870",
     decimal: 8,
-    logo: "/BTC.svg"
+    logo: "/BTC.svg",
   },
   {
     symbol: "SKL",
     addr: "0xE0595a049d02b7674572b0d59cd4880Db60EDC50",
     decimal: 18,
-    logo: "/SKL.svg"
+    logo: "/SKL.svg",
   },
   {
     symbol: "AQUA",
     addr: "0xE34A1fEF365876D4D0b55D281618768583ba4867",
     decimal: 18,
-    logo: "/AQUA1.png"
+    logo: "/AQUA1.png",
   },
   {
     symbol: "BRAWL",
     addr: "0x28c6ac22aB738BB01FC6CBA75804dC088aae6193",
     decimal: 18,
-    logo: "/AQUA2.png"
+    logo: "/BRAWL.png",
   },
   {
     symbol: "EXD",
     addr: "0xCfEBA92BD362B2F76fC30a89C433DE50a1D62BcA",
     decimal: 18,
-    logo: "/EXD.svg"
+    logo: "/EXD.svg",
   },
   {
     symbol: "RUBY",
     addr: "0x2B4e4899b53E8b7958c4591a6d02f9C0b5c50F8f",
     decimal: 18,
-    logo: "/RUBY.svg"
+    logo: "/RUBY.svg",
   },
   {
     symbol: "PROSPECT",
     addr: "0xA30cA600b8E722E2513B7738493F410a6Ae4a373",
     decimal: 18,
-    logo: "/PROSPECT.png"
+    logo: "/PROSPECT.png",
   },
 ] as const;
 

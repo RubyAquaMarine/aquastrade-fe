@@ -339,14 +339,13 @@ const SwapAmm = () => {
                     <div className={styles_pop.popup_content}>
                       {tokenAddresses.map((_token, index) => (
                         <div
-
-                        className={styles.token_list_symbol}
+                          className={styles.token_list_symbol}
                           key={index}
                           onClick={() => handleTokenSelectionA(_token.symbol)}
                         >
-                        {_token.symbol} {"  "}
+                          {_token.symbol} {"  "}
                           <Image
-                           className={styles.token_list_symbol_space}
+                            className={styles.token_list_symbol_space}
                             src={_token.logo}
                             alt="Aquas.Trade Crypto Assets On SKALE Network"
                             width={18}
@@ -388,20 +387,13 @@ const SwapAmm = () => {
             <div className={styles.input_container}>
               <p>You receive</p>
               <div className={styles.amount_inputs}>
-                {swap_path !== [""] && amountA !== "0.0" ? (
-                  <GetAmountsOut
-                    props={[amountA, swap_path, feeNFT.current]}
-                  ></GetAmountsOut>
-                ) : (
-                  <div className={styles.container}>
-                    <input
-                      className={styles.get_amount}
-                      type="text"
-                      placeholder="Get Amounts Out"
-                      value={"0.0"}
-                    />
-                  </div>
-                )}
+                <input
+                  className={styles.input_amount}
+                  type="text"
+                  placeholder="0.0"
+                  value={amountB}
+                  onChange={(e) => setAmountB(e.target.value)}
+                />
 
                 <input
                   className={styles.input_token}
@@ -411,20 +403,18 @@ const SwapAmm = () => {
                   onChange={(e) => setTokenB(e.target.value)}
                   onClick={() => setShowTokenListB(true)}
                 />
-
                 {showTokenListB && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                    {tokenAddresses.map((_token, index) => (
+                      {tokenAddresses.map((_token, index) => (
                         <div
-
-                        className={styles.token_list_symbol}
+                          className={styles.token_list_symbol}
                           key={index}
                           onClick={() => handleTokenSelectionB(_token.symbol)}
                         >
-                        {_token.symbol} {"  "}
+                          {_token.symbol} {"  "}
                           <Image
-                           className={styles.token_list_symbol_space}
+                            className={styles.token_list_symbol_space}
                             src={_token.logo}
                             alt="Aquas.Trade Crypto Assets On SKALE Network"
                             width={18}
@@ -432,13 +422,10 @@ const SwapAmm = () => {
                           />
                         </div>
                       ))}
-
-                      
                     </div>
                   </div>
                 )}
               </div>
-
               <p className={styles.amount_balance}>
                 Balance{" "}
                 {tokenBAddress.current !== "" ? (
@@ -452,14 +439,17 @@ const SwapAmm = () => {
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-                BigInt(tokenAllowance) >= parseEther(amountA) ? (
-                <button className={styles.button_field} onClick={handleSwap}>
-                  Swap
+              BigInt(tokenAllowance) >= parseEther(amountA) ? (
+                <button
+                  className={styles.button_field}
+                  onClick={handleProvideLiquidity}
+                >
+                  Add Liquidity
                 </button>
               ) : (
                 <button
                   className={styles.button_field}
-                  onClick={handleSwapApprove}
+                  onClick={handleLiquidityApprove}
                 >
                   Approve
                 </button>
@@ -496,16 +486,15 @@ const SwapAmm = () => {
                 {showTokenListA && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                    {tokenAddresses.map((_token, index) => (
+                      {tokenAddresses.map((_token, index) => (
                         <div
-
-                        className={styles.token_list_symbol}
+                          className={styles.token_list_symbol}
                           key={index}
                           onClick={() => handleTokenSelectionA(_token.symbol)}
                         >
-                        {_token.symbol} {"  "}
+                          {_token.symbol} {"  "}
                           <Image
-                           className={styles.token_list_symbol_space}
+                            className={styles.token_list_symbol_space}
                             src={_token.logo}
                             alt="Aquas.Trade Crypto Assets On SKALE Network"
                             width={18}
@@ -567,16 +556,15 @@ const SwapAmm = () => {
                 {showTokenListB && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                    {tokenAddresses.map((_token, index) => (
+                      {tokenAddresses.map((_token, index) => (
                         <div
-
-                        className={styles.token_list_symbol}
+                          className={styles.token_list_symbol}
                           key={index}
                           onClick={() => handleTokenSelectionB(_token.symbol)}
                         >
-                        {_token.symbol} {"  "}
+                          {_token.symbol} {"  "}
                           <Image
-                           className={styles.token_list_symbol_space}
+                            className={styles.token_list_symbol_space}
                             src={_token.logo}
                             alt="Aquas.Trade Crypto Assets On SKALE Network"
                             width={18}
@@ -601,7 +589,7 @@ const SwapAmm = () => {
             </div>
             <div className={styles.button_container}>
               {tokenAllowance &&
-                BigInt(tokenAllowance) >= parseEther(amountA) ? (
+              BigInt(tokenAllowance) >= parseEther(amountA) ? (
                 <button
                   className={styles.button_field}
                   onClick={handleProvideLiquidity}

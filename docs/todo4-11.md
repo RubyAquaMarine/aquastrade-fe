@@ -16,5 +16,8 @@ npx prettier . --write
 - coinflip : userAllowance move into a components ( atm button click fetches allowance twice )
 - amm : add symbols to tokenList
 
+## TODO 
+- decimals on swappAMM : double check all tokens 
+
 
    

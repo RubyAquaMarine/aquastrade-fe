@@ -44,7 +44,6 @@ const Home = () => {
 
   const { data: bal } = useCoinflip("balances", [address]);
 
-  
   console.log("Render COnflip:  User Allowance ", tokenAllowance);
 
   const buttonDescriptions = ["AQUA"];
@@ -122,7 +121,6 @@ const Home = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.midText}>Flip to Up your Stack</h1>
-     
 
       {address ? (
         <div>
@@ -208,7 +206,12 @@ const Home = () => {
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {address && typeof bal === "bigint" && bal < BigInt('115792089237316195423570985008687907853269984665640564039057') ? (
+                  {address &&
+                  typeof bal === "bigint" &&
+                  bal <
+                    BigInt(
+                      "115792089237316195423570985008687907853269984665640564039057",
+                    ) ? (
                     <p className={styles_button.toggleButton}>
                       You Won: {formatUnits(bal, 18)}
                     </p>
@@ -236,7 +239,7 @@ const Home = () => {
         <div> </div>
       )}
 
-<h2 className={styles.topText}>
+      <h2 className={styles.topText}>
         Prize pools and available flip assets are growing. Come back soon to
         flip again.
       </h2>
