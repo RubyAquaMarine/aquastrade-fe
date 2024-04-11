@@ -12,7 +12,7 @@ import SwapAmm from "./SwapAmm";
 const SwapPanel = () => {
   const path = usePathname();
   const dappType = path;
-  
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div>
@@ -21,7 +21,6 @@ const SwapPanel = () => {
           <Link href="/dashboard"> Back </Link>
         </p>
 
-       
         {dappType == "/swap/lifi" ? <SwapLifi /> : <p></p>}
 
         {dappType == "/swap/amm" ? <SwapAmm /> : <p></p>}

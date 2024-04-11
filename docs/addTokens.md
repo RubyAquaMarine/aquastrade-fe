@@ -6,8 +6,6 @@ Step 1
 
 * at `line 3 and 5` , add your Symbol and Address
 
+Step 2
 
-Step 2 
-
-
-- add liquidity 
+- add liquidity

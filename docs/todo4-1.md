@@ -1,11 +1,11 @@
 # all pages
 
 improve ux : better flow
+
 - is connected
 - - is approve
 - - - user actions
 - - - fetch tx , result
-
 
 ## test
 

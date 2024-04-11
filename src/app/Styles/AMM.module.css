@@ -30,7 +30,7 @@
 }
 
 .container {
-  max-width: 600px;
+  max-width: 620px;
   border-radius: 12px;
   background-color: #181a1d;
   margin-bottom: 10px;
@@ -68,7 +68,7 @@
 .input_token {
   display: flex;
   margin-right: 2px;
-  padding: 0.2rem;
+  padding: 0.1rem 0.8rem;
   color: #fff;
   background-color: #242629;
 }
@@ -105,3 +105,11 @@
   font-size: 12px;
   color: #bdb8b8;
 }
+
+.amount_balance_small {
+  font-size: 15.5px;
+  color: #bdb8b8;
+  display: flex;
+  justify-content: center;
+}
+
