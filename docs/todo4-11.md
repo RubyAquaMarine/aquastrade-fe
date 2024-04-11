@@ -5,3 +5,4 @@ branch: `fix-build`
 -  peer viem@"~0.3.19 || ^1.0.0" from @rainbow-me/rainbowkit@1.3.6
 - removed old dependencies
 - edited ` .eslintrc:` 
+- tested with node v20.xx. today : Metaport requires v18
