@@ -1,3 +1,24 @@
+.token_list_symbol {
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: #242629;
+  max-width: 300px;
+  max-height: 30px;
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.token_list_symbol_space {
+ 
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
 .nav {
   border-radius: 12px;
   background-color: #242629;

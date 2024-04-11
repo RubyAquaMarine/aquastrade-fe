@@ -28,7 +28,7 @@ import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
 
 const SwapAmm = () => {
-  // Save state without rendering 
+  // Save state without rendering
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
   );
@@ -82,7 +82,6 @@ const SwapAmm = () => {
       console.log("POP UP HERE");
     }
   }, [contractCallDataConfirmed]);
-
 
   // todo : this needs to be useRef because usingState renders way too much
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
@@ -258,7 +257,7 @@ const SwapAmm = () => {
           BigInt(0),
           address,
           timeIs,
-        ]
+        ],
       });
     }
   };
@@ -270,7 +269,6 @@ const SwapAmm = () => {
     const tempAmountA = amountA;
     setAmountA(amountB);
     setAmountB(tempAmountA);
-
   };
 
   const handleAMMFeatures = (_feature: string) => {
@@ -339,12 +337,21 @@ const SwapAmm = () => {
                 {showTokenListA && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                      {tokenSymbols.map((token, index) => (
+                      {tokenAddresses.map((_token, index) => (
                         <div
+
+                        className={styles.token_list_symbol}
                           key={index}
-                          onClick={() => handleTokenSelectionA(token)}
+                          onClick={() => handleTokenSelectionA(_token.symbol)}
                         >
-                          {token}
+                        {_token.symbol} {"  "}
+                          <Image
+                           className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
                         </div>
                       ))}
                     </div>
@@ -408,20 +415,25 @@ const SwapAmm = () => {
                 {showTokenListB && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                      {tokenSymbols.map((token, index) => (
+                    {tokenAddresses.map((_token, index) => (
                         <div
+
+                        className={styles.token_list_symbol}
                           key={index}
-                          onClick={() => handleTokenSelectionB(token)}
+                          onClick={() => handleTokenSelectionB(_token.symbol)}
                         >
-                          {token}
+                        {_token.symbol} {"  "}
+                          <Image
+                           className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
                         </div>
                       ))}
 
-                      <div className="selected-tokens">
-                        {tokenSymbols.map(({ id, iconUrl }) => (
-                          <img key={id} src={iconUrl}></img>
-                        ))}
-                      </div>
+                      
                     </div>
                   </div>
                 )}
@@ -484,20 +496,27 @@ const SwapAmm = () => {
                 {showTokenListA && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                      {tokenSymbols.map((token, index) => (
+                    {tokenAddresses.map((_token, index) => (
                         <div
+
+                        className={styles.token_list_symbol}
                           key={index}
-                          onClick={() => handleTokenSelectionA(token)}
+                          onClick={() => handleTokenSelectionA(_token.symbol)}
                         >
-                          {token}
+                        {_token.symbol} {"  "}
+                          <Image
+                           className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
               </div>
-
-
 
               <p className={styles.amount_balance}>
                 Balance{" "}
@@ -509,9 +528,6 @@ const SwapAmm = () => {
                   <div></div>
                 )}
               </p>
-
-
-
             </div>
             {!showTokenListA && !showTokenListB ? (
               <div id="1" className={styles.button_container}>
@@ -551,22 +567,23 @@ const SwapAmm = () => {
                 {showTokenListB && (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
-                      {tokenSymbols.map((token, index) => (
+                    {tokenAddresses.map((_token, index) => (
                         <div
+
+                        className={styles.token_list_symbol}
                           key={index}
-                          onClick={() => handleTokenSelectionB(token)}
+                          onClick={() => handleTokenSelectionB(_token.symbol)}
                         >
-                          {token}
+                        {_token.symbol} {"  "}
+                          <Image
+                           className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
                         </div>
                       ))}
-
-                      <div className="selected-tokens">
-                        {tokenSymbols
-                          .filter(({ selected }) => selected)
-                          .map(({ id, iconUrl }) => (
-                            <img key={id} src={iconUrl}></img>
-                          ))}
-                      </div>
                     </div>
                   </div>
                 )}
