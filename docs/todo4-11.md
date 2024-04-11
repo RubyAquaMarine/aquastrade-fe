@@ -19,6 +19,7 @@ npx prettier . --write
 ## TODO 
 - decimals on swappAMM : double check all tokens 
 - fix decimals 
+- dns 
 
 
    
