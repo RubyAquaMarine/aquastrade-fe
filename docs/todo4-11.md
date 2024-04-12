@@ -27,3 +27,4 @@ npx prettier . --write
 - addLiqudity tokenB Amount : Auto-fill amounts
 
 - USDC approve has infinite 115792xx
+- 0xfe18ccf3ac38b6da1a1b02cd730672cd2cb8fcb8 . idk if this is a good idea but .... it's defi
