@@ -9,7 +9,7 @@
 
 ## tech
 
-- next 14.x : file based routing
+- next 14.1.2 : file based routing
 - viem: 2.8.13
 - wagmi: 2.5.7
 - [react ](react_.md)
