@@ -12,6 +12,7 @@ interface Props {
   amountA: string;
   swapPath: string;
   fee: bigint;
+  decimals: number;
 }
 
 const GetAmountsOut = (params: Props) => {
@@ -36,7 +37,7 @@ const GetAmountsOut = (params: Props) => {
             className={styles.input_amount}
             type="text"
             placeholder="Select Token"
-            value={formatUnits(swap_out[1], 18)}
+            value={formatUnits(swap_out[1], params.props[3])}
           />
         )
       )}
