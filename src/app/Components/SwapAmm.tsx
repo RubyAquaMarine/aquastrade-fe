@@ -415,7 +415,7 @@ const SwapAmm = () => {
                       amountA,
                       swap_path,
                       feeNFT.current,
-                      tokenADecimal.current,
+                      tokenBDecimal.current,
                     ]}
                   ></GetAmountsOut>
                 ) : (
