@@ -73,7 +73,8 @@ const TokenApprove = (params: Props) => {
       <div className={styles.token_approve_container}>
         {address && typeof token_balance === "bigint" ? (
           <div>
-            {token_balance >= params.props[2] ? (
+            {token_balance >= params.props[2] &&
+            typeof token_balance === "bigint" ? (
               <button className={styles.token_approve_amount}>
                 {formatUnits(token_balance, params.props[4])}
               </button>

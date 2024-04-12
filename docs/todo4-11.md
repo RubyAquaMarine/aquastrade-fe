@@ -25,3 +25,5 @@ npx prettier . --write
 - <TokenApprove> click to revoke (if value is shown) : else approve
 - redo some css on amm swap panel
 - addLiqudity tokenB Amount : Auto-fill amounts
+
+- USDC approve has infinite 115792xx

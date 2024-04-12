@@ -411,7 +411,12 @@ const SwapAmm = () => {
               <div className={styles.amount_inputs}>
                 {swap_path !== [""] && amountA !== "0.0" ? (
                   <GetAmountsOut
-                    props={[amountA, swap_path, feeNFT.current]}
+                    props={[
+                      amountA,
+                      swap_path,
+                      feeNFT.current,
+                      tokenADecimal.current,
+                    ]}
                   ></GetAmountsOut>
                 ) : (
                   <div className={styles.container}>
