@@ -1,6 +1,6 @@
 # AQUA token
 
-No VC's, no IDOs, and no unlock schedules. Only AQUA airdrops and an AQUA dev fund. 
+No VC's, no IDOs, and no unlock schedules. Only AQUA airdrops and an AQUA dev fund.
 
 - - airdrop $AQUA to all nft holders : bullish for nft holders
 - - after NFTS are sold out, NFT Market Place requires AQUA => Bullish for AQUA
@@ -17,23 +17,25 @@ Quarterly airdrops
 - Jan, April, July, Oct
 - - 20 million released over 10 years
 - - 2 million per year
-- - - 500k released Quarterly 
+- - - 500k released Quarterly
 
 ### 10% - Token Listing
-- Game projects can pool with base asset $AQUA 
+
+- Game projects can pool with base asset $AQUA
 
 ### 30% Liquidity-bootstrap
+
 - NFT sales + AQUA base asset for deep liquidity
 
 ### 50% - Future development (Treasury)
-- Perps 
+
+- Perps
 - Lending
 
-### 200 million Supply 
+### 200 million Supply
+
 - TGE: @0.01 FDV $2 million
 - Quarterly Airdrop: ($5k USD TGE @ 0.01 per AQUA)
-- No IDO : 
-- Community Owned with no VC presale : 
+- No IDO :
+- Community Owned with no VC presale :
 - Quarterly token burns from earned protocol fees (DEX, PERPS, LENDING)
-
-

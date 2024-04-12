@@ -7,13 +7,11 @@ APP ROUTER Project
 - - /api (reserved specifically for nextjs) : fetch data, manipulate and return to Components
 - - /Hooks : <b> use</b>HookFuntionName , make custom useEffect for example [useHandleWrongNetwork](/src/app/Hooks/useHandleWrongNetwork.ts)
 
-
-## Project List 
+## Project List
 
 - DappRadar integration
 - DexTools : Also you can add a brief description of your project, explaining the main uses and advantages of your token and you can add your circulating supply too.
 - - https://docs.google.com/forms/d/e/1FAIpQLSd1BAqjAl9nntlS2mOk76tE0Q-dEf-AT1bUblDXikjZ-PNP1Q/viewform
-
 
 ## Branch
 
@@ -28,7 +26,7 @@ npx prettier . --write
 - - peer viem@"~0.3.19 || ^1.0.0" from @rainbow-me/rainbowkit@1.3.6
 - - tested with node v20.xx. today : Metaport requires v18
 
-## main 
+## main
 
 - walletConnect ID
 - gas Wallet Balance : for the skale bridge. does user have funds within the gasWallet: show this in the navigator
@@ -36,14 +34,10 @@ npx prettier . --write
 - slider for leverage adjustments ( default white themed)
 - dropdown-menu for navigation (default white themed)
 
-
-
 # api : database
 
 - what data would be userful to others : AQUA circulating supply
 - POST : when user buys nft to add to whitelist of $AQUA airdrops
-
-
 
 ## amm
 
@@ -56,13 +50,11 @@ http://localhost:3000/swap/amm
 - add liquidity doesn't work for WriteContract
 - gear icon has no functionality yet
 
-
-## coinflip 
+## coinflip
 
 (working)
 
 http://localhost:3000/dashboard/coinflip
-
 
 - show Contract Balance as the Max Prize aka = MAX BET
 - balance returns a huge value ...
@@ -76,7 +68,6 @@ http://localhost:3000/dashboard/coinflip
 - this `typeof token_balance === 'bigint' ? (` fixes the issue with showing the MAX_INT when object is undefined (coinFlip)
 - <TokenApprove> click to revoke (if value is shown) : else approve
 
-
 ## nft
 
 (working)
@@ -89,7 +80,6 @@ http://localhost:3000/nft
 ### NFT Market Place
 
 The marketplace will use $AQUA as the asset with router swapping to allow user to buy any nft with any asset within their wallet.
-
 
 ## perps
 
@@ -129,7 +119,6 @@ its working again : before there were issues with rainbowkit connection ( clicki
 - https://tradingview.github.io/lightweight-charts/plugin-examples/
 - https://github.com/tradingview/lightweight-charts/tree/master/plugin-examples/src/plugins/trend-line/example
 
- 
 ## Type-script
 
 // @ts-nocheck

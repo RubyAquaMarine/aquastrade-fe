@@ -6,7 +6,11 @@ import React, { useRef, useEffect } from "react";
 
 import { useMarketPlace, useERC20Token } from "@/app/Hooks/useMarketPlace";
 import { parseEther, parseUnits } from "viem";
-import { useAccount, useWriteContract,   useWaitForTransactionReceipt } from "wagmi";
+import {
+  useAccount,
+  useWriteContract,
+  useWaitForTransactionReceipt,
+} from "wagmi";
 
 import styles_button from "@/app/Styles/Toggle.module.css";
 import styles from "@/app/Styles/Links.module.css";
@@ -71,7 +75,6 @@ const Home = () => {
     }
   }, [contractCallDataConfirmed]);
 
-
   // Once the Marketplace data exists , filter through and find , store the nfts that will be for sale. 1 of 50000
   useEffect(() => {
     let counter = 0;
@@ -112,7 +115,6 @@ const Home = () => {
   }
 
   const handleButtonClick = (index: number) => {
-
     const allow = BigInt(allowancesTest.current);
 
     console.error("APPROVE|BUY with Amount:  ", allow);
@@ -172,15 +174,13 @@ const Home = () => {
 
         break;
       case 2:
-        console.error("APPROVE 2 Bronze NFT Step 1" , bronze);
+        console.error("APPROVE 2 Bronze NFT Step 1", bronze);
         const min = parseEther("0.03", "wei");
 
         if (min && allow) {
-
           console.error("APPROVE 2 Bronze NFT Step 2", min, allow);
 
           if (min > allow) {
-
             console.error("APPROVE 2 Bronze NFT Step 3 Approve ", min);
             // write to approve
             writeContract({
@@ -191,7 +191,6 @@ const Home = () => {
             });
             // wait for transaction
           } else {
-
             console.error("APPROVE 2 Bronze NFT Step 3 Write ", min);
 
             const str2 = String(bronze.current);
@@ -201,14 +200,10 @@ const Home = () => {
               abi: MARKETPACE_ABI,
               address: MARKETPLACE_AQUADEX,
               functionName: "buy",
-              args: [  parseUnits(str2, 0), parseEther("0.03")   ],
+              args: [parseUnits(str2, 0), parseEther("0.03")],
             });
-
-
           }
-
         }
-
 
         break;
       default:
@@ -261,7 +256,7 @@ const Home = () => {
               </div>
               {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
               {allowancesTest.current &&
-                BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
+              BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
                 <div>
                   <button
                     className={styles_button.toggleButton}
@@ -282,7 +277,6 @@ const Home = () => {
               )}
             </div>
           ))}
-
         </div>
       ) : (
         <div>

@@ -213,14 +213,20 @@ const SwapAmm = () => {
       abi: ERC20_ABI,
       address: tokenAAddress.current,
       functionName: "approve",
-      args: [ROUTER_AQUADEX, parseUnits(amountA, Number(tokenADecimal?.current))],
+      args: [
+        ROUTER_AQUADEX,
+        parseUnits(amountA, Number(tokenADecimal?.current)),
+      ],
     });
 
     writeContract({
       abi: ERC20_ABI,
       address: tokenBAddress.current,
       functionName: "approve",
-      args: [ROUTER_AQUADEX,    parseUnits(amountB, Number(tokenBDecimal?.current)),],
+      args: [
+        ROUTER_AQUADEX,
+        parseUnits(amountB, Number(tokenBDecimal?.current)),
+      ],
     });
   };
 

@@ -2,13 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {  useRef } from "react";
+import { useRef } from "react";
 
-import {
-  useAccount,
-  
-  useSwitchChain,
-} from "wagmi";
+import { useAccount, useSwitchChain } from "wagmi";
 
 import styles_button from "@/app/Styles/Toggle.module.css";
 import styles from "@/app/Styles/Links.module.css";

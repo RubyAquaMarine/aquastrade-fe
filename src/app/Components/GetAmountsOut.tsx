@@ -17,8 +17,11 @@ interface Props {
 }
 
 const GetAmountsOut = (params: Props) => {
-
-  console.error("GetAmountsOut: amount : decimal ",params.props[0],  params.props[3])
+  console.error(
+    "GetAmountsOut: amount : decimal ",
+    params.props[0],
+    params.props[3],
+  );
 
   const { data: swap_out } = useAMMRouter(ROUTER_AQUADEX, "getAmountsOut", [
     parseUnits(params.props[0], Number(params.props[3])),
