@@ -5,14 +5,13 @@ import Link from "next/link";
 import React, { useRef, useEffect } from "react";
 
 import { useMarketPlace, useERC20Token } from "@/app/Hooks/useMarketPlace";
-
 import { parseEther, parseUnits } from "viem";
-import { useAccount, useWriteContract } from "wagmi";
+import { useAccount, useWriteContract,   useWaitForTransactionReceipt } from "wagmi";
 
 import styles_button from "@/app/Styles/Toggle.module.css";
 import styles from "@/app/Styles/Links.module.css";
 
-import { marketplaceABI } from "@/app/Abi/europaMarketPlace";
+import { MARKETPACE_ABI } from "@/app/Abi/europaMarketPlace";
 
 import {
   MARKETPLACE_AQUADEX,
@@ -26,7 +25,12 @@ import { ERC20_ABI } from "@/app/Abi/erc20";
 
 const Home = () => {
   const allowancesTest = useRef(BigInt(1));
-  const { writeContract } = useWriteContract();
+
+  const { data: hash, writeContract } = useWriteContract();
+  const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
+
   const { address, isConnected, chain } = useAccount();
   const array: any[any] = [address, MARKETPLACE_AQUADEX];
   const { data: tokenAllowance } = useERC20Token("allowance", array);
@@ -60,6 +64,13 @@ const Home = () => {
     "https://elated-tan-skat.explorer.mainnet.skalenodes.com/token/0xcEcd42ff7eCC7b0BfF7a9CF95C6e7ce9aA052d8C/token-transfers",
     "https://elated-tan-skat.explorer.mainnet.skalenodes.com/token/0x87f23b254d59f97e7c4ceC7C14AbC7D6a1a4A0E3/token-transfers",
   ];
+
+  useEffect(() => {
+    if (contractCallDataConfirmed) {
+      console.log("POP UP HERE");
+    }
+  }, [contractCallDataConfirmed]);
+
 
   // Once the Marketplace data exists , filter through and find , store the nfts that will be for sale. 1 of 50000
   useEffect(() => {
@@ -101,6 +112,7 @@ const Home = () => {
   }
 
   const handleButtonClick = (index: number) => {
+
     const allow = BigInt(allowancesTest.current);
 
     console.error("APPROVE|BUY with Amount:  ", allow);
@@ -125,7 +137,7 @@ const Home = () => {
           console.error("BUY SILVER ", str);
 
           writeContract({
-            abi: marketplaceABI,
+            abi: MARKETPACE_ABI,
             address: MARKETPLACE_AQUADEX,
             functionName: "buy",
             args: [parseUnits(str, 0), minSilver],
@@ -151,7 +163,7 @@ const Home = () => {
           const str1 = String(gold.current);
           console.error("BUY GOLD ", str1);
           writeContract({
-            abi: marketplaceABI,
+            abi: MARKETPACE_ABI,
             address: MARKETPLACE_AQUADEX,
             functionName: "buy",
             args: [parseUnits(str1, 0), minGold],
@@ -160,29 +172,43 @@ const Home = () => {
 
         break;
       case 2:
-        console.error("APPROVE 2 Bronze NFT", bronze);
-
+        console.error("APPROVE 2 Bronze NFT Step 1" , bronze);
         const min = parseEther("0.03", "wei");
 
-        if (min > allow) {
-          // write to approve
-          writeContract({
-            abi: ERC20_ABI,
-            address: EUROPA_ETH,
-            functionName: "approve",
-            args: [MARKETPLACE_AQUADEX, min],
-          });
-          // wait for transaction
-        } else {
-          const str2 = String(bronze.current);
-          console.error("BUY BRONZE ", str2);
-          writeContract({
-            abi: marketplaceABI,
-            address: MARKETPLACE_AQUADEX,
-            functionName: "buy",
-            args: [parseUnits(str2, 0), parseEther("0.03", "wei")],
-          });
+        if (min && allow) {
+
+          console.error("APPROVE 2 Bronze NFT Step 2", min, allow);
+
+          if (min > allow) {
+
+            console.error("APPROVE 2 Bronze NFT Step 3 Approve ", min);
+            // write to approve
+            writeContract({
+              abi: ERC20_ABI,
+              address: EUROPA_ETH,
+              functionName: "approve",
+              args: [MARKETPLACE_AQUADEX, min],
+            });
+            // wait for transaction
+          } else {
+
+            console.error("APPROVE 2 Bronze NFT Step 3 Write ", min);
+
+            const str2 = String(bronze.current);
+            console.error("BUY BRONZE ", str2);
+
+            writeContract({
+              abi: MARKETPACE_ABI,
+              address: MARKETPLACE_AQUADEX,
+              functionName: "buy",
+              args: [  parseUnits(str2, 0), parseEther("0.03")   ],
+            });
+
+
+          }
+
         }
+
 
         break;
       default:
@@ -235,7 +261,7 @@ const Home = () => {
               </div>
               {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
               {allowancesTest.current &&
-              BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
+                BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
                 <div>
                   <button
                     className={styles_button.toggleButton}
@@ -256,6 +282,7 @@ const Home = () => {
               )}
             </div>
           ))}
+
         </div>
       ) : (
         <div>
