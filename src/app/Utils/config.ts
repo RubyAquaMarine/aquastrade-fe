@@ -13,6 +13,7 @@ export const tokenSymbols = [
   "EXD",
   "RUBY",
   "PROSPECT",
+  "SHISH"
 ];
 
 export const tokenAddresses = [
@@ -87,6 +88,12 @@ export const tokenAddresses = [
     addr: "0xA30cA600b8E722E2513B7738493F410a6Ae4a373",
     decimal: 18,
     logo: "/PROSPECT.png",
+  },
+  {
+    symbol: "SHISH",
+    addr: "0xfe18ccf3ac38b6da1a1b02cd730672cd2cb8fcb8",
+    decimal: 18,
+    logo: "/SHISH.png",
   },
 ] as const;
 
