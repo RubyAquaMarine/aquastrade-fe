@@ -2,13 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import {  useRef } from "react";
 
-import { parseEther, parseUnits } from "viem";
 import {
   useAccount,
-  useReadContract,
-  useWriteContract,
+  
   useSwitchChain,
 } from "wagmi";
 

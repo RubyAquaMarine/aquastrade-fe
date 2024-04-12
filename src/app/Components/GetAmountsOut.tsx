@@ -12,12 +12,16 @@ interface Props {
   amountA: string;
   swapPath: string;
   fee: bigint;
-  decimals: number;
+  decimalsA: number;
+  decimalsB: number;
 }
 
 const GetAmountsOut = (params: Props) => {
+
+  console.error("GetAmountsOut: amount : decimal ",params.props[0],  params.props[3])
+
   const { data: swap_out } = useAMMRouter(ROUTER_AQUADEX, "getAmountsOut", [
-    parseUnits(params.props[0], 18),
+    parseUnits(params.props[0], Number(params.props[3])),
     params.props[1],
     params.props[2],
   ]);
@@ -37,7 +41,7 @@ const GetAmountsOut = (params: Props) => {
             className={styles.input_amount}
             type="text"
             placeholder="Select Token"
-            value={formatUnits(swap_out[1], params.props[3])}
+            value={formatUnits(swap_out[1], params.props[4])}
           />
         )
       )}

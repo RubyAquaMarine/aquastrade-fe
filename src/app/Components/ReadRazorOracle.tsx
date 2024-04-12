@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useAccount, useReadContract } from "wagmi";
 
-import { parseUnits, hashMessage, formatUnits } from "viem";
+import { hashMessage, formatUnits } from "viem";
 
 import { EUROPA_RAZOR_ORACLE, ASSET_ETH } from "@/app/Utils/config";
 import { RAZOR_ORACLE_ABI } from "@/app/Abi/oracle";
