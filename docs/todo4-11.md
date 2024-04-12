@@ -16,10 +16,12 @@ npx prettier . --write
 - coinflip : userAllowance move into a components ( atm button click fetches allowance twice )
 - amm : add symbols to tokenList
 
-## TODO 
-- decimals on swappAMM : double check all tokens 
-- fix decimals 
-- dns 
+## TODO
 
-
-   
+- decimals on swappAMM : double check all tokens
+- fix decimals
+- dns
+- this `typeof token_balance === 'bigint' ? (` fixes the issue with showing the MAX_INT when object is undefined (coinFlip)
+- <TokenApprove> click to revoke (if value is shown) : else approve
+- redo some css on amm swap panel
+- addLiqudity tokenB Amount : Auto-fill amounts
