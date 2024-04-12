@@ -55,8 +55,8 @@ const SwapAmm = () => {
   const [swap_path, setSwapPath] = useState([""]);
   const [tokenA, setTokenA] = useState("USDP");
   const [tokenB, setTokenB] = useState("AQUA");
-  const [amountA, setAmountA] = useState("0.00001");
-  const [amountB, setAmountB] = useState("0.0");
+  const [amountA, setAmountA] = useState("1");
+  const [amountB, setAmountB] = useState("0");
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
 
@@ -358,7 +358,7 @@ const SwapAmm = () => {
               </div>
 
               <p className={styles.amount_balance}>
-                Balance{" "}
+                Balance: --{" "}
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
                     props={[tokenAAddress.current, tokenADecimal.current]}
@@ -394,10 +394,10 @@ const SwapAmm = () => {
                 <Image
                   src="/flip.svg"
                   alt="menu"
-                  width={18}
-                  height={18}
+                  width={50}
+                  height={50}
                   priority
-                  className={styles.imageInvert}
+                  className={styles.imageInvertToggle}
                   onClick={handleFlipTokens}
                 />
               </div>
@@ -431,7 +431,7 @@ const SwapAmm = () => {
 
                 {/**  */}
                 <input
-                  className={styles.token_space}
+                  className={styles.input_token_space}
                   type="text"
                   placeholder="Select Token"
                   value={tokenB}
@@ -464,7 +464,7 @@ const SwapAmm = () => {
               </div>
 
               <p className={styles.amount_balance}>
-                Balance{" "}
+                Balance: --{" "}
                 {tokenBAddress.current !== "" ? (
                   <TokenBalance
                     props={[tokenBAddress.current, tokenBDecimal.current]}
@@ -533,7 +533,7 @@ const SwapAmm = () => {
               </div>
 
               <p className={styles.amount_balance}>
-                Balance{" "}
+                Balance: --{" "}
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
                     props={[tokenAAddress.current, tokenADecimal.current]}
@@ -568,10 +568,10 @@ const SwapAmm = () => {
                 <Image
                   src="/flip.svg"
                   alt="menu"
-                  width={18}
-                  height={18}
+                  width={50}
+                  height={50}
                   priority
-                  className={styles.imageInvert}
+                  className={styles.imageInvertToggle}
                   onClick={handleFlipTokens}
                 />
               </div>
@@ -621,7 +621,7 @@ const SwapAmm = () => {
                 )}
               </div>
               <p className={styles.amount_balance}>
-                Balance{" "}
+                Balance: --{" "}
                 {tokenBAddress.current !== "" ? (
                   <TokenBalance
                     props={[tokenBAddress.current, tokenBDecimal.current]}

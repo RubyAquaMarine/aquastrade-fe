@@ -1,4 +1,20 @@
-.token_space {
+.imageInvert {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+
+.imageInvertToggle {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  border-radius:100%;
+  border: 2px solid #000;
+  display:inline-flex;
+  margin-top:-23px;
+  margin-bottom: -23px;
+  cursor: pointer;
+}
+
+.input_token_space {
   margin-bottom: 10px;
   margin-right: 10px;
   margin-left: 10px;
@@ -6,9 +22,10 @@
   padding: 0.2rem 0.2rem;
   color: #fff;
   background-color: #242629;
+  cursor: pointer;
 }
 
-.token_space:hover {
+.input_token_space:hover {
   background-color: #0056b3;
 }
 
@@ -41,6 +58,7 @@
   margin-top: 10px;
   margin-right: 10px;
   margin-left: 10px;
+  font-weight: 550;
 }
 
 .nav_right {
@@ -98,6 +116,7 @@
   padding: 0.2rem 0.8rem;
   color: #fff;
   background-color: #242629;
+  cursor: pointer;
 }
 
 .input_token:hover {
@@ -131,10 +150,6 @@
   background-color: #0056b3;
 }
 
-.imageInvert {
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
-}
 
 .amount_balance {
   font-size: 12px;
