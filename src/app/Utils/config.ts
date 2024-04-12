@@ -13,7 +13,7 @@ export const tokenSymbols = [
   "EXD",
   "RUBY",
   "PROSPECT",
-  "SHISH"
+  "SHISH",
 ];
 
 export const tokenAddresses = [
