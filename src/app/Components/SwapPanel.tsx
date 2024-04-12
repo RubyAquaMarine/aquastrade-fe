@@ -16,13 +16,7 @@ const SwapPanel = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div>
-        <p>
-          {" "}
-          <Link href="/dashboard"> Back </Link>
-        </p>
-
         {dappType == "/swap/lifi" ? <SwapLifi /> : <p></p>}
-
         {dappType == "/swap/amm" ? <SwapAmm /> : <p></p>}
       </div>
     </main>
