@@ -1,7 +1,6 @@
 // @ts-nocheck
 "use client";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import {
   useAccount,
   useWriteContract,
@@ -181,7 +180,7 @@ const SwapAmm = () => {
         address: ROUTER_AQUADEX,
         functionName: "swapExactTokensForTokens",
         args: [
-          parseUnits(amountA, tokenADecimal.current),
+          parseUnits(amountA, Number(tokenADecimal?.current)),
           parseEther("0.0"),
           pathForPools(tokenAAddress.current, tokenBAddress.current),
           address,
@@ -214,14 +213,14 @@ const SwapAmm = () => {
       abi: ERC20_ABI,
       address: tokenAAddress.current,
       functionName: "approve",
-      args: [ROUTER_AQUADEX, parseUnits(amountA, tokenADecimal.current)],
+      args: [ROUTER_AQUADEX, parseUnits(amountA, Number(tokenADecimal?.current))],
     });
 
     writeContract({
       abi: ERC20_ABI,
       address: tokenBAddress.current,
       functionName: "approve",
-      args: [ROUTER_AQUADEX, parseUnits(amountB, tokenBDecimal.current)],
+      args: [ROUTER_AQUADEX,    parseUnits(amountB, Number(tokenBDecimal?.current)),],
     });
   };
 
@@ -238,8 +237,8 @@ const SwapAmm = () => {
       tokenAAddress.current,
       tokenBAddress.current,
       address,
-      parseUnits(amountA, tokenADecimal.current),
-      parseUnits(amountB, tokenBDecimal.current),
+      parseUnits(amountA, Number(tokenADecimal?.current)),
+      parseUnits(amountB, Number(tokenBDecimal?.current)),
     );
 
     if (timeIs) {
@@ -251,8 +250,8 @@ const SwapAmm = () => {
         args: [
           tokenAAddress.current,
           tokenBAddress.current,
-          parseUnits(amountA, tokenADecimal.current),
-          parseUnits(amountB, tokenBDecimal.current),
+          parseUnits(amountA, Number(tokenADecimal?.current)),
+          parseUnits(amountB, Number(tokenBDecimal?.current)),
           BigInt(0),
           BigInt(0),
           address,
@@ -415,6 +414,7 @@ const SwapAmm = () => {
                       amountA,
                       swap_path,
                       feeNFT.current,
+                      tokenADecimal.current,
                       tokenBDecimal.current,
                     ]}
                   ></GetAmountsOut>

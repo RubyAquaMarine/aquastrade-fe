@@ -4,7 +4,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import { parseEther, parseUnits, formatUnits } from "viem";
+import { parseEther, formatUnits } from "viem";
 import { useAccount, useSwitchChain, useWriteContract } from "wagmi";
 
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
