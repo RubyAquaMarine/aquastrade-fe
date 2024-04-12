@@ -22,27 +22,25 @@ const GetAmountsOut = (params: Props) => {
   ]);
 
   return (
-   
-      <div className={styles.container}>
-        {!swap_out ? (
-          <input
+    <div className={styles.container}>
+      {!swap_out ? (
+        <input
           className={styles.input_amount}
+          type="text"
+          placeholder="Select Token"
+          value={"0.0"}
+        />
+      ) : (
+        typeof swap_out === "object" && (
+          <input
+            className={styles.input_amount}
             type="text"
             placeholder="Select Token"
-            value={"0.0"}
+            value={formatUnits(swap_out[1], 18)}
           />
-        ) : (
-          typeof swap_out === "object" && (
-            <input
-            className={styles.input_amount}
-              type="text"
-              placeholder="Select Token"
-              value={formatUnits(swap_out[1], 18)}
-            />
-          )
-        )}
-      </div>
-   
+        )
+      )}
+    </div>
   );
 };
 

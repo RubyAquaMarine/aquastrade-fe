@@ -16,6 +16,9 @@ import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
 import TokenBalance from "@/app/Components/TokenBalance";
 
+// test
+import TokenApprove from "@/app/Components/TokenApprove";
+
 import { ERC20_ABI } from "@/app/Abi/erc20";
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 import { useERC20Token } from "@/app/Hooks/useAMM";
@@ -58,15 +61,6 @@ const SwapAmm = () => {
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
 
-  // Allowance on Swapping Token A
-  const allowanceArray: any[any] = [address, ROUTER_AQUADEX];
-
-  const { data: tokenAllowance } = useERC20Token(
-    tokenAAddress.current,
-    "allowance",
-    allowanceArray,
-  );
-
   console.log("Rendered AMM ");
 
   // todo : this needs to be useRef because usingState renders way too much
@@ -78,7 +72,6 @@ const SwapAmm = () => {
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
 
         findSymbolDecimals(tokenA, tokenB);
-
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
@@ -89,12 +82,10 @@ const SwapAmm = () => {
     }
   }, [contractCallDataConfirmed]);
 
-  const findSymbolDecimals = (_symbolA: string, _symbolB: string,) => {
-
+  const findSymbolDecimals = (_symbolA: string, _symbolB: string) => {
     if (tokenAddresses) {
       console.log("SET UP DECIMALS ");
       tokenAddresses.forEach((element) => {
-
         if (_symbolA === element.symbol) {
           tokenADecimal.current = element.decimal;
         }
@@ -102,8 +93,6 @@ const SwapAmm = () => {
         if (_symbolB === element.symbol) {
           tokenBDecimal.current = element.decimal;
         }
-
-
       });
     }
   };
@@ -216,20 +205,6 @@ const SwapAmm = () => {
     console.log("User Asset Selected Token B", token);
     setTokenB(token);
     setShowTokenListB(false);
-  };
-
-  // Function to handle token swapping
-  const handleSwapApprove = () => {
-    // Implement swapping logic here
-
-    console.log("Approve Token  ", tokenA, " data ", tokenAllowance);
-
-    writeContract({
-      abi: ERC20_ABI,
-      address: tokenAAddress.current,
-      functionName: "approve",
-      args: [ROUTER_AQUADEX, parseUnits(amountA, tokenADecimal.current)],
-    });
   };
 
   // todo
@@ -382,12 +357,33 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
+
               <p className={styles.amount_balance}>
                 Balance{" "}
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
                     props={[tokenAAddress.current, tokenADecimal.current]}
                   ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
+              </p>
+
+              <p className={styles.amount_balance}>
+                Approved{" "}
+                {address &&
+                amountA &&
+                tokenAAddress.current &&
+                tokenADecimal.current ? (
+                  <TokenApprove
+                    props={[
+                      "allowance",
+                      tokenAAddress.current,
+                      parseUnits(amountA, Number(tokenADecimal?.current)),
+                      [address, ROUTER_AQUADEX],
+                      tokenADecimal.current,
+                    ]}
+                  ></TokenApprove>
                 ) : (
                   <div></div>
                 )}
@@ -409,19 +405,18 @@ const SwapAmm = () => {
             ) : (
               <div></div>
             )}
-{/**  */}
+            {/**  */}
             <div className={styles.input_container}>
               <p>You receive</p>
               <div className={styles.amount_inputs}>
-
-              {swap_path !== [""] && amountA !== "0.0" ? (
+                {swap_path !== [""] && amountA !== "0.0" ? (
                   <GetAmountsOut
                     props={[amountA, swap_path, feeNFT.current]}
                   ></GetAmountsOut>
                 ) : (
                   <div className={styles.container}>
                     <input
-                       className={styles.input_amount}
+                      className={styles.input_amount}
                       type="text"
                       placeholder="Get Amounts Out"
                       value={"0.0"}
@@ -438,8 +433,6 @@ const SwapAmm = () => {
                   onChange={(e) => setTokenB(e.target.value)}
                   onClick={() => setShowTokenListB(true)}
                 />
-
-
 
                 {showTokenListB && (
                   <div className={styles_pop.popup_container}>
@@ -475,28 +468,13 @@ const SwapAmm = () => {
                   <div></div>
                 )}
               </p>
-
             </div>
-{/**  Swap and Approve button  */}
+            {/**  Swap and Approve button  */}
             <div className={styles.button_container}>
-              {tokenAllowance &&
-                BigInt(tokenAllowance) >= parseUnits(amountA, tokenADecimal.current) ? (
-                <button
-                  className={styles.button_field}
-                  onClick={handleSwap}
-                >
-                  Swap
-                </button>
-              ) : (
-                <button
-                  className={styles.button_field}
-                  onClick={handleSwapApprove}
-                >
-                  Approve
-                </button>
-              )}
+              <button className={styles.button_field} onClick={handleSwap}>
+                Swap
+              </button>
             </div>
-
           </div>
         ) : (
           <div> </div>
@@ -555,6 +533,25 @@ const SwapAmm = () => {
                   <TokenBalance
                     props={[tokenAAddress.current, tokenADecimal.current]}
                   ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
+              </p>
+              <p className={styles.amount_balance}>
+                Approved{" "}
+                {address &&
+                amountA &&
+                tokenAAddress.current &&
+                tokenADecimal.current ? (
+                  <TokenApprove
+                    props={[
+                      "allowance",
+                      tokenAAddress.current,
+                      parseUnits(amountA, Number(tokenADecimal?.current)),
+                      [address, ROUTER_AQUADEX],
+                      tokenADecimal.current,
+                    ]}
+                  ></TokenApprove>
                 ) : (
                   <div></div>
                 )}
@@ -628,24 +625,33 @@ const SwapAmm = () => {
                   <div></div>
                 )}
               </p>
+              <p className={styles.amount_balance}>
+                Approved{" "}
+                {address &&
+                amountB &&
+                tokenBAddress.current &&
+                tokenBDecimal.current ? (
+                  <TokenApprove
+                    props={[
+                      "allowance",
+                      tokenBAddress.current,
+                      parseUnits(amountB, Number(tokenBDecimal?.current)),
+                      [address, ROUTER_AQUADEX],
+                      tokenBDecimal.current,
+                    ]}
+                  ></TokenApprove>
+                ) : (
+                  <div></div>
+                )}
+              </p>
             </div>
             <div className={styles.button_container}>
-              {tokenAllowance &&
-                BigInt(tokenAllowance) >= parseUnits(amountA, tokenADecimal.current) ? (
-                <button
-                  className={styles.button_field}
-                  onClick={handleProvideLiquidity}
-                >
-                  Add Liquidity
-                </button>
-              ) : (
-                <button
-                  className={styles.button_field}
-                  onClick={handleLiquidityApprove}
-                >
-                  Approve
-                </button>
-              )}
+              <button
+                className={styles.button_field}
+                onClick={handleProvideLiquidity}
+              >
+                Add Liquidity
+              </button>
             </div>
           </div>
         ) : (

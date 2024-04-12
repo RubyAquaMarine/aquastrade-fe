@@ -1,4 +1,6 @@
 "use client";
+// testing for fun
+// todo not using
 
 import React, { useEffect, useState, useCallback } from "react";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
@@ -8,50 +10,65 @@ import { ERC20_ABI } from "@/app/Abi/erc20";
 
 import styles from "@/app/Styles/Links.module.css";
 
-export interface ReadProps {
+interface Props {
   name?: string;
+  _address: `0x${string}`;
   approve?: bigint;
   args: [any];
 }
 
-function Erc20Approve({ name, approve, args }: ReadProps) {
+const Erc20Approve = (params: Props) => {
   const { address, isConnected, chain } = useAccount();
   const { writeContract } = useWriteContract();
 
   const [approveAmount, setApproveAmount] = useState(BigInt(1));
 
+  console.error(
+    "APPROVE ",
+    params.props[0],
+    params?.args,
+    params?._address,
+    params?.name,
+    params?.approve,
+  );
+
   const smartConrtactValue = useReadContract({
     abi: ERC20_ABI,
-    address: EUROPA_ETH,
-    functionName: name as undefined,
-    args: args[0],
+    address: params?._address,
+    functionName: params?.name as undefined,
+    args: params?.args,
   });
 
   console.error("SC ETH Allowance", smartConrtactValue?.data);
 
   const isApproved = useCallback(() => {
     let value;
-    console.error("isApproved : ", approve, " || ", smartConrtactValue?.data);
+    console.error(
+      "isApproved : ",
+      params?.approve,
+      " || ",
+      smartConrtactValue?.data,
+    );
     if (
       typeof smartConrtactValue?.data === "bigint" &&
-      typeof approve === "bigint"
+      typeof params?.approve === "bigint"
     ) {
-      if (BigInt(approve) > BigInt(smartConrtactValue?.data)) {
-        value = BigInt(approve) - BigInt(smartConrtactValue?.data);
+      if (BigInt(params?.approve) > BigInt(smartConrtactValue?.data)) {
+        value = BigInt(params?.approve) - BigInt(smartConrtactValue?.data);
         setApproveAmount(value);
       }
     }
     console.error("Approve amount : ", value);
-  }, [approve, smartConrtactValue]);
+  }, [params?.approve, smartConrtactValue]);
 
   const ApproveAmount = useCallback(() => {
     console.error("Ready to write to contract ", approveAmount);
 
     writeContract({
       abi: ERC20_ABI,
-      address: EUROPA_ETH,
+      address: params?._address,
       functionName: "approve",
-      args: [MARKETPLACE_AQUADEX, approveAmount],
+      args: [params?.args as unknown as `0x${string}`, approveAmount],
     });
   }, [approveAmount, writeContract]);
 
@@ -74,6 +91,6 @@ function Erc20Approve({ name, approve, args }: ReadProps) {
       )}
     </div>
   );
-}
+};
 
 export default Erc20Approve;

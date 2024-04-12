@@ -153,3 +153,29 @@
   margin-right: 2px;
   padding: 0.2rem;
 }
+
+.token_approve_amount {
+  font-size: 15.5px;
+  color: #bdb8b8;
+  display: flex;
+}
+
+.token_approve {
+  font-size: 15.5px;
+  display: contents;
+  color: #fff;
+  cursor: pointer;
+}
+
+.token_approve_container {
+  display: flex;
+  justify-content: center;
+  max-width: 620px;
+  border-radius: 12px;
+  background-color: #181a1d;
+  margin-bottom: 10px;
+}
+
+.token_approve:hover {
+  background-color: #0056b3;
+}
