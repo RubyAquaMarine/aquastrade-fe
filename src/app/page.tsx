@@ -29,13 +29,13 @@ interface CandlestickData {
 }
 
 export default function Home({ children }: any) {
-  const { address, chain } = useAccount();
   const [dataTV, setDataToTV] = useState<Array<CandlestickData>>([]);
   const [dataTVVolume, setDataToTVVolume] = useState<Array<CandlestickData>>(
     [],
   );
-  const { chains, switchChain } = useSwitchChain();
   const [isClient, setIsClient] = useState(false);
+
+  console.log(" Type of the ", typeof dataTV, dataTV);
 
   const getDataCallBack = async (
     setDataToTV: Function,
@@ -61,13 +61,17 @@ export default function Home({ children }: any) {
         <div> </div>
       ) : (
         <div className={styles.tradingView}>
-          <ChartComponent colors={{}} data={[dataTV, dataTVVolume]}>
-            <div
-              className="w-screen h-screen flex z-40 justify-start items-center pl-10 pb-44 absolute top-10 left-0 
-                        xl:pl-40"
-            >
+          {dataTV &&
+          dataTV?.length !== 0 &&
+          dataTVVolume &&
+          dataTVVolume?.length !== 0 ? (
+            <ChartComponent colors={{}} data={[dataTV, dataTVVolume]}>
               <div
-                className="
+                className="w-screen h-screen flex z-40 justify-start items-center pl-10 pb-44 absolute top-10 left-0 
+                        xl:pl-40"
+              >
+                <div
+                  className="
            bg-opacity-0
            rounded-2xl 
            min-h-fit
@@ -78,19 +82,20 @@ export default function Home({ children }: any) {
            w-min
             h-max
            justify-between"
-              >
-                <p className="mt-0 font-medium w-72 sm:w-max ">
-                  Connect Wallet to Start Trading
-                </p>
-                <p className={styles.tradingViewPara}>
-                  It&apos;s completely zero gas fees
-                </p>
-                <p className={styles.tradingViewText}>
-                  <ConnectWallet></ConnectWallet>
-                </p>
+                >
+                  <span className="mt-0 font-medium w-72 sm:w-max ">
+                    Connect Wallet to Start Trading
+                  </span>
+                  <p className={styles.tradingViewPara}>Reimagine 0 gas fees</p>
+                  <span className={styles.tradingViewText}>
+                    <ConnectWallet></ConnectWallet>
+                  </span>
+                </div>
               </div>
-            </div>
-          </ChartComponent>
+            </ChartComponent>
+          ) : (
+            <div>check blockers</div>
+          )}
         </div>
       )}
     </main>
