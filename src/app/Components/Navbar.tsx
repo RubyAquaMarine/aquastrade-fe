@@ -50,7 +50,7 @@ const Navbar = () => {
             <Dropdown openOnHover={true} buttonVariant="tertiary">
               <Dropdown.Item>
                 <Link
-                  href="https://aquastrade-ecosystem.vercel.app/"
+                  href="https://aquas.trade/"
                   target="_blank"
                 >
                   <Image
@@ -58,13 +58,14 @@ const Navbar = () => {
                     alt="AquasTrade Logo"
                     width={28}
                     height={28}
-                  />{" "}
-                  1.0
+                  />
                 </Link>
+
 
                 <Dropdown.Submenu>
                   <Dropdown.Item>
-                    AMM
+                    {" "}
+                    <Link href="/swap/amm">AMM</Link>
                     <Dropdown.Submenu>
                       <Dropdown.Item>
                         {" "}
@@ -97,6 +98,13 @@ const Navbar = () => {
                   </Dropdown.Item>
                 </Dropdown.Submenu>
               </Dropdown.Item>
+              <Dropdown.Item> <Link href="https://defillama.com/protocol/aquas-trade#information" target="_blank" >DefiLlama</Link></Dropdown.Item>
+              <Dropdown.Item> <Link href="https://discord.gg/TPVpcUgt3k" target="_blank" >Discord</Link></Dropdown.Item>
+              <Dropdown.Item> <Link href="https://github.com/rubyaquamarine" target="_blank" >Github</Link></Dropdown.Item>
+              <Dropdown.Item> <Link href="https://chainlist.org/?search=skale+europa" target="_blank" >Chain RPC</Link></Dropdown.Item>
+              <Dropdown.Item> <Link href="https://twitter.com/Aquastrade" target="_blank" >Twitter</Link></Dropdown.Item>
+
+              
             </Dropdown>
           </div>
         </div>
