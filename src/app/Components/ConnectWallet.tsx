@@ -28,18 +28,23 @@ const ConnectWallet = () => {
     <main>
       <div className={styles.connectButtons}>
         {isConnected ? (
-          <div>
-            Gas Balance: {!isError && data?.formatted}{" "}
-            {!isError && data?.symbol}{" "}
+          <div className={styles.p_styled_button}>
+            <p>
+              {!isError && data?.symbol} : {!isError && data?.formatted}
+            </p>
           </div>
         ) : (
-          <div>{message}</div>
+          <div>
+            {status !== "idle" && (
+              <div className={styles.p_styled_button_small}>{message}</div>
+            )}
+          </div>
         )}
 
         {isConnected ? (
-          <div>
+          <div className={styles.tradingViewText}>
             <button
-              className={button_styles.toggleButton}
+              className={styles.p_styled_button_small}
               onClick={() => disconnect()}
             >
               logout
@@ -53,7 +58,7 @@ const ConnectWallet = () => {
                 <ul>
                   <li className={styles.connectorButton}>
                     <button
-                      className={styles.toggleButton}
+                      className={styles.p_styled_button_small}
                       onClick={() => {
                         connect({ connector });
                       }}
