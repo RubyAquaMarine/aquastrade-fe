@@ -80,7 +80,7 @@ const TokenApprove = (params: Props) => {
               ) &&
             typeof token_balance === "bigint" ? (
               <button className={styles.token_approve_amount}>
-                {formatUnits(token_balance, params.props[4])}
+                {formatUnits(token_balance, Number(params.props[4]))}
               </button>
             ) : (
               <button className={styles.token_approve} onClick={handleApprove}>

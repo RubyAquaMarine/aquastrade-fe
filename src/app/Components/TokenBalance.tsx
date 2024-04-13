@@ -10,7 +10,7 @@ import styles from "@/app/Styles/AMM.module.css";
 
 interface Props {
   tokenAddress: string;
-  decimals: bigint;
+  decimals: number;
 }
 
 const TokenBalance = (params: Props) => {
@@ -29,7 +29,7 @@ const TokenBalance = (params: Props) => {
               {!token_balance
                 ? "0.0"
                 : typeof token_balance === "bigint" &&
-                  formatUnits(token_balance, params.props[1])}
+                  formatUnits(token_balance, Number(params.props[1]))}
             </p>
           </div>
         ) : (
