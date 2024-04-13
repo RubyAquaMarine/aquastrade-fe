@@ -39,3 +39,7 @@ Quarterly airdrops
 - No IDO :
 - Community Owned with no VC presale :
 - Quarterly token burns from earned protocol fees (DEX, PERPS, LENDING)
+
+### Treasury
+
+- https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x4f01C97785a62Cd0f4a33993B090DADe0F44e4F4

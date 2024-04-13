@@ -3,15 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useEffect } from "react";
+import { parseEther, parseUnits, formatUnits } from "viem";
 
-import { useMarketPlace, useERC20Token } from "@/app/Hooks/useMarketPlace";
-import { parseEther, parseUnits } from "viem";
 import {
   useAccount,
   useWriteContract,
   useWaitForTransactionReceipt,
 } from "wagmi";
 
+import { useMarketPlace } from "@/app/Hooks/useMarketPlace";
+import { useERC20Token } from "@/app/Hooks/useAMM";
 import styles_button from "@/app/Styles/Toggle.module.css";
 import styles from "@/app/Styles/Links.module.css";
 
@@ -24,6 +25,7 @@ import {
   MARKETPLACE_SILVER_NFT,
   MARKETPLACE_GOLD_NFT,
   CHAIN,
+  tokenAddresses,
 } from "@/app/Utils/config";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
@@ -36,8 +38,18 @@ const Home = () => {
   });
 
   const { address, isConnected, chain } = useAccount();
+
   const array: any[any] = [address, MARKETPLACE_AQUADEX];
-  const { data: tokenAllowance } = useERC20Token("allowance", array);
+  const { data: tokenAllowance } = useERC20Token(
+    MARKETPLACE_AQUADEX,
+    "allowance",
+    array,
+  );
+  const { data: token_balance } = useERC20Token(
+    tokenAddresses[5]?.addr,
+    "balanceOf",
+    [address],
+  );
 
   // Save the state and update when useBuy is called
   const gold = useRef(-1);
@@ -222,64 +234,72 @@ const Home = () => {
       </p>
       <br></br>
 
-      {address && chain && chain.id === CHAIN.id ? (
+      {address && isConnected && chain && chain.id === CHAIN.id ? (
         <div className={styles.container}>
-          {inputs.map((value, index) => (
-            <div key={index} className={styles.column}>
-              <div className={styles.imageCenter}>
-                <Link href={urlDescriptions[index]} target="_blank">
-                  <Image
-                    src={`/NFT${index}.png`}
-                    alt="AquasTrade Logo"
-                    width={200}
-                    height={200}
-                    className={styles.imageAlign}
-                    priority
+          <p className={styles.container}>
+            {inputs.map((value, index) => (
+              <div key={index} className={styles.column}>
+                <div className={styles.imageCenter}>
+                  <Link href={urlDescriptions[index]} target="_blank">
+                    <Image
+                      src={`/NFT${index}.png`}
+                      alt="AquasTrade Logo"
+                      width={200}
+                      height={200}
+                      className={styles.imageAlign}
+                      priority
+                    />
+                  </Link>
+
+                  <div>
+                    <ul className={styles.textDesc}>
+                      <li> Collection: {supplyDescriptions[index]}</li>
+                      <li> Fee discount: {feeDescriptions[index]}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    value={getInputValue(index)} // Call a function to get the appropriate value
+                    className={styles.textInputs}
+                    onChange={handleChangeETH}
                   />
-                </Link>
-
-                <div>
-                  <ul className={styles.textDesc}>
-                    <li> Collection: {supplyDescriptions[index]}</li>
-                    <li> Fee discount: {feeDescriptions[index]}</li>
-                  </ul>
                 </div>
+                {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
+                {allowancesTest.current &&
+                BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
+                  <div>
+                    <button
+                      className={styles_button.toggleButton}
+                      onClick={() => handleButtonClick(index)}
+                    >
+                      {buttonLogicTexts[index]}
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <button
+                      className={styles_button.toggleButton}
+                      onClick={() => handleButtonClick(index)}
+                    >
+                      Approve
+                    </button>
+                  </div>
+                )}
               </div>
-
-              <div className="mb-4">
-                <input
-                  type="text"
-                  value={getInputValue(index)} // Call a function to get the appropriate value
-                  className={styles.textInputs}
-                  onChange={handleChangeETH}
-                />
-              </div>
-              {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
-              {allowancesTest.current &&
-              BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
-                <div>
-                  <button
-                    className={styles_button.toggleButton}
-                    onClick={() => handleButtonClick(index)}
-                  >
-                    {buttonLogicTexts[index]}
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <button
-                    className={styles_button.toggleButton}
-                    onClick={() => handleButtonClick(index)}
-                  >
-                    Approve
-                  </button>
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
+          </p>
+          <p className={styles.bottomText}>
+            {!token_balance
+              ? "0.0"
+              : typeof token_balance === "bigint" &&
+                formatUnits(token_balance, 18)}
+            ETH Balance
+          </p>
         </div>
       ) : (
-        <div>
+        <div className={styles.p_styled_button}>
           <ul>
             <li>
               <Link href="/dashboard">

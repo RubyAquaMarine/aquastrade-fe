@@ -26,12 +26,12 @@ const Home = () => {
 
       {!addr ? (
         <div>
-          <div className={styles.p_styled}>
+          <div className={styles.p_styled_button}>
             <ul>
               <li>
                 <Link href="/">
                   {" "}
-                  <b>Back </b>(use web3 login to unlock features)
+                  <b>Back</b> (use web3 login to unlock features)
                 </Link>
               </li>
             </ul>

@@ -47,64 +47,70 @@ const Navbar = () => {
           </div>
 
           <div className={styles.versionMenu}>
-            <Dropdown openOnHover={true} buttonVariant="tertiary">
-              <Dropdown.Item>
-                <Link
-                  href="https://aquas.trade/"
-                  target="_blank"
-                >
-                  <Image
-                    src="/AQUA1.png"
-                    alt="AquasTrade Logo"
-                    width={28}
-                    height={28}
-                  />
-                </Link>
+            <Dropdown openOnHover={false} buttonVariant="tertiary">
+              <Dropdown.Item className={styles.popup_item_top}>
+                <Link href="/swap/amm">AMM</Link>
+              </Dropdown.Item>
 
+              <Dropdown.Item className={styles.popup_item}>
+                <Link href="/dashboard/metaport">Bridge</Link>
+              </Dropdown.Item>
 
-                <Dropdown.Submenu>
-                  <Dropdown.Item>
-                    {" "}
-                    <Link href="/swap/amm">AMM</Link>
-                    <Dropdown.Submenu>
-                      <Dropdown.Item>
-                        {" "}
-                        <Link href="/swap/amm">Swap</Link>
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <Link href="/swap/amm">Liquidity</Link>
-                      </Dropdown.Item>
-                    </Dropdown.Submenu>
+              <Dropdown.Item className={styles.popup_item}>
+                <Link href="/dashboard/coinflip">Coin Flip</Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
+                <Link href="/dashboard/marketplace">NFT Market Place</Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
+                <Link href="/perp">Perps</Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
+                <Link href={`/user/`}>Token List</Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item_bottom}>
+                Socials!
+                <Dropdown.Submenu className={styles.popup_submenu}>
+                  <Dropdown.Item className={styles.popup_item}>
+                    <Link
+                      href="https://chainlist.org/?search=skale+europa"
+                      target="_blank"
+                    >
+                      Chain RPC
+                    </Link>
                   </Dropdown.Item>
-
-                  <Dropdown.Item>
-                    <Link href="/dashboard/metaport">Bridge</Link>
+                  <Dropdown.Item className={styles.popup_item}>
+                    <Link
+                      href="https://defillama.com/protocol/aquas-trade#information"
+                      target="_blank"
+                    >
+                      DefiLlama
+                    </Link>
                   </Dropdown.Item>
-
-                  <Dropdown.Item>
-                    <Link href="/dashboard/coinflip">Coin Flip</Link>
+                  <Dropdown.Item className={styles.popup_item}>
+                    <Link href="https://discord.gg/TPVpcUgt3k" target="_blank">
+                      Discord
+                    </Link>
                   </Dropdown.Item>
-
-                  <Dropdown.Item>
-                    <Link href="/dashboard/marketplace">NFT Market Place</Link>
+                  <Dropdown.Item className={styles.popup_item}>
+                    <Link
+                      href="https://github.com/rubyaquamarine"
+                      target="_blank"
+                    >
+                      Github
+                    </Link>
                   </Dropdown.Item>
-
-                  <Dropdown.Item>
-                    <Link href="/perp">Perps</Link>
-                  </Dropdown.Item>
-
-                  <Dropdown.Item>
-                    <Link href={`/user/`}>Token List</Link>
+                  <Dropdown.Item className={styles.popup_item_bottom}>
+                    <Link href="https://twitter.com/Aquastrade" target="_blank">
+                      Twitter
+                    </Link>
                   </Dropdown.Item>
                 </Dropdown.Submenu>
               </Dropdown.Item>
-              <Dropdown.Item> <Link href="https://defillama.com/protocol/aquas-trade#information" target="_blank" >DefiLlama</Link></Dropdown.Item>
-              <Dropdown.Item> <Link href="https://discord.gg/TPVpcUgt3k" target="_blank" >Discord</Link></Dropdown.Item>
-              <Dropdown.Item> <Link href="https://github.com/rubyaquamarine" target="_blank" >Github</Link></Dropdown.Item>
-              <Dropdown.Item> <Link href="https://chainlist.org/?search=skale+europa" target="_blank" >Chain RPC</Link></Dropdown.Item>
-              <Dropdown.Item> <Link href="https://twitter.com/Aquastrade" target="_blank" >Twitter</Link></Dropdown.Item>
-
-              
             </Dropdown>
           </div>
         </div>
