@@ -1,12 +1,16 @@
-# how to add your token to Aquas.Trade
+# How to add your erc20 token
 
-Step 1
+- deploy token on ETH (Bridge to SKALE) or deploy on SKALE
+
+## Step 1
 
 - `aquastrade-fe/src/app/Utils/config.ts`
 
-* at `line 3 and 5` , add your Symbol and Address
+- find `tokenSymbols` and `tokenAddresses` then add your Symbol and Symbol, Address, Decimal, Logo info
 
-Step 2
+- add Logo.svg or .png to `aquastrade-fe/public`
+
+## Step 2
 
 http://localhost:3000/swap/amm
 

@@ -11,6 +11,6 @@ background-color: #242629;
 border color
 border-top: 1px solid #475384;
 
-## IDEAS 
+## IDEAS
 
-- token list : load tokens for all Skale chains and show all within one page. 
+- token list : load tokens for all Skale chains and show all within one page.
