@@ -326,6 +326,20 @@
   display: block;
   padding: 0.3rem 0.3rem;
 }
+.midText_sm {
+  box-sizing: border-box;
+  margin: 0.67em 0;
+  color: var(--white);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-family: Gellix, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 110%;
+  display: block;
+  padding: 0.3rem 0.3rem;
+}
 
 .bottomText {
   -webkit-text-size-adjust: 100%;

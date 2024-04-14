@@ -1,15 +1,8 @@
-- navigation menu : css : button styling
-- token balance on NFT page
-- amm
-  -- colors
-  container is darker
-  background-color: #181a1d;
+- metaport token mapping : EXD bridges from Europa to Exorde_chain?
+- coinflip :SKL : 0x10E0fB120c8264fF32b5400D89ADd77aee11FF88 : add new coinflips easily. 
+- - only fetch data from the module that is being clicked on. 
 
-input container is lighter
-background-color: #242629;
-
-border color
-border-top: 1px solid #475384;
+- findTokenAddressFromSymbol findAddressFromSymbol
 
 ## IDEAS
 

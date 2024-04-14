@@ -2,11 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Metaport } from "skale_metaport";
 import "skale_metaport/dist/style.css";
-import {
-  RubyConfig,
-  SmsConfig,
-  stagingConfig,
-} from "../Utils/metaportNetworkConfigV2";
+import { RubyConfig } from "../Utils/metaportNetworkConfigV2";
 
 const MetaportWidgetV2 = () => {
   return (
