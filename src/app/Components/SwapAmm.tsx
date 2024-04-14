@@ -378,7 +378,11 @@ const SwapAmm = () => {
                 Balance: --{" "}
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenAAddress.current, tokenADecimal.current]}
+                    props={[
+                      tokenAAddress.current,
+                      tokenADecimal.current,
+                      address,
+                    ]}
                   ></TokenBalance>
                 ) : (
                   <div></div>
@@ -482,7 +486,11 @@ const SwapAmm = () => {
                 Balance: --{" "}
                 {tokenBAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenBAddress.current, tokenBDecimal.current]}
+                    props={[
+                      tokenBAddress.current,
+                      tokenBDecimal.current,
+                      address,
+                    ]}
                   ></TokenBalance>
                 ) : (
                   <div></div>
@@ -561,7 +569,11 @@ const SwapAmm = () => {
                 Balance: --{" "}
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenAAddress.current, tokenADecimal.current]}
+                    props={[
+                      tokenAAddress.current,
+                      tokenADecimal.current,
+                      address,
+                    ]}
                   ></TokenBalance>
                 ) : (
                   <div></div>
@@ -649,7 +661,11 @@ const SwapAmm = () => {
                 Balance: --{" "}
                 {tokenBAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenBAddress.current, tokenBDecimal.current]}
+                    props={[
+                      tokenBAddress.current,
+                      tokenBDecimal.current,
+                      address,
+                    ]}
                   ></TokenBalance>
                 ) : (
                   <div></div>
@@ -753,7 +769,11 @@ const SwapAmm = () => {
                 Balance: --{" "}
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenAAddress.current, tokenADecimal.current]}
+                    props={[
+                      tokenAAddress.current,
+                      tokenADecimal.current,
+                      address,
+                    ]}
                   ></TokenBalance>
                 ) : (
                   <div></div>
@@ -841,7 +861,11 @@ const SwapAmm = () => {
                 Balance: --{" "}
                 {tokenBAddress.current !== "" ? (
                   <TokenBalance
-                    props={[tokenBAddress.current, tokenBDecimal.current]}
+                    props={[
+                      tokenBAddress.current,
+                      tokenBDecimal.current,
+                      address,
+                    ]}
                   ></TokenBalance>
                 ) : (
                   <div></div>

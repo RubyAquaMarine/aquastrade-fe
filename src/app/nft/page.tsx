@@ -112,12 +112,6 @@ const Home = () => {
     if (typeof tokenAllowance === "bigint") {
       allowancesTest.current = tokenAllowance;
     }
-
-    console.error(
-      " allowancesTest.current '",
-      allowancesTest.current,
-      typeof allowancesTest.current,
-    );
   }, [MarketPlace, tokenAllowance]);
 
   function getInputValue(index: number) {

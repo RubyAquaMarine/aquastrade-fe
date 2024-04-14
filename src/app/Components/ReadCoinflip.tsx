@@ -13,7 +13,7 @@ import {
 } from "@/app/Utils/config";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
-import { coinflipABI } from "@/app/Abi/europaCoinflip";
+import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
 import styles from "@/app/Styles/Links.module.css";
 
 export interface ReadProps {
@@ -25,7 +25,7 @@ function CoinFlip({ name }: ReadProps) {
   const { address, isConnected, chain } = useAccount();
 
   const smartConrtactValue = useReadContract({
-    abi: coinflipABI,
+    abi: COIN_FLIP_ABI,
     address: COIN_FLIP_AQUA,
     functionName: name as undefined,
     args: [address as `0x${string}`],
