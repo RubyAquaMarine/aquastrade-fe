@@ -61,7 +61,7 @@ export const tokenAddresses = [
   },
   {
     symbol: "AQUA",
-    addr: "0xE34A1fEF365876D4D0b55D281618768583ba4867",
+    addr: "0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C",
     decimal: 18,
     logo: "/AQUA1.png",
   },

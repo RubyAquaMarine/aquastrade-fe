@@ -1,5 +1,8 @@
 # AQUA token
 
+* address : 0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C
+* explorer : [0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C](https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C/read-contract#address-tabs) 
+
 No VC's, no IDOs, and no unlock schedules. Only AQUA airdrops and an AQUA dev fund.
 
 - - airdrop $AQUA to all nft holders : bullish for nft holders

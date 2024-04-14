@@ -1,3 +1,33 @@
+.amount_inputs {
+  display: flex;
+  margin-right: 2px;
+  padding: 0.2rem;
+}
+
+.text_bold {
+  font-weight: bold;
+}
+
+.text_space {
+  padding-right: 1px;
+}
+
+.text_space_right {
+  padding-right: 50px;
+}
+
+.text_space_left {
+  padding-left: 70px;
+}
+
+.text_space_left_xl {
+  padding-left: 215px;
+}
+
+.space_left_xl {
+  padding-left: 210px;
+}
+
 .imageInvert {
   -webkit-filter: invert(100%);
   filter: invert(100%);
@@ -84,21 +114,32 @@
 .container {
   max-width: 620px;
   border-radius: 12px;
+  border: 1px solid #475384;
   background-color: #181a1d;
-  margin-bottom: 10px;
 }
 
 .container_data {
   border-top: 1px solid #475384;
+  padding: 0.4rem 0.6rem;
 }
 
 .input_container {
   padding: 0.4rem 0.6rem;
   border-radius: 12px;
-  background-color: #242629;
+  min-width: 300px;
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: #242629;
+}
+
+.input_container_solo {
+  padding: 0.4rem 0.6rem;
+  border-radius: 12px;
+  background-color: #242629;
+  margin-right: 10px;
+  margin-left: 10px;
   margin-top: 10px;
 }
 
@@ -160,12 +201,6 @@
   color: #bdb8b8;
   display: flex;
   justify-content: center;
-}
-
-.amount_inputs {
-  display: flex;
-  margin-right: 2px;
-  padding: 0.2rem;
 }
 
 .token_approve_amount {

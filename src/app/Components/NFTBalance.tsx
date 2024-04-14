@@ -39,39 +39,41 @@ const NFTBalance = () => {
 
   return (
     <main>
-      <div className={styles.container}>
-        {address ? (
-          <div>
-            <div className={styles.input_container}>
-              <p>Gold NFT Holder</p>
-              <p className={styles.amount_balance}>
-                {!nft_gold_balance
-                  ? "0.0"
-                  : typeof nft_gold_balance === "bigint" &&
-                    formatUnits(nft_gold_balance, 0)}
-              </p>
+      <div className={styles.input_container}>
+        <div className={styles.container_data}>
+          {address ? (
+            <div>
+              <div className={styles.input_container_solo}>
+                <p>Gold NFT Holder</p>
+                <p className={styles.amount_balance}>
+                  {!nft_gold_balance
+                    ? "0.0"
+                    : typeof nft_gold_balance === "bigint" &&
+                      formatUnits(nft_gold_balance, 0)}
+                </p>
 
-              <p>Silver NFT Holder</p>
+                <p>Silver NFT Holder</p>
 
-              <p className={styles.amount_balance}>
-                {!nft_silver_balance
-                  ? "0.0"
-                  : typeof nft_silver_balance === "bigint" &&
-                    formatUnits(nft_silver_balance, 0)}
-              </p>
+                <p className={styles.amount_balance}>
+                  {!nft_silver_balance
+                    ? "0.0"
+                    : typeof nft_silver_balance === "bigint" &&
+                      formatUnits(nft_silver_balance, 0)}
+                </p>
 
-              <p>Bronze NFT Holder</p>
-              <p className={styles.amount_balance}>
-                {!nft_bronze_balance
-                  ? "0.0"
-                  : typeof nft_bronze_balance === "bigint" &&
-                    formatUnits(nft_bronze_balance, 0)}
-              </p>
+                <p>Bronze NFT Holder</p>
+                <p className={styles.amount_balance}>
+                  {!nft_bronze_balance
+                    ? "0.0"
+                    : typeof nft_bronze_balance === "bigint" &&
+                      formatUnits(nft_bronze_balance, 0)}
+                </p>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div></div>
-        )}
+          ) : (
+            <div></div>
+          )}
+        </div>
       </div>
     </main>
   );
