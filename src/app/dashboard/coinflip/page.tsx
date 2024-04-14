@@ -32,7 +32,6 @@ const Home = () => {
                   props={[contractAddresses[4].addr, "AQUA"]}
                 ></CoinFlip>
               )}
-             
             </div>
           )}
         </div>

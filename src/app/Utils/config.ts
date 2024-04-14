@@ -40,12 +40,12 @@ export const contractAddresses = [
   {
     id: 4,
     name: "coinflip-aqua",
-    addr: "0xAC7eb74a1e238215076CBBD2E7040aB880017676",
+    addr: "0xe137EDEDded60817e86085C0FacF950d4b5B73E7",
   },
   {
     id: 5,
     name: "coinflip-skl",
-    addr: "0x10E0fB120c8264fF32b5400D89ADd77aee11FF88",
+    addr: "0xD83BF4A2F43FE6ABeFa679791dc2eFcA98eB3060",
   },
 ] as const;
 

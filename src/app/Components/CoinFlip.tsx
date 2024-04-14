@@ -5,6 +5,8 @@
 import { useEffect, useState, useRef } from "react";
 import { parseEther, formatUnits } from "viem";
 import { useAccount, useSwitchChain, useWriteContract } from "wagmi";
+import TokenApprove from "@/app/Components/TokenApprove";
+import TokenBalance from "@/app/Components/TokenBalance";
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
 import { CHAIN, tokenAddresses } from "@/app/Utils/config";
 import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
@@ -26,13 +28,8 @@ const CoinFlip = (params: Props) => {
   const { chains, switchChain } = useSwitchChain();
   const { writeContract } = useWriteContract();
 
-  console.error("CoinFLIP address ", params?.props?.[0]);
-
-  const array: any[any] = [address, params?.props?.[0]];
-
   // Use the Symbol to find the Token Address || or use PayToken (RPC)
   const token_address_erc20 = findTokenAddressFromSymbol(params?.props?.[1]);
-  console.error("CoinFLIP token_address_erc20 ", token_address_erc20);
 
   // todo Promiseall
   const {
@@ -40,10 +37,12 @@ const CoinFlip = (params: Props) => {
     isLoading,
     isError,
   } = useCoinflip(params?.props?.[0], "totalLoss", [address]);
-
   const { data: win } = useCoinflip(params?.props?.[0], "totalWins", [address]);
   const { data: bal } = useCoinflip(params?.props?.[0], "balances", [address]);
 
+  console.error("READ CONTRACT token balances'", bal);
+
+  const array: any[any] = [address, params?.props?.[0]];
   const { data: tokenAllowance } = useERC20Token(
     token_address_erc20,
     "allowance",
@@ -55,13 +54,7 @@ const CoinFlip = (params: Props) => {
 
   useEffect(() => {
     if (token_address_erc20) {
-      console.error("READ CONTRACT token allowance '", tokenAllowance);
       allowancesTest.current = tokenAllowance;
-      console.error(
-        " allowancesTest.current '",
-        allowancesTest.current,
-        typeof allowancesTest.current,
-      );
     }
   }, [tokenAllowance, token_address_erc20]);
 
@@ -73,6 +66,7 @@ const CoinFlip = (params: Props) => {
 
   const handleButtonClick = (index: number) => {
     console.log(" this is the button to Flip Aqua", index);
+
     switch (index) {
       case 0:
         writeContract({
@@ -82,16 +76,11 @@ const CoinFlip = (params: Props) => {
           args: [parseEther(inputs[0], "wei")],
         });
         break;
-      case 1:
-        writeContract({
-          abi: ERC20_ABI,
-          address: token_address_erc20,
-          functionName: "approve",
-          args: [params?.props?.[0], parseEther(inputs[0])],
-        });
-        break;
-      // Add more cases as needed
     }
+
+    setNotification(`"Flipped Coin for " ${inputs[0]}`);
+
+    console.log("Notify: ", notification);
   };
 
   const handleButtonClickWithdraw = (index: number) => {
@@ -172,13 +161,16 @@ const CoinFlip = (params: Props) => {
                     </div>
                   ) : (
                     <div>
-                      {" "}
-                      <button
-                        className={styles_button.toggleButton}
-                        onClick={() => handleButtonClick(1)}
-                      >
-                        Approve
-                      </button>
+                      <span> Approved: </span>
+                      <TokenApprove
+                        props={[
+                          "allowance",
+                          token_address_erc20,
+                          parseEther(inputs[0]),
+                          [address, params?.props?.[0]],
+                          18,
+                        ]}
+                      ></TokenApprove>
                     </div>
                   )}
                 </div>
@@ -223,6 +215,12 @@ const CoinFlip = (params: Props) => {
                     <p className={styles_button.toggleButton}> No rewards</p>
                   )}
                 </div>
+                <br></br>
+
+                <span>Prize Pool: </span>
+                <TokenBalance
+                  props={[token_address_erc20, 18, params?.props?.[0]]}
+                ></TokenBalance>
               </div>
 
               <div className="p-4">

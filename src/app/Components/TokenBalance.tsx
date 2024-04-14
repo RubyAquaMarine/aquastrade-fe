@@ -11,6 +11,7 @@ import styles from "@/app/Styles/AMM.module.css";
 interface Props {
   tokenAddress: string;
   decimals: number;
+  checkAddress: string;
 }
 
 const TokenBalance = (params: Props) => {
@@ -18,7 +19,7 @@ const TokenBalance = (params: Props) => {
   const { data: token_balance } = useERC20Token(
     params.props?.[0],
     "balanceOf",
-    [address],
+    [params.props?.[2]],
   );
 
   return (
