@@ -19,7 +19,7 @@ const Home = () => {
               <p>Please select ChainID: 2046399126</p>
               <button
                 onClick={(event) => handleToEuropa(event, 2046399126)}
-                className={styles_button.toggleButton}
+                className={styles.toggleButton}
               >
                 Switch Network
               </button>
