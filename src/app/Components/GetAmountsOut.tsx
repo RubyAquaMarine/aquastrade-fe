@@ -30,7 +30,7 @@ const GetAmountsOut = (params: Props) => {
   ]);
 
   return (
-    <div className={styles.container}>
+    <div>
       {!swap_out ? (
         <input
           className={styles.input_amount}

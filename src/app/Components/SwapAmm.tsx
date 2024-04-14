@@ -289,13 +289,19 @@ const SwapAmm = () => {
             className={styles.nav}
             onClick={() => handleAMMFeatures("swap")}
           >
-            Swap
+            Trade
           </button>
           <button
             className={styles.nav}
             onClick={() => handleAMMFeatures("add")}
           >
-            Add
+            Cast
+          </button>
+          <button
+            className={styles.nav}
+            onClick={() => handleAMMFeatures("remove")}
+          >
+            Ship
           </button>
           <button
             className={styles.nav}
@@ -303,17 +309,22 @@ const SwapAmm = () => {
           >
             NFT
           </button>
-          <button className={styles.nav_right}>
-            <Image
-              src="/gear.svg"
-              alt="menu"
-              width={22}
-              height={22}
-              priority
-              className={styles.imageInvert}
-              onClick={handleFlipTokens}
-            />
-          </button>
+
+          {ammFeature !== "nft" ? (
+            <button className={styles.nav_right}>
+              <Image
+                src="/gear.svg"
+                alt="menu"
+                width={22}
+                height={22}
+                priority
+                className={styles.imageInvert}
+                onClick={handleFlipTokens}
+              />
+            </button>
+          ) : (
+            <div></div>
+          )}
         </div>
 
         {ammFeature === "swap" ? (
@@ -425,9 +436,9 @@ const SwapAmm = () => {
                     ]}
                   ></GetAmountsOut>
                 ) : (
-                  <div className={styles.container}>
+                  <div className={styles.input_container}>
                     <input
-                      className={styles.input_amount}
+                      className={styles.amount_inputs}
                       type="text"
                       placeholder="Get Amounts Out"
                       value={"0.0"}
@@ -435,7 +446,6 @@ const SwapAmm = () => {
                   </div>
                 )}
 
-                {/**  */}
                 <input
                   className={styles.input_token_space}
                   type="text"
@@ -468,7 +478,6 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
-
               <p className={styles.amount_balance}>
                 Balance: --{" "}
                 {tokenBAddress.current !== "" ? (
@@ -485,6 +494,13 @@ const SwapAmm = () => {
               <button className={styles.button_field} onClick={handleSwap}>
                 Swap
               </button>
+            </div>
+            <div className={styles.input_container}>
+              <div className={styles.container_data}>
+                <p> Fee: %</p>
+                <span> Exchange Rate: </span>{" "}
+                <span className={styles.text_space_left}> Slippage: </span>
+              </div>
             </div>
           </div>
         ) : (
@@ -661,8 +677,203 @@ const SwapAmm = () => {
                 className={styles.button_field}
                 onClick={handleProvideLiquidity}
               >
-                Add Liquidity
+                Cast Line
               </button>
+            </div>
+            <div className={styles.input_container}>
+              <div className={styles.container_data}>
+                <p> Whale Size: %</p>
+                <span> Exchange Rate: </span>{" "}
+                <span className={styles.text_space_left}> Slippage: </span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div> </div>
+        )}
+
+        {ammFeature === "remove" ? (
+          <div>
+            {" "}
+            <div className={styles.input_container}>
+              <span className={styles.text_bold}>
+                <span className={styles.text_space}> Select Percentage </span>{" "}
+                <span className={styles.text_space_left}> Select Token A </span>
+              </span>
+
+              <div className={styles.amount_inputs}>
+                <input
+                  className={styles.input_amount}
+                  type="text"
+                  placeholder="0.0"
+                  value={amountA}
+                  onChange={(e) => setAmountA(e.target.value)}
+                />
+
+                <input
+                  className={styles.input_token}
+                  type="text"
+                  placeholder="Select Token"
+                  value={tokenA}
+                  onChange={(e) => setTokenA(e.target.value)}
+                  onClick={() => setShowTokenListA(true)}
+                />
+
+                {showTokenListA && (
+                  <div className={styles_pop.popup_container}>
+                    <div className={styles_pop.popup_content}>
+                      {tokenAddresses.map((_token, index) => (
+                        <div
+                          className={styles.token_list_symbol}
+                          key={index}
+                          onClick={() => handleTokenSelectionA(_token.symbol)}
+                        >
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <p className={styles.amount_balance}>
+                Balance: --{" "}
+                {tokenAAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenAAddress.current, tokenADecimal.current]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
+              </p>
+              <p className={styles.amount_balance}>
+                Approved{" "}
+                {address &&
+                amountA &&
+                tokenAAddress.current &&
+                tokenADecimal.current ? (
+                  <TokenApprove
+                    props={[
+                      "allowance",
+                      tokenAAddress.current,
+                      parseUnits(amountA, Number(tokenADecimal?.current)),
+                      [address, ROUTER_AQUADEX],
+                      tokenADecimal.current,
+                    ]}
+                  ></TokenApprove>
+                ) : (
+                  <div></div>
+                )}
+              </p>
+            </div>
+            {!showTokenListA && !showTokenListB ? (
+              <div id="1" className={styles.button_container}>
+                {" "}
+                <Image
+                  src="/flip.svg"
+                  alt="menu"
+                  width={50}
+                  height={50}
+                  priority
+                  className={styles.imageInvertToggle}
+                  onClick={handleFlipTokens}
+                />
+              </div>
+            ) : (
+              <div></div>
+            )}
+            <div className={styles.input_container}>
+              <span className={styles.text_bold}>
+                <span className={styles.text_space_left_xl}>
+                  Select Token B
+                </span>
+              </span>
+              <div className={styles.amount_inputs}>
+                <span className={styles.space_left_xl}>
+                  {" "}
+                  <input
+                    className={styles.input_token}
+                    type="text"
+                    placeholder="Select Token"
+                    value={tokenB}
+                    onChange={(e) => setTokenB(e.target.value)}
+                    onClick={() => setShowTokenListB(true)}
+                  />{" "}
+                </span>
+
+                {showTokenListB && (
+                  <div className={styles_pop.popup_container}>
+                    <div className={styles_pop.popup_content}>
+                      {tokenAddresses.map((_token, index) => (
+                        <div
+                          className={styles.token_list_symbol}
+                          key={index}
+                          onClick={() => handleTokenSelectionB(_token.symbol)}
+                        >
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <p className={styles.amount_balance}>
+                Balance: --{" "}
+                {tokenBAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[tokenBAddress.current, tokenBDecimal.current]}
+                  ></TokenBalance>
+                ) : (
+                  <div></div>
+                )}
+              </p>
+              <p className={styles.amount_balance}>
+                Approved{" "}
+                {address &&
+                amountB &&
+                tokenBAddress.current &&
+                tokenBDecimal.current ? (
+                  <TokenApprove
+                    props={[
+                      "allowance",
+                      tokenBAddress.current,
+                      parseUnits(amountB, Number(tokenBDecimal?.current)),
+                      [address, ROUTER_AQUADEX],
+                      tokenBDecimal.current,
+                    ]}
+                  ></TokenApprove>
+                ) : (
+                  <div></div>
+                )}
+              </p>
+            </div>
+            <div className={styles.button_container}>
+              <button
+                className={styles.button_field}
+                onClick={handleProvideLiquidity}
+              >
+                Set Sail
+              </button>
+            </div>
+            <div className={styles.input_container}>
+              <div className={styles.container_data}>
+                <p> Expected amount in Token A: </p>
+                <p> Expected amount in Token B: </p>
+              </div>
             </div>
           </div>
         ) : (
