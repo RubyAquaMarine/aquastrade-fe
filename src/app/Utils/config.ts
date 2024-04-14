@@ -16,50 +16,76 @@ export const tokenSymbols = [
   "SHISH",
 ];
 
+export const contractAddresses = [
+  {
+    id: 1,
+    name: "router",
+    addr: "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61",
+  },
+  {
+    id: 2,
+    name: "factory",
+    addr: "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61",
+  },
+  {
+    id: 3,
+    name: "marketplace-eth",
+    addr: "0xc44A8E52A835c77932eB8747bD7E979c27308660",
+  },
+] as const;
+
 export const tokenAddresses = [
   {
+    id: 1,
     symbol: "USDC",
     addr: "0x5F795bb52dAC3085f578f4877D450e2929D2F13d",
     decimal: 6,
     logo: "/USDC.svg",
   },
   {
+    id: 2,
     symbol: "USDT",
     addr: "0x1c0491E3396AD6a35f061c62387a95d7218FC515",
     decimal: 6,
     logo: "/USDT.svg",
   },
   {
+    id: 3,
     symbol: "DAI",
     addr: "0xD05C4be5f3be302d376518c9492EC0147Fa5A718",
     decimal: 18,
     logo: "/DAI.svg",
   },
   {
+    id: 4,
     symbol: "USDP",
     addr: "0x73d22d8a2D1f59Bf5Bcf62cA382481a2073FAF58",
     decimal: 18,
     logo: "/USDP.svg",
   },
   {
+    id: 4,
     symbol: "ETH",
     addr: "0xD2Aaa00700000000000000000000000000000000",
     decimal: 18,
     logo: "/ETH.svg",
   },
   {
+    id: 6,
     symbol: "BTC",
     addr: "0xcb011E86DF014a46F4e3AC3F3cbB114A4EB80870",
     decimal: 8,
     logo: "/BTC.svg",
   },
   {
+    id: 7,
     symbol: "SKL",
     addr: "0xE0595a049d02b7674572b0d59cd4880Db60EDC50",
     decimal: 18,
     logo: "/SKL.svg",
   },
   {
+    id: 8,
     symbol: "AQUA",
     addr: "0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C",
     decimal: 18,
@@ -126,10 +152,11 @@ export const MARKETPLACE_BRONZE_NFT =
   "0x87f23b254d59f97e7c4ceC7C14AbC7D6a1a4A0E3";
 
 // coinflip
-export const COIN_FLIP_AQUA = "0x94C9c65c9f828703A716642E316CcE302Cdd1661";
+export const COIN_FLIP_AQUA = "0xAC7eb74a1e238215076CBBD2E7040aB880017676";
 
 // assets
 export const EUROPA_ETH = "0xD2Aaa00700000000000000000000000000000000";
+
 export const EUROPA_AQUA = "0xE34A1fEF365876D4D0b55D281618768583ba4867";
 
 /*** UNCOMMENT THE LINES BELOW TO RUN WITH TEST POOL AND ROUTER DATA ***/

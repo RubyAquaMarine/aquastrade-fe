@@ -28,6 +28,7 @@ import {
   tokenAddresses,
 } from "@/app/Utils/config";
 import { ERC20_ABI } from "@/app/Abi/erc20";
+import { Span } from "next/dist/trace";
 
 const Home = () => {
   const allowancesTest = useRef(BigInt(1));
@@ -294,8 +295,8 @@ const Home = () => {
             {!token_balance
               ? "0.0"
               : typeof token_balance === "bigint" &&
-                formatUnits(token_balance, 18)}
-            ETH Balance
+                formatUnits(token_balance, 18)}{" "}
+            <span> ETH Balance</span>
           </p>
         </div>
       ) : (

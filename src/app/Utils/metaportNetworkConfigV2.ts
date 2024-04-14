@@ -10,7 +10,6 @@ export const RubyConfig: interfaces.MetaportConfig = {
   mainnetEndpoint: "https://eth.llamarpc.com",
   chains: [
     "mainnet",
-    "adorable-quaint-bellatrix",
     "elated-tan-skat",
     "frayed-decent-antares",
     "honorable-steel-rasalhague",
@@ -19,6 +18,7 @@ export const RubyConfig: interfaces.MetaportConfig = {
     "green-giddy-denebola",
     "light-vast-diphda",
     "turbulent-unique-scheat",
+    "adorable-quaint-bellatrix",
   ],
   tokens: {
     eth: {
@@ -96,7 +96,6 @@ export const RubyConfig: interfaces.MetaportConfig = {
       eth: {
         eth: {
           chains: {
-            "adorable-quaint-bellatrix": {},
             "elated-tan-skat": {},
           },
         },
@@ -373,171 +372,5 @@ export const RubyConfig: interfaces.MetaportConfig = {
         },
       },
     },
-  },
-};
-
-/*
-    StreamMyScreen
-
-    Proposal to SMS: 
-    - deploy erc20 clones on adorable-quaint-bellatrix
-    -  "Europa Ether", "eETH" or "ETHe", 18 , map to 0xa5274efA35EbeFF47C1510529D9a8812F95F5735 (wrapped Europa Ether)
-    -- optional:  "Europa USDC", "USDC", 6 , map to 0x1c566a47e1baC535Ca616373146e3BE024F88Aa4 (wrapped Europa USDC)
-
-    This will allow the 412 addresses holding ether on Europa the ability to test out your product
-     and adding any of the 4 stable coins to your platform would be benefical too. I've provided an example for USDC
-*/
-export const SmsConfig = {
-  openOnLoad: true, // Open Metaport on load (optional, default = false)
-  // skaleNetwork: 'mainnet', // SKALE network that will be used - mainnet or staging (optional, defualt = mainnet)
-  // autoLookup: true,
-  debug: false,
-  mainnetEndpoint: "https://eth.llamarpc.com",
-  chains: ["mainnet", "elated-tan-skat", "adorable-quaint-bellatrix"],
-  chainsMetadata: {
-    "elated-tan-skat": {
-      alias: "Europa Hub",
-      minSfuelWei: "1",
-      faucetUrl: "https://ruby.exchange/faucet.html",
-    },
-
-    "adorable-quaint-bellatrix": {
-      alias: "StreamMyScreen",
-      minSfuelWei: "1",
-      faucetUrl: "https://sfuel.dirtroad.dev",
-    },
-  },
-  tokens: {
-    mainnet: {
-      eth: {
-        chains: ["adorable-quaint-bellatrix", "elated-tan-skat"],
-      },
-      erc20: {
-        USDC: {
-          name: "Circle USD",
-          address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-          symbol: "USDC",
-          iconUrl: "https://ruby.exchange/images/tokens/usdc-square.jpg",
-        },
-      },
-    },
-    "elated-tan-skat": {
-      erc20: {
-        wUSDC: {
-          name: "USDC",
-          symbol: "USDC",
-          address: "0x1c566a47e1baC535Ca616373146e3BE024F88Aa4",
-          iconUrl: "https://ruby.exchange/images/tokens/usdc-square.jpg",
-          decimals: "6",
-          wraps: {
-            // token that needs to be wrapped
-            address: "0x5F795bb52dAC3085f578f4877D450e2929D2F13d", // unwrapped token address
-            symbol: "USDC", // unwrapped token symbol
-          },
-        },
-        wETH: {
-          name: "ETH", // UI: token symbol display name (On the left).
-          symbol: "ETH", // UI: token symbol display name for the balance (On the right when on the target chain).
-          address: "0xa5274efA35EbeFF47C1510529D9a8812F95F5735", // wrapper token address
-          iconUrl: "https://ruby.exchange/images/tokens/eth-square.jpg",
-          wraps: {
-            address: "0xD2Aaa00700000000000000000000000000000000", // unwrapped token address
-            symbol: "ETH", // UI: token symbol display name for the balance (On the right).
-          },
-        },
-      },
-    },
-  },
-  theme: {
-    primary: "#192d2b",
-    background: "#03DAC6",
-    mode: "light",
-  },
-};
-
-export const stagingConfig = {
-  showButton: true,
-  openOnLoad: true, // Open Metaport on load (optional, default = false)
-  skaleNetwork: "staging3", // SKALE network that will be used - mainnet or staging (optional, defualt = mainnet)
-  mainnetEndpoint: "https://endpoints.omniatech.io/v1/eth/goerli/public",
-  chains: [
-    "mainnet", // List of SKALE Chains that will be available in the Metaport UI (default = [])
-    "staging-legal-crazy-castor",
-    "staging-utter-unripe-menkar",
-  ],
-  chainsMetadata: {
-    // Chain name aliases that will be displayed in the UI (optional, defualt = {})
-    "staging-legal-crazy-castor": {
-      alias: "Europa SKALE Chain", // optional
-      minSfuelWei: "27000000000000", // optional
-      faucetUrl: "https://sfuel.dirtroad.dev", // optional,
-    },
-    "staging-utter-unripe-menkar": {
-      alias: "Calypso SKALE Chain",
-      minSfuelWei: "27000000000000", // optional
-      faucetUrl: "https://sfuel.dirtroad.dev", // optional
-    },
-  },
-  tokens: {
-    mainnet: {
-      eth: {
-        chains: ["staging-legal-crazy-castor"],
-      },
-      erc20: {
-        _SKL_0x493D4442013717189C9963a2e275Ad33bfAFcE11: {
-          name: "SKL",
-          address: "0x493D4442013717189C9963a2e275Ad33bfAFcE11",
-          symbol: "SKL",
-        },
-      },
-    },
-    "staging-legal-crazy-castor": {
-      erc20: {
-        _ETH_0xa270484784f043e159f74C03B691F80B6F6e3c24: {
-          // wrapper token
-          name: "ETH", // wrapper token display name
-          symbol: "ETH",
-          address: "0xa270484784f043e159f74C03B691F80B6F6e3c24", // wrapper token address
-          iconUrl: "https://ruby.exchange/images/tokens/eth-square.jpg",
-          wraps: {
-            // token that needs to be wrapped
-            iconUrl: "https://ruby.exchange/images/tokens/eth-square.jpg",
-            address: "0xD2Aaa00700000000000000000000000000000000", // unwrapped token address
-            symbol: "ETHC", // unwrapped token symbol
-          },
-        },
-        _SKL_0x6a679eF80aF3fE01A646F858Ca1e26D58b5430B6: {
-          name: "SKL",
-          symbol: "SKL",
-          address: "0x6a679eF80aF3fE01A646F858Ca1e26D58b5430B6",
-          iconUrl: "https://ruby.exchange/images/tokens/skl-square.jpg",
-          wraps: {
-            // token that needs to be wrapped
-            address: "0xbA1E9BA7CDd4815Da6a51586bE56e8643d1bEAb6", // unwrapped token address
-            symbol: "SKL", // unwrapped token symbol
-            iconUrl: "https://ruby.exchange/images/tokens/skl-square.jpg",
-          },
-        },
-        _USDC_0x4f250cCE5b8B39caA96D1144b9A32E1c6a9f97b0: {
-          name: "USDC",
-          symbol: "USDC",
-          decimals: "6",
-          address: "0x4f250cCE5b8B39caA96D1144b9A32E1c6a9f97b0",
-          iconUrl: "https://ruby.exchange/images/tokens/usdc-square.jpg",
-          wraps: {
-            // token that needs to be wrapped
-            address: "0x5d42495D417fcd9ECf42F3EA8a55FcEf44eD9B33", // unwrapped token address
-            symbol: "USDC", // unwrapped token symbol
-            iconUrl: "https://ruby.exchange/images/tokens/usdc-square.jpg",
-          },
-        },
-      },
-    },
-  },
-  theme: {
-    // custom widget theme (default = dark SKALE theme)
-    primary: "#00d4ff", // primary accent color for action buttons
-    background: "#0a2540", // background color
-    mode: "dark", // theme type - dark or light
   },
 };

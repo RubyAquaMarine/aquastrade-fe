@@ -2,23 +2,22 @@
 
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { parseEther, formatUnits } from "viem";
 import { useAccount, useSwitchChain, useWriteContract } from "wagmi";
-
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
-
-import { COIN_FLIP_AQUA, CHAIN, tokenAddresses } from "@/app/Utils/config";
-
+import { CHAIN, tokenAddresses } from "@/app/Utils/config";
 import { ERC20_ABI } from "@/app/Abi/erc20";
-
 import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
-
 import styles from "@/app/Styles/Links.module.css";
 import styles_button from "@/app/Styles/Toggle.module.css";
 
-const Home = () => {
+interface Props {
+  address: string;
+  symbol: string;
+}
+
+const CoinFlip = (params: Props) => {
   const allowancesTest = useRef(undefined);
   const [inputs, setInputs] = useState([""]);
   const [notification, setNotification] = useState("");
@@ -26,14 +25,12 @@ const Home = () => {
   const { chains, switchChain } = useSwitchChain();
   const { writeContract } = useWriteContract();
 
-  const array: any[any] = [address, COIN_FLIP_AQUA];
+  console.error("CoinFLIP address ", params?.props?.[0]);
 
-  interface TokenData {
-    amount: bigint;
-  }
+  const array: any[any] = [address, params?.props?.[0]];
 
   const { data: tokenAllowance } = useERC20Token("allowance", array); // $AQUA
-
+  // todo Promiseall
   const {
     data: loss,
     isLoading,
@@ -41,13 +38,10 @@ const Home = () => {
   } = useCoinflip("totalLoss", [address]);
 
   const { data: win } = useCoinflip("totalWins", [address]);
-
   const { data: bal } = useCoinflip("balances", [address]);
 
-  console.log("Render COnflip:  User Allowance ", tokenAllowance);
-
-  const buttonDescriptions = ["AQUA"];
-  const buttonLogicTexts = ["Flip AQUA"];
+  const buttonDescriptions = [params?.props?.[1]];
+  const buttonLogicTexts = [`flip ${params?.props?.[1]}`];
 
   useEffect(() => {
     console.error("READ CONTRACT token allowance '", tokenAllowance);
@@ -71,7 +65,7 @@ const Home = () => {
       case 0:
         writeContract({
           abi: COIN_FLIP_ABI,
-          address: COIN_FLIP_AQUA,
+          address: params?.props?.[0],
           functionName: "flipCoin",
           args: [parseEther(inputs[0], "wei")],
         });
@@ -81,7 +75,7 @@ const Home = () => {
           abi: ERC20_ABI,
           address: tokenAddresses[8]?.addr,
           functionName: "approve",
-          args: [COIN_FLIP_AQUA, parseEther(inputs[0])],
+          args: [params?.props?.[0], parseEther(inputs[0])],
         });
         break;
       // Add more cases as needed
@@ -94,7 +88,7 @@ const Home = () => {
       case 0:
         writeContract({
           abi: COIN_FLIP_ABI,
-          address: COIN_FLIP_AQUA,
+          address: params?.props?.[0],
           functionName: "WithdrawAll",
           args: [],
         });
@@ -119,9 +113,7 @@ const Home = () => {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className={styles.midText}>Flip to Up your Stack</h1>
-
+    <main>
       {address ? (
         <div>
           {chain && chain.id !== CHAIN.id ? (
@@ -238,14 +230,7 @@ const Home = () => {
       ) : (
         <div> </div>
       )}
-
-      <h2 className={styles.topText}>
-        Prize pools and available flip assets are growing. Come back soon to
-        flip again.
-      </h2>
     </main>
   );
 };
-export default Home;
-
-// tsx-control-statements/components'
+export default CoinFlip;

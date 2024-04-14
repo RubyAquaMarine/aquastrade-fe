@@ -1,13 +1,29 @@
 # AQUA token
 
-* address : 0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C
-* explorer : [0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C](https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C/read-contract#address-tabs) 
+- address : 0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C
+- explorer : [0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C](https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C/read-contract#address-tabs)
+- AQUA Burned: https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C/read-contract#address-tabs
 
-No VC's, no IDOs, and no unlock schedules. Only AQUA airdrops and an AQUA dev fund.
+## Roles
 
-- - airdrop $AQUA to all nft holders : bullish for nft holders
-- - after NFTS are sold out, NFT Market Place requires AQUA => Bullish for AQUA
-- - AQUA powers AquasTrade by being the base asset on all major AMM pools, works as a marketplace utility token, and revenue fees burn AQUA. Bullish for AQUA and nft holders.
+- minter role revoked : https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/0xdd904d6b76f4a57c604b82dfe5996ccb7b187a329246250c1d47fc9738b4f7ae
+- burner role granted : https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/0x3b89aeda851e7000d8bc1a35a9018354fe7c94a8bfa504171d05295794c2830e
+
+## Minter
+
+- `getRoleMemberCount(0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6)` == 1
+- - Minter : IMA Bridge : `0xD2aAA00500000000000000000000000000000000`
+- - granted tx: https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/0x77c4ede68a55462c1fcee977da4a6dea2c50544d6c8a2508ec645ddf619097ad
+
+## Details
+
+Tokenomics for the AQUA token that powers Aquas.Trade
+
+- No VC's, no IDOs, and no unlock schedules. Only AQUA airdrops and an AQUA dev fund.
+
+* - airdrop $AQUA to all nft holders : bullish for nft holders
+* - after NFTS are sold out, NFT Market Place requires AQUA => Bullish for AQUA
+* - AQUA powers AquasTrade by being the base asset on all major AMM pools, works as a marketplace utility token, and revenue fees burn AQUA. Bullish for AQUA and nft holders.
 
 ## NFT Holders:
 

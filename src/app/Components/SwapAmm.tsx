@@ -495,11 +495,14 @@ const SwapAmm = () => {
                 Swap
               </button>
             </div>
-            <div className={styles.input_container}>
-              <div className={styles.container_data}>
-                <p> Fee: %</p>
-                <span> Exchange Rate: </span>{" "}
-                <span className={styles.text_space_left}> Slippage: </span>
+            <div className={styles.input_container_column}>
+              <div className={styles.column}>
+                <p> Fee:</p>
+                <p> Exchange Rate:</p>
+              </div>
+              <div className={styles.column}>
+                <p> Route:</p>
+                <p> Slippage:</p>
               </div>
             </div>
           </div>
@@ -680,11 +683,14 @@ const SwapAmm = () => {
                 Cast Line
               </button>
             </div>
-            <div className={styles.input_container}>
-              <div className={styles.container_data}>
-                <p> Whale Size: %</p>
-                <span> Exchange Rate: </span>{" "}
-                <span className={styles.text_space_left}> Slippage: </span>
+            <div className={styles.input_container_column}>
+              <div className={styles.column}>
+                <p> Whale Size:</p>
+                <p> Exchange Rate:</p>
+              </div>
+              <div className={styles.column}>
+                <p> Route:</p>
+                <p> Slippage:</p>
               </div>
             </div>
           </div>
@@ -869,10 +875,14 @@ const SwapAmm = () => {
                 Set Sail
               </button>
             </div>
-            <div className={styles.input_container}>
-              <div className={styles.container_data}>
-                <p> Expected amount in Token A: </p>
-                <p> Expected amount in Token B: </p>
+            <div className={styles.input_container_column}>
+              <div className={styles.column}>
+                <p> Token A Out:</p>
+                <p> Token B Out:</p>
+              </div>
+              <div className={styles.column}>
+                <p> Route:</p>
+                <p> Slippage:</p>
               </div>
             </div>
           </div>
