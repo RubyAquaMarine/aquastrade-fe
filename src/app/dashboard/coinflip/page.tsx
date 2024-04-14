@@ -29,7 +29,7 @@ const Home = () => {
               <span className={styles.midText_sm}>AQUA </span>
               {isConnected && (
                 <CoinFlip
-                  props={[contractAddresses[5].addr, "AQUA"]}
+                  props={[contractAddresses[4].addr, "AQUA"]}
                 ></CoinFlip>
               )}
              
