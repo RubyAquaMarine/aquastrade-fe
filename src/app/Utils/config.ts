@@ -18,6 +18,11 @@ export const tokenSymbols = [
 
 export const contractAddresses = [
   {
+    id: 0,
+    name: "router",
+    addr: "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61",
+  },
+  {
     id: 1,
     name: "router",
     addr: "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61",
@@ -32,9 +37,26 @@ export const contractAddresses = [
     name: "marketplace-eth",
     addr: "0xc44A8E52A835c77932eB8747bD7E979c27308660",
   },
+  {
+    id: 4,
+    name: "coinflip-aqua",
+    addr: "0xc44A8E52A835c77932eB8747bD7E979c27308660",
+  },
+  {
+    id: 5,
+    name: "coinflip-skl",
+    addr: "0x10E0fB120c8264fF32b5400D89ADd77aee11FF88",
+  },
 ] as const;
 
 export const tokenAddresses = [
+  {
+    id: 0,
+    symbol: "USDC",
+    addr: "0x5F795bb52dAC3085f578f4877D450e2929D2F13d",
+    decimal: 6,
+    logo: "/USDC.svg",
+  },
   {
     id: 1,
     symbol: "USDC",

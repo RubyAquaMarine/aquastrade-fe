@@ -7,6 +7,7 @@ import { parseEther, formatUnits } from "viem";
 import { useAccount, useSwitchChain, useWriteContract } from "wagmi";
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
 import { CHAIN, tokenAddresses } from "@/app/Utils/config";
+import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
 import styles from "@/app/Styles/Links.module.css";
@@ -29,29 +30,40 @@ const CoinFlip = (params: Props) => {
 
   const array: any[any] = [address, params?.props?.[0]];
 
-  const { data: tokenAllowance } = useERC20Token("allowance", array); // $AQUA
+  // Use the Symbol to find the Token Address || or use PayToken (RPC)
+  const token_address_erc20 = findTokenAddressFromSymbol(params?.props?.[1]);
+  console.error("CoinFLIP token_address_erc20 ", token_address_erc20);
+
   // todo Promiseall
   const {
     data: loss,
     isLoading,
     isError,
-  } = useCoinflip("totalLoss", [address]);
+  } = useCoinflip(params?.props?.[0], "totalLoss", [address]);
 
-  const { data: win } = useCoinflip("totalWins", [address]);
-  const { data: bal } = useCoinflip("balances", [address]);
+  const { data: win } = useCoinflip(params?.props?.[0], "totalWins", [address]);
+  const { data: bal } = useCoinflip(params?.props?.[0], "balances", [address]);
+
+  const { data: tokenAllowance } = useERC20Token(
+    token_address_erc20,
+    "allowance",
+    array,
+  ); // $AQUA
 
   const buttonDescriptions = [params?.props?.[1]];
   const buttonLogicTexts = [`flip ${params?.props?.[1]}`];
 
   useEffect(() => {
-    console.error("READ CONTRACT token allowance '", tokenAllowance);
-    allowancesTest.current = tokenAllowance;
-    console.error(
-      " allowancesTest.current '",
-      allowancesTest.current,
-      typeof allowancesTest.current,
-    );
-  }, [tokenAllowance]);
+    if (token_address_erc20) {
+      console.error("READ CONTRACT token allowance '", tokenAllowance);
+      allowancesTest.current = tokenAllowance;
+      console.error(
+        " allowancesTest.current '",
+        allowancesTest.current,
+        typeof allowancesTest.current,
+      );
+    }
+  }, [tokenAllowance, token_address_erc20]);
 
   const handleInputChange = (index: number, value: string) => {
     const newInputs = [...inputs];
@@ -73,7 +85,7 @@ const CoinFlip = (params: Props) => {
       case 1:
         writeContract({
           abi: ERC20_ABI,
-          address: tokenAddresses[8]?.addr,
+          address: token_address_erc20,
           functionName: "approve",
           args: [params?.props?.[0], parseEther(inputs[0])],
         });

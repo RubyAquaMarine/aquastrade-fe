@@ -46,6 +46,7 @@ const Home = () => {
     "allowance",
     array,
   );
+  // ETH
   const { data: token_balance } = useERC20Token(
     tokenAddresses[5]?.addr,
     "balanceOf",
