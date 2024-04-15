@@ -5,6 +5,8 @@ import Link from "next/link";
 import React, { useRef, useEffect } from "react";
 import { parseEther, parseUnits, formatUnits } from "viem";
 
+import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
+
 import {
   useAccount,
   useWriteContract,
@@ -24,11 +26,10 @@ import {
   MARKETPLACE_BRONZE_NFT,
   MARKETPLACE_SILVER_NFT,
   MARKETPLACE_GOLD_NFT,
-  CHAIN,
-  tokenAddresses,
+  CHAIN
 } from "@/app/Utils/config";
 import { ERC20_ABI } from "@/app/Abi/erc20";
-import { Span } from "next/dist/trace";
+
 
 const Home = () => {
   const allowancesTest = useRef(BigInt(1));
@@ -39,16 +40,19 @@ const Home = () => {
   });
 
   const { address, isConnected, chain } = useAccount();
-
+  const eth_address =  findTokenAddressFromSymbol("ETH") as unknown as `0x${string}`;
   const array: any[any] = [address, MARKETPLACE_AQUADEX];
   const { data: tokenAllowance } = useERC20Token(
-    MARKETPLACE_AQUADEX,
+    eth_address,
     "allowance",
     array,
   );
-  // ETH
+  
+
+ 
+  
   const { data: token_balance } = useERC20Token(
-    tokenAddresses[5]?.addr,
+    eth_address,
     "balanceOf",
     [address],
   );
@@ -65,7 +69,7 @@ const Home = () => {
     isError,
   } = useMarketPlace("getListedItems");
 
-  console.log(" User Allowance ", tokenAllowance);
+  console.log(" User Allowance ", tokenAllowance, allowancesTest.current);
 
   const inputs = ["0.3 ETH", "1.5 ETH", "0.03 ETH"];
   // input the Text to display on the button
