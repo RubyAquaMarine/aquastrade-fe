@@ -10,7 +10,6 @@ import TokenBalance from "@/app/Components/TokenBalance";
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
 import { CHAIN, tokenAddresses } from "@/app/Utils/config";
 import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
-import { ERC20_ABI } from "@/app/Abi/erc20";
 import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
 import styles from "@/app/Styles/Links.module.css";
 import styles_button from "@/app/Styles/Toggle.module.css";

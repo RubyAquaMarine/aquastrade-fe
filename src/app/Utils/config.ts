@@ -52,9 +52,9 @@ export const contractAddresses = [
 export const tokenAddresses = [
   {
     id: 0,
-    symbol: "USDC",
-    addr: "0x5F795bb52dAC3085f578f4877D450e2929D2F13d",
-    decimal: 6,
+    symbol: "PAXG",
+    addr: "0x73d22d8a2D1f59Bf5Bcf62cA382481a2073FAF58",
+    decimal: 18,
     logo: "/USDC.svg",
   },
   {
