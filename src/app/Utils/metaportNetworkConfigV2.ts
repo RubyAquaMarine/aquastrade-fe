@@ -421,22 +421,22 @@ export const AquaConfig: interfaces.MetaportConfig = {
       },
     },
     // todo EXD needs to deploy the erc20 clone of EuropaEXD wrapper address
-    "light-vast-diphda": {
-      erc20: {
-        exd: {
-          address: "0xCfEBA92BD362B2F76fC30a89C433DE50a1D6Dead",
-          chains: {
-            "elated-tan-skat": {
-              clone: true,
-            },
-            mainnet: {
-              clone: true,
-              hub: "elated-tan-skat",
-            },
-          },
-        },
-      },
-    },
+    // "light-vast-diphda": {
+    //   erc20: {
+    //     exd: {
+    //       address: "0xCfEBA92BD362B2F76fC30a89C433DE50a1D6Dead",
+    //       chains: {
+    //         "elated-tan-skat": {
+    //           clone: true,
+    //         },
+    //         mainnet: {
+    //           clone: true,
+    //           hub: "elated-tan-skat",
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
     // todo Razor Team needs to ... deploy wRAZOR on razor_chain : then EuropaHub can deploy and map to the wrapper
     // hub is the l2 home
     "turbulent-unique-scheat": {
