@@ -25,10 +25,9 @@ import {
   MARKETPLACE_BRONZE_NFT,
   MARKETPLACE_SILVER_NFT,
   MARKETPLACE_GOLD_NFT,
-  CHAIN
+  CHAIN,
 } from "@/app/Utils/config";
 import { ERC20_ABI } from "@/app/Abi/erc20";
-
 
 const Home = () => {
   const allowancesTest = useRef(BigInt(1));
@@ -39,22 +38,19 @@ const Home = () => {
   });
 
   const { address, isConnected, chain } = useAccount();
-  const eth_address =  findTokenAddressFromSymbol("ETH") as unknown as `0x${string}`;
+  const eth_address = findTokenAddressFromSymbol(
+    "ETH",
+  ) as unknown as `0x${string}`;
   const array: any[any] = [address, MARKETPLACE_AQUADEX];
   const { data: tokenAllowance } = useERC20Token(
     eth_address,
     "allowance",
     array,
   );
-  
 
- 
-  
-  const { data: token_balance } = useERC20Token(
-    eth_address,
-    "balanceOf",
-    [address],
-  );
+  const { data: token_balance } = useERC20Token(eth_address, "balanceOf", [
+    address,
+  ]);
 
   // Save the state and update when useBuy is called
   const gold = useRef(-1);
