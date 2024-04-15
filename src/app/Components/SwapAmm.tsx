@@ -317,7 +317,7 @@ const SwapAmm = () => {
           <div>
             {" "}
             <div className={styles.input_container}>
-              <p>You pay</p>
+              <p>Send</p>
               <div className={styles.amount_inputs}>
                 <input
                   className={styles.input_amount}
@@ -413,7 +413,7 @@ const SwapAmm = () => {
             )}
             {/**  */}
             <div className={styles.input_container}>
-              <p>You receive</p>
+              <p>Receive</p>
               <div className={styles.amount_inputs}>
                 {swap_path !== [""] && amountA !== "0.0" ? (
                   <GetAmountsOut

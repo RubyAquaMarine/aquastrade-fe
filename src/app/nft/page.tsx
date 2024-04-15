@@ -22,7 +22,6 @@ import { MARKETPACE_ABI } from "@/app/Abi/europaMarketPlace";
 
 import {
   MARKETPLACE_AQUADEX,
-  EUROPA_ETH,
   MARKETPLACE_BRONZE_NFT,
   MARKETPLACE_SILVER_NFT,
   MARKETPLACE_GOLD_NFT,
@@ -141,7 +140,7 @@ const Home = () => {
           // write to approve
           writeContract({
             abi: ERC20_ABI,
-            address: EUROPA_ETH,
+            address: eth_address,
             functionName: "approve",
             args: [MARKETPLACE_AQUADEX, minSilver],
           });
@@ -168,7 +167,7 @@ const Home = () => {
           // write to approve
           writeContract({
             abi: ERC20_ABI,
-            address: EUROPA_ETH,
+            address: eth_address,
             functionName: "approve",
             args: [MARKETPLACE_AQUADEX, minGold],
           });
@@ -197,7 +196,7 @@ const Home = () => {
             // write to approve
             writeContract({
               abi: ERC20_ABI,
-              address: EUROPA_ETH,
+              address: eth_address,
               functionName: "approve",
               args: [MARKETPLACE_AQUADEX, min],
             });
