@@ -1,3 +1,10 @@
+## bugs
+
+- show reserves BTC: too many decimals showing
+- token List extra USDC
+- - the issue is that the pool reserves can return the assets in a switched format and theres no other information within that data to see what is what.
+- - - must compare token0
+
 - metaport token mapping : EXD bridges from Europa to Exorde_chain?
 - coinflip :SKL : 0x10E0fB120c8264fF32b5400D89ADd77aee11FF88 : add new coinflips easily.
 - - only fetch data from the module that is being clicked on.

@@ -512,6 +512,9 @@ const SwapAmm = () => {
                         [],
                         tokenADecimal.current,
                         tokenBDecimal.current,
+
+                        tokenA,
+                        tokenB,
                       ]}
                     ></AMMPools>
                   )}
