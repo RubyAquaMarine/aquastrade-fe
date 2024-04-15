@@ -11,10 +11,7 @@ import styles from "@/app/Styles/Links.module.css";
 
 import { MARKETPACE_ABI } from "@/app/Abi/europaMarketPlace";
 
-import {
-  MARKETPLACE_AQUADEX,
-  CHAIN,
-} from "@/app/Utils/config";
+import { MARKETPLACE_AQUADEX, CHAIN } from "@/app/Utils/config";
 
 const Home = () => {
   const allowancesTest = useRef(BigInt(0));

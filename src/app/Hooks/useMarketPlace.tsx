@@ -3,9 +3,7 @@ import { useReadContract } from "wagmi";
 import { marketplaceABI } from "@/app/Abi/europaMarketPlace";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
-import {
-  MARKETPLACE_AQUADEX
-} from "@/app/Utils/config";
+import { MARKETPLACE_AQUADEX } from "@/app/Utils/config";
 
 import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
 

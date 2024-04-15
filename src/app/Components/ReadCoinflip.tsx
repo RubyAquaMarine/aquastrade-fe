@@ -3,9 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useAccount, useReadContract } from "wagmi";
 
-import {
-  COIN_FLIP_AQUA,
-} from "@/app/Utils/config";
+import { COIN_FLIP_AQUA } from "@/app/Utils/config";
 
 import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
 import styles from "@/app/Styles/Links.module.css";
