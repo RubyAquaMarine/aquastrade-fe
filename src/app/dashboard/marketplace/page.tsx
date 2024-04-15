@@ -13,10 +13,6 @@ import { MARKETPACE_ABI } from "@/app/Abi/europaMarketPlace";
 
 import {
   MARKETPLACE_AQUADEX,
-  EUROPA_ETH,
-  MARKETPLACE_BRONZE_NFT,
-  MARKETPLACE_SILVER_NFT,
-  MARKETPLACE_GOLD_NFT,
   CHAIN,
 } from "@/app/Utils/config";
 

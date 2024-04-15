@@ -4,13 +4,12 @@ import { marketplaceABI } from "@/app/Abi/europaMarketPlace";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
 import {
-  COIN_FLIP_AQUA,
-  MARKETPLACE_AQUADEX,
-  EUROPA_ETH,
-  MARKETPLACE_BRONZE_NFT,
-  MARKETPLACE_SILVER_NFT,
-  MARKETPLACE_GOLD_NFT,
+  MARKETPLACE_AQUADEX
 } from "@/app/Utils/config";
+
+import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
+
+const ETH_ADDRESS = findTokenAddressFromSymbol("ETH");
 
 export const useMarketPlace = (functionName: string, args?: [any]) => {
   const { data, isError, isLoading } = useReadContract({
@@ -26,7 +25,7 @@ export const useMarketPlace = (functionName: string, args?: [any]) => {
 export const useERC20Token = (functionName: string, args?: [any]) => {
   const { data, isError, isLoading } = useReadContract({
     abi: ERC20_ABI,
-    address: EUROPA_ETH,
+    address: ETH_ADDRESS,
     functionName: functionName as unknown as undefined,
     args: args,
   });

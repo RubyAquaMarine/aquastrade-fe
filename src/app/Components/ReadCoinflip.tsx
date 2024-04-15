@@ -5,13 +5,7 @@ import { useAccount, useReadContract } from "wagmi";
 
 import {
   COIN_FLIP_AQUA,
-  MARKETPLACE_AQUADEX,
-  EUROPA_ETH,
-  MARKETPLACE_BRONZE_NFT,
-  MARKETPLACE_SILVER_NFT,
-  MARKETPLACE_GOLD_NFT,
 } from "@/app/Utils/config";
-import { ERC20_ABI } from "@/app/Abi/erc20";
 
 import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
 import styles from "@/app/Styles/Links.module.css";
