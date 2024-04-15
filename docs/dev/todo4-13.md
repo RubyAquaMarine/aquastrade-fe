@@ -4,6 +4,16 @@
 
 - findTokenAddressFromSymbol findAddressFromSymbol
 
+`  const [token0Address, token1Address, reserves] = await Promise.all([
+    univ2Pair.token0(),
+    univ2Pair.token1(),
+    univ2Pair.getReserves(),
+  ]);
+  `
+
+- something wrong with decimals
+- - Make a functoin that can find the Pair Addresses : Right now, just hardcoded one PAIR.sol to test functionality
+
 ## IDEAS
 
 - token list : load tokens for all Skale chains and show all within one page.

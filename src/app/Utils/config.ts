@@ -30,7 +30,7 @@ export const contractAddresses = [
   {
     id: 2,
     name: "factory",
-    addr: "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61",
+    addr: "0xc318a82CB7c2B0faf7e355BB8F285016956aBF55",
   },
   {
     id: 3,
