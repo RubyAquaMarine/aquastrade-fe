@@ -18,13 +18,14 @@ import TokenBalance from "@/app/Components/TokenBalance";
 // test
 import TokenApprove from "@/app/Components/TokenApprove";
 
-import { ERC20_ABI } from "@/app/Abi/erc20";
+import AMMPools from "@/app/Components/AMMPools";
+
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
-import { useERC20Token } from "@/app/Hooks/useAMM";
+import { useFactory } from "@/app/Hooks/useAMM";
 import {
-  tokenSymbols,
   tokenAddresses,
   ROUTER_AQUADEX,
+  contractAddresses,
 } from "@/app/Utils/config";
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
@@ -60,7 +61,15 @@ const SwapAmm = () => {
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
 
-  console.log("Rendered AMM ");
+  // todo : recode this : just a test for now
+
+  const { data: poolAddress } = useFactory(
+    contractAddresses[2].addr,
+    "getPair",
+    [tokenAAddress.current, tokenBAddress.current],
+  );
+
+  console.log("Rendered AMM  Pair Address: ", poolAddress);
 
   // todo : this needs to be useRef because usingState renders way too much
   useEffect(() => {
@@ -83,7 +92,6 @@ const SwapAmm = () => {
 
   const findSymbolDecimals = (_symbolA: string, _symbolB: string) => {
     if (tokenAddresses) {
-      console.log("SET UP DECIMALS ");
       tokenAddresses.forEach((element) => {
         if (_symbolA === element.symbol) {
           tokenADecimal.current = element.decimal;
@@ -141,7 +149,7 @@ const SwapAmm = () => {
   };
 
   // path for swapping
-  const pathForSwap = (tokenA: string, tokenB: string) => {
+  const getSwapPath = (tokenA: string, tokenB: string) => {
     let pathAmm = true; // default AMM
 
     if (
@@ -162,6 +170,8 @@ const SwapAmm = () => {
     return pathAmm;
   };
 
+  const getSwapPool = (tokenA: string, tokenB: string) => {};
+
   // Function to handle token swapping
   const handleSwap = () => {
     const timeIs = resultBlock?.data?.timestamp
@@ -169,7 +179,7 @@ const SwapAmm = () => {
       : BigInt(404);
     console.log("timestamp for swap ", timeIs);
     // Implement swapping logic here
-    if (pathForSwap(tokenA, tokenB)) {
+    if (getSwapPath(tokenA, tokenB)) {
       // amm
       console.log(
         " DEX AMM Swap path: ",
@@ -204,30 +214,6 @@ const SwapAmm = () => {
     console.log("User Asset Selected Token B", token);
     setTokenB(token);
     setShowTokenListB(false);
-  };
-
-  // todo
-  const handleLiquidityApprove = () => {
-    // todo : need to check allowance on both tokens
-    writeContract({
-      abi: ERC20_ABI,
-      address: tokenAAddress.current,
-      functionName: "approve",
-      args: [
-        ROUTER_AQUADEX,
-        parseUnits(amountA, Number(tokenADecimal?.current)),
-      ],
-    });
-
-    writeContract({
-      abi: ERC20_ABI,
-      address: tokenBAddress.current,
-      functionName: "approve",
-      args: [
-        ROUTER_AQUADEX,
-        parseUnits(amountB, Number(tokenBDecimal?.current)),
-      ],
-    });
   };
 
   // Function to handle liquidity provision
@@ -511,6 +497,24 @@ const SwapAmm = () => {
               <div className={styles.column}>
                 <p> Route:</p>
                 <p> Slippage:</p>
+              </div>
+            </div>
+            {/**  Add AMM Pool Reserves */}
+            <div className={styles.input_container_column}>
+              <div className={styles.column}>
+                {poolAddress &&
+                  tokenADecimal.current &&
+                  tokenBDecimal.current && (
+                    <AMMPools
+                      props={[
+                        poolAddress,
+                        "getReserves",
+                        [],
+                        tokenADecimal.current,
+                        tokenBDecimal.current,
+                      ]}
+                    ></AMMPools>
+                  )}
               </div>
             </div>
           </div>
