@@ -29,11 +29,7 @@ const AmmPools = (props: Props) => {
 
   // token symbols
   const { data: sym0 } = useAMMPairs(props?.props?.[0], "token0", []);
-
-  const { data: sym1 } = useAMMPairs(props?.props?.[0], "token1", []);
-
-  console.error(" Symbols in", props?.props?.[5], props?.props?.[6]);
-  console.error(" Symbols out", sym0, sym1);
+  //  const { data: sym1 } = useAMMPairs(props?.props?.[0], "token1", []);
 
   // should match
   const token_address_erc20_in = findTokenAddressFromSymbol(props?.props?.[5]);

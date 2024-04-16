@@ -31,7 +31,7 @@ Airdrop 10% of the token supply over a 10 year period. This will result in an on
 
 ### 10% - airdrop
 
-Quarterly airdrops
+Quarterly airdrops (snapshot on 1st of month)
 
 - Jan, April, July, Oct
 - - 20 million released over 10 years
@@ -41,6 +41,7 @@ Quarterly airdrops
 ### 10% - Token Listing
 
 - Game projects can pool with base asset $AQUA
+- - [list token](/docs/addNewTokens.md) : contact via discord
 
 ### 30% Liquidity-bootstrap
 

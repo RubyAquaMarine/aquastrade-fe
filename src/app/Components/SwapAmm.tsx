@@ -32,6 +32,26 @@ import styles_pop from "@/app/Styles/Popup.module.css";
 
 const SwapAmm = () => {
   // Save state without rendering
+  const divRef = useRef(null);
+
+  const handleGetMaxAmount = (index: number) => {
+    const text = divRef.current.innerText;
+    console.log(text);
+    const _amount = text; // types tpdp
+
+    switch (index) {
+      case 0:
+        getMaxAmounts("25", _amount);
+        break;
+      case 1:
+        getMaxAmounts("50", _amount);
+        break;
+
+      case 2:
+        getMaxAmounts("100", _amount);
+        break;
+    }
+  };
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
   );
@@ -101,6 +121,21 @@ const SwapAmm = () => {
           tokenBDecimal.current = element.decimal;
         }
       });
+    }
+  };
+
+  const getMaxAmounts = (_percentage: string, _amount: string) => {
+    const dec = tokenADecimal.current; // bigint : convert to number
+    // convert to bigint first for math
+    const bigAmount = parseUnits(_amount, Number(dec)) * BigInt(100);
+    const bigPerc = parseUnits(_percentage, 0);
+    const math = (bigAmount * bigPerc) / BigInt(10000);
+    // then back to string for UI
+    const amount = formatUnits(math, dec);
+    if (amount) {
+      setAmountA(amount);
+    } else {
+      setAmountA(_amount);
     }
   };
 
@@ -316,9 +351,40 @@ const SwapAmm = () => {
         {ammFeature === "swap" ? (
           <div>
             {" "}
-            <div className={styles.input_container}>
-              <p>Send</p>
-              <div className={styles.amount_inputs}>
+            <div></div>
+            <div className={styles.input_container_sm}>
+              <div className={styles.input_container_column}>
+                <div className={styles.column}>
+                  <span className={styles.button_field_sm}>
+                    <button onClick={() => handleGetMaxAmount(0)}>25%</button>
+                  </span>{" "}
+                  <span className={styles.button_field_sm}>
+                    <button onClick={() => handleGetMaxAmount(1)}>50%</button>
+                  </span>{" "}
+                  <span className={styles.button_field_sm}>
+                    <button onClick={() => handleGetMaxAmount(2)}>Max</button>
+                  </span>
+                </div>
+                <div className={styles.column}>
+                  <span className={styles.text_space_right_12}>
+                    {" "}
+                    Wallet balance{" "}
+                  </span>{" "}
+                  <div ref={divRef}>
+                    {tokenAAddress.current !== "" && (
+                      <TokenBalance
+                        props={[
+                          tokenAAddress.current,
+                          tokenADecimal.current,
+                          address,
+                        ]}
+                      ></TokenBalance>
+                    )}{" "}
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.input_token_a}>
                 <input
                   className={styles.input_amount}
                   type="text"
@@ -360,51 +426,33 @@ const SwapAmm = () => {
                 )}
               </div>
 
-              <p className={styles.amount_balance}>
-                Balance: --{" "}
-                {tokenAAddress.current !== "" ? (
-                  <TokenBalance
-                    props={[
-                      tokenAAddress.current,
-                      tokenADecimal.current,
-                      address,
-                    ]}
-                  ></TokenBalance>
-                ) : (
-                  <div></div>
-                )}
-              </p>
-
-              <p className={styles.amount_balance}>
-                Approved{" "}
-                {address &&
-                amountA &&
-                tokenAAddress.current &&
-                tokenADecimal.current ? (
-                  <TokenApprove
-                    props={[
-                      "allowance",
-                      tokenAAddress.current,
-                      parseUnits(amountA, Number(tokenADecimal?.current)),
-                      [address, ROUTER_AQUADEX],
-                      tokenADecimal.current,
-                    ]}
-                  ></TokenApprove>
-                ) : (
-                  <div></div>
-                )}
-              </p>
+              <span className={styles.text_center}> Approved: </span>
+              {address &&
+              amountA &&
+              tokenAAddress.current &&
+              tokenADecimal.current ? (
+                <TokenApprove
+                  props={[
+                    "allowance",
+                    tokenAAddress.current,
+                    parseUnits(amountA, Number(tokenADecimal?.current)),
+                    [address, ROUTER_AQUADEX],
+                    tokenADecimal.current,
+                  ]}
+                ></TokenApprove>
+              ) : (
+                <span className={styles.text_center}> error </span>
+              )}
             </div>
             {!showTokenListA && !showTokenListB ? (
-              <div id="1" className={styles.button_container}>
-                {" "}
+              <div className={styles.button_container_sm}>
                 <Image
                   src="/flip.svg"
                   alt="menu"
-                  width={50}
-                  height={50}
+                  width={30}
+                  height={30}
                   priority
-                  className={styles.imageInvertToggle}
+                  className={styles.imageInvertToggle_sm}
                   onClick={handleFlipTokens}
                 />
               </div>
@@ -413,7 +461,7 @@ const SwapAmm = () => {
             )}
             {/**  */}
             <div className={styles.input_container}>
-              <p>Receive</p>
+              <p className={styles.container_text}>Receive</p>
               <div className={styles.amount_inputs}>
                 {swap_path !== [""] && amountA !== "0.0" ? (
                   <GetAmountsOut
@@ -437,7 +485,7 @@ const SwapAmm = () => {
                 )}
 
                 <input
-                  className={styles.input_token_space}
+                  className={styles.input_token}
                   type="text"
                   placeholder="Select Token"
                   value={tokenB}
@@ -468,20 +516,6 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
-              <p className={styles.amount_balance}>
-                Balance: --{" "}
-                {tokenBAddress.current !== "" ? (
-                  <TokenBalance
-                    props={[
-                      tokenBAddress.current,
-                      tokenBDecimal.current,
-                      address,
-                    ]}
-                  ></TokenBalance>
-                ) : (
-                  <div></div>
-                )}
-              </p>
             </div>
             {/**  Swap and Approve button  */}
             <div className={styles.button_container}>
@@ -528,8 +562,9 @@ const SwapAmm = () => {
         {ammFeature === "add" ? (
           <div>
             {" "}
-            <div className={styles.input_container}>
-              <p>Select Token A</p>
+            <div className={styles.input_container_sm}>
+              <span className={styles.text_bold}>Select Token A </span>
+
               <div className={styles.amount_inputs}>
                 <input
                   className={styles.input_amount}
@@ -572,8 +607,11 @@ const SwapAmm = () => {
                 )}
               </div>
 
-              <p className={styles.amount_balance}>
-                Balance: --{" "}
+              <p className={styles.container_margin}>
+                <span className={styles.text_space_right_12}>
+                  {" "}
+                  Wallet balance{" "}
+                </span>
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
                     props={[
@@ -583,39 +621,37 @@ const SwapAmm = () => {
                     ]}
                   ></TokenBalance>
                 ) : (
-                  <div></div>
+                  <span></span>
                 )}
               </p>
-              <p className={styles.amount_balance}>
-                Approved{" "}
-                {address &&
-                amountA &&
-                tokenAAddress.current &&
-                tokenADecimal.current ? (
-                  <TokenApprove
-                    props={[
-                      "allowance",
-                      tokenAAddress.current,
-                      parseUnits(amountA, Number(tokenADecimal?.current)),
-                      [address, ROUTER_AQUADEX],
-                      tokenADecimal.current,
-                    ]}
-                  ></TokenApprove>
-                ) : (
-                  <div></div>
-                )}
-              </p>
+
+              <span className={styles.text_center}> Approved: </span>
+              {address &&
+              amountA &&
+              tokenAAddress.current &&
+              tokenADecimal.current ? (
+                <TokenApprove
+                  props={[
+                    "allowance",
+                    tokenAAddress.current,
+                    parseUnits(amountA, Number(tokenADecimal?.current)),
+                    [address, ROUTER_AQUADEX],
+                    tokenADecimal.current,
+                  ]}
+                ></TokenApprove>
+              ) : (
+                <span className={styles.text_center}> error </span>
+              )}
             </div>
             {!showTokenListA && !showTokenListB ? (
-              <div id="1" className={styles.button_container}>
-                {" "}
+              <div className={styles.button_container_sm}>
                 <Image
                   src="/flip.svg"
                   alt="menu"
-                  width={50}
-                  height={50}
+                  width={30}
+                  height={30}
                   priority
-                  className={styles.imageInvertToggle}
+                  className={styles.imageInvertToggle_sm}
                   onClick={handleFlipTokens}
                 />
               </div>
@@ -623,7 +659,7 @@ const SwapAmm = () => {
               <div></div>
             )}
             <div className={styles.input_container}>
-              <p>Select Token B</p>
+              <span className={styles.text_bold}>Select Token B </span>
               <div className={styles.amount_inputs}>
                 <input
                   className={styles.input_amount}
@@ -664,8 +700,13 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
-              <p className={styles.amount_balance}>
-                Balance: --{" "}
+
+              <p className={styles.container_margin}>
+                <span className={styles.text_space_right_12}>
+                  {" "}
+                  Wallet balance{" "}
+                </span>
+
                 {tokenBAddress.current !== "" ? (
                   <TokenBalance
                     props={[
@@ -678,25 +719,24 @@ const SwapAmm = () => {
                   <div></div>
                 )}
               </p>
-              <p className={styles.amount_balance}>
-                Approved{" "}
-                {address &&
-                amountB &&
-                tokenBAddress.current &&
-                tokenBDecimal.current ? (
-                  <TokenApprove
-                    props={[
-                      "allowance",
-                      tokenBAddress.current,
-                      parseUnits(amountB, Number(tokenBDecimal?.current)),
-                      [address, ROUTER_AQUADEX],
-                      tokenBDecimal.current,
-                    ]}
-                  ></TokenApprove>
-                ) : (
-                  <div></div>
-                )}
-              </p>
+
+              <span className={styles.text_center}> Approved: </span>
+              {address &&
+              amountB &&
+              tokenBAddress.current &&
+              tokenBDecimal.current ? (
+                <TokenApprove
+                  props={[
+                    "allowance",
+                    tokenBAddress.current,
+                    parseUnits(amountB, Number(tokenBDecimal?.current)),
+                    [address, ROUTER_AQUADEX],
+                    tokenBDecimal.current,
+                  ]}
+                ></TokenApprove>
+              ) : (
+                <div></div>
+              )}
             </div>
             <div className={styles.button_container}>
               <button
@@ -724,7 +764,7 @@ const SwapAmm = () => {
         {ammFeature === "remove" ? (
           <div>
             {" "}
-            <div className={styles.input_container}>
+            <div className={styles.input_container_sm}>
               <span className={styles.text_bold}>
                 <span className={styles.text_space}> Select Percentage </span>{" "}
                 <span className={styles.text_space_left}> Select Token A </span>
@@ -772,8 +812,11 @@ const SwapAmm = () => {
                 )}
               </div>
 
-              <p className={styles.amount_balance}>
-                Balance: --{" "}
+              <p className={styles.container_margin}>
+                <span className={styles.text_space_right_12}>
+                  {" "}
+                  Wallet balance{" "}
+                </span>
                 {tokenAAddress.current !== "" ? (
                   <TokenBalance
                     props={[
@@ -786,36 +829,34 @@ const SwapAmm = () => {
                   <div></div>
                 )}
               </p>
-              <p className={styles.amount_balance}>
-                Approved{" "}
-                {address &&
-                amountA &&
-                tokenAAddress.current &&
-                tokenADecimal.current ? (
-                  <TokenApprove
-                    props={[
-                      "allowance",
-                      tokenAAddress.current,
-                      parseUnits(amountA, Number(tokenADecimal?.current)),
-                      [address, ROUTER_AQUADEX],
-                      tokenADecimal.current,
-                    ]}
-                  ></TokenApprove>
-                ) : (
-                  <div></div>
-                )}
-              </p>
+
+              <span className={styles.text_center}> Approved: </span>
+              {address &&
+              amountA &&
+              tokenAAddress.current &&
+              tokenADecimal.current ? (
+                <TokenApprove
+                  props={[
+                    "allowance",
+                    tokenAAddress.current,
+                    parseUnits(amountA, Number(tokenADecimal?.current)),
+                    [address, ROUTER_AQUADEX],
+                    tokenADecimal.current,
+                  ]}
+                ></TokenApprove>
+              ) : (
+                <span className={styles.text_center}> error </span>
+              )}
             </div>
             {!showTokenListA && !showTokenListB ? (
-              <div id="1" className={styles.button_container}>
-                {" "}
+              <div className={styles.button_container_sm}>
                 <Image
                   src="/flip.svg"
                   alt="menu"
-                  width={50}
-                  height={50}
+                  width={30}
+                  height={30}
                   priority
-                  className={styles.imageInvertToggle}
+                  className={styles.imageInvertToggle_sm}
                   onClick={handleFlipTokens}
                 />
               </div>
@@ -864,8 +905,11 @@ const SwapAmm = () => {
                   </div>
                 )}
               </div>
-              <p className={styles.amount_balance}>
-                Balance: --{" "}
+              <p className={styles.container_margin}>
+                <span className={styles.text_space_right_12}>
+                  {" "}
+                  Wallet balance{" "}
+                </span>
                 {tokenBAddress.current !== "" ? (
                   <TokenBalance
                     props={[
@@ -878,25 +922,24 @@ const SwapAmm = () => {
                   <div></div>
                 )}
               </p>
-              <p className={styles.amount_balance}>
-                Approved{" "}
-                {address &&
-                amountB &&
-                tokenBAddress.current &&
-                tokenBDecimal.current ? (
-                  <TokenApprove
-                    props={[
-                      "allowance",
-                      tokenBAddress.current,
-                      parseUnits(amountB, Number(tokenBDecimal?.current)),
-                      [address, ROUTER_AQUADEX],
-                      tokenBDecimal.current,
-                    ]}
-                  ></TokenApprove>
-                ) : (
-                  <div></div>
-                )}
-              </p>
+
+              <span className={styles.text_center}> Approved: </span>
+              {address &&
+              amountB &&
+              tokenBAddress.current &&
+              tokenBDecimal.current ? (
+                <TokenApprove
+                  props={[
+                    "allowance",
+                    tokenBAddress.current,
+                    parseUnits(amountB, Number(tokenBDecimal?.current)),
+                    [address, ROUTER_AQUADEX],
+                    tokenBDecimal.current,
+                  ]}
+                ></TokenApprove>
+              ) : (
+                <div></div>
+              )}
             </div>
             <div className={styles.button_container}>
               <button

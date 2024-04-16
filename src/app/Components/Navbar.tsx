@@ -72,7 +72,7 @@ const Navbar = () => {
                 <Link href={`/user/`}>Token List</Link>
               </Dropdown.Item>
 
-              <Dropdown.Item className={styles.popup_item_bottom}>
+              <Dropdown.Item className={styles.popup_item}>
                 Socials!
                 <Dropdown.Submenu className={styles.popup_submenu}>
                   <Dropdown.Item className={styles.popup_item}>
@@ -110,6 +110,9 @@ const Navbar = () => {
                     </Link>
                   </Dropdown.Item>
                 </Dropdown.Submenu>
+              </Dropdown.Item>
+              <Dropdown.Item className={styles.popup_item_bottom}>
+                <Link href={`/support/`}>Support</Link>
               </Dropdown.Item>
             </Dropdown>
           </div>
