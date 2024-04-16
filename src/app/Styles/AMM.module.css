@@ -71,7 +71,12 @@
 }
 
 .text_space {
-  padding-right: 1px;
+  padding-right: 5px;
+}
+
+.text_space_left_sm {
+  padding-left: 10px;
+  font-weight: bold;
 }
 
 .text_space_right {

@@ -563,7 +563,7 @@ const SwapAmm = () => {
           <div>
             {" "}
             <div className={styles.input_container_sm}>
-              <span className={styles.text_bold}>Select Token A </span>
+              <span className={styles.text_space_left_sm}>Select Token A </span>
 
               <div className={styles.amount_inputs}>
                 <input
@@ -658,8 +658,8 @@ const SwapAmm = () => {
             ) : (
               <div></div>
             )}
-            <div className={styles.input_container}>
-              <span className={styles.text_bold}>Select Token B </span>
+            <div className={styles.input_container_sm}>
+              <span className={styles.text_space_left_sm}>Select Token B </span>
               <div className={styles.amount_inputs}>
                 <input
                   className={styles.input_amount}
@@ -766,7 +766,10 @@ const SwapAmm = () => {
             {" "}
             <div className={styles.input_container_sm}>
               <span className={styles.text_bold}>
-                <span className={styles.text_space}> Select Percentage </span>{" "}
+                <span className={styles.text_space_left_sm}>
+                  {" "}
+                  Select Percentage{" "}
+                </span>{" "}
                 <span className={styles.text_space_left}> Select Token A </span>
               </span>
 
