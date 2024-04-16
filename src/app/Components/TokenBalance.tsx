@@ -15,7 +15,6 @@ interface Props {
 }
 
 const TokenBalance = (params: Props) => {
-  const { address, isConnected, chain } = useAccount();
   const { data: token_balance } = useERC20Token(
     params.props?.[0],
     "balanceOf",
@@ -23,23 +22,38 @@ const TokenBalance = (params: Props) => {
   );
 
   return (
-    <main>
-      <div className={styles.container}>
+    <>
+      <span>
+        {!token_balance ? (
+          <span className={styles.container_token_balance}> 0.0</span>
+        ) : (
+          typeof token_balance === "bigint" && (
+            <span className={styles.container_token_balance}>
+              {formatUnits(token_balance, Number(params.props?.[1]))}{" "}
+            </span>
+          )
+        )}
+      </span>
+    </>
+  );
+};
+
+export default TokenBalance;
+
+/*
+ <div className={styles.container_token_balance}>
         {address && isConnected ? (
-          <div>
-            <p className={styles.amount_balance_small}>
+          <div className={styles.amount_balance_small}>
+          
               {!token_balance
                 ? "0.0"
                 : typeof token_balance === "bigint" &&
                   formatUnits(token_balance, Number(params.props?.[1]))}
-            </p>
+           
           </div>
         ) : (
           <div></div>
         )}
       </div>
-    </main>
-  );
-};
 
-export default TokenBalance;
+*/
