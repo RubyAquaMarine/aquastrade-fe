@@ -1,26 +1,19 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-
 import { useAccount, useSwitchChain } from "wagmi";
-
-import styles_button from "@/app/Styles/Toggle.module.css";
-import styles from "@/app/Styles/Links.module.css";
-
-import { MARKETPACE_ABI } from "@/app/Abi/europaMarketPlace";
-
+import styles from "@/app/Styles/NFT.module.css";
 import { MARKETPLACE_AQUADEX, CHAIN } from "@/app/Utils/config";
 
 const Home = () => {
-  const allowancesTest = useRef(BigInt(0));
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
   const array = [];
 
-  array.push(address);
-  array.push(MARKETPLACE_AQUADEX);
+  if (address && isConnected) {
+    array.push(address);
+    array.push(MARKETPLACE_AQUADEX);
+  }
 
   const handleToEuropa = (
     // event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -42,30 +35,30 @@ const Home = () => {
         Limited Collection - 0% Fee Marketplace - Utility driven{" "}
       </h4>
       <h1 className={styles.midText}>NFT Market Place</h1>
-      <p>Say goodbye to tx gas fees and marketplace fees</p>
+      <p>
+        <Link href="/nft">
+          <button className={styles.toggleButton}>Buy NFT </button>
+        </Link>
+      </p>
       <p>
         <b>MarketPlace launches after all NFT sales</b>
       </p>
-      <p>
-        <Link href="/nft">
-          <button className={styles_button.toggleButton}>Buy NFT </button>
-        </Link>
-      </p>
-
-      {chain && chain.id !== CHAIN.id ? (
-        <div>
-          <p>Please select ChainID: 2046399126</p>
-          <button
-            onClick={(event) => handleToEuropa(event, 2046399126)}
-            className={styles_button.toggleButton}
-          >
-            Switch Network
-          </button>
-        </div>
-      ) : (
-        <div></div>
-      )}
     </main>
   );
 };
 export default Home;
+
+/*
+ <h4 className={styles.topText}>
+        Limited Collection - 0% Fee Marketplace - Utility driven{" "}
+      </h4>
+      <h1 className={styles.midText}>NFT Market Place</h1>
+      <p>
+        <Link href="/nft">
+          <button className={styles.toggleButton}>Buy NFT </button>
+        </Link>
+      </p>
+      <p>
+        <b>MarketPlace launches after all NFT sales</b>
+      </p>
+*/

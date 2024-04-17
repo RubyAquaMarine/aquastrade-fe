@@ -24,10 +24,6 @@ const Home = () => {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.midText}>Welcome to Aquas.Trade </h1>
 
-      <p>
-        <span className={styles.text_center}> Connected to:</span>{" "}
-      </p>
-      <span className={styles.text_style_border}>{chain?.name} </span>
       {!addr || !isConnected ? (
         <div>
           <div className={styles.p_styled_button}>
@@ -46,6 +42,9 @@ const Home = () => {
           <div className={styles.p_styled}>
             <ul>
               <li className={styles.text_heading}>Features</li>
+              <li>
+                <Link href="/dashboard/metaport">Bridge</Link>
+              </li>
               <li>
                 <Link href="/dashboard/games">Games</Link>
               </li>
@@ -76,6 +75,11 @@ const Home = () => {
               </li>
             </ul>
           </div>
+
+          <p>
+            <span className={styles.text_center}> Connected to:</span>{" "}
+          </p>
+          <span className={styles.text_style_border}>{chain?.name} </span>
 
           <p className={styles.spaceTop}>Select chain to switch networks </p>
 

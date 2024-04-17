@@ -1,0 +1,140 @@
+/*  buttons #171717; */
+.container {
+  width: auto;
+  border-radius: 12px;
+  background-color: #121111;
+}
+
+@media (min-width: 720px) {
+  .container {
+    width: auto;
+    min-width: 480px;
+  }
+}
+
+.column {
+  margin: 60px;
+  flex: 1;
+  box-sizing: border-box;
+  padding: 1rem 1rem;
+  text-align: center;
+  border-radius: 12px;
+  background-color: #040404;
+}
+
+.imageTitle {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: larger;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.imageCenter {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.toggleButton {
+  background-color: #181a1d;
+  color: white;
+  padding: 0.2rem 0.3rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+  border: 1px solid #2196f3;
+}
+
+.topText {
+  box-sizing: border-box;
+  font-weight: 400;
+  color: var(--white);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-family: monospace;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.midText {
+  box-sizing: border-box;
+  margin: 0.67em 0;
+  color: var(--white);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-family: monospace;
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 110%;
+  display: block;
+  padding: 0.3rem 0.3rem;
+}
+
+.textDesc {
+  text-align: center;
+  padding: 0.2rem 0.3rem;
+  font-size: 12px;
+  margin: 0.2rem 0.3rem;
+}
+
+.textInputs {
+  border: rounded;
+  color: rgb(194, 187, 187);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.imageAlign {
+  border: rounded;
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: auto;
+  max-width: 100%;
+}
+
+.bottomText {
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  margin-top: 0;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: center;
+  max-width: 530px;
+  color: #efefef;
+  margin-bottom: 32px;
+}
+
+.p_styled_button {
+  position: static;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: auto;
+  min-width: 200px;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid #2196f3;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(82, 86, 109, 0.47),
+    transparent
+  );
+  padding-bottom: 6px;
+  padding-top: 8px;
+  padding-right: 6px;
+  padding-left: 12px;
+}
+
+.p_styled_button:hover {
+  background-color: #2196f3;
+}
