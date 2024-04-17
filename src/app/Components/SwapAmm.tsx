@@ -1,6 +1,7 @@
 // @ts-nocheck
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import {
   useAccount,
   useWriteContract,
@@ -970,6 +971,12 @@ const SwapAmm = () => {
         {ammFeature === "nft" ? (
           <div>
             <NFTBalance> </NFTBalance>
+            <p className={styles.center}>
+              {" "}
+              <span className={styles.container_text}>
+                <Link href="/nft">Buy NFT</Link>
+              </span>
+            </p>
           </div>
         ) : (
           <div> </div>

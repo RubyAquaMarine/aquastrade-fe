@@ -1,6 +1,37 @@
-.container_text {
+.input_token {
+  margin-right: 10px;
+  margin-left: 10px;
+  max-width: 120px;
+  display: flex;
+  padding: 0.2rem 0.8rem;
+  color: #fff;
+  background-color: #242629;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.input_token:hover {
+  background-color: #0056b3;
+}
+
+.center {
   display: flex;
   justify-content: center;
+}
+
+.container_text {
+  margin: 10px;
+  max-width: 120px;
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem 0.8rem;
+  border-radius: 12px;
+  background-color: #242629;
+  border: 1px solid #475384;
+}
+
+.container_text:hover {
+  background-color: #0056b3;
 }
 
 .container_margin {

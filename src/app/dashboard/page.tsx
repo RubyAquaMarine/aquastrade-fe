@@ -47,6 +47,9 @@ const Home = () => {
             <ul>
               <li className={styles.text_heading}>Features</li>
               <li>
+                <Link href="/dashboard/metaport">Bridge</Link>
+              </li>
+              <li>
                 <Link href="/dashboard/games">Games</Link>
               </li>
               <li>

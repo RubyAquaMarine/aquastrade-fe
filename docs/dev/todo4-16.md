@@ -16,6 +16,10 @@ yarn check
 
 # todo
 
+- amm (Cast) margin bottom on the flip.icon
+
+- forward users to dashboard page after login
+
 - token List ( make small header with all the chain connectors to switch between skale chains easily)
 
 - metaport page : gasWallet : gas Estimation etc.
