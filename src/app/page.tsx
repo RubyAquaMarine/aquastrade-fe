@@ -1,10 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState, useLayoutEffect } from "react";
 import ConnectWallet from "./Components/ConnectWallet";
-import { useAccount, useSwitchChain } from "wagmi";
 import ChartCandles from "@/app/api/binance";
 import dynamic from "next/dynamic";
 import styles from "./Styles/Links.module.css";

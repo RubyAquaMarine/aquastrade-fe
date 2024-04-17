@@ -1,0 +1,25 @@
+.token_approve_container {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+
+  border-radius: 12px;
+  background-color: #181a1d;
+}
+
+.token_approve {
+  display: contents;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15.5px;
+}
+
+.token_approve:hover {
+  background-color: #0056b3;
+}
+
+.token_approve_amount {
+  display: flex;
+  font-size: 15.5px;
+  color: #bdb8b8;
+}

@@ -12,7 +12,7 @@ import { formatUnits } from "viem";
 import { useERC20Token } from "@/app/Hooks/useAMM";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
-import styles from "@/app/Styles/AMM.module.css";
+import styles from "@/app/Styles/TokenApprove.module.css";
 
 interface Props {
   name?: string;

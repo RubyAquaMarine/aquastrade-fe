@@ -39,7 +39,16 @@ if the user doesn't have the network within the MM already, then switching doesn
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.midText}>Games on SKALE </h1>
-      <p>Select a game to switch networks, then again to play </p>
+
+      <span className={styles.text_style_border}>
+        Select a game to switch SKALE chains, then click again to play{" "}
+      </span>
+
+      <p>
+        <span className={styles.text_center}> Connected to:</span>{" "}
+      </p>
+      <span className={styles.text_style_border}>{chain?.name} </span>
+
       {!addr ? (
         <div>
           <div className={styles.p_styled}>
@@ -57,6 +66,7 @@ if the user doesn't have the network within the MM already, then switching doesn
         <div>
           <div className={styles.p_styled}>
             <ul>
+              <li className={styles.text_heading}>Europa Hub</li>
               <li>
                 {" "}
                 <Link
@@ -68,6 +78,8 @@ if the user doesn't have the network within the MM already, then switching doesn
                   Coin Flip
                 </Link>
               </li>
+
+              <li className={styles.text_heading}>other SKALE chains</li>
 
               <li>
                 <Link
@@ -160,10 +172,8 @@ if the user doesn't have the network within the MM already, then switching doesn
                   Prospectors NFT
                 </Link>
               </li>
+              <li className={styles.text_heading}>Coming Soon</li>
 
-              <li>
-                <b>Coming Soon</b>
-              </li>
               <li>
                 <Link
                   href="https://www.flightforce4.com/"
