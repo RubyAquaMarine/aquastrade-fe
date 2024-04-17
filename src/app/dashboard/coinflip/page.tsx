@@ -12,7 +12,7 @@ const Home = () => {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.midText}>Flip to Up your Stack</h1>
       <span>Powered by on-chain</span>{" "}
-      <span className={styles.text_style_bottom}>
+      <span className={styles.text_style_border}>
         {" "}
         <Link
           href="https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x8103E54865Bbe8D0D6f502688BB235e62AF08FC0/read-contract#address-tabs "

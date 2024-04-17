@@ -40,14 +40,9 @@ if the user doesn't have the network within the MM already, then switching doesn
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.midText}>Games on SKALE </h1>
 
-      <span className={styles.text_style_border}>
+      <span className={styles.text_center}>
         Select a game to switch SKALE chains, then click again to play{" "}
       </span>
-
-      <p>
-        <span className={styles.text_center}> Connected to:</span>{" "}
-      </p>
-      <span className={styles.text_style_border}>{chain?.name} </span>
 
       {!addr ? (
         <div>
@@ -205,6 +200,10 @@ if the user doesn't have the network within the MM already, then switching doesn
               </li>
             </ul>
           </div>
+          <p>
+            <span className={styles.text_center}> Connected to:</span>{" "}
+          </p>
+          <span className={styles.text_style_border}>{chain?.name} </span>
         </div>
       )}
     </main>

@@ -27,10 +27,7 @@ const Home = ({ children, params }: any) => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.midText}>Airdrop Tokens </h1>
-      <p>
-        <span className={styles.text_center}> Connected to:</span>{" "}
-      </p>
-      <span className={styles.text_style_border}>{chain?.name} </span>
+      
 
       {address && chain && chain.id !== CHAIN.id ? (
         <div>
@@ -45,6 +42,11 @@ const Home = ({ children, params }: any) => {
       ) : (
         <AirDrop></AirDrop>
       )}
+
+<p>
+        <span className={styles.text_center}> Connected to:</span>{" "}
+      </p>
+      <span className={styles.text_style_border}>{chain?.name} </span>
     </main>
   );
 };

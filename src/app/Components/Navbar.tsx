@@ -52,6 +52,10 @@ const Navbar = () => {
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>
+                <Link href="/dashboard">Dashboard</Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
                 <Link href="/dashboard/games">Games</Link>
               </Dropdown.Item>
 
@@ -111,7 +115,7 @@ const Navbar = () => {
                 </Dropdown.Submenu>
               </Dropdown.Item>
               <Dropdown.Item className={styles.popup_item}>
-                <Link href={`/support/`}>Support</Link>
+                <Link href={`/dashboard/support/`}>Support</Link>
               </Dropdown.Item>
               <Dropdown.Item className={styles.popup_item_bottom}>
                 <Link

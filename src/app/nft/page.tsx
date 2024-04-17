@@ -266,7 +266,7 @@ const Home = () => {
                 BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
                   <div>
                     <button
-                      className={styles_button.toggleButton}
+                      className={styles.toggleButton}
                       onClick={() => handleButtonClick(index)}
                     >
                       {buttonLogicTexts[index]}
@@ -275,7 +275,7 @@ const Home = () => {
                 ) : (
                   <div>
                     <button
-                      className={styles_button.toggleButton}
+                      className={styles.toggleButton}
                       onClick={() => handleButtonClick(index)}
                     >
                       Approve
