@@ -39,7 +39,10 @@ const Navbar = () => {
           </div>
 
           <div className={styles.versionMenuNew}>
-            <Dropdown openOnHover={false} buttonVariant="primary" title="^">
+            <Dropdown
+              openOnHover={false}
+              buttonClassName="toolbar-item typography-dropdown"
+            >
               <Dropdown.Item className={styles.popup_item_top}>
                 <Link href="/swap/amm">AMM</Link>
               </Dropdown.Item>
@@ -61,7 +64,7 @@ const Navbar = () => {
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>
-                <Link href={`/airdrop`}>Token Airdrop</Link>
+                <Link href={`/dashboard/airdrop`}>Token Airdrop</Link>
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>

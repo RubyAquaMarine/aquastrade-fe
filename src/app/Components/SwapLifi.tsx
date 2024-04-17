@@ -8,13 +8,19 @@ const SwapLifi = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-20">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <span className={styles.text_style_bottom}> Lifi </span>
+        <span className={styles.textBold}> Lifi </span>
 
-        <span> Multi-chain </span>
-        <p>Token Swap</p>
+        <span className={styles.textSpace}>Multi-chain token swap</span>
 
-        <p> Start by </p>
-        <span className={styles.text_style_bottom}> clicking tab -{">"} </span>
+        <p className={styles.textSpace}>
+          {" "}
+          Start by{" "}
+          <span className={styles.text_style_bottom}>
+            {" "}
+            clicking tab -{">"}{" "}
+          </span>
+        </p>
+
         <WidgetEvents />
         <LiFiWidget
           config={{

@@ -54,7 +54,7 @@ const Home = () => {
                 <Link href={`/dashboard/marketplace`}>Market Place</Link>
               </li>{" "}
               <li>
-                <Link href="/airdrop">Token Airdrop</Link>
+                <Link href="/dashboard/airdrop">Token Airdrop</Link>
               </li>
               <li>
                 {" "}
