@@ -13,7 +13,7 @@ const Home = () => {
   //  const oldTheme = cookieStore.get("theme");
 
   const { chains, switchChain } = useSwitchChain();
-  const { address } = useAccount();
+  const { address, isConnected, chain } = useAccount();
   const [addr, setAddr] = useState("");
 
   useEffect(() => {
@@ -21,10 +21,14 @@ const Home = () => {
   }, [address]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center ">
-      <h1 className={styles.midText}>Featuring </h1>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h1 className={styles.midText}>Welcome to Aquas.Trade </h1>
 
-      {!addr ? (
+      <p>
+        <span className={styles.text_center}> Connected to:</span>{" "}
+      </p>
+      <span className={styles.text_style_border}>{chain?.name} </span>
+      {!addr || !isConnected ? (
         <div>
           <div className={styles.p_styled_button}>
             <ul>
@@ -41,41 +45,34 @@ const Home = () => {
         <div>
           <div className={styles.p_styled}>
             <ul>
-              <li>
-                {" "}
-                <Link href={`/dashboard/coinflip`}>Coin Flip</Link>
-              </li>
+              <li className={styles.text_heading}>Features</li>
               <li>
                 <Link href="/dashboard/games">Games</Link>
               </li>
               <li>
                 {" "}
                 <Link href={`/dashboard/marketplace`}>Market Place</Link>
+              </li>{" "}
+              <li>
+                <Link href="/airdrop">Token Airdrop</Link>
               </li>
-
               <li>
                 {" "}
                 <Link href={`/user/${address}`}>Token List</Link>
               </li>
-
-              <p>
-                <b>Swap Tokens</b>
-              </p>
+              <li className={styles.text_heading}>Trade</li>
               <li>
                 {" "}
-                <Link href={`/swap/amm`}>AquasTrade</Link>
+                <Link href={`/swap/amm`}>Tokens</Link>
               </li>
+              <li>
+                {" "}
+                <Link href={`/perp`}>Perps</Link>
+              </li>
+              <li className={styles.text_heading}>Trade 3rd Party</li>
               <li>
                 {" "}
                 <Link href={`/swap/lifi`}>Lifi</Link>
-              </li>
-
-              <p>
-                <b>Perps</b>
-              </p>
-              <li>
-                {" "}
-                <Link href={`/perp`}>AquasTrade</Link>
               </li>
             </ul>
           </div>

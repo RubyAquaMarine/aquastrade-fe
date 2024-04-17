@@ -1,6 +1,6 @@
 // @ts-nocheck
-
 "use client";
+import Link from "next/link";
 import { useAccount, useSwitchChain, useWriteContract } from "wagmi";
 import CoinFlip from "@/app/Components/CoinFlip";
 import styles from "@/app/Styles/Links.module.css";
@@ -11,7 +11,17 @@ const Home = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.midText}>Flip to Up your Stack</h1>
-
+      <span>Powered by on-chain</span>{" "}
+      <span className={styles.text_style_bottom}>
+        {" "}
+        <Link
+          href="https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x8103E54865Bbe8D0D6f502688BB235e62AF08FC0/read-contract#address-tabs "
+          target="_blank"
+        >
+          Random Number Generator
+        </Link>{" "}
+      </span>{" "}
+      <span> providing fair odds in winning and losing!</span>
       {address ? (
         <div>
           {chain && chain.id !== CHAIN.id ? (
@@ -27,6 +37,7 @@ const Home = () => {
           ) : (
             <div>
               <span className={styles.midText_sm}>AQUA </span>
+
               {isConnected && (
                 <CoinFlip
                   props={[contractAddresses[4].addr, "AQUA"]}
@@ -38,11 +49,8 @@ const Home = () => {
       ) : (
         <div> </div>
       )}
-
-      <h2 className={styles.topText}>
-        Prize pools and available flip assets are growing. Come back soon to
-        flip again.
-      </h2>
+      <span className={styles.midText_xs}>1. enter amount to bet</span>
+      <span className={styles.midText_xs}>2. flip to test your odds</span>
     </main>
   );
 };

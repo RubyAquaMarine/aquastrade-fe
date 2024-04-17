@@ -1,0 +1,62 @@
+.container {
+  width: 500px;
+}
+
+.container_margin {
+  width: 500px;
+  margin: 10px;
+}
+
+.input_token_address {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  width: 500px;
+  padding: 0.4rem 0.6rem;
+
+  border: 1px solid #475384;
+  background-color: #181a1d;
+}
+
+.input_address {
+  margin: 10px;
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  width: 500px;
+
+  border: 1px solid #475384;
+  background-color: #111317;
+}
+
+.input_address:hover {
+  background-color: #007bff;
+}
+
+.airdrop {
+  margin: 10px;
+  min-width: 500px;
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 1px solid #475384;
+  background-color: #111317;
+  font-size: 1.2rem;
+}
+
+.airdrop:hover {
+  background-color: #007bff;
+}
+
+.toggleButtonEuropa {
+  border: 1px solid #475384;
+  background-color: #181a1d;
+  color: #007bff;
+  padding: 1rem 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}

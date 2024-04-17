@@ -1,5 +1,25 @@
 /*  trading view */
 
+.text_center {
+  justify-content: center;
+  display: flex;
+  padding: 0.2rem 0.3rem;
+}
+
+.text_style_border {
+  justify-content: center;
+  display: flex;
+  padding: 0.2rem 0.3rem;
+  border-radius: 12px;
+  border: 1px solid #2196f3;
+  margin-bottom: 10px;
+}
+
+.text_heading {
+  font-size: 12px;
+  color: rgb(194, 187, 187);
+  border-bottom: 1px solid #ccc;
+}
 .tradeup {
   font-size: 8px;
   color: rgb(194, 187, 187);
@@ -28,6 +48,8 @@
 }
 .tradingViewText {
   font-size: 1rem;
+  padding-top: 20px;
+  padding-left: 35px;
 }
 
 /*  buttons #171717; */
@@ -117,7 +139,18 @@
 }
 
 .spaceTop {
-  margin-top: 5px;
+  margin-top: 20px;
+  border-bottom: 1px solid #2196f3;
+}
+
+.text_style_bottom {
+  border-bottom: 1px solid #2196f3;
+}
+
+.text_style_bottom:hover {
+  padding: 0.2rem 0.3rem;
+  border-radius: 12px;
+  border: 1px solid #2196f3;
 }
 
 .spaceNormal {
@@ -135,6 +168,7 @@
   backdrop-filter: blur(20px);
 */
 .p_styled {
+  margin-top: 40px;
   position: static;
   left: 0;
   top: 0;
@@ -143,7 +177,7 @@
   min-width: 200px;
   justify-content: center;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #2196f3;
   background-image: linear-gradient(
     to bottom,
     rgba(82, 86, 109, 0.47),
@@ -162,7 +196,7 @@
   min-width: 200px;
   justify-content: center;
   border-radius: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #2196f3;
   background-image: linear-gradient(
     to bottom,
     rgba(82, 86, 109, 0.47),
@@ -187,7 +221,7 @@
   min-width: 100px;
   justify-content: center;
   border-radius: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #2196f3;
   background-image: linear-gradient(
     to bottom,
     rgba(82, 86, 109, 0.47),
@@ -210,7 +244,7 @@
     width: auto;
     min-width: 200px;
     border-radius: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #2196f3;
     padding: 4px;
   }
 }
@@ -339,10 +373,23 @@
   margin: 0.67em 0;
   color: var(--white);
   text-align: center;
-  margin-top: 0;
+  margin-top: 20px;
   margin-bottom: 24px;
   font-family: Gellix, sans-serif;
   font-size: 32px;
+  font-weight: 600;
+  line-height: 110%;
+  display: block;
+  padding: 0.3rem 0.3rem;
+}
+
+.midText_xs {
+  box-sizing: border-box;
+  margin: 0.67em 0;
+  color: var(--white);
+  text-align: center;
+  margin-top: 20px;
+  font-size: 146x;
   font-weight: 600;
   line-height: 110%;
   display: block;

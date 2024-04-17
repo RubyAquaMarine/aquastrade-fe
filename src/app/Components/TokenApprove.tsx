@@ -12,7 +12,7 @@ import { formatUnits } from "viem";
 import { useERC20Token } from "@/app/Hooks/useAMM";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
-import styles from "@/app/Styles/AMM.module.css";
+import styles from "@/app/Styles/TokenApprove.module.css";
 
 interface Props {
   name?: string;
@@ -29,12 +29,19 @@ const TokenApprove = (params: Props) => {
     hash,
   });
 
+  console.error(
+    "Token Approval Props",
+    params.props[0],
+    params.props[1],
+    params.props[2],
+  );
+
   const { data: token_balance } = useERC20Token(
     params.props[1],
     params.props[0],
     params.props[3],
   );
-  /*
+
   console.error(
     "Token Approval",
     params.props[0],
@@ -49,7 +56,6 @@ const TokenApprove = (params: Props) => {
     " Approve This Contract: ",
     params.props[3][1],
   );
-  */
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -97,3 +103,7 @@ const TokenApprove = (params: Props) => {
 };
 
 export default TokenApprove;
+
+// token_approve_container
+// token_approve_amount
+// token_approve

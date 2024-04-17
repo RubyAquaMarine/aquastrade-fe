@@ -30,6 +30,12 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px 0px;
 }
 
+.imageInvert {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  text-align: right;
+}
+
 /* 
 
 background-color: #03bada;
@@ -52,6 +58,21 @@ background-color: #03bada;
     Helvetica Neue,
     sans-serif;
   border-bottom: 1px solid #475384;
+}
+
+.versionMenuNew {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.versionMenu {
+  background-color: #2196f3;
+  color: #070707;
+  width: 16px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
 }
 
 .navListWide {
@@ -142,16 +163,6 @@ background-color: #03bada;
 
 .float_center {
   float: center;
-}
-
-.versionMenu {
-  background-color: #2196f3;
-  color: #070707;
-  width: 16px;
-  height: 42px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
 }
 
 /*

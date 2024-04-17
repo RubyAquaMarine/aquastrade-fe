@@ -15,3 +15,5 @@
 http://localhost:3000/swap/amm
 
 - add liquidity
+
+# How to add your erc20 token to Metaport (bridge)

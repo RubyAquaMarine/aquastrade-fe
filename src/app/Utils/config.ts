@@ -35,6 +35,11 @@ export const contractAddresses = [
     name: "coinflip-skl",
     addr: "0xD83BF4A2F43FE6ABeFa679791dc2eFcA98eB3060",
   },
+  {
+    id: 6,
+    name: "airdrop",
+    addr: "0x980FA9c3F0837E9E03F5ab255D0fB938Acee26c1",
+  },
 ] as const;
 
 export const getKlineRecordCount = 600;

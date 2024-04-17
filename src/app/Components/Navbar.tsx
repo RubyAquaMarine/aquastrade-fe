@@ -33,21 +33,13 @@ const Navbar = () => {
           <div className={styles.float_center}>
             <ul className={styles.navListWide}>
               <li className={styles.navItem}>
-                <Link href="/dashboard/metaport">Bridge</Link>
-              </li>
-
-              <li className={styles.navItem}>
                 <Link href="/dashboard">Dashboard</Link>
-              </li>
-
-              <li className={styles.navItem}>
-                <Link href="/nft">NFT</Link>
               </li>
             </ul>
           </div>
 
-          <div className={styles.versionMenu}>
-            <Dropdown openOnHover={false} buttonVariant="tertiary">
+          <div className={styles.versionMenuNew}>
+            <Dropdown openOnHover={false} buttonVariant="primary" title="^">
               <Dropdown.Item className={styles.popup_item_top}>
                 <Link href="/swap/amm">AMM</Link>
               </Dropdown.Item>
@@ -57,7 +49,7 @@ const Navbar = () => {
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>
-                <Link href="/dashboard/coinflip">Coin Flip</Link>
+                <Link href="/dashboard/games">Games</Link>
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>
@@ -66,6 +58,10 @@ const Navbar = () => {
 
               <Dropdown.Item className={styles.popup_item}>
                 <Link href="/perp">Perps</Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
+                <Link href={`/airdrop`}>Token Airdrop</Link>
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>
@@ -111,8 +107,16 @@ const Navbar = () => {
                   </Dropdown.Item>
                 </Dropdown.Submenu>
               </Dropdown.Item>
-              <Dropdown.Item className={styles.popup_item_bottom}>
+              <Dropdown.Item className={styles.popup_item}>
                 <Link href={`/support/`}>Support</Link>
+              </Dropdown.Item>
+              <Dropdown.Item className={styles.popup_item_bottom}>
+                <Link
+                  href={`https://github.com/RubyAquaMarine/aquastrade-fe/issues`}
+                  target="_blank"
+                >
+                  Report Bug
+                </Link>
               </Dropdown.Item>
             </Dropdown>
           </div>

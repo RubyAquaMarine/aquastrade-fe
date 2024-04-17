@@ -14,7 +14,7 @@ export const AquaConfig: interfaces.MetaportConfig = {
     "elated-tan-skat", // Europa Hub
     "frayed-decent-antares",
     "honorable-steel-rasalhague",
-    "affectionate-immediate-pollux",
+    "affectionate-immediate-pollux", // cryptoblades
     "wan-red-ain",
     "green-giddy-denebola",
     "light-vast-diphda", // Razor
@@ -85,10 +85,11 @@ export const AquaConfig: interfaces.MetaportConfig = {
       name: "Razor",
       iconUrl: "https://aquas.trade/RAZOR.svg",
     },
-    ff: {
+    skill: {
       decimals: "18",
-      symbol: "FF",
-      name: "Forefront",
+      name: "SKILL",
+      symbol: "SKILL",
+      iconUrl: "https://aquas.trade/SKILL.png",
     },
     brawl: {
       decimals: "18",
@@ -339,6 +340,12 @@ export const AquaConfig: interfaces.MetaportConfig = {
             },
           },
         },
+        skill: {
+          address: "0xBDDad45160E10C3738785d9dD7F30b4B2a5Eeba8",
+          chains: {
+            "affectionate-immediate-pollux": { clone: true },
+          },
+        },
       },
     },
     "honorable-steel-rasalhague": {
@@ -414,6 +421,28 @@ export const AquaConfig: interfaces.MetaportConfig = {
       erc20: {
         brawl: {
           address: "0xE0A107a0010930Ac218ED0a50937b50D5633EB3e",
+          chains: {
+            "elated-tan-skat": {},
+          },
+        },
+      },
+    },
+    "affectionate-immediate-pollux": {
+      erc20: {
+        skl: {
+          address: "0x9FeF16c2Fe0dCB261cfD39e0B618c69A73feB3FE",
+          chains: {
+            "elated-tan-skat": {
+              clone: true,
+            },
+            mainnet: {
+              clone: true,
+              hub: "elated-tan-skat",
+            },
+          },
+        },
+        skill: {
+          address: "0x5F6E97612482095C0c2C02BC495C0171e61017d7",
           chains: {
             "elated-tan-skat": {},
           },

@@ -92,4 +92,10 @@ export const tokenList = [
     decimal: 18,
     logo: "/SHISH.png",
   },
+  {
+    symbol: "SKILL",
+    addr: "0xBDDad45160E10C3738785d9dD7F30b4B2a5Eeba8",
+    decimal: 18,
+    logo: "/SKILL.png",
+  },
 ] as const;
