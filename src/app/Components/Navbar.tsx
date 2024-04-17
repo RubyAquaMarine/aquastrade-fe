@@ -38,10 +38,12 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <div className={styles.versionMenuNew}>
+          <div className={styles.dropdownmenuBlue}>
+            {" "}
             <Dropdown
-              openOnHover={false}
-              buttonClassName="toolbar-item typography-dropdown"
+              buttonVariant="tertiary"
+              buttonClassName={styles.dropdownmenuBlue}
+              title="?"
             >
               <Dropdown.Item className={styles.popup_item_top}>
                 <Link href="/swap/amm">AMM</Link>
