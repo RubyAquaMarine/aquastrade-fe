@@ -89,6 +89,10 @@
 .text_bold {
   font-weight: bold;
 }
+.text_space_left_bd {
+  padding-left: 15px;
+  font-weight: bold;
+}
 
 .text_space {
   padding-right: 5px;
@@ -328,6 +332,12 @@
   display: flex;
   justify-content: center;
   padding: 0.1rem 0.1rem;
+}
+.button_container_sm_custom {
+  display: flex;
+  justify-content: center;
+  padding: 0.1rem 0.1rem;
+  margin-bottom: 4px;
 }
 
 .button_field:hover {

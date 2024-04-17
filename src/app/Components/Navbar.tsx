@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import styles from "../Styles/Header.module.css"; // You can create a CSS module for styling
-import DarkModeToggle from "./DarkModeToggleV2";
 import Image from "next/image";
 import Dropdown from "react-multilevel-dropdown";
 
@@ -46,11 +45,19 @@ const Navbar = () => {
               title="?"
             >
               <Dropdown.Item className={styles.popup_item_top}>
+                <Link href="/">Home</Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
                 <Link href="/swap/amm">AMM</Link>
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>
                 <Link href="/dashboard/metaport">Bridge</Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
+                <Link href="/dashboard/coinflip">Coinflip</Link>
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>

@@ -16,6 +16,16 @@ const Home = () => {
         <p> Bridge Cost: </p>
         <span> L1 Gas gwei: </span>
         <div>
+          <MetaportWidgetV2 />
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Home;
+/*
+ <div>
           {" "}
           {!address || !isConnected ? (
             <div className={styles.p_styled_button}>
@@ -32,9 +42,4 @@ const Home = () => {
             <MetaportWidgetV2 />
           )}
         </div>
-      </div>
-    </main>
-  );
-};
-
-export default Home;
+*/

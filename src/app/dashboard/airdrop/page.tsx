@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-
+import Image from "next/image";
 import { useAccount, useWriteContract, useSwitchChain } from "wagmi";
 import { CHAIN, tokenAddresses } from "@/app/Utils/config";
 import AirDrop from "@/app/Components/AirDrop";
@@ -27,6 +27,15 @@ const Home = ({ children, params }: any) => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.midText}>Airdrop Tokens </h1>
+      <span> on EuropaHub</span>
+      <Image
+        src="/EUROPA.png"
+        alt="menu"
+        width={70}
+        height={70}
+        priority
+        className={styles.image_center}
+      />
 
       {address && chain && chain.id !== CHAIN.id ? (
         <div>

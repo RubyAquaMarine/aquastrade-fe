@@ -16,6 +16,8 @@ yarn check
 
 # todo
 
+- as a user: must hover under the text within the Nagivation item : not ideal : should within the container
+
 - amm (Cast) margin bottom on the flip.icon
 
 - forward users to dashboard page after login
