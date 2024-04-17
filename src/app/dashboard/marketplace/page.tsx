@@ -36,14 +36,29 @@ const Home = () => {
       </h4>
       <h1 className={styles.midText}>NFT Market Place</h1>
       <p>
-        <b>MarketPlace launches after all NFT sales</b>
-      </p>
-      <p>
         <Link href="/nft">
           <button className={styles.toggleButton}>Buy NFT </button>
         </Link>
+      </p>
+      <p>
+        <b>MarketPlace launches after all NFT sales</b>
       </p>
     </main>
   );
 };
 export default Home;
+
+/*
+ <h4 className={styles.topText}>
+        Limited Collection - 0% Fee Marketplace - Utility driven{" "}
+      </h4>
+      <h1 className={styles.midText}>NFT Market Place</h1>
+      <p>
+        <Link href="/nft">
+          <button className={styles.toggleButton}>Buy NFT </button>
+        </Link>
+      </p>
+      <p>
+        <b>MarketPlace launches after all NFT sales</b>
+      </p>
+*/

@@ -15,8 +15,7 @@ import {
 
 import { useMarketPlace } from "@/app/Hooks/useMarketPlace";
 import { useERC20Token } from "@/app/Hooks/useAMM";
-import styles_button from "@/app/Styles/Toggle.module.css";
-import styles from "@/app/Styles/Links.module.css";
+import styles from "@/app/Styles/NFT.module.css";
 
 import { MARKETPACE_ABI } from "@/app/Abi/europaMarketPlace";
 
@@ -68,7 +67,8 @@ const Home = () => {
 
   const inputs = ["0.3 ETH", "1.5 ETH", "0.03 ETH"];
   // input the Text to display on the button
-  const buttonLogicTexts = ["Silver NFT", "Gold NFT", "Bronze NFT"];
+  const buttonLogicTexts = ["Buy Silver NFT", "Buy Gold NFT", "Buy Bronze NFT"];
+  const HeaderTexts = ["Silver NFT", "Gold NFT", "Bronze NFT"];
   const supplyDescriptions = ["500", "50", "5000"];
   const feeDescriptions = ["66%", "100%", "33.3%"];
   const allowance = [
@@ -236,6 +236,10 @@ const Home = () => {
               <div key={index} className={styles.column}>
                 <div className={styles.imageCenter}>
                   <Link href={urlDescriptions[index]} target="_blank">
+                    <span className={styles.imageTitle}>
+                      {" "}
+                      {HeaderTexts[index]}{" "}
+                    </span>
                     <Image
                       src={`/NFT${index}.png`}
                       alt="AquasTrade Logo"
