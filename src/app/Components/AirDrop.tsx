@@ -9,7 +9,7 @@ import { CHAIN } from "@/app/Utils/config";
 import { findContractInfo } from "@/app//Utils/findTokens";
 
 import TokenBalance from "@/app/Components/TokenBalance";
-import TokenApprove from "../Components/TokenApprove";
+import TokenApprove from "@/app/Components/TokenApprove";
 
 import { AIRDROP_ABI } from "@/app/Abi/airdropErc20";
 import styles from "@/app/Styles/Airdrop.module.css";

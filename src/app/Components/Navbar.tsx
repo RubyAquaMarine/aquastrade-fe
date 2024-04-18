@@ -85,7 +85,7 @@ const Navbar = () => {
                   href="/dashboard/games"
                   className={styles.popup_item_link}
                 >
-                  Games &emsp; &emsp; &emsp; &ensp;{" "}
+                  Games &emsp; &emsp; &emsp; &ensp;&nbsp;{" "}
                 </Link>
               </Dropdown.Item>
 
@@ -100,7 +100,7 @@ const Navbar = () => {
 
               <Dropdown.Item className={styles.popup_item}>
                 <Link href="/perp" className={styles.popup_item_link}>
-                  Perps &emsp; &emsp; &emsp; &nbsp;{" "}
+                  Perps &emsp; &emsp; &emsp; &ensp;&nbsp;{" "}
                 </Link>
               </Dropdown.Item>
 
@@ -109,7 +109,7 @@ const Navbar = () => {
                   href="/dashboard/airdrop"
                   className={styles.popup_item_link}
                 >
-                  Token Airdrop &ensp;{" "}
+                  Token Airdrop &ensp;
                 </Link>
               </Dropdown.Item>
 
@@ -155,7 +155,7 @@ const Navbar = () => {
                       target="_blank"
                       className={styles.popup_item_sub_link}
                     >
-                      Github &nbsp;
+                      Github &nbsp;&nbsp;
                     </Link>
                   </Dropdown.Item>
                   <Dropdown.Item className={styles.popup_item_bottom}>
