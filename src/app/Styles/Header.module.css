@@ -176,6 +176,27 @@ className={styles.popup}  openOnHover={true}
   color: #f4f4f4;
   background-color: #242629;
   margin-top: -12px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.popup_item_link {
+  word-spacing: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-bottom: 1px solid #475384;
+}
+.popup_item_sub_link {
+  word-spacing: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-right: 35px;
+  padding-left: 35px;
+  border-bottom: 1px solid #475384;
 }
 
 .popup_item_bottom {
