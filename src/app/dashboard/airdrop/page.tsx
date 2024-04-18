@@ -6,7 +6,7 @@ import { useAccount, useSwitchChain } from "wagmi";
 import { CHAIN } from "@/app/Utils/config";
 import AirDrop from "@/app/Components/AirDrop";
 import styles from "@/app/Styles/Airdrop.module.css";
-
+import SpinImage from "@/app/Components/SpinImage";
 const Home = ({ children, params }: any) => {
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
@@ -32,14 +32,7 @@ const Home = ({ children, params }: any) => {
         {" "}
         on SKALE | Europa Liquidity Hub
       </span>
-      <Image
-        src="/EUROPA.png"
-        alt="menu"
-        width={130}
-        height={130}
-        priority
-        className={styles.image_center}
-      />
+      <SpinImage imageUrl="/EUROPA.png" />
 
       {!address || !isConnected || (chain && chain.id !== CHAIN.id) ? (
         <div className={styles.button_back}>
