@@ -196,9 +196,9 @@ className={styles.popup}  openOnHover={true}
 }
 
 .dropdownmenuBlue {
-  margin-right: 5px;
-  border-radius: 12px;
-  border: 1px solid #2196f3;
+  border-radius: 6px;
+  color: #2196f3;
+  border: 2px solid #475384;
   font-size: 18px;
   background-color: #1a1b1f;
 }

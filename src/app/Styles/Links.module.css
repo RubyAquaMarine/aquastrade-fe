@@ -1,5 +1,11 @@
 /*  trading view */
 
+.image_center {
+  justify-content: center;
+  display: flex;
+  padding: 0.2rem 0.3rem;
+}
+
 .text_center {
   justify-content: center;
   display: flex;
@@ -52,6 +58,18 @@
   padding-left: 35px;
 }
 
+.toggleButton_bk {
+  background-color: #181a1d;
+  color: white;
+  padding: 0.2rem 0.3rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.9rem;
+}
 /*  buttons #171717; */
 .toggleButton {
   background-color: #181a1d;

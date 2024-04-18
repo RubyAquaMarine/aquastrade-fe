@@ -28,7 +28,8 @@ const Home = () => {
             <li>
               <Link href="/">
                 {" "}
-                <b>Back </b>(use web3 login to unlock features)
+                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+                features)
               </Link>
             </li>
           </ul>

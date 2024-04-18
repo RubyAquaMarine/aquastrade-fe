@@ -98,9 +98,12 @@ const TokenList = ({ params }: any) => {
               <ul>
                 {" "}
                 <li>
-                  <Link href="/dashboard"> Back </Link>
+                  <Link href="/">
+                    {" "}
+                    <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to
+                    unlock features)
+                  </Link>
                 </li>
-                <li>List assets for address: {addressWallet} </li>
               </ul>
             </div>
           ) : (

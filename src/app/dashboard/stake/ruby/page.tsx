@@ -2,7 +2,7 @@
 // @ts-nocheck
 // RUBY staking contract: working
 import { useState } from "react";
-
+import Link from "next/link";
 import { parseEther } from "viem";
 import { useAccount, useSwitchChain, useWriteContract } from "wagmi";
 import styles from "@/app/Styles/Links.module.css";
@@ -145,14 +145,17 @@ const Home = () => {
         {/** Handles Network switching to Europa Hub */}
 
         {!address || (chain && chain.id !== CHAIN.id) ? (
-          <div>
-            <p>Please select ChainID: 2046399126</p>
-            <button
-              onClick={(event) => handleLinkClickRubySwap(event, 2046399126)}
-              className={styles_button.toggleButton}
-            >
-              Switch Network
-            </button>
+          <div className={styles.p_styled}>
+            <ul>
+              {" "}
+              <li>
+                <Link href="/">
+                  {" "}
+                  <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+                  features)
+                </Link>
+              </li>
+            </ul>
           </div>
         ) : (
           <div>
@@ -164,6 +167,7 @@ const Home = () => {
           </div>
         )}
       </div>
+      {/** unfunctional unless on Europa Liquidity Hub */}
       {/** Grid to show buttons and available functions */}
       <div className="grid grid-cols-3 gap-1 w-full">
         <div className="p-4">

@@ -14,6 +14,8 @@ import TokenApprove from "../Components/TokenApprove";
 import { AIRDROP_ABI } from "@/app/Abi/airdropErc20";
 import styles from "@/app/Styles/Airdrop.module.css";
 
+import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
+
 export interface Wallet {
   wallet?: `0x${string}`;
 }
@@ -27,6 +29,8 @@ const AirDrop = () => {
   const setTotalAmounts = useRef(BigInt(0));
   // todo decimals
   const tokenADecimal = useRef(BigInt(18));
+
+  const totalWallets = useRef();
   // const tokenBDecimal = useRef(BigInt(18));
 
   // Token Address that user inputs
@@ -44,17 +48,30 @@ const AirDrop = () => {
   const { writeContract } = useWriteContract();
   const contractAirdrop = findContractInfo("airdrop");
 
-  if (setTotalAmounts.current > BigInt(0)) {
-    console.error("Approve This amount ", setTotalAmounts.current);
-  }
-
-  // listens for messages in the room the user is in
+  // renders for ui
+  // todo bug
   useEffect(() => {
     if (tokenAmount) {
-      parseEthAmounts(tokenAmount as string);
+      let bug: string = tokenAmount as string;
+      parseEthAmounts(bug + ",");
     }
-  }, [tokenAmount]);
 
+    if (tokenAddresses) {
+      let bug: string = tokenAddresses as string;
+      parseEthAddresses(bug + ",");
+    }
+
+    // get the token address from using the symbol
+    if (tokenSymbol) {
+      const token_address = findTokenAddressFromSymbol(
+        tokenSymbol,
+      ) as unknown as `0x${string}`;
+      console.log("Set the Address from Symbol ", token_address, tokenSymbol);
+      setAirdropToken(token_address);
+    }
+  }, [tokenAmount, tokenSymbol, tokenAddresses]);
+
+  // runs the data again before submitting
   const doAirdrop = () => {
     const amounts = parseEthAmounts(tokenAmount as string);
     const addresses = parseEthAddresses(tokenAddresses as string);
@@ -104,6 +121,7 @@ const AirDrop = () => {
     });
 
     setTotalAmounts.current = sumOf;
+    totalWallets.current = formattedAddresses?.length;
 
     return formattedAddresses;
   }
@@ -159,6 +177,15 @@ const AirDrop = () => {
             onChange={(e) => setTokenAmount(e.target.value)}
             className={styles.input_address}
           />
+          {/** todo: add decimal support : Add the number of wallets for user */}
+          <p className={styles.container_margin}>
+            {" "}
+            <span>Wallets: {totalWallets.current}</span>{" "}
+            <span>
+              {" "}
+              Total Amount: {formatUnits(setTotalAmounts.current, 18)}
+            </span>
+          </p>
           {setTotalAmounts.current ? (
             <button className={styles.airdrop} onClick={doAirdrop}>
               {" "}

@@ -22,32 +22,26 @@ const Home = () => {
         </Link>{" "}
       </span>{" "}
       <span> providing fair odds in winning and losing!</span>
-      {address ? (
-        <div>
-          {chain && chain.id !== CHAIN.id ? (
-            <div>
-              <p>Please select ChainID: 2046399126</p>
-              <button
-                onClick={(event) => handleToEuropa(event, 2046399126)}
-                className={styles.toggleButton}
-              >
-                Switch Network
-              </button>
-            </div>
-          ) : (
-            <div>
-              <span className={styles.midText_sm}>AQUA </span>
-
-              {isConnected && (
-                <CoinFlip
-                  props={[contractAddresses[4].addr, "AQUA"]}
-                ></CoinFlip>
-              )}
-            </div>
-          )}
+      {!address || (chain && chain.id !== CHAIN.id) ? (
+        <div className={styles.p_styled}>
+          <ul>
+            <li>
+              <Link href="/">
+                {" "}
+                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+                features)
+              </Link>
+            </li>
+          </ul>
         </div>
       ) : (
-        <div> </div>
+        <div>
+          <span className={styles.midText_sm}>AQUA </span>
+
+          {isConnected && (
+            <CoinFlip props={[contractAddresses[4].addr, "AQUA"]}></CoinFlip>
+          )}
+        </div>
       )}
       <span className={styles.midText_xs}>1. enter amount to bet</span>
       <span className={styles.midText_xs}>2. flip to test your odds</span>

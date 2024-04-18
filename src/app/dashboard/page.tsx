@@ -23,7 +23,15 @@ const Home = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.midText}>Welcome to Aquas.Trade </h1>
-
+      <span>0 gas fees, NFT-powered AMM DEX, NFT Market Place,</span>
+      <span> and leveraged trading on the</span>
+      <span>
+        {" "}
+        <Link href="https://skale.space" target="_blank">
+          {" "}
+          <b>SKALE</b> Network
+        </Link>
+      </span>
       {!addr || !isConnected ? (
         <div>
           <div className={styles.p_styled_button}>
@@ -88,7 +96,7 @@ const Home = () => {
               {chains.map((chain, index) => (
                 <li key={index} className={styles.connectorButton}>
                   <button
-                    className={styles.toggleButton}
+                    className={styles.toggleButton_bk}
                     // @ts-ignore: Unreachable code error
                     onClick={() => switchChain({ chainId: chain.id })}
                   >

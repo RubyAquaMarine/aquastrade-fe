@@ -301,7 +301,7 @@ const Home = () => {
         <div className={styles.p_styled_button}>
           <ul>
             <li>
-              <Link href="/dashboard">
+              <Link href="/">
                 {" "}
                 <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
                 features)
