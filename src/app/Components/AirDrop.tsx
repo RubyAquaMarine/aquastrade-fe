@@ -1,7 +1,13 @@
 // @ts-nocheck
 "use client";
-import React, { useEffect, useState, useRef } from "react";
-import { useAccount, useWriteContract, useSwitchChain } from "wagmi";
+import React, { useState, ChangeEvent, useEffect, useRef } from "react";
+
+import {
+  useAccount,
+  useWriteContract,
+  useBlock,
+  useWaitForTransactionReceipt,
+} from "wagmi";
 import { formatUnits, parseUnits } from "viem";
 
 import { CHAIN } from "@/app/Utils/config";
@@ -24,41 +30,80 @@ export interface Amount {
   amount?: string;
 }
 
-const AirDrop = () => {
+const AirDrop: React.FC = () => {
+  //test
+  const [inputValue, setInputValue] = useState<string>("");
+
+  // updates via function parseEthAmounts()
+  const setAirdropped = useRef(true);
+  const isCommaAtEndOfAmounts = useRef(false);
+
   // updates via function parseEthAmounts()
   const setTotalAmounts = useRef(BigInt(0));
   // todo decimals
   const tokenADecimal = useRef(BigInt(18));
 
   const totalWallets = useRef();
+  const totalAmounts = useRef();
   // const tokenBDecimal = useRef(BigInt(18));
 
   // Token Address that user inputs
   const [token, setAirdropToken] = useState("");
 
-  // todo ppolist symbols list
+  // enter symbol to get token address
   const [tokenSymbol, setAirdropTokenSymbol] = useState("");
 
-  // Original Input from user as string format : will be parsed later
+  // Original Input from user is in string format : will be parsed later
   const [tokenAddresses, setTokenAddresses] = useState<Wallet>();
   const [tokenAmount, setTokenAmount] = useState<Amount>();
 
   //wagmi
   const { address, isConnected, chain } = useAccount();
-  const { writeContract } = useWriteContract();
+  const { data: hash, writeContract } = useWriteContract();
+  const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
+
   const contractAirdrop = findContractInfo("airdrop");
+
+  console.error(
+    " Airdrop status: ",
+    setAirdropped.current,
+    " ready: ",
+    isCommaAtEndOfAmounts.current,
+  );
+
+  useEffect(() => {
+    if (contractCallDataConfirmed) {
+      console.log("POP UP HERE");
+      // reset airdrop and fetch new balances
+      setAirdropped.current = true;
+    }
+  }, [contractCallDataConfirmed]);
 
   // renders for ui
   // todo bug
   useEffect(() => {
     if (tokenAmount) {
-      let bug: string = tokenAmount as string;
-      parseEthAmounts(bug + ",");
+      setAirdropped.current = false;
+
+      const testT = tokenAmount as string;
+      const testTT = testT.concat(",");
+
+      console.error(
+        " Token input amounts changed ",
+        tokenAmount,
+        " test with extra ,  : ",
+        testTT,
+      );
+
+      const bug: string = tokenAmount as string;
+      parseEthAmounts(bug);
     }
 
     if (tokenAddresses) {
-      let bug: string = tokenAddresses as string;
-      parseEthAddresses(bug + ",");
+      const bug: string = tokenAddresses as string;
+      parseEthAddresses(bug);
     }
 
     // get the token address from using the symbol
@@ -71,8 +116,39 @@ const AirDrop = () => {
     }
   }, [tokenAmount, tokenSymbol, tokenAddresses]);
 
+  const stringEndWithComma = (e: string) => {
+    isCommaAtEndOfAmounts.current = true;
+  };
+
+  function isLastCharacterComma(input: string): boolean {
+    // Check if the input string is not empty and the last character is a comma
+    return input.trim() !== "" && input.trim().slice(-1) === ",";
+  }
+
+  // filter with regex
+  const handleInputAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e;
+    // Check if the input matches the allowed pattern
+    if (/^[0-9.,]*$/.test(value)) {
+      isCommaAtEndOfAmounts.current = isLastCharacterComma(value);
+
+      // if true, show instructions
+
+      setTokenAmount(value);
+      setInputValue(value);
+
+      console.error(
+        "handleInputAmountChange: ",
+        value,
+        isCommaAtEndOfAmounts.current,
+      );
+    }
+  };
+
   // runs the data again before submitting
   const doAirdrop = () => {
+    setAirdropped.current = true;
+
     const amounts = parseEthAmounts(tokenAmount as string);
     const addresses = parseEthAddresses(tokenAddresses as string);
     if (
@@ -101,6 +177,8 @@ const AirDrop = () => {
       }
     });
 
+    totalWallets.current = formattedAddresses?.length;
+
     return formattedAddresses;
   }
 
@@ -121,7 +199,7 @@ const AirDrop = () => {
     });
 
     setTotalAmounts.current = sumOf;
-    totalWallets.current = formattedAddresses?.length;
+    totalAmounts.current = formattedAddresses?.length;
 
     return formattedAddresses;
   }
@@ -140,13 +218,15 @@ const AirDrop = () => {
           />
           <input
             type="text"
-            placeholder="or Symbol"
+            placeholder="or input token symbol such as ETH, BTC, SKL, AQUA, etc"
             value={tokenSymbol}
             onChange={(e) => setAirdropTokenSymbol(e.target.value)}
             className={styles.input_token_address}
           />
           <div className={styles.container_margin}>
-            {setTotalAmounts.current !== BigInt(0) && token ? (
+            {setAirdropped.current === false &&
+            setTotalAmounts.current !== BigInt(0) &&
+            token ? (
               <TokenApprove
                 props={[
                   "allowance",
@@ -159,8 +239,14 @@ const AirDrop = () => {
             ) : (
               <span></span>
             )}
-            {isConnected && token && address && (
+
+            {setAirdropped.current === true &&
+            isConnected &&
+            token &&
+            address ? (
               <TokenBalance props={[token, 18, address]} />
+            ) : (
+              <span></span>
             )}
           </div>
           <input
@@ -170,34 +256,64 @@ const AirDrop = () => {
             onChange={(e) => setTokenAddresses(e.target.value)}
             className={styles.input_address}
           />
+          {isCommaAtEndOfAmounts.current === true ? (
+            <span></span>
+          ) : (
+            <span className={styles.text_center_warning}>
+              add one more {'"'} {","} {'"'} after the last digit
+            </span>
+          )}
           <input
             type="text"
             placeholder="Amount List"
             value={tokenAmount}
-            onChange={(e) => setTokenAmount(e.target.value)}
+            onChange={(e) => handleInputAmountChange(e.target.value)}
             className={styles.input_address}
           />
           {/** todo: add decimal support : Add the number of wallets for user */}
+          {totalWallets.current === totalAmounts.current ? (
+            <span></span>
+          ) : (
+            <span className={styles.text_center_warning}>
+              Wallets must equal Amounts
+            </span>
+          )}
           <p className={styles.container_margin}>
             {" "}
-            <span>Wallets: {totalWallets.current}</span>{" "}
+            <p>Wallets: {totalWallets.current}</p>{" "}
+            <p>Amounts: {totalAmounts.current}</p>{" "}
             <span>
               {" "}
               Total Amount: {formatUnits(setTotalAmounts.current, 18)}
             </span>
           </p>
           {setTotalAmounts.current ? (
-            <button className={styles.airdrop} onClick={doAirdrop}>
-              {" "}
-              Airdrop{" "}
-              {formatUnits(
-                setTotalAmounts.current,
-                Number(tokenADecimal.current),
-              )}{" "}
-              to community{" "}
-            </button>
+            <span>
+              {isCommaAtEndOfAmounts.current === true ? (
+                <span>
+                  <button className={styles.airdrop} onClick={doAirdrop}>
+                    {" "}
+                    Airdrop{" "}
+                    {formatUnits(
+                      setTotalAmounts.current,
+                      Number(tokenADecimal.current),
+                    )}{" "}
+                    to Community{" "}
+                  </button>
+                </span>
+              ) : (
+                <span>
+                  <button
+                    className={styles.airdrop_warning}
+                    onClick={doAirdrop}
+                  >
+                    Fix Amount List
+                  </button>
+                </span>
+              )}
+            </span>
           ) : (
-            <span className={styles.airdrop}>Enter Amount List</span>
+            <span className={styles.airdrop}>Complete Form</span>
           )}
         </div>
       ) : (
