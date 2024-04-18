@@ -7,6 +7,7 @@ import {
   useWriteContract,
   useBlock,
   useWaitForTransactionReceipt,
+  useSwitchChain,
 } from "wagmi";
 import { formatUnits, parseUnits } from "viem";
 
@@ -59,6 +60,7 @@ const AirDrop: React.FC = () => {
 
   //wagmi
   const { address, isConnected, chain } = useAccount();
+  const { chains, switchChain } = useSwitchChain();
   const { data: hash, writeContract } = useWriteContract();
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
     hash,
@@ -203,6 +205,19 @@ const AirDrop: React.FC = () => {
 
     return formattedAddresses;
   }
+
+  const handleToEuropa = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    targetChainId: number,
+  ) => {
+    if (chain) {
+      if (chain.id !== targetChainId) {
+        event.preventDefault();
+        // @ts-ignore: Unreachable code error
+        switchChain({ chainId: targetChainId });
+      }
+    }
+  };
 
   return (
     <div>

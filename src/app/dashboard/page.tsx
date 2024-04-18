@@ -1,17 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-//import { cookies} from "next/headers";// todo dynamic rendering is server side only
 import { useAccount, useSwitchChain } from "wagmi";
-import styles from "@/app/Styles/Links.module.css";
-
-// if wallet is not connected
-const wallet = "0x8609E3D519756a7B15a6240e501e641AF25a0c2F";
+import styles from "@/app/Styles/Dashboard.module.css";
 
 const Home = () => {
-  // const cookieStore = cookies();
-  //  const oldTheme = cookieStore.get("theme");
-
   const { chains, switchChain } = useSwitchChain();
   const { address, isConnected, chain } = useAccount();
   const [addr, setAddr] = useState("");
@@ -85,11 +78,22 @@ const Home = () => {
           </div>
 
           <p>
-            <span className={styles.text_center}> Connected to:</span>{" "}
+            {!chain ? (
+              <span className={styles.text_style_border}>
+                Unsupported Network : Recommended Network is Europa Liquidity
+                Hub
+              </span>
+            ) : (
+              <span>
+                <span className={styles.text_center}> Connected to:</span>{" "}
+                <span className={styles.text_style_border}>{chain?.name} </span>
+              </span>
+            )}
           </p>
-          <span className={styles.text_style_border}>{chain?.name} </span>
 
-          <p className={styles.spaceTop}>Select chain to switch networks </p>
+          <p className={styles.space_border}>
+            Select chain to switch networks{" "}
+          </p>
 
           <div>
             <ul>

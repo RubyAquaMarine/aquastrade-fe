@@ -10,16 +10,14 @@ interface SpinningImageProps {
 const SpinningImage: React.FC<SpinningImageProps> = ({ imageUrl }) => {
   return (
     <div className={styles.container}>
-     
       <Image
-              src={imageUrl}
-              alt="Spinning Image"
-              width={120}
-              height={120}
-              priority
-              className={styles.image} 
-            />
-
+        src={imageUrl}
+        alt="Spinning Image"
+        width={120}
+        height={120}
+        priority
+        className={styles.image}
+      />
     </div>
   );
 };
