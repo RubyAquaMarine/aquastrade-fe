@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import styles from "../Styles/Header.module.css"; // You can create a CSS module for styling
 import Image from "next/image";
 import Dropdown from "react-multilevel-dropdown";

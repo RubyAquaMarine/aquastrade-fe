@@ -7,8 +7,7 @@ import Navbar from "@/app/Components/Navbar";
 import NavbarBottom from "./Components/navbarBottom";
 
 import { Providers } from "./providers";
-
-import styles_tv from "./Styles/MainBody.module.css";
+import styles from "./Styles/MainBody.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +22,7 @@ export default function RootLayout(props: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className={styles_tv.p_body}>
+        <div className={styles.p_body}>
           <Navbar />
           <Providers>{props.children}</Providers>
         </div>
@@ -34,12 +33,10 @@ export default function RootLayout(props: { children: ReactNode }) {
 
 /*
 
-
  <body className={inter.className}>
         <Navbar />
         <Providers>{props.children}
           <NavbarBottom />
         </Providers>
       </body>
-
       */
