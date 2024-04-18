@@ -26,6 +26,10 @@ npm install -g pino-pretty
 yarn add pino-pretty
 yarn
 yarn dev
+
+# prod
+yarn build
+yarn start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

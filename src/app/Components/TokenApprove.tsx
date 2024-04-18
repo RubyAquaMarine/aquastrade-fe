@@ -29,12 +29,12 @@ const TokenApprove = (params: Props) => {
     hash,
   });
 
-  console.error(
-    "Token Approval Props",
-    params.props[0],
-    params.props[1],
-    params.props[2],
-  );
+  // console.error(
+  //   "Token Approval Props",
+  //   params.props[0],
+  //   params.props[1],
+  //   params.props[2],
+  // );
 
   const { data: token_balance } = useERC20Token(
     params.props[1],
@@ -42,20 +42,20 @@ const TokenApprove = (params: Props) => {
     params.props[3],
   );
 
-  console.error(
-    "Token Approval",
-    params.props[0],
-    params.props[1],
-    params.props[2],
+  // console.error(
+  //   "Token Approval",
+  //   params.props[0],
+  //   params.props[1],
+  //   params.props[2],
 
-    params.props[3],
-    params.props[4],
+  //   params.props[3],
+  //   params.props[4],
 
-    token_balance,
+  //   token_balance,
 
-    " Approve This Contract: ",
-    params.props[3][1],
-  );
+  //   " Approve This Contract: ",
+  //   params.props[3][1],
+  // );
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
