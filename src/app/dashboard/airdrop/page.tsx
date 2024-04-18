@@ -2,10 +2,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useAccount, useWriteContract, useSwitchChain } from "wagmi";
-import { CHAIN, tokenAddresses } from "@/app/Utils/config";
+import { useAccount, useSwitchChain } from "wagmi";
+import { CHAIN } from "@/app/Utils/config";
 import AirDrop from "@/app/Components/AirDrop";
-import styles from "@/app/Styles/Links.module.css";
+import styles from "@/app/Styles/Airdrop.module.css";
 
 const Home = ({ children, params }: any) => {
   const { address, isConnected, chain } = useAccount();
@@ -27,19 +27,22 @@ const Home = ({ children, params }: any) => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className={styles.midText}>Airdrop Tokens </h1>
-      <span> on EuropaHub</span>
+      <h1 className={styles.text_title}>Airdrop Tokens </h1>
+      <span className={styles.text_border_bottom}>
+        {" "}
+        on SKALE | Europa Liquidity Hub
+      </span>
       <Image
         src="/EUROPA.png"
         alt="menu"
-        width={70}
-        height={70}
+        width={130}
+        height={130}
         priority
         className={styles.image_center}
       />
 
-      {!address || (chain && chain.id !== CHAIN.id) ? (
-        <div className={styles.p_styled}>
+      {!address || !isConnected || (chain && chain.id !== CHAIN.id) ? (
+        <div className={styles.button_back}>
           <ul>
             <li>
               <Link href="/">
@@ -51,13 +54,14 @@ const Home = ({ children, params }: any) => {
           </ul>
         </div>
       ) : (
-        <AirDrop></AirDrop>
+        <div>
+          <AirDrop></AirDrop>
+          <p>
+            <span className={styles.text_center}> Connected to:</span>{" "}
+          </p>
+          <span className={styles.text_border}>{chain?.name} </span>
+        </div>
       )}
-
-      <p>
-        <span className={styles.text_center}> Connected to:</span>{" "}
-      </p>
-      <span className={styles.text_style_border}>{chain?.name} </span>
     </main>
   );
 };
