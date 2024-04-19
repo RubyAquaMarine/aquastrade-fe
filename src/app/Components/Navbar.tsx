@@ -32,6 +32,9 @@ const Navbar = () => {
           <div className={styles.float_center}>
             <ul className={styles.navListWide}>
               <li className={styles.navItem}>
+                <Link href="/dashboard/metaport">Bridge</Link>
+              </li>
+              <li className={styles.navItem}>
                 <Link href="/dashboard">Dashboard</Link>
               </li>
             </ul>
