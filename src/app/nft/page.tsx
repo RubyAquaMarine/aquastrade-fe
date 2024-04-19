@@ -221,7 +221,7 @@ const Home = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h4 className={styles.topText}>
-        Limited Collection - 0% Fee Marketplace - Utility driven{" "}
+        Limited Collection sizes: 50, 500, 5000
       </h4>
       <h1 className={styles.midText}>Swap Fee Discounts for Life</h1>
       <p>
@@ -253,7 +253,7 @@ const Home = () => {
                   <div>
                     <ul className={styles.textDesc}>
                       <li> Collection: {supplyDescriptions[index]}</li>
-                      <li> Fee discount: {feeDescriptions[index]}</li>
+                      <li> Swap Fee discount: {feeDescriptions[index]}</li>
                     </ul>
                   </div>
                 </div>

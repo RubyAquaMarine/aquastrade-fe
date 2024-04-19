@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useAccount, useBalance, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Dashboard.module.css";
 
+import TextSizeAdjuster from "@/app/Components/ViewPort";
+
 const Home = () => {
   const { chains, switchChain } = useSwitchChain();
   const { address, isConnected, chain } = useAccount();
@@ -18,7 +20,20 @@ const Home = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className={styles.midText}>Welcome to Aquas.Trade </h1>
+      <h4 className={styles.topText}>
+        <Link href="/nft">
+          Limited Collection - Utility driven NFT{"'"}s - Buy Now
+        </Link>
+      </h4>
+
+      <span className={styles.midText}>
+        {" "}
+        <TextSizeAdjuster
+          text={"Welcome to Aquas.Trade"}
+          text_size="48"
+          text_size_to="64"
+        ></TextSizeAdjuster>{" "}
+      </span>
       <span>0 gas fees, NFT-powered AMM DEX, NFT Market Place,</span>
       <span> and leveraged trading on the</span>
       <span>

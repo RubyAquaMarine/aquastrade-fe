@@ -73,7 +73,7 @@ const Home = ({ children, params }: any) => {
                   <span className={styles.text_title}>
                     <TextSizeAdjuster
                       text={" Connect Wallet to Start Trading"}
-                      text_size="24"
+                      text_size="28"
                       text_size_to="48"
                     ></TextSizeAdjuster>
                   </span>

@@ -34,15 +34,34 @@
   margin: 0.67em 0;
   color: var(--white);
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 24px;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 2rem;
   font-family: monospace;
   font-size: 64px;
   font-weight: 600;
   line-height: 110%;
   display: block;
-  padding: 0.3rem 0.3rem;
+  padding: 0.2rem 0.3rem;
 }
+.topText {
+  box-sizing: border-box;
+  font-weight: 400;
+  color: var(--white);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-family: monospace;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.topText:hover {
+  border-radius: 12px;
+  padding: 0.2rem 0.3rem;
+  background-color: #2196f3;
+}
+
 .midText_sm {
   box-sizing: border-box;
   margin: 0.67em 0;
