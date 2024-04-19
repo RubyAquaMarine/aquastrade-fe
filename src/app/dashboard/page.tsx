@@ -1,13 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useAccount, useSwitchChain } from "wagmi";
+import { useAccount, useBalance, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Dashboard.module.css";
 
 const Home = () => {
   const { chains, switchChain } = useSwitchChain();
   const { address, isConnected, chain } = useAccount();
   const [addr, setAddr] = useState("");
+  const { data: walletFuel, isError } = useBalance({
+    address: address,
+  });
 
   useEffect(() => {
     setAddr(address as string);
@@ -87,6 +90,11 @@ const Home = () => {
               <span>
                 <span className={styles.text_center}> Connected to:</span>{" "}
                 <span className={styles.text_style_border}>{chain?.name} </span>
+                <span className={styles.text_style_border}>
+                  {" "}
+                  {!isError && walletFuel?.symbol} :{" "}
+                  {!isError && walletFuel?.formatted}{" "}
+                </span>
               </span>
             )}
           </p>

@@ -10,8 +10,4 @@ so useRef = true on connect , then when user adjusts inputs = false, then after 
 
 # todo
 
-- need to remap AQUA to new contract : deploy new coin flip : need to drain amm and redeploy new pools
-- - edit : tokenList.ts ,
-
-- place sfuel,eth balance on dashboard : remove from mainpage
 - read razor : current version works but there is a version v2 now

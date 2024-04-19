@@ -49,18 +49,8 @@ const ConnectWallet = () => {
   return (
     <main>
       <div className={styles.connectButtons}>
-        {isConnected ? (
-          <div className={styles.text_flex}>
-            <p>
-              {!isError && data?.symbol} : {!isError && data?.formatted}
-            </p>
-          </div>
-        ) : (
-          <div>
-            {status !== "idle" && (
-              <div className={styles.text_flex}>{message}</div>
-            )}
-          </div>
+        {!isConnected && status !== "idle" && (
+          <div className={styles.text_flex}>{message}</div>
         )}
 
         {/** Hand case where user is using unknown EVM network */}
