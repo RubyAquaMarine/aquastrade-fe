@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useAccount, useBalance, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Dashboard.module.css";
 
-import TextSizeAdjuster from "@/app/Components/ViewPort";
+//import TextSizeAdjuster from "@/app/Components/ViewPort"; // todo : ReferenceError: window is not defined 
 
-const Home = () => {
+const Dashbaord = ({ children, params }: any) => {
   const { chains, switchChain } = useSwitchChain();
   const { address, isConnected, chain } = useAccount();
   const [addr, setAddr] = useState("");
@@ -28,11 +28,7 @@ const Home = () => {
 
       <span className={styles.midText}>
         {" "}
-        <TextSizeAdjuster
-          text={"Welcome to Aquas.Trade"}
-          text_size="48"
-          text_size_to="64"
-        ></TextSizeAdjuster>{" "}
+      
       </span>
       <span>0 gas fees, NFT-powered AMM DEX, NFT Market Place,</span>
       <span> and leveraged trading on the</span>
@@ -139,4 +135,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashbaord;
