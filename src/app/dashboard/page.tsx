@@ -28,7 +28,7 @@ const Dashbaord = ({ children, params }: any) => {
 
       <span className={styles.midText}>
         {" "}
-      
+     Welcome to Aquas.Trade
       </span>
       <span>0 gas fees, NFT-powered AMM DEX, NFT Market Place,</span>
       <span> and leveraged trading on the</span>
