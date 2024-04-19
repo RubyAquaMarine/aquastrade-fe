@@ -1,6 +1,8 @@
 // @ts-nocheck
 "use client";
 import React, { useState, ChangeEvent, useEffect, useRef } from "react";
+import { ToastContainer, Slide, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   useAccount,
@@ -39,6 +41,7 @@ const AirDrop: React.FC = () => {
   const setAirdropped = useRef(true);
   const isCommaAtEndOfAmounts = useRef(false);
 
+  // Token Approval amount and function
   // updates via function parseEthAmounts()
   const setTotalAmounts = useRef(BigInt(0));
   // todo decimals
@@ -68,6 +71,22 @@ const AirDrop: React.FC = () => {
 
   const contractAirdrop = findContractInfo("airdrop");
 
+  const notify = () =>
+    toast.success(
+      `Airdropped ${tokenSymbol} to ${totalWallets.current} wallets on 🌊 AquasTrade!`,
+      {
+        position: "bottom-left",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      },
+    );
+
   console.error(
     " Airdrop status: ",
     setAirdropped.current,
@@ -78,6 +97,8 @@ const AirDrop: React.FC = () => {
   useEffect(() => {
     if (contractCallDataConfirmed) {
       console.log("POP UP HERE");
+      // todo toast
+      notify();
       // reset airdrop and fetch new balances
       setAirdropped.current = true;
     }
@@ -223,6 +244,8 @@ const AirDrop: React.FC = () => {
     }
   };
 
+  //   toast.error("Empty Room or Username field");
+
   return (
     <div>
       {address && chain && chain.id === CHAIN.id ? (
@@ -347,6 +370,10 @@ const AirDrop: React.FC = () => {
           </button>
         </div>
       )}
+
+      <span>
+        <ToastContainer />
+      </span>
     </div>
   );
 };

@@ -3,6 +3,7 @@ strongly recommended. Run 'npm i sharp', and Next.js will use it automatically f
 ## airdrop todo
 
 - notifications (approval:, doAirdrop)
+- load nft holder addresses
 
 ## better flow
 
