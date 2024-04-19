@@ -1,6 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import React from "react";
 import Link from "next/link";
 import { useAccount, useSwitchChain } from "wagmi";
 import { CHAIN } from "@/app/Utils/config";
