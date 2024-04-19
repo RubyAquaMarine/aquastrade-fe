@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState, useLayoutEffect } from "react";
-import ConnectWallet from "./Components/ConnectWallet";
+import React, { useEffect, useState, useLayoutEffect } from "react";
+import TextSizeAdjuster from "@/app/Components/ViewPort";
+import ConnectWallet from "@/app/Components/ConnectWallet";
 import ChartCandles from "@/app/api/binance";
 import dynamic from "next/dynamic";
 import styles from "./Styles/Links.module.css";
@@ -25,26 +26,30 @@ interface CandlestickData {
   value: number;
 }
 
-export default function Home({ children }: any) {
+//
+const Home = ({ children, params }: any) => {
+  // const Home = ({ children }: HomeProps) =>{
   const [dataTV, setDataToTV] = useState<Array<CandlestickData>>([]);
   const [dataTVVolume, setDataToTVVolume] = useState<Array<CandlestickData>>(
     [],
   );
   const [isClient, setIsClient] = useState(false);
 
-  console.log(" Type of the ", typeof dataTV, dataTV);
-
-  const getDataCallBack = async (
+  const getDataCallBack = (
     setDataToTV: Function,
     setDataToTVVolume: Function,
   ) => {
-    try {
-      const bars = await ChartCandles("SKLUSDT");
-      setDataToTV(bars?.[0]);
-      setDataToTVVolume(bars?.[1]);
-    } catch {
-      console.error("unable to get ChartCandles() ");
-    }
+    const fetchData = async () => {
+      try {
+        const bars = await ChartCandles("SKLUSDT");
+        setDataToTV(bars?.[0]);
+        setDataToTVVolume(bars?.[1]);
+      } catch {
+        console.error("unable to get ChartCandles() ");
+      }
+    };
+
+    fetchData();
   };
 
   useLayoutEffect(() => {
@@ -81,9 +86,19 @@ export default function Home({ children }: any) {
            justify-between"
                 >
                   <span className="mt-0 font-medium w-72 sm:w-max ">
-                    Connect Wallet to Start Trading
+                    <TextSizeAdjuster
+                      text={" Connect Wallet to Start Trading"}
+                      text_size="32"
+                      text_size_to="48"
+                    ></TextSizeAdjuster>
                   </span>
-                  <p className={styles.tradingViewPara}>Reimagine 0 gas fees</p>
+                  <p className={styles.tradingViewPara}>
+                    <TextSizeAdjuster
+                      text={"Reimagine 0 gas fees"}
+                      text_size="18"
+                      text_size_to="28"
+                    ></TextSizeAdjuster>
+                  </p>
                   <span className={styles.tradingViewText}>
                     <ConnectWallet></ConnectWallet>
                   </span>
@@ -97,4 +112,6 @@ export default function Home({ children }: any) {
       )}
     </main>
   );
-}
+};
+
+export default Home;

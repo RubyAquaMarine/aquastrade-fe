@@ -6,8 +6,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import "react-range-slider-input/dist/style.css";
-import Image from "next/image";
-//import { cookies} from "next/headers";// todo dynamic rendering is server side only
+
 import { useAccount, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Perps.module.css";
 
