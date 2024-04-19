@@ -73,7 +73,7 @@ const AirDrop: React.FC = () => {
 
   const notify = () =>
     toast.success(
-      `Airdropped ${tokenSymbol} to ${totalWallets.current} wallets on 🌊 AquasTrade!`,
+      `Airdropped ${tokenSymbol} to ${totalWallets.current} wallets from 🌊 AquasTrade!`,
       {
         position: "bottom-left",
         autoClose: 4000,

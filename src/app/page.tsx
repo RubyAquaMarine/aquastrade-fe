@@ -5,7 +5,7 @@ import TextSizeAdjuster from "@/app/Components/ViewPort";
 import ConnectWallet from "@/app/Components/ConnectWallet";
 import ChartCandles from "@/app/api/binance";
 import dynamic from "next/dynamic";
-import styles from "./Styles/Links.module.css";
+import styles from "./Styles/Home.module.css";
 
 // build static chart for homepage
 const ChartComponent = dynamic(() => import("@/app/Components/ChartTV2"), {
@@ -58,7 +58,7 @@ const Home = ({ children, params }: any) => {
   }, []);
 
   return (
-    <main className={styles.p_body}>
+    <main className={styles.chart}>
       {!isClient ? (
         <div> </div>
       ) : (
@@ -69,33 +69,21 @@ const Home = ({ children, params }: any) => {
           dataTVVolume?.length !== 0 ? (
             <ChartComponent colors={{}} data={[dataTV, dataTVVolume]}>
               <div
-                className="w-screen h-screen flex z-40 justify-start items-center pl-10 pb-44 absolute top-10 left-0 
+                className="w-screen h-screen flex-wrap z-40 justify-start items-center pl-10 pb-44 absolute top-20 left-0 
                         xl:pl-40"
               >
-                <div
-                  className="
-           bg-opacity-0
-           rounded-2xl 
-           min-h-fit
-           flex-initial
-           z-50 
-           text-white
-           text-5xl  
-           w-min
-            h-max
-           justify-between"
-                >
-                  <span className="mt-0 font-medium w-72 sm:w-max ">
+                <div className={styles.container}>
+                  <span className={styles.text_title}>
                     <TextSizeAdjuster
                       text={" Connect Wallet to Start Trading"}
-                      text_size="32"
+                      text_size="24"
                       text_size_to="48"
                     ></TextSizeAdjuster>
                   </span>
-                  <p className={styles.tradingViewPara}>
+                  <p className={styles.text_body}>
                     <TextSizeAdjuster
                       text={"Reimagine 0 gas fees"}
-                      text_size="18"
+                      text_size="16"
                       text_size_to="28"
                     ></TextSizeAdjuster>
                   </p>
