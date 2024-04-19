@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useAccount, useBalance, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Dashboard.module.css";
 
-const Home = () => {
+//import TextSizeAdjuster from "@/app/Components/ViewPort"; // todo : ReferenceError: window is not defined 
+
+const Dashbaord = ({ children, params }: any) => {
   const { chains, switchChain } = useSwitchChain();
   const { address, isConnected, chain } = useAccount();
   const [addr, setAddr] = useState("");
@@ -18,7 +20,16 @@ const Home = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className={styles.midText}>Welcome to Aquas.Trade </h1>
+      <h4 className={styles.topText}>
+        <Link href="/nft">
+          Limited Collection - Utility driven NFT{"'"}s - Buy Now
+        </Link>
+      </h4>
+
+      <span className={styles.midText}>
+        {" "}
+     Welcome to Aquas.Trade
+      </span>
       <span>0 gas fees, NFT-powered AMM DEX, NFT Market Place,</span>
       <span> and leveraged trading on the</span>
       <span>
@@ -124,4 +135,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashbaord;
