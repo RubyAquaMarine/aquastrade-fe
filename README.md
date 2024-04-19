@@ -2,10 +2,12 @@
 
 0 gas fees, NFT-powered AMM DEX, NFT Market Place, and leveraged trading on the SKALE Network
 
+- AQUA: [read docs](/docs/AQUA.md)
 - AMM (v2): [list token](/docs/addNewTokens.md)
-- Perps
-- Games
-- NFT Market Place
+- ERC20 Airdrop: [read docs](/docs/Airdrop.md)
+- Perps: coming soon
+- Games: [coinflip](https://aquas.trade/dashboard/coinflip)
+- NFT Market Place: coming after [NFT Sales](https://aquas.trade/nft)
 
 ## tech
 
@@ -33,6 +35,10 @@ yarn start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Contributors
+
+- [readme](/docs/Contributors.md)
 
 # Security and Liability
 

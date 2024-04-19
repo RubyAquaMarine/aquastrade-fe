@@ -30,7 +30,7 @@
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.3",
     "sass": "^1.72.0",
-    "skale_metaport": "npm:@skalenetwork/metaport@2.1.0-develop.3",
+    "skale_metaport": "npm:@skalenetwork/metaport@2.1.0-develop.5",
     "viem": "^2.8.13",
     "wagmi": "^2.5.7",
     "web3": "^1.10.1"

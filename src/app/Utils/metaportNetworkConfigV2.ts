@@ -327,6 +327,9 @@ export const AquaConfig: interfaces.MetaportConfig = {
             "green-giddy-denebola": {
               wrapper: "0xD162bB5c75FE99144295b03510bAb2DF99617440",
             },
+            "affectionate-immediate-pollux": {
+              wrapper: "0xD162bB5c75FE99144295b03510bAb2DF99617440",
+            },
           },
         },
         prospect: {

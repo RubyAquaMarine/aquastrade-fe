@@ -13358,10 +13358,10 @@ sisteransi@^1.0.5:
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
 
-"skale_metaport@npm:@skalenetwork/metaport@2.1.0-develop.3":
-  version "2.1.0-develop.3"
-  resolved "https://registry.yarnpkg.com/@skalenetwork/metaport/-/metaport-2.1.0-develop.3.tgz#18166678e390ff9a63d2f202d6785104ee8e568e"
-  integrity sha512-0udBAKtu/8EcwKINnt6iIJU6Cg7W/Zipl4Kei+dr7GMxN4utq/WzZvnKL13teVKrTvbaSus4qngwYR+iTYFCVg==
+"skale_metaport@npm:@skalenetwork/metaport@2.1.0-develop.5":
+  version "2.1.0-develop.5"
+  resolved "https://registry.yarnpkg.com/@skalenetwork/metaport/-/metaport-2.1.0-develop.5.tgz#b0156928570cb28395d49ea104a8abfd8146fcb5"
+  integrity sha512-/M4EvU69NEU/br19UkC08XdRiae0M2sfgXMT2F6rq6bj4A1N8OMUOOpvz8pL4dJ/Z/QKgbjwvgDHkM91+WSyoA==
   dependencies:
     "@emotion/react" "^11.11.1"
     "@emotion/styled" "^11.11.0"
