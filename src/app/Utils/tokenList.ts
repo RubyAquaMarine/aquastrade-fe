@@ -58,7 +58,7 @@ export const tokenList = [
   {
     id: 8,
     symbol: "AQUA",
-    addr: "0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C",
+    addr: "0xF7F957D88768126916dAF3C1705D13C291d2B7D8",
     decimal: 18,
     logo: "/AQUA1.png",
   },

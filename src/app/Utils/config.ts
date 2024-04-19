@@ -28,7 +28,7 @@ export const contractAddresses = [
   {
     id: 4,
     name: "coinflip-aqua",
-    addr: "0xe137EDEDded60817e86085C0FacF950d4b5B73E7",
+    addr: "0xaCD323A49dC2Dd404551Ac9BfEB3e7Ef12aA3015",
   },
   {
     id: 5,

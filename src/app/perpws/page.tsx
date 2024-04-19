@@ -123,7 +123,7 @@ const Home = () => {
             <p className={styles.image_skl}>
               <Link href={`/perp/sklusdt`} className={styles.toggleButton}>
                 {" "}
-                Begin Trading{" "}
+                Coming Soon{" "}
               </Link>
             </p>
           </div>
