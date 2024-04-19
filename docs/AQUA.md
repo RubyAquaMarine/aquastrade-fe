@@ -1,8 +1,8 @@
 # AQUA token
 
-- address : 0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C
-- explorer : [0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C](https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C/read-contract#address-tabs)
-- AQUA Burned: https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x74f63Fd5F06e2A8B19409e0b3959941276c66f8C/read-contract#address-tabs
+- address : 0xF7F957D88768126916dAF3C1705D13C291d2B7D8
+- explorer : [0xF7F957D88768126916dAF3C1705D13C291d2B7D8](https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0xF7F957D88768126916dAF3C1705D13C291d2B7D8/read-contract#address-tabs)
+- AQUA Burned: https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0xF7F957D88768126916dAF3C1705D13C291d2B7D8/read-contract#address-tabs
 
 ## Roles
 
