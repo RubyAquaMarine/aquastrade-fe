@@ -68,10 +68,7 @@ const Home = ({ children, params }: any) => {
           dataTVVolume &&
           dataTVVolume?.length !== 0 ? (
             <ChartComponent colors={{}} data={[dataTV, dataTVVolume]}>
-              <div
-                className="w-screen h-screen flex-wrap z-40 justify-start items-center pl-10 pb-44 absolute top-20 left-0 
-                        xl:pl-40"
-              >
+              <div className={styles.container_positioning}>
                 <div className={styles.container}>
                   <span className={styles.text_title}>
                     <TextSizeAdjuster

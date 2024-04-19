@@ -1,5 +1,8 @@
 // using this on the home page
-import { useEffect, useRef, useState, useLayoutEffect } from "react";
+// @ts-nocheck
+"use client";
+
+import { useRef, useLayoutEffect } from "react";
 import { createChart } from "lightweight-charts";
 
 const ChartComponent: React.FC<{
@@ -17,19 +20,19 @@ const ChartComponent: React.FC<{
     },
   } = props;
   const chartContainerRef = useRef<HTMLDivElement>(null);
-  const CHART_WIDTH_OFFSET = 15;
-  const CHART_HEIGHT_OFFSET = 50;
+  const CHART_WIDTH_OFFSET = 0;
+  const CHART_HEIGHT_OFFSET = 52; // removes the header height
 
   useLayoutEffect(() => {
     const handleResize = () => {
       chart?.applyOptions({
-        width: window.innerWidth,
+        width: window.innerWidth - CHART_WIDTH_OFFSET,
         height: window.innerHeight - CHART_HEIGHT_OFFSET,
       });
     };
 
-    var chart = createChart(chartContainerRef.current!, {
-      width: window.innerWidth,
+    const chart = createChart(chartContainerRef.current!, {
+      width: window.innerWidth - CHART_WIDTH_OFFSET,
       height: window.innerHeight - CHART_HEIGHT_OFFSET,
       rightPriceScale: {
         scaleMargins: {
@@ -40,7 +43,6 @@ const ChartComponent: React.FC<{
       },
       layout: {
         background: { color: "#0d0d10" },
-
         textColor: "#d1d4dc",
       },
       grid: {
@@ -86,7 +88,7 @@ const ChartComponent: React.FC<{
 
     volumeSeries.setData(volumeSeriesData);
 
-    chart.applyOptions({
+    chart?.applyOptions({
       handleScroll: {
         horzTouchDrag: false,
         mouseWheel: false,
