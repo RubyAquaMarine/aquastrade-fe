@@ -32,6 +32,7 @@ const TextSizeAdjuster: React.FC<TextSizeAdjusterProps> = ({
       <p
         style={{
           fontSize: isVertical ? `${text_size}px` : `${text_size_to}px`,
+          maxWidth: isVertical ? "300px" : "99vw",
         }}
       >
         {/* Your text content */}
