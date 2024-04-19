@@ -169,41 +169,45 @@ const AirDrop: React.FC = () => {
 
   function parseEthAddresses(addressString: string): string[] {
     // Split the addressString by commas to get individual addresses
-    const addresses: string[] = addressString.split(",");
-    // Trim whitespace from each address and push it into a new array
-    const formattedAddresses: string[] = [];
-    addresses.forEach((address) => {
-      const trimmedAddress = address.trim();
-      if (trimmedAddress.length > 0) {
-        formattedAddresses.push(trimmedAddress);
-      }
-    });
+    if (addressString) {
+      const addresses: string[] = addressString.split(",");
+      // Trim whitespace from each address and push it into a new array
+      const formattedAddresses: string[] = [];
+      addresses.forEach((address) => {
+        const trimmedAddress = address.trim();
+        if (trimmedAddress.length > 0) {
+          formattedAddresses.push(trimmedAddress);
+        }
+      });
 
-    totalWallets.current = formattedAddresses?.length;
+      totalWallets.current = formattedAddresses?.length;
 
-    return formattedAddresses;
+      return formattedAddresses;
+    }
   }
 
   // todo , make a sum = total amount to approve to pass down into props
   function parseEthAmounts(addressString: string): bigint[] {
     let sumOf: bigint = BigInt(0);
-    // Split the addressString by commas to get individual addresses
-    const addresses: string[] = addressString.split(",");
-    // Trim whitespace from each address and push it into a new array
-    const formattedAddresses: bigint[] = [];
-    addresses.forEach((address) => {
-      const trimmedAddress = address.trim();
-      if (trimmedAddress.length > 0) {
-        let valueIs = parseUnits(trimmedAddress, 18); // do to , pass in decimals
-        sumOf = valueIs + sumOf;
-        formattedAddresses.push(valueIs);
-      }
-    });
 
-    setTotalAmounts.current = sumOf;
-    totalAmounts.current = formattedAddresses?.length;
+    if (addressString) {
+      // Split the addressString by commas to get individual addresses
+      const addresses: string[] = addressString.split(",");
+      // Trim whitespace from each address and push it into a new array
+      const formattedAddresses: bigint[] = [];
+      addresses.forEach((address) => {
+        const trimmedAddress = address.trim();
+        if (trimmedAddress.length > 0) {
+          let valueIs = parseUnits(trimmedAddress, 18); // do to , pass in decimals
+          sumOf = valueIs + sumOf;
+          formattedAddresses.push(valueIs);
+        }
+      });
 
-    return formattedAddresses;
+      setTotalAmounts.current = sumOf;
+      totalAmounts.current = formattedAddresses?.length;
+      return formattedAddresses;
+    }
   }
 
   const handleToEuropa = (
@@ -271,7 +275,8 @@ const AirDrop: React.FC = () => {
             onChange={(e) => setTokenAddresses(e.target.value)}
             className={styles.input_address}
           />
-          {isCommaAtEndOfAmounts.current === true ? (
+          {isCommaAtEndOfAmounts.current === true ||
+          typeof totalAmounts.current === "undefined" ? (
             <span></span>
           ) : (
             <span className={styles.text_center_warning}>
