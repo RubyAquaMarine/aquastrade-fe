@@ -69,7 +69,7 @@ const Home = ({ children, params }: any) => {
           dataTVVolume?.length !== 0 ? (
             <ChartComponent colors={{}} data={[dataTV, dataTVVolume]}>
               <div className={styles.container_positioning}>
-                <div className={styles.container}>
+                <div className={styles.text_container}>
                   <span className={styles.text_title}>
                     <TextSizeAdjuster
                       text={" Connect Wallet to Start Trading"}

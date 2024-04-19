@@ -1,10 +1,10 @@
 .tradingView {
   display: flex;
 }
-
+/* 100% view window to prevent the chart scrol bar from activating*/
 .container_positioning {
   z-index: 40;
-  width: fit-content;
+  width: 99vw;
   height: fit-content;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -17,13 +17,11 @@
 .chart {
   overflow-y: hidden;
   overflow-x: hidden;
-  border: 3px solid #120247;
+  border: 2px solid #120247;
 }
 
 .text_container {
-  padding: 5rem;
-
-  max-width: 200px;
+  max-width: 500px;
 
   margin-top: 25px;
   color: aliceblue;
@@ -31,6 +29,7 @@
 
 .text_title {
   font-size: 2rem;
+  max-width: 200px;
 }
 
 .text_body {
