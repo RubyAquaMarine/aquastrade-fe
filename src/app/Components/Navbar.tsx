@@ -49,7 +49,7 @@ const Navbar = () => {
             >
               <Dropdown.Item className={styles.popup_item_top}>
                 <Link href="/" className={styles.popup_item_link}>
-                  Home &emsp; &emsp; &emsp; &emsp; &emsp;{" "}
+                  Connect Wallet&emsp;&nbsp;
                 </Link>
               </Dropdown.Item>
 
