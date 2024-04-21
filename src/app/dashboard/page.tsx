@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useAccount, useBalance, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Dashboard.module.css";
 
-//import TextSizeAdjuster from "@/app/Components/ViewPort"; // todo : ReferenceError: window is not defined 
+//import TextSizeAdjuster from "@/app/Components/ViewPort"; // todo : ReferenceError: window is not defined
 
 const Dashbaord = ({ children, params }: any) => {
   const { chains, switchChain } = useSwitchChain();
@@ -26,10 +26,7 @@ const Dashbaord = ({ children, params }: any) => {
         </Link>
       </h4>
 
-      <span className={styles.midText}>
-        {" "}
-     Welcome to Aquas.Trade
-      </span>
+      <span className={styles.midText}> Welcome to Aquas.Trade</span>
       <span>0 gas fees, NFT-powered AMM DEX, NFT Market Place,</span>
       <span> and leveraged trading on the</span>
       <span>

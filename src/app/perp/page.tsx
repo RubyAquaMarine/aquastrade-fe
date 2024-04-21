@@ -119,7 +119,7 @@ const Home = () => {
             </p>
 
             <p className={styles.image_skl}>
-              <Link href={`/perp/sklusdt`} className={styles.toggleButton}>
+              <Link href={`/perp/ethusdt`} className={styles.toggleButton}>
                 {" "}
                 Coming Soon{" "}
               </Link>
