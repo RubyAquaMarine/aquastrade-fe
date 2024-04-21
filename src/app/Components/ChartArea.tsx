@@ -1,4 +1,5 @@
-// maybe test this
+// @ts-nocheck
+"use client";
 import { createChart, ColorType } from "lightweight-charts";
 import React, { useEffect, useRef } from "react";
 
