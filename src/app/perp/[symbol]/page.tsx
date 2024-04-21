@@ -152,8 +152,6 @@ const Home = ({ children, params }: any) => {
               {/** Note: todo: decimals skl and others 0.0000  */}
               {chartPrice ? chartPrice.toFixed(2) : "0.0"}
             </li>
-            Volume
-            <li> {dataIs.current?.k?.v ? dataIs.current?.k?.v.toFixed(2) :"0.0"}</li>
           </ul>
           {/** Note: render chart : load historical data: connect ws:  */}
           {dataIs.current?.E ? (
