@@ -31,7 +31,7 @@ interface CandlestickData {
 }
 
 const Home = ({ children, params }: any) => {
-  const [chartPrice, setChartPrice] = useState(0.0);
+  const [chartPrice, setChartPrice] = useState(0.01);
   const { address } = useAccount();
   const [inputs, setInputs] = useState(["", ""]);
   const [sliderValue, setSliderValue] = useState([30, 60]);
@@ -61,11 +61,13 @@ const Home = ({ children, params }: any) => {
     if (websocket) {
       websocket.onmessage = (event) => {
         const out = JSON.parse(event.data);
-        dataIs.current = out;
-        setChartPrice(dataIs.current?.k?.c);
-        const dataFormatted = configDataToSend(dataIs.current);
-        if (dataFormatted) {
-          setRenderAgain(dataFormatted);
+        if (out) {
+          dataIs.current = out;
+          setChartPrice(Number(dataIs.current?.k?.c));
+          const dataFormatted = configDataToSend(dataIs.current);
+          if (dataFormatted) {
+            setRenderAgain(dataFormatted);
+          }
         }
       };
     }
