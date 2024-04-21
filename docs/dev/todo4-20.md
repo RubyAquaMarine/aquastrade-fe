@@ -12,6 +12,8 @@
 
 # Perps
 
+working chart with historical data and ws: but renders two charts in `yarn dev` and only 1 chart in `prod` => good
+
 - /ComponentsChartTV2.1 (/perp/ethusdt)
 - /ComponentsChartTV2.2 (/perpws/ethusdt)
 - work on this one
@@ -21,18 +23,3 @@ timestamps are correct. Now the kline 1m wss is matched with 1m kline historical
 
 - - - build function that gets the symbol - ethusdt ; substract "usdt" and toUpperCase
 - - - get logo by ^^ Symbol ETH , BTC , etc automatically
-
-# charts
-
-: candlestickSeries.update
-
-import {
-CandlestickSeriesPartialOptions,
-ChartOptions,
-createChart,
-DeepPartial,
-HistogramSeriesPartialOptions,
-IChartApi,
-ISeriesApi,
-UTCTimestamp,
-} from "lightweight-charts";

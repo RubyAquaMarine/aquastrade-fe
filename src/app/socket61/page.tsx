@@ -2,13 +2,9 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-// using this
-//import WebSocketConnection from "@/app/Utils/WebSocketConnection";
 import WebSocketConnection from "@/app/Components/WebSocketConnection";
-
 import { getWebSocket } from "@/app/Utils/web-socket";
 import Chart from "@/app/Components/Chart6.1"; //
-
 import { useAccount, useSwitchChain } from "wagmi";
 
 /* using import Chart from "@/app/Components/Chart6";
@@ -19,7 +15,7 @@ import { useAccount, useSwitchChain } from "wagmi";
 
 /* using import Chart from "@/app/Components/Chart6";
 
-- ws within the component: not page 
+- ws within the component: not this pages websocket data 
 
 */
 
@@ -32,8 +28,7 @@ const Home = ({ children, params }: any) => {
   const { address, chain } = useAccount();
   //
   const domElement = useRef();
-  // create the Chart at initialize .. no way this is relevant or working . should be removed
-  // const chart = useRef();
+
   // save data from websocket
   const dataIs = useRef<any>({});
   // update ui
@@ -44,12 +39,10 @@ const Home = ({ children, params }: any) => {
     const websocket = getWebSocket();
     if (websocket) {
       websocket.onmessage = (event) => {
-        const out = JSON.parse(event.data); // converts to object in json format
+        const out = JSON.parse(event.data);
         dataIs.current = out;
         const dataFormatted = configDataToSend(dataIs.current);
         setRenderAgain(dataFormatted);
-
-        // chart.current.updateData(renderAgain);
       };
     }
   }, [dataIs]);

@@ -13,11 +13,10 @@
   position: absolute;
   left: 0;
 }
-
+/** reomve border on chart container*/
 .chart {
   overflow-y: hidden;
   overflow-x: hidden;
-  border: 2px solid #120247;
 }
 
 .text_container {
