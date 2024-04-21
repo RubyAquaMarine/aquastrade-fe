@@ -2,6 +2,7 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation"; // for client side
 
 import WebSocketConnection from "@/app/Components/WebSocketConnection";
@@ -30,6 +31,7 @@ interface CandlestickData {
 }
 
 const Home = ({ children, params }: any) => {
+  const [chartPrice, setChartPrice] = useState(0.0);
   const { address } = useAccount();
   const [inputs, setInputs] = useState(["", ""]);
   const [sliderValue, setSliderValue] = useState([30, 60]);
@@ -60,6 +62,7 @@ const Home = ({ children, params }: any) => {
       websocket.onmessage = (event) => {
         const out = JSON.parse(event.data);
         dataIs.current = out;
+        setChartPrice(dataIs.current?.k?.c);
         const dataFormatted = configDataToSend(dataIs.current);
         if (dataFormatted) {
           setRenderAgain(dataFormatted);
@@ -129,11 +132,28 @@ const Home = ({ children, params }: any) => {
           {/** Notes top navigation  and add li for new columns  */}
           <ul className={styles.tradeNav}>
             <li className={styles.tradeAvailAssets}>
-              {" "}
-              (logo) <b>{params?.symbol.toUpperCase()}</b>{" "}
+              {/** Not ready for Asset  navigation yet: need functional chart component  */}
+              <span>
+                {" "}
+                <Image
+                  src="/ETH.svg"
+                  alt="Skale: Perpertual Assets Menu"
+                  width={22}
+                  height={22}
+                  priority
+                />{" "}
+              </span>{" "}
+              <span className={styles.tradeAvailAssetsMargin}>
+                {" "}
+                <b>{params?.symbol.toUpperCase()}</b>{" "}
+              </span>
             </li>
-            <li> {dataIs.current?.k?.c}</li>
-            <li> {dataIs.current?.k?.v}</li>
+            <li className={styles.tradeAvailAssetsPrice}>
+              {/** Note: todo: decimals skl and others 0.0000  */}
+              {chartPrice ? chartPrice.toFixed(2) : "0.0"}
+            </li>
+            Volume
+            <li> {dataIs.current?.k?.v ? dataIs.current?.k?.v.toFixed(2) :"0.0"}</li>
           </ul>
           {/** Note: render chart : load historical data: connect ws:  */}
           {dataIs.current?.E ? (

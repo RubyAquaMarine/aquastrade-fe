@@ -61,13 +61,35 @@ margin top and bottom to center the cell within the nav etter
 }
 
 .tradeAvailAssets {
+  display: flex;
+  justify-content: center;
   position: static;
-  min-width: 60px;
-  font-size: 22px;
-  background-color: #2196f3;
-
-  border-radius: 6px;
+  max-height: 50px;
+  min-width: 180px;
+  font-size: 28px;
+  border-bottom: 2px solid #2196f3;
   padding: 0.2rem 1rem;
+}
+.tradeAvailAssets:hover {
+  border-radius: 6px;
+  background-color: #2196f3;
+}
+.tradeAvailAssetsMargin {
+  margin-left: 10px;
+}
+
+.tradeAvailAssetsPrice {
+  font-size: 44px;
+}
+
+.tradeAvailAssetsPriceUp {
+  font-size: 48px;
+  color: #a6f86d;
+}
+
+.tradeAvailAssetsPriceDown {
+  font-size: 48px;
+  color: #ff5c66;
 }
 
 /*
