@@ -150,7 +150,9 @@ const Home = ({ children, params }: any) => {
             </li>
             <li className={styles.tradeAvailAssetsPrice}>
               {/** Note: todo: decimals skl and others 0.0000  */}
-              {chartPrice ? chartPrice.toFixed(2) : "0.0"}
+              {chartPrice && typeof chartPrice === "number"
+                ? chartPrice?.toFixed(2)
+                : "0.0"}
             </li>
           </ul>
           {/** Note: render chart : load historical data: connect ws:  */}
