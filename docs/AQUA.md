@@ -6,14 +6,23 @@
 
 ## Roles
 
-- minter role revoked : https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/0xdd904d6b76f4a57c604b82dfe5996ccb7b187a329246250c1d47fc9738b4f7ae
-- burner role granted : https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/0x3b89aeda851e7000d8bc1a35a9018354fe7c94a8bfa504171d05295794c2830e
+- minter role revoked : https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/0xf43a6a9926368529de370dafa227b17b743ec495387ba570a21594158293ba1f
+- burner role granted : https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/0x0667458ef8da787f0903b53afcbd078bc31ddc45ccc458bcd2f8040c23e3c618
+
+## Burner
+
+Role
+
+`0x3c11d16cbaffd01df69ce1c404f6340ee057498f5f00246190ea54220576a848`
 
 ## Minter
 
+Role
+
+`0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6`
+
 - `getRoleMemberCount(0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6)` == 1
 - - Minter : IMA Bridge : `0xD2aAA00500000000000000000000000000000000`
-- - granted tx: https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/0x77c4ede68a55462c1fcee977da4a6dea2c50544d6c8a2508ec645ddf619097ad
 
 ## Details
 
@@ -29,7 +38,7 @@ Tokenomics for the AQUA token that powers Aquas.Trade
 
 Airdrop 10% of the token supply over a 10 year period. This will result in an one percent inflation for the next 10 years.
 
-### 10% - airdrop
+### 10% - Airdrop
 
 Quarterly airdrops (snapshot on 1st of month)
 

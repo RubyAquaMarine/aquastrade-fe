@@ -13,9 +13,6 @@ import {
 import styles from "@/app/Styles/AMM.module.css";
 
 const NFTBalance = () => {
-  const toggleAMMFeatures = useRef("swap"); // swap, add, list
-  const [ammFeature, setAMMFeature] = useState("swap"); // swap, add, list
-
   const { address, isConnected, chain } = useAccount();
 
   // NFT Balances
@@ -40,7 +37,7 @@ const NFTBalance = () => {
   return (
     <main>
       <div className={styles.input_container}>
-        {address ? (
+        {address && isConnected ? (
           <div>
             <div className={styles.input_container_solo}>
               <p>Gold NFT Holder</p>
@@ -70,7 +67,17 @@ const NFTBalance = () => {
             </div>
           </div>
         ) : (
-          <div></div>
+          <div>
+            <ul>
+              <li>
+                <Link href="/">
+                  {" "}
+                  <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+                  features)
+                </Link>
+              </li>
+            </ul>
+          </div>
         )}
       </div>
     </main>
