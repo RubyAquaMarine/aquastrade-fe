@@ -175,3 +175,14 @@
     transform: rotate(360deg);
   }
 }
+
+.input_container {
+  padding: 0.4rem 0.6rem;
+  border-radius: 12px;
+  min-width: 300px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border: 1px solid #475384;
+}

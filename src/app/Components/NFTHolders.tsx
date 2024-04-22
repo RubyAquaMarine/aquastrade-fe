@@ -5,7 +5,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 import { formatUnits } from "viem";
-
+import AirDrop from "@/app/Components/AirDrop";
 import { useNFTs } from "@/app/Hooks/useAMM";
 import {
   MARKETPLACE_GOLD_NFT,
@@ -16,6 +16,8 @@ import styles from "@/app/Styles/AMM.module.css";
 
 const NFTHolder = () => {
   const isNFTHolder = useRef(false);
+  const [nftHolder, setNFTHolder] = useState(false);
+
   const { address, isConnected, chain } = useAccount();
 
   // NFT Balances
@@ -36,9 +38,15 @@ const NFTHolder = () => {
   );
 
   useEffect(() => {
-    if (isConnected && address) {
-      isNFTHolder.current = false;
+    isNFTHolder.current = false;
 
+    if (
+      isConnected &&
+      address &&
+      !loadingBronze &&
+      !loadingSilver &&
+      !loadingGold
+    ) {
       if (nft_gold_balance && typeof nft_gold_balance === "bigint") {
         isNFTHolder.current = true;
       }
@@ -50,6 +58,8 @@ const NFTHolder = () => {
       if (nft_bronze_balance && typeof nft_bronze_balance === "bigint") {
         isNFTHolder.current = true;
       }
+
+      setNFTHolder(isNFTHolder.current);
 
       console.log(
         "NFT Holder: ",
@@ -67,18 +77,30 @@ const NFTHolder = () => {
     nft_bronze_balance,
   ]);
 
+  console.log(
+    "Rending: NFT Holder Component: ",
+    isNFTHolder.current,
+    nftHolder,
+  );
+
   return (
     <>
-      {isNFTHolder.current === true ? (
+      {address && isConnected && nftHolder && nftHolder === true ? (
         <div id="PASS" className={styles.input_container}>
-          Welcome NFT Holder
+          <AirDrop></AirDrop>
         </div>
       ) : (
-        <div id="FAIL" className={styles.input_container}>
-          <Link href="/nft">
-            {" "}
-            <b>Back </b>(Buy any NFT to unlock features)
-          </Link>
+        <div id="FAIL">
+          {nftHolder === false ? (
+            <span className={styles.input_container}>
+              <Link href="/nft">
+                {" "}
+                <b>Back </b>(Buy any NFT to unlock features)
+              </Link>
+            </span>
+          ) : (
+            <span></span>
+          )}
         </div>
       )}
     </>
