@@ -18,6 +18,10 @@ const ChartComponent: React.FC<{
   } = props;
   const chartContainerRef = useRef<HTMLDivElement>(null);
 
+  console.log(" DEBUG TV CHART AGAIN ", props);
+
+  console.log(" DEBUG TV CHART AGAIN : Stream", props?.stream);
+
   useLayoutEffect(() => {
     const handleResize = () => {
       chart?.applyOptions({
@@ -126,18 +130,15 @@ const ChartComponent: React.FC<{
       });
 
       console.error("TV (set up) done ");
-    }
-
-    // input stream data
-    if (props?.stream && props?.stream?.time) {
-      console.error(
+    } else {
+      console.log(
         "TV (container) update  stream",
         props?.stream,
         " ContainerID: ",
         chartContainerRef?.current,
       );
 
-      candlestick.update(props?.stream);
+      candlestick.update(props.stream);
     }
 
     window.addEventListener("resize", handleResize);

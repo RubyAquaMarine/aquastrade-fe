@@ -33,3 +33,4 @@ Run these commands before PR
 
 1. `npx prettier . --write`
 2. `yarn build`
+   If everything is ok, proceed with your proposal.

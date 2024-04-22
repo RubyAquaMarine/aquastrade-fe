@@ -3,11 +3,11 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import TextSizeAdjuster from "@/app/Components/ViewPort";
 import ConnectWallet from "@/app/Components/ConnectWallet";
-import ChartCandles from "@/app/api/binance";
 import dynamic from "next/dynamic";
 import styles from "./Styles/Home.module.css";
 
 // build static chart for homepage
+import ChartCandles from "@/app/api/binance";
 const ChartComponent = dynamic(() => import("@/app/Components/ChartTV2"), {
   ssr: false,
 });

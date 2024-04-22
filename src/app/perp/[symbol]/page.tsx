@@ -1,21 +1,21 @@
+// @ts-nocheck
 "use client";
-import React, { useEffect, useState } from "react";
-//import { useRouter } from "next/router"  // For server side
-import { usePathname, useRouter } from "next/navigation"; // for client side
-import dynamic from "next/dynamic";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation"; // for client side
 
-import "react-range-slider-input/dist/style.css";
+import WebSocketConnection from "@/app/Components/WebSocketConnection";
+import { getWebSocket } from "@/app/Utils/web-socket";
+import Chart from "@/app/Components/Chart6.2"; // 6.2 resize to original,,,
 
 import { useAccount, useSwitchChain } from "wagmi";
+
 import styles from "@/app/Styles/Perps.module.css";
 
-import ChartCandles from "@/app/api/binance";
+const testTF = "1m";
 
-const ChartComponent = dynamic(() => import("@/app/Components/ChartTV2.1"), {
-  ssr: false,
-});
-
+// add this to
 interface CandlestickData {
   time: string;
   /** Opening price */
@@ -31,42 +31,70 @@ interface CandlestickData {
 }
 
 const Home = ({ children, params }: any) => {
+  const [chartPrice, setChartPrice] = useState(0.01);
+  const { address } = useAccount();
   const [inputs, setInputs] = useState(["", ""]);
   const [sliderValue, setSliderValue] = useState([30, 60]);
-  const [dataTV, setDataToTV] = useState<Array<CandlestickData>>([]);
-  const [dataTVVolume, setDataToTVVolume] = useState<Array<CandlestickData>>(
-    [],
-  );
-
+  // Add Chart.6.1
+  const domElement = useRef();
+  const dataIs = useRef<any>({});
+  const [renderAgain, setRenderAgain] = useState<any>();
   const url = usePathname();
   const Asset = url.slice(6).toUpperCase();
-  console.error(" Route Url is ", Asset);
+  console.log(" Route Url is ", Asset, " ws data ", dataIs, " addr: ", address);
 
   const desc = ["0.0", "50"];
   const desctwo = ["PAY", "POSITION"];
 
-  const getDataCallBack = async () => {
-    try {
-      const bars = await ChartCandles(Asset);
-      console.error("Rendered bars: ", bars?.[0], bars?.[1]);
-      setDataToTV(bars?.[0]);
-      setDataToTVVolume(bars?.[1]);
-    } catch {
-      console.error("unable to get ChartCandles() ");
+  // nothing important here. just testing
+  useEffect(() => {
+    const _domElement = window.document.getElementById("btc");
+    console.log(" Dom is ", _domElement);
+    // btc is no longer found and now wow chart is being assigned
+    const _domElementChart = window.document.getElementById("wow-chart");
+    console.log(" Chart  is ", _domElementChart);
+  });
+
+  // Connect to websocket
+  useEffect(() => {
+    const websocket = getWebSocket();
+    if (websocket) {
+      websocket.onmessage = (event) => {
+        const out = JSON.parse(event.data);
+        if (out) {
+          dataIs.current = out;
+          setChartPrice(Number(dataIs.current?.k?.c));
+          const dataFormatted = configDataToSend(dataIs.current);
+          if (dataFormatted) {
+            setRenderAgain(dataFormatted);
+          }
+        }
+      };
     }
-  };
+  }, [dataIs]);
 
+  // nothing important here. just testing
   useEffect(() => {
-    getDataCallBack();
-  }, [Asset]);
+    const _domElement = window.document.getElementById("btc");
+    domElement.current = _domElement;
+    console.log(" Dom is ", domElement);
+    // btc is no longer found and now wow chart is being assigned
+    const _domElementChart = window.document.getElementById("wow-chart");
+    console.log(" Chart  is ", _domElementChart);
+  });
 
-  const { chains, switchChain } = useSwitchChain();
-  const { address } = useAccount();
-  const [addr, setAddr] = useState("");
+  function configDataToSend(dataToSend: any) {
+    let data = {
+      date: dataToSend["E"], // Kline Close time
+      open: dataToSend["k"]["o"], // Open price
+      high: dataToSend["k"]["h"], // High price
+      low: dataToSend["k"]["l"], // Low price
+      close: dataToSend["k"]["c"], // Close price
+      volume: dataToSend["k"]["v"], // Volume
+    };
 
-  useEffect(() => {
-    setAddr(address as string);
-  }, [address]);
+    return JSON.stringify(data);
+  }
 
   const handleInputChange = (index: number, value: string) => {
     const newInputs = [...inputs];
@@ -87,7 +115,7 @@ const Home = ({ children, params }: any) => {
 
   return (
     <main className="">
-      {!addr ? (
+      {!address ? (
         <div className={styles.p_styled}>
           <ul>
             <li>
@@ -100,95 +128,130 @@ const Home = ({ children, params }: any) => {
         </div>
       ) : (
         <div className={styles.tradeContainer}>
-          <div>
-            {/** Notes top navigation  and add li for new columns  */}
-            <ul className={styles.tradeNav}>
-              <li className={styles.tradeAvailAssets}>
+          {children}
+          {/** Note: idk why this is required since  <Chart> contains the ws connection  */}
+          <WebSocketConnection></WebSocketConnection>
+          {/** Notes top navigation  and add li for new columns  */}
+          <ul className={styles.tradeNav}>
+            <li className={styles.tradeAvailAssets}>
+              {/** Not ready for Asset  navigation yet: need functional chart component  */}
+              <span>
                 {" "}
-                (logo) <b>{params?.symbol.toUpperCase()}</b>{" "}
-              </li>
-              <li>3923.42</li>
-              <li>+4.04% </li>
-
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-          </div>
-          {/** Notes  */}
-
-          <div className={styles.tradeChart}>
-            <ChartComponent colors={{}} data={[dataTV, dataTVVolume]}>
-              {children}
-            </ChartComponent>
-          </div>
-
-          <div>
-            <ul className={styles.tradeButtons}>
-              <li> pnl </li>
-
-              <li className={styles.tradeButtonSell}>
-                <button>Sell</button>
-              </li>
-              <li>
+                <Image
+                  src="/ETH.svg"
+                  alt="Skale: Perpertual Assets Menu"
+                  width={22}
+                  height={22}
+                  priority
+                />{" "}
+              </span>{" "}
+              <span className={styles.tradeAvailAssetsMargin}>
                 {" "}
-                {inputs.map((value, index) => (
-                  <div key={index} className="mb-4">
-                    <p>
-                      {" "}
-                      {`${desctwo[index]}`}{" "}
-                      {desctwo[index] === "PAY" ? (
-                        <li className={styles.tradeBalance}>
-                          <Link href={`/user/${address}`}>
-                            {" "}
-                            {/* add balance input here */} Balance: $94.0493{" "}
-                          </Link>
-                        </li>
-                      ) : (
-                        <li></li>
-                      )}
-                    </p>
+                <b>{params?.symbol.toUpperCase()}</b>{" "}
+              </span>
+            </li>
+            <li className={styles.tradeAvailAssetsPrice}>
+              {/** Note: todo: decimals skl and others 0.0000  */}
+              {chartPrice && typeof chartPrice === "number"
+                ? chartPrice?.toFixed(2)
+                : "0.0"}
+            </li>
+          </ul>
+          {/** Note: render chart : load historical data: connect ws:  */}
+          {dataIs.current?.E ? (
+            <div id="wow-chart">
+              <Chart
+                props={[
+                  dataIs.current?.s,
+                  testTF,
+                  dataIs.current?.E,
+                  dataIs.current?.k?.o,
+                  dataIs.current?.k?.h,
+                  dataIs.current?.k?.l,
+                  dataIs.current?.k?.c,
+                  dataIs.current?.k?.v,
+                ]}
+              ></Chart>
+            </div>
+          ) : (
+            <div>no chart error?</div>
+          )}
 
-                    <p>
-                      {" "}
-                      {desctwo[index] === "POSITION" ? (
-                        <li className={styles.tradeBalance}>
-                          <Link href={`/user/${address}`}>
-                            {" "}
-                            {/* add liq price input here */} Liq Price: 0.23 |
-                            0.08{" "}
-                          </Link>
-                        </li>
-                      ) : (
-                        <li></li>
-                      )}
-                    </p>
+          {/** Note: for nav here - tf -   */}
+          <span className={styles.tradeNav}>
+            {" "}
+            <span className={styles.tradeTF}>M1 </span>{" "}
+            <span className={styles.tradeTF}>M5 </span>{" "}
+            <span className={styles.tradeTF}>M30 </span>{" "}
+            <span className={styles.tradeTF}> H1</span>{" "}
+            <span className={styles.tradeTF}>H6 </span>{" "}
+            <span className={styles.tradeTF}> H12</span>
+          </span>
 
+          <ul className={styles.tradeButtons}>
+            <li> pnl </li>
+
+            <li className={styles.tradeButtonSell}>
+              <button>Sell</button>
+            </li>
+            <li>
+              {" "}
+              {inputs.map((value, index) => (
+                <div key={index} className="mb-4">
+                  <p>
+                    {" "}
+                    {`${desctwo[index]}`}{" "}
                     {desctwo[index] === "PAY" ? (
-                      <li>
-                        <input
-                          className={styles.tradeInput}
-                          type="text"
-                          value={getInputValue(index)} // Call a function to get the appropriate value
-                          onChange={(e) =>
-                            handleInputChange(index, e.target.value)
-                          }
-                          placeholder={`${desc[index]}`}
-                        />
+                      <li className={styles.tradeBalance}>
+                        <Link href={`/user/${address}`}>
+                          {" "}
+                          {/* add balance input here */} Balance: $94.0493{" "}
+                        </Link>
                       </li>
                     ) : (
                       <li></li>
                     )}
-                  </div>
-                ))}
-              </li>
+                  </p>
 
-              <li className={styles.tradeButtonBuy}>
-                <button>Buy</button>
-              </li>
-              <li className={styles.tradeSlider}> </li>
-            </ul>
-          </div>
+                  <p>
+                    {" "}
+                    {desctwo[index] === "POSITION" ? (
+                      <li className={styles.tradeBalance}>
+                        <Link href={`/user/${address}`}>
+                          {" "}
+                          {/* add liq price input here */} Liq Price: 0.23 |
+                          0.08{" "}
+                        </Link>
+                      </li>
+                    ) : (
+                      <li></li>
+                    )}
+                  </p>
+
+                  {desctwo[index] === "PAY" ? (
+                    <li>
+                      <input
+                        className={styles.tradeInput}
+                        type="text"
+                        value={getInputValue(index)} // Call a function to get the appropriate value
+                        onChange={(e) =>
+                          handleInputChange(index, e.target.value)
+                        }
+                        placeholder={`${desc[index]}`}
+                      />
+                    </li>
+                  ) : (
+                    <li></li>
+                  )}
+                </div>
+              ))}
+            </li>
+
+            <li className={styles.tradeButtonBuy}>
+              <button>Buy</button>
+            </li>
+            <li className={styles.tradeSlider}> </li>
+          </ul>
         </div>
       )}
     </main>
