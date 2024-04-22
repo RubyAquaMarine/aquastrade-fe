@@ -1,28 +1,37 @@
 "use client";
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useAccount, useSwitchChain } from "wagmi";
 import { CHAIN } from "@/app/Utils/config";
-import AirDrop from "@/app/Components/AirDrop";
 import styles from "@/app/Styles/Airdrop.module.css";
 import SpinImage from "@/app/Components/SpinImage";
+import NFTHolder from "@/app/Components/NFTHolders";
+
 const Home = ({ children, params }: any) => {
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
 
-  const handleToEuropa = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    targetChainId: number,
-  ) => {
-    console.log("Handle Network Switch");
-    if (chain) {
-      if (chain.id !== targetChainId) {
-        event.preventDefault();
-        // @ts-ignore: Unreachable code error
-        switchChain({ chainId: targetChainId });
-      }
+  const [nftHolder, setNFTHolder] = useState("");
+
+  const isNFTHolder = useRef<HTMLDivElement>(null);
+  const test = isNFTHolder.current?.children;
+
+  console.log("isNFTHolder Test ", test, nftHolder);
+
+  if (test && test?.length >= 1) {
+    console.log(
+      "isNFTHolder  ",
+      isNFTHolder,
+      "child is ",
+      isNFTHolder.current?.children[0]?.id,
+    );
+  }
+
+  useEffect(() => {
+    if (isConnected && address && test) {
+      setNFTHolder(isNFTHolder.current?.children[0]?.id);
     }
-  };
+  }, [address, isConnected, test]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -47,7 +56,7 @@ const Home = ({ children, params }: any) => {
         </div>
       ) : (
         <div>
-          <AirDrop></AirDrop>
+          <div ref={isNFTHolder}>{<NFTHolder />} </div>
           <p>
             <span className={styles.text_center}> Connected to:</span>{" "}
           </p>
@@ -59,3 +68,18 @@ const Home = ({ children, params }: any) => {
 };
 
 export default Home;
+
+/*
+
+ {isNFTHolder && isNFTHolder.current?.children[0]?.id === "PASS" ? (
+            <div id="airdrop"></div>
+          ) : (
+            <div id="FAIL" className={styles.input_container}>
+              <Link href="/nft">
+                {" "}
+                <b>Back </b>(Buy any NFT to unlock features)
+              </Link>
+            </div>
+          )}
+
+      */

@@ -33,10 +33,14 @@ if these values change, then re-render
 - useful for
 
 ```js
-onClick ={ () => setValueForuseState(new.value)}
+onClick ={ () => setStateValue(new.value)}
 ```
 
+Arrays
+
+```
 useState<Array<CandlestickData>>([]);
+```
 
 ## hooks
 
