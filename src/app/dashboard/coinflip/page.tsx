@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 import Link from "next/link";
-import { useAccount, useSwitchChain, useWriteContract } from "wagmi";
+import { useAccount } from "wagmi";
 import CoinFlip from "@/app/Components/CoinFlip";
 import styles from "@/app/Styles/Coinflip.module.css";
 import { CHAIN, contractAddresses } from "@/app/Utils/config";
@@ -44,7 +44,9 @@ const Home = () => {
         </div>
       )}
       <span className={styles.midText_xs}>1. Enter amount to bet</span>
-      <span className={styles.midText_xs}>2. Flip to win</span>
+      <span className={styles.midText_xs}>
+        2. Please {'"'}flip{'"'} , complete tx in wallet.
+      </span>
       <span className={styles.midText_xs}>3. Collect rewards</span>
     </main>
   );

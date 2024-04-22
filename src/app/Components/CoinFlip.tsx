@@ -1,10 +1,17 @@
 // @ts-nocheck
 
 "use client";
-
+import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { parseEther, formatUnits } from "viem";
-import { useAccount, useSwitchChain, useWriteContract } from "wagmi";
+import {
+  useAccount,
+  useSwitchChain,
+  useWriteContract,
+  useWaitForTransactionReceipt,
+} from "wagmi";
+import { ToastContainer, Slide, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import TokenApprove from "@/app/Components/TokenApprove";
 import TokenBalance from "@/app/Components/TokenBalance";
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
@@ -22,10 +29,17 @@ interface Props {
 const CoinFlip = (params: Props) => {
   const allowancesTest = useRef(undefined);
   const [inputs, setInputs] = useState([""]);
-  const [notification, setNotification] = useState("");
+
+  const [totalWins, setTotalWins] = useState("");
+  const [totalLosses, setTotalLosses] = useState("");
+  const [totalBalance, setTotalBalance] = useState("");
+
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
-  const { writeContract } = useWriteContract();
+  const { data: hash, writeContract } = useWriteContract();
+  const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
 
   // Use the Symbol to find the Token Address || or use PayToken (RPC)
   const token_address_erc20 = findTokenAddressFromSymbol(params?.props?.[1]);
@@ -38,8 +52,6 @@ const CoinFlip = (params: Props) => {
   } = useCoinflip(params?.props?.[0], "totalLoss", [address]);
   const { data: win } = useCoinflip(params?.props?.[0], "totalWins", [address]);
   const { data: bal } = useCoinflip(params?.props?.[0], "balances", [address]);
-
-  console.error("READ CONTRACT token balances'", bal);
 
   const array: any[any] = [address, params?.props?.[0]];
   const { data: tokenAllowance } = useERC20Token(
@@ -56,6 +68,14 @@ const CoinFlip = (params: Props) => {
       allowancesTest.current = tokenAllowance;
     }
   }, [tokenAllowance, token_address_erc20]);
+
+  useEffect(() => {
+    setTotalWins(win);
+    setTotalLosses(loss);
+    setTotalBalance(bal);
+    console.log(" Update Win / Loss ", win, loss);
+    console.log(" Update Balance", bal);
+  }, [win, loss, bal]);
 
   const handleInputChange = (index: number, value: string) => {
     const newInputs = [...inputs];
@@ -76,10 +96,6 @@ const CoinFlip = (params: Props) => {
         });
         break;
     }
-
-    setNotification(`"Flipped Coin for " ${inputs[0]}`);
-
-    console.log("Notify: ", notification);
   };
 
   const handleButtonClickWithdraw = (index: number) => {
@@ -104,13 +120,39 @@ const CoinFlip = (params: Props) => {
     if (chain) {
       if (chain.id !== targetChainId) {
         event.preventDefault();
-        const mess = `Please switch network to ChainID ${targetChainId} to access this link.`;
-        setNotification(mess);
         // @ts-ignore: Unreachable code error
         switchChain({ chainId: targetChainId });
       }
     }
   };
+
+  const CustomToastWithLink = (_url: string) => (
+    <div>
+      <Link href={_url} target="_blank">
+        Coinflip Tx Hash on 🌊 AquasTrade
+      </Link>
+    </div>
+  );
+  // `${_message} on 🌊 AquasTrade! [tx] Hash: ${_link}`
+  const notify = (_link: string) =>
+    toast.info(CustomToastWithLink(_link), {
+      position: "bottom-left",
+      autoClose: 8000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
+    });
+
+  useEffect(() => {
+    if (contractCallDataConfirmed) {
+      const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
+      notify(isLink);
+    }
+  }, [contractCallDataConfirmed]);
 
   return (
     <main>
@@ -189,7 +231,7 @@ const CoinFlip = (params: Props) => {
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {address && loss ? (
+                  {address && loss && !isLoading ? (
                     <button className={styles.buttonDisplay}>
                       Losses: {loss?.toString()}
                     </button>
@@ -239,6 +281,9 @@ const CoinFlip = (params: Props) => {
       ) : (
         <div> </div>
       )}
+      <span>
+        <ToastContainer />
+      </span>
     </main>
   );
 };
