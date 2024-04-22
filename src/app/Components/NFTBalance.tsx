@@ -1,5 +1,6 @@
 // @ts-nocheck
 "use client";
+import Link from "next/link";
 import { useAccount } from "wagmi";
 import React, { useState, useRef } from "react";
 import { formatUnits } from "viem";
