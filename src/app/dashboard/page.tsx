@@ -21,9 +21,10 @@ const Dashbaord = ({ children, params }: any) => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h4 className={styles.topText}>
-        <Link href="/nft">
-          Limited Collection - Utility driven NFT{"'"}s - Buy Now
-        </Link>
+        <span>Utility driven NFT Collection - </span>{" "}
+        <span className={styles.top_text_link}>
+          <Link href="/nft">Buy Now</Link>
+        </span>
       </h4>
 
       <span className={styles.midText}> Welcome to Aquas.Trade</span>
@@ -31,7 +32,11 @@ const Dashbaord = ({ children, params }: any) => {
       <span> and leveraged trading on the</span>
       <span>
         {" "}
-        <Link href="https://skale.space" target="_blank">
+        <Link
+          href="https://skale.space"
+          target="_blank"
+          className={styles.top_text_link}
+        >
           {" "}
           <b>SKALE</b> Network
         </Link>
@@ -54,41 +59,41 @@ const Dashbaord = ({ children, params }: any) => {
           <div className={styles.p_styled}>
             <ul>
               <li className={styles.text_heading}>Features</li>
-              <li>
+              <li className={styles.text_button}>
                 <Link href="/dashboard/metaport">Bridge</Link>
               </li>
-              <li>
+              <li className={styles.text_button}>
                 <Link href="/dashboard/games">Games</Link>
               </li>
-              <li>
+              <li className={styles.text_button}>
                 {" "}
                 <Link href={`/dashboard/marketplace`}>Market Place</Link>
               </li>{" "}
-              <li>
+              <li className={styles.text_button}>
                 <Link href="/dashboard/airdrop">Token Airdrop</Link>
               </li>
-              <li>
+              <li className={styles.text_button}>
                 {" "}
                 <Link href={`/user/${address}`}>Token List</Link>
               </li>
               <li className={styles.text_heading}>Trade</li>
-              <li>
+              <li className={styles.text_button}>
                 {" "}
                 <Link href={`/swap/amm`}>Tokens</Link>
               </li>
-              <li>
+              <li className={styles.text_button}>
                 {" "}
                 <Link href={`/perp`}>Perps</Link>
               </li>
               <li className={styles.text_heading}>Trade 3rd Party</li>
-              <li>
+              <li className={styles.text_button}>
                 {" "}
                 <Link href={`/swap/lifi`}>Lifi</Link>
               </li>
             </ul>
           </div>
 
-          <p>
+          <div>
             {!chain ? (
               <span className={styles.text_style_border}>
                 Unsupported Network : Recommended Network is Europa Liquidity
@@ -96,27 +101,43 @@ const Dashbaord = ({ children, params }: any) => {
               </span>
             ) : (
               <span>
-                <span className={styles.text_center}> Connected to:</span>{" "}
-                <span className={styles.text_style_border}>{chain?.name} </span>
-                <span className={styles.text_style_border}>
-                  {" "}
-                  {!isError && walletFuel?.symbol} :{" "}
-                  {!isError && walletFuel?.formatted}{" "}
-                </span>
+                <span className={styles.text_padding}> Connected to: </span>
+                <span className={styles.p_styled}>
+                  <ul>
+                    <li className={styles.text_padding}>
+                      <Link
+                        href="https://elated-tan-skat.explorer.mainnet.skalenodes.com"
+                        target="_blank"
+                      >
+                        {chain?.name}{" "}
+                      </Link>
+                    </li>
+
+                    <li className={styles.text_padding}>
+                      {" "}
+                      {!isError && walletFuel?.symbol} :{" "}
+                      {!isError && walletFuel?.formatted}{" "}
+                    </li>
+                    <li className={styles.text_padding_sm}>
+                      {address && address}
+                    </li>
+                  </ul>
+                </span>{" "}
               </span>
             )}
-          </p>
+          </div>
 
-          <p className={styles.space_border}>
+          <span className={styles.text_padding}>
+            {" "}
             Select chain to switch networks{" "}
-          </p>
+          </span>
 
           <div>
             <ul>
               {chains.map((chain, index) => (
-                <li key={index} className={styles.connectorButton}>
+                <li key={index} className={styles.text_padding}>
                   <button
-                    className={styles.toggleButton_bk}
+                    className={styles.toggle_network}
                     // @ts-ignore: Unreachable code error
                     onClick={() => switchChain({ chainId: chain.id })}
                   >

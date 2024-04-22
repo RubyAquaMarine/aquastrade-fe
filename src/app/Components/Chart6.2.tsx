@@ -218,7 +218,6 @@ const Chart = (props: CandleConfig) => {
   return (
     <>
       <div ref={ref} />
-      ID:
     </>
   );
 };

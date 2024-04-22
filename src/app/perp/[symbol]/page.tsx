@@ -176,6 +176,18 @@ const Home = ({ children, params }: any) => {
           ) : (
             <div>no chart error?</div>
           )}
+
+          {/** Note: for nav here - tf -   */}
+          <span className={styles.tradeNav}>
+            {" "}
+            <span className={styles.tradeTF}>M1 </span>{" "}
+            <span className={styles.tradeTF}>M5 </span>{" "}
+            <span className={styles.tradeTF}>M30 </span>{" "}
+            <span className={styles.tradeTF}> H1</span>{" "}
+            <span className={styles.tradeTF}>H6 </span>{" "}
+            <span className={styles.tradeTF}> H12</span>
+          </span>
+
           <ul className={styles.tradeButtons}>
             <li> pnl </li>
 
