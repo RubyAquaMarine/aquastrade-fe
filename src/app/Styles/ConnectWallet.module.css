@@ -2,6 +2,10 @@
   padding: 0.3rem 0.5rem;
 }
 
+.spinner_padding {
+  padding: 6px;
+}
+
 .p_styled_button_med {
   margin-top: 5px;
   margin-bottom: 10px;
@@ -41,7 +45,11 @@
     rgba(82, 86, 109, 0.47),
     transparent
   );
-  padding: 6px;
+  padding: 0.1rem;
+}
+
+.p_styled_button_sm:hover {
+  background-color: #2196f3;
 }
 
 .logout {

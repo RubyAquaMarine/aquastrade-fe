@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useAccount, useBalance, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Dashboard.module.css";
 
+import { CHAIN } from "@/app/Utils/config";
+
 //import TextSizeAdjuster from "@/app/Components/ViewPort"; // todo : ReferenceError: window is not defined
 
 const Dashbaord = ({ children, params }: any) => {
@@ -99,16 +101,25 @@ const Dashbaord = ({ children, params }: any) => {
           <div>
             {!chain ? (
               <span className={styles.text_style_border}>
-                Unsupported Network : Recommended Network is Europa Liquidity
-                Hub
-                <span>
-                  {" "}
-                  <button
-                    className={styles.toggle_network}
-                    // @ts-ignore: Unreachable code error
-                    onClick={() => switchChain({ chainId: CHAIN.id })}
-                  ></button>
-                </span>
+                <ul>
+                  <li>
+                    {" "}
+                    Unsupported Network : Recommended Network is Europa
+                    Liquidity Hub
+                  </li>
+
+                  <li className={styles.text_center}>
+                    {" "}
+                    <button
+                      className={styles.toggle_network}
+                      // @ts-ignore: Unreachable code error
+                      onClick={() => switchChain({ chainId: CHAIN.id })}
+                    >
+                      {" "}
+                      Switch Network
+                    </button>
+                  </li>
+                </ul>
               </span>
             ) : (
               <span>

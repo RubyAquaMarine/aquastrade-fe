@@ -122,8 +122,6 @@ const TokenList = ({ params }: any) => {
             </div>
 
             <ul>
-              <li className={styles.text_padding}>Address : {address} </li>
-              <li className={styles.text_padding}>ChainID : {chain?.id}</li>
               <li className={styles.text_border}>
                 <Link
                   href={
