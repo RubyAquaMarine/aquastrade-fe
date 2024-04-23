@@ -91,9 +91,14 @@ const ConnectWallet = () => {
                         connect({ connector });
                       }}
                     >
-                      {<FaSpinner />}
-                      {isConnected && address}
-                      {connector.name}
+                      <span className={styles.spinner_padding}>
+                        {<FaSpinner />}{" "}
+                      </span>
+                      <span className={styles.spinner_padding}>
+                        {" "}
+                        {isConnected && address}
+                        {connector.name}
+                      </span>
                     </button>
                   </li>
                 </ul>

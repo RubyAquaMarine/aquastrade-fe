@@ -107,15 +107,20 @@ const Home = () => {
               All prices are provided in real-time on-chain by Razor.Network.
             </p>
             <p className={styles.image_skl}>
-              <Image
-                src="/RAZOR_NAME.svg"
-                alt="Skale  Network Logo"
-                className={styles.imageInvert}
-                width={33}
-                height={50}
-                priority
-                style={{ width: "66px", height: "36px" }}
-              />
+              <Link
+                href="https://razorscan.io/governance/datafeeds"
+                target="_blank"
+              >
+                <Image
+                  src="/RAZOR_NAME.svg"
+                  alt="Skale  Network Logo"
+                  className={styles.imageInvert}
+                  width={33}
+                  height={50}
+                  priority
+                  style={{ width: "66px", height: "36px" }}
+                />
+              </Link>
             </p>
 
             <p className={styles.image_skl}>

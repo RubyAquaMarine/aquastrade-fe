@@ -1,7 +1,12 @@
 "use client";
 
 import { http, createConfig, webSocket, fallback } from "wagmi";
-import { coinbaseWallet, injected, walletConnect } from "wagmi/connectors";
+import {
+  coinbaseWallet,
+  injected,
+  safe,
+  walletConnect,
+} from "wagmi/connectors"; // todo add more wallets here
 // todo add chains here
 import {
   mainnet,
@@ -35,15 +40,20 @@ export const config = createConfig({
   connectors: [
     injected(),
     coinbaseWallet({ appName: "Create Wagmi" }),
-    // walletConnect({ projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID }),
+    safe(),
+    walletConnect({
+      projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID
+        ? process.env.NEXT_PUBLIC_WC_PROJECT_ID
+        : "",
+    }),
   ],
   ssr: true,
   transports: {
     [mainnet.id]: http(),
     [skaleEuropa.id]: fallback([
       webSocket("wss://mainnet.skalenodes.com/v1/ws/elated-tan-skat", {
-        retryCount: 4,
-        retryDelay: 1000,
+        retryCount: 10,
+        retryDelay: 500,
       }),
       http("https://mainnet.skalenodes.com/v1/elated-tan-skat"),
     ]),

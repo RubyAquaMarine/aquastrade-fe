@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useAccount, useBalance, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Dashboard.module.css";
 
+import { CHAIN } from "@/app/Utils/config";
+
 //import TextSizeAdjuster from "@/app/Components/ViewPort"; // todo : ReferenceError: window is not defined
 
 const Dashbaord = ({ children, params }: any) => {
@@ -29,7 +31,10 @@ const Dashbaord = ({ children, params }: any) => {
 
       <span className={styles.midText}> Welcome to Aquas.Trade</span>
       <span>0 gas fees, NFT-powered AMM DEX, NFT Market Place,</span>
-      <span> and leveraged trading on the</span>
+      <span className={styles.top_text_link}>
+        {" "}
+        <Link href="/perp"> and leveraged trading on the</Link>
+      </span>
       <span>
         {" "}
         <Link
@@ -96,12 +101,28 @@ const Dashbaord = ({ children, params }: any) => {
           <div>
             {!chain ? (
               <span className={styles.text_style_border}>
-                Unsupported Network : Recommended Network is Europa Liquidity
-                Hub
+                <ul>
+                  <li>
+                    {" "}
+                    Unsupported Network : Recommended Network is Europa
+                    Liquidity Hub
+                  </li>
+
+                  <li className={styles.text_center}>
+                    {" "}
+                    <button
+                      className={styles.toggle_network}
+                      // @ts-ignore: Unreachable code error
+                      onClick={() => switchChain({ chainId: CHAIN.id })}
+                    >
+                      {" "}
+                      Switch Network
+                    </button>
+                  </li>
+                </ul>
               </span>
             ) : (
               <span>
-                <span className={styles.text_padding}> Connected to: </span>
                 <span className={styles.p_styled}>
                   <ul>
                     <li className={styles.text_padding}>
@@ -112,40 +133,24 @@ const Dashbaord = ({ children, params }: any) => {
                         {chain?.name}{" "}
                       </Link>
                     </li>
-
+                    <li className={styles.text_heading}>Native Gas</li>
                     <li className={styles.text_padding}>
                       {" "}
                       {!isError && walletFuel?.symbol} :{" "}
                       {!isError && walletFuel?.formatted}{" "}
                     </li>
-                    <li className={styles.text_padding_sm}>
-                      {address && address}
+
+                    <li className={styles.text_heading}>Connected Wallet</li>
+
+                    <li className={styles.text_button_color}>
+                      <Link href={`/user/${address}`}>
+                        {address && address}
+                      </Link>
                     </li>
                   </ul>
                 </span>{" "}
               </span>
             )}
-          </div>
-
-          <span className={styles.text_padding}>
-            {" "}
-            Select chain to switch networks{" "}
-          </span>
-
-          <div>
-            <ul>
-              {chains.map((chain, index) => (
-                <li key={index} className={styles.text_padding}>
-                  <button
-                    className={styles.toggle_network}
-                    // @ts-ignore: Unreachable code error
-                    onClick={() => switchChain({ chainId: chain.id })}
-                  >
-                    {chain.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       )}

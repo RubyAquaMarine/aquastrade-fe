@@ -1,14 +1,11 @@
 // @ts-nocheck
 "use client";
 import { BigNumber, ethers } from "ethers";
-import { useAccount } from "wagmi";
+import { useAccount, useSwitchChain } from "wagmi";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-
-import styles_grid from "@/app/Styles/GridAssets.module.css";
-
-import styles from "@/app/Styles/Links.module.css";
-/*
+import styles from "@/app/Styles/TokenList.module.css";
+/* http://localhost:3000/user 
  - if wallet is connected, change the explorer url
  - if not connected, show assets from europaHub
 */
@@ -20,11 +17,6 @@ type Repository = {
   decimals: string;
 };
 
-// todo create a function that returns the skale chain name (input: chainID)
-/*
-      "nebula": "green-giddy-denebola",
-      "cryptoC": "haunting-devoted-deneb"
-*/
 // chainID
 const chainNames: Record<number, string> = {
   1: "elated-tan-skat",
@@ -53,28 +45,17 @@ function getChainName(chainId: number): string {
   return chainNames[chainId] || "elated-tan-skat";
 }
 
-//  {params} : {params: {id : string}} aka user wallet address
 const TokenList = ({ params }: any) => {
-  const { chain, address } = useAccount();
+  const { chain, address, addresses } = useAccount();
+  const { chains, switchChain } = useSwitchChain();
   const [assetArray, setAsset] = useState<any>(null);
   const [chainName, setChainName] = useState<any>(null);
-
-  /* 
-    //todo refactor
-    This will allow /user page to load with the connected wallet 
-    - hack because navigation doesn't have wagmiConfig access : maybe change that later 
-  */
-
-  let addressWallet = params.wallet;
-  if (!addressWallet) {
-    addressWallet = address;
-  }
 
   useEffect(() => {
     const getSigner = async () => {
       if (chain) {
         const chainName = getChainName(Number(chain.id));
-        const apiString = `https://${chainName}.explorer.mainnet.skalenodes.com/api?module=account&action=tokenlist&address=${addressWallet}`;
+        const apiString = `https://${chainName}.explorer.mainnet.skalenodes.com/api?module=account&action=tokenlist&address=${address}`;
         console.error("api string ", apiString);
         const response = await fetch(apiString);
         const jsonData = await response.json();
@@ -84,85 +65,112 @@ const TokenList = ({ params }: any) => {
       }
     };
 
-    if (addressWallet) {
+    if (address) {
       getSigner();
     }
-  }, [addressWallet, chain]);
+  }, [address, chain]);
   // todo : this surely has hydration errors, redo the logic
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <div>
-          {!addressWallet ? (
+      <div>
+        {!address ? (
+          <div className={styles.p_styled}>
+            <ul>
+              {" "}
+              <li>
+                <Link href="/">
+                  {" "}
+                  <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+                  features)
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <p>Switch between connected wallet addresses</p>
             <div className={styles.p_styled}>
               <ul>
-                {" "}
-                <li>
-                  <Link href="/">
-                    {" "}
-                    <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to
-                    unlock features)
-                  </Link>
-                </li>
+                {addresses.map((wallet_address, index) => (
+                  <li key={index} className={styles.text_link}>
+                    <button
+                      // @ts-ignore: Unreachable code error
+                      onClick={() => switchChain({ chainId: chain.id })}
+                    >
+                      {wallet_address}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
-          ) : (
-            <div>
+
+            <span>Switch between skale chains</span>
+
+            <div className={styles.p_styled}>
               <ul>
-                <li>Address : {addressWallet} </li>
-                <li>ChainID : {chain?.id}</li>
-                <li>
-                  <Link
-                    href={
-                      chain?.blockExplorers?.default.url +
-                      "/address/" +
-                      addressWallet
-                    }
-                    target="_blank"
-                  >
-                    Explorer : {chainName}
-                  </Link>
-                </li>
+                {chains.map((chain, index) => (
+                  <li key={index} className={styles.text_link}>
+                    <button
+                      // @ts-ignore: Unreachable code error
+                      onClick={() => switchChain({ chainId: chain.id })}
+                    >
+                      {chain.name}
+                    </button>
+                  </li>
+                ))}
               </ul>
-              <br></br>
-              <div className={styles_grid["grid-container"]}>
-                {/* @ts-ignore: Unreachable code error*/}
-                {assetArray &&
-                  assetArray.map((item, index) => (
-                    <div key={index} className={styles_grid["grid-item"]}>
-                      <div>Name: {item.name}</div>
-                      <div>
-                        Balance:{" "}
-                        {ethers.utils.formatUnits(
-                          item.balance,
-                          Number(item.decimals),
-                        )}
-                      </div>
-                      <div>Symbol: {item.symbol}</div>
-                      <div>Decimal: {item.decimals}</div>
-                      <div>
-                        Address:
-                        <Link
-                          href={
-                            chain?.blockExplorers?.default.url +
-                            "/address/" +
-                            item.contractAddress
-                          }
-                          target="_blank"
-                        >
-                          {item.contractAddress}
-                        </Link>
-                      </div>
-                      {/* Crusty logic*/}
-                      {item.type == "ERC-721" ? (
-                        <div>Type: {item.type}</div>
-                      ) : null}
-                    </div>
-                  ))}
-              </div>
             </div>
-          )}
-        </div>
+
+            <ul>
+              <li className={styles.text_border}>
+                <Link
+                  href={
+                    chain?.blockExplorers?.default.url + "/address/" + address
+                  }
+                  target="_blank"
+                >
+                  Explorer : {chainName}
+                </Link>
+              </li>
+            </ul>
+            <br></br>
+            <div className={styles.grid_container}>
+              {/* @ts-ignore: Unreachable code error*/}
+              {assetArray &&
+                assetArray.map((item, index) => (
+                  <div key={index} className={styles.grid_item}>
+                    <div>Name: {item.name}</div>
+                    <div>
+                      Balance:{" "}
+                      {ethers.utils.formatUnits(
+                        item.balance,
+                        Number(item.decimals),
+                      )}
+                    </div>
+                    <div>Symbol: {item.symbol}</div>
+                    <div>Decimal: {item.decimals}</div>
+                    <div>
+                      Address:
+                      <Link
+                        href={
+                          chain?.blockExplorers?.default.url +
+                          "/address/" +
+                          item.contractAddress
+                        }
+                        target="_blank"
+                      >
+                        {item.contractAddress}
+                      </Link>
+                    </div>
+                    {/* Crusty logic*/}
+                    {item.type == "ERC-721" ? (
+                      <div>Type: {item.type}</div>
+                    ) : null}
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
       </div>
     </main>
   );

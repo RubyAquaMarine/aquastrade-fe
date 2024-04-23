@@ -26,10 +26,17 @@
   justify-content: center;
   border-radius: 12px;
 }
+.text_button_color {
+  padding: 0.5rem;
+  border-radius: 12px;
+}
 
 .text_button:hover {
   background-color: #2196f3;
-  font-size: larger;
+}
+
+.text_button_color:hover {
+  background-color: #2196f3;
 }
 
 .text_heading {
@@ -81,6 +88,7 @@
 }
 
 .top_text_link {
+  margin: 1rem;
   box-sizing: border-box;
   font-weight: 400;
   color: var(--white);
@@ -88,7 +96,7 @@
   font-family: monospace;
   font-size: 18px;
   line-height: 22px;
-  padding: 0.2rem 0.3rem;
+  padding: 0.5rem;
   border-bottom: 1px solid #2196f3;
 }
 
