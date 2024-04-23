@@ -50,6 +50,7 @@ const config: Config = {
       zIndex: {
         "10000": "10000",
       },
+      screen: {},
     },
   },
   plugins: [],
