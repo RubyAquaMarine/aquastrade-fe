@@ -42,9 +42,19 @@ export const config = createConfig({
     coinbaseWallet({ appName: "Create Wagmi" }),
     safe(),
     walletConnect({
+      isNewChainsStale: true,
       projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID
         ? process.env.NEXT_PUBLIC_WC_PROJECT_ID
         : "",
+      metadata: {
+        icons: [""],
+        name: "Aquas.Trade",
+        description: "Skale DEX Trading",
+        url: "https://aquas.trade",
+      },
+      qrModalOptions: {
+        themeMode: "dark",
+      },
     }),
   ],
   ssr: true,
