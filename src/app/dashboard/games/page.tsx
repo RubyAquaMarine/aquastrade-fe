@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Inter } from "next/font/google";
-import styles from "@/app/Styles/Links.module.css";
+import styles from "@/app/Styles/Dashboard.module.css";
 import { useAccount, useSwitchChain } from "wagmi";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,7 +59,7 @@ if the user doesn't have the network within the MM already, then switching doesn
           <div className={styles.p_styled}>
             <ul>
               <li className={styles.text_heading}>Europa Hub</li>
-              <li>
+              <li className={styles.text_button}>
                 {" "}
                 <Link
                   href={`/dashboard/coinflip`}
@@ -73,7 +73,7 @@ if the user doesn't have the network within the MM already, then switching doesn
 
               <li className={styles.text_heading}>other SKALE chains</li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://play.blockbrawlers.com/me"
                   target="_blank"
@@ -83,7 +83,7 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://app.cryptoblades.io/#/?chain=SKALE"
                   target="_blank"
@@ -95,7 +95,7 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://motodex.openbisea.com/?chain=skale"
                   target="_blank"
@@ -107,7 +107,7 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://play.mystrios.com/Game"
                   target="_blank"
@@ -119,7 +119,7 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://platformer.dirtroad.dev/"
                   target="_blank"
@@ -131,7 +131,7 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://tankwars.zone/"
                   target="_blank"
@@ -143,7 +143,7 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://untitledplatformer.io/play/"
                   target="_blank"
@@ -153,7 +153,7 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li className={styles.spaceDouble}>
+              <li className={styles.text_button}>
                 <Link
                   href="https://www.voxelverse.ca/"
                   target="_blank"
@@ -166,7 +166,7 @@ if the user doesn't have the network within the MM already, then switching doesn
               </li>
               <li className={styles.text_heading}>Coming Soon</li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://www.flightforce4.com/"
                   target="_blank"
@@ -176,7 +176,7 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://loe-staging-game.primebitgames.com/"
                   target="_blank"
@@ -186,7 +186,7 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li>
+              <li className={styles.text_button}>
                 <Link
                   href="https://www.flightforce4.com/"
                   target="_blank"

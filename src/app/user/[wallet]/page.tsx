@@ -4,11 +4,9 @@ import { BigNumber, ethers } from "ethers";
 import { useAccount } from "wagmi";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import styles from "../../Styles/TokenList.module.css";
 
-import styles_grid from "../../Styles/GridAssets.module.css";
-
-import styles from "../../Styles/Links.module.css";
-/*
+/* http://localhost:3000/user/0xCDeb7F7974D89Fd71089487D65AA9731d7E846F5
  - if wallet is connected, change the explorer url
  - if not connected, show assets from europaHub
 */
@@ -20,11 +18,6 @@ type Repository = {
   decimals: string;
 };
 
-// todo create a function that returns the skale chain name (input: chainID)
-/*
-      "nebula": "green-giddy-denebola",
-      "cryptoC": "haunting-devoted-deneb"
-*/
 // chainID
 const chainNames: Record<number, string> = {
   1: "elated-tan-skat",
@@ -53,7 +46,7 @@ function getChainName(chainId: number): string {
   return chainNames[chainId] || "elated-tan-skat";
 }
 
-//  {params} : {params: {id : string}}
+//  {params} : {params: {id : string}} aka user wallet address
 const TokenList = ({ params }: any) => {
   const addressWallet = params.wallet;
   const { chain } = useAccount();
@@ -81,7 +74,12 @@ const TokenList = ({ params }: any) => {
   // todo : this surely has hydration errors, redo the logic
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className={styles.midText}>Token List</h1>
+      <h4 className={styles.text_sm}>
+        Showing all you{"'"}re tokens in one place
+      </h4>
+      <p className={styles.text_link}>
+        <Link href="/user"> Multi Address Version? </Link>
+      </p>
       <p>
         <span className={styles.text_center}> Connected to:</span>{" "}
       </p>
@@ -102,10 +100,11 @@ const TokenList = ({ params }: any) => {
           ) : (
             <div>
               <ul>
-                <li>Address : {addressWallet} </li>
-                <li>ChainID : {chain?.id}</li>
-
-                <li>
+                <li className={styles.text_padding}>
+                  Address : {addressWallet}{" "}
+                </li>
+                <li className={styles.text_padding}>ChainID : {chain?.id}</li>
+                <li className={styles.text_border}>
                   <Link
                     href={
                       chain?.blockExplorers?.default.url +
@@ -119,11 +118,11 @@ const TokenList = ({ params }: any) => {
                 </li>
               </ul>
               <br></br>
-              <div className={styles_grid["grid-container"]}>
+              <div className={styles.grid_container}>
                 {/* @ts-ignore: Unreachable code error*/}
                 {assetArray &&
                   assetArray.map((item, index) => (
-                    <div key={index} className={styles_grid["grid-item"]}>
+                    <div key={index} className={styles.grid_item}>
                       <div>Name: {item.name}</div>
                       <div>
                         Balance:{" "}

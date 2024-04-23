@@ -187,69 +187,91 @@ const Home = ({ children, params }: any) => {
             <span className={styles.tradeTF}>H6 </span>{" "}
             <span className={styles.tradeTF}> H12</span>
           </span>
-
+          {/** this is kinda of a mess :  */}
           <ul className={styles.tradeButtons}>
-            <li> pnl </li>
-
             <li className={styles.tradeButtonSell}>
               <button>Sell</button>
             </li>
-            <li>
-              {" "}
-              {inputs.map((value, index) => (
-                <div key={index} className="mb-4">
-                  <p>
-                    {" "}
-                    {`${desctwo[index]}`}{" "}
+
+            {/** Note: This should maintain center viewport  */}
+            <span className={styles.trade_panel}>
+              <li>
+                {" "}
+                {inputs.map((value, index) => (
+                  <div key={index} className="mb-4">
+                    <p>
+                      <span> {`${desctwo[index]}`} </span>
+
+                      {desctwo[index] === "PAY" ? (
+                        <li className={styles.tradeBalance}>
+                          <Link href={`/user/${address}`}>
+                            {" "}
+                            {/* add balance input here */} Balance: $94.0493{" "}
+                          </Link>
+                          <span className={styles.panel_text}>
+                            {" "}
+                            <button className={styles.tradeBalance}>
+                              Deposit
+                            </button>{" "}
+                            <button className={styles.tradeBalance}>
+                              Withdraw
+                            </button>
+                          </span>
+                        </li>
+                      ) : (
+                        <li></li>
+                      )}
+                    </p>
+
+                    <p>
+                      {" "}
+                      {desctwo[index] === "POSITION" ? (
+                        <li className={styles.tradeBalance}>
+                          <Link href={`/user/${address}`}>
+                            {" "}
+                            {/* add liq price input here */} Liq Price: 0.23 |
+                            0.08{" "}
+                          </Link>
+                          <span className={styles.trade_panel}>
+                            {" "}
+                            <button className={styles.tradeBalance}>
+                              Limit
+                            </button>{" "}
+                            <button className={styles.tradeBalance}>
+                              Stop
+                            </button>
+                            <button className={styles.tradeBalance}>TP</button>
+                            <button className={styles.tradeBalance}>SL</button>
+                          </span>
+                        </li>
+                      ) : (
+                        <li></li>
+                      )}
+                    </p>
+
                     {desctwo[index] === "PAY" ? (
-                      <li className={styles.tradeBalance}>
-                        <Link href={`/user/${address}`}>
-                          {" "}
-                          {/* add balance input here */} Balance: $94.0493{" "}
-                        </Link>
+                      <li>
+                        <input
+                          className={styles.tradeInput}
+                          type="text"
+                          value={getInputValue(index)} // Call a function to get the appropriate value
+                          onChange={(e) =>
+                            handleInputChange(index, e.target.value)
+                          }
+                          placeholder={`${desc[index]}`}
+                        />
                       </li>
                     ) : (
                       <li></li>
                     )}
-                  </p>
-
-                  <p>
-                    {" "}
-                    {desctwo[index] === "POSITION" ? (
-                      <li className={styles.tradeBalance}>
-                        <Link href={`/user/${address}`}>
-                          {" "}
-                          {/* add liq price input here */} Liq Price: 0.23 |
-                          0.08{" "}
-                        </Link>
-                      </li>
-                    ) : (
-                      <li></li>
-                    )}
-                  </p>
-
-                  {desctwo[index] === "PAY" ? (
-                    <li>
-                      <input
-                        className={styles.tradeInput}
-                        type="text"
-                        value={getInputValue(index)} // Call a function to get the appropriate value
-                        onChange={(e) =>
-                          handleInputChange(index, e.target.value)
-                        }
-                        placeholder={`${desc[index]}`}
-                      />
-                    </li>
-                  ) : (
-                    <li></li>
-                  )}
-                </div>
-              ))}
-            </li>
-
+                  </div>
+                ))}
+              </li>
+            </span>
             <li className={styles.tradeButtonBuy}>
               <button>Buy</button>
             </li>
+
             <li className={styles.tradeSlider}> </li>
           </ul>
         </div>
