@@ -1,3 +1,23 @@
+.spinner_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust height as needed */
+}
+
+.spinner_icon {
+  animation: spin 1s linear infinite; /* Adjust animation duration */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .connectorButton {
   padding: 0.3rem 0.5rem;
 }
