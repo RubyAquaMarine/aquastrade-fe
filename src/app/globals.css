@@ -78,3 +78,9 @@ body::-webkit-scrollbar {
     background: black;
   }
 }
+
+@media screen and (display-mode: standalone) {
+  .header {
+    height: 88px !important;
+  }
+}

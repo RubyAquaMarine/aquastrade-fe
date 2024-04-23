@@ -13,6 +13,12 @@ lets token-gate : nft bronze or higher for perps-trading page: if no pass, redir
 
 ## Wallet Connect
 
+### Bug
+
+- unable to use Non chain.id 1 atm
+- maybe try on another page : https://docs.walletconnect.com/web3modal/v2/react/wagmi/installation
+- https://wagmi.sh/react/api/connectors/walletConnect
+
 - https://github.com/trustwallet/wallet-core/issues/546
 - `isNewChainsStale` - https://github.com/wevm/wagmi/pull/3787
 
@@ -23,3 +29,9 @@ lets token-gate : nft bronze or higher for perps-trading page: if no pass, redir
 https://react-icons.github.io/react-icons/icons/ai/
 
 - import { AiFillGithub } from "react-icons/ai";// todo github icon
+
+# Webmanifest
+
+- https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest
+
+`npx pwa-asset-generator ./AQUA1.png --manifest ../src/app/manifest.json`
