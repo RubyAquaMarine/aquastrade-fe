@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { FaSpinner } from "react-icons/fa6";
+
 import styles from "@/app/Styles/ConnectWallet.module.css";
 import { CHAIN } from "@/app/Utils/config";
 
@@ -10,7 +11,7 @@ const ConnectWallet = () => {
   // wagmi
   const { connectors, connect, status, error } = useConnect();
   const { disconnect } = useDisconnect();
-  const { address, isConnected, chain } = useAccount();
+  const { address, isConnected, chain, isConnecting } = useAccount();
   const { chains, switchChain } = useSwitchChain();
 
   console.error(" ConnectWallet Chain ID is: ", chain, chain?.id);
@@ -92,7 +93,14 @@ const ConnectWallet = () => {
                       }}
                     >
                       <span className={styles.spinner_padding}>
-                        {<FaSpinner />}{" "}
+                        {isConnecting ? (
+                          <span>
+                            {" "}
+                            {<FaSpinner className={styles.spinner_icon} />}
+                          </span>
+                        ) : (
+                          <span> </span>
+                        )}
                       </span>
                       <span className={styles.spinner_padding}>
                         {" "}
