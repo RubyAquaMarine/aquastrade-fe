@@ -46,7 +46,7 @@ function getChainName(chainId: number): string {
 }
 
 const TokenList = ({ params }: any) => {
-  const { chain, address } = useAccount();
+  const { chain, address, addresses } = useAccount();
   const { chains, switchChain } = useSwitchChain();
   const [assetArray, setAsset] = useState<any>(null);
   const [chainName, setChainName] = useState<any>(null);
@@ -88,7 +88,21 @@ const TokenList = ({ params }: any) => {
           </div>
         ) : (
           <div>
-            <p>Switch between wallet addresses</p>
+            <p>Switch between connected wallet addresses</p>
+            <div className={styles.p_styled}>
+              <ul>
+                {addresses.map((wallet_address, index) => (
+                  <li key={index} className={styles.text_link}>
+                    <button
+                      // @ts-ignore: Unreachable code error
+                      onClick={() => switchChain({ chainId: chain.id })}
+                    >
+                      {wallet_address}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <span>Switch between skale chains</span>
 

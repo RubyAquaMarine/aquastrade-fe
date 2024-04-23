@@ -83,7 +83,17 @@ const TokenList = ({ params }: any) => {
       <p>
         <span className={styles.text_center}> Connected to:</span>{" "}
       </p>
-      <span className={styles.text_style_border}>{chain?.name} </span>
+      <span className={styles.text_style_border}>
+        {" "}
+        <Link
+          href={
+            chain?.blockExplorers?.default.url + "/address/" + addressWallet
+          }
+          target="_blank"
+        >
+          {chainName}
+        </Link>
+      </span>
 
       <div>
         <div>
@@ -100,22 +110,8 @@ const TokenList = ({ params }: any) => {
           ) : (
             <div>
               <ul>
-                <li className={styles.text_padding}>
-                  Address : {addressWallet}{" "}
-                </li>
-                <li className={styles.text_padding}>ChainID : {chain?.id}</li>
-                <li className={styles.text_border}>
-                  <Link
-                    href={
-                      chain?.blockExplorers?.default.url +
-                      "/address/" +
-                      addressWallet
-                    }
-                    target="_blank"
-                  >
-                    Explorer : {chainName}
-                  </Link>
-                </li>
+                <li className={styles.text_center}>Connected Wallet:</li>
+                <li className={styles.text_center}>{addressWallet} </li>
               </ul>
               <br></br>
               <div className={styles.grid_container}>

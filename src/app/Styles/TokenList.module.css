@@ -55,6 +55,10 @@
   border: 1px solid #2196f3;
 }
 
+.text_style_border:hover {
+  background-color: #007bff;
+}
+
 .p_styled {
   margin-top: 40px;
   position: static;
