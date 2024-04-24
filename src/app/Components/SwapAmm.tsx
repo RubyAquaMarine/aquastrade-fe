@@ -11,6 +11,9 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 import { formatUnits, parseEther, parseUnits } from "viem";
 
+import { ToastContainer, Slide, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // Make components for better rendering functionality: move hooks into these new components
 import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
@@ -107,9 +110,47 @@ const SwapAmm = () => {
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
-      console.log("POP UP HERE");
+      const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
+      notify(isLink);
     }
   }, [contractCallDataConfirmed]);
+
+  const CustomToastWithLink = (_url: string) => (
+    <div>
+      <Link href={_url} target="_blank">
+        {ammFeature?.toUpperCase()} Tx Hash on 🌊 AquasTrade
+      </Link>
+    </div>
+  );
+  // `${_message} on 🌊 AquasTrade! [tx] Hash: ${_link}`
+  // const notify = (_link: string) =>
+  //   toast.info(CustomToastWithLink(_link), {
+  //     position: "bottom-left",
+  //     autoClose: 8000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //     transition: Slide,
+  //   });
+
+  const notify = (_link: string) => {
+    // if(!toast.isActive(ammFeature)) {
+    toast.info(CustomToastWithLink(_link), {
+      position: "bottom-left",
+      autoClose: 8000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
+    });
+    //  }
+  };
 
   const findSymbolDecimals = (_symbolA: string, _symbolB: string) => {
     if (tokenAddresses) {
@@ -972,6 +1013,10 @@ const SwapAmm = () => {
       ) : (
         <div> </div>
       )}
+
+      <span>
+        <ToastContainer />
+      </span>
     </div>
   );
 };
