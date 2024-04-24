@@ -800,14 +800,11 @@ const SwapAmm = () => {
         <div>
           {" "}
           <div className={styles.input_container_sm}>
-            <span className={styles.text_bold}>
-              <span className={styles.text_space_left_sm}>
-                {" "}
-                Select Percentage{" "}
-              </span>{" "}
-              <span className={styles.text_space_left}> Select Token A </span>
-            </span>
-
+            <span className={styles.text_space_left_sm}>
+              {" "}
+              Select Percentage{" "}
+            </span>{" "}
+            <span className={styles.text_space_left}> Select Token A </span>
             <div className={styles.amount_inputs}>
               <input
                 className={styles.input_amount}
@@ -849,7 +846,6 @@ const SwapAmm = () => {
                 </div>
               )}
             </div>
-
             <p className={styles.container_margin}>
               <span className={styles.text_space_right_12}>
                 {" "}
@@ -867,7 +863,6 @@ const SwapAmm = () => {
                 <div></div>
               )}
             </p>
-
             <span className={styles.text_center}> Approved: </span>
             {address &&
             amountA &&
@@ -902,22 +897,18 @@ const SwapAmm = () => {
             <div></div>
           )}
           <div className={styles.input_container}>
-            <span className={styles.text_bold}>
-              <span className={styles.text_space_left_xl}>Select Token B</span>
-            </span>
-            <div className={styles.amount_inputs}>
-              <span className={styles.space_left_xl}>
-                {" "}
-                <input
-                  className={styles.input_token}
-                  type="text"
-                  placeholder="Select Token"
-                  value={tokenB}
-                  onChange={(e) => setTokenB(e.target.value)}
-                  onClick={() => setShowTokenListB(true)}
-                />{" "}
-              </span>
+            <span className={styles.text_space_left_xl}>Select Token B</span>
 
+            <div className={styles.token_inputs}>
+              {" "}
+              <input
+                className={styles.input_token}
+                type="text"
+                placeholder="Select Token"
+                value={tokenB}
+                onChange={(e) => setTokenB(e.target.value)}
+                onClick={() => setShowTokenListB(true)}
+              />{" "}
               {showTokenListB && (
                 <div className={styles_pop.popup_container}>
                   <div className={styles_pop.popup_content}>
