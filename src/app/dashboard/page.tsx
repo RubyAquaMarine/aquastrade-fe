@@ -22,7 +22,7 @@ const Dashbaord = ({ children, params }: any) => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <span className={styles.midText}> Welcome to Aquas.Trade</span>
+      <span className={styles.midText}>AquasTrade</span>
       <span className={styledContainer.container}>
         NFT-powered DEX, Market Place,{" "}
       </span>

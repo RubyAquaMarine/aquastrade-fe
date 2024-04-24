@@ -1,5 +1,5 @@
 .space_border {
-  margin-top: 20px;
+  margin-top: 1.2rem;
 }
 
 .text_padding {
@@ -55,8 +55,8 @@
 }
 
 .text_style_border {
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin-top: 0.9rem;
+  margin-bottom: 0.6rem;
   justify-content: center;
   display: flex;
   padding: 0.2rem 0.3rem;
@@ -66,13 +66,12 @@
 
 .midText {
   box-sizing: border-box;
-
-  color: var(--white);
+  color: #2196f3;
   text-align: center;
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   font-family: monospace;
-  font-size: 4rem;
+  font-size: 2.4rem;
   font-weight: 600;
   line-height: 110%;
   display: block;
@@ -109,11 +108,10 @@
 
 .midText_sm {
   box-sizing: border-box;
-  margin: 0.67em 0;
   color: var(--white);
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 24px;
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
   font-family: monospace;
   font-size: 2rem;
   font-weight: 600;
@@ -128,7 +126,7 @@
   backdrop-filter: blur(20px);
 */
 .p_styled {
-  margin-top: 40px;
+  margin-top: 2rem;
   position: static;
   left: 0;
   top: 0;
@@ -221,7 +219,7 @@
   /* Using em for media query */
   .midText {
     padding: 0.1rem 0.2rem;
-    font-size: 3rem;
+    font-size: 2.2rem;
   }
 }
 
