@@ -32,9 +32,6 @@ const Navbar = () => {
           <div className={styles.float_center}>
             <ul className={styles.navListWide}>
               <li className={styles.navItem}>
-                <Link href="/dashboard/metaport">Bridge</Link>
-              </li>
-              <li className={styles.navItem}>
                 <Link href="/dashboard">Dashboard</Link>
               </li>
             </ul>
@@ -45,7 +42,15 @@ const Navbar = () => {
             <Dropdown
               buttonVariant="tertiary"
               buttonClassName={styles.dropdownmenuBlue}
-              title="?"
+              title={
+                <Image
+                  src="/list.png"
+                  alt="AquasTrade Menu"
+                  width={20}
+                  height={20}
+                  className={styles.image_invert}
+                />
+              }
             >
               <Dropdown.Item className={styles.popup_item_top}>
                 <Link href="/" className={styles.popup_item_link}>

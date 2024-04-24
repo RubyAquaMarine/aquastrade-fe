@@ -36,6 +36,12 @@
   text-align: right;
 }
 
+.image_invert {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  text-align: right;
+}
+
 /* 
 
 background-color: #03bada;
@@ -217,8 +223,21 @@ className={styles.popup}  openOnHover={true}
 
 .dropdownmenuBlue {
   border-radius: 6px;
-  color: #2196f3;
-  border: 2px solid #475384;
-  font-size: 18px;
+
   background-color: #1a1b1f;
+}
+
+/* Media Queries */
+@media (max-width: 48em) {
+  /* Using em for media query */
+  .navItemLogo {
+    display: block;
+  }
+}
+
+@media (max-width: 36em) {
+  /* Using em for media query */
+  .navItemLogo {
+    display: none;
+  }
 }
