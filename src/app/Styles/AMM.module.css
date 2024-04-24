@@ -71,6 +71,17 @@
   border: 1px solid #475384;
 }
 
+.token_inputs {
+  display: flex;
+  justify-content: right;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding: 0.2rem;
+  border-radius: 12px;
+  background-color: #242629;
+  border: 1px solid #475384;
+}
+
 .input_token_a {
   display: flex;
   margin-right: 30px;
@@ -364,6 +375,12 @@
     border: 0.2rem solid #42518d;
     max-width: 420px;
   }
+  .text_space_left_xl {
+    padding-left: 180px;
+  }
+  .text_space_left {
+    padding-left: 35px;
+  }
 }
 
 @media (max-width: 36em) {
@@ -371,5 +388,11 @@
   .container {
     border: 0.1rem solid #42518d;
     max-width: 360px;
+  }
+  .text_space_left_xl {
+    padding-left: 180px;
+  }
+  .text_space_left {
+    padding-left: 35px;
   }
 }
