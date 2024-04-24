@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useEffect } from "react";
 import { parseEther, parseUnits, formatUnits } from "viem";
+import { ToastContainer, Slide, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
 
@@ -84,7 +86,8 @@ const Home = () => {
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
-      console.log("POP UP HERE");
+      const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
+      notify(isLink);
     }
   }, [contractCallDataConfirmed]);
 
@@ -112,6 +115,28 @@ const Home = () => {
       allowancesTest.current = tokenAllowance;
     }
   }, [MarketPlace, tokenAllowance]);
+
+  const CustomToastWithLink = (_url: string) => (
+    <div>
+      <Link href={_url} target="_blank">
+        NFT Tx Hash on 🌊 AquasTrade
+      </Link>
+    </div>
+  );
+  // `${_message} on 🌊 AquasTrade! [tx] Hash: ${_link}`
+  const notify = (_link: string) =>
+    toast.info(CustomToastWithLink(_link), {
+      containerId: "NFT",
+      position: "bottom-left",
+      autoClose: 8000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
+    });
 
   function getInputValue(index: number) {
     return inputs[index];
@@ -310,6 +335,9 @@ const Home = () => {
           </ul>
         </div>
       )}
+      <span>
+        <ToastContainer containerId={"NFT"} />
+      </span>
     </main>
   );
 };
