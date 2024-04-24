@@ -35,3 +35,9 @@ https://react-icons.github.io/react-icons/icons/ai/
 - https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest
 
 `npx pwa-asset-generator ./AQUA1.png --manifest ../src/app/manifest.json`
+
+## adding meta
+
+```<meta >
+- https://github.com/explosion/spaCy/blob/2e2334632beb0e91abc1d7820a0471a10af61489/website/pages/_app.tsx#L14
+```
