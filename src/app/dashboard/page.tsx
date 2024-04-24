@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAccount, useBalance, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/Dashboard.module.css";
-
+import styledContainer from "@/app/Styles/Container.module.css";
 import { CHAIN } from "@/app/Utils/config";
 
 //import TextSizeAdjuster from "@/app/Components/ViewPort"; // todo : ReferenceError: window is not defined
@@ -22,15 +22,10 @@ const Dashbaord = ({ children, params }: any) => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h4 className={styles.topText}>
-        <span>Utility driven NFT Collection - </span>{" "}
-        <span className={styles.top_text_link}>
-          <Link href="/nft">Buy Now</Link>
-        </span>
-      </h4>
-
-      <span className={styles.midText}> Welcome to Aquas.Trade</span>
-      <span>0 gas fees, NFT-powered AMM DEX, NFT Market Place,</span>
+      <span className={styles.midText}>AquasTrade</span>
+      <span className={styledContainer.container}>
+        NFT-powered DEX, Market Place,{" "}
+      </span>
       <span className={styles.top_text_link}>
         {" "}
         <Link href="/perp"> and leveraged trading on the</Link>
@@ -46,8 +41,9 @@ const Dashbaord = ({ children, params }: any) => {
           <b>SKALE</b> Network
         </Link>
       </span>
+
       {!addr || !isConnected ? (
-        <div>
+        <div className={styledContainer.container}>
           <div className={styles.p_styled_button}>
             <ul>
               <li>
@@ -60,8 +56,8 @@ const Dashbaord = ({ children, params }: any) => {
           </div>
         </div>
       ) : (
-        <div>
-          <div className={styles.p_styled}>
+        <div className={styledContainer.container}>
+          <span className={styles.p_styled}>
             <ul>
               <li className={styles.text_heading}>Features</li>
               <li className={styles.text_button}>
@@ -96,62 +92,62 @@ const Dashbaord = ({ children, params }: any) => {
                 <Link href={`/swap/lifi`}>Lifi</Link>
               </li>
             </ul>
-          </div>
+          </span>
 
-          <div>
-            {!chain ? (
-              <span className={styles.text_style_border}>
-                <ul>
-                  <li>
+          {!chain ? (
+            <span className={styles.text_style_border}>
+              <ul>
+                <li>
+                  {" "}
+                  Unsupported Network : Recommended Network is Europa Liquidity
+                  Hub
+                </li>
+
+                <li className={styles.text_center}>
+                  {" "}
+                  <button
+                    className={styles.toggle_network}
+                    // @ts-ignore: Unreachable code error
+                    onClick={() => switchChain({ chainId: CHAIN.id })}
+                  >
                     {" "}
-                    Unsupported Network : Recommended Network is Europa
-                    Liquidity Hub
+                    Switch Network
+                  </button>
+                </li>
+              </ul>
+            </span>
+          ) : (
+            <span>
+              <span className={styles.p_styled}>
+                <ul>
+                  <li className={styles.text_padding}>
+                    <Link
+                      href="https://elated-tan-skat.explorer.mainnet.skalenodes.com"
+                      target="_blank"
+                    >
+                      {chain?.name}{" "}
+                    </Link>
+                  </li>
+                  <li className={styles.text_heading}>Native Gas</li>
+                  <li className={styles.text_padding}>
+                    {" "}
+                    {!isError && walletFuel?.symbol} :{" "}
+                    {!isError && walletFuel?.formatted}{" "}
                   </li>
 
-                  <li className={styles.text_center}>
-                    {" "}
-                    <button
-                      className={styles.toggle_network}
-                      // @ts-ignore: Unreachable code error
-                      onClick={() => switchChain({ chainId: CHAIN.id })}
-                    >
-                      {" "}
-                      Switch Network
-                    </button>
+                  <li className={styles.text_heading}>Connected Wallet</li>
+
+                  <li className={styles.text_button}>
+                    <Link href={`/user/${address}`}>
+                      {address
+                        ? `${address?.slice(0, 4)} ... ${address?.slice(38, 42)}`
+                        : `no provider`}
+                    </Link>
                   </li>
                 </ul>
-              </span>
-            ) : (
-              <span>
-                <span className={styles.p_styled}>
-                  <ul>
-                    <li className={styles.text_padding}>
-                      <Link
-                        href="https://elated-tan-skat.explorer.mainnet.skalenodes.com"
-                        target="_blank"
-                      >
-                        {chain?.name}{" "}
-                      </Link>
-                    </li>
-                    <li className={styles.text_heading}>Native Gas</li>
-                    <li className={styles.text_padding}>
-                      {" "}
-                      {!isError && walletFuel?.symbol} :{" "}
-                      {!isError && walletFuel?.formatted}{" "}
-                    </li>
-
-                    <li className={styles.text_heading}>Connected Wallet</li>
-
-                    <li className={styles.text_button_color}>
-                      <Link href={`/user/${address}`}>
-                        {address && address}
-                      </Link>
-                    </li>
-                  </ul>
-                </span>{" "}
-              </span>
-            )}
-          </div>
+              </span>{" "}
+            </span>
+          )}
         </div>
       )}
     </main>
@@ -159,3 +155,7 @@ const Dashbaord = ({ children, params }: any) => {
 };
 
 export default Dashbaord;
+
+// not block,  inline-flex, contents, :flow-root;
+
+// maybe  display:inline-block;

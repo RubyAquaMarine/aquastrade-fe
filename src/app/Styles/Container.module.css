@@ -1,0 +1,32 @@
+/* styles/ProgressiveContainer.module.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 60rem; /* Using rem for maximum width */
+  margin: 0 auto;
+  padding: 1rem; /* Using rem for padding */
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: 1.2rem;
+}
+
+/* Media Queries */
+@media (max-width: 48em) {
+  /* Using em for media query */
+  .container {
+    padding: 0.8rem; /* Adjusting padding with rem */
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 36em) {
+  /* Using em for media query */
+  .container {
+    padding: 0.4rem; /* Adjusting padding with rem */
+    font-size: 0.8rem;
+  }
+}
