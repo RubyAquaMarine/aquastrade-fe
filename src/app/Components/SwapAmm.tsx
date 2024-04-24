@@ -19,6 +19,8 @@ import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
 import TokenBalance from "@/app/Components/TokenBalance";
 
+import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
+
 // test
 import TokenApprove from "@/app/Components/TokenApprove";
 
@@ -59,9 +61,13 @@ const SwapAmm = () => {
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
   );
-  const tokenBAddress = useRef(
-    "0xE34A1fEF365876D4D0b55D281618768583ba4867" as `0x${string}`,
-  );
+
+  const aqua_token_address = findTokenAddressFromSymbol(
+    "AQUA",
+  ) as unknown as `0x${string}`;
+
+  const tokenBAddress = useRef(aqua_token_address);
+
   const feeNFT = useRef(BigInt(997));
 
   const tokenADecimal = useRef(BigInt(18));
@@ -85,8 +91,6 @@ const SwapAmm = () => {
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
 
-  // todo : recode this : just a test for now
-
   const { data: poolAddress } = useFactory(
     contractAddresses[2].addr,
     "getPair",
@@ -97,13 +101,16 @@ const SwapAmm = () => {
 
   // todo : this needs to be useRef because usingState renders way too much
   useEffect(() => {
-    if (address && isConnected === true) {
+    if (address && isConnected) {
       if (tokenA && tokenB) {
         findAddressFromSymbol(true, tokenA);
         findAddressFromSymbol(false, tokenB);
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
-
         findSymbolDecimals(tokenA, tokenB);
+        console.log(
+          "Updated AMM Pool Paths, addresses, decimals ",
+          poolAddress,
+        );
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
@@ -181,15 +188,9 @@ const SwapAmm = () => {
     }
   };
 
-  // todo : this needs to be useRef because usingState renders way too much
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
     if (tokenA !== "AQUA" && tokenB !== "AQUA") {
-      // todo : this needs to be useRef because usingState renders way too much
-      setSwapPath([
-        _tokenA,
-        "0xE34A1fEF365876D4D0b55D281618768583ba4867",
-        _tokenB,
-      ]);
+      setSwapPath([_tokenA, aqua_token_address, _tokenB]);
     } else {
       setSwapPath([_tokenA, _tokenB]);
     }
@@ -220,7 +221,7 @@ const SwapAmm = () => {
     if (tokenA !== "AQUA" && tokenB !== "AQUA") {
       console.log(" MultiHop AMM ");
       // all pools are aqua based
-      return [_tokenA, "0xE34A1fEF365876D4D0b55D281618768583ba4867", _tokenB];
+      return [_tokenA, aqua_token_address, _tokenB];
     }
     return [_tokenA, _tokenB];
   };
@@ -311,7 +312,6 @@ const SwapAmm = () => {
     );
 
     if (timeIs) {
-      // todo : bug doesn't prompt metamask
       writeContract({
         abi: EUROPA_AMM_ROUTER_ABI,
         address: ROUTER_AQUADEX,
@@ -321,6 +321,43 @@ const SwapAmm = () => {
           tokenBAddress.current,
           parseUnits(amountA, Number(tokenADecimal?.current)),
           parseUnits(amountB, Number(tokenBDecimal?.current)),
+          BigInt(0),
+          BigInt(0),
+          address,
+          timeIs,
+        ],
+      });
+    }
+  };
+
+  // Function to handle liquidity provision
+  const handleRemoveLiquidity = () => {
+    // Implement liquidity provision logic here
+    const timeIs = resultBlock?.data?.timestamp
+      ? resultBlock?.data?.timestamp + BigInt(20000)
+      : BigInt(404);
+
+    console.log(
+      "timestamp for remove Liquidity ",
+      timeIs,
+      tokenAAddress.current,
+      tokenBAddress.current,
+      address,
+      parseUnits(amountA, Number(tokenADecimal?.current)),
+      parseUnits(amountB, Number(tokenBDecimal?.current)),
+    );
+
+    if (timeIs) {
+      writeContract({
+        abi: EUROPA_AMM_ROUTER_ABI,
+        address: ROUTER_AQUADEX,
+        functionName: "removeLiquidity",
+        args: [
+          tokenAAddress.current,
+          tokenBAddress.current,
+
+          parseUnits(amountA, Number(18)),
+
           BigInt(0),
           BigInt(0),
           address,
@@ -809,7 +846,7 @@ const SwapAmm = () => {
               <input
                 className={styles.input_amount}
                 type="text"
-                placeholder="0.0"
+                placeholder="0.0%"
                 value={amountA}
                 onChange={(e) => setAmountA(e.target.value)}
               />
@@ -971,7 +1008,7 @@ const SwapAmm = () => {
           <div className={styles.button_container}>
             <button
               className={styles.button_field}
-              onClick={handleProvideLiquidity}
+              onClick={handleRemoveLiquidity}
             >
               Set Sail
             </button>
