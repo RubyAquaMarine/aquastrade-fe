@@ -20,6 +20,8 @@ Update: I forgot the `containerId` : string or number within the `const toastId 
 
 # Calculate the Token B amount on addLiquidity
 
+make another <GetAmountsOut
+
 const poolContract = new ethers.Contract(pairAddress, pairABI, accountSigner);
 
     let reserve = await poolContract.getReserves().then(result => {
@@ -41,3 +43,8 @@ const poolContract = new ethers.Contract(pairAddress, pairABI, accountSigner);
     if (typeof matchWithThisAmount === "undefined") {
         return;
     }
+
+#
+
+- `findTokenAddressFromSymbol` replaces all code that currently uses `tokenAddresses`
+  -- search and remove
