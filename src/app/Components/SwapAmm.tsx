@@ -346,7 +346,7 @@ const SwapAmm = () => {
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.menu}>
         <button
           className={styles.nav}
           onClick={() => handleAMMFeatures("swap")}
@@ -367,19 +367,19 @@ const SwapAmm = () => {
         </button>
 
         {ammFeature !== "nft" ? (
-          <button className={styles.nav_right}>
+          <button className={styles.nav}>
             <Image
               src="/gear.svg"
               alt="menu"
-              width={22}
-              height={22}
+              width={26}
+              height={26}
               priority
               className={styles.imageInvert}
               onClick={handleFlipTokens}
             />
           </button>
         ) : (
-          <div></div>
+          <span></span>
         )}
       </div>
 
