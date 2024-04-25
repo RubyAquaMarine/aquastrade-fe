@@ -19,7 +19,7 @@
 
 # Getting Started
 
-Create .env , .env.local
+Create .env.local
 
 ```
 NEXT_PUBLIC_WC_PROJECT_ID= wallet connect id
