@@ -21,11 +21,21 @@
 - `Loading Pool Data` : waiting on rpc api
 - `Multi ` : this is a `multi hop` route
 
-## Cast - add
+## Cast - add liquidity
 
 0. Select `top-input-token` and select `bottom-input-token`
 1. The `top-input-amount` is the amount of tokens that you to allocate to the AMM pool. The `bottom-input-amount` is automatically calculated based on the `token-a` input amount.
 2. Approve Buttons will appear for both assets: click to approve the token transfers.
 3. Click the `Cast Line` button and complete the request within your web3 wallet.
 
-## Ship = remove
+- - Click the `Build Boat` button to create a new liquidity pool.
+
+###
+
+- The `bottom-input-amount` is `0.0` : You are about to create a new liquidity pool. Calculating the pool price can be tricky.
+
+## Ship = remove liquidity
+
+0. Select `top-input-token` and select `bottom-input-token`
+1. The `top-input-amount` is the `%` amount of liquidity that you want to remove from the pool.
+2. Click the `Set Sail` button and complete the request within your web3 wallet.

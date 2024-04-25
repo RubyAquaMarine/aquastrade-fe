@@ -20,7 +20,7 @@ Update: I forgot the `containerId` : string or number within the `const toastId 
 
 # Calculate the Token B amount on addLiquidity
 
-make another <GetAmountsOut
+make another <GetAmountsOut , but that just renders the value, i need a hook
 
 const poolContract = new ethers.Contract(pairAddress, pairABI, accountSigner);
 
@@ -48,3 +48,28 @@ const poolContract = new ethers.Contract(pairAddress, pairABI, accountSigner);
 
 - `findTokenAddressFromSymbol` replaces all code that currently uses `tokenAddresses`
   -- search and remove
+
+# useAMMRouter
+
+## AddLiquidity
+
+- DONE
+  I need to show the TokenB amount when user is changin Token A amounts
+
+/Hooks/useAMM
+
+i can build a component the fetches the value and returns in div
+
+document.querySelector('.tokenBAmount').innerText;
+div.innerText () on the page to get the value
+
+const handleGetMaxAmount = (index: number) => {
+const text = divRef.current.innerText;
+
+# Remove Liquidity
+
+I need to use the pairs contract ,
+
+- Fetch user balance of LP token
+- verify and approve the LP token to contract
+- the amount : removeLiqudiity is the bigint value of the lp tokens, ... then UI will turn this value into a percentage.
