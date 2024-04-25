@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 // Make components for better rendering functionality: move hooks into these new components
 import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
+import GetAmountIn from "@/app/Components/GetAmountIn";
 import TokenBalance from "@/app/Components/TokenBalance";
 
 import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
@@ -40,24 +41,6 @@ const SwapAmm = () => {
   // Save state without rendering
   const divRef = useRef(null);
 
-  const handleGetMaxAmount = (index: number) => {
-    const text = divRef.current.innerText;
-    console.log(text);
-    const _amount = text; // types tpdp
-
-    switch (index) {
-      case 0:
-        getMaxAmounts("25", _amount);
-        break;
-      case 1:
-        getMaxAmounts("50", _amount);
-        break;
-
-      case 2:
-        getMaxAmounts("100", _amount);
-        break;
-    }
-  };
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
   );
@@ -157,6 +140,25 @@ const SwapAmm = () => {
       transition: Slide,
     });
     //  }
+  };
+
+  const handleGetMaxAmount = (index: number) => {
+    const text = divRef.current.innerText;
+    console.log(text);
+    const _amount = text; // types tpdp
+
+    switch (index) {
+      case 0:
+        getMaxAmounts("25", _amount);
+        break;
+      case 1:
+        getMaxAmounts("50", _amount);
+        break;
+
+      case 2:
+        getMaxAmounts("100", _amount);
+        break;
+    }
   };
 
   const findSymbolDecimals = (_symbolA: string, _symbolB: string) => {
@@ -732,14 +734,28 @@ const SwapAmm = () => {
           )}
           <div className={styles.input_container_sm}>
             <span className={styles.text_space_left_sm}>Select Token B </span>
+
             <div className={styles.amount_inputs}>
-              <input
-                className={styles.input_amount}
-                type="text"
-                placeholder="0.0"
-                value={amountB}
-                onChange={(e) => setAmountB(e.target.value)}
-              />
+              {poolAddress &&
+              poolAddress !== "0x0000000000000000000000000000000000000000" ? (
+                <GetAmountIn
+                  props={[
+                    amountA,
+                    poolAddress,
+
+                    tokenADecimal.current,
+                    tokenBDecimal.current,
+                  ]}
+                ></GetAmountIn>
+              ) : (
+                <input
+                  className={styles.input_amount}
+                  type="text"
+                  placeholder="0.0"
+                  value={amountB}
+                  onChange={(e) => setAmountB(e.target.value)}
+                />
+              )}
 
               <input
                 className={styles.input_token}
@@ -815,7 +831,9 @@ const SwapAmm = () => {
               className={styles.button_field}
               onClick={handleProvideLiquidity}
             >
-              Cast Line
+              {poolAddress !== "0x0000000000000000000000000000000000000000"
+                ? "Cast Line"
+                : "Build Boat"}
             </button>
           </div>
           <div className={styles.input_container_column}>

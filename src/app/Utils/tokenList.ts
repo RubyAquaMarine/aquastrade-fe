@@ -1,3 +1,19 @@
+export const tokenSymbolList = [
+  "ETH",
+  "BTC",
+  "SKL",
+  "AQUA",
+  "USDC",
+  "USDT",
+  "USDP",
+  "DAI",
+  "BRAWL",
+  "EXD",
+  "RUBY",
+  "PROSPECT",
+  "SHISH",
+] as const;
+
 export const tokenList = [
   {
     id: 0,

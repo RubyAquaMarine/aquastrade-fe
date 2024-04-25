@@ -37,7 +37,7 @@ const AmmPools = (props: Props) => {
   // Now compare , with Token Address , with token symbol, match or switched? if switched : reverse Decimals and Symbols in return<>
 
   return (
-    <main>
+    <div>
       {reserves ? (
         <div>
           Pool Reserves:
@@ -77,7 +77,7 @@ const AmmPools = (props: Props) => {
           {!reserves && !isLoading && !isError && <div>No Pool data</div>}
         </div>
       )}
-    </main>
+    </div>
   );
 };
 

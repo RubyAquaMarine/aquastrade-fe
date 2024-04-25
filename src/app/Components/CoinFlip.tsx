@@ -155,7 +155,7 @@ const CoinFlip = (params: Props) => {
   }, [contractCallDataConfirmed]);
 
   return (
-    <main>
+    <div>
       {address ? (
         <div>
           {chain && chain.id !== CHAIN.id ? (
@@ -284,7 +284,7 @@ const CoinFlip = (params: Props) => {
       <span>
         <ToastContainer />
       </span>
-    </main>
+    </div>
   );
 };
 export default CoinFlip;

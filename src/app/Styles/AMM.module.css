@@ -368,6 +368,10 @@
   display: flex;
 }
 
+.token_b {
+  display: flex;
+}
+
 /* Media Queries */
 @media (max-width: 48em) {
   /* Using em for media query */

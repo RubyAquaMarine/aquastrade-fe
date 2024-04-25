@@ -103,30 +103,28 @@ const TokenApprove = (params: Props) => {
   };
 
   return (
-    <main>
-      <div className={styles.token_approve_container}>
-        {address && typeof token_balance === "bigint" ? (
-          <div>
-            {token_balance >= params.props[2] &&
-            token_balance <
-              BigInt(
-                "115792089237316195423570985008687907853269984665640564039057",
-              ) &&
-            typeof token_balance === "bigint" ? (
-              <button className={styles.token_approve_amount}>
-                {formatUnits(token_balance, Number(params.props[4]))}
-              </button>
-            ) : (
-              <button className={styles.token_approve} onClick={handleApprove}>
-                Approve
-              </button>
-            )}
-          </div>
-        ) : (
-          <div></div>
-        )}
-      </div>
-    </main>
+    <div className={styles.token_approve_container}>
+      {address && typeof token_balance === "bigint" ? (
+        <div>
+          {token_balance >= params.props[2] &&
+          token_balance <
+            BigInt(
+              "115792089237316195423570985008687907853269984665640564039057",
+            ) &&
+          typeof token_balance === "bigint" ? (
+            <button className={styles.token_approve_amount}>
+              {formatUnits(token_balance, Number(params.props[4]))}
+            </button>
+          ) : (
+            <button className={styles.token_approve} onClick={handleApprove}>
+              Approve
+            </button>
+          )}
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </div>
   );
 };
 

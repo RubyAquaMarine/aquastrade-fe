@@ -39,7 +39,7 @@ export const config = createConfig({
 
   connectors: [
     injected(),
-    coinbaseWallet({ appName: "Create Wagmi" }),
+    coinbaseWallet({ appName: "Aquas.Trade" }),
     safe(),
     walletConnect({
       isNewChainsStale: true,

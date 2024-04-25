@@ -1,5 +1,5 @@
-import { tokenList } from "./tokenList";
-import { tokenSymbolList } from "./tokenSymbolList";
+import { tokenList, tokenSymbolList } from "./tokenList";
+
 // EUROPA-HUB
 // Add Tokens here
 export const tokenSymbols = tokenSymbolList;

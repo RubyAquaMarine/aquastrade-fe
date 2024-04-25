@@ -39,83 +39,81 @@ const ConnectWallet = () => {
   };
 
   return (
-    <main>
-      <div className={styles.connectButtons}>
-        {!isConnected && status !== "idle" && (
-          <div className={styles.text_flex}>{message}</div>
-        )}
+    <div className={styles.connectButtons}>
+      {!isConnected && status !== "idle" && (
+        <div className={styles.text_flex}>{message}</div>
+      )}
 
-        {/** Handle case where user is using an unknown EVM network */}
-        {isConnected ? (
-          <div className={styles.tradingViewText}>
-            <span>
-              {" "}
-              {chain && chain.id !== CHAIN.id ? (
-                <button
-                  className={styles.p_styled_button_med}
-                  onClick={(event) => handleToEuropa(event, 2046399126)}
-                >
-                  Switch Network
-                </button>
-              ) : (
-                <span>
-                  {!chain ? (
-                    <button className={styles.p_styled_button_med}>
-                      <Link href="/dashboard">Switch Network</Link>
-                    </button>
-                  ) : (
-                    <button className={styles.p_styled_button_med}>
-                      <Link href="/swap/amm">Start Trading</Link>
-                    </button>
-                  )}
-                </span>
-              )}
-            </span>
+      {/** Handle case where user is using an unknown EVM network */}
+      {isConnected ? (
+        <div className={styles.tradingViewText}>
+          <span>
+            {" "}
+            {chain && chain.id !== CHAIN.id ? (
+              <button
+                className={styles.p_styled_button_med}
+                onClick={(event) => handleToEuropa(event, 2046399126)}
+              >
+                Switch Network
+              </button>
+            ) : (
+              <span>
+                {!chain ? (
+                  <button className={styles.p_styled_button_med}>
+                    <Link href="/dashboard">Switch Network</Link>
+                  </button>
+                ) : (
+                  <button className={styles.p_styled_button_med}>
+                    <Link href="/swap/amm">Start Trading</Link>
+                  </button>
+                )}
+              </span>
+            )}
+          </span>
 
-            <span>
-              {" "}
-              <button className={styles.logout} onClick={() => disconnect()}>
-                logout
-              </button>{" "}
-            </span>
-          </div>
-        ) : (
-          <>
-            {error && <div>Error: {error.message}</div>}
-            {connectors.map((connector) => (
-              <div key={connector.uid}>
-                <ul>
-                  <li className={styles.connectorButton}>
-                    <button
-                      className={styles.p_styled_button_sm}
-                      onClick={() => {
-                        connect({ connector });
-                      }}
-                    >
-                      <span className={styles.spinner_padding}>
-                        {isConnecting ? (
-                          <span>
-                            {" "}
-                            {<FaSpinner className={styles.spinner_icon} />}
-                          </span>
-                        ) : (
-                          <span> </span>
-                        )}
-                      </span>
-                      <span className={styles.spinner_padding}>
-                        {" "}
-                        {isConnected && address}
-                        {connector.name}
-                      </span>
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            ))}
-          </>
-        )}
-      </div>
-    </main>
+          <span>
+            {" "}
+            <button className={styles.logout} onClick={() => disconnect()}>
+              logout
+            </button>{" "}
+          </span>
+        </div>
+      ) : (
+        <>
+          {error && <div>Error: {error.message}</div>}
+          {connectors.map((connector) => (
+            <div key={connector.uid}>
+              <ul>
+                <li className={styles.connectorButton}>
+                  <button
+                    className={styles.p_styled_button_sm}
+                    onClick={() => {
+                      connect({ connector });
+                    }}
+                  >
+                    <span className={styles.spinner_padding}>
+                      {isConnecting ? (
+                        <span>
+                          {" "}
+                          {<FaSpinner className={styles.spinner_icon} />}
+                        </span>
+                      ) : (
+                        <span> </span>
+                      )}
+                    </span>
+                    <span className={styles.spinner_padding}>
+                      {" "}
+                      {isConnected && address}
+                      {connector.name}
+                    </span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ))}
+        </>
+      )}
+    </div>
   );
 };
 
