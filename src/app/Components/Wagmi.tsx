@@ -70,7 +70,7 @@ export const config = createConfig({
     [skaleBlockBrawlers.id]: http(),
     [skaleCalypso.id]: http(),
     [skaleCryptoBlades.id]: http(),
-    //  [skaleCryptoColosseum.id]: http(),
+    [skaleCryptoColosseum.id]: http(),
     [skaleExorde.id]: http(),
     [skaleHumanProtocol.id]: http(),
     [skaleNebula.id]: http(),
