@@ -424,8 +424,6 @@ const SwapAmm = () => {
 
       {ammFeature === "swap" ? (
         <div>
-          {" "}
-          <div></div>
           <div className={styles.input_container_sm}>
             <div className={styles.input_container_column}>
               <div className={styles.column}>
@@ -535,7 +533,6 @@ const SwapAmm = () => {
           )}
           {/**  */}
           <div className={styles.input_container}>
-            <p className={styles.text_space_left_bd}>Receive</p>
             <div className={styles.amount_inputs}>
               {swap_path !== [""] && amountA !== "0.0" ? (
                 <GetAmountsOut
@@ -637,8 +634,6 @@ const SwapAmm = () => {
         <div>
           {" "}
           <div className={styles.input_container_sm}>
-            <span className={styles.text_space_left_sm}>Select Token A </span>
-
             <div className={styles.amount_inputs}>
               <input
                 className={styles.input_amount}
@@ -733,8 +728,6 @@ const SwapAmm = () => {
             <div></div>
           )}
           <div className={styles.input_container_sm}>
-            <span className={styles.text_space_left_sm}>Select Token B </span>
-
             <div className={styles.amount_inputs}>
               {poolAddress &&
               poolAddress !== "0x0000000000000000000000000000000000000000" ? (
