@@ -1,0 +1,2 @@
+- this was working : home page connection => stays connected on /bridge page
+- - now, user has to connect again via the Metaport widget Connect button

@@ -73,3 +73,7 @@ I need to use the pairs contract ,
 - Fetch user balance of LP token
 - verify and approve the LP token to contract
 - the amount : removeLiqudiity is the bigint value of the lp tokens, ... then UI will turn this value into a percentage.
+
+# wagmi updated
+- https://www.npmjs.com/package/wagmi/v/2.5.20
+
