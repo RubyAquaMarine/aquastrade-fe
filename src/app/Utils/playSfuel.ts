@@ -13,14 +13,14 @@ import { privateKeyToAccount } from "viem/accounts";
 import { createWalletClient, http } from "viem";
 import { skaleEuropa } from "viem/chains";
 import { SFUEL_ABI } from "@/app/Abi/sfuel";
+import { findContractInfo } from "@/app/Utils/findTokens";
 
-const testKeyA = process.env.NEXT_PUBLIC_FAUCET_KEY;
+const faucetContract = findContractInfo("faucet");
 
 async function privatekeySendsFuel(params: `0x${string}`) {
-  const account = privateKeyToAccount(testKeyA as `0x${string}`);
-
-  console.log("VIEM SFUEL ACCOUNT ", account);
-  console.log("VIEM SFUEL TO  ", params);
+  const account = privateKeyToAccount(
+    process.env.NEXT_PUBLIC_FAUCET_KEY as `0x${string}`,
+  );
 
   const client = createWalletClient({
     account,
@@ -28,15 +28,12 @@ async function privatekeySendsFuel(params: `0x${string}`) {
     transport: http(),
   });
 
-  // new : transferSFUEL 0x453495a7bD8943530FdcBAEE6749795F1f07dBD3
-  // old : mint : 0xa26530CD46d7c039ce64484F5D0a7d44dF9f9206
   const hash = await client.writeContract({
     abi: SFUEL_ABI,
-    address: "0x453495a7bD8943530FdcBAEE6749795F1f07dBD3",
+    address: faucetContract?.addr,
     args: [params],
     functionName: "transferSFUEL",
   });
-  console.log("VIEM SFUEL HASH ", hash);
   return hash;
 }
 
