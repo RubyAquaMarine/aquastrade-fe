@@ -28,8 +28,7 @@ async function privatekeySendsFuel(params: `0x${string}`) {
     transport: http(),
   });
 
-  // works if the args address matches the pkey address.  but I couldn't pass in the props address and have the same outcome.  tx fails, or something, no hash is returned.
-  // new : 0x453495a7bD8943530FdcBAEE6749795F1f07dBD3
+  // new : transferSFUEL 0x453495a7bD8943530FdcBAEE6749795F1f07dBD3
   // old : mint : 0xa26530CD46d7c039ce64484F5D0a7d44dF9f9206
   const hash = await client.writeContract({
     abi: SFUEL_ABI,
