@@ -1,5 +1,4 @@
 import { USER_DATA } from "./database";
-import { USER_WHITELIST } from "./whitelist";
 
 import { NextResponse } from "next/server";
 
@@ -11,13 +10,13 @@ export async function GET() {
 export async function POST(request: Request) {
   const insertUser = await request.json();
   const newUser = {
-    id: USER_WHITELIST.length + 1,
-    wallet: insertUser.text,
+    id: (USER_DATA.length + 1).toString(),
+    wallet: insertUser.text as string,
   };
 
-  USER_WHITELIST.push(newUser);
+  USER_DATA.push(newUser);
 
-  return new NextResponse(JSON.stringify(newUser), {
+  return new Response(JSON.stringify(newUser), {
     headers: { "Content-Type": "application/json" },
     status: 200,
   });

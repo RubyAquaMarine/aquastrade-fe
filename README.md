@@ -8,6 +8,7 @@
 - Perps: coming soon
 - Games: [coinflip](https://aquas.trade/dashboard/coinflip)
 - NFT Market Place: coming after [NFT Sales](https://aquas.trade/nft)
+- sFuel automatic distribution
 
 ## tech
 
@@ -17,6 +18,13 @@
 - [react ](react_.md)
 
 # Getting Started
+
+Create .env , .env.local
+
+```
+NEXT_PUBLIC_WC_PROJECT_ID= wallet connect id
+NEXT_PUBLIC_FAUCET_KEY= enter a private key with no assets other than sfuel
+```
 
 First, run the development server:
 

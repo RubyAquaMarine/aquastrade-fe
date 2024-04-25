@@ -40,6 +40,11 @@ export const contractAddresses = [
     name: "airdrop",
     addr: "0x980FA9c3F0837E9E03F5ab255D0fB938Acee26c1",
   },
+  {
+    id: 7,
+    name:"faucet",
+    addr:"0x453495a7bD8943530FdcBAEE6749795F1f07dBD3"
+  }
 ] as const;
 
 export const getKlineRecordCount = 600;
