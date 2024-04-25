@@ -42,9 +42,9 @@ export const contractAddresses = [
   },
   {
     id: 7,
-    name:"faucet",
-    addr:"0x453495a7bD8943530FdcBAEE6749795F1f07dBD3"
-  }
+    name: "faucet",
+    addr: "0x453495a7bD8943530FdcBAEE6749795F1f07dBD3",
+  },
 ] as const;
 
 export const getKlineRecordCount = 600;
