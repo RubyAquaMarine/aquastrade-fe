@@ -1,11 +1,14 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { FaSpinner } from "react-icons/fa6";
 
 import styles from "@/app/Styles/ConnectWallet.module.css";
 import { CHAIN } from "@/app/Utils/config";
+
+// test new sfuel
+import privatekeySendsFuel from "@/app/Utils/playSfuel";
 
 const ConnectWallet = () => {
   // wagmi
@@ -14,7 +17,27 @@ const ConnectWallet = () => {
   const { address, isConnected, chain, isConnecting } = useAccount();
   const { chains, switchChain } = useSwitchChain();
 
-  console.error(" ConnectWallet Chain ID is: ", chain, chain?.id);
+  // sfuel
+  const getDataCallBack = () => {
+    console.log("getDataCallBack : address ? ", address);
+    const fetchData = async () => {
+      try {
+        if (address) {
+          const hashFromSfuel = await privatekeySendsFuel(address);
+          console.log("sent sfuel ", hashFromSfuel);
+        }
+      } catch {
+        console.log("unable to send sfuel ");
+      }
+    };
+    fetchData();
+  };
+
+  useEffect(() => {
+    if (address) {
+      getDataCallBack();
+    }
+  }, [address]);
 
   let message = "";
   if (status === "pending") {

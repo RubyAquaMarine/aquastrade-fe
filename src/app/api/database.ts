@@ -4,7 +4,7 @@ export const USER_DATA = [
     wallet: "0x",
   },
   {
-    id: "1",
+    id: "2",
     wallet: "0x",
   },
 ];
