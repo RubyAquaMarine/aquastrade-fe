@@ -28,7 +28,7 @@ import TokenApprove from "@/app/Components/TokenApprove";
 import AMMPools from "@/app/Components/AMMPools";
 
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
-import { useFactory } from "@/app/Hooks/useAMM";
+import { useFactory, useGetAmountInQuote } from "@/app/Hooks/useAMM";
 import {
   tokenAddresses,
   ROUTER_AQUADEX,
@@ -81,6 +81,15 @@ const SwapAmm = () => {
   );
 
   console.log("Rendered AMM  Pair Address: ", poolAddress);
+
+  const addTokenBAmount = useGetAmountInQuote(
+    amountA,
+    poolAddress,
+    tokenAAddress.current,
+    tokenADecimal.current,
+  );
+
+  console.log("Rendered AMM  useGetAmountInQuote: ", addTokenBAmount);
 
   // todo : this needs to be useRef because usingState renders way too much
   useEffect(() => {
@@ -322,7 +331,7 @@ const SwapAmm = () => {
           tokenAAddress.current,
           tokenBAddress.current,
           parseUnits(amountA, Number(tokenADecimal?.current)),
-          parseUnits(amountB, Number(tokenBDecimal?.current)),
+          addTokenBAmount,
           BigInt(0),
           BigInt(0),
           address,
@@ -730,18 +739,14 @@ const SwapAmm = () => {
           <div className={styles.input_container_sm}>
             <div className={styles.amount_inputs}>
               {poolAddress &&
+              addTokenBAmount &&
               poolAddress !== "0x0000000000000000000000000000000000000000" ? (
-                <GetAmountIn
-                  props={[
-                    amountA,
-                    poolAddress,
-
-                    tokenADecimal.current,
-                    tokenBDecimal.current,
-
-                    tokenAAddress.current,
-                  ]}
-                ></GetAmountIn>
+                <input
+                  className={styles.input_amount}
+                  type="text"
+                  placeholder="0.0"
+                  value={formatUnits(addTokenBAmount, tokenBDecimal.current)}
+                />
               ) : (
                 <input
                   className={styles.input_amount}
