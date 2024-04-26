@@ -55,13 +55,7 @@ const GetAmountIn = (params: Props) => {
   // todo , input the reserves in switched order if the AMM POOL Quote/BASE doesnt match
   // the users input token to the QUOTE ,
 
-  console.log(
-    "GetAmountIn: Flipped Reserves ",
-    flipReserves.current,
-    reserves,
-    tokenA,
-    tokenB,
-  );
+  console.log("GetAmountIn: Flipped Reserves ", flipReserves.current, reserves);
 
   const { data: swap_out } = useAMMRouter(ROUTER_AQUADEX, "quote", [
     parseUnits(params.props[0], Number(params.props[2])),
