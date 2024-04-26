@@ -83,7 +83,7 @@ const AirDrop: React.FC = () => {
       },
     );
 
-  console.error(
+  console.log(
     " Airdrop status: ",
     setAirdropped.current,
     " ready: ",
@@ -109,7 +109,7 @@ const AirDrop: React.FC = () => {
       const testT = tokenAmount as string;
       const testTT = testT.concat(",");
 
-      console.error(
+      console.log(
         " Token input amounts changed ",
         tokenAmount,
         " test with extra ,  : ",
@@ -156,7 +156,7 @@ const AirDrop: React.FC = () => {
       setTokenAmount(value);
       setInputValue(value);
 
-      console.error(
+      console.log(
         "handleInputAmountChange: ",
         value,
         isCommaAtEndOfAmounts.current,

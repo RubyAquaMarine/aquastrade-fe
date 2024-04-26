@@ -177,7 +177,7 @@ const Chart = (props: CandleConfig) => {
         volumeSeries.setData(vdata);
         console.log("Binance Static Kline REST API called: output", cdata);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.log(err));
 
     ws.onmessage = (event) => {
       const responseObject = JSON.parse(event.data);

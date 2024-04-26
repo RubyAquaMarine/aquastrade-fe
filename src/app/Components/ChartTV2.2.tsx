@@ -91,15 +91,15 @@ const ChartComponent: React.FC<{
 
     // input historical data
     if (!props?.stream) {
-      console.error("TV (set up) historical data ++++++++++++++++++++");
+      console.log("TV (set up) historical data ++++++++++++++++++++");
 
       if (props?.data[0] && props?.data[0].length > 1) {
-        console.error("TV set Historical data Candles", props?.data[0]);
+        console.log("TV set Historical data Candles", props?.data[0]);
         candlestick.setData(props.data[0]);
       }
 
       if (props?.data[1] && props?.data[1].length > 1) {
-        console.error("TV set Historical data Volume ", props?.data[1]);
+        console.log("TV set Historical data Volume ", props?.data[1]);
         volumeSeries.setData(props.data[1]);
       }
 
@@ -129,7 +129,7 @@ const ChartComponent: React.FC<{
         },
       });
 
-      console.error("TV (set up) done ");
+      console.log("TV (set up) done ");
     } else {
       console.log(
         "TV (container) update  stream",

@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { formatUnits, parseUnits } from "viem";
 import { useAMMRouter } from "@/app/Hooks/useAMM";
 import styles from "@/app/Styles/AMM.module.css";
@@ -17,8 +17,9 @@ interface Props {
 }
 
 const GetAmountsOut = (params: Props) => {
+  const [amount_out, setAmountOut] = useState([]);
   /*
-  console.error(
+  console.log(
     "GetAmountsOut: amount : decimal ",
     params.props[0],
     params.props[3],
@@ -31,9 +32,15 @@ const GetAmountsOut = (params: Props) => {
     params.props[2],
   ]);
 
+  useEffect(() => {
+    if (swap_out) {
+      setAmountOut(swap_out);
+    }
+  }, [swap_out]);
+
   return (
     <div>
-      {!swap_out ? (
+      {amount_out.length === 0 ? (
         <input
           className={styles.input_amount}
           type="text"
@@ -41,12 +48,12 @@ const GetAmountsOut = (params: Props) => {
           value={"0.0"}
         />
       ) : (
-        typeof swap_out === "object" && (
+        typeof amount_out === "object" && (
           <input
             className={styles.input_amount}
             type="text"
             placeholder="Select Token"
-            value={formatUnits(swap_out[1], params.props[4])}
+            value={formatUnits(amount_out[1], params.props[4])}
           />
         )
       )}

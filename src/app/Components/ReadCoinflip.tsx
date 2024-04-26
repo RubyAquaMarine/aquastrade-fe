@@ -38,7 +38,7 @@ function CoinFlip({ name }: ReadProps) {
       valueOfString = BigInt(0);
     }
 
-    console.error(
+    console.log(
       `Read Contract ${name}`,
       valueOfString,
       " SC: ",

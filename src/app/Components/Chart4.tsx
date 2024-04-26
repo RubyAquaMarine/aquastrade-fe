@@ -132,7 +132,7 @@ class ChartManager {
       this.chart.timeScale().scrollToPosition(2, true);
       console.log("Data loaded successfully");
     } catch (error) {
-      console.error("Error fetching or parsing data:", error);
+      console.log("Error fetching or parsing data:", error);
     }
   }
 
@@ -149,7 +149,7 @@ class ChartManager {
       console.log(newData.time);
       // console.log("Data Updated successfully");
     } catch (error) {
-      console.error("Error fetching or parsing data:", error);
+      console.log("Error fetching or parsing data:", error);
     }
   }
 }

@@ -17,7 +17,7 @@ const DarkModeToggle: React.FC = () => {
   }
 
   const toggleTheme = () => {
-    console.error(" Toggle Theme", theme);
+    console.log(" Toggle Theme", theme);
     if (theme === "dark") {
       setTheme("light");
     }

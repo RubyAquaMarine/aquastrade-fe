@@ -45,7 +45,7 @@ const Home = ({ children, params }: any) => {
         setDataToTV(bars?.[0]);
         setDataToTVVolume(bars?.[1]);
       } catch {
-        console.error("unable to get ChartCandles() ");
+        console.log("unable to get ChartCandles() ");
       }
     };
 

@@ -72,3 +72,7 @@ Quarterly airdrops (snapshot on 1st of month)
 ### Treasury
 
 - https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x4f01C97785a62Cd0f4a33993B090DADe0F44e4F4
+- docs : https://docs.skale.network/skale-chain-administration/multisig-setup
+- url UI: https://ipfs.io/ipfs/QmfRD4GuqZobNi2NT2C77a3UTQ452ffwstr4fjEJixUgjf/#/wallets
+- https://bafybeih5ygj2c5iwcusasd7lr3oqv5kxbblhtivkd7vk3h4wps45kxdofy.ipfs.dweb.link/#/wallets
+  https://github.com/skalenetwork/gnosis-safe-ui

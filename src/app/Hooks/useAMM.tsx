@@ -39,7 +39,7 @@ export const useNFTs = (
   _functionName: string,
   _args?: [any],
 ) => {
-  //  console.error(`use NFT  ${_functionName}  with params: ${_args}`);
+  //  console.log(`use NFT  ${_functionName}  with params: ${_args}`);
 
   const { data, isError, isLoading } = useReadContract({
     abi: EUROPA_NFT_ABI,
@@ -56,7 +56,7 @@ export const useAMMRouter = (
   _functionName: string,
   _args?: [any],
 ) => {
-  //  console.error(`use AMM Router ${_functionName}  with params: ${_args}`);
+  //  console.log(`use AMM Router ${_functionName}  with params: ${_args}`);
 
   const { data, isError, isLoading } = useReadContract({
     abi: EUROPA_AMM_ROUTER_ABI,
@@ -73,7 +73,7 @@ export const useAMMPairs = (
   _functionName: string,
   _args?: [any],
 ) => {
-  // console.error(`use AMM Pairs ${_address}  with name ${_functionName}  with params: ${_args}`);
+  // console.log(`use AMM Pairs ${_address}  with name ${_functionName}  with params: ${_args}`);
 
   const { data, isError, isLoading } = useReadContract({
     abi: PAIRS_ABI,

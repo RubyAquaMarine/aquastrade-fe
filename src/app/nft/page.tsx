@@ -143,21 +143,21 @@ const Home = () => {
   }
 
   function handleChangeETH() {
-    console.error("handleChangeETH "); // https://stackoverflow.com/questions/73172456/react-warning-you-provided-a-value-prop-to-a-form-field-without-an-onchange
+    console.log("handleChangeETH "); // https://stackoverflow.com/questions/73172456/react-warning-you-provided-a-value-prop-to-a-form-field-without-an-onchange
   }
 
   const handleButtonClick = (index: number) => {
     const allow = BigInt(allowancesTest.current);
 
-    console.error("APPROVE|BUY with Amount:  ", allow);
+    console.log("APPROVE|BUY with Amount:  ", allow);
 
     switch (index) {
       case 0:
-        console.error("APPROVE 0 Silver NFT", silver);
+        console.log("APPROVE 0 Silver NFT", silver);
         const minSilver = parseEther("0.3", "wei");
 
         if (minSilver > allow) {
-          console.error("APPROVE 0 ", minSilver);
+          console.log("APPROVE 0 ", minSilver);
           // write to approve
           writeContract({
             abi: ERC20_ABI,
@@ -168,7 +168,7 @@ const Home = () => {
           // wait for transaction
         } else {
           const str = String(silver.current);
-          console.error("BUY SILVER ", str);
+          console.log("BUY SILVER ", str);
 
           writeContract({
             abi: MARKETPACE_ABI,
@@ -180,7 +180,7 @@ const Home = () => {
 
         break;
       case 1:
-        console.error("APPROVE 1 Gold NFT", gold);
+        console.log("APPROVE 1 Gold NFT", gold);
 
         const minGold = parseEther("1.5", "wei");
 
@@ -195,7 +195,7 @@ const Home = () => {
           // wait for transaction
         } else {
           const str1 = String(gold.current);
-          console.error("BUY GOLD ", str1);
+          console.log("BUY GOLD ", str1);
           writeContract({
             abi: MARKETPACE_ABI,
             address: MARKETPLACE_AQUADEX,
@@ -206,14 +206,14 @@ const Home = () => {
 
         break;
       case 2:
-        console.error("APPROVE 2 Bronze NFT Step 1", bronze);
+        console.log("APPROVE 2 Bronze NFT Step 1", bronze);
         const min = parseEther("0.03", "wei");
 
         if (min && allow) {
-          console.error("APPROVE 2 Bronze NFT Step 2", min, allow);
+          console.log("APPROVE 2 Bronze NFT Step 2", min, allow);
 
           if (min > allow) {
-            console.error("APPROVE 2 Bronze NFT Step 3 Approve ", min);
+            console.log("APPROVE 2 Bronze NFT Step 3 Approve ", min);
             // write to approve
             writeContract({
               abi: ERC20_ABI,
@@ -223,10 +223,10 @@ const Home = () => {
             });
             // wait for transaction
           } else {
-            console.error("APPROVE 2 Bronze NFT Step 3 Write ", min);
+            console.log("APPROVE 2 Bronze NFT Step 3 Write ", min);
 
             const str2 = String(bronze.current);
-            console.error("BUY BRONZE ", str2);
+            console.log("BUY BRONZE ", str2);
 
             writeContract({
               abi: MARKETPACE_ABI,
@@ -244,7 +244,7 @@ const Home = () => {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-14">
       <h4 className={styles.topText}>
         Limited Collection sizes: 50, 500, 5000
       </h4>

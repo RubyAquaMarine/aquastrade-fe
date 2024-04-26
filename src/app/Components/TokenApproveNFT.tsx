@@ -35,7 +35,7 @@ const TokenApprove = (params: Props) => {
     params.props[3],
   );
   /*
-  console.error(
+  console.log(
     "Token Approval",
     params.props[0],
     params.props[1],

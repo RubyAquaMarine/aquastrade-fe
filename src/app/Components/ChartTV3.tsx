@@ -84,7 +84,7 @@ const ChartComponent: React.FC<{
     })
     */
 
-    console.error(" ChartTV3 : SetData now ", data);
+    console.log(" ChartTV3 : SetData now ", data);
     // @ts-ignore: Unreachable code error
     candlestick.setData(data);
 

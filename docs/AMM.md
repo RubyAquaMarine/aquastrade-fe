@@ -1,3 +1,9 @@
+# Gas is free
+
+When you connect your wallet to Aquas.Trade, your wallet will be transfered 0.0001 sfuel and topped up automatically on each login.
+
+- [free sFuel: FaucetEuropa](https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x453495a7bD8943530FdcBAEE6749795F1f07dBD3?tab=write_contract)
+
 # Uniswap v2 AMM Pool type liquidity
 
 - Alpha: UI and UX rapidly changing. Better liquidity routing and liquidity aggregation coming soon. Mostly a simple `single hop` (ANY->AQUA and AQUA->ANY) or `multi hop` (ANY -> AQUA -> ANY)
