@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { useReadContract } from "wagmi";
-
+import { formatUnits, parseEther, parseUnits } from "viem";
 import { MARKETPACE_ABI } from "@/app/Abi/europaMarketPlace";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
@@ -7,6 +8,7 @@ import { EUROPA_NFT_ABI } from "@/app/Abi/europaAquaNFT";
 import { PAIRS_ABI } from "@/app/Abi/pairs";
 import { FACTORY_ABI } from "@/app/Abi/factory";
 import { MARKETPLACE_AQUADEX } from "@/app/Utils/config";
+import { findContractInfo } from "../Utils/findTokens";
 
 export const useMarketPlace = (functionName: string, args?: [any]) => {
   const { data, isError, isLoading } = useReadContract({
@@ -56,7 +58,7 @@ export const useAMMRouter = (
   _functionName: string,
   _args?: [any],
 ) => {
-  //  console.log(`use AMM Router ${_functionName}  with params: ${_args}`);
+  console.log(`use AMM Router ${_functionName}  with params: ${_args}`);
 
   const { data, isError, isLoading } = useReadContract({
     abi: EUROPA_AMM_ROUTER_ABI,
@@ -73,7 +75,11 @@ export const useAMMPairs = (
   _functionName: string,
   _args?: [any],
 ) => {
-  // console.log(`use AMM Pairs ${_address}  with name ${_functionName}  with params: ${_args}`);
+  console.log(
+    `use AMM Pairs ${_address}  with name ${_functionName}  with params: ${_args}`,
+  );
+
+  //if(!_address ||!_functionName) return '';
 
   const { data, isError, isLoading } = useReadContract({
     abi: PAIRS_ABI,
@@ -98,4 +104,52 @@ export const useFactory = (
   });
 
   return { data, isError, isLoading };
+};
+
+export const useGetAmountInQuote = (
+  _amount: string,
+  _addressPair: `0x${string}`,
+  _inputTokenAddress: `0x${string}`,
+  _decimalA: bigint,
+) => {
+  console.log("useGetAmountInQuote:Props: ", _amount, _addressPair, _decimalA);
+
+  // if(!_amount || !_addressPair || !_decimalA) return '';
+  let flip = false;
+
+  const { data: reserves } = useAMMPairs(_addressPair, "getReserves");
+  const { data: addrA } = useAMMPairs(_addressPair, "token0");
+
+  console.log(" addrA ", addrA, " should match ", _addressPair);
+
+  if (addrA && _inputTokenAddress && addrA === _inputTokenAddress) {
+    console.log(" InputToken  matches the QUOTE ");
+    flip = false;
+  } else {
+    console.log(" InputToken  !match the QUOTE ");
+    flip = true;
+  }
+
+  const routerContract = findContractInfo("router");
+
+  console.log(" routerContract", routerContract);
+
+  const data = [
+    parseUnits(_amount, Number(_decimalA)),
+
+    flip === false ? reserves?.[0] : reserves?.[1],
+    flip === false ? reserves?.[1] : reserves?.[0],
+  ];
+
+  console.log(" routerContract data in ", data);
+
+  const { data: swap_out } = useAMMRouter(
+    routerContract.addr,
+    "quote",
+    data as any,
+  );
+
+  console.log(" routerContract data  out ", swap_out);
+
+  return swap_out;
 };

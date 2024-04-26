@@ -19,6 +19,13 @@ interface Props {
 // therefore if you add USDC (top input) paired with AQUA , then the bottom value will be correct
 // if AQUA is selected as the quote, then calculations are switched and GetAmountIn will be invalid to perform the addLiquidity function
 const GetAmountIn = (params: Props) => {
+  const ref = useRef();
+  const isOut = useRef<HTMLDivElement>(null);
+  const testA = isOut.current?.children;
+
+  console.log("isGetAmountIn Test div", testA);
+  console.log("isGetAmountIn Test ref ", ref);
+
   const [amount_out, setAmountOut] = useState(BigInt(0));
   const flipReserves = useRef(false);
 
@@ -80,14 +87,10 @@ const GetAmountIn = (params: Props) => {
 
   return (
     <>
-      {amount_out && reserves && typeof amount_out === "bigint" && (
-        <input
-          className={styles.input_amount}
-          type="text"
-          placeholder="0.0"
-          value={formatUnits(amount_out, params.props[3])}
-        />
-      )}
+      {amount_out &&
+        reserves &&
+        typeof amount_out === "bigint" &&
+        formatUnits(amount_out, params.props[3])}
     </>
   );
 };
