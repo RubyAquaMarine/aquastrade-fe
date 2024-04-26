@@ -37,23 +37,13 @@ const GetAmountIn = (params: Props) => {
   // _args?: [any];
   const { data: reserves } = useAMMPairs(params.props[1], "getReserves", []);
   const { data: addrA } = useAMMPairs(params.props[1], "token0", []);
-  const { data: addrB } = useAMMPairs(params.props[1], "token1", []);
-
-  function test() {
-    if (addrA && params.props[4] && addrA === params.props[4]) {
-      console.log(" InputToken  matches the QUOTE ");
-      flipReserves.current = false;
-    } else {
-      console.log(" InputToken  !match the QUOTE ");
-      flipReserves.current = true;
-    }
-  }
+  // const { data: addrB } = useAMMPairs(params.props[1], "token1", []);
 
   // fetch decimals now
   // const tokenA = findTokenFromAddress(addrA);
   // const tokenB = findTokenFromAddress(addrB);
   // todo , input the reserves in switched order if the AMM POOL Quote/BASE doesnt match
-  // the users input token to the QUOTE ,
+  // the users input token === QUOTE : !== QOUTE,
 
   console.log("GetAmountIn: Flipped Reserves ", flipReserves.current, reserves);
 
@@ -64,7 +54,7 @@ const GetAmountIn = (params: Props) => {
     flipReserves.current === false ? reserves?.[1] : reserves?.[0],
   ]);
 
-  console.log("GetAmountIn Token B Amount:", swap_out);
+  console.log("GetAmountIn Amount:", swap_out);
 
   useEffect(() => {
     if (swap_out) {
@@ -76,7 +66,17 @@ const GetAmountIn = (params: Props) => {
     if (reserves) {
       test();
     }
-  }, [reserves]);
+  }, [reserves, params.props[4]]);
+
+  function test() {
+    if (addrA && params.props[4] && addrA === params.props[4]) {
+      console.log(" InputToken  matches the QUOTE ");
+      flipReserves.current = false;
+    } else {
+      console.log(" InputToken  !match the QUOTE ");
+      flipReserves.current = true;
+    }
+  }
 
   return (
     <>
