@@ -153,7 +153,7 @@ export const wsController = (
 };
 
 const getDataCallBack = async (params: any) => {
-  console.error("fetching ChartCandles data ", params);
+  console.log("fetching ChartCandles data ", params);
   try {
     const dataKlines = fetch(
       `https://api.binance.com/api/v3/klines?symbol=${params}&interval=1d&limit=1000`,
@@ -182,7 +182,7 @@ const getDataCallBack = async (params: any) => {
       }
     }
   } catch (error) {
-    console.error("data ", error);
+    console.log("data ", error);
   }
 };
 

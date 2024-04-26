@@ -14,7 +14,7 @@ export interface ReadProps {
   name?: string;
 }
 
-console.error(`Read `, ASSET_ETH.symbol);
+console.log(`Read `, ASSET_ETH.symbol);
 //bug
 const argsSC = hashMessage(ASSET_ETH.symbol);
 // this is broken until hashing working correctly as ethers.keccak256
@@ -32,7 +32,7 @@ function Oracle({ name }: ReadProps) {
     ],
   });
 
-  console.error(
+  console.log(
     `Read Contract ${name}`,
     smartConrtactValue?.data,
     " | Connected with ",
@@ -46,7 +46,7 @@ function Oracle({ name }: ReadProps) {
   if (typeof smartConrtactValue?.data === "object") {
     valueOfString = smartConrtactValue?.data;
     valueOfString = formatUnits(valueOfString[0], valueOfString[1]);
-    console.error(`Read Contract ${name}`, valueOfString);
+    console.log(`Read Contract ${name}`, valueOfString);
   }
 
   // This useEffect hook ensures that the component is only mounted on the client side

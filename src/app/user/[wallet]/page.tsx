@@ -42,7 +42,7 @@ const chainNames: Record<number, string> = {
 };
 
 function getChainName(chainId: number): string {
-  console.error("chainId ", chainId);
+  console.log("chainId ", chainId);
   return chainNames[chainId] || "elated-tan-skat";
 }
 
@@ -58,7 +58,7 @@ const TokenList = ({ params }: any) => {
       if (chain) {
         const chainName = getChainName(Number(chain.id));
         const apiString = `https://${chainName}.explorer.mainnet.skalenodes.com/api?module=account&action=tokenlist&address=${addressWallet}`;
-        console.error("api string ", apiString);
+        console.log("api string ", apiString);
         const response = await fetch(apiString);
         const jsonData = await response.json();
         const assetList = jsonData?.result;

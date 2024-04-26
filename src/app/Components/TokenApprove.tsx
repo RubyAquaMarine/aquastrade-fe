@@ -1,15 +1,9 @@
 // @ts-nocheck
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import {
-  useAccount,
-  useWriteContract,
-  useBlock,
-  useWaitForTransactionReceipt,
-} from "wagmi";
-import React, { useState, useRef, useEffect } from "react";
+import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import React, { useState, useEffect } from "react";
 import { formatUnits } from "viem";
 
 import { Slide, toast } from "react-toastify";
@@ -29,26 +23,27 @@ interface Props {
 }
 
 const TokenApprove = (params: Props) => {
-  const { address, isConnected, chain } = useAccount();
   const { data: hash, writeContract } = useWriteContract();
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
 
-  // console.error(
+  const [allowance_amount, setAllowance] = useState(BigInt(0));
+
+  // console.log(
   //   "Token Approval Props",
   //   params.props[0],
   //   params.props[1],
   //   params.props[2],
   // );
 
-  const { data: token_balance } = useERC20Token(
+  const { data: token_transfer_allowance } = useERC20Token(
     params.props[1],
     params.props[0],
     params.props[3],
   );
 
-  // console.error(
+  // console.log(
   //   "Token Approval",
   //   params.props[0],
   //   params.props[1],
@@ -57,7 +52,7 @@ const TokenApprove = (params: Props) => {
   //   params.props[3],
   //   params.props[4],
 
-  //   token_balance,
+  //   token_transfer_allowance,
 
   //   " Approve This Contract: ",
   //   params.props[3][1],
@@ -69,6 +64,12 @@ const TokenApprove = (params: Props) => {
       notify(isLink);
     }
   }, [contractCallDataConfirmed]);
+
+  useEffect(() => {
+    if (token_transfer_allowance) {
+      setAllowance(token_transfer_allowance);
+    }
+  }, [token_transfer_allowance]);
 
   const CustomToastWithLink = (_url: string) => (
     <div>
@@ -104,16 +105,16 @@ const TokenApprove = (params: Props) => {
 
   return (
     <div className={styles.token_approve_container}>
-      {address && typeof token_balance === "bigint" ? (
+      {typeof allowance_amount === "bigint" ? (
         <div>
-          {token_balance >= params.props[2] &&
-          token_balance <
+          {allowance_amount >= params.props[2] &&
+          allowance_amount <
             BigInt(
               "115792089237316195423570985008687907853269984665640564039057",
             ) &&
-          typeof token_balance === "bigint" ? (
+          typeof allowance_amount === "bigint" ? (
             <button className={styles.token_approve_amount}>
-              {formatUnits(token_balance, Number(params.props[4]))}
+              {formatUnits(allowance_amount, Number(params.props[4]))}
             </button>
           ) : (
             <button className={styles.token_approve} onClick={handleApprove}>

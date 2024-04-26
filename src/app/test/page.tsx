@@ -40,8 +40,8 @@ const TokenList = ({ params }: any) => {
   }, [address, addresses]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>
+    <main className="flex min-h-screen flex-col items-center justify-between">
+      <div className={styles.rad2}>
         {isConnecting && <span> Connecting</span>}
 
         {isConnected && <span> Connected | Address: {savedAddress}</span>}

@@ -738,6 +738,8 @@ const SwapAmm = () => {
 
                     tokenADecimal.current,
                     tokenBDecimal.current,
+
+                    tokenAAddress.current,
                   ]}
                 ></GetAmountIn>
               ) : (

@@ -17,8 +17,8 @@ const Navbar = () => {
                   <Image
                     src="/AQUA1.png"
                     alt="AquasTrade Logo"
-                    width={40}
-                    height={40}
+                    width={44}
+                    height={44}
                   />
                 </Link>
               </li>
@@ -44,10 +44,10 @@ const Navbar = () => {
               buttonClassName={styles.dropdownmenuBlue}
               title={
                 <Image
-                  src="/list.png"
+                  src="/menu1.svg"
                   alt="AquasTrade Menu"
-                  width={20}
-                  height={20}
+                  width={30}
+                  height={30}
                   className={styles.image_invert}
                 />
               }

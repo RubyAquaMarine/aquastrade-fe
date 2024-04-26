@@ -21,11 +21,16 @@ interface Props {
 }
 
 const AmmPools = (props: Props) => {
+  // can be used for the the amm pool reserves
   const {
     data: reserves,
     isError,
     isLoading,
-  } = useAMMPairs(props?.props?.[0], props?.props?.[1], props?.props?.[2]);
+  } = useAMMPairs(
+    props?.props?.[0], // pool address
+    props?.props?.[1], // functionName to call on CA
+    props?.props?.[2], // ifArgs are required
+  );
 
   // token symbols
   const { data: sym0 } = useAMMPairs(props?.props?.[0], "token0", []);
