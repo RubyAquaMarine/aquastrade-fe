@@ -120,28 +120,25 @@ export const useGetAmountInQuote = (
   const { data: reserves } = useAMMPairs(_addressPair, "getReserves");
   const { data: addrA } = useAMMPairs(_addressPair, "token0");
 
-  console.log(" addrA ", addrA, " should match ", _addressPair);
-
-  if (addrA && _inputTokenAddress && addrA === _inputTokenAddress) {
-    console.log(" InputToken  matches the QUOTE ");
-    flip = false;
-  } else {
-    console.log(" InputToken  !match the QUOTE ");
-    flip = true;
+  if (_addressPair && addrA && _inputTokenAddress) {
+    if (addrA === _inputTokenAddress) {
+      console.log(" InputToken  matches the QUOTE ");
+      flip = false;
+    } else {
+      console.log(" InputToken  !match the QUOTE ");
+      flip = true;
+    }
   }
 
   const routerContract = findContractInfo("router");
 
-  console.log(" routerContract", routerContract);
-
+  // todo : bug here, on mulit hop calculations when asset is not 18 decimals
   const data = [
     parseUnits(_amount, Number(_decimalA)),
 
     flip === false ? reserves?.[0] : reserves?.[1],
     flip === false ? reserves?.[1] : reserves?.[0],
   ];
-
-  console.log(" routerContract data in ", data);
 
   const { data: swap_out } = useAMMRouter(
     routerContract.addr,

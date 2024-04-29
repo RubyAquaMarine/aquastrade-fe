@@ -16,6 +16,10 @@ interface Props {
   decimalsB: number;
 }
 
+// bug on decimals because on a multi hop the params does not contain the 3 asset
+// asset a and asset b in single hop is fine
+// btc + aqua + usdc (8,6) are passed in, but aqua is (18)
+
 const GetAmountsOut = (params: Props) => {
   const [amount_out, setAmountOut] = useState([]);
   /*
@@ -27,9 +31,9 @@ const GetAmountsOut = (params: Props) => {
   */
 
   const { data: swap_out } = useAMMRouter(ROUTER_AQUADEX, "getAmountsOut", [
-    parseUnits(params.props[0], Number(params.props[3])),
-    params.props[1],
-    params.props[2],
+    parseUnits(params.props[0], Number(params.props[3])), // amount + decimals for tokenA
+    params.props[1], // path
+    params.props[2], // fee
   ]);
 
   useEffect(() => {
@@ -53,7 +57,11 @@ const GetAmountsOut = (params: Props) => {
             className={styles.input_amount}
             type="text"
             placeholder="Select Token"
-            value={formatUnits(amount_out[1], params.props[4])}
+            value={
+              !amount_out[2]
+                ? formatUnits(amount_out[1], params.props[4])
+                : formatUnits(amount_out[2], params.props[4])
+            }
           />
         )
       )}

@@ -21,7 +21,7 @@ interface Props {
 }
 
 const AmmPools = (props: Props) => {
-  // can be used for the the amm pool reserves
+  // can be used for the amm pool reserves
   const {
     data: reserves,
     isError,
@@ -79,7 +79,9 @@ const AmmPools = (props: Props) => {
 
           {isError && !isLoading && <div>Multi Pool Routing required</div>}
 
-          {!reserves && !isLoading && !isError && <div>No Pool data</div>}
+          {!reserves && !isLoading && !isError && (
+            <div>Go to Cast and Build a Boat</div>
+          )}
         </div>
       )}
     </div>

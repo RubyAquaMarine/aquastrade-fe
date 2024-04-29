@@ -20,7 +20,11 @@ import GetAmountsOut from "@/app/Components/GetAmountsOut";
 import GetAmountIn from "@/app/Components/GetAmountIn";
 import TokenBalance from "@/app/Components/TokenBalance";
 
-import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
+import {
+  findTokenAddressFromSymbol,
+  findTokenLogoFromAddress,
+  findTokenDecimalsFromSymbol,
+} from "@/app/Utils/findTokens";
 
 // test
 import TokenApprove from "@/app/Components/TokenApprove";
@@ -36,6 +40,7 @@ import {
 } from "@/app/Utils/config";
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
+import useSkaleExplorer from "@/app/Hooks/useSkaleExplorer";
 
 const SwapAmm = () => {
   // Save state without rendering
@@ -66,13 +71,18 @@ const SwapAmm = () => {
 
   // default swapping pair
   const [ammFeature, setAMMFeature] = useState("swap");
+
+  //contains token addresses:  logic shows the routing asset logos , can be two or three items , alos used for the GetAmounts Out
   const [swap_path, setSwapPath] = useState([""]);
+
   const [tokenA, setTokenA] = useState("USDC");
   const [tokenB, setTokenB] = useState("AQUA");
   const [amountA, setAmountA] = useState("1");
-  const [amountB, setAmountB] = useState("0");
+  const [amountB, setAmountB] = useState("1");
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
+
+  const walletTokenList = useSkaleExplorer(address);
 
   const { data: poolAddress } = useFactory(
     contractAddresses[2].addr,
@@ -80,8 +90,11 @@ const SwapAmm = () => {
     [tokenAAddress.current, tokenBAddress.current],
   );
 
-  console.log("Rendered AMM  Pair Address: ", poolAddress);
+  const swap_path_logos1 = findTokenLogoFromAddress(swap_path[0]);
+  const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
+  const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
 
+  // for Add Liquidity function
   const addTokenBAmount = useGetAmountInQuote(
     amountA,
     poolAddress,
@@ -89,20 +102,21 @@ const SwapAmm = () => {
     tokenADecimal.current,
   );
 
-  console.log("Rendered AMM  useGetAmountInQuote: ", addTokenBAmount);
-
   // todo : this needs to be useRef because usingState renders way too much
+
+  console.log("Token A ", tokenA, tokenAAddress.current);
+  console.log("Token B ", tokenB, tokenBAddress.current);
+
   useEffect(() => {
     if (address && isConnected) {
       if (tokenA && tokenB) {
-        findAddressFromSymbol(true, tokenA);
-        findAddressFromSymbol(false, tokenB);
+        tokenAAddress.current = findTokenAddressFromSymbol(tokenA);
+        tokenBAddress.current = findTokenAddressFromSymbol(tokenB);
+
+        tokenADecimal.current = findTokenDecimalsFromSymbol(tokenA);
+        tokenBDecimal.current = findTokenDecimalsFromSymbol(tokenB);
+
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
-        findSymbolDecimals(tokenA, tokenB);
-        console.log(
-          "Updated AMM Pool Paths, addresses, decimals ",
-          poolAddress,
-        );
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
@@ -121,19 +135,6 @@ const SwapAmm = () => {
       </Link>
     </div>
   );
-  // `${_message} on 🌊 AquasTrade! [tx] Hash: ${_link}`
-  // const notify = (_link: string) =>
-  //   toast.info(CustomToastWithLink(_link), {
-  //     position: "bottom-left",
-  //     autoClose: 8000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "dark",
-  //     transition: Slide,
-  //   });
 
   const notify = (_link: string) => {
     // if(!toast.isActive(ammFeature)) {
@@ -152,8 +153,8 @@ const SwapAmm = () => {
   };
 
   const handleGetMaxAmount = (index: number) => {
-    const text = divRef.current.innerText;
-    console.log(text);
+    const text: string = divRef.current.innerText;
+
     const _amount = text; // types tpdp
 
     switch (index) {
@@ -167,20 +168,9 @@ const SwapAmm = () => {
       case 2:
         getMaxAmounts("100", _amount);
         break;
-    }
-  };
-
-  const findSymbolDecimals = (_symbolA: string, _symbolB: string) => {
-    if (tokenAddresses) {
-      tokenAddresses.forEach((element) => {
-        if (_symbolA === element.symbol) {
-          tokenADecimal.current = element.decimal;
-        }
-
-        if (_symbolB === element.symbol) {
-          tokenBDecimal.current = element.decimal;
-        }
-      });
+      case 3:
+        getMaxAmounts("10", _amount);
+        break;
     }
   };
 
@@ -199,39 +189,21 @@ const SwapAmm = () => {
     }
   };
 
+  // pass in the token addresses
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
+    // no Aqua base means a MultiHop is required
     if (tokenA !== "AQUA" && tokenB !== "AQUA") {
       setSwapPath([_tokenA, aqua_token_address, _tokenB]);
+      return;
     } else {
       setSwapPath([_tokenA, _tokenB]);
-    }
-    console.log("  findPathForPools: swap path: ", swap_path);
-  };
-
-  const findAddressFromSymbol = (_a: boolean, _symbol: string) => {
-    console.log("findTokenAddressFromSymbol", _symbol);
-    if (tokenAddresses) {
-      tokenAddresses.forEach((element) => {
-        if (_symbol === element.symbol) {
-          console.log(`found ${_symbol} at address: `, element.addr);
-
-          if (_a === true) {
-            tokenAAddress.current = element.addr;
-          }
-          if (_a === false) {
-            tokenBAddress.current = element.addr;
-          }
-        }
-      });
+      return;
     }
   };
 
-  // path for pools
   // insert Token Addresses
   const pathForPools = (_tokenA: string, _tokenB: string) => {
     if (tokenA !== "AQUA" && tokenB !== "AQUA") {
-      console.log(" MultiHop AMM ");
-      // all pools are aqua based
       return [_tokenA, aqua_token_address, _tokenB];
     }
     return [_tokenA, _tokenB];
@@ -294,13 +266,11 @@ const SwapAmm = () => {
 
   // Function to handle token selection from the list
   const handleTokenSelectionA = (token: string) => {
-    console.log("User Asset Selected Token A", token);
     setTokenA(token);
     setShowTokenListA(false);
   };
 
   const handleTokenSelectionB = (token: string) => {
-    console.log("User Asset Selected Token B", token);
     setTokenB(token);
     setShowTokenListB(false);
   };
@@ -331,7 +301,9 @@ const SwapAmm = () => {
           tokenAAddress.current,
           tokenBAddress.current,
           parseUnits(amountA, Number(tokenADecimal?.current)),
-          addTokenBAmount,
+          addTokenBAmount
+            ? addTokenBAmount
+            : parseUnits(amountB, Number(tokenBDecimal?.current)), // Create new pool
           BigInt(0),
           BigInt(0),
           address,
@@ -434,37 +406,6 @@ const SwapAmm = () => {
       {ammFeature === "swap" ? (
         <div>
           <div className={styles.input_container_sm}>
-            <div className={styles.input_container_column}>
-              <div className={styles.column}>
-                <span className={styles.button_field_sm}>
-                  <button onClick={() => handleGetMaxAmount(0)}>25%</button>
-                </span>{" "}
-                <span className={styles.button_field_sm}>
-                  <button onClick={() => handleGetMaxAmount(1)}>50%</button>
-                </span>{" "}
-                <span className={styles.button_field_sm}>
-                  <button onClick={() => handleGetMaxAmount(2)}>Max</button>
-                </span>
-              </div>
-              <div className={styles.column}>
-                <span className={styles.text_space_right_12}>
-                  {" "}
-                  Wallet balance{" "}
-                </span>{" "}
-                <div ref={divRef}>
-                  {tokenAAddress.current !== "" && (
-                    <TokenBalance
-                      props={[
-                        tokenAAddress.current,
-                        tokenADecimal.current,
-                        address,
-                      ]}
-                    ></TokenBalance>
-                  )}{" "}
-                </div>
-              </div>
-            </div>
-
             <div className={styles.input_token_a}>
               <input
                 className={styles.input_amount}
@@ -500,12 +441,51 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span key={index}>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
                 </div>
               )}
             </div>
+
+            <p className={styles.container_margin}>
+              <span className={styles.text_space_right_12}>
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(3)}>10%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(0)}>25%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(1)}>50%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(2)}>Max</button>
+                </span>{" "}
+                Wallet balance{" "}
+              </span>
+
+              <span ref={divRef} className={styles.container_token_balance}>
+                {tokenAAddress.current !== "" &&
+                  walletTokenList.map((_balance, index) => (
+                    <span key={index}>
+                      {" "}
+                      {_balance.contractAddress.toUpperCase() ===
+                        tokenAAddress.current.toUpperCase() &&
+                        formatUnits(_balance.balance, _balance.decimals)}
+                    </span>
+                  ))}
+              </span>
+            </p>
 
             <span className={styles.text_center}> Approved: </span>
             {address &&
@@ -590,6 +570,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span key={index}>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -609,7 +598,68 @@ const SwapAmm = () => {
               <p> Exchange Rate:</p>
             </div>
             <div className={styles.column}>
-              <p> Route:</p>
+              <p>
+                {swap_path_logos3 ? (
+                  <span className={styles.routing}>
+                    {" "}
+                    Route:{" "}
+                    <span>
+                      {" "}
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos1}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                    <span>
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos2}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                    <span>
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos3}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                  </span>
+                ) : (
+                  <span className={styles.routing}>
+                    {" "}
+                    Route:{" "}
+                    <span>
+                      {" "}
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos1}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                    <span>
+                      {" "}
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos2}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                  </span>
+                )}
+              </p>
+
               <p> Slippage:</p>
             </div>
           </div>
@@ -678,6 +728,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span key={index}>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -687,20 +746,34 @@ const SwapAmm = () => {
 
             <p className={styles.container_margin}>
               <span className={styles.text_space_right_12}>
-                {" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(3)}>10%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(0)}>25%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(1)}>50%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(2)}>Max</button>
+                </span>{" "}
                 Wallet balance{" "}
               </span>
-              {tokenAAddress.current !== "" ? (
-                <TokenBalance
-                  props={[
-                    tokenAAddress.current,
-                    tokenADecimal.current,
-                    address,
-                  ]}
-                ></TokenBalance>
-              ) : (
-                <span></span>
-              )}
+
+              <div ref={divRef}>
+                {tokenAAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[
+                      tokenAAddress.current,
+                      tokenADecimal.current,
+                      address,
+                    ]}
+                  ></TokenBalance>
+                ) : (
+                  <span></span>
+                )}
+              </div>
             </p>
 
             <span className={styles.text_center}> Approved: </span>
@@ -782,6 +855,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span key={index}>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -838,13 +920,15 @@ const SwapAmm = () => {
           </div>
           <div className={styles.input_container_column}>
             <div className={styles.column}>
-              <p> Whale Size:</p>
+              <p>
+                {" "}
+                {poolAddress !== "0x0000000000000000000000000000000000000000"
+                  ? "Whale Size:"
+                  : "100% Ownership"}
+              </p>
               <p> Exchange Rate:</p>
             </div>
-            <div className={styles.column}>
-              <p> Route:</p>
-              <p> Slippage:</p>
-            </div>
+            <div className={styles.column}></div>
           </div>
         </div>
       ) : (
@@ -895,6 +979,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span key={index}>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -981,6 +1074,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span key={index}>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
