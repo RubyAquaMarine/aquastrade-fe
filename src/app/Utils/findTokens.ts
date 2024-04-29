@@ -57,3 +57,17 @@ export const findContractInfo = (_name: string) => {
     return save as any;
   }
 };
+
+export const findTokenDecimalsFromSymbol = (_symbol: string) => {
+  let save;
+  if (tokenAddresses) {
+    tokenAddresses.forEach((element) => {
+      if (_symbol === element.symbol) {
+        save = element.decimal;
+      }
+    });
+  }
+  if (save) {
+    return save as any;
+  }
+};

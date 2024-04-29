@@ -8,9 +8,8 @@
 
 # AMM :
 
-- select symbols should load the balances of all tokens : make function to shorten the strings.
+- select symbols should load the balances of all tokens : make function to shorten the wallet balance strings.
 - remove the onchain fetch for token balances and use the direct api from explorer
-- show swap route: just show the symbol icons with arrows
 
 ## trade
 

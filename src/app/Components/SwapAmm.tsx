@@ -23,6 +23,7 @@ import TokenBalance from "@/app/Components/TokenBalance";
 import {
   findTokenAddressFromSymbol,
   findTokenLogoFromAddress,
+  findTokenDecimalsFromSymbol,
 } from "@/app/Utils/findTokens";
 
 // test
@@ -92,13 +93,7 @@ const SwapAmm = () => {
   const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
   const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
 
-  console.log(
-    "Rendered AMM  Pair Address: ",
-    poolAddress,
-    " route ",
-    swap_path,
-  );
-
+  // for Add Liquidity function
   const addTokenBAmount = useGetAmountInQuote(
     amountA,
     poolAddress,
@@ -106,24 +101,17 @@ const SwapAmm = () => {
     tokenADecimal.current,
   );
 
-  console.log("Rendered AMM  useGetAmountInQuote: ", addTokenBAmount);
-
   // todo : this needs to be useRef because usingState renders way too much
   useEffect(() => {
     if (address && isConnected) {
       if (tokenA && tokenB) {
-        // findAddressFromSymbol(true, tokenA);
-        // findAddressFromSymbol(false, tokenB);
-
         tokenAAddress.current = findTokenAddressFromSymbol(tokenA);
         tokenBAddress.current = findTokenAddressFromSymbol(tokenB);
 
+        tokenADecimal.current = findTokenDecimalsFromSymbol(tokenA);
+        tokenBDecimal.current = findTokenDecimalsFromSymbol(tokenB);
+
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
-        findSymbolDecimals(tokenA, tokenB);
-        console.log(
-          "Updated AMM Pool Paths, addresses, decimals ",
-          poolAddress,
-        );
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
@@ -142,19 +130,6 @@ const SwapAmm = () => {
       </Link>
     </div>
   );
-  // `${_message} on 🌊 AquasTrade! [tx] Hash: ${_link}`
-  // const notify = (_link: string) =>
-  //   toast.info(CustomToastWithLink(_link), {
-  //     position: "bottom-left",
-  //     autoClose: 8000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "dark",
-  //     transition: Slide,
-  //   });
 
   const notify = (_link: string) => {
     // if(!toast.isActive(ammFeature)) {
@@ -174,7 +149,7 @@ const SwapAmm = () => {
 
   const handleGetMaxAmount = (index: number) => {
     const text = divRef.current.innerText;
-    console.log(text);
+   
     const _amount = text; // types tpdp
 
     switch (index) {
@@ -188,20 +163,6 @@ const SwapAmm = () => {
       case 2:
         getMaxAmounts("100", _amount);
         break;
-    }
-  };
-
-  const findSymbolDecimals = (_symbolA: string, _symbolB: string) => {
-    if (tokenAddresses) {
-      tokenAddresses.forEach((element) => {
-        if (_symbolA === element.symbol) {
-          tokenADecimal.current = element.decimal;
-        }
-
-        if (_symbolB === element.symbol) {
-          tokenBDecimal.current = element.decimal;
-        }
-      });
     }
   };
 
@@ -220,23 +181,21 @@ const SwapAmm = () => {
     }
   };
 
+  // pass in the token addresses
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
+    // no Aqua base means a MultiHop is required
     if (tokenA !== "AQUA" && tokenB !== "AQUA") {
       setSwapPath([_tokenA, aqua_token_address, _tokenB]);
-    } else {
+      return;
+    } else{
       setSwapPath([_tokenA, _tokenB]);
+      return;
     }
-    console.log("  findPathForPools: swap path: ", swap_path);
   };
 
-  // make a new function that uses the token addresses to return the logos in span
-
-  // path for pools
   // insert Token Addresses
   const pathForPools = (_tokenA: string, _tokenB: string) => {
     if (tokenA !== "AQUA" && tokenB !== "AQUA") {
-      console.log(" MultiHop AMM ");
-      // all pools are aqua based
       return [_tokenA, aqua_token_address, _tokenB];
     }
     return [_tokenA, _tokenB];
@@ -299,13 +258,13 @@ const SwapAmm = () => {
 
   // Function to handle token selection from the list
   const handleTokenSelectionA = (token: string) => {
-    console.log("User Asset Selected Token A", token);
+   
     setTokenA(token);
     setShowTokenListA(false);
   };
 
   const handleTokenSelectionB = (token: string) => {
-    console.log("User Asset Selected Token B", token);
+   
     setTokenB(token);
     setShowTokenListB(false);
   };
@@ -942,13 +901,15 @@ const SwapAmm = () => {
           </div>
           <div className={styles.input_container_column}>
             <div className={styles.column}>
-              <p> Whale Size:</p>
+              <p>
+                {" "}
+                {poolAddress !== "0x0000000000000000000000000000000000000000"
+                  ? "Whale Size:"
+                  : "100% Ownership"}
+              </p>
               <p> Exchange Rate:</p>
             </div>
-            <div className={styles.column}>
-              <p> Route:</p>
-              <p> Slippage:</p>
-            </div>
+            <div className={styles.column}></div>
           </div>
         </div>
       ) : (
