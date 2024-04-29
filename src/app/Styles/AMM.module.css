@@ -5,6 +5,12 @@
   background-color: #181a1d;
 }
 
+.routing {
+  display: flex;
+  justify-content: space-between;
+  max-height: 20px;
+}
+
 .input_token:hover {
   background-color: #0056b3;
 }

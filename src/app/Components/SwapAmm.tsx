@@ -20,7 +20,10 @@ import GetAmountsOut from "@/app/Components/GetAmountsOut";
 import GetAmountIn from "@/app/Components/GetAmountIn";
 import TokenBalance from "@/app/Components/TokenBalance";
 
-import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
+import {
+  findTokenAddressFromSymbol,
+  findTokenLogoFromAddress,
+} from "@/app/Utils/findTokens";
 
 // test
 import TokenApprove from "@/app/Components/TokenApprove";
@@ -67,11 +70,13 @@ const SwapAmm = () => {
 
   // default swapping pair
   const [ammFeature, setAMMFeature] = useState("swap");
+
   const [swap_path, setSwapPath] = useState([""]);
+
   const [tokenA, setTokenA] = useState("USDC");
   const [tokenB, setTokenB] = useState("AQUA");
   const [amountA, setAmountA] = useState("1");
-  const [amountB, setAmountB] = useState("0");
+  const [amountB, setAmountB] = useState("1");
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
 
@@ -83,7 +88,16 @@ const SwapAmm = () => {
     [tokenAAddress.current, tokenBAddress.current],
   );
 
-  console.log("Rendered AMM  Pair Address: ", poolAddress);
+  const swap_path_logos1 = findTokenLogoFromAddress(swap_path[0]);
+  const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
+  const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
+
+  console.log(
+    "Rendered AMM  Pair Address: ",
+    poolAddress,
+    " route ",
+    swap_path,
+  );
 
   const addTokenBAmount = useGetAmountInQuote(
     amountA,
@@ -98,8 +112,12 @@ const SwapAmm = () => {
   useEffect(() => {
     if (address && isConnected) {
       if (tokenA && tokenB) {
-        findAddressFromSymbol(true, tokenA);
-        findAddressFromSymbol(false, tokenB);
+        // findAddressFromSymbol(true, tokenA);
+        // findAddressFromSymbol(false, tokenB);
+
+        tokenAAddress.current = findTokenAddressFromSymbol(tokenA);
+        tokenBAddress.current = findTokenAddressFromSymbol(tokenB);
+
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
         findSymbolDecimals(tokenA, tokenB);
         console.log(
@@ -211,23 +229,7 @@ const SwapAmm = () => {
     console.log("  findPathForPools: swap path: ", swap_path);
   };
 
-  const findAddressFromSymbol = (_a: boolean, _symbol: string) => {
-    console.log("findTokenAddressFromSymbol", _symbol);
-    if (tokenAddresses) {
-      tokenAddresses.forEach((element) => {
-        if (_symbol === element.symbol) {
-          console.log(`found ${_symbol} at address: `, element.addr);
-
-          if (_a === true) {
-            tokenAAddress.current = element.addr;
-          }
-          if (_a === false) {
-            tokenBAddress.current = element.addr;
-          }
-        }
-      });
-    }
-  };
+  // make a new function that uses the token addresses to return the logos in span
 
   // path for pools
   // insert Token Addresses
@@ -507,7 +509,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span>
+                          <span key={index}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -606,7 +608,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span>
+                          <span key={index}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -632,7 +634,68 @@ const SwapAmm = () => {
               <p> Exchange Rate:</p>
             </div>
             <div className={styles.column}>
-              <p> Route:</p>
+              <p>
+                {swap_path_logos3 ? (
+                  <span className={styles.routing}>
+                    {" "}
+                    Route:{" "}
+                    <span>
+                      {" "}
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos1}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                    <span>
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos2}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                    <span>
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos3}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                  </span>
+                ) : (
+                  <span className={styles.routing}>
+                    {" "}
+                    Route:{" "}
+                    <span>
+                      {" "}
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos1}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                    <span>
+                      {" "}
+                      <Image
+                        className={styles.token_list_symbol_space}
+                        src={swap_path_logos2}
+                        alt="Aquas.Trade Crypto Assets On SKALE Network"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                  </span>
+                )}
+              </p>
+
               <p> Slippage:</p>
             </div>
           </div>
@@ -703,7 +766,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span>
+                          <span key={index}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -816,7 +879,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span>
+                          <span key={index}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -938,7 +1001,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span>
+                          <span key={index}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -1033,7 +1096,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span>
+                          <span key={index}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
