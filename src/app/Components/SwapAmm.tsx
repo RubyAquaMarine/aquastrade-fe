@@ -72,6 +72,7 @@ const SwapAmm = () => {
   // default swapping pair
   const [ammFeature, setAMMFeature] = useState("swap");
 
+  //contains token addresses:  logic shows the routing asset logos , can be two or three items , alos used for the GetAmounts Out
   const [swap_path, setSwapPath] = useState([""]);
 
   const [tokenA, setTokenA] = useState("USDC");
@@ -102,6 +103,10 @@ const SwapAmm = () => {
   );
 
   // todo : this needs to be useRef because usingState renders way too much
+
+  console.log("Token A ", tokenA, tokenAAddress.current);
+  console.log("Token B ", tokenB, tokenBAddress.current);
+
   useEffect(() => {
     if (address && isConnected) {
       if (tokenA && tokenB) {
@@ -148,8 +153,8 @@ const SwapAmm = () => {
   };
 
   const handleGetMaxAmount = (index: number) => {
-    const text = divRef.current.innerText;
-   
+    const text: string = divRef.current.innerText;
+
     const _amount = text; // types tpdp
 
     switch (index) {
@@ -162,6 +167,9 @@ const SwapAmm = () => {
 
       case 2:
         getMaxAmounts("100", _amount);
+        break;
+      case 3:
+        getMaxAmounts("10", _amount);
         break;
     }
   };
@@ -187,7 +195,7 @@ const SwapAmm = () => {
     if (tokenA !== "AQUA" && tokenB !== "AQUA") {
       setSwapPath([_tokenA, aqua_token_address, _tokenB]);
       return;
-    } else{
+    } else {
       setSwapPath([_tokenA, _tokenB]);
       return;
     }
@@ -258,13 +266,11 @@ const SwapAmm = () => {
 
   // Function to handle token selection from the list
   const handleTokenSelectionA = (token: string) => {
-   
     setTokenA(token);
     setShowTokenListA(false);
   };
 
   const handleTokenSelectionB = (token: string) => {
-   
     setTokenB(token);
     setShowTokenListB(false);
   };
@@ -400,37 +406,6 @@ const SwapAmm = () => {
       {ammFeature === "swap" ? (
         <div>
           <div className={styles.input_container_sm}>
-            <div className={styles.input_container_column}>
-              <div className={styles.column}>
-                <span className={styles.button_field_sm}>
-                  <button onClick={() => handleGetMaxAmount(0)}>25%</button>
-                </span>{" "}
-                <span className={styles.button_field_sm}>
-                  <button onClick={() => handleGetMaxAmount(1)}>50%</button>
-                </span>{" "}
-                <span className={styles.button_field_sm}>
-                  <button onClick={() => handleGetMaxAmount(2)}>Max</button>
-                </span>
-              </div>
-              <div className={styles.column}>
-                <span className={styles.text_space_right_12}>
-                  {" "}
-                  Wallet balance{" "}
-                </span>{" "}
-                <div ref={divRef}>
-                  {tokenAAddress.current !== "" && (
-                    <TokenBalance
-                      props={[
-                        tokenAAddress.current,
-                        tokenADecimal.current,
-                        address,
-                      ]}
-                    ></TokenBalance>
-                  )}{" "}
-                </div>
-              </div>
-            </div>
-
             <div className={styles.input_token_a}>
               <input
                 className={styles.input_amount}
@@ -481,6 +456,36 @@ const SwapAmm = () => {
                 </div>
               )}
             </div>
+
+            <p className={styles.container_margin}>
+              <span className={styles.text_space_right_12}>
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(3)}>10%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(0)}>25%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(1)}>50%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(2)}>Max</button>
+                </span>{" "}
+                Wallet balance{" "}
+              </span>
+
+              <span ref={divRef} className={styles.container_token_balance}>
+                {tokenAAddress.current !== "" &&
+                  walletTokenList.map((_balance, index) => (
+                    <span key={index}>
+                      {" "}
+                      {_balance.contractAddress.toUpperCase() ===
+                        tokenAAddress.current.toUpperCase() &&
+                        formatUnits(_balance.balance, _balance.decimals)}
+                    </span>
+                  ))}
+              </span>
+            </p>
 
             <span className={styles.text_center}> Approved: </span>
             {address &&
@@ -741,20 +746,34 @@ const SwapAmm = () => {
 
             <p className={styles.container_margin}>
               <span className={styles.text_space_right_12}>
-                {" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(3)}>10%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(0)}>25%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(1)}>50%</button>
+                </span>{" "}
+                <span className={styles.button_field_xs}>
+                  <button onClick={() => handleGetMaxAmount(2)}>Max</button>
+                </span>{" "}
                 Wallet balance{" "}
               </span>
-              {tokenAAddress.current !== "" ? (
-                <TokenBalance
-                  props={[
-                    tokenAAddress.current,
-                    tokenADecimal.current,
-                    address,
-                  ]}
-                ></TokenBalance>
-              ) : (
-                <span></span>
-              )}
+
+              <div ref={divRef}>
+                {tokenAAddress.current !== "" ? (
+                  <TokenBalance
+                    props={[
+                      tokenAAddress.current,
+                      tokenADecimal.current,
+                      address,
+                    ]}
+                  ></TokenBalance>
+                ) : (
+                  <span></span>
+                )}
+              </div>
             </p>
 
             <span className={styles.text_center}> Approved: </span>
