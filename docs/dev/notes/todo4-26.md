@@ -6,8 +6,15 @@
 
 # Wallet Address switching on Token List page
 
-# AMM : cast :
+# AMM :
 
-- bug in input amounts (usdc input value being sent as the aqua amount)
+- select symbols should load the balances of all tokens : make function to shorten the strings.
+- remove the onchain fetch for token balances and use the direct api from explorer
+- show swap route: just show the symbol icons with arrows
+
+## trade
+
+## cast :
+
+- AmmPools component. work on this. if no pool exists, notify user to create a pool "loading pool data..."
 - new feature: click on the wallet-balance to insert `max` balance amount
-- approve button doesn't disappear and show the allowance amount

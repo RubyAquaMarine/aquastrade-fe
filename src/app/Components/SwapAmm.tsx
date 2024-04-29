@@ -36,6 +36,7 @@ import {
 } from "@/app/Utils/config";
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
+import useSkaleExplorer from "@/app/Hooks/useSkaleExplorer";
 
 const SwapAmm = () => {
   // Save state without rendering
@@ -73,6 +74,8 @@ const SwapAmm = () => {
   const [amountB, setAmountB] = useState("0");
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
+
+  const walletTokenList = useSkaleExplorer(address);
 
   const { data: poolAddress } = useFactory(
     contractAddresses[2].addr,
@@ -331,7 +334,9 @@ const SwapAmm = () => {
           tokenAAddress.current,
           tokenBAddress.current,
           parseUnits(amountA, Number(tokenADecimal?.current)),
-          addTokenBAmount,
+          addTokenBAmount
+            ? addTokenBAmount
+            : parseUnits(amountB, Number(tokenBDecimal?.current)), // Create new pool
           BigInt(0),
           BigInt(0),
           address,
@@ -500,6 +505,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -590,6 +604,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -678,6 +701,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -782,6 +814,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -895,6 +936,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
@@ -981,6 +1031,15 @@ const SwapAmm = () => {
                           width={18}
                           height={18}
                         />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.addr.toUpperCase() &&
+                              formatUnits(_balance.balance, _balance.decimals)}
+                          </span>
+                        ))}
                       </div>
                     ))}
                   </div>
