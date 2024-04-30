@@ -57,6 +57,7 @@ const SwapAmm = () => {
   const tokenBAddress = useRef(aqua_token_address);
 
   const feeNFT = useRef(BigInt(997));
+  const swap_feeNFT = useRef(BigInt(0)); // ceate a value to est the swap fee
 
   const tokenADecimal = useRef(BigInt(18));
   const tokenBDecimal = useRef(BigInt(18));
@@ -71,6 +72,7 @@ const SwapAmm = () => {
 
   // default swapping pair
   const [ammFeature, setAMMFeature] = useState("swap");
+  const [feeForTrade, setFeeForTrade] = useState("0.0");
 
   //contains token addresses:  logic shows the routing asset logos , can be two or three items , alos used for the GetAmounts Out
   const [swap_path, setSwapPath] = useState([""]);
@@ -102,11 +104,6 @@ const SwapAmm = () => {
     tokenADecimal.current,
   );
 
-  // todo : this needs to be useRef because usingState renders way too much
-
-  console.log("Token A ", tokenA, tokenAAddress.current);
-  console.log("Token B ", tokenB, tokenBAddress.current);
-
   useEffect(() => {
     if (address && isConnected) {
       if (tokenA && tokenB) {
@@ -117,9 +114,16 @@ const SwapAmm = () => {
         tokenBDecimal.current = findTokenDecimalsFromSymbol(tokenB);
 
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
+        console.log("useEffect: Token  A-B Changed:  ");
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
+
+  useEffect(() => {
+    if (amountA) {
+      handleFeeCalculations();
+    }
+  }, [amountA]);
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -364,6 +368,39 @@ const SwapAmm = () => {
     setAMMFeature(_feature);
   };
 
+  const handleFeeCalculations = () => {
+    const _fee = feeNFT.current;
+    const nftCheck = BigInt(1000) - _fee;
+    const input = parseUnits(amountA, 18); // string to big
+    const oneTenth = input / BigInt(1000);
+    let fee = BigInt(0);
+    switch (Number(nftCheck)) {
+      case 0:
+        // gold
+        fee = oneTenth * BigInt(nftCheck);
+
+      case 1:
+        // silver
+        fee = oneTenth * BigInt(nftCheck);
+
+      case 2:
+        // br
+        fee = oneTenth * BigInt(nftCheck);
+
+      case 3:
+        // norm
+        fee = oneTenth * BigInt(nftCheck); // 0.3% fee
+
+        break;
+    }
+
+    if (tokenADecimal.current && fee) {
+      setFeeForTrade(formatUnits(fee, 18));
+    } else {
+      setFeeForTrade("0.0");
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.menu}>
@@ -443,7 +480,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -469,15 +506,16 @@ const SwapAmm = () => {
                   <button onClick={() => handleGetMaxAmount(1)}>50%</button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button onClick={() => handleGetMaxAmount(2)}>Max</button>
-                </span>{" "}
-                Wallet balance{" "}
+                  <button onClick={() => handleGetMaxAmount(2)}>
+                    Wallet balance
+                  </button>
+                </span>
               </span>
 
               <span ref={divRef} className={styles.container_token_balance}>
                 {tokenAAddress.current !== "" &&
                   walletTokenList.map((_balance, index) => (
-                    <span key={index}>
+                    <span key={index} className={styles.amount_balance}>
                       {" "}
                       {_balance.contractAddress.toUpperCase() ===
                         tokenAAddress.current.toUpperCase() &&
@@ -572,7 +610,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -594,7 +632,10 @@ const SwapAmm = () => {
           </div>
           <div className={styles.input_container_column}>
             <div className={styles.column}>
-              <p> Fee:</p>
+              <p>
+                Fee: <span className={styles.fee_balance}> {feeForTrade} </span>{" "}
+                <span className={styles.fee_balance}> {tokenA}</span>
+              </p>
               <p> Exchange Rate:</p>
             </div>
             <div className={styles.column}>
@@ -609,8 +650,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos1}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                     <span>
@@ -618,8 +659,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos2}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                     <span>
@@ -627,8 +668,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos3}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                   </span>
@@ -642,8 +683,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos1}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                     <span>
@@ -652,8 +693,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos2}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                   </span>
@@ -730,7 +771,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -756,9 +797,10 @@ const SwapAmm = () => {
                   <button onClick={() => handleGetMaxAmount(1)}>50%</button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button onClick={() => handleGetMaxAmount(2)}>Max</button>
-                </span>{" "}
-                Wallet balance{" "}
+                  <button onClick={() => handleGetMaxAmount(2)}>
+                    Wallet balance
+                  </button>
+                </span>
               </span>
 
               <div ref={divRef}>
@@ -857,7 +899,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -981,7 +1023,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -1076,7 +1118,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&

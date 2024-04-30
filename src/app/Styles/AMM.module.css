@@ -214,6 +214,7 @@
 .token_list_symbol_space {
   margin-right: 10px;
   margin-left: 10px;
+  max-height: 20px;
 }
 
 .menu {
@@ -339,25 +340,29 @@
 }
 
 .button_field_xs {
-  padding-left: 0.2rem;
+  padding-top: 0.2rem;
   padding-right: 0.2rem;
+  padding-left: 0.2rem;
   border-bottom: 0.05rem solid #42518d;
   color: #fff;
   cursor: pointer;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
 }
 
 .button_field_xs:hover {
+  border-radius: 12px;
   background-color: #42518d;
 }
 
 .text_space_right_12 {
-  margin-top: -5px;
-  padding-bottom: 2px;
+  margin-top: -0.3rem;
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
+  padding-bottom: 0.2rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   color: #bdb8b8;
 }
 
@@ -387,6 +392,12 @@
 .pool_balance {
   font-size: 12px;
   color: #bdb8b8;
+}
+
+.fee_balance {
+  font-size: 12px;
+  color: #bdb8b8;
+  margin-right: 0.1rem;
 }
 
 .amount_balance_small {
