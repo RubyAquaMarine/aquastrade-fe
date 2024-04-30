@@ -1,10 +1,34 @@
+.container {
+  background-color: #0d0d10;
+  color: white;
+  padding: 1rem;
+}
+
 .space_border {
   margin-top: 1.2rem;
 }
 
+.text_centered {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.input_amount {
+  min-width: 5rem;
+  padding: 0.25rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid #475384;
+  background-color: #181a1d;
+}
+
 .text_padding {
   padding: 0.5rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
