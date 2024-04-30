@@ -47,7 +47,9 @@ const SwapAmm = () => {
   const divRef = useRef(null);
 
   const lpTokenBalance = useRef("9999999999999.0");
+
   const [amountLPRemove, setAmountLPRemove] = useState(100);
+  const [amountLP, setAmountLP] = useState(BigInt(0));
 
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
@@ -60,7 +62,7 @@ const SwapAmm = () => {
   const tokenBAddress = useRef(aqua_token_address);
 
   const feeNFT = useRef(BigInt(997));
-  const swap_feeNFT = useRef(BigInt(0)); // ceate a value to est the swap fee
+  const swap_feeNFT = useRef(BigInt(0)); //todo: fetch nft  ceate a value to est the swap fee
 
   const tokenADecimal = useRef(BigInt(18));
   const tokenBDecimal = useRef(BigInt(18));
@@ -117,7 +119,6 @@ const SwapAmm = () => {
         tokenBDecimal.current = findTokenDecimalsFromSymbol(tokenB);
 
         findPathForPools(tokenAAddress.current, tokenBAddress.current);
-        console.log("useEffect: Token  A-B Changed:  ");
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
@@ -238,13 +239,11 @@ const SwapAmm = () => {
         tokenB === "USDC" ||
         tokenB === "USDT"
       ) {
-        pathAmm = false;
+        pathAmm = false; // todo : build out stableswap logic
       }
     }
     return pathAmm;
   };
-
-  const getSwapPool = (tokenA: string, tokenB: string) => {};
 
   // Function to handle token swapping
   const handleSwap = () => {
@@ -252,13 +251,8 @@ const SwapAmm = () => {
       ? resultBlock?.data?.timestamp + BigInt(20000)
       : BigInt(404);
     console.log("timestamp for swap ", timeIs);
-    // Implement swapping logic here
+
     if (getSwapPath(tokenA, tokenB)) {
-      // amm
-      console.log(
-        " DEX AMM Swap path: ",
-        pathForPools(tokenAAddress.current, tokenBAddress.current),
-      );
       writeContract({
         abi: EUROPA_AMM_ROUTER_ABI,
         address: ROUTER_AQUADEX,
@@ -349,7 +343,7 @@ const SwapAmm = () => {
         args: [
           tokenAAddress.current,
           tokenBAddress.current,
-          lpTokenBalance.current,
+          amountLP,
           BigInt(0),
           BigInt(0),
           address,
@@ -427,16 +421,7 @@ const SwapAmm = () => {
         const percentage = BigInt(amountLPRemove);
         const wallet = BigInt(saveBalance); // string to big
         const out = (wallet * percentage) / BigInt(100);
-        console.log(
-          " AMOUNTS FOR LP % ",
-          percentage,
-          "Wallet: ",
-          wallet,
-          " test ",
-          out,
-        );
-
-        lpTokenBalance.current = out;
+        setAmountLP(out);
       }
     }
   };
@@ -1031,6 +1016,7 @@ const SwapAmm = () => {
                 className={styles.input_amount}
                 type="number"
                 placeholder="100"
+                max={100}
                 value={amountLPRemove}
                 onChange={(e) => setAmountLPRemove(Number(e.target.value))}
               />
@@ -1102,15 +1088,12 @@ const SwapAmm = () => {
               </span>
             </p>
             <span className={styles.text_center}> Approved: </span>
-            {address &&
-            amountA &&
-            tokenAAddress.current &&
-            tokenADecimal.current ? (
+            {address && poolAddress && amountLP ? (
               <TokenApprove
                 props={[
                   "allowance",
                   poolAddress,
-                  lpTokenBalance.current,
+                  amountLP,
                   [address, ROUTER_AQUADEX],
                   BigInt(18),
                 ]}

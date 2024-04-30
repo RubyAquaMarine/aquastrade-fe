@@ -8,6 +8,8 @@
 
 # AMM :
 
+- load nft at start :
+
 - <TokenBalance> remove all and use the api explorer to speed up ui
 
 - select symbols should load the balances of all tokens : make function to shorten the wallet balance strings.
@@ -22,7 +24,3 @@
 
 # Slippage
 
-- input amountA 100 / 100Factor = 1%
-
-need to times both sides by 1000 first
-10,000 / 10,000 =
