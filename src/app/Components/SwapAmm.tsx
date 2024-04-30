@@ -480,7 +480,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -515,7 +515,7 @@ const SwapAmm = () => {
               <span ref={divRef} className={styles.container_token_balance}>
                 {tokenAAddress.current !== "" &&
                   walletTokenList.map((_balance, index) => (
-                    <span key={index}>
+                    <span key={index} className={styles.amount_balance}>
                       {" "}
                       {_balance.contractAddress.toUpperCase() ===
                         tokenAAddress.current.toUpperCase() &&
@@ -610,7 +610,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -650,8 +650,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos1}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                     <span>
@@ -659,8 +659,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos2}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                     <span>
@@ -668,8 +668,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos3}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                   </span>
@@ -683,8 +683,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos1}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                     <span>
@@ -693,8 +693,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos2}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
+                        width={20}
+                        height={20}
                       />
                     </span>
                   </span>
@@ -771,7 +771,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -899,7 +899,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -1023,7 +1023,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
@@ -1118,7 +1118,7 @@ const SwapAmm = () => {
                         />
                         {"  "}{" "}
                         {walletTokenList.map((_balance, index) => (
-                          <span key={index}>
+                          <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
