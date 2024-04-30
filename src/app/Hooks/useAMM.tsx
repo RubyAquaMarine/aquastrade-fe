@@ -58,7 +58,7 @@ export const useAMMRouter = (
   _functionName: string,
   _args?: [any],
 ) => {
-  console.log(`use AMM Router ${_functionName}  with params: ${_args}`);
+  // console.log(`use AMM Router ${_functionName}  with params: ${_args}`);
 
   const { data, isError, isLoading } = useReadContract({
     abi: EUROPA_AMM_ROUTER_ABI,
@@ -75,12 +75,7 @@ export const useAMMPairs = (
   _functionName: string,
   _args?: [any],
 ) => {
-  console.log(
-    `use AMM Pairs ${_address}  with name ${_functionName}  with params: ${_args}`,
-  );
-
-  //if(!_address ||!_functionName) return '';
-
+  //  console.log(`use AMM Pairs ${_address}  with name ${_functionName}  with params: ${_args}`);
   const { data, isError, isLoading } = useReadContract({
     abi: PAIRS_ABI,
     address: _address,
@@ -112,9 +107,7 @@ export const useGetAmountInQuote = (
   _inputTokenAddress: `0x${string}`,
   _decimalA: bigint,
 ) => {
-  console.log("useGetAmountInQuote:Props: ", _amount, _addressPair, _decimalA);
-
-  // if(!_amount || !_addressPair || !_decimalA) return '';
+  //  console.log("useGetAmountInQuote:Props: ", _amount, _addressPair, _decimalA);
   let flip = false;
 
   const { data: reserves } = useAMMPairs(_addressPair, "getReserves");
@@ -146,7 +139,7 @@ export const useGetAmountInQuote = (
     data as any,
   );
 
-  console.log(" routerContract data  out ", swap_out);
+  console.log("GetAmountInQuote: ", swap_out);
 
   return swap_out;
 };
