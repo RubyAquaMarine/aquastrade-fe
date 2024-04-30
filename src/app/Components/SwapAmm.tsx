@@ -46,6 +46,9 @@ const SwapAmm = () => {
   // Save state without rendering
   const divRef = useRef(null);
 
+  const lpTokenBalance = useRef("9999999999999.0");
+  const [amountLPRemove, setAmountLPRemove] = useState(100);
+
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
   );
@@ -124,6 +127,12 @@ const SwapAmm = () => {
       handleFeeCalculations();
     }
   }, [amountA]);
+
+  useEffect(() => {
+    if (amountLPRemove && poolAddress) {
+      handleLPCalculations();
+    }
+  }, [amountLPRemove, poolAddress]);
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -330,8 +339,6 @@ const SwapAmm = () => {
       tokenAAddress.current,
       tokenBAddress.current,
       address,
-      parseUnits(amountA, Number(tokenADecimal?.current)),
-      parseUnits(amountB, Number(tokenBDecimal?.current)),
     );
 
     if (timeIs) {
@@ -342,9 +349,7 @@ const SwapAmm = () => {
         args: [
           tokenAAddress.current,
           tokenBAddress.current,
-
-          parseUnits(amountA, Number(18)),
-
+          lpTokenBalance.current,
           BigInt(0),
           BigInt(0),
           address,
@@ -398,6 +403,41 @@ const SwapAmm = () => {
       setFeeForTrade(formatUnits(fee, 18));
     } else {
       setFeeForTrade("0.0");
+    }
+  };
+
+  const handleLPCalculations = () => {
+    // find lp balance ; value will be string?
+    if (
+      poolAddress &&
+      poolAddress !== "0x0000000000000000000000000000000000000000" &&
+      poolAddress !== ""
+    ) {
+      let saveBalance = "";
+      walletTokenList.forEach((element) => {
+        if (
+          element.contractAddress.toUpperCase() ===
+          poolAddress.toLocaleUpperCase()
+        ) {
+          saveBalance = element.balance;
+        }
+      });
+
+      if (saveBalance) {
+        const percentage = BigInt(amountLPRemove);
+        const wallet = BigInt(saveBalance); // string to big
+        const out = (wallet * percentage) / BigInt(100);
+        console.log(
+          " AMOUNTS FOR LP % ",
+          percentage,
+          "Wallet: ",
+          wallet,
+          " test ",
+          out,
+        );
+
+        lpTokenBalance.current = out;
+      }
     }
   };
 
@@ -989,10 +1029,10 @@ const SwapAmm = () => {
             <div className={styles.amount_inputs}>
               <input
                 className={styles.input_amount}
-                type="text"
-                placeholder="0.0%"
-                value={amountA}
-                onChange={(e) => setAmountA(e.target.value)}
+                type="number"
+                placeholder="100"
+                value={amountLPRemove}
+                onChange={(e) => setAmountLPRemove(Number(e.target.value))}
               />
 
               <input
@@ -1038,20 +1078,28 @@ const SwapAmm = () => {
             </div>
             <p className={styles.container_margin}>
               <span className={styles.text_space_right_12}>
+                LP: {poolAddress ? poolAddress : " Pool not found"}
+              </span>
+
+              <span className={styles.text_space_right_12}>
                 {" "}
                 Wallet balance{" "}
               </span>
-              {tokenAAddress.current !== "" ? (
-                <TokenBalance
-                  props={[
-                    tokenAAddress.current,
-                    tokenADecimal.current,
-                    address,
-                  ]}
-                ></TokenBalance>
-              ) : (
-                <div></div>
-              )}
+
+              <span ref={divRef} className={styles.container_token_balance}>
+                {poolAddress &&
+                  poolAddress !==
+                    "0x0000000000000000000000000000000000000000" &&
+                  poolAddress !== "" &&
+                  walletTokenList.map((_balance, index) => (
+                    <span key={index} className={styles.amount_balance}>
+                      {" "}
+                      {_balance.contractAddress.toUpperCase() ===
+                        poolAddress.toUpperCase() &&
+                        formatUnits(_balance.balance, _balance.decimals)}
+                    </span>
+                  ))}
+              </span>
             </p>
             <span className={styles.text_center}> Approved: </span>
             {address &&
@@ -1061,10 +1109,10 @@ const SwapAmm = () => {
               <TokenApprove
                 props={[
                   "allowance",
-                  tokenAAddress.current,
-                  parseUnits(amountA, Number(tokenADecimal?.current)),
+                  poolAddress,
+                  lpTokenBalance.current,
                   [address, ROUTER_AQUADEX],
-                  tokenADecimal.current,
+                  BigInt(18),
                 ]}
               ></TokenApprove>
             ) : (
@@ -1131,41 +1179,6 @@ const SwapAmm = () => {
                 </div>
               )}
             </div>
-            <p className={styles.container_margin}>
-              <span className={styles.text_space_right_12}>
-                {" "}
-                Wallet balance{" "}
-              </span>
-              {tokenBAddress.current !== "" ? (
-                <TokenBalance
-                  props={[
-                    tokenBAddress.current,
-                    tokenBDecimal.current,
-                    address,
-                  ]}
-                ></TokenBalance>
-              ) : (
-                <div></div>
-              )}
-            </p>
-
-            <span className={styles.text_center}> Approved: </span>
-            {address &&
-            amountB &&
-            tokenBAddress.current &&
-            tokenBDecimal.current ? (
-              <TokenApprove
-                props={[
-                  "allowance",
-                  tokenBAddress.current,
-                  parseUnits(amountB, Number(tokenBDecimal?.current)),
-                  [address, ROUTER_AQUADEX],
-                  tokenBDecimal.current,
-                ]}
-              ></TokenApprove>
-            ) : (
-              <div></div>
-            )}
           </div>
           <div className={styles.button_container}>
             <button
@@ -1179,10 +1192,6 @@ const SwapAmm = () => {
             <div className={styles.column}>
               <p> Token A Out:</p>
               <p> Token B Out:</p>
-            </div>
-            <div className={styles.column}>
-              <p> Route:</p>
-              <p> Slippage:</p>
             </div>
           </div>
         </div>

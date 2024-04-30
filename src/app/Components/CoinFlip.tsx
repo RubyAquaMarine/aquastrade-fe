@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import TokenApprove from "@/app/Components/TokenApprove";
 import TokenBalance from "@/app/Components/TokenBalance";
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
-import { CHAIN, tokenAddresses } from "@/app/Utils/config";
+import { CHAIN } from "@/app/Utils/config";
 import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
 import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
 import styles from "@/app/Styles/Links.module.css";

@@ -54,7 +54,7 @@ const AirDrop: React.FC = () => {
   const [tokenSymbol, setAirdropTokenSymbol] = useState("");
 
   // Original Input from user is in string format : will be parsed later
-  const [tokenAddresses, setTokenAddresses] = useState<Wallet>();
+  const [tokenAddressList, setTokenAddresses] = useState<Wallet>();
   const [tokenAmount, setTokenAmount] = useState<Amount>();
 
   //wagmi
@@ -120,8 +120,8 @@ const AirDrop: React.FC = () => {
       parseEthAmounts(bug);
     }
 
-    if (tokenAddresses) {
-      const bug: string = tokenAddresses as string;
+    if (tokenAddressList) {
+      const bug: string = tokenAddressList as string;
       parseEthAddresses(bug);
     }
 
@@ -133,7 +133,7 @@ const AirDrop: React.FC = () => {
       console.log("Set the Address from Symbol ", token_address, tokenSymbol);
       setAirdropToken(token_address);
     }
-  }, [tokenAmount, tokenSymbol, tokenAddresses]);
+  }, [tokenAmount, tokenSymbol, tokenAddressList]);
 
   const stringEndWithComma = (e: string) => {
     isCommaAtEndOfAmounts.current = true;
@@ -169,7 +169,7 @@ const AirDrop: React.FC = () => {
     setAirdropped.current = true;
 
     const amounts = parseEthAmounts(tokenAmount as string);
-    const addresses = parseEthAddresses(tokenAddresses as string);
+    const addresses = parseEthAddresses(tokenAddressList as string);
     if (
       token &&
       addresses?.length !== 0 &&
@@ -290,7 +290,7 @@ const AirDrop: React.FC = () => {
           <input
             type="text"
             placeholder="Address List"
-            value={tokenAddresses}
+            value={tokenAddressList}
             onChange={(e) => setTokenAddresses(e.target.value)}
             className={styles.input_address}
           />

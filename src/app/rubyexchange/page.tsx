@@ -46,7 +46,7 @@ const RubyExchange = ({ children, params }: any) => {
   const CustomToastWithLink = (_url: string) => (
     <div>
       <Link href={_url} target="_blank">
-        Reomve Farm LP tokens Tx Hash on 🌊 AquasTrade
+        Remove Farm LP tokens Tx Hash on 🌊 AquasTrade
       </Link>
     </div>
   );
