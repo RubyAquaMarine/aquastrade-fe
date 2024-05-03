@@ -13,15 +13,16 @@ export const tokenSymbolList = [
   "PROSPECT",
   "SHISH",
 ] as const;
-
-export const tokenList = [
-  {
+/*
+{
     id: 0,
     symbol: "PAXG",
     addr: "0x73d22d8a2D1f59Bf5Bcf62cA382481a2073FAF58",
     decimal: 18,
     logo: "/USDC.svg",
   },
+*/
+export const tokenList = [
   {
     id: 1,
     symbol: "USDC",
@@ -113,5 +114,11 @@ export const tokenList = [
     addr: "0xBDDad45160E10C3738785d9dD7F30b4B2a5Eeba8",
     decimal: 18,
     logo: "/SKILL.png",
+  },
+  {
+    symbol: "TGOLD",
+    addr: "0x9F26f887307986CBC2BA53BFf9A8E2e5Da61D1f8",
+    decimal: 18,
+    logo: "/TGOLD.png",
   },
 ] as const;

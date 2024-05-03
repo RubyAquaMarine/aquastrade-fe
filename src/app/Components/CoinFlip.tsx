@@ -209,7 +209,6 @@ const CoinFlip = (params: Props) => {
                           token_address_erc20,
                           parseEther(inputs[0]),
                           [address, params?.props?.[0]],
-                          18,
                         ]}
                       ></TokenApprove>
                     </div>

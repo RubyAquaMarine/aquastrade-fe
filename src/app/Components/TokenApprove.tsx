@@ -13,13 +13,14 @@ import { useERC20Token } from "@/app/Hooks/useAMM";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
 import styles from "@/app/Styles/TokenApprove.module.css";
+import { findTokenFromAddress } from "@/app/Utils/findTokens";
 
+// todo recode with , to use names within code. using ; isn't correct
 interface Props {
   name?: string;
   _address: `0x${string}`;
   approve?: bigint;
   args: [any];
-  decimals: number;
 }
 
 const TokenApprove = (params: Props) => {
@@ -29,13 +30,8 @@ const TokenApprove = (params: Props) => {
   });
 
   const [allowance_amount, setAllowance] = useState(BigInt(0));
-
-  // console.log(
-  //   "Token Approval Props",
-  //   params.props[0],
-  //   params.props[1],
-  //   params.props[2],
-  // );
+  const [inputTrigger, setTrigger] = useState(false); // todo : only triggers once and doesn't reset :
+  const inputToken = findTokenFromAddress(params.props[1]);
 
   const { data: token_transfer_allowance } = useERC20Token(
     params.props[1],
@@ -43,25 +39,26 @@ const TokenApprove = (params: Props) => {
     params.props[3],
   );
 
-  // console.log(
-  //   "Token Approval",
-  //   params.props[0],
-  //   params.props[1],
-  //   params.props[2],
+  console.log(
+    "Token Approval Props",
+    params.props[0],
+    params.props[1],
+    params.props[2],
+    "Input Args",
+    params.props[3],
 
-  //   params.props[3],
-  //   params.props[4],
+    " Approve This Contract: ",
+    token_transfer_allowance,
 
-  //   token_transfer_allowance,
-
-  //   " Approve This Contract: ",
-  //   params.props[3][1],
-  // );
+    " TokenInfo Contract: ",
+    inputToken,
+  );
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
+      setTrigger(true);
     }
   }, [contractCallDataConfirmed]);
 
@@ -69,7 +66,10 @@ const TokenApprove = (params: Props) => {
     if (token_transfer_allowance) {
       setAllowance(token_transfer_allowance);
     }
-  }, [token_transfer_allowance]);
+    if (inputTrigger) {
+      console.log("Token Approval Completed", inputTrigger);
+    }
+  }, [inputTrigger, token_transfer_allowance]);
 
   const CustomToastWithLink = (_url: string) => (
     <div>
@@ -107,18 +107,22 @@ const TokenApprove = (params: Props) => {
     <div className={styles.token_approve_container}>
       {typeof allowance_amount === "bigint" ? (
         <div>
-          {allowance_amount >= params.props[2] &&
-          allowance_amount <
-            BigInt(
-              "115792089237316195423570985008687907853269984665640564039057",
-            ) &&
-          typeof allowance_amount === "bigint" ? (
-            <button className={styles.token_approve_amount}>
-              {formatUnits(allowance_amount, Number(params.props[4]))}
-            </button>
+          {inputTrigger === true ||
+          (allowance_amount >= params.props[2] &&
+            allowance_amount <
+              BigInt(
+                "115792089237316195423570985008687907853269984665640564039057",
+              ) &&
+            typeof allowance_amount === "bigint") ? (
+            <span className={styles.token_approve_amount}>
+              {formatUnits(
+                inputTrigger === true ? params.props[2] : allowance_amount,
+                Number(inputToken ? inputToken?.decimal : 18),
+              )}
+            </span>
           ) : (
             <button className={styles.token_approve} onClick={handleApprove}>
-              Approve
+              Approve {" : "} {inputToken ? inputToken?.symbol : "LP"}
             </button>
           )}
         </div>

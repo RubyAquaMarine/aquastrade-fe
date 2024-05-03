@@ -271,7 +271,6 @@ const AirDrop: React.FC = () => {
                   token,
                   setTotalAmounts.current,
                   [address, contractAirdrop?.addr],
-                  tokenADecimal.current,
                 ]}
               />
             ) : (

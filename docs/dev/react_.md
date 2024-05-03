@@ -28,7 +28,7 @@ re- run logic without re-rendering the ui (immutable data)
 
 ## useState : to rerender ui
 
-if these values change, then re-render
+if these values change in ui, then re-render
 
 - useful for
 

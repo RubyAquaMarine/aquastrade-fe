@@ -17,8 +17,10 @@ import "react-toastify/dist/ReactToastify.css";
 // Make components for better rendering functionality: move hooks into these new components
 import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
-import GetAmountIn from "@/app/Components/GetAmountIn";
+
 import TokenBalance from "@/app/Components/TokenBalance";
+
+import DCAInterface from "@/app/Components/DCA";
 
 import {
   findTokenAddressFromSymbol,
@@ -76,6 +78,7 @@ const SwapAmm = () => {
   });
 
   // default swapping pair
+  const [tradeFeature, setTradeFeature] = useState("swap");
   const [ammFeature, setAMMFeature] = useState("swap");
   const [feeForTrade, setFeeForTrade] = useState("0.0");
 
@@ -86,10 +89,13 @@ const SwapAmm = () => {
   const [tokenB, setTokenB] = useState("AQUA");
   const [amountA, setAmountA] = useState("1");
   const [amountB, setAmountB] = useState("1");
+
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
 
   const walletTokenList = useSkaleExplorer(address);
+
+  const tokenListInWallet = useRef([]);
 
   const { data: poolAddress } = useFactory(
     contractAddresses[2].addr,
@@ -101,7 +107,7 @@ const SwapAmm = () => {
   const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
   const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
 
-  // for Add Liquidity function
+  // for Add Liquidity function : calls getReserves, token0, quote
   const addTokenBAmount = useGetAmountInQuote(
     amountA,
     poolAddress,
@@ -367,6 +373,11 @@ const SwapAmm = () => {
     setAMMFeature(_feature);
   };
 
+  const handleTradeFeatures = (_feature: string) => {
+    console.log("Toggle Trading Features ", _feature);
+    setTradeFeature(_feature);
+  };
+
   const handleFeeCalculations = () => {
     const _fee = feeNFT.current;
     const nftCheck = BigInt(1000) - _fee;
@@ -466,6 +477,39 @@ const SwapAmm = () => {
       </div>
 
       {ammFeature === "swap" ? (
+        <span className={styles.container_nav_xs}>
+          <button
+            className={
+              tradeFeature === "swap" ? styles.nav_xs_select : styles.nav_xs
+            }
+            onClick={() => handleTradeFeatures("swap")}
+          >
+            SWP{" "}
+          </button>
+          <span> </span>
+          <button
+            className={
+              tradeFeature === "dca" ? styles.nav_xs_select : styles.nav_xs
+            }
+            onClick={() => handleTradeFeatures("dca")}
+          >
+            DCA{" "}
+          </button>
+          <span> </span>
+          <button
+            className={
+              tradeFeature === "limit" ? styles.nav_xs_select : styles.nav_xs
+            }
+            onClick={() => handleTradeFeatures("limit")}
+          >
+            LMT{" "}
+          </button>
+        </span>
+      ) : (
+        <span></span>
+      )}
+
+      {ammFeature === "swap" && tradeFeature === "swap" ? (
         <div>
           <div className={styles.input_container_sm}>
             <div className={styles.input_token_a}>
@@ -561,7 +605,6 @@ const SwapAmm = () => {
                   tokenAAddress.current,
                   parseUnits(amountA, Number(tokenADecimal?.current)),
                   [address, ROUTER_AQUADEX],
-                  tokenADecimal.current,
                 ]}
               ></TokenApprove>
             ) : (
@@ -755,6 +798,20 @@ const SwapAmm = () => {
         <div> </div>
       )}
 
+      {ammFeature === "swap" && tradeFeature === "dca" ? (
+        <div>
+          <DCAInterface></DCAInterface>
+        </div>
+      ) : (
+        <div> </div>
+      )}
+
+      {ammFeature === "swap" && tradeFeature === "limit" ? (
+        <div className={styles.input_container}> On Chain Limit Orders</div>
+      ) : (
+        <div> </div>
+      )}
+
       {ammFeature === "add" ? (
         <div>
           {" "}
@@ -854,7 +911,6 @@ const SwapAmm = () => {
                   tokenAAddress.current,
                   parseUnits(amountA, Number(tokenADecimal?.current)),
                   [address, ROUTER_AQUADEX],
-                  tokenADecimal.current,
                 ]}
               ></TokenApprove>
             ) : (
@@ -968,7 +1024,6 @@ const SwapAmm = () => {
                   tokenBAddress.current,
                   parseUnits(amountB, Number(tokenBDecimal?.current)),
                   [address, ROUTER_AQUADEX],
-                  tokenBDecimal.current,
                 ]}
               ></TokenApprove>
             ) : (
@@ -1095,7 +1150,6 @@ const SwapAmm = () => {
                   poolAddress,
                   amountLP,
                   [address, ROUTER_AQUADEX],
-                  BigInt(18),
                 ]}
               ></TokenApprove>
             ) : (
