@@ -134,7 +134,3 @@ const TokenApprove = (params: Props) => {
 };
 
 export default TokenApprove;
-
-// token_approve_container
-// token_approve_amount
-// token_approve

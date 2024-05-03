@@ -5,6 +5,47 @@
   background-color: #181a1d;
 }
 
+.container_wrap {
+  padding: 0.4rem 0.6rem;
+  margin: 0.7rem;
+  border-radius: 12px;
+  background-color: #141618;
+  border: 1px solid #475384;
+}
+
+.container_nav_xs {
+  margin-left: 0.4rem;
+  display: flex;
+  justify-content: flex-start;
+  max-width: 8rem;
+  border-radius: 12px;
+  padding: 0.1rem;
+}
+
+.input_token_a {
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem;
+  border-radius: 12px;
+  background-color: #242629;
+  border: 1px solid #475384;
+}
+
+.input_container_column {
+  padding: 0.4rem 0.6rem;
+  border-radius: 12px;
+  min-width: 300px;
+  margin: 0.7rem;
+  background-color: #242629;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #475384;
+}
+
+.container_margin {
+  margin-bottom: 0.8rem;
+}
+
 .container_token_balance {
   display: flex;
   justify-content: center;
@@ -60,20 +101,6 @@
   padding: 0 1rem;
 }
 
-.input_container_column {
-  padding: 0.4rem 0.6rem;
-  border-radius: 12px;
-  min-width: 300px;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  background-color: #242629;
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid #475384;
-}
-
 .amount_balance {
   font-size: 12px;
   color: #bdb8b8;
@@ -96,16 +123,6 @@
   justify-content: right;
   margin-right: 20px;
   margin-left: 20px;
-  padding: 0.2rem;
-  border-radius: 12px;
-  background-color: #242629;
-  border: 1px solid #475384;
-}
-
-.input_token_a {
-  display: flex;
-  margin-right: 30px;
-  margin-left: 30px;
   padding: 0.2rem;
   border-radius: 12px;
   background-color: #242629;
@@ -257,10 +274,11 @@
 }
 
 .nav_xs {
-  margin-left: 0.15rem;
-  margin-right: 0.15rem;
+  margin-top: 0.3rem;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
   max-width: 2rem;
-  padding: 0.2rem 0.1rem;
+  padding: 0.4rem 0.2rem;
   font-size: 0.6rem;
   font-weight: 450;
   border-radius: 12px;
@@ -275,10 +293,11 @@
 }
 
 .nav_xs_select {
-  margin-left: 0.15rem;
-  margin-right: 0.15rem;
+  margin-top: 0.3rem;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
   max-width: 2rem;
-  padding: 0.2rem 0.1rem;
+  padding: 0.4rem 0.2rem;
   font-size: 0.6rem;
   font-weight: 450;
   border-radius: 12px;
@@ -289,17 +308,6 @@
 .nav_xs:active {
   color: #f8f1f1;
   background-color: #475384;
-}
-
-.container_nav_xs {
-  margin-bottom: 0.25rem;
-  margin-left: 0.4rem;
-  display: flex;
-  justify-content: flex-start;
-  max-width: 5.8rem;
-  border-radius: 12px;
-
-  padding: 0.1rem;
 }
 
 .container_data {

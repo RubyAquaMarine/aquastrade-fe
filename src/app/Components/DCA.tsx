@@ -80,7 +80,7 @@ const DCAInterface: React.FC = () => {
   const [inputTokenB, setTokenB] = useState<string>("");
 
   const [inputSwapSpeed, setSwapSpeed] = useState<string>("");
-  const [inputInvestmentDuration, setInvestmentDuration] = useState<string>("");
+  const [inputInvestmentDuration, setInvestmentDuration] = useState<number>(24);
 
   const [inputMinPrice, setMinPrice] = useState<string>("");
   const [inputMaxPrice, setMaxPrice] = useState<string>("");
@@ -270,64 +270,64 @@ const DCAInterface: React.FC = () => {
     <div>
       {address && chain && chain.id === CHAIN.id ? (
         <div>
-          <span className={styles.text_center}> Select DEX </span>
-          <span className={styles.text_center}>
-            {" "}
-            <input
-              type="text"
-              value={inputRouterName}
-              onClick={handleMenuStateRouter}
-              className={styles.input_token_address}
-            />{" "}
-          </span>
+          <div className={styles.container}>
+            <span className={styles.text_center}> Select DEX </span>
+            <span className={styles.text_center}>
+              {" "}
+              <input
+                type="text"
+                value={inputRouterName}
+                onClick={handleMenuStateRouter}
+                className={styles.input_token_address}
+              />{" "}
+            </span>
 
-          <span className={styles.text_center}>
-            {" "}
-            {showDropdownRouter && routerName.length >= 1 && (
-              <div className={styles.dropdownmenu}>
-                {routerName.map((item) => (
-                  <div key={item} onClick={() => handleItemClick(item, 0)}>
-                    {item}
-                  </div>
-                ))}
-              </div>
-            )}{" "}
-          </span>
+            <span className={styles.text_center}>
+              {" "}
+              {showDropdownRouter && routerName.length >= 1 && (
+                <div className={styles.dropdownmenu}>
+                  {routerName.map((item) => (
+                    <div key={item} onClick={() => handleItemClick(item, 0)}>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              )}{" "}
+            </span>
 
-          <span className={styles.text_center}> Select AMM Pool</span>
-          <span className={styles.text_center}>
-            {" "}
-            <input
-              type="text"
-              value={inputPoolSymbol}
-              onClick={handleMenuStatePool}
-              onChange={() => {
-                setDDPool(false);
-              }}
-              className={styles.input_token_address}
-            />{" "}
-          </span>
+            <span className={styles.text_center}> Select AMM Pool</span>
+            <span className={styles.text_center}>
+              {" "}
+              <input
+                type="text"
+                value={inputPoolSymbol}
+                onClick={handleMenuStatePool}
+                onChange={() => {
+                  setDDPool(false);
+                }}
+                className={styles.input_token_address}
+              />{" "}
+            </span>
 
-          <span className={styles.text_center}>
-            {" "}
-            {showDropdownPool && inputSymbolList.length >= 1 && (
-              <div className={styles.dropdownmenu}>
-                {inputSymbolList.map((item) => (
-                  <div key={item} onClick={() => handleItemClick(item, 1)}>
-                    {item}
-                  </div>
-                ))}
-              </div>
-            )}{" "}
-          </span>
+            <span className={styles.text_center}>
+              {" "}
+              {showDropdownPool && inputSymbolList.length >= 1 && (
+                <div className={styles.dropdownmenu}>
+                  {inputSymbolList.map((item) => (
+                    <div key={item} onClick={() => handleItemClick(item, 1)}>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              )}{" "}
+            </span>
+          </div>
 
           <span className={styles.text_center}>
             <span className={styles.column}>
-              {" "}
-              Buying {inputTokenA} ? {" : "}{" "}
+              Buying {inputTokenA} {" : "}
             </span>
             <span className={styles.column}>
-              {" "}
               <input
                 type="checkbox"
                 checked={inputIsBuying}
@@ -335,17 +335,18 @@ const DCAInterface: React.FC = () => {
               />
             </span>
           </span>
-          <span className={styles.text_center}>
-            <input
-              type="text"
-              placeholder="Input Token Amount"
-              value={inputTokenAmount}
-              onChange={(e) => setTokenAmount(e.target.value)}
-              className={styles.input_token_address}
-            />{" "}
-          </span>
 
-          <p>
+          <div className={styles.container}>
+            <span className={styles.text_center}>
+              <input
+                type="text"
+                placeholder="Input Token Amount"
+                value={inputTokenAmount}
+                onChange={(e) => setTokenAmount(e.target.value)}
+                className={styles.input_token_address}
+              />{" "}
+            </span>
+
             {contractDCAMulti && inputTokenAmount ? (
               <TokenApprove
                 props={[
@@ -365,9 +366,7 @@ const DCAInterface: React.FC = () => {
             ) : (
               <span> </span>
             )}
-          </p>
 
-          <p>
             {contractDCAMulti &&
             inputIsBuying &&
             tokenAddress_b !== token_address_aqua ? (
@@ -408,113 +407,114 @@ const DCAInterface: React.FC = () => {
             ) : (
               <span> </span>
             )}
-          </p>
-
-          <p>
-            {" "}
-            <span className={styles.text_center}>
-              {" "}
-              <button
-                className={styles.button_field}
-                onClick={() => submitDCAOrder(0)}
-              >
-                {" "}
-                Submit DCA Order{" "}
-              </button>
-            </span>
-          </p>
+          </div>
 
           <span className={styles.text_center}>
             {" "}
             <button
-              className={styles.button_border_bottom}
-              onClick={() =>
-                inputDCAFeatures !== "advanced"
-                  ? setDCAFeature("advanced")
-                  : setDCAFeature("submit")
-              }
+              className={styles.button_field}
+              onClick={() => submitDCAOrder(0)}
             >
               {" "}
-              Advanced
+              Submit Order{" "}
             </button>
           </span>
 
-          {inputDCAFeatures === "advanced" ? (
-            <p>
-              {" "}
-              <span className={styles.text_center}>
-                {" "}
-                <input
-                  type="text"
-                  placeholder="Swap speed in Seconds"
-                  value={inputSwapSpeed}
-                  onChange={(e) => setSwapSpeed(e.target.value)}
-                  className={styles.input_token_address}
-                />{" "}
-              </span>
-              <span className={styles.text_center}>
-                {" "}
-                <input
-                  type="text"
-                  placeholder="Duration in Hours"
-                  value={inputInvestmentDuration}
-                  onChange={(e) => setInvestmentDuration(e.target.value)}
-                  className={styles.input_token_address}
-                />
-              </span>
-              <span className={styles.text_center}>
-                {" "}
-                <input
-                  type="text"
-                  placeholder="Lowest Price"
-                  value={inputMinPrice}
-                  onChange={(e) => setMinPrice(e.target.value)}
-                  className={styles.input_token_address}
-                />{" "}
-              </span>
-              <span className={styles.text_center}>
-                {" "}
-                <input
-                  type="text"
-                  placeholder="Highest Price"
-                  value={inputMaxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                  className={styles.input_token_address}
-                />
-              </span>{" "}
-            </p>
-          ) : (
-            <p> </p>
-          )}
-
-          <span className={styles.text_center}>
-            {" "}
-            <button
-              className={styles.button_border_bottom}
-              onClick={() =>
-                inputDCAFeatures !== "orders"
-                  ? setDCAFeature("orders")
-                  : setDCAFeature("submit")
-              }
-            >
-              {" "}
-              Current Orders
-            </button>
-          </span>
-
-          {inputDCAFeatures === "orders" ? (
+          <div className={styles.container}>
             <span className={styles.text_center}>
               {" "}
               <button
-                className={styles.button_detailed}
-                onClick={() => submitDeleteOrder(BigInt(4), BigInt(3))}
+                className={styles.button_border_bottom}
+                onClick={() =>
+                  inputDCAFeatures !== "advanced"
+                    ? setDCAFeature("advanced")
+                    : setDCAFeature("submit")
+                }
               >
-                Delete Order
+                {" "}
+                DCA Settings
               </button>
             </span>
-          ) : (
-            <span></span>
-          )}
+
+            {inputDCAFeatures === "advanced" ? (
+              <p>
+                {" "}
+                <span className={styles.text_center}>
+                  {" "}
+                  <input
+                    type="text"
+                    placeholder="Swap speed in Seconds"
+                    value={inputSwapSpeed}
+                    onChange={(e) => setSwapSpeed(e.target.value)}
+                    className={styles.input_token_address}
+                  />{" "}
+                </span>
+                <span className={styles.text_center}>
+                  {" "}
+                  <input
+                    type="number"
+                    min={1}
+                    value={inputInvestmentDuration}
+                    onChange={(e) =>
+                      setInvestmentDuration(Number(e.target.value))
+                    }
+                    className={styles.input_token_address}
+                  />
+                </span>
+                <span className={styles.text_center}>
+                  {" "}
+                  <input
+                    type="text"
+                    placeholder="Lowest Price"
+                    value={inputMinPrice}
+                    onChange={(e) => setMinPrice(e.target.value)}
+                    className={styles.input_token_address}
+                  />{" "}
+                </span>
+                <span className={styles.text_center}>
+                  {" "}
+                  <input
+                    type="text"
+                    placeholder="Highest Price"
+                    value={inputMaxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                    className={styles.input_token_address}
+                  />
+                </span>{" "}
+              </p>
+            ) : (
+              <p> </p>
+            )}
+
+            <span className={styles.text_center}>
+              {" "}
+              <button
+                className={styles.button_border_bottom}
+                onClick={() =>
+                  inputDCAFeatures !== "orders"
+                    ? setDCAFeature("orders")
+                    : setDCAFeature("submit")
+                }
+              >
+                {" "}
+                Current Orders
+              </button>
+            </span>
+
+            {inputDCAFeatures === "orders" ? (
+              <span className={styles.text_center}>
+                {" "}
+                <button
+                  className={styles.button_detailed}
+                  onClick={() => submitDeleteOrder(BigInt(4), BigInt(3))}
+                >
+                  Delete Order
+                </button>
+              </span>
+            ) : (
+              <span></span>
+            )}
+          </div>
         </div>
       ) : (
         <div>connect wallet</div>
