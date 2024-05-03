@@ -1,20 +1,22 @@
-- bug : token approve now uses the hardcoded tokenList which doesn't have any lp tokens.
+Welcome to [Aquas.Trade](https://aquas.trade/)
 
-# DCA on Multiple DEX
+# WIP
+
+- if using AQUA to buy ASSET B, then add fee (1 aqua) to the approval amount (users can do this manually)
+- fetch user orders : delete orders
+
+# DCA on Multiple DEXes
 
 New Utilities for NFT holders and deflationary tokenomics for the AQUA token
 
-- Cost 1 AQUA to submit orders through DCA protocol. 
-- - 100% of the collected AQUA is burned. 
+- Cost 1 AQUA to submit orders through DCA protocol.
+- - 100% of the collected AQUA is burned.
 - - Functionality is `public` to burn.
-- Gold NFT Holders are granted free access to use DCA functionality on any DEX protocol. 
+- Gold NFT Holders are granted free access to use DCA functionality on any DEX protocol.
 
-
-## Fee 
-
+## Fee
 
 1 AQUA token : approval is required before submitting DCA order
-
 
 ## Submit DCA Order
 
@@ -23,8 +25,7 @@ For now, use these defaults
 - intervalSeconds : 60
 - durationHours : 24
 - minPrice : 0.000000000000000001
-- maxPrice : 987654321
-
+- maxPrice : 98765432199
 
 ## DCA config
 
@@ -38,6 +39,9 @@ For now, use these defaults
 - `index` : the Incrementor value : globalID : you can determine your ID by fetching this value before placing order.
 - To delete an order, you will need the globalID and the storageID
 
-# WIP 
-- if using AQUA to buy ASSET B, then add fee (1 aqua) to approval amount
-- fetch user orders : delete orders 
+# dev
+
+- toast notify should have explorer link
+- advanced tab ( shows the inputs) : setup default inputs otherwise
+- make new component for the user orders
+- add number of swaps and the expected amount size per swap in UI

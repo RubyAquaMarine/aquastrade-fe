@@ -1,0 +1,15 @@
+/* components/Checkbox.module.css */
+
+.checkboxContainer {
+  margin-bottom: 10px;
+}
+
+.checkboxLabel {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkboxLabel input {
+  margin-right: 8px;
+}

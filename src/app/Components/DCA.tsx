@@ -51,11 +51,13 @@ export interface Amount {
 }
 
 const DCAInterface: React.FC = () => {
-  const [inputIsBuying, setInputIsBuying] = useState(false);
+  const [inputDCAFeatures, setDCAFeature] = useState<string>("submit");
+
+  const [inputIsBuying, setInputIsBuying] = useState<boolean>(false);
 
   // drop down menus
-  const [showDropdownRouter, setDDRouter] = useState(false);
-  const [showDropdownPool, setDDPool] = useState(false);
+  const [showDropdownRouter, setDDRouter] = useState<boolean>(false);
+  const [showDropdownPool, setDDPool] = useState<boolean>(false);
 
   const [inputSymbolList, setSymbolList] = useState([]);
   // copy the object for later use : change to useRef later
@@ -201,7 +203,7 @@ const DCAInterface: React.FC = () => {
     switch (_switch) {
       case 0:
         setRouterName(item);
-        setPoolSymbol('ETH-USD');// defaults to this symbol each time the router changes
+        setPoolSymbol("ETH-USD"); // defaults to this symbol each time the router changes
         setDDRouter(false); // change the dropdown menu state : close the menu
         break;
 
@@ -253,6 +255,11 @@ const DCAInterface: React.FC = () => {
       functionName: "DeleteOrder",
       args: data,
     });
+  };
+
+  // switch checkbox
+  const handleCheckboxChange = () => {
+    setInputIsBuying(!inputIsBuying);
   };
 
   console.log(
@@ -323,9 +330,8 @@ const DCAInterface: React.FC = () => {
               {" "}
               <input
                 type="checkbox"
-                onChange={(e) =>
-                  setInputIsBuying(e.target.value === "on" ? true : false)
-                }
+                checked={inputIsBuying}
+                onChange={handleCheckboxChange}
               />
             </span>
           </span>
@@ -403,79 +409,112 @@ const DCAInterface: React.FC = () => {
               <span> </span>
             )}
           </p>
-          <span className={styles.text_center}>
-            {" "}
-            <input
-              type="text"
-              placeholder="Swap speed in Seconds"
-              value={inputSwapSpeed}
-              onChange={(e) => setSwapSpeed(e.target.value)}
-              className={styles.input_token_address}
-            />{" "}
-          </span>
 
-          <span className={styles.text_center}>
+          <p>
             {" "}
-            <input
-              type="text"
-              placeholder="Duration in Hours"
-              value={inputInvestmentDuration}
-              onChange={(e) => setInvestmentDuration(e.target.value)}
-              className={styles.input_token_address}
-            />
-          </span>
-
-          <span className={styles.text_center}>
-            {" "}
-            <input
-              type="text"
-              placeholder="Lowest Price"
-              value={inputMinPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-              className={styles.input_token_address}
-            />{" "}
-          </span>
-
-          <span className={styles.text_center}>
-            {" "}
-            <input
-              type="text"
-              placeholder="Highest Price"
-              value={inputMaxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-              className={styles.input_token_address}
-            />
-          </span>
+            <span className={styles.text_center}>
+              {" "}
+              <button
+                className={styles.button_field}
+                onClick={() => submitDCAOrder(0)}
+              >
+                {" "}
+                Submit DCA Order{" "}
+              </button>
+            </span>
+          </p>
 
           <span className={styles.text_center}>
             {" "}
             <button
-              className={styles.button_field}
-              onClick={() => submitDCAOrder(0)}
+              className={styles.button_border_bottom}
+              onClick={() =>
+                inputDCAFeatures !== "advanced"
+                  ? setDCAFeature("advanced")
+                  : setDCAFeature("submit")
+              }
             >
               {" "}
-              Submit DCA Order{" "}
+              Advanced
             </button>
           </span>
 
-          <span className={styles.text_center}>User Data </span>
+          {inputDCAFeatures === "advanced" ? (
+            <p>
+              {" "}
+              <span className={styles.text_center}>
+                {" "}
+                <input
+                  type="text"
+                  placeholder="Swap speed in Seconds"
+                  value={inputSwapSpeed}
+                  onChange={(e) => setSwapSpeed(e.target.value)}
+                  className={styles.input_token_address}
+                />{" "}
+              </span>
+              <span className={styles.text_center}>
+                {" "}
+                <input
+                  type="text"
+                  placeholder="Duration in Hours"
+                  value={inputInvestmentDuration}
+                  onChange={(e) => setInvestmentDuration(e.target.value)}
+                  className={styles.input_token_address}
+                />
+              </span>
+              <span className={styles.text_center}>
+                {" "}
+                <input
+                  type="text"
+                  placeholder="Lowest Price"
+                  value={inputMinPrice}
+                  onChange={(e) => setMinPrice(e.target.value)}
+                  className={styles.input_token_address}
+                />{" "}
+              </span>
+              <span className={styles.text_center}>
+                {" "}
+                <input
+                  type="text"
+                  placeholder="Highest Price"
+                  value={inputMaxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                  className={styles.input_token_address}
+                />
+              </span>{" "}
+            </p>
+          ) : (
+            <p> </p>
+          )}
 
           <span className={styles.text_center}>
             {" "}
             <button
-              className={styles.button_detailed}
-              onClick={() => submitDeleteOrder(BigInt(4), BigInt(3))}
+              className={styles.button_border_bottom}
+              onClick={() =>
+                inputDCAFeatures !== "orders"
+                  ? setDCAFeature("orders")
+                  : setDCAFeature("submit")
+              }
             >
-              Delete Order
-            </button>
-            -
-            <button
-              className={styles.button_detailed}
-              onClick={() => submitDeleteOrder(BigInt(4), BigInt(17))}
-            >
-              Delete Order
+              {" "}
+              Current Orders
             </button>
           </span>
+
+          {inputDCAFeatures === "orders" ? (
+            <span className={styles.text_center}>
+              {" "}
+              <button
+                className={styles.button_detailed}
+                onClick={() => submitDeleteOrder(BigInt(4), BigInt(3))}
+              >
+                Delete Order
+              </button>
+            </span>
+          ) : (
+            <span></span>
+          )}
         </div>
       ) : (
         <div>connect wallet</div>

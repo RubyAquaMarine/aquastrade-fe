@@ -71,7 +71,7 @@
 }
 
 .button_detailed:hover {
-  background-color: #2196f3;
+  background-color: #007bff;
 }
 
 .text_border {
@@ -79,7 +79,7 @@
   display: flex;
   padding: 0.2rem 0.3rem;
   border-radius: 12px;
-  border: 1px solid #2196f3;
+  border: 1px solid #007bff;
 }
 
 .text_title {
@@ -94,4 +94,16 @@
   line-height: 110%;
   display: block;
   padding: 0.3rem 0.3rem;
+}
+
+.button_border_bottom {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0.2rem 0.3rem;
+  border-bottom: 1px solid #475384;
+}
+.button_border_bottom:hover {
+  border-radius: 12px;
+  background-color: #007bff;
 }
