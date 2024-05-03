@@ -125,10 +125,8 @@ export const useGetAmountInQuote = (
 
   const routerContract = findContractInfo("router");
 
-  // todo : bug here, on mulit hop calculations when asset is not 18 decimals
   const data = [
     parseUnits(_amount, Number(_decimalA)),
-
     flip === false ? reserves?.[0] : reserves?.[1],
     flip === false ? reserves?.[1] : reserves?.[0],
   ];

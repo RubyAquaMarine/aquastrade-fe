@@ -1,9 +1,23 @@
 import { tokenList, tokenSymbolList } from "./tokenList";
+import {
+  europaRouters,
+  poolListAqua,
+  poolListRuby,
+  poolListSushi,
+} from "./poolList";
 
 // EUROPA-HUB
 // Add Tokens here
 export const tokenSymbols = tokenSymbolList;
 export const tokenAddresses = tokenList;
+
+// DEX uniswap v2
+export const uniswapRouters = europaRouters;
+
+export const poolsAtAqua = poolListAqua;
+export const poolsAtRuby = poolListRuby;
+export const poolsAtSushi = poolListSushi;
+
 export const contractAddresses = [
   {
     id: 0,
@@ -44,6 +58,16 @@ export const contractAddresses = [
     id: 7,
     name: "faucet",
     addr: "0x453495a7bD8943530FdcBAEE6749795F1f07dBD3",
+  },
+  {
+    id: 8,
+    name: "dcafactory",
+    addr: "0xF587ff043D0826601dC4e25167B21CB03390a6B5",
+  },
+  {
+    id: 9,
+    name: "dcamulti",
+    addr: "0x84B98837A22989bf950E3299f4803BDA3c7E0879",
   },
 ] as const;
 

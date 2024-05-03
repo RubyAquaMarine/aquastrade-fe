@@ -229,10 +229,10 @@
   background-color: #242629;
   max-width: 60px;
   padding: 0.4rem 0.6rem;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-bottom: 0.1rem;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
   font-weight: 550;
 }
 
@@ -254,6 +254,52 @@
 
 .nav_right:hover {
   background-color: #007bff;
+}
+
+.nav_xs {
+  margin-left: 0.15rem;
+  margin-right: 0.15rem;
+  max-width: 2rem;
+  padding: 0.2rem 0.1rem;
+  font-size: 0.6rem;
+  font-weight: 450;
+  border-radius: 12px;
+  color: #bdb8b8;
+  background-color: #242629;
+  border-bottom: 0.05rem solid #475384;
+}
+
+.nav_xs:hover {
+  color: #f8f1f1;
+  background-color: #475384;
+}
+
+.nav_xs_select {
+  margin-left: 0.15rem;
+  margin-right: 0.15rem;
+  max-width: 2rem;
+  padding: 0.2rem 0.1rem;
+  font-size: 0.6rem;
+  font-weight: 450;
+  border-radius: 12px;
+  color: #f8f1f1;
+  background-color: #475384;
+}
+
+.nav_xs:active {
+  color: #f8f1f1;
+  background-color: #475384;
+}
+
+.container_nav_xs {
+  margin-bottom: 0.25rem;
+  margin-left: 0.4rem;
+  display: flex;
+  justify-content: flex-start;
+  max-width: 5.8rem;
+  border-radius: 12px;
+
+  padding: 0.1rem;
 }
 
 .container_data {

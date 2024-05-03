@@ -17,7 +17,7 @@ const useSkaleExplorer = (params: WALLET) => {
     const fetchData = async () => {
       try {
         const apiString = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/api?module=account&action=tokenlist&address=${addressWallet}`;
-        console.log("Block Exploerer api string ", apiString);
+        console.log("Block Explorer api string ", apiString);
         const response = await fetch(apiString);
         const jsonData = await response.json();
         const assetList = jsonData?.result;
