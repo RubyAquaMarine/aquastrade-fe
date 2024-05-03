@@ -459,7 +459,7 @@ const SwapAmm = () => {
           NFT
         </button>
 
-        {ammFeature !== "nft" ? (
+        {ammFeature !== "nft" && tradeFeature === "swap" ? (
           <button className={styles.nav}>
             <Image
               src="/gear.svg"
