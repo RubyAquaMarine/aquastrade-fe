@@ -1,5 +1,5 @@
 import { interfaces } from "skale_metaport";
-
+// https://www.npmjs.com/package/@skalenetwork/metaport
 export const AquaConfig: interfaces.MetaportConfig = {
   theme: {
     mode: "dark",
@@ -13,10 +13,10 @@ export const AquaConfig: interfaces.MetaportConfig = {
     "mainnet",
     "elated-tan-skat", // Europa Hub
     "frayed-decent-antares",
-    "honorable-steel-rasalhague",
+    "honorable-steel-rasalhague", // calypso nft hub
     "affectionate-immediate-pollux", // cryptoblades
     "wan-red-ain",
-    "green-giddy-denebola",
+    "green-giddy-denebola", // Nebula gaming hub
     "light-vast-diphda", // Razor
     "turbulent-unique-scheat",
     "adorable-quaint-bellatrix",
@@ -138,6 +138,9 @@ export const AquaConfig: interfaces.MetaportConfig = {
             "honorable-steel-rasalhague": {
               hub: "elated-tan-skat",
             },
+            "green-giddy-denebola": {
+              hub: "elated-tan-skat",
+            },
           },
         },
         // 3,268,317,507
@@ -237,6 +240,7 @@ export const AquaConfig: interfaces.MetaportConfig = {
       },
     },
     // Chain mapping to the L2 addresses go here, per chain
+    // these addresses are from https://elated-tan-skat.explorer.mainnet.skalenodes.com/
     // including wrapped : https://github.com/EuropaHub/Europa-origin-tokens?tab=readme-ov-file#wrapped-origin-token-addresses
     "elated-tan-skat": {
       eth: {
@@ -277,6 +281,12 @@ export const AquaConfig: interfaces.MetaportConfig = {
           chains: {
             mainnet: {
               clone: true,
+            },
+            "honorable-steel-rasalhague": {
+              wrapper: "0x42dDeBDa2195FaEDAEC1cf24c19B42da1c881feB",
+            },
+            "green-giddy-denebola": {
+              wrapper: "0x42dDeBDa2195FaEDAEC1cf24c19B42da1c881feB",
             },
           },
         },
@@ -377,6 +387,18 @@ export const AquaConfig: interfaces.MetaportConfig = {
             },
           },
         },
+        usdt: {
+          address: "0xf9B5736E74b37Ec2EDd37B1B3c8e1aF9fa426F2A",
+          chains: {
+            "elated-tan-skat": {
+              clone: true,
+            },
+            mainnet: {
+              clone: true,
+              hub: "elated-tan-skat",
+            },
+          },
+        },
       },
     },
     "green-giddy-denebola": {
@@ -395,6 +417,18 @@ export const AquaConfig: interfaces.MetaportConfig = {
         },
         usdc: {
           address: "0xCC205196288B7A26f6D43bBD68AaA98dde97276d",
+          chains: {
+            "elated-tan-skat": {
+              clone: true,
+            },
+            mainnet: {
+              clone: true,
+              hub: "elated-tan-skat",
+            },
+          },
+        },
+        usdt: {
+          address: "0x932427E1f1Ea096e2bb05C7dE937d083ddb8Ff83",
           chains: {
             "elated-tan-skat": {
               clone: true,
