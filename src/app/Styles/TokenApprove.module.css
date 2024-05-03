@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   border-radius: 12px;
-  background-color: #181a1d;
 }
 
 .token_approve {
@@ -16,7 +15,7 @@
 }
 
 .token_approve:hover {
-  background-color: #2196f3;
+  background-color: #007bff;
 }
 
 .token_approve_amount {
