@@ -93,9 +93,72 @@
   color: var(--white);
   text-align: center;
   margin-top: 20px;
-  font-size: 146x;
   font-weight: 600;
   line-height: 110%;
   display: block;
   padding: 0.3rem 0.3rem;
+}
+
+.gridSix {
+  margin-top: 5px;
+  background-color: #2196f3;
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) minmax(30px, 1fr);
+  grid-column-gap: 15px;
+  grid-column: flex;
+  min-width: 380px;
+  width: fit-content;
+  border: rounded;
+  border-radius: 12px;
+}
+
+.textInputSmall {
+  padding: 0.2rem 1rem;
+  color: rgb(194, 187, 187);
+  border-radius: 6px;
+  text-align: center;
+  max-width: 8.2rem;
+  font-size: 0.7rem;
+}
+
+.buttonDisplay {
+  background-color: #1a1b1f;
+  color: white;
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 8px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-size: 0.8rem;
+  text-align: center;
+  max-width: 120px;
+}
+
+.text_center {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0.2rem 0.3rem;
+}
+
+.text_center_sm {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.7rem;
+}
+
+.button_field {
+  color: #fff;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1px solid #475384;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+}
+
+.button_field:hover {
+  background-color: #0056b3;
 }

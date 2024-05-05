@@ -43,11 +43,11 @@ const Home = () => {
           )}
         </div>
       )}
-      <span className={styles.midText_xs}>1. Enter amount to bet</span>
+      <span className={styles.midText_xs}>1. Enter Amount to place bet</span>
       <span className={styles.midText_xs}>
-        2. Please {'"'}flip{'"'} , complete tx in wallet.
+        2. Press {'"'}flip{'"'} and complete tx in wallet
       </span>
-      <span className={styles.midText_xs}>3. Collect rewards</span>
+      <span className={styles.midText_xs}>3. Withdraw rewards at any time</span>
     </main>
   );
 };

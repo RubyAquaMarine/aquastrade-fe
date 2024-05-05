@@ -1,15 +1,28 @@
-# Gas is free
+# AMM
 
-When you connect your wallet to Aquas.Trade, your wallet will be transfered 0.0001 sfuel and topped up automatically on each login.
+Welcome to [Aquas.Trade](https://aquas.trade/)
+
+- When you connect your wallet to Aquas.Trade, your wallet will be transfered 0.0001 sfuel and topped up automatically on each login.
 
 - [free sFuel: FaucetEuropa](https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x453495a7bD8943530FdcBAEE6749795F1f07dBD3?tab=write_contract)
 
-# Uniswap v2 AMM Pool type liquidity
+# Uniswap v2 AMM
 
-- Alpha: UI and UX rapidly changing. Better liquidity routing and liquidity aggregation coming soon. Mostly a simple `single hop` (ANY->AQUA and AQUA->ANY) or `multi hop` (ANY -> AQUA -> ANY)
+AMM : Automated Market Maker provides equal amounts of liquity for both the Quote and Base Asset.
+
+- Mostly a simple `single hop` (ANY->AQUA and AQUA->ANY) or `multi hop` (ANY -> AQUA -> ANY)
   \*\* `ANY` represents all tokens within the `token-list`
+- Alpha: UI and UX rapidly changing.
+- Better liquidity routing and liquidity aggregation coming soon.
 
-## Trade - swap
+## Contract Adresses
+
+- Uniswap Factory CA: `0xc318a82CB7c2B0faf7e355BB8F285016956aBF55`
+  - - https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0xc318a82CB7c2B0faf7e355BB8F285016956aBF55
+
+# How to guide
+
+## Trade => swap tokens
 
 0. Select `top-input-token` (you are selling this token) and select `bottom-input-token` ( you will receive this token).
 1. The `top-input-amount` is the amount of tokens that you want to trade for `token b`
@@ -27,7 +40,7 @@ When you connect your wallet to Aquas.Trade, your wallet will be transfered 0.00
 - `Loading Pool Data` : waiting on rpc api
 - `Multi ` : this is a `multi hop` route
 
-## Cast - add liquidity
+## Cast => add liquidity
 
 0. Select `top-input-token` and select `bottom-input-token`
 1. The `top-input-amount` is the amount of tokens that you to allocate to the AMM pool. The `bottom-input-amount` is automatically calculated based on the `token-a` input amount.
@@ -40,8 +53,14 @@ When you connect your wallet to Aquas.Trade, your wallet will be transfered 0.00
 
 - The `bottom-input-amount` is `0.0` : You are about to create a new liquidity pool. Calculating the pool price can be tricky.
 
-## Ship = remove liquidity
+## Ship => remove liquidity
 
 0. Select `top-input-token` and select `bottom-input-token`
 1. The `top-input-amount` is the `%` amount of liquidity that you want to remove from the pool.
 2. Click the `Set Sail` button and complete the request within your web3 wallet.
+
+# Fees
+
+- Max fee trader pays is 0.30% from input token.
+- 75% of fee goes to you (Liquidity Provider)
+- 25% of fee goes to AquasDevFund : [Treasury](./AQUA.md#treasury)

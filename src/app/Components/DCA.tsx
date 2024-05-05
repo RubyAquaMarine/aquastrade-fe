@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
+import Link from "next/link";
 import React, { useState, ChangeEvent, useEffect, useRef } from "react";
-
 import { Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -79,15 +79,13 @@ const DCAInterface: React.FC = () => {
   const [inputTokenA, setTokenA] = useState<string>("");
   const [inputTokenB, setTokenB] = useState<string>("");
 
-  const [inputSwapSpeed, setSwapSpeed] = useState<string>("");
+  const [inputSwapSpeed, setSwapSpeed] = useState<number>(1);
   const [inputInvestmentDuration, setInvestmentDuration] = useState<number>(24);
 
-  const [inputMinPrice, setMinPrice] = useState<string>("");
-  const [inputMaxPrice, setMaxPrice] = useState<string>("");
+  const [inputMinPrice, setMinPrice] = useState<string>("0.000000000000000001");
+  const [inputMaxPrice, setMaxPrice] = useState<string>("9999999999");
 
   const [inputTokenAmount, setTokenAmount] = useState<string>("");
-
-  const setAirdropped = useRef(true);
 
   //wagmi
   const { address, isConnected, chain } = useAccount();
@@ -170,17 +168,23 @@ const DCAInterface: React.FC = () => {
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
-      // todo toast
-      notify();
-      // reset airdrop and fetch new balances
-      setAirdropped.current = true;
+      const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
+      notify(isLink);
     }
   }, [contractCallDataConfirmed]);
 
-  const notify = () =>
-    toast.success(`DCA TX from 🌊 AquasTrade!`, {
+  const CustomToastWithLink = (_url: string) => (
+    <div>
+      <Link href={_url} target="_blank">
+        DCA Order Tx Hash on 🌊 AquasTrade
+      </Link>
+    </div>
+  );
+
+  const notify = (_link: string) =>
+    toast.info(CustomToastWithLink(_link), {
       position: "bottom-left",
-      autoClose: 4000,
+      autoClose: 8000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -223,7 +227,7 @@ const DCAInterface: React.FC = () => {
       tokenAddress_a,
       tokenAddress_b,
 
-      BigInt(inputSwapSpeed),
+      BigInt(inputSwapSpeed * 60), // convert seconds to minutes
       BigInt(inputInvestmentDuration),
       parseEther(inputMinPrice),
       parseEther(inputMaxPrice),
@@ -347,6 +351,8 @@ const DCAInterface: React.FC = () => {
               />{" "}
             </span>
 
+            <span className={styles.text_center_sm}>Approved:</span>
+
             {contractDCAMulti && inputTokenAmount ? (
               <TokenApprove
                 props={[
@@ -439,15 +445,23 @@ const DCAInterface: React.FC = () => {
             {inputDCAFeatures === "advanced" ? (
               <p>
                 {" "}
+                <span className={styles.text_center_sm}>
+                  {" "}
+                  Swap Speed: minutes{" "}
+                </span>
                 <span className={styles.text_center}>
                   {" "}
                   <input
-                    type="text"
-                    placeholder="Swap speed in Seconds"
+                    type="number"
+                    min={1}
                     value={inputSwapSpeed}
-                    onChange={(e) => setSwapSpeed(e.target.value)}
+                    onChange={(e) => setSwapSpeed(Number(e.target.value))}
                     className={styles.input_token_address}
                   />{" "}
+                </span>
+                <span className={styles.text_center_sm}>
+                  {" "}
+                  Investment Duration: hours{" "}
                 </span>
                 <span className={styles.text_center}>
                   {" "}
@@ -461,6 +475,7 @@ const DCAInterface: React.FC = () => {
                     className={styles.input_token_address}
                   />
                 </span>
+                <span className={styles.text_center_sm}> Minimum Price </span>
                 <span className={styles.text_center}>
                   {" "}
                   <input
@@ -471,6 +486,7 @@ const DCAInterface: React.FC = () => {
                     className={styles.input_token_address}
                   />{" "}
                 </span>
+                <span className={styles.text_center_sm}> Maximum Price</span>
                 <span className={styles.text_center}>
                   {" "}
                   <input
@@ -485,7 +501,9 @@ const DCAInterface: React.FC = () => {
             ) : (
               <p> </p>
             )}
+          </div>
 
+          <div className={styles.container}>
             <span className={styles.text_center}>
               {" "}
               <button

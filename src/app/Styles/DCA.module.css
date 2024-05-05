@@ -32,15 +32,19 @@
   border: 1px solid #475384;
 }
 
-.text_border_bottom {
-  border-bottom: 1px solid #475384;
-}
-
 .text_center {
   display: flex;
   justify-content: center;
   text-align: center;
   padding: 0.2rem 0.3rem;
+}
+
+.text_center_sm {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.7rem;
 }
 
 .toggle_button {
@@ -109,10 +113,11 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  padding: 0.2rem 0.3rem;
-  border-bottom: 1px solid #475384;
+  border-radius: 12px;
+  border: 1px solid #475384;
+  font-size: 0.8rem;
+  padding: 0.6rem 1rem;
 }
 .button_border_bottom:hover {
-  border-radius: 12px;
   background-color: #007bff;
 }
