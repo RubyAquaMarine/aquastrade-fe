@@ -1,3 +1,5 @@
+# DCA
+
 Welcome to [Aquas.Trade](https://aquas.trade/)
 
 # on-chain DCA on any DEX

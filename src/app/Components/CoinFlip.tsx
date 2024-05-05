@@ -18,8 +18,7 @@ import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
 import { CHAIN } from "@/app/Utils/config";
 import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
 import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
-import styles from "@/app/Styles/Links.module.css";
-import styles_button from "@/app/Styles/Toggle.module.css";
+import styles from "@/app/Styles/Coinflip.module.css";
 
 interface Props {
   address: string;
@@ -63,11 +62,11 @@ const CoinFlip = (params: Props) => {
   const buttonDescriptions = [params?.props?.[1]];
   const buttonLogicTexts = [`flip ${params?.props?.[1]}`];
 
-  useEffect(() => {
-    if (token_address_erc20) {
-      allowancesTest.current = tokenAllowance;
-    }
-  }, [tokenAllowance, token_address_erc20]);
+  // useEffect(() => {
+  //   if (token_address_erc20) {
+  //     allowancesTest.current = tokenAllowance;
+  //   }
+  // }, [tokenAllowance, token_address_erc20]);
 
   useEffect(() => {
     setTotalWins(win);
@@ -163,115 +162,126 @@ const CoinFlip = (params: Props) => {
               <p>Please select ChainID: 2046399126</p>
               <button
                 onClick={(event) => handleToEuropa(event, 2046399126)}
-                className={styles_button.toggleButton}
+                className={styles.button_field}
               >
                 Switch Network
               </button>
             </div>
           ) : (
             <div className={styles.gridSix}>
+              <span>
+                {" "}
+                <span className={styles.text_center}>Prize Pool: </span>
+                <span className={styles.text_center}>
+                  {" "}
+                  <TokenBalance
+                    props={[token_address_erc20, 18, params?.props?.[0]]}
+                  ></TokenBalance>
+                </span>{" "}
+              </span>
+
               <div className="p-4">
                 <div className="space-y-2">
-                  {inputs.map((value, index) => (
-                    <div key={index} className="mb-4">
-                      <input
-                        type="text"
-                        value={inputs[index]}
-                        onChange={(e) =>
-                          handleInputChange(index, e.target.value)
-                        }
-                        className={styles.textInputSmall}
-                        placeholder={`Amount`}
-                      />
-                    </div>
-                  ))}
+                  <span className={styles.text_center}>
+                    {inputs.map((value, index) => (
+                      <span key={index} className="mb-4">
+                        <input
+                          type="text"
+                          value={inputs[index]}
+                          onChange={(e) =>
+                            handleInputChange(index, e.target.value)
+                          }
+                          className={styles.textInputSmall}
+                          placeholder={`Enter Amount`}
+                        />
+                      </span>
+                    ))}
+                  </span>
+
+                  <span className={styles.text_center}>
+                    {" "}
+                    <button
+                      className={styles.button_field}
+                      onClick={() => handleButtonClick(0)}
+                    >
+                      {buttonLogicTexts[0]}
+                    </button>{" "}
+                  </span>
+
+                  <span className={styles.text_center_sm}> Approved: </span>
+
+                  <span className={styles.text_center}>
+                    {" "}
+                    <TokenApprove
+                      props={[
+                        "allowance",
+                        token_address_erc20,
+                        parseEther(inputs[0]),
+                        [address, params?.props?.[0]],
+                      ]}
+                    ></TokenApprove>{" "}
+                  </span>
                 </div>
               </div>
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {allowancesTest.current &&
-                  BigInt(allowancesTest.current) >= parseEther(inputs[0]) ? (
-                    <div>
-                      <button
-                        className={styles_button.toggleButton}
-                        onClick={() => handleButtonClick(0)}
-                      >
-                        {buttonLogicTexts[0]}
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <span> Approved: </span>
-                      <TokenApprove
-                        props={[
-                          "allowance",
-                          token_address_erc20,
-                          parseEther(inputs[0]),
-                          [address, params?.props?.[0]],
-                        ]}
-                      ></TokenApprove>
-                    </div>
-                  )}
+                  <span className={styles.text_center}>
+                    {address && win ? (
+                      <span className={styles.buttonDisplay}>
+                        Wins: {win?.toString()}
+                      </span>
+                    ) : (
+                      <span className={styles.buttonDisplay}>Wins:</span>
+                    )}
+                  </span>
                 </div>
               </div>
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {address && win ? (
-                    <button className={styles.buttonDisplay}>
-                      Wins: {win?.toString()}
-                    </button>
-                  ) : (
-                    <button className={styles.buttonDisplay}>Wins:</button>
-                  )}
+                  <span className={styles.text_center}>
+                    {address && loss && !isLoading ? (
+                      <span className={styles.buttonDisplay}>
+                        Losses: {loss?.toString()}
+                      </span>
+                    ) : (
+                      <span className={styles.buttonDisplay}>Losses:</span>
+                    )}
+                  </span>
                 </div>
               </div>
 
               <div className="p-4">
                 <div className="space-y-2">
-                  {address && loss && !isLoading ? (
-                    <button className={styles.buttonDisplay}>
-                      Losses: {loss?.toString()}
-                    </button>
-                  ) : (
-                    <button className={styles.buttonDisplay}>Losses:</button>
-                  )}
-                </div>
-              </div>
-
-              <div className="p-4">
-                <div className="space-y-2">
-                  {address &&
-                  typeof bal === "bigint" &&
-                  bal <
-                    BigInt(
-                      "115792089237316195423570985008687907853269984665640564039057",
-                    ) ? (
-                    <p className={styles_button.toggleButton}>
-                      You Won: {formatUnits(bal, 18)}
-                    </p>
-                  ) : (
-                    <p className={styles_button.toggleButton}> No rewards</p>
-                  )}
+                  <span className={styles.text_center}>
+                    {address &&
+                    typeof bal === "bigint" &&
+                    bal <
+                      BigInt(
+                        "115792089237316195423570985008687907853269984665640564039057",
+                      ) ? (
+                      <span className={styles.buttonDisplay}>
+                        You Won: {formatUnits(bal, 18)}
+                      </span>
+                    ) : (
+                      <span className={styles.buttonDisplay}> No rewards</span>
+                    )}
+                  </span>
                 </div>
                 <br></br>
-
-                <span>Prize Pool: </span>
-                <TokenBalance
-                  props={[token_address_erc20, 18, params?.props?.[0]]}
-                ></TokenBalance>
               </div>
 
               <div className="p-4">
                 <div className="space-y-2">
-                  <button
-                    className={styles_button.toggleButton}
-                    onClick={() => handleButtonClickWithdraw(0)}
-                  >
-                    <p>Withdraw</p>
-                    <p>{buttonDescriptions[0]}</p>
-                  </button>
+                  <span className={styles.text_center}>
+                    <button
+                      className={styles.button_field}
+                      onClick={() => handleButtonClickWithdraw(0)}
+                    >
+                      <span>Withdraw</span> <span>{buttonDescriptions[0]}</span>
+                    </button>
+                  </span>
                 </div>
               </div>
             </div>

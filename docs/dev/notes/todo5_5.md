@@ -1,3 +1,5 @@
+regEx on all inputs : prevent ui crash from entering non number
+
 ## DCA config
 
 - `executeOrders` (storageID, isBuying) : Starts at index 1 (not zero)
@@ -20,8 +22,6 @@ returns the token address assigned to base asset
 
 # dev
 
-- toast notify should have explorer link
-- advanced tab ( shows the inputs) : setup default inputs otherwise
 - make new component for the user orders
 - add number of swaps and the expected amount size per swap in UI
 
@@ -32,6 +32,8 @@ returns the token address assigned to base asset
 - 3 : AQUA : ETH-AQUA : pool price : 260009 011 70238 88600 00000 : 1 ETH => 260009 AQUA
 
 - 8 : AQUA : DAI-AQUA : pool price : 103429804652244680000 : bidding 100.0
+
+- 12 : AQUA : USDC - AQUA : 1.6205290826884932e+25 16205290826884932000000000 ==> 16 205 290 .826 88493 20000 00000
 
 - 17: RUBY : SKL-USDP : pool price : 76 68914 75355 32000 = 0.076 68914 75355 32000 : 1 SKL = 0.076 USDP
 
@@ -63,4 +65,4 @@ i am adding AQUA and removing USDP from the pool,
 This makes price go down:
 ( is buying USDP : no ) : use USDP to buy AQUA
 minPrice : 0.000000000000000001
-max 100
+max 60000000
