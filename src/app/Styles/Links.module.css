@@ -614,3 +614,18 @@ cells  not used yet */
     transparent
   );
 }
+
+.button {
+  border: 1px solid #ccc;
+  list-style: none;
+  display: flex;
+  gap: 3.5rem;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  padding: 0.2rem 1rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* Ensuring the container has a defined height for vertical alignment */
+}

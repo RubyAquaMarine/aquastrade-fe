@@ -60,7 +60,7 @@ const TokenApprove = (params: Props) => {
       notify(isLink);
       setTrigger(true);
     }
-  }, [contractCallDataConfirmed]);
+  }, [contractCallDataConfirmed, hash]);
 
   useEffect(() => {
     if (token_transfer_allowance) {

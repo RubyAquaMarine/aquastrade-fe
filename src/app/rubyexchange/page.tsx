@@ -41,7 +41,7 @@ const RubyExchange = ({ children, params }: any) => {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
     }
-  }, [contractCallDataConfirmed]);
+  }, [contractCallDataConfirmed, hash]);
 
   const CustomToastWithLink = (_url: string) => (
     <div>

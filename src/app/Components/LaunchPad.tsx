@@ -68,16 +68,15 @@ const LaunchPad: React.FC = () => {
   }, [contractCallDataConfirmed]);
 
   const doTokenLaunch = () => {
-
-
-    console.log(" Deploy Token ", tokenName, tokenSymbol, tokenDecimal, tokenMax);
-
+    console.log(
+      " Deploy Token ",
+      tokenName,
+      tokenSymbol,
+      tokenDecimal,
+      tokenMax,
+    );
 
     console.log(" Deploy Token with CA: ", contractMemeCreator?.addr);
-
-
-
-
 
     writeContract({
       abi: MEME_CREATOR_ABI,

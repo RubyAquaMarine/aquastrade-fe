@@ -59,23 +59,19 @@ export const contractAddresses = [
   },
   {
     id: 8,
-    name: "dcafactory",
-    addr: "0xF587ff043D0826601dC4e25167B21CB03390a6B5",
+    name: "memecreator",
+    addr: "0xbB794A1F6C13E604bFEf1b56FbE1e02d1674f4f2",
   },
+
   {
     id: 9,
     name: "dcamulti",
-    addr: "0x84B98837A22989bf950E3299f4803BDA3c7E0879",
+    addr: "0x9683ADC7FD56b81F1eb70040B30864a822C330f2",
   },
   {
     id: 10,
     name: "aquasfeed",
     addr: "0x012D95449F3FE5E9263A2bA75406b78e83546510",
-  },
-  {
-    id: 11,
-    name: "memecreator",
-    addr: "0xbB794A1F6C13E604bFEf1b56FbE1e02d1674f4f2",
   },
 ] as const;
 // WIP : remove any CA: below
