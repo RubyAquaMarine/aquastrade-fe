@@ -5,19 +5,17 @@ import {
   poolListRuby,
   poolListSushi,
 } from "./poolList";
-
 // EUROPA-HUB
 // Add Tokens here
 export const tokenSymbols = tokenSymbolList;
 export const tokenAddresses = tokenList;
-
 // DEX uniswap v2
 export const uniswapRouters = europaRouters;
-
+// DEX POOLS
 export const poolsAtAqua = poolListAqua;
 export const poolsAtRuby = poolListRuby;
 export const poolsAtSushi = poolListSushi;
-
+// AQUAS.TRADE
 export const contractAddresses = [
   {
     id: 0,
@@ -69,8 +67,13 @@ export const contractAddresses = [
     name: "dcamulti",
     addr: "0x84B98837A22989bf950E3299f4803BDA3c7E0879",
   },
+  {
+    id: 10,
+    name: "aquasfeed",
+    addr: "0x012D95449F3FE5E9263A2bA75406b78e83546510",
+  },
 ] as const;
-
+// WIP : remove any CA: below
 export const getKlineRecordCount = 600;
 
 export const CHAIN = {
@@ -82,10 +85,6 @@ export const EUROPA_RAZOR_ORACLE = "0xEb9324f0d17e4dEa7371f6dddf361D9bB453BEb9";
 export const ASSET_ETH = { symbol: "ETHUSD" };
 
 export const RUBY_STAKER = "0x2998f0b516b1eaCbb06442B1c13cB2FFc865B449";
-
-// list of uniswap:router address
-export const ROUTER_AQUADEX = "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61";
-export const ROUTER_RUBYSWAP = "0xd4C0828FC3C50B75eBdcEE209c7423A7398C4d72";
 
 // market place
 export const MARKETPLACE_AQUADEX = "0xc44A8E52A835c77932eB8747bD7E979c27308660";

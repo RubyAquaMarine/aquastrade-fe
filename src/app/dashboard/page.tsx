@@ -22,10 +22,8 @@ const Dashbaord = ({ children, params }: any) => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <span className={styles.midText}>AquasTrade</span>
-      <span className={styledContainer.container}>
-        NFT-powered DEX, Market Place,{" "}
-      </span>
+      <span className={styles.midText}> NFT-powered DEX, Market Place, </span>
+
       <span className={styles.top_text_link}>
         {" "}
         <Link href="/perp"> and leveraged trading on the</Link>
@@ -69,6 +67,10 @@ const Dashbaord = ({ children, params }: any) => {
               <li className={styles.text_button}>
                 {" "}
                 <Link href={`/dashboard/marketplace`}>Market Place</Link>
+              </li>{" "}
+              <li className={styles.text_button}>
+                {" "}
+                <Link href={`/nft`}>NFTs</Link>
               </li>{" "}
               <li className={styles.text_button}>
                 <Link href="/dashboard/airdrop">Token Airdrop</Link>

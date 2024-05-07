@@ -14,6 +14,7 @@ import { formatUnits, parseEther, parseUnits } from "viem";
 import { ToastContainer, Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { findTokenFromAddress, findContractInfo } from "@/app/Utils/findTokens";
 // Make components for better rendering functionality: move hooks into these new components
 import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
@@ -35,14 +36,12 @@ import AMMPools from "@/app/Components/AMMPools";
 
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 import { useFactory, useGetAmountInQuote } from "@/app/Hooks/useAMM";
-import {
-  tokenAddresses,
-  ROUTER_AQUADEX,
-  contractAddresses,
-} from "@/app/Utils/config";
+import { tokenAddresses, contractAddresses } from "@/app/Utils/config";
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
 import useSkaleExplorer from "@/app/Hooks/useSkaleExplorer";
+
+const ROUTER_AQUADEX = findContractInfo("router")?.addr;
 
 const SwapAmm = () => {
   // Save state without rendering

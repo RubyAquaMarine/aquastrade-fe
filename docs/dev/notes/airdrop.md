@@ -1,5 +1,3 @@
-NFT Gated ERC20 Token Airdropper. Can send to 1000 transfers within 1 tx.
-
 # How to design the nft holder database and airdrop aqua
 
 /src/app/api/route.ts
@@ -8,8 +6,3 @@ NFT Gated ERC20 Token Airdropper. Can send to 1000 transfers within 1 tx.
 - need a snap shot of all nft holders in 3 files : POST [{},{},{}] to api : then fetch list into airdrop ui
 - - [input collection size ] /[ aqua amount]= [ airdrop per nft] :: fetch nft owners db
 - - for $aqua quarterly airdrops in 3 clicks. (make is public then anyone can airdrop: to Aqua nft holders too)
-
-## bug boutys
-
-- https://hackerone.com/leaderboard
-- https://immunefi.com/bug-bounty/

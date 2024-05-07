@@ -1,5 +1,9 @@
 regEx on all inputs : prevent ui crash from entering non number
 
+# added
+
+api routes(tokens, contracts) , menu + dashboard links, telegram, remove discord
+
 ## DCA config
 
 - `executeOrders` (storageID, isBuying) : Starts at index 1 (not zero)

@@ -133,6 +133,18 @@ if the user doesn't have the network within the MM already, then switching doesn
 
               <li className={styles.text_button}>
                 <Link
+                  href="https://www.voxelverse.ca/"
+                  target="_blank"
+                  onClick={(event) =>
+                    handleLinkClickRubySwap(event, 1482601649)
+                  }
+                >
+                  Prospectors NFT
+                </Link>
+              </li>
+
+              <li className={styles.text_button}>
+                <Link
                   href="https://tankwars.zone/"
                   target="_blank"
                   onClick={(event) =>
@@ -153,17 +165,6 @@ if the user doesn't have the network within the MM already, then switching doesn
                 </Link>
               </li>
 
-              <li className={styles.text_button}>
-                <Link
-                  href="https://www.voxelverse.ca/"
-                  target="_blank"
-                  onClick={(event) =>
-                    handleLinkClickRubySwap(event, 1482601649)
-                  }
-                >
-                  Prospectors NFT
-                </Link>
-              </li>
               <li className={styles.text_heading}>Coming Soon</li>
 
               <li className={styles.text_button}>
