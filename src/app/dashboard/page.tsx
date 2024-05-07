@@ -77,6 +77,10 @@ const Dashbaord = ({ children, params }: any) => {
               </li>
               <li className={styles.text_button}>
                 {" "}
+                <Link href={`/dashboard/create`}>Token Create</Link>
+              </li>
+              <li className={styles.text_button}>
+                {" "}
                 <Link href={`/user/${address}`}>Token List</Link>
               </li>
               <li className={styles.text_heading}>Trade</li>

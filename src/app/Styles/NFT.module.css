@@ -86,6 +86,7 @@
 }
 
 .textInputs {
+  margin-left: 0.3rem;
   border: rounded;
   color: rgb(194, 187, 187);
   border-radius: 6px;

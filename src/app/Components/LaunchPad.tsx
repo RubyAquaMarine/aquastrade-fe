@@ -15,7 +15,7 @@ import { formatUnits, parseUnits } from "viem";
 import { CHAIN } from "@/app/Utils/config";
 import { findContractInfo } from "@/app//Utils/findTokens";
 
-import { AIRDROP_ABI } from "@/app/Abi/airdropErc20";
+import { MEME_CREATOR_ABI } from "@/app/Abi/memeCreator";
 import styles from "@/app/Styles/LaunchPad.module.css";
 
 import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
@@ -29,26 +29,6 @@ export interface Amount {
 }
 
 const LaunchPad: React.FC = () => {
-  //test
-  const [inputValue, setInputValue] = useState<string>("");
-
-  // updates via function parseEthAmounts()
-  const setAirdropped = useRef(true);
-  const isCommaAtEndOfAmounts = useRef(false);
-
-  // Token Approval amount and function
-  // updates via function parseEthAmounts()
-  const setTotalAmounts = useRef(BigInt(0));
-  // todo decimals
-  const tokenADecimal = useRef(BigInt(18));
-
-  const totalWallets = useRef();
-  const totalAmounts = useRef();
-  // const tokenBDecimal = useRef(BigInt(18));
-
-  // Token Address that user inputs
-  const [token, setAirdropToken] = useState("");
-
   // enter symbol to get token address
   const [tokenSymbol, setTokenSymbol] = useState("");
 
@@ -58,10 +38,6 @@ const LaunchPad: React.FC = () => {
 
   const [tokenMax, setTokenMax] = useState(8000000000);
 
-  // Original Input from user is in string format : will be parsed later
-  const [tokenAddressList, setTokenAddresses] = useState<Wallet>();
-  const [tokenAmount, setTokenAmount] = useState<Amount>();
-
   //wagmi
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
@@ -70,112 +46,42 @@ const LaunchPad: React.FC = () => {
     hash,
   });
 
-  const contractAirdrop = findContractInfo("airdrop");
+  const contractMemeCreator = findContractInfo("memecreator");
 
   const notify = () =>
-    toast.success(
-      `Token Created ${tokenSymbol} to ${totalWallets.current} wallets from 🌊 AquasTrade!`,
-      {
-        position: "bottom-left",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Slide,
-      },
-    );
-
-  console.log(
-    " Airdrop status: ",
-    setAirdropped.current,
-    " ready: ",
-    isCommaAtEndOfAmounts.current,
-  );
+    toast.success(`Token Created ${tokenSymbol} from 🌊 AquasTrade!`, {
+      position: "bottom-left",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
+    });
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
-      console.log("POP UP HERE");
-      // todo toast
       notify();
-      // reset airdrop and fetch new balances
-      setAirdropped.current = true;
     }
   }, [contractCallDataConfirmed]);
 
-  // renders for ui
-  // todo bug
-  useEffect(() => {
-    if (tokenAmount) {
-      setAirdropped.current = false;
-
-      const testT = tokenAmount as string;
-      const testTT = testT.concat(",");
-
-      console.log(
-        " Token input amounts changed ",
-        tokenAmount,
-        " test with extra ,  : ",
-        testTT,
-      );
-
-      const bug: string = tokenAmount as string;
-      parseEthAmounts(bug);
-    }
-
-    if (tokenAddressList) {
-      const bug: string = tokenAddressList as string;
-      parseEthAddresses(bug);
-    }
-
-    // get the token address from using the symbol
-    if (tokenSymbol) {
-      const token_address = findTokenAddressFromSymbol(
-        tokenSymbol,
-      ) as unknown as `0x${string}`;
-      console.log("Set the Address from Symbol ", token_address, tokenSymbol);
-      setAirdropToken(token_address);
-    }
-  }, [tokenAmount, tokenSymbol, tokenAddressList]);
-
-  const stringEndWithComma = (e: string) => {
-    isCommaAtEndOfAmounts.current = true;
-  };
-
-  function isLastCharacterComma(input: string): boolean {
-    // Check if the input string is not empty and the last character is a comma
-    return input.trim() !== "" && input.trim().slice(-1) === ",";
-  }
-
-  // filter with regex
-  const handleInputAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e;
-    // Check if the input matches the allowed pattern
-    if (/^[0-9.,]*$/.test(value)) {
-      isCommaAtEndOfAmounts.current = isLastCharacterComma(value);
-
-      // if true, show instructions
-
-      setTokenAmount(value);
-      setInputValue(value);
-
-      console.log(
-        "handleInputAmountChange: ",
-        value,
-        isCommaAtEndOfAmounts.current,
-      );
-    }
-  };
-
-  // runs the data again before submitting
   const doTokenLaunch = () => {
-    setAirdropped.current = true;
+
+
+    console.log(" Deploy Token ", tokenName, tokenSymbol, tokenDecimal, tokenMax);
+
+
+    console.log(" Deploy Token with CA: ", contractMemeCreator?.addr);
+
+
+
+
 
     writeContract({
-      abi: AIRDROP_ABI,
-      address: contractAirdrop?.addr,
+      abi: MEME_CREATOR_ABI,
+      address: contractMemeCreator?.addr,
       functionName: "deployToken",
       args: [tokenName, tokenSymbol, BigInt(tokenDecimal), BigInt(tokenMax)],
     });
@@ -239,11 +145,19 @@ const LaunchPad: React.FC = () => {
             onChange={(e) => setTokenMax(e.target.value)}
             className={styles.input_token_address}
           />
-          <span>
-            <button className={styles.airdrop} onClick={doTokenLaunch}>
-              Deploy Token
-            </button>
-          </span>
+          {tokenSymbol && tokenMax && tokenDecimal && tokenName ? (
+            <span>
+              <button className={styles.airdrop} onClick={doTokenLaunch}>
+                Deploy Token
+              </button>
+            </span>
+          ) : (
+            <span>
+              <button className={styles.airdrop} onClick={doTokenLaunch}>
+                Input Values
+              </button>
+            </span>
+          )}
         </div>
       ) : (
         <div>

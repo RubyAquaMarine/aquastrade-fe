@@ -72,6 +72,11 @@ export const contractAddresses = [
     name: "aquasfeed",
     addr: "0x012D95449F3FE5E9263A2bA75406b78e83546510",
   },
+  {
+    id: 11,
+    name: "memecreator",
+    addr: "0xbB794A1F6C13E604bFEf1b56FbE1e02d1674f4f2",
+  },
 ] as const;
 // WIP : remove any CA: below
 export const getKlineRecordCount = 600;
