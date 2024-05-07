@@ -101,6 +101,18 @@ export const AquaConfig: interfaces.MetaportConfig = {
       symbol: "BTC",
       name: "Wrapped BTC",
     },
+    untitled: {
+      decimals: "18",
+      symbol: "UNT",
+      name: "Untitled",
+      iconUrl: "https://aquas.trade/UNT.png",
+    },
+    hurleypoint: {
+      decimals: "18",
+      symbol: "HP",
+      name: "HurleyPoint",
+      iconUrl: "https://aquas.trade/HP.png",
+    },
   },
 
   connections: {
@@ -359,6 +371,20 @@ export const AquaConfig: interfaces.MetaportConfig = {
             "affectionate-immediate-pollux": { clone: true },
           },
         },
+        untitled: {
+          address: "0xcB65a1d08E938a96D2Da45f3FD33f31D135CE986",
+          chains: {
+            "honorable-steel-rasalhague": { clone: true },
+          },
+        },
+        hurleypoint: {
+          address: "0x7FbAd6363dd81822DA09C6E0459BAff8d78B06f7",
+          chains: {
+            "green-giddy-denebola": {
+              clone: true,
+            },
+          },
+        },
       },
     },
     "honorable-steel-rasalhague": {
@@ -396,6 +422,14 @@ export const AquaConfig: interfaces.MetaportConfig = {
             mainnet: {
               clone: true,
               hub: "elated-tan-skat",
+            },
+          },
+        },
+        untitled: {
+          address: "0xB968FD9Ab6827F1E37b6dcCef07375737DdE0efE",
+          chains: {
+            "elated-tan-skat": {
+              clone: true,
             },
           },
         },
@@ -448,6 +482,14 @@ export const AquaConfig: interfaces.MetaportConfig = {
             mainnet: {
               clone: true,
               hub: "elated-tan-skat",
+            },
+          },
+        },
+        hurleypoint: {
+          address: "0x43b1288794de3A9F4D8cA3BbEf8f1A5dD957fbE7",
+          chains: {
+            "elated-tan-skat": {
+              clone: true,
             },
           },
         },

@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { FaSpinner } from "react-icons/fa6";
-
 import styles from "@/app/Styles/ConnectWallet.module.css";
 import { CHAIN } from "@/app/Utils/config";
 
@@ -74,7 +73,7 @@ const ConnectWallet = () => {
             {" "}
             {chain && chain.id !== CHAIN.id ? (
               <button
-                className={styles.p_styled_button_med}
+                className={styles.button_login}
                 onClick={(event) => handleToEuropa(event, 2046399126)}
               >
                 Switch Network
@@ -82,11 +81,11 @@ const ConnectWallet = () => {
             ) : (
               <span>
                 {!chain ? (
-                  <button className={styles.p_styled_button_med}>
+                  <button className={styles.button_login}>
                     <Link href="/dashboard">Switch Network</Link>
                   </button>
                 ) : (
-                  <button className={styles.p_styled_button_med}>
+                  <button className={styles.button_login}>
                     <Link href="/swap/amm">Start Trading</Link>
                   </button>
                 )}
@@ -94,7 +93,7 @@ const ConnectWallet = () => {
             )}
           </span>
 
-          <span>
+          <span className={styles.margin_med}>
             {" "}
             <button className={styles.logout} onClick={() => disconnect()}>
               logout
@@ -109,7 +108,7 @@ const ConnectWallet = () => {
               <ul>
                 <li className={styles.connectorButton}>
                   <button
-                    className={styles.p_styled_button_sm}
+                    className={styles.button_login}
                     onClick={() => {
                       connect({ connector });
                     }}

@@ -7,7 +7,7 @@ export const europaRouters = [
     id: 0,
     name: "Aquas.Trade",
     addr: "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61",
-    logo: "/AQUA1.png",
+    logo: "/AQUA.png",
   },
   {
     id: 1,
@@ -36,7 +36,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/USDC.svg",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
 
   {
@@ -47,7 +47,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/BRAWL.png",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 30,
@@ -57,7 +57,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/ETH.svg",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 31,
@@ -67,7 +67,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/BTC.svg",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 32,
@@ -77,7 +77,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/SKL.svg",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 33,
@@ -87,7 +87,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/SHISH.png",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 34,
@@ -97,7 +97,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/SKILL.png",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 35,
@@ -107,7 +107,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/EXD.svg",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 36,
@@ -117,7 +117,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/DAI.svg",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 37,
@@ -127,7 +127,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/USDT.svg",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 38,
@@ -137,7 +137,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/USDP.svg",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
   {
     id: 39,
@@ -147,7 +147,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/RUBY.svg",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
 
   {
@@ -158,7 +158,7 @@ export const poolListAqua = [
     tokenB: "AQUA",
     decimal: 18,
     logoQuote: "/PROSPECT.png",
-    logoBase: "/AQUA1.png",
+    logoBase: "/AQUA.png",
   },
 ] as const;
 

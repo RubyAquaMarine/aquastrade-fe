@@ -1,3 +1,5 @@
+NFT Gated (Gold NFT) ERC20 Token Airdropper. Can send up to 1000 transfers within 1 tx.
+
 # Airdrop
 
 Supports: SKALE | Europa Hub

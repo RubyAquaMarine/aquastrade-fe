@@ -80,8 +80,8 @@ const Home = ({ children, params }: any) => {
                   <p className={styles.text_body}>
                     <TextSizeAdjuster
                       text={"Reimagine 0 gas fees"}
-                      text_size="16"
-                      text_size_to="28"
+                      text_size="12"
+                      text_size_to="18"
                     ></TextSizeAdjuster>
                   </p>
                   <span className={styles.tradingViewText}>

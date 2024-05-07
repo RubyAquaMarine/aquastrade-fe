@@ -15,10 +15,11 @@ const Navbar = () => {
               <li>
                 <Link href="/">
                   <Image
-                    src="/AQUA1.png"
+                    src="/AQUA.png"
                     alt="AquasTrade Logo"
                     width={44}
                     height={44}
+                    priority
                   />
                 </Link>
               </li>
@@ -74,15 +75,6 @@ const Navbar = () => {
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>
-                <Link
-                  href="/dashboard/coinflip"
-                  className={styles.popup_item_link}
-                >
-                  Coinflip &emsp; &ensp; &nbsp;{" "}
-                </Link>
-              </Dropdown.Item>
-
-              <Dropdown.Item className={styles.popup_item}>
                 <Link href="/dashboard" className={styles.popup_item_link}>
                   Dashboard &emsp; &emsp; &emsp;{" "}
                 </Link>
@@ -107,6 +99,12 @@ const Navbar = () => {
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>
+                <Link href="/nft" className={styles.popup_item_link}>
+                  NFTs &emsp; &emsp; &emsp; &emsp; &emsp;
+                </Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
                 <Link href="/perp" className={styles.popup_item_link}>
                   Perps &emsp; &emsp; &emsp; &ensp;&nbsp;{" "}
                 </Link>
@@ -118,6 +116,15 @@ const Navbar = () => {
                   className={styles.popup_item_link}
                 >
                   Token Airdrop &ensp;
+                </Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
+                <Link
+                  href={`/dashboard/create`}
+                  className={styles.popup_item_link}
+                >
+                  Token Create &emsp; &emsp;{" "}
                 </Link>
               </Dropdown.Item>
 
@@ -150,20 +157,20 @@ const Navbar = () => {
                   </Dropdown.Item>
                   <Dropdown.Item className={styles.popup_item}>
                     <Link
-                      href="https://discord.gg/TPVpcUgt3k"
-                      target="_blank"
-                      className={styles.popup_item_sub_link}
-                    >
-                      Discord &nbsp;
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item className={styles.popup_item}>
-                    <Link
                       href="https://github.com/rubyaquamarine"
                       target="_blank"
                       className={styles.popup_item_sub_link}
                     >
                       Github &nbsp;&nbsp;
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item className={styles.popup_item}>
+                    <Link
+                      href="https://t.me/AquasTrade"
+                      target="_blank"
+                      className={styles.popup_item_sub_link}
+                    >
+                      Telegram &nbsp;
                     </Link>
                   </Dropdown.Item>
                   <Dropdown.Item className={styles.popup_item_bottom}>

@@ -77,7 +77,7 @@ export const tokenList = [
     symbol: "AQUA",
     addr: "0xF7F957D88768126916dAF3C1705D13C291d2B7D8",
     decimal: 18,
-    logo: "/AQUA1.png",
+    logo: "/AQUA.png",
   },
   {
     symbol: "BRAWL",

@@ -4,9 +4,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { formatUnits, parseUnits } from "viem";
 import { useAMMRouter, useAMMPairs } from "@/app/Hooks/useAMM";
-import styles from "@/app/Styles/AMM.module.css";
-import { ROUTER_AQUADEX } from "@/app/Utils/config";
-import { findTokenFromAddress } from "@/app/Utils/findTokens";
+
+import { findTokenFromAddress, findContractInfo } from "@/app/Utils/findTokens";
+
+const ROUTER_AQUADEX = findContractInfo("router")?.addr;
 
 interface Props {
   amountA: string;

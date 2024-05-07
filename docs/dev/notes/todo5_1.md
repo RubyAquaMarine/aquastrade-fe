@@ -52,7 +52,13 @@ clean up
 - tokenlist: Wallet Address switching on Token List page
 - https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest
 
-`npx pwa-asset-generator ./AQUA1.png --manifest ../src/app/manifest.json`
+bug bounties
+
+- https://hackerone.com/leaderboard
+- https://immunefi.com/bug-bounty/
+
+`cd public && `
+`npx pwa-asset-generator ./AQUA.png --manifest ../src/app/manifest.json`
 
 ## Icons
 

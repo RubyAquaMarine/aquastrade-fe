@@ -73,6 +73,11 @@ const Home = () => {
   const HeaderTexts = ["Silver NFT", "Gold NFT", "Bronze NFT"];
   const supplyDescriptions = ["500", "50", "5000"];
   const feeDescriptions = ["66%", "100%", "33.3%"];
+  const utilityDescriptions = [
+    "Token Create",
+    "Token Create, Token Airdrop",
+    "Token Create",
+  ];
   const allowance = [
     "300000000000000000",
     "1500000000000000000",
@@ -277,8 +282,28 @@ const Home = () => {
 
                   <div>
                     <ul className={styles.textDesc}>
-                      <li> Collection: {supplyDescriptions[index]}</li>
-                      <li> Swap Fee discount: {feeDescriptions[index]}</li>
+                      <li>
+                        {" "}
+                        Collection:
+                        <span className={styles.textInputs}>
+                          {supplyDescriptions[index]}{" "}
+                        </span>{" "}
+                      </li>
+                      <li>
+                        {" "}
+                        Swap Fee discount:
+                        <span className={styles.textInputs}>
+                          {feeDescriptions[index]}{" "}
+                        </span>{" "}
+                      </li>
+                      <li>
+                        {" "}
+                        Utility:
+                        <span className={styles.textInputs}>
+                          {" "}
+                          {utilityDescriptions[index]}
+                        </span>{" "}
+                      </li>
                     </ul>
                   </div>
                 </div>

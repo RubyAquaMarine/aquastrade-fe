@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { createChart } from "lightweight-charts";
 import { CandlestickSeriesPartialOptions } from "lightweight-charts";
-import { mockCandlestickData } from "@/app/api/mock";
 
 interface CandlestickData {
   time: string;
