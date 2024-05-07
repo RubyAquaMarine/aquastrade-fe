@@ -33,3 +33,18 @@ For now, use these defaults within the UI:
 
 - if using AQUA to buy ASSET B, then add fee (1 aqua) to the approval amount (users can do this manually)
 - fetch user orders : delete orders
+- make new component for the user orders
+- add number of swaps and the expected amount size per swap in UI
+
+# Details
+
+- `executeOrders` (storageID, isBuying) : Starts at index 1 (not zero)
+- `GetOrderDetails`(storageID, and matching `globalID`) : the globalID is retreivable from the factory using `GetAllOrders` .
+- `globalID` : Increments ++ only from each new `SubmitDCAOrder`
+- `GetAllOrders` (storageID, traderWallet) : this returns an array of the globalIDs that are recorded within this storageID for that trader. Therefore to fetch, loop storageID, traderWallet if StorageID has orders. `GetOrderLength` : input the storageID to get the number of orders, if zero dont fetch
+- `index` : the Incrementor value : globalID : you can determine your ID by fetching this value before placing order.
+- To delete an order, you will need the globalID and the storageID
+
+- `GetTokenBaseUsingIndex` : returns the token address assigned to base asset
+
+- `GetTokenQuoteUsingIndex` : returns the token address assigned to quote asset
