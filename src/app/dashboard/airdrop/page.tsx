@@ -16,17 +16,6 @@ const Home = ({ children, params }: any) => {
   const isNFTHolder = useRef<HTMLDivElement>(null);
   const test = isNFTHolder.current?.children;
 
-  console.log("isNFTHolder Test ", test, nftHolder);
-
-  if (test && test?.length >= 1) {
-    console.log(
-      "isNFTHolder  ",
-      isNFTHolder,
-      "child is ",
-      isNFTHolder.current?.children[0]?.id,
-    );
-  }
-
   useEffect(() => {
     if (isConnected && address && test) {
       setNFTHolder(isNFTHolder.current?.children[0]?.id);

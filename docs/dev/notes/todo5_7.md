@@ -31,6 +31,7 @@ latest : 0x9683ADC7FD56b81F1eb70040B30864a822C330f2
 - pool 2 - usdt - aqua
 - pool 3 - usdp - aqua
 - pool 4 - dai - aqua
+- pool 6 - btc - usdp on ruby
 
 Delete these : `0x84B98837A22989bf950E3299f4803BDA3c7E0879`
 

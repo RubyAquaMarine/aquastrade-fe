@@ -151,7 +151,7 @@ const CoinFlip = (params: Props) => {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
     }
-  }, [contractCallDataConfirmed]);
+  }, [contractCallDataConfirmed, hash]);
 
   return (
     <div>

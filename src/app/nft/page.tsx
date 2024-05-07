@@ -94,7 +94,7 @@ const Home = () => {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
     }
-  }, [contractCallDataConfirmed]);
+  }, [contractCallDataConfirmed, hash]);
 
   // Once the Marketplace data exists , filter through and find , store the nfts that will be for sale. 1 of 50000
   useEffect(() => {
