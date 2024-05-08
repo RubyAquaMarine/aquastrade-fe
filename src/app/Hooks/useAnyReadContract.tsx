@@ -1,4 +1,5 @@
 // useDataFetching.ts
+"use client";
 
 import { useState, useEffect } from "react";
 

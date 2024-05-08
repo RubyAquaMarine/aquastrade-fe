@@ -1,61 +1,8 @@
-/*  buttons #171717; */
-.container {
-  width: auto;
-  border-radius: 12px;
-  background-color: #121111;
+.text_align {
+  padding: 1rem;
 }
 
-@media (min-width: 720px) {
-  .container {
-    width: auto;
-    min-width: 480px;
-  }
-}
-
-.column {
-  margin: 60px;
-  flex: 1;
-  box-sizing: border-box;
-  padding: 1rem 1rem;
-  text-align: center;
-  border-radius: 12px;
-  background-color: #040404;
-}
-
-.imageTitle {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: larger;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.imageCenter {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.toggleButton {
-  background-color: #181a1d;
-  color: white;
-  padding: 0.6rem 1rem;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-  font-size: 0.9rem;
-  border: 1px solid #2196f3;
-}
-
-.toggleButton:hover {
-  background-color: #2196f3;
-}
-
-.topText {
+.text_top {
   box-sizing: border-box;
   font-weight: 400;
   color: var(--white);
@@ -63,11 +10,12 @@
   margin-top: 0;
   margin-bottom: 16px;
   font-family: monospace;
-  font-size: 18px;
+  font-size: 1.1rem;
   line-height: 22px;
+  padding: 0.3rem 0.3rem;
 }
 
-.midText {
+.text_title {
   box-sizing: border-box;
   margin: 0.67em 0;
   color: var(--white);
@@ -82,6 +30,71 @@
   padding: 0.3rem 0.3rem;
 }
 
+.text_sm {
+  font-size: 0.9rem;
+  margin: 0.67em 0;
+  text-align: center;
+  padding: 0.3rem 0.3rem;
+}
+
+.container {
+  width: auto;
+  border-radius: 12px;
+  background-color: #121111;
+}
+
+.container_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  margin: 60px;
+  flex: 1;
+  box-sizing: border-box;
+  padding: 1rem 1rem;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.container_nft {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  padding: 1rem 1rem;
+  margin: 1rem;
+  background-color: #040404;
+  border: 1px solid #a3903a;
+  max-width: 350px;
+}
+
+.text_title_nft {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 0.5rem 2rem;
+}
+
+.button_nft {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: #2196f3;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.button_nft:hover {
+  background-color: #0056b3;
+}
+
 .textDesc {
   text-align: center;
   padding: 0.2rem 0.3rem;
@@ -89,34 +102,37 @@
   margin: 0.2rem 0.3rem;
 }
 
-.textInputs {
-  margin-left: 0.3rem;
+.text_grey {
   border: rounded;
   color: rgb(194, 187, 187);
   border-radius: 6px;
   text-align: center;
+  font-size: 0.8rem;
 }
 
-.imageAlign {
+.text_white {
   border: rounded;
+  color: floralwhite;
   border-radius: 6px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.image_align {
+  border: rounded;
+  border-radius: 24px;
   box-sizing: border-box;
   width: auto;
   max-width: 100%;
 }
 
-.bottomText {
-  -webkit-text-size-adjust: 100%;
-  box-sizing: border-box;
-  margin-top: 0;
+.balance {
+  text-align: center;
   font-family: monospace;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  text-align: center;
-  max-width: 530px;
   color: #efefef;
-  margin-bottom: 32px;
 }
 
 .p_styled_button {

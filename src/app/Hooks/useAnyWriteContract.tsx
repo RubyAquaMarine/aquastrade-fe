@@ -1,5 +1,7 @@
 // https://github.com/heyxyz/hey/blob/main/apps/web/src/hooks/useCreatePublication.tsx#L65
 // just testing a hook from latest Viem and Wagmi project ^^
+"use client";
+
 import { useRouter } from "next/router";
 import { useSignTypedData, useWriteContract } from "wagmi";
 import useHandleWrongNetwork from "./useHandleWrongNetwork";

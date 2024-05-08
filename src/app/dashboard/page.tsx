@@ -24,10 +24,7 @@ const Dashbaord = ({ children, params }: any) => {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <span className={styles.midText}> NFT-powered DEX, Market Place, </span>
 
-      <span className={styles.top_text_link}>
-        {" "}
-        <Link href="/perp"> and leveraged trading on the</Link>
-      </span>
+      <span className={styles.top_text}> and leveraged trading on the</span>
       <span>
         {" "}
         <Link

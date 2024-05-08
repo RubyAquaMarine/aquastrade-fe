@@ -1,3 +1,5 @@
+"use client";
+
 import { CHAIN } from "@/app/Utils/config";
 import { useConnections, useSwitchChain } from "wagmi";
 

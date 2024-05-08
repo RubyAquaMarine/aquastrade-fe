@@ -1,3 +1,5 @@
+"use client";
+
 import { useReadContract } from "wagmi";
 
 import { marketplaceABI } from "@/app/Abi/europaMarketPlace";
