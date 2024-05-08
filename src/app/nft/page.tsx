@@ -75,7 +75,7 @@ const Home = () => {
   const feeDescriptions = ["66%", "100%", "33.3%"];
   const utilityDescriptions = [
     "Token Create",
-    "Token Create, Token Airdrop",
+    "Free DCA Orders, Token Create, Token Airdrop",
     "Token Create",
   ];
   const allowance = [
@@ -250,102 +250,109 @@ const Home = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-14">
-      <h4 className={styles.topText}>
+      <h4 className={styles.text_top}>
         Limited Collection sizes: 50, 500, 5000
       </h4>
-      <h1 className={styles.midText}>Swap Fee Discounts for Life</h1>
-      <p>
+      <h1 className={styles.text_title}>Swap Fee Discounts for Life</h1>
+      <span className={styles.text_sm}>
         Say goodbye to tx gas fees, swap fees and hello to a new era in defi
-      </p>
-      <br></br>
+      </span>
 
       {address && isConnected && chain && chain.id === CHAIN.id ? (
         <div className={styles.container}>
-          <p className={styles.container}>
-            {inputs.map((value, index) => (
-              <div key={index} className={styles.column}>
-                <div className={styles.imageCenter}>
-                  <Link href={urlDescriptions[index]} target="_blank">
-                    <span className={styles.imageTitle}>
-                      {" "}
-                      {HeaderTexts[index]}{" "}
-                    </span>
-                    <Image
-                      src={`/NFT${index}.png`}
-                      alt="AquasTrade Logo"
-                      width={200}
-                      height={200}
-                      className={styles.imageAlign}
-                      priority
-                    />
-                  </Link>
-
-                  <div>
-                    <ul className={styles.textDesc}>
-                      <li>
-                        {" "}
-                        Collection:
-                        <span className={styles.textInputs}>
-                          {supplyDescriptions[index]}{" "}
-                        </span>{" "}
-                      </li>
-                      <li>
-                        {" "}
-                        Swap Fee discount:
-                        <span className={styles.textInputs}>
-                          {feeDescriptions[index]}{" "}
-                        </span>{" "}
-                      </li>
-                      <li>
-                        {" "}
-                        Utility:
-                        <span className={styles.textInputs}>
-                          {" "}
-                          {utilityDescriptions[index]}
-                        </span>{" "}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    value={getInputValue(index)} // Call a function to get the appropriate value
-                    className={styles.textInputs}
-                    onChange={handleChangeETH}
+          {inputs.map((value, index) => (
+            <div key={index} className={styles.column}>
+              <span className={styles.container_nft}>
+                <Link href={urlDescriptions[index]} target="_blank">
+                  <span className={styles.text_title_nft}>
+                    {" "}
+                    {HeaderTexts[index]}{" "}
+                  </span>
+                  <Image
+                    src={`/NFT${index}.png`}
+                    alt="AquasTrade Logo"
+                    width={300}
+                    height={300}
+                    className={styles.image_align}
+                    priority
                   />
-                </div>
-                {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
-                {allowancesTest.current &&
-                BigInt(allowancesTest.current) >= BigInt(allowance[index]) ? (
-                  <div>
-                    <button
-                      className={styles.toggleButton}
-                      onClick={() => handleButtonClick(index)}
-                    >
-                      {buttonLogicTexts[index]}
-                    </button>
-                  </div>
-                ) : (
-                  <div>
-                    <button
-                      className={styles.toggleButton}
-                      onClick={() => handleButtonClick(index)}
-                    >
-                      Approve
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
-          </p>
-          <p className={styles.bottomText}>
-            {!token_balance
-              ? "0.0"
-              : typeof token_balance === "bigint" &&
-                formatUnits(token_balance, 18)}{" "}
-            <span> ETH Balance</span>
-          </p>
+                </Link>
+
+                <span className={styles.text_align}>
+                  <ul>
+                    <li className={styles.text_grey}>
+                      {" "}
+                      Collection:
+                      <span className={styles.text_white}>
+                        {supplyDescriptions[index]}{" "}
+                      </span>{" "}
+                    </li>
+                    <li className={styles.text_grey}>
+                      {" "}
+                      Swap Fee Discount:
+                      <span className={styles.text_white}>
+                        {feeDescriptions[index]}{" "}
+                      </span>{" "}
+                    </li>
+                    <li className={styles.text_grey}>
+                      {" "}
+                      Utility:
+                      <span className={styles.text_white}>
+                        {" "}
+                        {utilityDescriptions[index]}
+                      </span>{" "}
+                    </li>
+                    <li className={styles.text_grey}>
+                      {" "}
+                      Cost:
+                      <span className={styles.text_white}>
+                        {" "}
+                        {getInputValue(index)}
+                      </span>{" "}
+                    </li>
+
+                    <li>
+                      {allowancesTest.current &&
+                      BigInt(allowancesTest.current) >=
+                        BigInt(allowance[index]) ? (
+                        <span>
+                          <button
+                            className={styles.button_nft}
+                            onClick={() => handleButtonClick(index)}
+                          >
+                            {buttonLogicTexts[index]}
+                          </button>
+                        </span>
+                      ) : (
+                        <span>
+                          <button
+                            className={styles.button_nft}
+                            onClick={() => handleButtonClick(index)}
+                          >
+                            Approve
+                          </button>
+                        </span>
+                      )}
+                    </li>
+                  </ul>
+                </span>
+              </span>
+
+              {/** User has to click on button again to compare logic: then aka Needs to render again to show the approval is complete and buy button appears */}
+            </div>
+          ))}
+
+          <span className={styles.container_text}>
+            {" "}
+            <span className={styles.text_title_nft}>
+              {" "}
+              {!token_balance
+                ? "0.0"
+                : typeof token_balance === "bigint" &&
+                  formatUnits(token_balance, 18)}{" "}
+              <span> ETH Balance</span>
+            </span>{" "}
+          </span>
         </div>
       ) : (
         <div className={styles.p_styled_button}>

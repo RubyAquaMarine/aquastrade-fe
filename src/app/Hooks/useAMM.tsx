@@ -1,4 +1,6 @@
 // @ts-nocheck
+"use client";
+
 import { useReadContract } from "wagmi";
 import { formatUnits, parseEther, parseUnits } from "viem";
 import { MARKETPACE_ABI } from "@/app/Abi/europaMarketPlace";
