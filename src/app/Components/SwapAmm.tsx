@@ -80,6 +80,8 @@ const SwapAmm = () => {
   const [tradeFeature, setTradeFeature] = useState("swap");
   const [ammFeature, setAMMFeature] = useState("swap");
   const [feeForTrade, setFeeForTrade] = useState("0.0");
+  const [multihop, setMultihop] = useState(false);
+  const [multihopBaseToken, setMultihopBaseToken] = useState("AQUA");
 
   //contains token addresses:  logic shows the routing asset logos , can be two or three items , alos used for the GetAmounts Out
   const [swap_path, setSwapPath] = useState([""]);
@@ -104,6 +106,7 @@ const SwapAmm = () => {
   const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
   const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
 
+  // Adding Liqudity : can be removed when refactoring into ammFeature Components
   const addTokenBAmount = useGetAmountInQuote(
     amountA,
     poolAddress,
@@ -124,6 +127,11 @@ const SwapAmm = () => {
       }
     }
   }, [address, isConnected, tokenA, tokenB]);
+
+  // test
+  useEffect(() => {
+    findPathForPools(tokenAAddress.current, tokenBAddress.current);
+  }, [poolAddress]);
 
   useEffect(() => {
     if (amountA) {
@@ -207,14 +215,46 @@ const SwapAmm = () => {
 
   // pass in the token addresses
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
-    // no Aqua base means a MultiHop is required
-    if (tokenA !== "AQUA" && tokenB !== "AQUA") {
-      setSwapPath([_tokenA, aqua_token_address, _tokenB]);
-      return;
-    } else {
+    // Having No Aqua base means a MultiHop is required
+
+    // does pool address exist with current TokenA and TokenB ?
+    if (
+      poolAddress !== "0x0000000000000000000000000000000000000000" &&
+      tokenA !== "AQUA" &&
+      tokenB !== "AQUA"
+    ) {
+      setMultihop(false);
       setSwapPath([_tokenA, _tokenB]);
+      console.log(`LOGIC 1 ${false} ${multihop}`);
       return;
     }
+
+    if (
+      poolAddress === "0x0000000000000000000000000000000000000000" &&
+      tokenA !== "AQUA" &&
+      tokenB !== "AQUA"
+    ) {
+      setMultihop(true);
+      setSwapPath([_tokenA, aqua_token_address, _tokenB]);
+      setMultihopBaseToken("AQUA"); // later add some logic to find other base assets like usdc
+      console.log(`LOGIC 2 ${true} ${multihop}`);
+      return;
+    }
+
+    if (
+      multihop === false &&
+      poolAddress === "0x0000000000000000000000000000000000000000"
+    ) {
+      setMultihop(true);
+      setSwapPath([_tokenA, aqua_token_address, _tokenB]);
+      setMultihopBaseToken("AQUA"); // later add some logic to find other base assets like usdc
+      console.log(`LOGIC 3 ${true} ${multihop}`);
+      return;
+    }
+
+    setMultihop(false);
+    setSwapPath([_tokenA, _tokenB]);
+    console.log(`LOGIC 4 ${false} ${multihop}`);
   };
 
   // insert Token Addresses
@@ -432,6 +472,8 @@ const SwapAmm = () => {
       }
     }
   };
+
+  console.log(`"AMM Features: is Multihop", ${multihop} isPool ${poolAddress}`);
 
   return (
     <div className={styles.container}>
@@ -704,26 +746,26 @@ const SwapAmm = () => {
 
           <div className={styles.input_container_column}>
             <div className={styles.column}>
-              <p>
+              <p className={styles.routing}>
                 Fee: <span className={styles.fee_balance}> {feeForTrade} </span>{" "}
                 <span className={styles.fee_balance}> {tokenA}</span>
               </p>
-              <p> Exchange Rate:</p>
+              <p className={styles.routing}> Exchange Rate:</p>
             </div>
             <div className={styles.column}>
               <p>
                 {swap_path_logos3 ? (
                   <span className={styles.routing}>
                     {" "}
-                    Route:{" "}
+                    Best Route:{" "}
                     <span>
                       {" "}
                       <Image
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos1}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={20}
-                        height={20}
+                        width={30}
+                        height={30}
                       />
                     </span>
                     <span>
@@ -731,8 +773,8 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos2}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={20}
-                        height={20}
+                        width={30}
+                        height={30}
                       />
                     </span>
                     <span>
@@ -740,23 +782,23 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos3}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={20}
-                        height={20}
+                        width={30}
+                        height={30}
                       />
                     </span>
                   </span>
                 ) : (
                   <span className={styles.routing}>
                     {" "}
-                    Route:{" "}
+                    Best Route:{" "}
                     <span>
                       {" "}
                       <Image
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos1}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={20}
-                        height={20}
+                        width={30}
+                        height={30}
                       />
                     </span>
                     <span>
@@ -765,36 +807,77 @@ const SwapAmm = () => {
                         className={styles.token_list_symbol_space}
                         src={swap_path_logos2}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={20}
-                        height={20}
+                        width={30}
+                        height={30}
                       />
                     </span>
                   </span>
                 )}
               </p>
 
-              <p> Slippage:</p>
+              <p className={styles.routing}> Slippage:</p>
             </div>
           </div>
           {/**  Add AMM Pool Reserves */}
           <div className={styles.input_container_column}>
             <div className={styles.column}>
-              {poolAddress &&
-                tokenADecimal.current &&
-                tokenBDecimal.current && (
-                  <AMMPools
-                    props={[
-                      poolAddress,
-                      "getReserves",
-                      [],
-                      tokenADecimal.current,
-                      tokenBDecimal.current,
+              {/**  is Multihop, Show reserves from both pools */}
 
-                      tokenA,
-                      tokenB,
-                    ]}
-                  ></AMMPools>
-                )}
+              {multihop ? (
+                <span>
+                  {multihopBaseToken &&
+                    tokenADecimal.current &&
+                    tokenBDecimal.current && (
+                      <AMMPools
+                        props={[
+                          poolAddress,
+                          "getReserves",
+                          [],
+                          tokenADecimal.current,
+                          18,
+
+                          tokenA,
+                          multihopBaseToken,
+                        ]}
+                      ></AMMPools>
+                    )}
+
+                  {multihopBaseToken &&
+                    tokenADecimal.current &&
+                    tokenBDecimal.current && (
+                      <AMMPools
+                        props={[
+                          poolAddress,
+                          "getReserves",
+                          [],
+                          tokenADecimal.current,
+                          18,
+
+                          tokenB,
+                          multihopBaseToken,
+                        ]}
+                      ></AMMPools>
+                    )}
+                </span>
+              ) : (
+                <span>
+                  {" "}
+                  {tokenADecimal.current && tokenBDecimal.current && (
+                    <AMMPools
+                      props={[
+                        poolAddress,
+                        "getReserves",
+                        [],
+                        tokenADecimal.current,
+                        tokenBDecimal.current,
+
+                        tokenA,
+                        tokenB,
+                      ]}
+                    ></AMMPools>
+                  )}
+                </span>
+              )}
             </div>
           </div>
         </div>

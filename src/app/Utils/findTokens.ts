@@ -29,6 +29,20 @@ export const findTokenFromAddress = (_address: string) => {
   }
 };
 
+export const findTokenFromSymbol = (_symbol: string) => {
+  let save;
+  if (tokenAddresses) {
+    tokenAddresses.forEach((element) => {
+      if (_symbol === element?.symbol) {
+        save = element;
+      }
+    });
+  }
+  if (save) {
+    return save;
+  }
+};
+
 export const findTokenLogoFromAddress = (_address: string) => {
   let save;
   if (tokenAddresses) {

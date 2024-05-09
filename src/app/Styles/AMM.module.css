@@ -62,7 +62,9 @@
 .routing {
   display: flex;
   justify-content: space-between;
-  max-height: 20px;
+  max-height: 30px;
+  font-size: 0.7rem;
+  color: #bdb8b8;
 }
 
 .input_token:hover {
@@ -231,7 +233,7 @@
 .token_list_symbol_space {
   margin-right: 10px;
   margin-left: 10px;
-  max-height: 20px;
+  max-height: 26px;
 }
 
 .menu {
@@ -383,6 +385,21 @@
   cursor: pointer;
 }
 
+.button_field_med {
+  padding-top: 0.2rem;
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
+  border-bottom: 0.05rem solid #42518d;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.button_field_med:hover {
+  border-radius: 12px;
+  background-color: #42518d;
+}
+
 .button_field_sm {
   border-radius: 12px;
   padding: 0.2rem 0.2rem;
@@ -449,8 +466,8 @@
 }
 
 .fee_balance {
-  font-size: 12px;
-  color: #bdb8b8;
+  font-size: 0.8rem;
+  color: #fff;
   margin-right: 0.1rem;
 }
 

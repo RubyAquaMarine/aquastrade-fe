@@ -117,10 +117,8 @@ export const useGetAmountInQuote = (
 
   if (_addressPair && addrA && _inputTokenAddress) {
     if (addrA === _inputTokenAddress) {
-      console.log(" InputToken  matches the QUOTE ");
       flip = false;
     } else {
-      console.log(" InputToken  !match the QUOTE ");
       flip = true;
     }
   }
@@ -139,7 +137,7 @@ export const useGetAmountInQuote = (
     data as any,
   );
 
-  console.log("GetAmountInQuote: ", swap_out);
+  // console.log("GetAmountInQuote: ", swap_out);
 
   return swap_out;
 };
