@@ -1,5 +1,5 @@
 .container {
-  max-width: 620px;
+  max-width: 100vw;
   border-radius: 12px;
   border: 0.4rem solid #475384;
   background-color: #181a1d;
@@ -22,13 +22,64 @@
   padding: 0.1rem;
 }
 
-.input_token_a {
+.box_space {
   display: flex;
-  justify-content: center;
-  padding: 0.2rem;
+  justify-content: right;
+  margin-left: 1rem;
+}
+
+.box_space_xl {
+  display: flex;
+  justify-content: right;
+  margin-left: 3rem;
+}
+
+/** amount_inputs  and input_box same  */
+.input_box {
+  display: flex;
+  text-align: center;
+  justify-content: safe;
+  border: 1px solid #475384;
+  padding: 0.4rem 0.6rem;
+  background-color: #242629;
+  border-radius: 12px;
+}
+
+.input_symbol {
+  max-width: 7rem;
+  min-width: 6rem;
+  background-color: #181a1d;
+  border-radius: 12px;
+  padding: 0.2rem 0.4rem;
+  display: flex;
+  text-align: center;
+  justify-content: safe;
+}
+
+.input_symbol:hover {
+  background-color: #007bff;
+}
+
+.input_container {
+  padding: 0.4rem 0.6rem;
+  min-width: 300px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.input_container_sm {
+  border-radius: 12px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.input_container_solo {
+  padding: 0.4rem 0.6rem;
   border-radius: 12px;
   background-color: #242629;
-  border: 1px solid #475384;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .input_container_column {
@@ -65,10 +116,6 @@
   max-height: 30px;
   font-size: 0.7rem;
   color: #bdb8b8;
-}
-
-.input_token:hover {
-  background-color: #0056b3;
 }
 
 .center {
@@ -317,55 +364,14 @@
   padding: 0.4rem 0.6rem;
 }
 
-.input_container {
-  padding: 0.4rem 0.6rem;
-  border-radius: 12px;
-  min-width: 300px;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
-.input_container_sm {
-  border-radius: 12px;
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-.input_container_solo {
-  padding: 0.4rem 0.6rem;
-  border-radius: 12px;
-  background-color: #242629;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-top: 10px;
-}
-
 .input_amount {
-  max-width: 180px;
+  max-width: 9rem;
   display: flex;
   margin-right: 2px;
   padding: 0.2rem 0.8rem;
   color: #fff;
   background-color: #242629;
   border-radius: 12px;
-}
-
-.input_token {
-  margin-right: 10px;
-  margin-left: 10px;
-  max-width: 4.9rem;
-  display: flex;
-  padding: 0.2rem 0.8rem;
-  color: #fff;
-  background-color: #242629;
-  cursor: pointer;
-  border-radius: 12px;
-}
-
-.input_token:hover {
-  background-color: #0056b3;
 }
 
 .get_amount {
