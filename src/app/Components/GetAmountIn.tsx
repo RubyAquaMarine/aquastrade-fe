@@ -78,10 +78,8 @@ const GetAmountIn = (params: Props) => {
 
   function test() {
     if (addrA && params.props[4] && addrA === params.props[4]) {
-      console.log(" InputToken  matches the QUOTE ");
       flipReserves.current = false;
     } else {
-      console.log(" InputToken  !match the QUOTE ");
       flipReserves.current = true;
     }
   }
