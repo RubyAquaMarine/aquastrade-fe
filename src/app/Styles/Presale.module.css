@@ -1,0 +1,266 @@
+.container {
+  border: 1px solid #2196f3;
+}
+
+.container_margin {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.container_flex {
+  margin-top: 2rem;
+  position: static;
+  left: 0;
+  top: 0;
+  display: flex;
+
+  min-width: 200px;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #2196f3;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(82, 86, 109, 0.47),
+    transparent
+  );
+  padding-bottom: 6px;
+  padding-top: 8px;
+}
+
+.container_flex_tokens {
+  min-width: 200px;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid #2196f3;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(82, 86, 109, 0.47),
+    transparent
+  );
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.text_border_bottom {
+  margin-top: 2rem;
+  display: flex;
+  text-align: left;
+  border-bottom: 1px solid #475384;
+}
+
+.text_center {
+  justify-content: center;
+  display: flex;
+  padding: 0.2rem 0.3rem;
+}
+
+.text_sm {
+  padding: 0.2rem 0.3rem;
+  font-size: 0.8rem;
+  text-align: left;
+  border-radius: 12px;
+  color: #bdb8b8;
+}
+
+.text_center_warning {
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-content: center;
+  display: flex;
+  padding: 0.2rem 0.3rem;
+  border-radius: 12px;
+  background-color: #222224;
+  border: 2px solid #ff5c66;
+}
+
+.airdrop_warning {
+  border: 2px solid #ff5c66;
+
+  margin: 10px;
+  min-width: 500px;
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+
+  background-color: #111317;
+  font-size: 1.2rem;
+}
+
+.text_border {
+  justify-content: center;
+  display: flex;
+  padding: 0.2rem 0.3rem;
+  border-radius: 12px;
+  border: 1px solid #2196f3;
+  margin-bottom: 10px;
+}
+
+.text_title {
+  box-sizing: border-box;
+  margin: 0.67em 0;
+  color: var(--white);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-family: monospace;
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 110%;
+  display: block;
+  padding: 0.3rem 0.3rem;
+}
+
+.input_token_address {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  width: 500px;
+  padding: 0.4rem 0.6rem;
+
+  border: 1px solid #475384;
+  background-color: #181a1d;
+}
+
+.input_address {
+  margin: 10px;
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  width: 500px;
+
+  border: 1px solid #475384;
+  background-color: #111317;
+}
+
+.input_address:hover {
+  background-color: #007bff;
+}
+
+.text_lg {
+  margin: 10px;
+  min-width: 500px;
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+
+  font-size: 1.8rem;
+}
+
+.button_presale {
+  padding: 0.4rem 0.6rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  border: 2px solid #2196f3;
+  font-size: 1.8rem;
+}
+
+.button_presale:hover {
+  background-color: #007bff;
+}
+
+.toggleButtonEuropa {
+  border: 1px solid #475384;
+  background-color: #181a1d;
+  color: #007bff;
+  padding: 1rem 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.image_center {
+  justify-content: center;
+  display: flex;
+  padding: 0.2rem 0.3rem;
+}
+
+.button_back {
+  margin-top: 40px;
+  position: static;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: auto;
+  min-width: 200px;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #2196f3;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(82, 86, 109, 0.47),
+    transparent
+  );
+  padding-bottom: 6px;
+  padding-top: 8px;
+}
+
+/* components/SpinningImage.module.css */
+
+.container {
+  margin-top: 10px;
+  width: 120px; /* Adjust container size as needed */
+  height: 120px; /* Adjust container size as needed */
+  padding: 0.2rem 0.3rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: spin 6s linear infinite; /* Adjust duration and timing function as needed */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.input_container {
+  padding: 0.4rem 0.6rem;
+  border-radius: 12px;
+  min-width: 300px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border: 1px solid #475384;
+}
+
+.dropdownmenu {
+  margin-left: 4rem;
+  display: flex;
+  justify-content: center;
+  max-width: 400px;
+  font-size: 0.8rem;
+  padding: 1rem;
+  color: #bdb8b8;
+  border-radius: 12px;
+  background-color: #242629;
+  border: 1px solid #475384;
+}
+
+.dropdownmenu_item {
+  margin-right: 1rem;
+}
+.dropdownmenu_item_image {
+  padding: 0.8rem;
+}
