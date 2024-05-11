@@ -65,11 +65,17 @@ const Presale: React.FC = () => {
   const { data: priceInUSD } = usePresale("price", []);
   const { data: presaleOwner } = usePresale("presaleOwner", []);
 
+  const percentOfTokens = useRef();
+
   // fix this ,  not hardcode
   const aqua_addr = findTokenAddressFromSymbol(
     presaleTokenSymbol ? presaleTokenSymbol : "AQUA",
   );
   const { data: tokenSupply } = useERC20Token(aqua_addr, "totalSupply", []); // $AQUA
+
+  const { data: tokenSupplyRemaining } = useERC20Token(aqua_addr, "balanceOf", [
+    contractIDO?.addr,
+  ]); // $AQUA
 
   const loadTokenPresaleInfo = findTokenFromAddress(aqua_addr);
 
@@ -86,12 +92,16 @@ const Presale: React.FC = () => {
       console.log("presale token address:", presaleTokenAddress);
       const token = findTokenFromAddress(presaleTokenAddress);
       setPresaleTokenSymbol(token?.symbol);
-
-      //setSymbolsInDropdown
-
       setSymbolsInDropdown(["USDC", "USDT", "USDP", "DAI"]);
+    
+
+      if (tokenSupplyRemaining && tokenSupply) {
+        percentOfTokens.current =
+          Number((tokenSupplyRemaining * 10000n) / tokenSupply) / 100;
+        console.log(" Percentage: ok ", percentOfTokens.current);
+      }
     }
-  }, [presaleTokenAddress]);
+  }, [presaleTokenAddress, tokenSupplyRemaining, tokenSupply]);
 
   // setPresaleTokenSymbol
 
@@ -254,11 +264,16 @@ const Presale: React.FC = () => {
                 Remaining Tokens
               </Link>{" "}
             </span>
-            {tokenSupply && loadTokenPresaleInfo ? (
+            <span>
+              {" "}
+              {tokenSupplyRemaining &&
+                formatUnits(tokenSupplyRemaining, 18)}{" "}
+            </span>
+            {percentOfTokens.current && tokenSupply && loadTokenPresaleInfo ? (
               <Slider
                 aria-label="Small steps"
-                defaultValue={0}
-                step={1}
+                defaultValue={100 - percentOfTokens.current}
+                step={0.1}
                 marks
                 min={0}
                 max={100}
