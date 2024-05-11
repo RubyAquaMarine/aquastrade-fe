@@ -129,6 +129,15 @@ const Navbar = () => {
               </Dropdown.Item>
 
               <Dropdown.Item className={styles.popup_item}>
+                <Link
+                  href={`/dashboard/presale`}
+                  className={styles.popup_item_link}
+                >
+                  Token IDO &emsp; &emsp;{" "}
+                </Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item className={styles.popup_item}>
                 <Link href={`/user/`} className={styles.popup_item_link}>
                   Token List &emsp; &emsp;{" "}
                 </Link>

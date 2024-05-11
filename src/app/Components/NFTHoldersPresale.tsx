@@ -5,7 +5,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 import { formatUnits } from "viem";
-import LaunchPad from "@/app/Components/Presale";
+import PresaleAdmin from "@/app/Components/PresaleAdmin";
 import { useNFTs } from "@/app/Hooks/useAMM";
 import {
   MARKETPLACE_GOLD_NFT,
@@ -14,7 +14,7 @@ import {
 } from "@/app/Utils/config";
 import styles from "@/app/Styles/AMM.module.css";
 
-const NFTHolderLaunchPad = () => {
+const NFTHolderPresale = () => {
   const isNFTHolder = useRef(false);
   const [nftHolder, setNFTHolder] = useState(false);
 
@@ -73,7 +73,7 @@ const NFTHolderLaunchPad = () => {
     <>
       {address && isConnected && nftHolder && nftHolder === true ? (
         <div id="PASS" className={styles.input_container}>
-          <LaunchPad></LaunchPad>
+          <PresaleAdmin></PresaleAdmin>
         </div>
       ) : (
         <div id="FAIL">
@@ -93,4 +93,4 @@ const NFTHolderLaunchPad = () => {
   );
 };
 
-export default NFTHolderLaunchPad;
+export default NFTHolderPresale;

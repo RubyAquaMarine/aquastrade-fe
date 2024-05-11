@@ -13,14 +13,14 @@ export const usePresale = (functionName: string, args?: [any]) => {
     args: args,
   });
 
-  console.log(
-    "usePresale: data from ",
-    functionName,
-    args,
-    data,
-    isLoading,
-    isError,
-    contract?.addr,
-  );
+  // console.log(
+  //   "usePresale: data from ",
+  //   functionName,
+  //   args,
+  //   data,
+  //   isLoading,
+  //   isError,
+  //   contract?.addr,
+  // );
   return { data, isError, isLoading };
 };
