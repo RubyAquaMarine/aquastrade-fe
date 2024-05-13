@@ -18,6 +18,9 @@ import { formatUnits, parseUnits } from "viem";
   AquasTrade components
 */
 import TokenApprove from "@/app/Components/TokenApprove";
+
+import useSkaleExplorer from "@/app/Hooks/useSkaleExplorer";
+
 import { CHAIN } from "@/app/Utils/config";
 import { PRESALE_ABI } from "@/app/Abi/presale";
 import {
@@ -48,16 +51,11 @@ const Presale: React.FC = () => {
     hash,
   });
 
+  const walletTokenList = useSkaleExplorer(address);
+
   // Presale Contract
   const contractIDO = findContractInfo("presale");
   const [presaleTokenSymbol, setPresaleTokenSymbol] = useState("AQUA");
-
-  // recode : i want to show the Symbols in the UI , not the addresses, then fetch address using symbol
-  // no reason to fetch from contract
-  const { data: inputUSDC } = usePresale("USD", [0]);
-  const { data: inputUSDT } = usePresale("USD", [1]);
-  const { data: inputUSDP } = usePresale("USD", [2]);
-  const { data: inputDAI, isLoading: isUSD } = usePresale("USD", [3]);
 
   const { data: presaleTokenAddress } = usePresale("currentTokenSale", []);
   const { data: isPresalePaused } = usePresale("isPaused", []);
@@ -93,7 +91,6 @@ const Presale: React.FC = () => {
       const token = findTokenFromAddress(presaleTokenAddress);
       setPresaleTokenSymbol(token?.symbol);
       setSymbolsInDropdown(["USDC", "USDT", "USDP", "DAI"]);
-    
 
       if (tokenSupplyRemaining && tokenSupply) {
         percentOfTokens.current =
@@ -158,6 +155,8 @@ const Presale: React.FC = () => {
   const handleMenuState = () => {
     setDDSymbol(!showDropdownSymbol);
   };
+
+  console.log("  walletTokenList ", walletTokenList);
 
   return (
     <div>
@@ -299,18 +298,37 @@ const Presale: React.FC = () => {
             {" "}
             {showDropdownSymbol && inputSymbolsInDropdown.length >= 1 && (
               <div className={styles.dropdownmenu}>
-                {inputSymbolsInDropdown.map((item) => (
-                  <div key={item} onClick={() => handleItemClick(item, 1)}>
-                    <span className={styles.dropdownmenu_item}> {item}</span>{" "}
+                {inputSymbolsInDropdown.map((_item) => (
+                  <div
+                    className={styles.box}
+                    key={_item}
+                    onClick={() => handleItemClick(_item, 1)}
+                  >
+                    <span className={styles.dropdownmenu_item}> {_item}</span>
                     <span className={styles.dropdownmenu_item_image}>
-                      {" "}
                       <Image
-                        src={`/${item}.svg`}
+                        src={`/${_item}.svg`}
                         alt="AquasTrade USD"
                         width={20}
                         height={20}
                         priority
                       />
+                    </span>
+                    <span className={styles.dropdownmenu_item_balance}>
+                      {walletTokenList.length >= 1 &&
+                        walletTokenList.map((_balance, index) => (
+                          <span key={index}>
+                            {_balance?.symbol === _item.toUpperCase() &&
+                              parseFloat(
+                                formatUnits(
+                                  _balance.balance,
+                                  _balance.decimals,
+                                ),
+                              ).toFixed(2)}
+                          </span>
+                        ))}
+
+                      {/** How to add a zero if no balance exists: no balance means the api responsse doesn't have a matching symbol */}
                     </span>
                   </div>
                 ))}

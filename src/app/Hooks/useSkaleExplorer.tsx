@@ -1,7 +1,6 @@
 // @ts-nocheck
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+import React, { useRef } from "react";
 
 interface WALLET {
   address: `0x${string}`;
