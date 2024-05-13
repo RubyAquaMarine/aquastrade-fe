@@ -32,11 +32,6 @@ const Home = ({ children, params }: any) => {
       ) : (
         <div className={styles.container_margin}>
           <Presale></Presale>
-
-          <p>
-            <span className={styles.text_center}> Connected to:</span>{" "}
-          </p>
-          <span className={styles.text_border}>{chain?.name} </span>
         </div>
       )}
     </main>
