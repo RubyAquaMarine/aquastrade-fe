@@ -44,7 +44,9 @@ const TokenBalance = (params: Props) => {
         ) : (
           typeof amount === "bigint" && (
             <span className={styles.container_token_balance}>
-              {formatUnits(amount, Number(params.props?.[1]))}
+              {parseFloat(
+                formatUnits(amount, Number(params.props?.[1])),
+              ).toFixed(8)}
             </span>
           )
         )}

@@ -53,27 +53,18 @@ const CoinFlip = (params: Props) => {
   const { data: bal } = useCoinflip(params?.props?.[0], "balances", [address]);
 
   const array: any[any] = [address, params?.props?.[0]];
-  const { data: tokenAllowance } = useERC20Token(
-    token_address_erc20,
-    "allowance",
-    array,
-  ); // $AQUA
 
   const buttonDescriptions = [params?.props?.[1]];
   const buttonLogicTexts = [`flip ${params?.props?.[1]}`];
 
-  // useEffect(() => {
-  //   if (token_address_erc20) {
-  //     allowancesTest.current = tokenAllowance;
-  //   }
-  // }, [tokenAllowance, token_address_erc20]);
-
   useEffect(() => {
-    setTotalWins(win);
-    setTotalLosses(loss);
-    setTotalBalance(bal);
-    console.log(" Update Win / Loss ", win, loss);
-    console.log(" Update Balance", bal);
+    if (win && loss && bal) {
+      setTotalWins(win);
+      setTotalLosses(loss);
+      setTotalBalance(bal);
+      console.log(" Update Win / Loss ", win, loss);
+      console.log(" Update Balance", bal);
+    }
   }, [win, loss, bal]);
 
   const handleInputChange = (index: number, value: string) => {
@@ -173,10 +164,11 @@ const CoinFlip = (params: Props) => {
                 {" "}
                 <span className={styles.text_center}>Prize Pool: </span>
                 <span className={styles.text_center}>
-                  {" "}
-                  <TokenBalance
-                    props={[token_address_erc20, 18, params?.props?.[0]]}
-                  ></TokenBalance>
+                  {token_address_erc20 && (
+                    <TokenBalance
+                      props={[token_address_erc20, 18, params?.props?.[0]]}
+                    ></TokenBalance>
+                  )}
                 </span>{" "}
               </span>
 

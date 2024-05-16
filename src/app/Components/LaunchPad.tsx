@@ -152,9 +152,7 @@ const LaunchPad: React.FC = () => {
             </span>
           ) : (
             <span>
-              <button className={styles.airdrop} onClick={doTokenLaunch}>
-                Input Values
-              </button>
+              <button className={styles.airdrop}>Input Values</button>
             </span>
           )}
         </div>

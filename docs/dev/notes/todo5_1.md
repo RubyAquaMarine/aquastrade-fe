@@ -17,6 +17,8 @@ clean up
 
 # Major
 
+- parseFloat(formatUnits(bal,dec).toFixed(2-8) in most cases
+
 - Cast : if balance is zero after adding all liquidity , the balance doesn't refresh and stays the same, then switching assets then injects the other asset for both balance values. if value doesn't exist : '0'
 
 - `useGetAmountInQuote` : bug on mulit hop calculations when asset is not 18 decimals such as USDC to BTC : USDP to BTC works,

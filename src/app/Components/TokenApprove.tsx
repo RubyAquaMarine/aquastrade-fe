@@ -115,10 +115,12 @@ const TokenApprove = (params: Props) => {
               ) &&
             typeof allowance_amount === "bigint") ? (
             <span className={styles.token_approve_amount}>
-              {formatUnits(
-                inputTrigger === true ? params.props[2] : allowance_amount,
-                Number(inputToken ? inputToken?.decimal : 18),
-              )}
+              {parseFloat(
+                formatUnits(
+                  inputTrigger === true ? params.props[2] : allowance_amount,
+                  Number(inputToken ? inputToken?.decimal : 18),
+                ),
+              ).toFixed(8)}
             </span>
           ) : (
             <button className={styles.token_approve} onClick={handleApprove}>

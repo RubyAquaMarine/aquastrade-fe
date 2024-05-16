@@ -1,20 +1,10 @@
-# Coinflip
-
-- Need to round the Prize Pool amount to nearest 0.1
-
 # Home
 
-- Make the Height 100vw or 100% to ensure chart scroll doesn't trigger
 - regEx on all inputs : prevent ui crash from entering non number
 
 # Token Approve
 
 - doesn't reset after successful tx. user needs to switch assets ( toggle), or menu toggle to reset the TokenApprove componment
-
-# IDO
-
-- show balances : done
-- toast nofify : add links
 
 # Cast : UX
 
