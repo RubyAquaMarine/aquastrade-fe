@@ -1,11 +1,25 @@
-# AquasOracle
+# AquasFeed
+
+Not an Oracle, since there's only one relayer. Therefore, on-chain DataFeed is more appropiate.
 
 ## ConsumeFeed
 
-```struct Feed {
+read contract function call below:
+
+- `Feeds` or `consumeFeed` : input `_FeedID` : returns `index, router, pooladdress, tokenQoute, tokenBase,DataFeedprice, AmmPoolPrice`
+
+- `consumeFeeds` : returns `index, router, pooladdress, tokenQoute, tokenBase,DataFeedprice, AmmPoolPrice`
+
+- `getPriceWithAddress` : returns `DataFeedprice`
+- `getPoolPriceWithAddress` : returns `AmmPoolPrice`
+
+## Solidity
+
+```solidity
+struct Feed {
         uint256 id;
         address router;
-        address pool;
+        address pool;// LP Token Address
         address quote;
         address base;
         uint256 priceFeed;
@@ -13,13 +27,14 @@
     }
 ```
 
-## https://aquas.trade/api/amm/pools
+## Read
 
-- 0xa8Fe14ed6952dd42B66546AE9322A178d64B99c1
-
-1. `setNftAddress` : to gold nft : `0xcEcd42ff7eCC7b0BfF7a9CF95C6e7ce9aA052d8C`
+- `FeedID` = Total feeds available
+- `FeedMaximum` = Total feeds available
 
 ## addDataFeed
+
+Must be NFT Holder : Gold : `0xcEcd42ff7eCC7b0BfF7a9CF95C6e7ce9aA052d8C`
 
 Example
 
@@ -83,5 +98,3 @@ Example
 ```
 0xF7F957D88768126916dAF3C1705D13C291d2B7D8
 ```
-
-92 900 17285 71493 00000

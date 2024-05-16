@@ -14,5 +14,4 @@ NFTS
 
 DataFeeds
 
-- https://aquas.trade/api/tickers : https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0x012D95449F3FE5E9263A2bA75406b78e83546510?tab=read_contract
-- `consumeFeeds` : output `index, router, pooladdress, tokenQoute, tokenBase,DataFeedprice, AmmPoolPrice`
+- https://aquas.trade/api/tickers

@@ -1,12 +1,7 @@
 "use client";
 
 import { http, createConfig, webSocket, fallback } from "wagmi";
-import {
-  coinbaseWallet,
-  injected,
-  safe,
-  walletConnect,
-} from "wagmi/connectors"; // todo add more wallets here
+import { coinbaseWallet, injected, walletConnect } from "wagmi/connectors"; // todo add more wallets here
 // todo add chains here
 import {
   mainnet,
@@ -40,7 +35,6 @@ export const config = createConfig({
   connectors: [
     injected(),
     coinbaseWallet({ appName: "Aquas.Trade" }),
-    safe(),
     walletConnect({
       isNewChainsStale: true,
       projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID
