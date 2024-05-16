@@ -22,6 +22,13 @@
   padding-right: 0.2rem;
 }
 
+.column_balance {
+  color: #bdb8b8;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  font-size: 0.8rem;
+}
+
 .dropdownmenu {
   text-align: center;
   font-size: 0.8rem;

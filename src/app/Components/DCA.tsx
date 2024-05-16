@@ -30,6 +30,8 @@ import {
   findTokenDecimalsFromSymbol,
 } from "@/app/Utils/findTokens";
 
+import useSkaleExplorer from "@/app/Hooks/useSkaleExplorer";
+
 import TokenApprove from "@/app/Components/TokenApprove";
 
 // need this address for the smart contract
@@ -87,6 +89,9 @@ const DCAInterface: React.FC = () => {
 
   const [inputTokenAmount, setTokenAmount] = useState<string>("");
 
+  const [inputTokenABalance, setTokenABalance] = useState(null);
+  const [inputTokenBBalance, setTokenBBalance] = useState(null);
+
   //wagmi
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
@@ -94,6 +99,8 @@ const DCAInterface: React.FC = () => {
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
+
+  const walletTokenList = useSkaleExplorer(address);
 
   // get contracts or assets
   const contractDCAMulti = findContractInfo("dcamulti");
@@ -107,11 +114,11 @@ const DCAInterface: React.FC = () => {
 
   useEffect(() => {
     if (inputPoolData.length >= 1 && inputPoolSymbol) {
-      console.log("inputPoolSymbol changed ", inputPoolSymbol);
-      console.log(
-        "inputPoolSymbol changed :  inputPoolData ",
-        inputPoolData[0],
-      );
+      // console.log("inputPoolSymbol changed ", inputPoolSymbol);
+      // console.log(
+      //   "inputPoolSymbol changed :  inputPoolData ",
+      //   inputPoolData[0],
+      // );
 
       inputPoolData.map((pool) => {
         pool.symbol === inputPoolSymbol
@@ -122,11 +129,9 @@ const DCAInterface: React.FC = () => {
       });
     }
 
-    console.log("inputPoolSymbol changed token A ", inputTokenA);
-
-    console.log("inputPoolSymbol changed token B", inputTokenB);
-
-    console.log("inputPoolAddress", inputPoolAddress);
+    // console.log("inputPoolSymbol changed token A ", inputTokenA);
+    // console.log("inputPoolSymbol changed token B", inputTokenB);
+    // console.log("inputPoolAddress", inputPoolAddress);
   }, [inputPoolSymbol, inputPoolData]);
 
   // Switching the router should prompt fetching the
@@ -165,6 +170,19 @@ const DCAInterface: React.FC = () => {
       setRouter(routerAddressList[routerID]);
     }
   }, [inputRouterName]);
+
+  useEffect(() => {
+    if (walletTokenList && tokenAddress_a && tokenAddress_b) {
+      // Probably not done
+      const testBalance = handleWalletBalance();
+
+      setTokenABalance(testBalance[0]);
+      setTokenBBalance(testBalance[1]);
+
+      console.log("token A  Balance ", testBalance[0]);
+      console.log("token B  Balance ", testBalance[1]);
+    }
+  }, [walletTokenList, tokenAddress_a, tokenAddress_b]);
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -266,9 +284,28 @@ const DCAInterface: React.FC = () => {
     setInputIsBuying(!inputIsBuying);
   };
 
-  console.log(
-    ` InputSymbolList  ${inputSymbolList}  | inputPoolData ${inputPoolData.toString()}  is buying  ${inputIsBuying} isRouter ${inputRouterAddress} isTokensAddresses ${tokenAddress_a} ${tokenAddress_b}  amounts ${inputTokenAmount}`,
-  );
+  // new :refactor
+  const handleWalletBalance = () => {
+    let saveBalanceA, saveBalanceB;
+    if (tokenAddress_a && tokenAddress_b) {
+      walletTokenList.forEach((element) => {
+        if (
+          element.contractAddress.toUpperCase() === tokenAddress_a.toUpperCase()
+        ) {
+          saveBalanceA = element;
+        }
+      });
+      //----
+      walletTokenList.forEach((element) => {
+        if (
+          element.contractAddress.toUpperCase() === tokenAddress_b.toUpperCase()
+        ) {
+          saveBalanceB = element;
+        }
+      });
+    }
+    return [saveBalanceA, saveBalanceB];
+  };
 
   return (
     <div>
@@ -337,6 +374,37 @@ const DCAInterface: React.FC = () => {
                 checked={inputIsBuying}
                 onChange={handleCheckboxChange}
               />
+            </span>
+          </span>
+
+          {/** Show the wallet balance of the two tokens within the Pair */}
+          <span className={styles.text_center}>
+            <span className={styles.column_balance}>
+              {inputTokenA} {" : "}
+            </span>
+            <span className={styles.column_balance}>
+              {inputTokenABalance &&
+                parseFloat(
+                  formatUnits(
+                    inputTokenABalance.balance,
+                    inputTokenABalance.decimals,
+                  ),
+                ).toFixed(8)}
+            </span>
+          </span>
+
+          <span className={styles.text_center}>
+            <span className={styles.column_balance}>
+              {inputTokenB} {" : "}
+            </span>
+            <span className={styles.column_balance}>
+              {inputTokenBBalance &&
+                parseFloat(
+                  formatUnits(
+                    inputTokenBBalance.balance,
+                    inputTokenBBalance.decimals,
+                  ),
+                ).toFixed(8)}
             </span>
           </span>
 
