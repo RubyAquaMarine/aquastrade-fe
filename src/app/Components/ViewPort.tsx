@@ -29,7 +29,7 @@ const TextSizeAdjuster: React.FC<TextSizeAdjusterProps> = ({
 
   return (
     <div>
-      <p
+      <span
         style={{
           fontSize: isVertical ? `${text_size}px` : `${text_size_to}px`,
           maxWidth: isVertical ? "300px" : "99vw",
@@ -37,7 +37,7 @@ const TextSizeAdjuster: React.FC<TextSizeAdjusterProps> = ({
       >
         {/* Your text content */}
         {text}
-      </p>
+      </span>
     </div>
   );
 };

@@ -7,6 +7,7 @@
   font-family: bPl;
   src: url("../app/Fonts/Regular.woff2");
 }
+
 @font-face {
   font-family: bPl-light;
   src: url("../app/Fonts/Plex-Light.otf");
@@ -20,20 +21,6 @@
 @font-face {
   font-family: bPl-medium;
   src: url("../app/Fonts/Medium.otf");
-}
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
 }
 
 body {
@@ -51,12 +38,13 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: white;
+  color: #0d0d10;
+}
+
+[data-theme="dark"] body {
+  background-color: #0d0d10;
+  color: white;
 }
 
 body::-webkit-scrollbar {
@@ -66,16 +54,6 @@ body::-webkit-scrollbar {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
   }
 }
 

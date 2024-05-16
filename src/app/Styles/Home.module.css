@@ -5,6 +5,7 @@
 .container_positioning {
   z-index: 40;
   width: 99vw;
+
   height: fit-content;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -20,26 +21,22 @@
 }
 
 .text_container {
-  max-width: 420px;
-  margin-top: 25px;
+  max-width: 380px;
+
   color: aliceblue;
+
+  width: 99vw;
+  height: 80vh;
 }
 
 .text_title {
-  font-size: 2rem;
   max-width: 200px;
 }
 
 .text_body {
-  padding-left: 2rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  font-size: 2rem;
+  text-align: left;
+  padding: 1rem;
+
   font-weight: 400;
   max-width: 180px;
-  border-bottom: 1px solid #475384;
-}
-
-.tradingViewText {
-  font-size: 1rem;
 }

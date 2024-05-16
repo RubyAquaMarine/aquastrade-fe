@@ -1,3 +1,5 @@
+Now, you have to specify where components should execute, which ones are Client Components, which ones are server, and how they work together
+
 # SSR : Server side components
 
 Pros:

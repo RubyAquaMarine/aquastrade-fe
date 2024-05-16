@@ -1,7 +1,13 @@
 "use client";
 import { ThemeProvider } from "next-themes";
+import { type ThemeProviderProps } from "next-themes/dist/types";
+
 import React, { useEffect, useState } from "react";
-export default function HandleThemes({ children }: any) {
+
+export default function HandleThemes({
+  children,
+  ...props
+}: ThemeProviderProps) {
   const [isMounted, setIsMounted] = useState(false);
   // This useEffect hook ensures that the component is only mounted on the client side
   useEffect(() => {
@@ -12,5 +18,5 @@ export default function HandleThemes({ children }: any) {
     return <>{children}</>;
   }
 
-  return <ThemeProvider enableSystem={false}>{children}</ThemeProvider>;
+  return <ThemeProvider {...props}>{children}</ThemeProvider>;
 }

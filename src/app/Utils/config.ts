@@ -18,6 +18,11 @@ export const poolsAtSushi = poolListSushi;
 // AQUAS.TRADE
 export const contractAddresses = [
   {
+    id: 333,
+    name: "treasury",
+    addr: "0x4f01C97785a62Cd0f4a33993B090DADe0F44e4F4",
+  },
+  {
     id: 0,
     name: "aqua-router",
     addr: "0x18425939A31E35DB05358Ba4Bc85d1075ed015E5",

@@ -40,7 +40,7 @@ export const config = createConfig({
   connectors: [
     injected(),
     coinbaseWallet({ appName: "Aquas.Trade" }),
-    safe(),
+
     walletConnect({
       isNewChainsStale: true,
       projectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID

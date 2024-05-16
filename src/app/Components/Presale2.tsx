@@ -100,14 +100,25 @@ const Presale: React.FC = () => {
     }
   }, [presaleTokenAddress, tokenSupplyRemaining, tokenSupply]);
 
-  // setPresaleTokenSymbol
+  useEffect(() => {
+    if (contractCallDataConfirmed) {
+      const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
+      notify(isLink);
+    }
+  }, [contractCallDataConfirmed, hash]);
 
-  // console.log(" inputToken Addresses: ", inputUSDAddress);
-
-  const notify = () =>
-    toast.success(`Token Created ${presaleTokenSymbol} from 🌊 AquasTrade!`, {
+  const CustomToastWithLink = (_url: string) => (
+    <div>
+      <Link href={_url} target="_blank">
+        IDO Token Purchased: Tx Hash on 🌊 AquasTrade
+      </Link>
+    </div>
+  );
+  // `${_message} on 🌊 AquasTrade! [tx] Hash: ${_link}`
+  const notify = (_link: string) =>
+    toast.info(CustomToastWithLink(_link), {
       position: "bottom-left",
-      autoClose: 4000,
+      autoClose: 8000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -116,12 +127,6 @@ const Presale: React.FC = () => {
       theme: "dark",
       transition: Slide,
     });
-
-  useEffect(() => {
-    if (contractCallDataConfirmed) {
-      notify();
-    }
-  }, [contractCallDataConfirmed]);
 
   const doTokenLaunch = () => {
     console.log(" Deploy Token with CA: ", contractIDO?.addr);

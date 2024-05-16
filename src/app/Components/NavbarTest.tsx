@@ -9,6 +9,8 @@ import Dropdown from "react-multilevel-dropdown";
 import { ThemeToggle } from "@/app/Components/ui/ThemeToggle";
 //     <ThemeToggle></ThemeToggle>
 
+import { NavigationMenuDemo } from "@/app/Components/NavBarDemo";
+
 const Navbar = () => {
   return (
     <header className={styles.header}>
@@ -35,11 +37,7 @@ const Navbar = () => {
           </div>
 
           <div className={styles.float_center}>
-            <ul className={styles.navListWide}>
-              <li className={styles.navItem}>
-                <Link href="/dashboard">Dashboard</Link>
-              </li>
-            </ul>
+            <NavigationMenuDemo></NavigationMenuDemo>
           </div>
 
           <div className={styles.dropdownmenuBlue}>

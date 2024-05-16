@@ -1,4 +1,0 @@
-# IDO
-
-- show balances : done
-
