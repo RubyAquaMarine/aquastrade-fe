@@ -64,7 +64,7 @@ const DCAInterface: React.FC = () => {
   const [inputPoolData, setPoolData] = useState([]);
 
   // allow switching from different AMM Routers
-  const [inputRouter, setRouter] = useState<string>(
+  const [inputRouterAddress, setRouter] = useState<string>(
     "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61",
   );
   const [inputRouterName, setRouterName] = useState<string>("Aquas.Trade");
@@ -223,7 +223,7 @@ const DCAInterface: React.FC = () => {
     // fixed bug : BUYING TOKEN QUOTE means you are using the decimals from token B for the input amount
     const dec = inputIsBuying ? token_decimal_b : token_decimal_a;
     const data = [
-      inputRouter,
+      inputRouterAddress,
       tokenAddress_a,
       tokenAddress_b,
 
@@ -267,7 +267,7 @@ const DCAInterface: React.FC = () => {
   };
 
   console.log(
-    ` InputSymbolList  ${inputSymbolList}  | inputPoolData ${inputPoolData.toString()}  is buying  ${inputIsBuying} isRouter ${inputRouter} isTokensAddresses ${tokenAddress_a} ${tokenAddress_b}  amounts ${inputTokenAmount}`,
+    ` InputSymbolList  ${inputSymbolList}  | inputPoolData ${inputPoolData.toString()}  is buying  ${inputIsBuying} isRouter ${inputRouterAddress} isTokensAddresses ${tokenAddress_a} ${tokenAddress_b}  amounts ${inputTokenAmount}`,
   );
 
   return (
@@ -353,25 +353,47 @@ const DCAInterface: React.FC = () => {
 
             <span className={styles.text_center_sm}>Approved:</span>
 
-            {contractDCAMulti && inputTokenAmount ? (
-              <TokenApprove
-                props={[
-                  "allowance",
-                  inputIsBuying ? tokenAddress_b : tokenAddress_a,
-                  parseUnits(
-                    inputTokenAmount,
-                    inputIsBuying ? token_decimal_b : token_decimal_a,
-                  ),
-                  [
-                    address,
-                    contractDCAMulti.addr,
-                    inputIsBuying ? token_decimal_b : token_decimal_a,
-                  ],
-                ]}
-              ></TokenApprove>
-            ) : (
-              <span> </span>
-            )}
+            {/** figure out some locig that allows adding one AQUA to the approval amount when selling AQUA for the QUOTE asset  */}
+
+            {contractDCAMulti &&
+              inputTokenAmount &&
+              tokenAddress_b !== token_address_aqua && (
+                <TokenApprove
+                  props={[
+                    "allowance",
+                    inputIsBuying ? tokenAddress_b : tokenAddress_a,
+                    parseUnits(
+                      inputTokenAmount,
+                      inputIsBuying ? token_decimal_b : token_decimal_a,
+                    ),
+                    [
+                      address,
+                      contractDCAMulti.addr,
+                      inputIsBuying ? token_decimal_b : token_decimal_a,
+                    ],
+                  ]}
+                ></TokenApprove>
+              )}
+            {/** adding one AQUA to the approval amount when selling AQUA for the QUOTE asset  */}
+            {contractDCAMulti &&
+              inputTokenAmount &&
+              tokenAddress_b === token_address_aqua && (
+                <TokenApprove
+                  props={[
+                    "allowance",
+                    inputIsBuying ? tokenAddress_b : tokenAddress_a,
+                    parseUnits(
+                      inputTokenAmount,
+                      inputIsBuying ? token_decimal_b : token_decimal_a,
+                    ) + BigInt(1000000000000000000n),
+                    [
+                      address,
+                      contractDCAMulti.addr,
+                      inputIsBuying ? token_decimal_b : token_decimal_a,
+                    ],
+                  ]}
+                ></TokenApprove>
+              )}
 
             {contractDCAMulti &&
             inputIsBuying &&

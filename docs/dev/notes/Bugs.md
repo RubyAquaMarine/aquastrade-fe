@@ -17,20 +17,17 @@
 
 # DCA
 
-- Must add 1 AQUA to approve and the Transfer Amounts , otherwise SC fails
 - get the same LastPoolPrice calculations within the UI
 - after selecting the POOL : show the POOL price below the input
 - - ( no styling: Price: 123.00 )
-- add 1 more AQUA when using DEX: AQUA and when buying QUOTE (selling aqua for other token)
+
 
 # Wallet Address switching on Token List page
 
 # AMM :
 
 - <TokenBalance> remove all and use the api explorer to speed up ui
+- - remove the onchain fetch for token balances and use the direct api from explorer
 
 - tokens out when removing liquidity " user amount in relation to whole pool " reserves and total lp token amounts
-
-- select symbols should load the balances of all tokens : make function to shorten the wallet balance strings.
-- remove the onchain fetch for token balances and use the direct api from explorer
 - BUYING TOKEN QUOTE means you are using the decimals from token B for the input amount
