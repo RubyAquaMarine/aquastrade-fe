@@ -68,12 +68,6 @@ const ConnectWallet = () => {
     }
   };
 
-  console.log("Debug Wagmi Connectors", connectors);
-
-  console.log("Debug Wagmi Connectors", filteredConnectors);
-
-  console.log("Debug Wagmi Connectors", uniqueList);
-
   return (
     <div className={styles.connectButtons}>
       {!isConnected && status !== "idle" && (

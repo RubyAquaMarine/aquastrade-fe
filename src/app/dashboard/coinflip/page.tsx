@@ -4,7 +4,11 @@ import Link from "next/link";
 import { useAccount } from "wagmi";
 import CoinFlip from "@/app/Components/CoinFlip";
 import styles from "@/app/Styles/Coinflip.module.css";
-import { CHAIN, contractAddresses } from "@/app/Utils/config";
+import { CHAIN } from "@/app/Utils/config";
+import { findContractInfo } from "@/app/Utils/findTokens";
+
+const aqua_coinflip_address = findContractInfo("coinflip-aqua")?.addr;
+
 const Home = () => {
   const { address, isConnected, chain } = useAccount();
 
@@ -39,7 +43,7 @@ const Home = () => {
           <span className={styles.midText_sm}>AQUA </span>
 
           {isConnected && (
-            <CoinFlip props={[contractAddresses[4].addr, "AQUA"]}></CoinFlip>
+            <CoinFlip props={[aqua_coinflip_address, "AQUA"]}></CoinFlip>
           )}
         </div>
       )}

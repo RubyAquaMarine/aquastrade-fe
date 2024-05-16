@@ -14,7 +14,6 @@ import { formatUnits, parseEther, parseUnits } from "viem";
 import { ToastContainer, Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { findTokenFromAddress, findContractInfo } from "@/app/Utils/findTokens";
 // Make components for better rendering functionality: move hooks into these new components
 import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
@@ -36,12 +35,16 @@ import AMMPools from "@/app/Components/AMMPools";
 
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 import { useFactory, useGetAmountInQuote } from "@/app/Hooks/useAMM";
-import { tokenAddresses, contractAddresses } from "@/app/Utils/config";
+import { tokenAddresses } from "@/app/Utils/config";
+import { findContractInfo } from "@/app/Utils/findTokens";
+
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
 import useSkaleExplorer from "@/app/Hooks/useSkaleExplorer";
 
 const ROUTER_AQUADEX = findContractInfo("router")?.addr;
+//
+const FACTORY_AQUADEX = findContractInfo("factory")?.addr;
 
 const SwapAmm = () => {
   // Save state without rendering
@@ -96,11 +99,10 @@ const SwapAmm = () => {
 
   const walletTokenList = useSkaleExplorer(address);
 
-  const { data: poolAddress } = useFactory(
-    contractAddresses[2].addr,
-    "getPair",
-    [tokenAAddress.current, tokenBAddress.current],
-  );
+  const { data: poolAddress } = useFactory(FACTORY_AQUADEX, "getPair", [
+    tokenAAddress.current,
+    tokenBAddress.current,
+  ]);
 
   const swap_path_logos1 = findTokenLogoFromAddress(swap_path[0]);
   const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
@@ -593,7 +595,9 @@ const SwapAmm = () => {
                           {" "}
                           {_balance.contractAddress.toUpperCase() ===
                             _token.addr.toUpperCase() &&
-                            formatUnits(_balance.balance, _balance.decimals)}
+                            parseFloat(
+                              formatUnits(_balance.balance, _balance.decimals),
+                            ).toFixed(8)}
                         </span>
                       ))}
                     </div>
@@ -626,7 +630,9 @@ const SwapAmm = () => {
                       {" "}
                       {_balance.contractAddress.toUpperCase() ===
                         tokenAAddress.current.toUpperCase() &&
-                        formatUnits(_balance.balance, _balance.decimals)}
+                        parseFloat(
+                          formatUnits(_balance.balance, _balance.decimals),
+                        ).toFixed(8)}
                     </span>
                   ))}
               </span>
@@ -721,10 +727,12 @@ const SwapAmm = () => {
                               {" "}
                               {_balance.contractAddress.toUpperCase() ===
                                 _token.addr.toUpperCase() &&
-                                formatUnits(
-                                  _balance.balance,
-                                  _balance.decimals,
-                                )}
+                                parseFloat(
+                                  formatUnits(
+                                    _balance.balance,
+                                    _balance.decimals,
+                                  ),
+                                ).toFixed(8)}
                             </span>
                           ))}
                         </span>
@@ -945,10 +953,12 @@ const SwapAmm = () => {
                               {" "}
                               {_balance.contractAddress.toUpperCase() ===
                                 _token.addr.toUpperCase() &&
-                                formatUnits(
-                                  _balance.balance,
-                                  _balance.decimals,
-                                )}
+                                parseFloat(
+                                  formatUnits(
+                                    _balance.balance,
+                                    _balance.decimals,
+                                  ),
+                                ).toFixed(8)}
                             </span>
                           ))}
                         </div>
@@ -1239,7 +1249,9 @@ const SwapAmm = () => {
                       {" "}
                       {_balance.contractAddress.toUpperCase() ===
                         poolAddress.toUpperCase() &&
-                        formatUnits(_balance.balance, _balance.decimals)}
+                        parseFloat(
+                          formatUnits(_balance.balance, _balance.decimals),
+                        ).toFixed(8)}
                     </span>
                   ))}
               </span>
@@ -1311,7 +1323,12 @@ const SwapAmm = () => {
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
                               _token.addr.toUpperCase() &&
-                              formatUnits(_balance.balance, _balance.decimals)}
+                              parseFloat(
+                                formatUnits(
+                                  _balance.balance,
+                                  _balance.decimals,
+                                ),
+                              ).toFixed(8)}
                           </span>
                         ))}
                       </div>
