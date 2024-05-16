@@ -16,6 +16,14 @@ const ConnectWallet = () => {
   const { address, isConnected, chain, isConnecting } = useAccount();
   const { chains, switchChain } = useSwitchChain();
 
+  // for some reason there are now duplicates within the connectors , it will show two metamask icons
+  const filteredConnectors = new Set();
+  const uniqueList = connectors.filter((element) => {
+    const isDuplicate = filteredConnectors.has(element.id);
+    filteredConnectors.add(element.id);
+    return !isDuplicate;
+  });
+
   // sfuel
   const getDataCallBack = () => {
     console.log("getDataCallBack : address ? ", address);
@@ -60,6 +68,12 @@ const ConnectWallet = () => {
     }
   };
 
+  console.log("Debug Wagmi Connectors", connectors);
+
+  console.log("Debug Wagmi Connectors", filteredConnectors);
+
+  console.log("Debug Wagmi Connectors", uniqueList);
+
   return (
     <div className={styles.connectButtons}>
       {!isConnected && status !== "idle" && (
@@ -103,8 +117,8 @@ const ConnectWallet = () => {
       ) : (
         <>
           {error && <div>Error: {error.message}</div>}
-          {connectors.map((connector) => (
-            <div key={connector.uid}>
+          {uniqueList.map((connector) => (
+            <div key={connector.id}>
               <ul>
                 <li className={styles.connectorButton}>
                   <button
