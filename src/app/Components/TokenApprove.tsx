@@ -118,7 +118,7 @@ const TokenApprove = (params: Props) => {
               {parseFloat(
                 formatUnits(
                   inputTrigger === true ? params.props[2] : allowance_amount,
-                  Number(inputToken ? inputToken?.decimal : 18),
+                  Number(inputToken ? inputToken?.decimals : 18),
                 ),
               ).toFixed(8)}
             </span>

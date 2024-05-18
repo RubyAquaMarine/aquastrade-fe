@@ -7,7 +7,7 @@ import { useAMMRouter, useAMMPairs } from "@/app/Hooks/useAMM";
 
 import { findTokenFromAddress, findContractInfo } from "@/app/Utils/findTokens";
 
-const ROUTER_AQUADEX = findContractInfo("router")?.addr;
+const ROUTER_AQUADEX = findContractInfo("router")?.address;
 
 interface Props {
   amountA: string;

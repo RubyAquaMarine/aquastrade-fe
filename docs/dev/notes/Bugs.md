@@ -11,9 +11,7 @@
 - Cast : approve token B logic doesn't work correctly. should use the GetAmountsOut value
 - after adding liquidity, the tokenB approved amount is asking for approval again even though its already been approved
 - after adding LP : refetch the Balances
-- size of users position compared to the reserves : % whale_size
-- AmmPools component. work on this. if no pool exists, notify user to create a pool "loading pool data..."
-- new feature: click on the wallet-balance to insert `max` balance amount
+- `% whale_size` size of users position compared to the reserves :
 
 # Pricing
 

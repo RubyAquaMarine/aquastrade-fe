@@ -170,7 +170,7 @@ const Navbar = () => {
                   </Dropdown.Item>
                   <Dropdown.Item className={styles.popup_item}>
                     <Link
-                      href="https://github.com/rubyaquamarine"
+                      href="https://github.com/aquastrade"
                       target="_blank"
                       className={styles.popup_item_sub_link}
                     >
@@ -188,7 +188,7 @@ const Navbar = () => {
                   </Dropdown.Item>
                   <Dropdown.Item className={styles.popup_item_bottom}>
                     <Link
-                      href="https://twitter.com/Aquastrade"
+                      href="https://x.com/Aquastrade"
                       target="_blank"
                       className={styles.popup_item_sub_link}
                     >

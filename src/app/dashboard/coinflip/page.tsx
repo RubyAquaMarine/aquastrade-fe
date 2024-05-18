@@ -7,7 +7,7 @@ import styles from "@/app/Styles/Coinflip.module.css";
 import { CHAIN } from "@/app/Utils/config";
 import { findContractInfo } from "@/app/Utils/findTokens";
 
-const aqua_coinflip_address = findContractInfo("coinflip-aqua")?.addr;
+const aqua_coinflip_address = findContractInfo("coinflip-aqua")?.address;
 
 const Home = () => {
   const { address, isConnected, chain } = useAccount();

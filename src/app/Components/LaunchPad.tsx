@@ -76,11 +76,11 @@ const LaunchPad: React.FC = () => {
       tokenMax,
     );
 
-    console.log(" Deploy Token with CA: ", contractMemeCreator?.addr);
+    console.log(" Deploy Token with CA: ", contractMemeCreator?.address);
 
     writeContract({
       abi: MEME_CREATOR_ABI,
-      address: contractMemeCreator?.addr,
+      address: contractMemeCreator?.address,
       functionName: "deployToken",
       args: [tokenName, tokenSymbol, BigInt(tokenDecimal), BigInt(tokenMax)],
     });

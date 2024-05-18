@@ -45,7 +45,7 @@ function Oracle({ name }: ReadProps) {
 
   if (typeof smartConrtactValue?.data === "object") {
     valueOfString = smartConrtactValue?.data;
-    valueOfString = formatUnits(valueOfString[0], valueOfString[1]);
+    valueOfString = formatUnits(valueOfString[0], Number(valueOfString[1]));
     console.log(`Read Contract ${name}`, valueOfString);
   }
 

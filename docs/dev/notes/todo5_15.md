@@ -1,3 +1,30 @@
+# add new tokens automatically
+
+- `createTokenList.ts` : creates a token list based on the AquasFeed DB, which means , new tokens are added automatically. to ui ( almost done :)
+- todo : redeploy to aquasFeed and memeCreator smartContracts
+- todo : fetch explorer for new token details `useSkaleExplorer`
+
+- memeCreator : as tokens are created, amm pool and datafeed will be created.
+- - the frontend relies on the SC data and not on outside/centralized DB , Frontend will be responsive to any latest information
+
+how to update the tokenList ( must enable any token listing: how to handle logos? ). or get the available symbols via the AquasFeed
+
+- - `PoolAssetQuote` and `PoolAssetBase`
+- new `getAllBaseAssets` , and then filter out duplicates. Fetch this data everytime user connects wallet :
+- - can I still use the const tokenList information as a base, then add on top (if any new pools/assets were created)
+
+# Load Data when user connects
+
+- TokenList -rpc 2 calls
+- sFuel - rpc - 1 call
+- Token Balances ( block explorer api ) - 1 call
+
+amm UI relies on the tokenList assets : not the Pool:Addresses
+
+need to redesign stuff `poolsAtAqua` : hardcoded , but can be loaded via consumeFeeds from `AquasFeed`
+
+- actually everything that the frontend needs is alread within this 1 function call ^^^^^^
+
 # UI
 
 - https://ui.shadcn.com/

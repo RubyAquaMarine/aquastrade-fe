@@ -18,5 +18,5 @@ export function useToastSuccess(text: string) {
       progress: undefined,
       theme: "dark",
     });
-  }, []);
+  }, [text]);
 }

@@ -6,7 +6,7 @@ import { formatUnits, parseUnits } from "viem";
 import { useAMMRouter } from "@/app/Hooks/useAMM";
 import styles from "@/app/Styles/AMM.module.css";
 import { findTokenFromAddress, findContractInfo } from "@/app/Utils/findTokens";
-const ROUTER_AQUADEX = findContractInfo("router")?.addr;
+const ROUTER_AQUADEX = findContractInfo("router")?.address;
 
 interface Props {
   amountA: string;
@@ -59,8 +59,8 @@ const GetAmountsOut = (params: Props) => {
             placeholder="Select Token"
             value={
               !amount_out[2]
-                ? formatUnits(amount_out[1], params.props[4])
-                : formatUnits(amount_out[2], params.props[4])
+                ? formatUnits(amount_out[1], Number(params.props[4]))
+                : formatUnits(amount_out[2], Number(params.props[4]))
             }
           />
         )

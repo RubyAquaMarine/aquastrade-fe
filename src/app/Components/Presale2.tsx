@@ -19,7 +19,7 @@ import { formatUnits, parseUnits } from "viem";
 */
 import TokenApprove from "@/app/Components/TokenApprove";
 
-import useSkaleExplorer from "@/app/Hooks/useSkaleExplorer";
+import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
 
 import { CHAIN } from "@/app/Utils/config";
 import { PRESALE_ABI } from "@/app/Abi/presale";
@@ -72,7 +72,7 @@ const Presale: React.FC = () => {
   const { data: tokenSupply } = useERC20Token(aqua_addr, "totalSupply", []); // $AQUA
 
   const { data: tokenSupplyRemaining } = useERC20Token(aqua_addr, "balanceOf", [
-    contractIDO?.addr,
+    contractIDO?.address,
   ]); // $AQUA
 
   const loadTokenPresaleInfo = findTokenFromAddress(aqua_addr);
@@ -129,15 +129,15 @@ const Presale: React.FC = () => {
     });
 
   const doTokenLaunch = () => {
-    console.log(" Deploy Token with CA: ", contractIDO?.addr);
+    console.log(" Deploy Token with CA: ", contractIDO?.address);
 
     writeContract({
       abi: PRESALE_ABI,
-      address: contractIDO?.addr,
+      address: contractIDO?.address,
       functionName: "buy",
       args: [
-        loadTokenUSDInfo?.addr,
-        parseUnits(inputTokenAmount, loadTokenUSDInfo?.decimal),
+        loadTokenUSDInfo?.address,
+        parseUnits(inputTokenAmount, loadTokenUSDInfo?.decimals),
       ],
     });
   };
@@ -237,7 +237,7 @@ const Presale: React.FC = () => {
                 <span className={styles.text_border_bottom}>
                   {" "}
                   <Link
-                    href={`https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/${loadTokenPresaleInfo?.addr}`}
+                    href={`https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/${loadTokenPresaleInfo?.address}`}
                     target={"_blank"}
                   >
                     Contract Details
@@ -246,7 +246,7 @@ const Presale: React.FC = () => {
 
                 <li>
                   <span className={styles.text_sm}> CA :</span>{" "}
-                  {loadTokenPresaleInfo.addr}{" "}
+                  {loadTokenPresaleInfo.address}{" "}
                 </li>
 
                 <li>
@@ -327,7 +327,7 @@ const Presale: React.FC = () => {
                               parseFloat(
                                 formatUnits(
                                   _balance.balance,
-                                  _balance.decimals,
+                                  Number(_balance.decimals),
                                 ),
                               ).toFixed(2)}
                           </span>
@@ -354,8 +354,8 @@ const Presale: React.FC = () => {
               props={[
                 "allowance",
                 inputUSDAddress,
-                parseUnits(inputTokenAmount, loadTokenUSDInfo?.decimal),
-                [address, contractIDO?.addr],
+                parseUnits(inputTokenAmount, loadTokenUSDInfo?.decimals),
+                [address, contractIDO?.address],
               ]}
             />
           ) : (

@@ -1,6 +1,6 @@
 // @ts-nocheck
 "use client";
-import { BigNumber, ethers } from "ethers";
+import { formatUnits } from "viem";
 import { useAccount, useSwitchChain } from "wagmi";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -142,10 +142,7 @@ const TokenList = ({ params }: any) => {
                     <div>Name: {item.name}</div>
                     <div>
                       Balance:{" "}
-                      {ethers.utils.formatUnits(
-                        item.balance,
-                        Number(item.decimals),
-                      )}
+                      {formatUnits(item.balance, Number(item.decimals))}
                     </div>
                     <div>Symbol: {item.symbol}</div>
                     <div>Decimal: {item.decimals}</div>

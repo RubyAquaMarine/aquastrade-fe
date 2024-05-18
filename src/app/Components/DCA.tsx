@@ -30,13 +30,14 @@ import {
   findTokenDecimalsFromSymbol,
 } from "@/app/Utils/findTokens";
 
-import useSkaleExplorer from "@/app/Hooks/useSkaleExplorer";
+import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
+import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
 
 import TokenApprove from "@/app/Components/TokenApprove";
 
 // need this address for the smart contract
 const routerAddressList: string[] = uniswapRouters.map((router) => {
-  return router.addr;
+  return router.address;
 });
 
 // show this to the user : when changed, use the router address
@@ -110,6 +111,9 @@ const DCAInterface: React.FC = () => {
   const token_decimal_a = findTokenDecimalsFromSymbol(inputTokenA);
   const token_decimal_b = findTokenDecimalsFromSymbol(inputTokenB);
 
+  const price = useAquaFeed("getPoolPriceWithAddress", [inputPoolAddress]);
+  console.log("POP UP HERE", price);
+
   // when inputPoolSymbol changes,  need to update the inputPoolAddress
 
   useEffect(() => {
@@ -124,7 +128,7 @@ const DCAInterface: React.FC = () => {
         pool.symbol === inputPoolSymbol
           ? setTokenA(pool.tokenA) &
             setTokenB(pool.tokenB) &
-            setPoolAddress(pool.addr)
+            setPoolAddress(pool.address)
           : "0";
       });
     }
@@ -258,7 +262,7 @@ const DCAInterface: React.FC = () => {
       case 0:
         writeContract({
           abi: DCA_ABI,
-          address: contractDCAMulti.addr,
+          address: contractDCAMulti.address,
           functionName: "SubmitDCAOrder",
           args: data,
         });
@@ -273,7 +277,7 @@ const DCAInterface: React.FC = () => {
     // todo : need to figure out the LastPoolPrice value (show in UI first)
     writeContract({
       abi: DCA_ABI,
-      address: contractDCAMulti.addr,
+      address: contractDCAMulti.address,
       functionName: "DeleteOrder",
       args: data,
     });
@@ -436,7 +440,7 @@ const DCAInterface: React.FC = () => {
                     ),
                     [
                       address,
-                      contractDCAMulti.addr,
+                      contractDCAMulti.address,
                       inputIsBuying ? token_decimal_b : token_decimal_a,
                     ],
                   ]}
@@ -456,7 +460,7 @@ const DCAInterface: React.FC = () => {
                     ) + BigInt(1000000000000000000n),
                     [
                       address,
-                      contractDCAMulti.addr,
+                      contractDCAMulti.address,
                       inputIsBuying ? token_decimal_b : token_decimal_a,
                     ],
                   ]}
@@ -478,7 +482,7 @@ const DCAInterface: React.FC = () => {
                       "allowance",
                       token_address_aqua,
                       parseEther("1.0"),
-                      [address, contractDCAMulti.addr, 18],
+                      [address, contractDCAMulti.address, 18],
                     ]}
                   ></TokenApprove>{" "}
                 </span>
@@ -496,7 +500,7 @@ const DCAInterface: React.FC = () => {
                     "allowance",
                     token_address_aqua,
                     parseEther("1.0"),
-                    [address, contractDCAMulti.addr, 18],
+                    [address, contractDCAMulti.address, 18],
                   ]}
                 ></TokenApprove>
               </span>
@@ -587,6 +591,14 @@ const DCAInterface: React.FC = () => {
                     className={styles.input_token_address}
                   />
                 </span>{" "}
+                {/** */}
+                <span className={styles.text_center_sm}>
+                  {" "}
+                  PoolPrice:{" "}
+                  {!price?.isLoading &&
+                    price?.data &&
+                    formatUnits(price?.data, 18)}{" "}
+                </span>
               </p>
             ) : (
               <p> </p>
