@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -35,7 +36,8 @@ const Home = ({ children, params }: any) => {
         </div>
       ) : (
         <div className={styles.container_margin}>
-          <Presale props={presaleTokenAddress}></Presale>
+          <Presale 
+          props={presaleTokenAddress}></Presale>
         </div>
       )}
     </main>

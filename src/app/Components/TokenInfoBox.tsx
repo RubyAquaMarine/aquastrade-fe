@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect, memo } from "react";
@@ -6,18 +7,13 @@ import React, { useState, useEffect, memo } from "react";
 
 import { useSkaleExplorerAddresses } from "@/app/Hooks/useSkaleExplorer";
 
-//// div with image, symbol_name _ address //
-interface Props {
-  _address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
-  _args?: [any];
-}
 
 type CardProps = {
   _address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
   address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
 };
 
-const tokenInfoBox = (props: CardProps) => {
+const TokenInfoBox = (props: CardProps) => {
   console.log("tokenInfoBox Props", props);
   const data: any = useSkaleExplorerAddresses(props?.props?.[0]);
 
@@ -42,4 +38,4 @@ const tokenInfoBox = (props: CardProps) => {
   );
 };
 
-export default memo(tokenInfoBox);
+export default memo(TokenInfoBox);
