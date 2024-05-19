@@ -77,9 +77,6 @@ const TokenList = ({ params }: any) => {
       <h4 className={styles.text_sm}>
         Showing all you{"'"}re tokens in one place
       </h4>
-      <p className={styles.text_link}>
-        <Link href="/user"> Multi Address Version? </Link>
-      </p>
       <p>
         <span className={styles.text_center}> Connected to:</span>{" "}
       </p>

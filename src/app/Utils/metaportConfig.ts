@@ -7,7 +7,7 @@ export const AquaConfig: interfaces.MetaportConfig = {
   },
   skaleNetwork: "mainnet",
   openButton: true,
-  openOnLoad: true,
+  openOnLoad: false,
   mainnetEndpoint: "https://eth.llamarpc.com",
   chains: [
     "mainnet",

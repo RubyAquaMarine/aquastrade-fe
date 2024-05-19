@@ -1,3 +1,37 @@
+# Double check everything
+
+- sfuel - ok
+- amm - everything worked (better UX : after tx : reset UI values to 0 :retrigger approvals)
+- dashboard : still ugly
+- coinflip : ui doesn't update after flip : win/loss
+- nft marketplace needs mockup :
+- ido
+- airdrop
+- etc
+
+- - Improvements :
+
+---
+
+Token List
+
+- scrollable list
+- search
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
+---
+
 # add new tokens automatically
 
 - `createTokenList.ts` : creates a token list based on the AquasFeed DB, which means , new tokens are added automatically. to ui ( almost done :)

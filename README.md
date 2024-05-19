@@ -7,7 +7,7 @@
 - ERC20 Airdrop: [read docs](/docs/Airdrop.md)
 - Perps: coming soon
 - Games: [coinflip](https://aquas.trade/dashboard/coinflip)
-- NFT Market Place: coming after [NFT Sales](https://aquas.trade/nft)
+- NFT Market Place: coming after [NFT Sales](https://aquas.trade/dashboard/nft)
 - sFuel automatic distribution
 
 ## tech

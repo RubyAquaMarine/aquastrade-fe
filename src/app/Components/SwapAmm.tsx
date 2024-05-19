@@ -1375,7 +1375,7 @@ const SwapAmm = () => {
           <p className={styles.center}>
             {" "}
             <button className={styles.button_field}>
-              <Link href="/nft">Buy NFT</Link>
+              <Link href="/dashboard/nft">Buy NFT</Link>
             </button>
           </p>
         </div>

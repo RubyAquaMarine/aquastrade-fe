@@ -7,7 +7,7 @@ import Link from "next/link";
 const SwapLifi = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-20">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+      <div className="max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <span className={styles.textBold}> Lifi </span>
 
         <span className={styles.textSpace}>Multi-chain token swap</span>

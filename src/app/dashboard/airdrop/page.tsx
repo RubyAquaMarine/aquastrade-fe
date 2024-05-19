@@ -57,18 +57,3 @@ const Home = ({ children, params }: any) => {
 };
 
 export default Home;
-
-/*
-
- {isNFTHolder && isNFTHolder.current?.children[0]?.id === "PASS" ? (
-            <div id="airdrop"></div>
-          ) : (
-            <div id="FAIL" className={styles.input_container}>
-              <Link href="/nft">
-                {" "}
-                <b>Back </b>(Buy any NFT to unlock features)
-              </Link>
-            </div>
-          )}
-
-      */

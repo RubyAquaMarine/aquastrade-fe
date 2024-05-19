@@ -79,7 +79,7 @@ const NFTHolderPresale = () => {
         <div id="FAIL">
           {nftHolder === false ? (
             <span className={styles.input_container}>
-              <Link href="/nft">
+              <Link href="/dashboard/nft">
                 {" "}
                 <b>Back </b>(Buy any NFT to unlock features)
               </Link>

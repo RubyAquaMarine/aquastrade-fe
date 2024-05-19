@@ -7,7 +7,6 @@ import React, { useState, useEffect, memo } from "react";
 
 import { useSkaleExplorerAddresses } from "@/app/Hooks/useSkaleExplorer";
 
-
 type CardProps = {
   _address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
   address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
