@@ -11,7 +11,7 @@ import { useAccount } from "wagmi";
 
 // Custom stuff
 
-import { useSkaleExplorerAddresses } from "@/app/Hooks/useSkaleExplorer";
+import TokenInfoBox from "@/app/Components/TokenInfoBox";
 
 import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
 
@@ -34,9 +34,10 @@ const Home = () => {
 
   const objectFeeds: any = useAquaFeed("consumeFeeds")?.data;
 
-  const data: any = useSkaleExplorerAddresses(
-    savedToken ? savedToken : ("" as unknown as WALLET),
-  );
+  // make this a component that makes div with image, symbol_name _ address
+  // const data: any = useSkaleExplorerAddresses(
+  //   savedToken ? savedToken : ("" as unknown as WALLET),
+  // );
 
   useEffect(() => {
     if (savedToken) {
@@ -46,13 +47,13 @@ const Home = () => {
     }
   }, [savedToken]);
 
-  useEffect(() => {
-    if (data?.address) {
-      const newArray: any = symbolList;
-      newArray.push(data);
-      setSymbolList(newArray);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data?.address) {
+  //     const newArray: any = symbolList;
+  //     newArray.push(data);
+  //     setSymbolList(newArray);
+  //   }
+  // }, [data]);
 
   useEffect(() => {
     if (objectFeeds && address && isConnected) {
@@ -108,7 +109,6 @@ const Home = () => {
   }, [objectFeeds, address, isConnected]);
 
   console.log(" debug again ", symbolList);
-  console.log(" debug again ", data);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -181,6 +181,15 @@ const Home = () => {
             ))}
         </ul>
       </div>
+
+      {savedToken ? (
+        <span>
+          {" "}
+          <TokenInfoBox props={[savedToken, savedToken]}> </TokenInfoBox>{" "}
+        </span>
+      ) : (
+        <span> </span>
+      )}
 
       <div className={styles.container}></div>
     </main>

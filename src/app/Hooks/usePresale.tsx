@@ -8,7 +8,7 @@ const contract = findContractInfo("presale");
 export const usePresale = (functionName: string, args?: [any]) => {
   const { data, isError, isLoading } = useReadContract({
     abi: PRESALE_ABI,
-    address: contract.addr,
+    address: contract.address,
     functionName: functionName as unknown as undefined,
     args: args,
   });
@@ -20,7 +20,7 @@ export const usePresale = (functionName: string, args?: [any]) => {
   //   data,
   //   isLoading,
   //   isError,
-  //   contract?.addr,
+  //   contract?.address,
   // );
   return { data, isError, isLoading };
 };

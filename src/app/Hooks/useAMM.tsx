@@ -132,7 +132,7 @@ export const useGetAmountInQuote = (
   ];
 
   const { data: swap_out } = useAMMRouter(
-    routerContract.addr,
+    routerContract.address,
     "quote",
     data as any,
   );

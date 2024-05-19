@@ -18,6 +18,7 @@ import { formatUnits, parseUnits } from "viem";
   AquasTrade components
 */
 import TokenApprove from "@/app/Components/TokenApprove";
+import PresaleTokenInfo from "@/app/Components/PresaleTokenInfo";
 /*
   AquasTrade hooks
 */
@@ -39,10 +40,15 @@ import {
   findTokenFromAddress,
 } from "@/app//Utils/findTokens";
 
-const Presale: React.FC = () => {
-  const percentOfTokens = useRef();
+type Props = {
+  _address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
+  address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
+};
 
-  const [presaleTokenSymbol, setPresaleTokenSymbol] = useState("AQUA");
+const Presale: React.FC = (props: Props) => {
+  const presaleTokenAddress = props?.props;
+
+  const percentOfTokens = useRef();
 
   // dropdown menu state
   const [showDropdownSymbol, setDDSymbol] = useState<boolean>(false);
@@ -60,6 +66,8 @@ const Presale: React.FC = () => {
 
   // HOOKS
 
+  const { data: isPresalePaused } = usePresale("isPaused", []);
+
   //wagmi
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
@@ -70,37 +78,25 @@ const Presale: React.FC = () => {
 
   const walletTokenList = useSkaleExplorer(address);
 
-  const { data: presaleTokenAddress } = usePresale("currentTokenSale", []);
-  const { data: isPresalePaused } = usePresale("isPaused", []);
-  const { data: maxAllocation } = usePresale("maxAllocation", []);
-  const { data: priceInUSD } = usePresale("price", []);
-  const { data: presaleOwner } = usePresale("presaleOwner", []);
-
   // UTILS
 
   // Presale Contract
   const contractPresale = findContractInfo("presale");
 
-  // fix this ,  not hardcode
-  const aqua_addr = findTokenAddressFromSymbol(
-    presaleTokenSymbol ? presaleTokenSymbol : "AQUA",
-  );
-  const { data: tokenSupply } = useERC20Token(aqua_addr, "totalSupply", []); // $AQUA
+  // remove the slider into a componenet and pass down props (addresses and values )
+  const { data: tokenSupply } = useERC20Token(
+    presaleTokenAddress,
+    "totalSupply",
+    [],
+  ); // $AQUA
 
-  const { data: tokenSupplyRemaining } = useERC20Token(aqua_addr, "balanceOf", [
-    contractPresale?.address,
-  ]); // $AQUA
-
-  const loadTokenPresaleInfo = findTokenFromAddress(aqua_addr);
+  const { data: tokenSupplyRemaining } = useERC20Token(
+    presaleTokenAddress,
+    "balanceOf",
+    [contractPresale?.address],
+  ); // $AQUA
 
   const loadTokenUSDInfo = findTokenFromAddress(inputUSDAddress);
-
-  useEffect(() => {
-    if (presaleTokenAddress) {
-      const token = findTokenFromAddress(presaleTokenAddress);
-      setPresaleTokenSymbol(token?.symbol);
-    }
-  }, [presaleTokenAddress]);
 
   useEffect(() => {
     if (tokenSupplyRemaining && tokenSupply) {
@@ -166,111 +162,16 @@ const Presale: React.FC = () => {
     setDDSymbol(!showDropdownSymbol);
   };
 
-  // console.log("  walletTokenList ", walletTokenList);
-  // console.log("   showDropdown Menu for USD asset selection",  showDropdownSymbol);
-
-  // console.log("     inputSymbolsInDropdown",    inputSymbolsInDropdown.current);
-
-  // console.log("     contractPresale",   contractPresale);
-
-  // console.log("    inputUSDAddress",   inputUSDAddress);
-
-  // console.log("      presaleTokenAddress",     presaleTokenAddress);
+  console.log("Render Presale", props);
 
   return (
     <div>
       {address && chain && chain.id === CHAIN.id ? (
         <div>
-          {presaleTokenAddress ? "" : "Loading"}{" "}
-          <div className={styles.container_flex}>
-            {loadTokenPresaleInfo ? (
-              <ul>
-                <li>
-                  <span className={styles.text_sm}> Name: </span>{" "}
-                  {loadTokenPresaleInfo.name}{" "}
-                </li>
+          {presaleTokenAddress ? "" : "Loading"}
 
-                <li>
-                  <span className={styles.text_sm}> Symbol :</span>{" "}
-                  {loadTokenPresaleInfo.symbol}{" "}
-                </li>
+          <PresaleTokenInfo props={presaleTokenAddress}></PresaleTokenInfo>
 
-                <li>
-                  <span className={styles.text_sm}> Max Supply:</span>
-                  {tokenSupply ? formatUnits(tokenSupply, 18) : "0.0"}
-                </li>
-
-                <li>
-                  <span className={styles.text_sm}> Presale Live:</span>
-                  {isPresalePaused === false ? (
-                    <span> LFG</span>
-                  ) : (
-                    <span>Coming Soon</span>
-                  )}
-                </li>
-
-                <li>
-                  <span className={styles.text_sm}> Max Allocation : </span>
-                  {maxAllocation ? (
-                    <span>
-                      {" "}
-                      {formatUnits(maxAllocation, 18)}{" "}
-                      {loadTokenPresaleInfo.symbol}{" "}
-                    </span>
-                  ) : (
-                    <span> </span>
-                  )}
-                </li>
-
-                <li>
-                  <span className={styles.text_sm}>
-                    {" "}
-                    Price per {loadTokenPresaleInfo.symbol} : ${" "}
-                  </span>
-                  {priceInUSD ? (
-                    <span> {formatUnits(priceInUSD, 18)}</span>
-                  ) : (
-                    <span> 0.0</span>
-                  )}
-                </li>
-
-                <li>
-                  <span className={styles.text_sm}> Max USD Amount : $</span>
-
-                  {priceInUSD && maxAllocation ? (
-                    <span>
-                      {" "}
-                      {Number(formatUnits(maxAllocation, 18)) *
-                        Number(formatUnits(priceInUSD, 18))}
-                    </span>
-                  ) : (
-                    <span> 0.0</span>
-                  )}
-                </li>
-
-                <span className={styles.text_border_bottom}>
-                  {" "}
-                  <Link
-                    href={`https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/${loadTokenPresaleInfo?.address}`}
-                    target={"_blank"}
-                  >
-                    Contract Details
-                  </Link>{" "}
-                </span>
-
-                <li>
-                  <span className={styles.text_sm}> CA :</span>{" "}
-                  {loadTokenPresaleInfo.address}{" "}
-                </li>
-
-                <li>
-                  <span className={styles.text_sm}> CO :</span> {presaleOwner}{" "}
-                </li>
-              </ul>
-            ) : (
-              <span></span>
-            )}
-          </div>
           <div className={styles.container_flex_tokens}>
             {" "}
             <span className={styles.text_border_bottom}>
@@ -285,9 +186,10 @@ const Presale: React.FC = () => {
             <span>
               {" "}
               {tokenSupplyRemaining &&
+                presaleTokenAddress &&
                 formatUnits(tokenSupplyRemaining, 18)}{" "}
             </span>
-            {percentOfTokens.current && tokenSupply && loadTokenPresaleInfo ? (
+            {percentOfTokens.current && tokenSupply && presaleTokenAddress ? (
               <Slider
                 aria-label="Small steps"
                 defaultValue={100 - percentOfTokens.current}
@@ -376,10 +278,10 @@ const Presale: React.FC = () => {
           ) : (
             <span> </span>
           )}
-          {presaleTokenSymbol && isPresalePaused === false ? (
+          {isPresalePaused === false ? (
             <span className={styles.container_margin}>
               <button className={styles.button_presale} onClick={doTokenLaunch}>
-                Buy {loadTokenPresaleInfo.symbol}
+                Buy Token
               </button>
             </span>
           ) : (

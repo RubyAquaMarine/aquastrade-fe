@@ -12,6 +12,20 @@
   padding: 0.2rem 0.3rem;
 }
 
+.border {
+  padding: 5rem;
+  background-color: #683d3d;
+  border-radius: 12px;
+  border: 1px solid #2196f3;
+}
+
+.borderA {
+  padding: 1rem;
+  background-color: #492874;
+  border-radius: 12px;
+  border: 1px solid #2196f3;
+}
+
 .text_style_border {
   margin-bottom: 10px;
   justify-content: center;
