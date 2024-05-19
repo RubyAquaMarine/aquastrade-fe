@@ -4,7 +4,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useAccount } from "wagmi";
-import { formatUnits } from "viem";
+
 import PresaleAdmin from "@/app/Components/PresaleAdmin";
 import { useNFTs } from "@/app/Hooks/useAMM";
 import {
@@ -79,7 +79,7 @@ const NFTHolderPresale = () => {
         <div id="FAIL">
           {nftHolder === false ? (
             <span className={styles.input_container}>
-              <Link href="/nft">
+              <Link href="/dashboard/nft">
                 {" "}
                 <b>Back </b>(Buy any NFT to unlock features)
               </Link>

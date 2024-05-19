@@ -177,7 +177,7 @@ const AirDrop: React.FC = () => {
     ) {
       writeContract({
         abi: AIRDROP_ABI,
-        address: contractAirdrop?.addr,
+        address: contractAirdrop?.address,
         functionName: "doAirdrop",
         args: [token as `0x${string}`, addresses as `0x${string}`[], amounts],
       });
@@ -270,7 +270,7 @@ const AirDrop: React.FC = () => {
                   "allowance",
                   token,
                   setTotalAmounts.current,
-                  [address, contractAirdrop?.addr],
+                  [address, contractAirdrop?.address],
                 ]}
               />
             ) : (

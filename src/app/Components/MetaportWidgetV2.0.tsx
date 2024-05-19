@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Metaport } from "skale_metaport";
 import "skale_metaport/dist/style.css";
-import { AquaConfig } from "../Utils/metaportNetworkConfigV2";
+import { AquaConfig } from "@/app/Utils/metaportConfig";
 
 const MetaportWidgetV2 = () => {
   return (

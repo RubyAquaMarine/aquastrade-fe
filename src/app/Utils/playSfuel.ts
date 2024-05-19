@@ -2,7 +2,7 @@
 
 /*
 
- The task here is to import a private key to fire off sfuel to users with zero sfuel within 
+ The task here is to import a private key then fire off sfuel to users with zero sfuel within 
  their balance upon switching networks to europa : onConnectWallet : check : fire off sfuel 
  before user lands on amm page or dashboard
 
@@ -30,7 +30,7 @@ async function privatekeySendsFuel(params: `0x${string}`) {
 
   const hash = await client.writeContract({
     abi: SFUEL_ABI,
-    address: faucetContract?.addr,
+    address: faucetContract?.address,
     args: [params],
     functionName: "transferSFUEL",
   });

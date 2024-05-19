@@ -5,6 +5,18 @@ import { useAccount, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/NFT.module.css";
 import { MARKETPLACE_AQUADEX, CHAIN } from "@/app/Utils/config";
 
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+  NavigationMenuViewport,
+} from "@/app/Components/ui/NavigationMenu";
+
 const Home = () => {
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
@@ -31,32 +43,45 @@ const Home = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h4 className={styles.topText}>List Any ERC721 - 0% Marketplace Fee</h4>
-      <h1 className={styles.midText}>NFT Market Place</h1>
-      <p>
-        <b>MarketPlace launches after all NFT sales</b>
-      </p>
-      <p>
-        <Link href="/nft">
-          <button className={styles.toggleButton}>Buy NFT </button>
-        </Link>
-      </p>
+      <div className="max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <span> </span>
+        <span> NFT MarketPlace Coming Soon</span>
+        <span className={styles.text_style_bottom}>
+          {" "}
+          <Link href="/dashboard/metaport"> Top-up</Link>{" "}
+        </span>
+        <span> L1 Gas gwei: </span>{" "}
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Trade</NavigationMenuTrigger>
+
+              <NavigationMenuContent>
+                <Link href="/swap/amm" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Swap Tokens
+                  </NavigationMenuLink>
+                </Link>
+
+                <Link href="/perp/ethusdt" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Perpetuals
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link href="/docs" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Buy NFT
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>{" "}
+      </div>
     </main>
   );
 };
 export default Home;
-
-/*
- <h4 className={styles.topText}>
-        Limited Collection - 0% Fee Marketplace - Utility driven{" "}
-      </h4>
-      <h1 className={styles.midText}>NFT Market Place</h1>
-      <p>
-        <Link href="/nft">
-          <button className={styles.toggleButton}>Buy NFT </button>
-        </Link>
-      </p>
-      <p>
-        <b>MarketPlace launches after all NFT sales</b>
-      </p>
-*/

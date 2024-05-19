@@ -13,7 +13,7 @@ import {
   useWaitForTransactionReceipt,
   useSwitchChain,
 } from "wagmi";
-import { formatUnits, parseUnits } from "viem";
+import { parseUnits } from "viem";
 /*
   AquasTrade components
 */
@@ -77,15 +77,15 @@ const PresaleAdmin: React.FC = () => {
   }, [contractCallDataConfirmed]);
 
   const doTokenLaunch = () => {
-    console.log(" Deploy Token with CA: ", contractIDO?.addr);
+    console.log(" Deploy Token with CA: ", contractIDO?.address);
 
     writeContract({
       abi: PRESALE_ABI,
-      address: contractIDO?.addr,
+      address: contractIDO?.address,
       functionName: "buy",
       args: [
-        loadTokenUSDInfo?.addr,
-        parseUnits(inputTokenAmount, loadTokenUSDInfo?.decimal),
+        loadTokenUSDInfo?.address,
+        parseUnits(inputTokenAmount, loadTokenUSDInfo?.decimals),
       ],
     });
   };

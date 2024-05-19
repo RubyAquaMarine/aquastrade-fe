@@ -5,7 +5,7 @@ export const findTokenAddressFromSymbol = (_symbol: string) => {
   if (tokenAddresses) {
     tokenAddresses.forEach((element) => {
       if (_symbol === element?.symbol) {
-        save = element?.addr;
+        save = element?.address;
       }
     });
   }
@@ -19,13 +19,20 @@ export const findTokenFromAddress = (_address: string) => {
   let save;
   if (tokenAddresses) {
     tokenAddresses.forEach((element) => {
-      if (_address === element?.addr) {
+      if (_address === element?.address) {
         save = element;
       }
     });
   }
   if (save) {
     return save;
+  } else {
+    console.log(
+      "Token Not Found within Aquas.Trade Ecosystem as of yet",
+      _address,
+    );
+    const failed: any = "false";
+    return failed;
   }
 };
 
@@ -47,7 +54,7 @@ export const findTokenLogoFromAddress = (_address: string) => {
   let save;
   if (tokenAddresses) {
     tokenAddresses.forEach((element) => {
-      if (_address === element?.addr) {
+      if (_address === element?.address) {
         save = element?.logo;
       }
     });
@@ -77,7 +84,7 @@ export const findTokenDecimalsFromSymbol = (_symbol: string) => {
   if (tokenAddresses) {
     tokenAddresses.forEach((element) => {
       if (_symbol === element.symbol) {
-        save = element.decimal;
+        save = element?.decimals;
       }
     });
   }

@@ -40,11 +40,11 @@ import { findContractInfo } from "@/app/Utils/findTokens";
 
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
-import useSkaleExplorer from "@/app/Hooks/useSkaleExplorer";
+import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
 
-const ROUTER_AQUADEX = findContractInfo("router")?.addr;
+const ROUTER_AQUADEX = findContractInfo("router")?.address;
 //
-const FACTORY_AQUADEX = findContractInfo("factory")?.addr;
+const FACTORY_AQUADEX = findContractInfo("factory")?.address;
 
 const SwapAmm = () => {
   // Save state without rendering
@@ -207,7 +207,7 @@ const SwapAmm = () => {
     const bigPerc = parseUnits(_percentage, 0);
     const math = (bigAmount * bigPerc) / BigInt(10000);
     // then back to string for UI
-    const amount = formatUnits(math, dec);
+    const amount = formatUnits(math, Number(dec));
     if (amount) {
       setAmountA(amount);
     } else {
@@ -594,9 +594,12 @@ const SwapAmm = () => {
                         <span key={index} className={styles.amount_balance}>
                           {" "}
                           {_balance.contractAddress.toUpperCase() ===
-                            _token.addr.toUpperCase() &&
+                            _token.address.toUpperCase() &&
                             parseFloat(
-                              formatUnits(_balance.balance, _balance.decimals),
+                              formatUnits(
+                                _balance.balance,
+                                Number(_balance.decimals),
+                              ),
                             ).toFixed(8)}
                         </span>
                       ))}
@@ -631,7 +634,10 @@ const SwapAmm = () => {
                       {_balance.contractAddress.toUpperCase() ===
                         tokenAAddress.current.toUpperCase() &&
                         parseFloat(
-                          formatUnits(_balance.balance, _balance.decimals),
+                          formatUnits(
+                            _balance.balance,
+                            Number(_balance.decimals),
+                          ),
                         ).toFixed(8)}
                     </span>
                   ))}
@@ -726,11 +732,11 @@ const SwapAmm = () => {
                             <span key={index} className={styles.amount_balance}>
                               {" "}
                               {_balance.contractAddress.toUpperCase() ===
-                                _token.addr.toUpperCase() &&
+                                _token.address.toUpperCase() &&
                                 parseFloat(
                                   formatUnits(
                                     _balance.balance,
-                                    _balance.decimals,
+                                    Number(_balance.decimals),
                                   ),
                                 ).toFixed(8)}
                             </span>
@@ -952,11 +958,11 @@ const SwapAmm = () => {
                             <span key={index} className={styles.amount_balance}>
                               {" "}
                               {_balance.contractAddress.toUpperCase() ===
-                                _token.addr.toUpperCase() &&
+                                _token.address.toUpperCase() &&
                                 parseFloat(
                                   formatUnits(
                                     _balance.balance,
-                                    _balance.decimals,
+                                    Number(_balance.decimals),
                                   ),
                                 ).toFixed(8)}
                             </span>
@@ -1090,10 +1096,10 @@ const SwapAmm = () => {
                             <span key={index} className={styles.amount_balance}>
                               {" "}
                               {_balance.contractAddress.toUpperCase() ===
-                                _token.addr.toUpperCase() &&
+                                _token.address.toUpperCase() &&
                                 formatUnits(
                                   _balance.balance,
-                                  _balance.decimals,
+                                  Number(_balance.decimals),
                                 )}
                             </span>
                           ))}
@@ -1219,8 +1225,11 @@ const SwapAmm = () => {
                           <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
-                              _token.addr.toUpperCase() &&
-                              formatUnits(_balance.balance, _balance.decimals)}
+                              _token.address.toUpperCase() &&
+                              formatUnits(
+                                _balance.balance,
+                                Number(_balance.decimals),
+                              )}
                           </span>
                         ))}
                       </div>
@@ -1250,7 +1259,10 @@ const SwapAmm = () => {
                       {_balance.contractAddress.toUpperCase() ===
                         poolAddress.toUpperCase() &&
                         parseFloat(
-                          formatUnits(_balance.balance, _balance.decimals),
+                          formatUnits(
+                            _balance.balance,
+                            Number(_balance.decimals),
+                          ),
                         ).toFixed(8)}
                     </span>
                   ))}
@@ -1322,11 +1334,11 @@ const SwapAmm = () => {
                           <span key={index} className={styles.amount_balance}>
                             {" "}
                             {_balance.contractAddress.toUpperCase() ===
-                              _token.addr.toUpperCase() &&
+                              _token.address.toUpperCase() &&
                               parseFloat(
                                 formatUnits(
                                   _balance.balance,
-                                  _balance.decimals,
+                                  Number(_balance.decimals),
                                 ),
                               ).toFixed(8)}
                           </span>
@@ -1363,7 +1375,7 @@ const SwapAmm = () => {
           <p className={styles.center}>
             {" "}
             <button className={styles.button_field}>
-              <Link href="/nft">Buy NFT</Link>
+              <Link href="/dashboard/nft">Buy NFT</Link>
             </button>
           </p>
         </div>

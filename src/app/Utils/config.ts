@@ -20,68 +20,68 @@ export const contractAddresses = [
   {
     id: 333,
     name: "treasury",
-    addr: "0x4f01C97785a62Cd0f4a33993B090DADe0F44e4F4",
+    address: "0x4f01C97785a62Cd0f4a33993B090DADe0F44e4F4",
   },
   {
     id: 0,
     name: "aqua-router",
-    addr: "0x18425939A31E35DB05358Ba4Bc85d1075ed015E5",
+    address: "0x18425939A31E35DB05358Ba4Bc85d1075ed015E5",
   },
   {
     id: 1,
     name: "router",
-    addr: "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61",
+    address: "0x698EA133CBA3BACD4aA6405411d8e8c1726D5f61",
   },
   {
     id: 2,
     name: "factory",
-    addr: "0xc318a82CB7c2B0faf7e355BB8F285016956aBF55",
+    address: "0xc318a82CB7c2B0faf7e355BB8F285016956aBF55",
   },
   {
     id: 3,
     name: "marketplace-eth",
-    addr: "0xc44A8E52A835c77932eB8747bD7E979c27308660",
+    address: "0xc44A8E52A835c77932eB8747bD7E979c27308660",
   },
   {
     id: 4,
     name: "coinflip-aqua",
-    addr: "0xaCD323A49dC2Dd404551Ac9BfEB3e7Ef12aA3015",
+    address: "0xaCD323A49dC2Dd404551Ac9BfEB3e7Ef12aA3015",
   },
   {
     id: 5,
     name: "coinflip-skl",
-    addr: "0xD83BF4A2F43FE6ABeFa679791dc2eFcA98eB3060",
+    address: "0xD83BF4A2F43FE6ABeFa679791dc2eFcA98eB3060",
   },
   {
     id: 6,
     name: "airdrop",
-    addr: "0x980FA9c3F0837E9E03F5ab255D0fB938Acee26c1",
+    address: "0x980FA9c3F0837E9E03F5ab255D0fB938Acee26c1",
   },
   {
     id: 7,
     name: "faucet",
-    addr: "0x453495a7bD8943530FdcBAEE6749795F1f07dBD3",
+    address: "0x453495a7bD8943530FdcBAEE6749795F1f07dBD3",
   },
   {
     id: 8,
     name: "memecreator",
-    addr: "0xbB794A1F6C13E604bFEf1b56FbE1e02d1674f4f2",
+    address: "0xbB794A1F6C13E604bFEf1b56FbE1e02d1674f4f2",
   },
 
   {
     id: 9,
     name: "dcamulti",
-    addr: "0x9683ADC7FD56b81F1eb70040B30864a822C330f2",
+    address: "0x9683ADC7FD56b81F1eb70040B30864a822C330f2",
   },
   {
     id: 10,
-    name: "aquasfeed",
-    addr: "0x012D95449F3FE5E9263A2bA75406b78e83546510",
+    name: "aquafeed",
+    address: "0xe204717f1986513d121fC75DddEd806Af61550b5",
   },
   {
     id: 11,
     name: "presale",
-    addr: "0xA88b25EBb3cb5B0f08124e8FFBc6249aE026cB07",
+    address: "0xA88b25EBb3cb5B0f08124e8FFBc6249aE026cB07",
   },
 ] as const;
 // WIP : remove any CA: below

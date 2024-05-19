@@ -1,6 +1,6 @@
 // @ts-nocheck
 "use client";
-import { BigNumber, ethers } from "ethers";
+import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -77,9 +77,6 @@ const TokenList = ({ params }: any) => {
       <h4 className={styles.text_sm}>
         Showing all you{"'"}re tokens in one place
       </h4>
-      <p className={styles.text_link}>
-        <Link href="/user"> Multi Address Version? </Link>
-      </p>
       <p>
         <span className={styles.text_center}> Connected to:</span>{" "}
       </p>
@@ -122,10 +119,7 @@ const TokenList = ({ params }: any) => {
                       <div>Name: {item.name}</div>
                       <div>
                         Balance:{" "}
-                        {ethers.utils.formatUnits(
-                          item.balance,
-                          Number(item.decimals),
-                        )}
+                        {formatUnits(item.balance, Number(item.decimals))}
                       </div>
                       <div>Symbol: {item.symbol}</div>
                       <div>Decimal: {item.decimals}</div>

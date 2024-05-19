@@ -4,7 +4,7 @@ http://localhost:3000/dashboard/coinflip
 - user flow
 
 1. first render gets win, losses, balance
-2. approve token to smart contract (need to add this functionality : exists on /nft page.tsx)
+2. approve token to smart contract (need to add this functionality : exists on /dashboard/nft page.tsx)
 3. user enters amount and clicks flip => MM prompt
 4. onConfirmedTX : fetch win, losses, balance.
 

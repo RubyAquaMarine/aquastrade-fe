@@ -2,7 +2,7 @@
 "use client";
 
 import { useReadContract } from "wagmi";
-import { formatUnits, parseEther, parseUnits } from "viem";
+import { parseUnits } from "viem";
 import { MARKETPACE_ABI } from "@/app/Abi/europaMarketPlace";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
@@ -132,7 +132,7 @@ export const useGetAmountInQuote = (
   ];
 
   const { data: swap_out } = useAMMRouter(
-    routerContract.addr,
+    routerContract.address,
     "quote",
     data as any,
   );

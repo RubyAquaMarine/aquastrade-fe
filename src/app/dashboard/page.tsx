@@ -19,9 +19,9 @@ const Dashbaord = ({ children, params }: any) => {
   useEffect(() => {
     setAddr(address as string);
   }, [address]);
-
+  // min-h-screen
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex  flex-col items-center justify-between p-24">
       <span className={styles.midText}> NFT-powered DEX, Market Place, </span>
 
       <span className={styles.top_text}> and leveraged trading on the</span>
@@ -52,55 +52,6 @@ const Dashbaord = ({ children, params }: any) => {
         </div>
       ) : (
         <div className={styledContainer.container}>
-          <span className={styles.p_styled}>
-            <ul>
-              <li className={styles.text_heading}>Features</li>
-              <li className={styles.text_button}>
-                <Link href="/dashboard/metaport">Bridge</Link>
-              </li>
-              <li className={styles.text_button}>
-                <Link href="/dashboard/games">Games</Link>
-              </li>
-              <li className={styles.text_button}>
-                {" "}
-                <Link href={`/dashboard/marketplace`}>Market Place</Link>
-              </li>{" "}
-              <li className={styles.text_button}>
-                {" "}
-                <Link href={`/nft`}>NFTs</Link>
-              </li>{" "}
-              <li className={styles.text_button}>
-                <Link href="/dashboard/airdrop">Token Airdrop</Link>
-              </li>
-              <li className={styles.text_button}>
-                {" "}
-                <Link href={`/dashboard/create`}>Token Create</Link>
-              </li>
-              <li className={styles.text_button}>
-                {" "}
-                <Link href={`/dashboard/presale`}>Token IDO</Link>
-              </li>
-              <li className={styles.text_button}>
-                {" "}
-                <Link href={`/user/${address}`}>Token List</Link>
-              </li>
-              <li className={styles.text_heading}>Trade</li>
-              <li className={styles.text_button}>
-                {" "}
-                <Link href={`/swap/amm`}>Tokens</Link>
-              </li>
-              <li className={styles.text_button}>
-                {" "}
-                <Link href={`/perp`}>Perps</Link>
-              </li>
-              <li className={styles.text_heading}>Trade 3rd Party</li>
-              <li className={styles.text_button}>
-                {" "}
-                <Link href={`/swap/lifi`}>Lifi</Link>
-              </li>
-            </ul>
-          </span>
-
           {!chain ? (
             <span className={styles.text_style_border}>
               <ul>
@@ -166,3 +117,54 @@ export default Dashbaord;
 // not block,  inline-flex, contents, :flow-root;
 
 // maybe  display:inline-block;
+
+/*
+   <span className={styles.p_styled}>
+            <ul>
+              <li className={styles.text_heading}>Features</li>
+              <li className={styles.text_button}>
+                <Link href="/dashboard/metaport">Bridge</Link>
+              </li>
+              <li className={styles.text_button}>
+                <Link href="/dashboard/games">Games</Link>
+              </li>
+              <li className={styles.text_button}>
+                {" "}
+                <Link href={`/dashboard/marketplace`}>Market Place</Link>
+              </li>{" "}
+              <li className={styles.text_button}>
+                {" "}
+                <Link href={`/dashboard/nft`}>NFTs</Link>
+              </li>{" "}
+              <li className={styles.text_button}>
+                <Link href="/dashboard/airdrop">Token Airdrop</Link>
+              </li>
+              <li className={styles.text_button}>
+                {" "}
+                <Link href={`/dashboard/create`}>Token Create</Link>
+              </li>
+              <li className={styles.text_button}>
+                {" "}
+                <Link href={`/dashboard/presale`}>Token IDO</Link>
+              </li>
+              <li className={styles.text_button}>
+                {" "}
+                <Link href={`/user/${address}`}>Token List</Link>
+              </li>
+              <li className={styles.text_heading}>Trade</li>
+              <li className={styles.text_button}>
+                {" "}
+                <Link href={`/swap/amm`}>Tokens</Link>
+              </li>
+              <li className={styles.text_button}>
+                {" "}
+                <Link href={`/perp`}>Perps</Link>
+              </li>
+              <li className={styles.text_heading}>Trade 3rd Party</li>
+              <li className={styles.text_button}>
+                {" "}
+                <Link href={`/swap/lifi`}>Lifi</Link>
+              </li>
+            </ul>
+          </span>
+*/

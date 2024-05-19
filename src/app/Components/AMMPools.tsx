@@ -9,7 +9,7 @@ import { useAMMPairs, useFactory } from "@/app/Hooks/useAMM";
 
 import styles from "@/app/Styles/AMM.module.css";
 
-const FACTORY = findContractInfo("factory")?.addr;
+const FACTORY = findContractInfo("factory")?.address;
 
 interface Props {
   _address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
@@ -28,8 +28,8 @@ const AmmPools = (props: Props) => {
   const erc20_out = findTokenFromSymbol(props?.props?.[6]);
 
   const { data: poolAddress } = useFactory(FACTORY, "getPair", [
-    erc20_in?.addr,
-    erc20_out?.addr,
+    erc20_in?.address,
+    erc20_out?.address,
   ]);
 
   // can be used for the amm pool reserves
@@ -61,29 +61,29 @@ const AmmPools = (props: Props) => {
             Pool Reserves
           </Link>
 
-          {erc20_in?.addr === sym0 && (
+          {erc20_in?.address === sym0 && (
             <div>
               <p className={styles.pool_balance}>
                 {/**Token  */}
                 {props?.props?.[5]}:{" "}
-                {formatUnits(reserves?.[0], Number(erc20_in?.decimal))}
+                {formatUnits(reserves?.[0], Number(erc20_in?.decimals))}
               </p>
               <p className={styles.pool_balance}>
                 {props?.props?.[6]}:{" "}
-                {formatUnits(reserves?.[1], Number(erc20_out?.decimal))}
+                {formatUnits(reserves?.[1], Number(erc20_out?.decimals))}
               </p>
             </div>
           )}
-          {erc20_in?.addr !== sym0 && (
+          {erc20_in?.address !== sym0 && (
             <div>
               {" "}
               <p className={styles.pool_balance}>
                 {props?.props?.[6]}:{" "}
-                {formatUnits(reserves?.[0], Number(erc20_out?.decimal))}
+                {formatUnits(reserves?.[0], Number(erc20_out?.decimals))}
               </p>
               <p className={styles.pool_balance}>
                 {props?.props?.[5]}:{" "}
-                {formatUnits(reserves?.[1], Number(erc20_in?.decimal))}
+                {formatUnits(reserves?.[1], Number(erc20_in?.decimals))}
               </p>
             </div>
           )}

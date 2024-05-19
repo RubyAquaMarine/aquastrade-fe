@@ -91,7 +91,13 @@ const Home = ({ children, params }: any) => {
               </div>
             </ChartComponent>
           ) : (
-            <div>check blockers</div>
+            <div>
+              <span> check blockers: no internet ? wss</span>
+
+              <span>
+                <ConnectWallet></ConnectWallet>{" "}
+              </span>
+            </div>
           )}
         </div>
       )}
