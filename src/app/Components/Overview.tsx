@@ -1,42 +1,24 @@
 "use client";
-
-import React, { useRef, useEffect, useState, memo } from "react";
+import React, { useMemo } from "react";
 
 import TableDataFeed from "@/app/Components/table/TableDataFeed";
 
-import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
-
-// 5 Columns
-export type DataFeed = {
+type DataFeedV = {
   id: string;
-  pool: string;
-  pricePool: string;
-  priceFeed: string;
+  poolAddress: string;
+  poolPrice: string;
+  feedPrice: string;
   assets: string[];
-  quote: string[];
-  base: string[];
 };
 
-function Overview() {
-  const [position, setPosition] = useState<DataFeed[]>();
-
-  const objectFeeds: any = useAquaFeed("consumeFeeds")?.data;
-
-  // reformat the data by taking the token_addresses , and returning the symbols to the user instead
-  // the symbols will be stored in the assets
-
-  useEffect(() => {
-    if (objectFeeds && objectFeeds?.length > 1) {
-      setPosition(objectFeeds);
-      console.log(" Render | objectFeeds", objectFeeds);
-    }
-  }, [objectFeeds]);
-
+const Overview = (params: DataFeedV[]) => {
+  const newArray = Object.values(params);
+  const data: DataFeedV[] = useMemo(() => newArray, []);
   return (
     <div>
-      <TableDataFeed {...position}></TableDataFeed>
+      <TableDataFeed {...data}></TableDataFeed>
     </div>
   );
-}
+};
 
-export default memo(Overview);
+export default Overview;

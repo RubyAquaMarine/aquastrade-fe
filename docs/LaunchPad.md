@@ -2,17 +2,20 @@
 
 https://aquas.trade/dashboard/create
 
-## todo
+Tokens are automatically listed on the exchange and are ready for trading. A datafeed is created when new tokens are deployed through Aquas.Trade Token Launch Pad
 
-show the balance
-available tokens to mint based on the available AQUA Balance: Balance will be refilled periododicly
+## Access
+
+You will need (1) NFT from Aquas.Trade [nft-collection](./NFT.md)
 
 - gold , silver, bronze
 
-# How to pull off a successful Token Creation
+## How to pull off a successful Token Creation
+
+At Aquas.Trade its easy, so let's LFG!
 
 - Launch the token
-- buy up most of the tokens in 1 tx
+- Buy up most of the tokens in 1 tx
 - Presale - IDO 50% to 80%
 - Use Token [Airdrop](./Airdrop.md) (Gold Members have access only) and airdrop 20-50% tokens to your selected audience/target/community
 

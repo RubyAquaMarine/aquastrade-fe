@@ -160,7 +160,29 @@ export const poolListAqua = [
     logoQuote: "/PROSPECT.png",
     logoBase: "/AQUA.png",
   },
+  {
+    id: 41,
+    symbol: "BTC-USDT",
+    address: "0x57A7a760deA34d28dfeD05a9Bb3b6c80BBFC5EF3",
+    tokenA: "BTC",
+    tokenB: "USDT",
+    decimals: 18,
+    logoQuote: "/BTC.svg",
+    logoBase: "/USDT.svg",
+  },
+  {
+    id: 42,
+    symbol: "ETH-USDT",
+    address: "0x35621160d0Aaf48B33b5A040f16DD035C037a88B",
+    tokenA: "ETH",
+    tokenB: "USDT",
+    decimals: 18,
+    logoQuote: "/ETH.svg",
+    logoBase: "/USDT.svg",
+  },
 ] as const;
+
+// 0x35621160d0Aaf48B33b5A040f16DD035C037a88B
 
 // 6 pools
 export const poolListRuby = [

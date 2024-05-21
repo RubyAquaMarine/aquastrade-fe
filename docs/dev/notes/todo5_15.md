@@ -2,7 +2,6 @@
 
 - sfuel - ok
 - amm - everything worked (better UX : after tx : reset UI values to 0 :retrigger approvals)
-- dashboard : still ugly
 - coinflip : ui doesn't update after flip : win/loss
 - nft marketplace needs mockup :
 - ido
@@ -10,6 +9,12 @@
 - etc
 
 - - Improvements :
+
+snake_case all css
+
+# amm
+
+if pool reserves exist, don't do multi hop swap : allow the trader to swap on that pool. but offer the multi hop if better liquidity.
 
 ---
 
@@ -59,16 +64,6 @@ need to redesign stuff `poolsAtAqua` : hardcoded , but can be loaded via consume
 
 - actually everything that the frontend needs is alread within this 1 function call ^^^^^^
 
-# UI
-
-- https://ui.shadcn.com/
-- - https://www.npmjs.com/package/tailwind-merge
-- - https://www.npmjs.com/package/class-variance-authority
-- - yarn add cmdk
-- - yarn add @tanstack/react-table
-
-- https://www.framer.com/motion/three-introduction/
-
 # CoinGecko listing
 
 - requires api for coin circulating amounts
@@ -90,23 +85,3 @@ need to redesign stuff `poolsAtAqua` : hardcoded , but can be loaded via consume
 - `deploy_token` : log the token name, token symbol , and time
 - - this creates a new AMM pool, so this function should also update the DB_POOLS
 - - show number Token Launch {Pads
-
-# shadCN
-
-- use this for the different Order types on the Perps page : https://ui.shadcn.com/docs/components/drawer
-
-# UX : spinning buttons
-
-```
- <span className={styles.spinner_padding}>
-                      {isConnecting ? (
-                        <span>
-                          {" "}
-                          {<FaSpinner className={styles.spinner_icon} />}
-                        </span>
-                      ) : (
-                        <span> </span>
-                      )}
-                    </span>
-
-```

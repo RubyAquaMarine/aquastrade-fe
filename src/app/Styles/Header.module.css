@@ -240,7 +240,7 @@ className={styles.popup}  openOnHover={true}
 
 .nav_menu_dd {
   min-width: 370px;
-  z-index: 9999998;
+  z-index: 9998;
   background-color: #1a1b1f;
   padding: 0.6rem;
   position: sticky;

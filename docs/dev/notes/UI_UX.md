@@ -1,8 +1,30 @@
-snake_case all css
+# UI
 
-# amm
+- https://ui.shadcn.com/
+- - https://www.npmjs.com/package/tailwind-merge
+- - https://www.npmjs.com/package/class-variance-authority
+- - yarn add cmdk
+- - yarn add @tanstack/react-table
 
-if pool reserves exist, don't do multi hop swap : allow the trader to swap on that pool. but offer the multi hop if better liquidity.
+- https://www.framer.com/motion/three-introduction/
+
+- use this for the different Order types on the Perps page : https://ui.shadcn.com/docs/components/drawer
+
+# UX : spinning buttons
+
+```
+ <span className={styles.spinner_padding}>
+                      {isConnecting ? (
+                        <span>
+                          {" "}
+                          {<FaSpinner className={styles.spinner_icon} />}
+                        </span>
+                      ) : (
+                        <span> </span>
+                      )}
+                    </span>
+
+```
 
 # MUI
 

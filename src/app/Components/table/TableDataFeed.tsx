@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useRef, useEffect, useState, useMemo } from "react";
+import { formatUnits, parseUnits } from "viem";
+
+import { findTokenFromAddress } from "@/app/Utils/findTokens";
 import {
   CaretSortIcon,
   ChevronDownIcon,
@@ -41,10 +44,19 @@ import {
   TableRow,
 } from "@/app/Components/ui/Table";
 
-const accessorKeyAssets = "assets";
-const accessorPoolPrice = "poolPrice";
-const accessorFeedPrice = "feedPrice";
-const accessofPair = "poolAddress";
+import styles from "@/app/Styles/Table.module.css";
+
+const accessorKeyAssets = "pool";
+
+export type DataFeed = {
+  id: string;
+  pool: string;
+  poolPrice: string;
+  feedPrice: string;
+  assets: string[];
+  quote: string;
+  base: string;
+};
 
 export default function TableDataFeed(dataFeed: any) {
   console.log("TableDataFeed params", dataFeed);
@@ -56,36 +68,98 @@ export default function TableDataFeed(dataFeed: any) {
   const data = useMemo(() => dataNow, []);
 
   //  const columns = [{'title':'test'},{'title':'test'}];
+  //const columns: ColumnDef<DataFeed>[] =
   const columns = [
-    {
-      header: "ID",
-      accessorKey: "id",
-    },
     {
       header: "Pair",
       accessorKey: "assets",
+      cell: ({ row }: any) => {
+        const addrQ = row.getValue("quote");
+        const addrB = row.getValue("base");
+        const quote = findTokenFromAddress(addrQ)?.symbol;
+        const base = findTokenFromAddress(addrB)?.symbol;
+
+        return (
+          <div className="text-right font-medium">{`${quote}/${base}`}</div>
+        );
+      },
     },
 
+    {
+      header: "Exchange Rate",
+      accessorKey: "pricePool",
+      cell: ({ row }: any) => {
+        const base: string = row.getValue("base");
+        const dec = findTokenFromAddress(base)?.decimals;
+        const inAmount: bigint = row.getValue("pricePool");
+        // need to normalize all data based on the  base token decimals  ..
+        // this is a bug....  working for btc and eth but not on skl
+        let value;
+        const cc = parseUnits("1", dec);
+
+        if (inAmount && BigInt(inAmount) < cc) {
+          console.log("debug Shit +++++ ");
+          value = parseFloat(
+            formatUnits(row.getValue("pricePool"), dec),
+          ).toFixed(18);
+        }
+
+        if (inAmount && inAmount > cc) {
+          console.log("debug Shit ----");
+          value = parseFloat(
+            formatUnits(row.getValue("pricePool"), dec),
+          ).toFixed(2);
+        }
+        const formatted = value;
+        return <div className="text-right font-medium">{formatted}</div>;
+      },
+    },
+    {
+      header: "Feed Price",
+      accessorKey: "priceFeed",
+      cell: ({ row }: any) => {
+        const inAmount: bigint = row.getValue("priceFeed");
+        const cc = parseUnits("1", 18);
+        let value;
+        if (inAmount && BigInt(inAmount) < cc) {
+          value = parseFloat(formatUnits(inAmount, 18)).toFixed(18);
+        }
+
+        if (inAmount && inAmount >= cc) {
+          value = parseFloat(formatUnits(inAmount, 18)).toFixed(2);
+        }
+        const formatted = value;
+
+        return <div className="text-right font-medium">{formatted}</div>;
+      },
+    },
     {
       header: "Pool",
       accessorKey: "pool",
     },
     {
-      header: "Pool Price",
-      accessorKey: "pricePool",
-    },
-    {
-      header: "Feed Price",
-      accessorKey: "priceFeed",
-    },
-
-    {
       header: "Quote",
       accessorKey: "quote",
+      cell: ({ row }: any) => {
+        const addr = row.getValue("quote");
+        const formatted = findTokenFromAddress(addr)?.symbol;
+
+        return <div className="text-right font-medium">{formatted}</div>;
+      },
     },
     {
       header: "Base",
       accessorKey: "base",
+      cell: ({ row }: any) => {
+        const addr = row.getValue("base");
+        const formatted = findTokenFromAddress(addr)?.symbol;
+
+        return <div className="text-right font-medium">{formatted}</div>;
+      },
+    },
+    {
+      header: "ID",
+      accessorKey: "id",
     },
   ];
 
@@ -96,13 +170,16 @@ export default function TableDataFeed(dataFeed: any) {
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    initialState: {
+      pagination: { pageIndex: 0, pageSize: 10 },
+    },
   });
 
   return (
-    <div className="w-full">
+    <div className={styles.container}>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter assets"
+          placeholder="Filter Pools"
           value={
             (table.getColumn(accessorKeyAssets)?.getFilterValue() as string) ??
             ""
@@ -112,11 +189,11 @@ export default function TableDataFeed(dataFeed: any) {
               .getColumn(accessorKeyAssets)
               ?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className={styles.input}
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline" className={styles.button_column}>
               Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -141,9 +218,9 @@ export default function TableDataFeed(dataFeed: any) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className={styles.table}>
         <Table>
-          <TableHeader>
+          <TableHeader className={styles.table_header}>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -161,10 +238,11 @@ export default function TableDataFeed(dataFeed: any) {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className={styles.table_body}>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className={styles.table_body}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >

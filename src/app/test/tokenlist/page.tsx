@@ -174,7 +174,7 @@ const Home = () => {
                 {component.pool} :{" "}
                 {formatUnits(
                   component.pricePool,
-                  Number(findTokenFromAddress(component.base)?.decimals),
+                  Number(findTokenFromAddress(component.base)?.decimals), // use the decimals from the Base asset such as USDT = 6.
                 )}{" "}
                 : {formatUnits(component.priceFeed, 18)}
               </li>

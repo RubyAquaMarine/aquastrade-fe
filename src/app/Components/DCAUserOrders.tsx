@@ -18,7 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "@/app/Styles/DCA.module.css";
 
 import { DCA_ABI } from "@/app/Abi/dca";
-import { findContractInfo } from "@/app/Utils/findTokens";
+import { findContractInfo, findTokenFromAddress } from "@/app/Utils/findTokens";
 
 const DCA = findContractInfo("dcamulti");
 
@@ -33,6 +33,9 @@ const DCAUserOrders: React.FC = (props: Props) => {
 
   const [orderIds, setOrderIds] = useState<bigint[]>();
 
+  //  If No Pairname, Don't render a Label for the StorageID
+  const [pairName, setPairName] = useState<string>();
+
   //wagmi
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
@@ -46,6 +49,10 @@ const DCAUserOrders: React.FC = (props: Props) => {
     address,
   ]);
 
+  const quote = useDCA("GetTokenQuoteUsingIndex", [props?.props?.storage]);
+
+  const base = useDCA("GetTokenBaseUsingIndex", [props?.props?.storage]);
+
   useEffect(() => {
     if (address && isConnected && user_orders_storage_0?.data) {
       // this can be an array
@@ -55,7 +62,24 @@ const DCAUserOrders: React.FC = (props: Props) => {
         setOrderId(user_orders_storage_0?.data);
       }
     }
-  }, [address, isConnected, user_orders_storage_0?.data]);
+    if (
+      base?.data &&
+      quote?.data &&
+      user_orders_storage_0?.data &&
+      user_orders_storage_0?.data.length >= 1
+    ) {
+      const q = findTokenFromAddress(quote?.data)?.symbol;
+      const b = findTokenFromAddress(base?.data)?.symbol;
+
+      setPairName(`${q}/${b}`);
+    }
+  }, [
+    address,
+    isConnected,
+    user_orders_storage_0?.data,
+    base?.data,
+    quote?.data,
+  ]);
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -98,46 +122,48 @@ const DCAUserOrders: React.FC = (props: Props) => {
     });
   };
 
-  // console.log("User orders ", orderId);
-  // console.log("User orders ", orderIds, orderIds?.length);
+  console.log("DCA USER RENDER", pairName);
 
-  return (
-    <div>
-      {orderIds || orderId ? (
-        <span className={styles.text_center_sm}>
-          {" "}
-          Storage: {formatUnits(props?.props?.storage, 0)}
-        </span>
-      ) : (
-        ""
-      )}
-
-      {orderIds && orderIds?.length > 1 ? (
-        orderIds.map((_value, index) => (
-          <p key={index} className={styles.text_center}>
-            <button
-              className={styles.button_field}
-              onClick={() => submitDeleteOrder(_value)}
-            >
-              Delete : {formatUnits(_value, 0)}{" "}
-            </button>
-          </p>
-        ))
-      ) : (
-        <p key={index} className={styles.text_center}>
-          {" "}
-          {orderId && (
-            <button
-              className={styles.button_field}
-              onClick={() => submitDeleteOrder(orderId)}
-            >
-              Delete :{orderId && formatUnits(orderId, 0)}{" "}
-            </button>
-          )}{" "}
-        </p>
-      )}
-    </div>
-  );
+  if (pairName) {
+    return (
+      <div>
+        {pairName && (
+          <span>
+            <span className={styles.text_center_sm}> Storage: {pairName}</span>
+            <span>
+              {" "}
+              {orderIds && orderIds?.length > 1 ? (
+                orderIds.map((_value, index) => (
+                  <p key={index} className={styles.text_center}>
+                    <button
+                      className={styles.button_field}
+                      onClick={() => submitDeleteOrder(_value)}
+                    >
+                      Delete : {formatUnits(_value, 0)}{" "}
+                    </button>
+                  </p>
+                ))
+              ) : (
+                <p className={styles.text_center}>
+                  {/** No Mapping here . Just One order exists */}
+                  {orderId && (
+                    <button
+                      className={styles.button_field}
+                      onClick={() => submitDeleteOrder(orderId)}
+                    >
+                      Delete :{orderId && formatUnits(orderId, 0)}{" "}
+                    </button>
+                  )}{" "}
+                </p>
+              )}
+            </span>
+          </span>
+        )}
+      </div>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export default memo(DCAUserOrders);

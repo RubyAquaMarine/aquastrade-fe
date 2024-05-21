@@ -10,3 +10,7 @@
 - need total number of dca storages,
 - need totalOrdersNumber = GlobalID
 - need user_wallet
+
+UI : DCA Setting
+
+- show the Pool : Pair instead of 'storage id #'

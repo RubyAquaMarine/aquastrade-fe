@@ -6,7 +6,7 @@ import { useAccount, useSwitchChain } from "wagmi";
 import { CHAIN } from "@/app/Utils/config";
 import styles from "@/app/Styles/Airdrop.module.css";
 import SpinImage from "@/app/Components/SpinImage";
-import Presale from "@/app/Components/Presale3";
+import Presale from "@/app/Components/Presale";
 
 import { usePresale } from "@/app/Hooks/usePresale";
 

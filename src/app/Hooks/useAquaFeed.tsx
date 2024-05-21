@@ -9,7 +9,7 @@ import { findContractInfo } from "@/app/Utils/findTokens";
 const AQUAFEED = findContractInfo("aquafeed");
 
 export const useAquaFeed = (functionName: string, args?: [any]) => {
-  console.log(" debug ", functionName, args);
+  console.log("useAquaFeed Fetch ", functionName, args);
   const { data, isError, isLoading } = useReadContract({
     abi: AQUAFEED_ABI,
     address: AQUAFEED?.address,

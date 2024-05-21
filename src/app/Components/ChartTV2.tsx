@@ -28,6 +28,16 @@ const ChartComponent: React.FC<{
       chart?.applyOptions({
         width: window.innerWidth - CHART_WIDTH_OFFSET,
         height: window.innerHeight - CHART_HEIGHT_OFFSET,
+        handleScroll: {
+          horzTouchDrag: false,
+          mouseWheel: false,
+          pressedMouseMove: false,
+          vertTouchDrag: false,
+        },
+        handleScale: {
+          mouseWheel: false,
+          axisPressedMouseMove: false,
+        },
       });
     };
 
@@ -97,6 +107,7 @@ const ChartComponent: React.FC<{
       },
       handleScale: {
         mouseWheel: false,
+        axisPressedMouseMove: false,
       },
     });
 

@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { formatUnits } from "viem";
 
 import { Slide, toast } from "react-toastify";
@@ -31,7 +31,8 @@ const TokenApprove = (params: Props) => {
 
   const [allowance_amount, setAllowance] = useState(BigInt(0));
   const [inputTrigger, setTrigger] = useState(false); // todo : only triggers once and doesn't reset :
-  const inputToken = findTokenFromAddress(params.props[1]);
+
+  const [inputToken, setToken] = useState(false); // todo : only triggers once and doesn't reset :
 
   const { data: token_transfer_allowance } = useERC20Token(
     params.props[1],
@@ -39,20 +40,27 @@ const TokenApprove = (params: Props) => {
     params.props[3],
   );
 
-  // console.log(
-  //   "Token Approval Props",
-  //   params.props[0],
-  //   params.props[1],
-  //   params.props[2],
-  //   "Input Args",
-  //   params.props[3],
+  useEffect(() => {
+    if (params?.props[1]) {
+      const token = findTokenFromAddress(params?.props[1]);
+      setToken(token);
+    }
+  }, [params?.props[1]]);
 
-  //   " Approve This Contract: ",
-  //   token_transfer_allowance,
+  console.log(
+    "Token Approval Props",
+    params.props[0],
+    params.props[1],
+    params.props[2],
+    "Input Args",
+    params.props[3],
 
-  //   " TokenInfo Contract: ",
-  //   inputToken,
-  // );
+    " Approve This Contract: ",
+    token_transfer_allowance,
+
+    " TokenInfo Contract: ",
+    inputToken,
+  );
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -135,4 +143,4 @@ const TokenApprove = (params: Props) => {
   );
 };
 
-export default TokenApprove;
+export default memo(TokenApprove);
