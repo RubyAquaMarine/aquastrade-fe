@@ -52,7 +52,7 @@ export default function TableDataFeed(dataFeed: any) {
   const dataNow = Object.values(dataFeed);
 
   // These object name must be [data,columns]
-  //  const data = [{'t':'t'},{'t':'d'} ];
+
   const data = useMemo(() => dataNow, []);
 
   //  const columns = [{'title':'test'},{'title':'test'}];

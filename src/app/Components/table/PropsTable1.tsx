@@ -55,7 +55,8 @@ export default function PropsTable(dataFeed: any) {
   //  const data = [{'t':'t'},{'t':'d'} ];
   const data = useMemo(() => dataNow, []);
 
-  console.log("PropsTable data ", data);
+  // const data = dataNow;
+  console.log("PropsTable data ", data, dataNow);
 
   //  const columns = [{'title':'test'},{'title':'test'}];
   const columns = [
@@ -65,15 +66,15 @@ export default function PropsTable(dataFeed: any) {
     },
     {
       header: "Pool",
-      accessorKey: "poolAddress",
+      accessorKey: "pool",
     },
     {
       header: "Pool Price",
-      accessorKey: "poolPrice",
+      accessorKey: "pricePool",
     },
     {
       header: "Feed Price",
-      accessorKey: "feedPrice",
+      accessorKey: "priceFeed",
     },
     {
       header: "Pair",
