@@ -35,6 +35,8 @@ import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
 
 import TokenApprove from "@/app/Components/TokenApprove";
 
+import DCATotalOrders from "@/app/Components/DCATotalOrders";
+
 // need this address for the smart contract
 const routerAddressList: string[] = uniswapRouters.map((router) => {
   return router.address;
@@ -85,8 +87,8 @@ const DCAInterface: React.FC = () => {
   const [inputSwapSpeed, setSwapSpeed] = useState<number>(1);
   const [inputInvestmentDuration, setInvestmentDuration] = useState<number>(24);
 
-  const [inputMinPrice, setMinPrice] = useState<string>("0.000000000000000001");
-  const [inputMaxPrice, setMaxPrice] = useState<string>("9999999999");
+  const [inputMinPrice, setMinPrice] = useState<string>("0.1");
+  const [inputMaxPrice, setMaxPrice] = useState<string>("60000");
 
   const [inputTokenAmount, setTokenAmount] = useState<string>("");
 
@@ -621,18 +623,10 @@ const DCAInterface: React.FC = () => {
               </button>
             </span>
 
-            {inputDCAFeatures === "orders" ? (
-              <span className={styles.text_center}>
-                {" "}
-                <button
-                  className={styles.button_detailed}
-                  onClick={() => submitDeleteOrder(BigInt(4), BigInt(3))}
-                >
-                  Delete Order
-                </button>
+            {inputDCAFeatures === "orders" && (
+              <span>
+                <DCATotalOrders />
               </span>
-            ) : (
-              <span></span>
             )}
           </div>
         </div>

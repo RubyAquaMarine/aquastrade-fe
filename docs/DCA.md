@@ -20,7 +20,8 @@ New Utilities for NFT holders and deflationary tokenomics for the AQUA token
 
 For now, use these defaults within the UI:
 
-- intervalSeconds : 60
+- input amount should be 0.1 or more
+- intervalMinutes : 1
 - durationHours : 24 (set min to 1 for button and add :number)
 - minPrice : 0.000000000000000001
 - maxPrice : 987654321
@@ -31,12 +32,10 @@ For now, use these defaults within the UI:
 
 ### WIP
 
-- if using AQUA to buy ASSET B, then add fee (1 aqua) to the approval amount (users can do this manually)
-- fetch user orders : delete orders
-- make new component for the user orders
-- add number of swaps and the expected amount size per swap in UI
+- add number of swaps and the expected amount size per swap in UI to check for errors, swap_minimums_getAmountsOut,etc
+- bug in approval amounts , the 1 AQUA about is being added to usdt, etc and messes up the amounts by \*\*12
 
-# Details
+# tldr
 
 - `executeOrders` (storageID, isBuying) : Starts at index 1 (not zero)
 - `GetOrderDetails`(storageID, and matching `globalID`) : the globalID is retreivable from the factory using `GetAllOrders` .
@@ -48,3 +47,7 @@ For now, use these defaults within the UI:
 - `GetTokenBaseUsingIndex` : returns the token address assigned to base asset
 
 - `GetTokenQuoteUsingIndex` : returns the token address assigned to quote asset
+
+# Advanced Traders
+
+At AquasTrade we enjoy trading as much as a trading bot, but we're human and get tired.

@@ -125,10 +125,9 @@ const Home = () => {
                 <DropdownMenuSeparator />
 
                 {chains.map((chain, index) => (
-                  <DropdownMenuItem   key={index}> 
+                  <DropdownMenuItem key={index}>
                     {" "}
                     <button
-                    
                       className={styles.text_style_bottom_sm}
                       // @ts-ignore: Unreachable code error
                       onClick={() => switchChain({ chainId: chain.id })}

@@ -17,11 +17,6 @@
 
 waiting for `AquasFeed.sol`
 
-## DCA
-
-- after selecting the POOL : show the POOL price below the input
-- - ( no styling: Price: 123.00 )
-
 # Wallet Address switching on Token List page
 
 # AMM :
