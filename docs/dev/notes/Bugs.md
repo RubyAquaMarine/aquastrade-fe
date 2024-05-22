@@ -2,6 +2,12 @@
 
 - regEx on all inputs : prevent ui crash from entering non number
 
+# Metaport
+
+AQUA => "@emotion/react": "^11.11.4",
+
+MP => "@emotion/react": "^11.11.1",
+
 # AMM routing
 
 - USDC / BTC pool exists , but trad is being routed through AQUA : Turn Off MultiHop : within the settings

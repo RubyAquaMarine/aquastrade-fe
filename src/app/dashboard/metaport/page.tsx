@@ -92,7 +92,12 @@ const Home = () => {
         </div>
 
         <div>
-          {" "}
+          <MetaportWidgetV2 />
+        </div>
+      </div>
+
+      <div className={styles.container}>
+        <p>
           <span>
             {" "}
             <DropdownMenu>
@@ -120,14 +125,8 @@ const Home = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           </span>{" "}
-        </div>
+        </p>
 
-        <div>
-          <MetaportWidgetV2 />
-        </div>
-      </div>
-
-      <div className={styles.container}>
         <p className={styles.dropdown}>
           {" "}
           <span className={styles.text_style_bottom}>

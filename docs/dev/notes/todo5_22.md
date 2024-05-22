@@ -1,5 +1,5 @@
-FDV calculation .... 
-presale page token_approve button feels smoothier than the rest of the site...... um copy that code. 
+FDV calculation ....
+presale page token_approve button feels smoothier than the rest of the site...... um copy that code.
 
 <TokenInfoBox>
 

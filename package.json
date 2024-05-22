@@ -1,6 +1,6 @@
 {
   "name": "aquastrade-fe",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "engines": {
     "node": ">=18.18.0 <19.0.0"
@@ -14,16 +14,14 @@
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
-    "@emotion/react": "^11.11.4",
+    "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.5",
     "@fontsource/roboto": "^5.0.13",
     "@hookform/resolvers": "^3.4.0",
     "@lifi/sdk": "^2.2.3",
     "@lifi/widget": "^2.2.6",
     "@mesonfi/to": "^0.4.1",
-    "@mui/icons-material": "^5.15.17",
-    "@mui/material": "^6.0.0-alpha.6",
-    "@mui/material-nextjs": "^6.0.0-alpha.0",
+    "@mui/material-nextjs": "^5.15.11",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-checkbox": "^1.0.4",
