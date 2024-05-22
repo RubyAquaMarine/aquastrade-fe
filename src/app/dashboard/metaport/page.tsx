@@ -1,5 +1,6 @@
 // @ts-nocheck
 "use client";
+import Image from "next/image";
 import { formatUnits } from "viem";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -73,23 +74,21 @@ const Home = () => {
   return (
     <main className="flex flex-col items-center justify-between p-6">
       <div className="max-w-5xl  items-center justify-between font-mono text-sm lg:flex">
-        <span> L1 Gas wallet: 0.0005 :</span>
-        <span className={styles.text_style_bottom}>Top Up </span>
-        <p> Bridge Cost: </p>
-        <span> L1 Gas gwei: </span>
-
-        <div className={styles.text_style_bottom}>
-          {addresses &&
-            addresses.map((wallet_address, index) => (
-              <button
-                key={index}
-                className={styles.text_link}
-                // @ts-ignore: Unreachable code error
-                onClick={() => switchChain({ chainId: chain.id })}
-              >
-                {wallet_address}
-              </button>
-            ))}
+        <div className={styles.container_sm}>
+          {" "}
+          Click{" "}
+          <span>
+            {" "}
+            <Image
+              className={styles.image_invert_center}
+              src={`/SKL.svg`}
+              alt="AquasTrade Logo outbound external links"
+              width={20}
+              height={20}
+              priority
+            />{" "}
+          </span>{" "}
+          below to open Metaport bridge{" "}
         </div>
 
         <div>
@@ -98,9 +97,53 @@ const Home = () => {
       </div>
 
       <div className={styles.container}>
+        <p>
+          <span>
+            {" "}
+            <DropdownMenu>
+              <DropdownMenuTrigger className={styles.text_style}>
+                Connected Wallets:{" "}
+                {addresses ? addresses?.length.toString() : ""}
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent className={styles.dropdown_bd}>
+                <DropdownMenuLabel>Select Wallet</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+
+                {addresses &&
+                  addresses.map((wallet_address, index) => (
+                    <DropdownMenuItem key={index}>
+                      {" "}
+                      <button
+                        className={styles.text_style_bottom_sm}
+                        // @ts-ignore: Unreachable code error
+                      >
+                        {wallet_address}
+                      </button>
+                    </DropdownMenuItem>
+                  ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </span>{" "}
+        </p>
+
         <p className={styles.dropdown}>
           {" "}
-          <span>
+          <span className={styles.text_style_bottom}>
+            {" "}
+            <Link
+              href={` https://etherscan.io/address/0x588801cA36558310D91234aFC2511502282b1621#writeProxyContract`}
+              target="_blank"
+            >
+              {" "}
+              Top Up{" "}
+            </Link>{" "}
+          </span>
+          <span className={styles.container_sm}>
+            <span className={styles.amount_title}> L1 GasWallet: </span>
+            <span className={styles.amount_eth}> 0.005 </span>
+          </span>
+          <span className={styles.container_sm}>
             {" "}
             <Link
               href={chain?.blockExplorers?.default.url + "/address/" + address}
@@ -111,7 +154,7 @@ const Home = () => {
           </span>
         </p>
 
-        <p className={styles.dropdown}>
+        <p className={styles.container_sm}>
           {" "}
           <span>
             {" "}
@@ -125,10 +168,9 @@ const Home = () => {
                 <DropdownMenuSeparator />
 
                 {chains.map((chain, index) => (
-                  <DropdownMenuItem   key={index}> 
+                  <DropdownMenuItem key={index}>
                     {" "}
                     <button
-                    
                       className={styles.text_style_bottom_sm}
                       // @ts-ignore: Unreachable code error
                       onClick={() => switchChain({ chainId: chain.id })}
@@ -154,8 +196,8 @@ const Home = () => {
               </div>
               <div>Symbol: {item.symbol}</div>
               <div>Decimal: {item.decimals}</div>
-              <div>
-                Address:
+
+              <div className={styles.container_sm}>
                 <Link
                   href={
                     chain?.blockExplorers?.default.url +
@@ -165,6 +207,23 @@ const Home = () => {
                   target="_blank"
                 >
                   {item.contractAddress}
+                </Link>
+                <Link
+                  href={
+                    chain?.blockExplorers?.default.url +
+                    "/address/" +
+                    item.contractAddress
+                  }
+                  target="_blank"
+                >
+                  <Image
+                    className={styles.image_invert_center}
+                    src={`/outbound.svg`}
+                    alt="AquasTrade Logo outbound external links"
+                    width={14}
+                    height={14}
+                    priority
+                  />
                 </Link>
               </div>
               {/* Crusty logic*/}

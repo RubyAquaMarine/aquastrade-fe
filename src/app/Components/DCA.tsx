@@ -12,7 +12,14 @@ import {
   useWaitForTransactionReceipt,
   useSwitchChain,
 } from "wagmi";
-import { formatUnits, parseUnits, parseEther } from "viem";
+import { formatUnits, parseUnits } from "viem";
+
+import {
+  findTokenAddressFromSymbol,
+  findTokenDecimalsFromSymbol,
+  findContractInfo,
+  findTokenFromSymbol,
+} from "@/app/Utils/findTokens";
 import {
   CHAIN,
   poolsAtAqua,
@@ -20,20 +27,17 @@ import {
   poolsAtSushi,
   uniswapRouters,
 } from "@/app/Utils/config";
-import { findContractInfo } from "@/app//Utils/findTokens";
-import styles from "@/app/Styles/DCA.module.css";
 
+import PoolPrice from "@/app/Components/PoolPrice";
+import TokenApprove from "@/app/Components/TokenApprove";
+import DCATotalOrders from "@/app/Components/DCATotalOrders";
 import { DCA_ABI } from "@/app/Abi/dca";
-
-import {
-  findTokenAddressFromSymbol,
-  findTokenDecimalsFromSymbol,
-} from "@/app/Utils/findTokens";
+import { useDCA } from "@/app/Hooks/useDCA";
 
 import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
 import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
 
-import TokenApprove from "@/app/Components/TokenApprove";
+import styles from "@/app/Styles/DCA.module.css";
 
 // need this address for the smart contract
 const routerAddressList: string[] = uniswapRouters.map((router) => {
@@ -73,9 +77,7 @@ const DCAInterface: React.FC = () => {
   const [inputRouterName, setRouterName] = useState<string>("Aquas.Trade");
 
   // Dropdown menu of pool addresses or use the
-  const [inputPoolAddress, setPoolAddress] = useState<string>(
-    "0x7CE47dA2789267B254e243e45A216Ef6897E5840",
-  );
+  const [inputPoolAddress, setPoolAddress] = useState<string>();
 
   const [inputPoolSymbol, setPoolSymbol] = useState<string>("ETH-USD");
 
@@ -85,10 +87,10 @@ const DCAInterface: React.FC = () => {
   const [inputSwapSpeed, setSwapSpeed] = useState<number>(1);
   const [inputInvestmentDuration, setInvestmentDuration] = useState<number>(24);
 
-  const [inputMinPrice, setMinPrice] = useState<string>("0.000000000000000001");
-  const [inputMaxPrice, setMaxPrice] = useState<string>("9999999999");
+  const [inputMinPrice, setMinPrice] = useState<string>("0.1");
+  const [inputMaxPrice, setMaxPrice] = useState<string>("60000");
 
-  const [inputTokenAmount, setTokenAmount] = useState<string>("");
+  const [inputTokenAmount, setTokenAmount] = useState<string>();
 
   const [inputTokenABalance, setTokenABalance] = useState(null);
   const [inputTokenBBalance, setTokenBBalance] = useState(null);
@@ -105,14 +107,15 @@ const DCAInterface: React.FC = () => {
 
   // get contracts or assets
   const contractDCAMulti = findContractInfo("dcamulti");
-  const token_address_aqua = findTokenAddressFromSymbol("AQUA");
+  const token_address_aqua = findTokenFromSymbol("AQUA");
+  // todo : refactor to findTokenFrom
   const tokenAddress_a = findTokenAddressFromSymbol(inputTokenA);
   const tokenAddress_b = findTokenAddressFromSymbol(inputTokenB);
   const token_decimal_a = findTokenDecimalsFromSymbol(inputTokenA);
   const token_decimal_b = findTokenDecimalsFromSymbol(inputTokenB);
 
-  const price = useAquaFeed("getPoolPriceWithAddress", [inputPoolAddress]);
-  console.log("POP UP HERE", price);
+  // NEW
+  const { data: globalID, isLoading, isError } = useDCA("GlobalID");
 
   // when inputPoolSymbol changes,  need to update the inputPoolAddress
 
@@ -176,7 +179,7 @@ const DCAInterface: React.FC = () => {
   }, [inputRouterName]);
 
   useEffect(() => {
-    if (walletTokenList && tokenAddress_a && tokenAddress_b) {
+    if (tokenAddress_a && tokenAddress_b) {
       // Probably not done
       const testBalance = handleWalletBalance();
 
@@ -186,7 +189,7 @@ const DCAInterface: React.FC = () => {
       console.log("token A  Balance ", testBalance[0]);
       console.log("token B  Balance ", testBalance[1]);
     }
-  }, [walletTokenList, tokenAddress_a, tokenAddress_b]);
+  }, [tokenAddress_a, tokenAddress_b]);
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -251,8 +254,10 @@ const DCAInterface: React.FC = () => {
 
       BigInt(inputSwapSpeed * 60), // convert seconds to minutes
       BigInt(inputInvestmentDuration),
-      parseEther(inputMinPrice),
-      parseEther(inputMaxPrice),
+
+      parseUnits(inputMinPrice, dec), // The bug
+      parseUnits(inputMaxPrice, dec),
+
       parseUnits(inputTokenAmount, dec),
       inputIsBuying,
     ];
@@ -270,28 +275,15 @@ const DCAInterface: React.FC = () => {
     }
   };
 
-  const submitDeleteOrder = (_storageID: bigint, _id: bigint) => {
-    const dec = inputIsBuying ? token_decimal_b : token_decimal_a;
-    const data = [_storageID, _id];
-    console.log("Sumbit DCA Order: data input: ", data);
-    // todo : need to figure out the LastPoolPrice value (show in UI first)
-    writeContract({
-      abi: DCA_ABI,
-      address: contractDCAMulti.address,
-      functionName: "DeleteOrder",
-      args: data,
-    });
-  };
-
   // switch checkbox
   const handleCheckboxChange = () => {
     setInputIsBuying(!inputIsBuying);
   };
 
-  // new :refactor
+  // todo :refactor : move to child component
   const handleWalletBalance = () => {
     let saveBalanceA, saveBalanceB;
-    if (tokenAddress_a && tokenAddress_b) {
+    if (walletTokenList && tokenAddress_a && tokenAddress_b) {
       walletTokenList.forEach((element) => {
         if (
           element.contractAddress.toUpperCase() === tokenAddress_a.toUpperCase()
@@ -382,35 +374,42 @@ const DCAInterface: React.FC = () => {
           </span>
 
           {/** Show the wallet balance of the two tokens within the Pair */}
-          <span className={styles.text_center}>
-            <span className={styles.column_balance}>
-              {inputTokenA} {" : "}
-            </span>
-            <span className={styles.column_balance}>
-              {inputTokenABalance &&
-                parseFloat(
-                  formatUnits(
-                    inputTokenABalance.balance,
-                    inputTokenABalance.decimals,
-                  ),
-                ).toFixed(8)}
-            </span>
-          </span>
 
-          <span className={styles.text_center}>
-            <span className={styles.column_balance}>
-              {inputTokenB} {" : "}
+          {inputPoolAddress ? (
+            <span>
+              {" "}
+              <span className={styles.text_center}>
+                <span className={styles.column_balance}>
+                  {inputTokenA} {" : "}
+                </span>
+                <span className={styles.column_balance}>
+                  {inputTokenABalance &&
+                    parseFloat(
+                      formatUnits(
+                        inputTokenABalance.balance,
+                        inputTokenABalance.decimals,
+                      ),
+                    ).toFixed(8)}
+                </span>
+              </span>
+              <span className={styles.text_center}>
+                <span className={styles.column_balance}>
+                  {inputTokenB} {" : "}
+                </span>
+                <span className={styles.column_balance}>
+                  {inputTokenBBalance &&
+                    parseFloat(
+                      formatUnits(
+                        inputTokenBBalance.balance,
+                        inputTokenBBalance.decimals,
+                      ),
+                    ).toFixed(8)}
+                </span>
+              </span>{" "}
             </span>
-            <span className={styles.column_balance}>
-              {inputTokenBBalance &&
-                parseFloat(
-                  formatUnits(
-                    inputTokenBBalance.balance,
-                    inputTokenBBalance.decimals,
-                  ),
-                ).toFixed(8)}
-            </span>
-          </span>
+          ) : (
+            <span> </span>
+          )}
 
           <div className={styles.container}>
             <span className={styles.text_center}>
@@ -429,7 +428,7 @@ const DCAInterface: React.FC = () => {
 
             {contractDCAMulti &&
               inputTokenAmount &&
-              tokenAddress_b !== token_address_aqua && (
+              tokenAddress_b !== token_address_aqua?.address && (
                 <TokenApprove
                   props={[
                     "allowance",
@@ -449,7 +448,7 @@ const DCAInterface: React.FC = () => {
             {/** adding one AQUA to the approval amount when selling AQUA for the QUOTE asset  */}
             {contractDCAMulti &&
               inputTokenAmount &&
-              tokenAddress_b === token_address_aqua && (
+              tokenAddress_b === token_address_aqua?.address && (
                 <TokenApprove
                   props={[
                     "allowance",
@@ -469,20 +468,23 @@ const DCAInterface: React.FC = () => {
 
             {contractDCAMulti &&
             inputIsBuying &&
-            tokenAddress_b !== token_address_aqua ? (
+            tokenAddress_b !== token_address_aqua?.address ? (
               <span>
                 {" "}
                 <span className={styles.text_center}>
                   Approve 1 AQUA (fee){" "}
                 </span>{" "}
                 <span>
-                  {" "}
                   <TokenApprove
                     props={[
                       "allowance",
-                      token_address_aqua,
-                      parseEther("1.0"),
-                      [address, contractDCAMulti.address, 18],
+                      token_address_aqua?.address,
+                      parseUnits("1.0", token_address_aqua?.decimals),
+                      [
+                        address,
+                        contractDCAMulti.address,
+                        token_address_aqua?.decimals,
+                      ],
                     ]}
                   ></TokenApprove>{" "}
                 </span>
@@ -493,14 +495,18 @@ const DCAInterface: React.FC = () => {
 
             {contractDCAMulti &&
             !inputIsBuying &&
-            tokenAddress_a !== token_address_aqua ? (
+            tokenAddress_a !== token_address_aqua?.address ? (
               <span className={styles.text_center}>
                 <TokenApprove
                   props={[
                     "allowance",
-                    token_address_aqua,
-                    parseEther("1.0"),
-                    [address, contractDCAMulti.address, 18],
+                    token_address_aqua?.address,
+                    parseUnits("1.0", token_address_aqua?.decimals),
+                    [
+                      address,
+                      contractDCAMulti.address,
+                      token_address_aqua?.decimals,
+                    ],
                   ]}
                 ></TokenApprove>
               </span>
@@ -593,11 +599,21 @@ const DCAInterface: React.FC = () => {
                 </span>{" "}
                 {/** */}
                 <span className={styles.text_center_sm}>
-                  {" "}
-                  PoolPrice:{" "}
-                  {!price?.isLoading &&
-                    price?.data &&
-                    formatUnits(price?.data, 18)}{" "}
+                  {inputPoolAddress && token_decimal_b ? (
+                    <span>
+                      {" "}
+                      PoolPrice:{" "}
+                      <PoolPrice
+                        {...{
+                          id: inputPoolAddress,
+                          pool: inputPoolAddress,
+                          base_decimal: token_decimal_b,
+                        }}
+                      ></PoolPrice>{" "}
+                    </span>
+                  ) : (
+                    <span> </span>
+                  )}
                 </span>
               </p>
             ) : (
@@ -621,18 +637,10 @@ const DCAInterface: React.FC = () => {
               </button>
             </span>
 
-            {inputDCAFeatures === "orders" ? (
-              <span className={styles.text_center}>
-                {" "}
-                <button
-                  className={styles.button_detailed}
-                  onClick={() => submitDeleteOrder(BigInt(4), BigInt(3))}
-                >
-                  Delete Order
-                </button>
+            {inputDCAFeatures === "orders" && globalID && (
+              <span>
+                <DCATotalOrders props={{ globalID: globalID }} />
               </span>
-            ) : (
-              <span></span>
             )}
           </div>
         </div>

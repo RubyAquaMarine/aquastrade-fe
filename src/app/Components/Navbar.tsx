@@ -192,6 +192,14 @@ const Navbar = () => {
                           Perpetuals
                         </NavigationMenuLink>
                       </Link>
+
+                      <Link href="/dashboard/overview" legacyBehavior passHref>
+                        <NavigationMenuLink
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          Overview
+                        </NavigationMenuLink>
+                      </Link>
                     </NavigationMenuContent>{" "}
                   </span>
                 </NavigationMenuItem>

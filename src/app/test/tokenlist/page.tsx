@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import React, { useRef, useEffect, useState } from "react";
-import { parseEther, parseUnits, formatUnits } from "viem";
+import { formatUnits } from "viem";
 import styled from "@/app/Styles/Pools.module.css";
 import styles from "@/app/Styles/Container.module.css";
 
@@ -11,7 +11,7 @@ import { useAccount } from "wagmi";
 
 // Custom stuff
 
-import TokenInfoBox from "@/app/Components/TokenInfoBox";
+import TokenInfoBox from "@/app/Components/TokenInfoBoxOld";
 
 import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
 
@@ -174,7 +174,7 @@ const Home = () => {
                 {component.pool} :{" "}
                 {formatUnits(
                   component.pricePool,
-                  Number(findTokenFromAddress(component.base)?.decimals),
+                  Number(findTokenFromAddress(component.base)?.decimals), // use the decimals from the Base asset such as USDT = 6.
                 )}{" "}
                 : {formatUnits(component.priceFeed, 18)}
               </li>
@@ -185,7 +185,7 @@ const Home = () => {
       {savedToken ? (
         <span>
           {" "}
-          <TokenInfoBox props={[savedToken, savedToken]}> </TokenInfoBox>{" "}
+          <TokenInfoBox {...{ address: savedToken }}> </TokenInfoBox>{" "}
         </span>
       ) : (
         <span> </span>
@@ -196,3 +196,4 @@ const Home = () => {
   );
 };
 export default Home;
+//    <TokenInfoBox props={[savedToken, savedToken]}> </TokenInfoBox>{" "}

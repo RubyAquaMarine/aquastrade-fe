@@ -4,6 +4,7 @@ import Slider from "@mui/material/Slider";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, ChangeEvent, useEffect, useRef } from "react";
+
 import { ToastContainer, Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {

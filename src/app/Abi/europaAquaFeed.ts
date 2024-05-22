@@ -12,8 +12,8 @@ export const AQUAFEED_ABI = [
         type: "address",
       },
       {
-        internalType: "address",
-        name: "_nft",
+        internalType: "contract INFTAdmin",
+        name: "_nftAdmin",
         type: "address",
       },
     ],
@@ -147,19 +147,6 @@ export const AQUAFEED_ABI = [
         internalType: "uint256",
         name: "pricePool",
         type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "NFTAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
       },
     ],
     stateMutability: "view",
@@ -444,15 +431,31 @@ export const AQUAFEED_ABI = [
         name: "_stableTVL",
         type: "uint256",
       },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAllBaseAssets",
+    outputs: [
       {
-        internalType: "uint256",
-        name: "_majorTVL",
-        type: "uint256",
+        internalType: "address[]",
+        name: "_symbolList",
+        type: "address[]",
       },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAllQuoteAssets",
+    outputs: [
       {
-        internalType: "uint256",
-        name: "_minorTVL",
-        type: "uint256",
+        internalType: "address[]",
+        name: "_symbolList",
+        type: "address[]",
       },
     ],
     stateMutability: "view",
@@ -498,6 +501,19 @@ export const AQUAFEED_ABI = [
   },
   {
     inputs: [],
+    name: "nftAdmin",
+    outputs: [
+      {
+        internalType: "contract INFTAdmin",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "owner",
     outputs: [
       {
@@ -512,19 +528,6 @@ export const AQUAFEED_ABI = [
   {
     inputs: [],
     name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newAddress",
-        type: "address",
-      },
-    ],
-    name: "setNftAddress",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

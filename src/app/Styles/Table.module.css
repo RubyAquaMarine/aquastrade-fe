@@ -1,0 +1,34 @@
+.container {
+  width: auto;
+  padding: 1rem;
+}
+
+.input {
+  border: 1px solid #475384;
+  max-width: 10rem;
+  padding: 1rem;
+}
+
+.button_column {
+  border: 1px solid #475384;
+  max-width: 10rem;
+  margin-left: auto;
+  padding: 1rem;
+}
+
+.table {
+  border-radius: 12px;
+  border: 1px solid #475384;
+  padding: 0.5rem;
+}
+
+.table_header {
+  background-color: #181a1d;
+  color: #fff;
+  border: 1px solid #181a1d;
+}
+
+.table_body {
+  border: 1px solid #181a1d;
+  color: #bdb8b8;
+}

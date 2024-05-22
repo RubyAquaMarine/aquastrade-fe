@@ -3,7 +3,7 @@
 }
 /* 100% view window to prevent the chart scrol bar from activating*/
 .container_positioning {
-  z-index: 40;
+  z-index: 2;
   width: 99vw;
 
   height: fit-content;

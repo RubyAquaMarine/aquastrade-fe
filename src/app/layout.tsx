@@ -5,8 +5,6 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 
 import "./globals.css";
 import { Providers } from "./providers";
-import styles from "./Styles/MainBody.module.css";
-
 import Navbar from "@/app/Components/Navbar";
 import NavbarBottom from "./Components/navbarBottom";
 
@@ -16,7 +14,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Aquas.Trade",
-  description: "SKALE network Defi Hub",
+  description:
+    "Fastest growing defi hub on the l2 modular scaling network: SKALE $SKL",
 };
 // React Componenet
 // add Nav - Footer - Header here - or any seo - build consistent layout for app

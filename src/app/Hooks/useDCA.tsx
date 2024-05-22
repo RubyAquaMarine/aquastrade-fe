@@ -1,18 +1,15 @@
 "use client";
 
 import { useReadContract } from "wagmi";
-
-import { AQUAFEED_ABI } from "@/app/Abi/europaAquaFeed";
-
+import { DCA_ABI } from "@/app/Abi/dca";
 import { findContractInfo } from "@/app/Utils/findTokens";
 
-const AQUAFEED = findContractInfo("aquafeed");
+const DCA = findContractInfo("dcamulti");
 
-export const useAquaFeed = (functionName: string, args?: [any]) => {
-  console.log("useAquaFeed Fetch ", functionName, args);
+export const useDCA = (functionName: string, args?: [any]) => {
   const { data, isError, isLoading } = useReadContract({
-    abi: AQUAFEED_ABI,
-    address: AQUAFEED?.address,
+    abi: DCA_ABI,
+    address: DCA?.address,
     functionName: functionName as unknown as undefined,
     args: args,
   });

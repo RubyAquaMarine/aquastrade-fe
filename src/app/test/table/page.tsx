@@ -1,0 +1,113 @@
+"use client";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
+
+import BasicTable from "@/app/Components/table/BasicTable";
+
+export type DataFeed = {
+  id: string;
+  poolAddress: string;
+  poolPrice: string;
+  feedPrice: string;
+  assets: string[];
+};
+
+const TokenList = ({ params }: any) => {
+  const [savedData, setData] = useState<DataFeed[]>([]);
+
+  const data: DataFeed[] = React.useMemo(
+    () => [
+      {
+        id: "0",
+        poolAddress: "0xgfdh546",
+        poolPrice: "123",
+        feedPrice: "343",
+        assets: ["ETH", "USD"],
+      },
+      {
+        id: "1",
+        poolAddress: "0x",
+        poolPrice: "123",
+        feedPrice: "343",
+        assets: ["ETH", "USDT"],
+      },
+      {
+        id: "2",
+        poolAddress: "0x",
+        poolPrice: "123",
+        feedPrice: "343",
+        assets: ["ETH", "USDC"],
+      },
+      {
+        id: "3",
+        poolAddress: "0x",
+        poolPrice: "123",
+        feedPrice: "343",
+        assets: ["ETH", "USDP"],
+      },
+      {
+        id: "4",
+        poolAddress: "0x",
+        poolPrice: "123",
+        feedPrice: "343",
+        assets: ["ETH", "USD"],
+      },
+    ],
+    [],
+  );
+
+  const dataOne: DataFeed[] = [
+    {
+      id: "0",
+      poolAddress: "0xgfdh546",
+      poolPrice: "123",
+      feedPrice: "343",
+      assets: ["ETH", "USD"],
+    },
+    {
+      id: "1",
+      poolAddress: "0x",
+      poolPrice: "123",
+      feedPrice: "343",
+      assets: ["ETH", "USDT"],
+    },
+    {
+      id: "2",
+      poolAddress: "0x",
+      poolPrice: "123",
+      feedPrice: "343",
+      assets: ["ETH", "USDC"],
+    },
+    {
+      id: "3",
+      poolAddress: "0x",
+      poolPrice: "123",
+      feedPrice: "343",
+      assets: ["ETH", "USDP"],
+    },
+    {
+      id: "4",
+      poolAddress: "0x",
+      poolPrice: "123",
+      feedPrice: "343",
+      assets: ["ETH", "USD"],
+    },
+  ];
+
+  const dataTwo = useCallback(() => {
+    setData(dataOne);
+  }, [savedData]);
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <BasicTable></BasicTable>
+    </main>
+  );
+};
+
+export default TokenList;

@@ -279,7 +279,7 @@ export const DCA_ABI = [
         components: [
           {
             internalType: "uint256",
-            name: "index",
+            name: "_globalID",
             type: "uint256",
           },
           {
@@ -500,6 +500,19 @@ export const DCA_ABI = [
   },
   {
     inputs: [],
+    name: "GlobalID",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "MAX_ORDERS",
     outputs: [
       {
@@ -643,19 +656,6 @@ export const DCA_ABI = [
         internalType: "contract DCAStorage",
         name: "",
         type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "index",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
       },
     ],
     stateMutability: "view",

@@ -7,6 +7,25 @@
   max-width: 400px;
 }
 
+.amount_title {
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
+}
+
+.amount_eth {
+  margin-left: 1rem;
+  color: rgb(194, 187, 187);
+  margin-bottom: 0.2rem;
+}
+
+.container_sm {
+  display: flex;
+  justify-content: center;
+
+  text-align: center;
+  padding: 1rem;
+}
+
 .text_style_bottom {
   padding: 0.6rem 1rem;
   border-bottom: 1px solid #2196f3;
@@ -57,4 +76,11 @@
 .dropdown_bd {
   border: 1px solid #475384;
   background-color: #141618;
+}
+
+.image_invert_center {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  margin-left: 1rem;
+  margin-right: 1rem;
 }

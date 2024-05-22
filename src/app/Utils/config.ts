@@ -65,18 +65,18 @@ export const contractAddresses = [
   {
     id: 8,
     name: "memecreator",
-    address: "0xbB794A1F6C13E604bFEf1b56FbE1e02d1674f4f2",
+    address: "0x30A3180ED7fE976ADF737c4369320C5c13800Eaa",
   },
 
   {
     id: 9,
     name: "dcamulti",
-    address: "0x9683ADC7FD56b81F1eb70040B30864a822C330f2",
+    address: "0xa099229c5Ed1649c069381af8D3851304EcFBb69",
   },
   {
     id: 10,
     name: "aquafeed",
-    address: "0xe204717f1986513d121fC75DddEd806Af61550b5",
+    address: "0x3330427464D4c6A2e2E587621e9D7C405D754F02",
   },
   {
     id: 11,
