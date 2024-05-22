@@ -11,7 +11,7 @@ import { useAccount } from "wagmi";
 
 // Custom stuff
 
-import TokenInfoBox from "@/app/Components/TokenInfoBox";
+import TokenInfoBox from "@/app/Components/TokenInfoBoxOld";
 
 import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
 

@@ -3,15 +3,17 @@ import React, { useMemo } from "react";
 
 import TableDataFeed from "@/app/Components/table/TableDataFeed";
 
-type DataFeedV = {
+export type DataFeedV = {
   id: string;
-  poolAddress: string;
-  poolPrice: string;
-  feedPrice: string;
+  pool: string;
+  pricePool: string;
+  priceFeed: string;
   assets: string[];
+  quote: string;
+  base: string;
 };
 
-const Overview = (params: DataFeedV[]) => {
+export const Overview = (params: DataFeedV[]) => {
   const newArray = Object.values(params);
   const data: DataFeedV[] = useMemo(() => newArray, []);
   return (
@@ -20,5 +22,3 @@ const Overview = (params: DataFeedV[]) => {
     </div>
   );
 };
-
-export default Overview;
