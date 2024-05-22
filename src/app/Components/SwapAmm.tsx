@@ -9,7 +9,7 @@ import {
   useWaitForTransactionReceipt,
 } from "wagmi";
 import React, { useState, useEffect, useRef } from "react";
-import { formatUnits, parseEther, parseUnits } from "viem";
+import { formatUnits, parseUnits } from "viem";
 
 import { ToastContainer, Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -303,7 +303,7 @@ const SwapAmm = () => {
         functionName: "swapExactTokensForTokens",
         args: [
           parseUnits(amountA, Number(tokenADecimal?.current)),
-          parseEther("0.0"),
+          parseUnits("0.0", 18),
           pathForPools(tokenAAddress.current, tokenBAddress.current),
           address,
           timeIs,

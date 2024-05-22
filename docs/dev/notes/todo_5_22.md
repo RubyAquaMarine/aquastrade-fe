@@ -1,3 +1,5 @@
+0.000 000 000 000 000 01
+
 <TokenInfoBox>
 
 # search daily

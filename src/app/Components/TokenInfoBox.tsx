@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, memo, useRef } from "react";
-import { parseEther, parseUnits, formatUnits } from "viem";
+import { formatUnits } from "viem";
 import {
   Card,
   CardContent,

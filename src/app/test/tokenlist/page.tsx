@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import React, { useRef, useEffect, useState } from "react";
-import { parseEther, parseUnits, formatUnits } from "viem";
+import { formatUnits } from "viem";
 import styled from "@/app/Styles/Pools.module.css";
 import styles from "@/app/Styles/Container.module.css";
 

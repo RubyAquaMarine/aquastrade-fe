@@ -12,12 +12,13 @@ import {
   useWaitForTransactionReceipt,
   useSwitchChain,
 } from "wagmi";
-import { formatUnits, parseUnits, parseEther } from "viem";
+import { formatUnits, parseUnits } from "viem";
 
 import {
   findTokenAddressFromSymbol,
   findTokenDecimalsFromSymbol,
   findContractInfo,
+  findTokenFromSymbol,
 } from "@/app/Utils/findTokens";
 import {
   CHAIN,
@@ -106,7 +107,7 @@ const DCAInterface: React.FC = () => {
 
   // get contracts or assets
   const contractDCAMulti = findContractInfo("dcamulti");
-  const token_address_aqua = findTokenAddressFromSymbol("AQUA");
+  const token_address_aqua = findTokenFromSymbol("AQUA");
   // todo : refactor to findTokenFrom
   const tokenAddress_a = findTokenAddressFromSymbol(inputTokenA);
   const tokenAddress_b = findTokenAddressFromSymbol(inputTokenB);
@@ -253,8 +254,10 @@ const DCAInterface: React.FC = () => {
 
       BigInt(inputSwapSpeed * 60), // convert seconds to minutes
       BigInt(inputInvestmentDuration),
-      parseEther(inputMinPrice),
-      parseEther(inputMaxPrice),
+
+      parseUnits(inputMinPrice, dec), // The bug
+      parseUnits(inputMaxPrice, dec),
+
       parseUnits(inputTokenAmount, dec),
       inputIsBuying,
     ];
@@ -425,7 +428,7 @@ const DCAInterface: React.FC = () => {
 
             {contractDCAMulti &&
               inputTokenAmount &&
-              tokenAddress_b !== token_address_aqua && (
+              tokenAddress_b !== token_address_aqua?.address && (
                 <TokenApprove
                   props={[
                     "allowance",
@@ -445,7 +448,7 @@ const DCAInterface: React.FC = () => {
             {/** adding one AQUA to the approval amount when selling AQUA for the QUOTE asset  */}
             {contractDCAMulti &&
               inputTokenAmount &&
-              tokenAddress_b === token_address_aqua && (
+              tokenAddress_b === token_address_aqua?.address && (
                 <TokenApprove
                   props={[
                     "allowance",
@@ -465,7 +468,7 @@ const DCAInterface: React.FC = () => {
 
             {contractDCAMulti &&
             inputIsBuying &&
-            tokenAddress_b !== token_address_aqua ? (
+            tokenAddress_b !== token_address_aqua?.address ? (
               <span>
                 {" "}
                 <span className={styles.text_center}>
@@ -475,9 +478,13 @@ const DCAInterface: React.FC = () => {
                   <TokenApprove
                     props={[
                       "allowance",
-                      token_address_aqua,
-                      parseEther("1.0"),
-                      [address, contractDCAMulti.address, 18],
+                      token_address_aqua?.address,
+                      parseUnits("1.0", token_address_aqua?.decimals),
+                      [
+                        address,
+                        contractDCAMulti.address,
+                        token_address_aqua?.decimals,
+                      ],
                     ]}
                   ></TokenApprove>{" "}
                 </span>
@@ -488,14 +495,18 @@ const DCAInterface: React.FC = () => {
 
             {contractDCAMulti &&
             !inputIsBuying &&
-            tokenAddress_a !== token_address_aqua ? (
+            tokenAddress_a !== token_address_aqua?.address ? (
               <span className={styles.text_center}>
                 <TokenApprove
                   props={[
                     "allowance",
-                    token_address_aqua,
-                    parseEther("1.0"),
-                    [address, contractDCAMulti.address, token_decimal_b],
+                    token_address_aqua?.address,
+                    parseUnits("1.0", token_address_aqua?.decimals),
+                    [
+                      address,
+                      contractDCAMulti.address,
+                      token_address_aqua?.decimals,
+                    ],
                   ]}
                 ></TokenApprove>
               </span>

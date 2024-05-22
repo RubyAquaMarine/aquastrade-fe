@@ -3,7 +3,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import { parseEther, formatUnits } from "viem";
+import { formatUnits } from "viem";
 import {
   useAccount,
   useSwitchChain,
@@ -16,7 +16,10 @@ import TokenApprove from "@/app/Components/TokenApprove";
 import TokenBalance from "@/app/Components/TokenBalance";
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
 import { CHAIN } from "@/app/Utils/config";
-import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
+import {
+  findTokenAddressFromSymbol,
+  findTokenFromSymbol,
+} from "@/app/Utils/findTokens";
 import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
 import styles from "@/app/Styles/Coinflip.module.css";
 
@@ -41,7 +44,8 @@ const CoinFlip = (params: Props) => {
   });
 
   // Use the Symbol to find the Token Address || or use PayToken (RPC)
-  const token_address_erc20 = findTokenAddressFromSymbol(params?.props?.[1]);
+  // const token_address_erc20 = findTokenAddressFromSymbol(params?.props?.[1]);
+  const token_address_erc20 = findTokenFromSymbol(params?.props?.[1]);
 
   // todo Promiseall
   const {
@@ -82,7 +86,7 @@ const CoinFlip = (params: Props) => {
           abi: COIN_FLIP_ABI,
           address: params?.props?.[0],
           functionName: "flipCoin",
-          args: [parseEther(inputs[0], "wei")],
+          args: [parseUnits(inputs[0], "wei")],
         });
         break;
     }
@@ -166,7 +170,11 @@ const CoinFlip = (params: Props) => {
                 <span className={styles.text_center}>
                   {token_address_erc20 && (
                     <TokenBalance
-                      props={[token_address_erc20, 18, params?.props?.[0]]}
+                      props={[
+                        token_address_erc20?.address,
+                        token_address_erc20?.decimals,
+                        params?.props?.[0],
+                      ]}
                     ></TokenBalance>
                   )}
                 </span>{" "}
@@ -203,15 +211,24 @@ const CoinFlip = (params: Props) => {
                   <span className={styles.text_center_sm}> Approved: </span>
 
                   <span className={styles.text_center}>
-                    {" "}
-                    <TokenApprove
-                      props={[
-                        "allowance",
-                        token_address_erc20,
-                        parseEther(inputs[0]),
-                        [address, params?.props?.[0]],
-                      ]}
-                    ></TokenApprove>{" "}
+                    {token_address_erc20 ? (
+                      <span>
+                        {" "}
+                        <TokenApprove
+                          props={[
+                            "allowance",
+                            token_address_erc20?.address,
+                            parseUnits(
+                              inputs[0],
+                              token_address_erc20?.decimals,
+                            ),
+                            [address, params?.props?.[0]],
+                          ]}
+                        ></TokenApprove>
+                      </span>
+                    ) : (
+                      <span> </span>
+                    )}
                   </span>
                 </div>
               </div>

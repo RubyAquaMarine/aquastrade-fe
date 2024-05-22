@@ -2,7 +2,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
-import { formatUnits, parseEther, parseUnits } from "viem";
+import { formatUnits, parseUnits } from "viem";
 import { findTokenFromSymbol, findContractInfo } from "@/app/Utils/findTokens";
 
 import { useAMMPairs, useFactory } from "@/app/Hooks/useAMM";
