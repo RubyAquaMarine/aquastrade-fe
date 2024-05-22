@@ -107,6 +107,7 @@ const DCAInterface: React.FC = () => {
   // get contracts or assets
   const contractDCAMulti = findContractInfo("dcamulti");
   const token_address_aqua = findTokenAddressFromSymbol("AQUA");
+  // todo : refactor to findTokenFrom
   const tokenAddress_a = findTokenAddressFromSymbol(inputTokenA);
   const tokenAddress_b = findTokenAddressFromSymbol(inputTokenB);
   const token_decimal_a = findTokenDecimalsFromSymbol(inputTokenA);
@@ -128,8 +129,8 @@ const DCAInterface: React.FC = () => {
       inputPoolData.map((pool) => {
         pool.symbol === inputPoolSymbol
           ? setTokenA(pool.tokenA) &
-            setTokenB(pool.tokenB) &
-            setPoolAddress(pool.address)
+          setTokenB(pool.tokenB) &
+          setPoolAddress(pool.address)
           : "0";
       });
     }
@@ -370,7 +371,8 @@ const DCAInterface: React.FC = () => {
           </span>
 
           {/** Show the wallet balance of the two tokens within the Pair */}
-          <span className={styles.text_center}>
+
+          {inputPoolAddress ? <span>  <span className={styles.text_center}>
             <span className={styles.column_balance}>
               {inputTokenA} {" : "}
             </span>
@@ -385,20 +387,22 @@ const DCAInterface: React.FC = () => {
             </span>
           </span>
 
-          <span className={styles.text_center}>
-            <span className={styles.column_balance}>
-              {inputTokenB} {" : "}
-            </span>
-            <span className={styles.column_balance}>
-              {inputTokenBBalance &&
-                parseFloat(
-                  formatUnits(
-                    inputTokenBBalance.balance,
-                    inputTokenBBalance.decimals,
-                  ),
-                ).toFixed(8)}
-            </span>
-          </span>
+            <span className={styles.text_center}>
+              <span className={styles.column_balance}>
+                {inputTokenB} {" : "}
+              </span>
+              <span className={styles.column_balance}>
+                {inputTokenBBalance &&
+                  parseFloat(
+                    formatUnits(
+                      inputTokenBBalance.balance,
+                      inputTokenBBalance.decimals,
+                    ),
+                  ).toFixed(8)}
+              </span>
+            </span> </span> : <span> </span>}
+
+
 
           <div className={styles.container}>
             <span className={styles.text_center}>
@@ -456,8 +460,8 @@ const DCAInterface: React.FC = () => {
               )}
 
             {contractDCAMulti &&
-            inputIsBuying &&
-            tokenAddress_b !== token_address_aqua ? (
+              inputIsBuying &&
+              tokenAddress_b !== token_address_aqua ? (
               <span>
                 {" "}
                 <span className={styles.text_center}>
@@ -479,8 +483,8 @@ const DCAInterface: React.FC = () => {
             )}
 
             {contractDCAMulti &&
-            !inputIsBuying &&
-            tokenAddress_a !== token_address_aqua ? (
+              !inputIsBuying &&
+              tokenAddress_a !== token_address_aqua ? (
               <span className={styles.text_center}>
                 <TokenApprove
                   props={[
@@ -580,15 +584,16 @@ const DCAInterface: React.FC = () => {
                 </span>{" "}
                 {/** */}
                 <span className={styles.text_center_sm}>
-                  {" "}
-                  PoolPrice:{" "}
-                  <PoolPrice
-                    {...{
-                      id: inputPoolAddress,
-                      pool: inputPoolAddress,
-                      base_decimal: token_decimal_b,
-                    }}
-                  ></PoolPrice>
+                  {inputPoolAddress && token_decimal_b ? <span> {" "}
+                    PoolPrice:{" "}
+                    <PoolPrice
+                      {...{
+                        id: inputPoolAddress,
+                        pool: inputPoolAddress,
+                        base_decimal: token_decimal_b,
+                      }}
+                    ></PoolPrice> </span> : <span> </span>}
+
                 </span>
               </p>
             ) : (

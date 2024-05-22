@@ -92,20 +92,21 @@ export default function TableDataFeed(dataFeed: any) {
         const base: string = row.getValue("base");
         const dec = findTokenFromAddress(base)?.decimals;
         const inAmount: bigint = row.getValue("pricePool");
+        // todo
         // need to normalize all data based on the  base token decimals  ..
         // this is a bug....  working for btc and eth but not on skl
         let value;
         const cc = parseUnits("1", dec);
 
         if (inAmount && BigInt(inAmount) < cc) {
-          console.log("debug Shit +++++ ");
+       
           value = parseFloat(
             formatUnits(row.getValue("pricePool"), dec),
           ).toFixed(18);
         }
 
         if (inAmount && inAmount > cc) {
-          console.log("debug Shit ----");
+       
           value = parseFloat(
             formatUnits(row.getValue("pricePool"), dec),
           ).toFixed(2);
