@@ -464,7 +464,6 @@ const DCAInterface: React.FC = () => {
                   Approve 1 AQUA (fee){" "}
                 </span>{" "}
                 <span>
-                  bug in decimals{" "}
                   <TokenApprove
                     props={[
                       "allowance",
@@ -483,13 +482,12 @@ const DCAInterface: React.FC = () => {
             !inputIsBuying &&
             tokenAddress_a !== token_address_aqua ? (
               <span className={styles.text_center}>
-                bug in decimals
                 <TokenApprove
                   props={[
                     "allowance",
                     token_address_aqua,
                     parseEther("1.0"),
-                    [address, contractDCAMulti.address, 18],
+                    [address, contractDCAMulti.address, token_decimal_b],
                   ]}
                 ></TokenApprove>
               </span>

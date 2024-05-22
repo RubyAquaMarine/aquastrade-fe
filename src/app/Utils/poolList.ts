@@ -180,9 +180,47 @@ export const poolListAqua = [
     logoQuote: "/ETH.svg",
     logoBase: "/USDT.svg",
   },
+  {
+    id: 43,
+    symbol: "ETH-USDC",
+    address: "0xC9B43EeDe1894e299681874c2BFB7B12A85Ae458",
+    tokenA: "ETH",
+    tokenB: "USDC",
+    decimals: 18,
+    logoQuote: "/ETH.svg",
+    logoBase: "/USDC.svg",
+  },
+  {
+    id: 44,
+    symbol: "BTC-USDC",
+    address: "0x75512336c999C3a1B1e4d4270713B9aA39a9cC1a",
+    tokenA: "BTC",
+    tokenB: "USDC",
+    decimals: 18,
+    logoQuote: "/BTC.svg",
+    logoBase: "/USDC.svg",
+  },
+  {
+    id: 45,
+    symbol: "SKL-USDT",
+    address: "0x41D2f4A3a67636E236CAA36A407dCF1d219FD9Dd",
+    tokenA: "SKL",
+    tokenB: "USDT",
+    decimals: 18,
+    logoQuote: "/SKL.svg",
+    logoBase: "/USDT.svg",
+  },
+  {
+    id: 46,
+    symbol: "SKL-USDC",
+    address: "0xE9891205b75B5ebea07EDe0F11B6ef58A1d8e3b1",
+    tokenA: "SKL",
+    tokenB: "USDC",
+    decimals: 18,
+    logoQuote: "/SKL.svg",
+    logoBase: "/USDC.svg",
+  },
 ] as const;
-
-// 0x35621160d0Aaf48B33b5A040f16DD035C037a88B
 
 // 6 pools
 export const poolListRuby = [
