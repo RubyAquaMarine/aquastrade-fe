@@ -1,4 +1,5 @@
-0.000 000 000 000 000 01
+FDV calculation .... 
+presale page token_approve button feels smoothier than the rest of the site...... um copy that code. 
 
 <TokenInfoBox>
 
@@ -6,20 +7,6 @@
 
 // todo
 // client-side: async functions
-
-## DCA
-
-btcusdt and usdc dca orders working : but dont remeber the input min_max values ....... try again
-
-- btc : usdt , pool price at 72455
-
-- btc : usdc , pool price at 28500
-
-- eth : usdt , pool price at 3025.30
-  -- order : min 0.1 and max 60k
-
-- eth : usdc , pool price at 3052++ (working)
-  -- order : min 0.0000000000001 and max 3200 (testing)
 
 ## overview
 

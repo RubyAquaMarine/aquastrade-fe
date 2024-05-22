@@ -115,7 +115,7 @@ const DCAInterface: React.FC = () => {
   const token_decimal_b = findTokenDecimalsFromSymbol(inputTokenB);
 
   // NEW
-  const { data: globalID, isLoading, isError } = useDCA("index");
+  const { data: globalID, isLoading, isError } = useDCA("GlobalID");
 
   // when inputPoolSymbol changes,  need to update the inputPoolAddress
 
