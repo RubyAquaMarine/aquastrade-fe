@@ -2,6 +2,13 @@
 
 - regEx on all inputs : prevent ui crash from entering non number
 
+# AMM routing
+
+- USDC / BTC pool exists , but trad is being routed through AQUA : Turn Off MultiHop : within the settings
+- Recommended route will always be with AQUA as the MultiHop if swapping non AQUA base pools. ok this should be ok for UX design.
+- How to show the best routing? Or default to multihop 100% of time, or check for what Pool has the best rates (liquidity amounts, getAmountsOut logic)
+- maybe make a smart contract routing for the frontend to do computations ^^
+
 # Token Approve
 
 - doesn't reset after successful tx. user needs to switch assets ( toggle), or menu toggle to reset the TokenApprove componment

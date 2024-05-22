@@ -99,14 +99,12 @@ export default function TableDataFeed(dataFeed: any) {
         const cc = parseUnits("1", dec);
 
         if (inAmount && BigInt(inAmount) < cc) {
-       
           value = parseFloat(
             formatUnits(row.getValue("pricePool"), dec),
           ).toFixed(18);
         }
 
         if (inAmount && inAmount > cc) {
-       
           value = parseFloat(
             formatUnits(row.getValue("pricePool"), dec),
           ).toFixed(2);

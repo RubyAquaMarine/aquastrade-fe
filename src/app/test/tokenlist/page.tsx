@@ -185,7 +185,7 @@ const Home = () => {
       {savedToken ? (
         <span>
           {" "}
-          <TokenInfoBox props={[savedToken, savedToken]}> </TokenInfoBox>{" "}
+          <TokenInfoBox {...{ address: savedToken }}> </TokenInfoBox>{" "}
         </span>
       ) : (
         <span> </span>
@@ -196,3 +196,4 @@ const Home = () => {
   );
 };
 export default Home;
+//    <TokenInfoBox props={[savedToken, savedToken]}> </TokenInfoBox>{" "}

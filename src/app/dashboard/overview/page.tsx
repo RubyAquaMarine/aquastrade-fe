@@ -56,15 +56,24 @@ const Home = ({ params }: any) => {
 
   return (
     <main className={styles.container}>
-      {address && isConnected && tableData && chain && chain.id === CHAIN.id ? (
+      {inputWallet && tableData && chain && chain.id === CHAIN.id ? (
         // @ts-ignore: Unreachable code error
         <Overview {...tableData}></Overview>
       ) : (
-        <span className={styles.button_back}>  <Link href="/">
-        {" "}
-        <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
-        features)
-      </Link></span>
+        <span className={styles.button_back}>
+          {!tableData && inputWallet && chain && chain.id === CHAIN.id ? (
+            <span>Loading OverView </span>
+          ) : (
+            <span>
+              {" "}
+              <Link href="/">
+                {" "}
+                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+                features)
+              </Link>{" "}
+            </span>
+          )}
+        </span>
       )}
     </main>
   );
