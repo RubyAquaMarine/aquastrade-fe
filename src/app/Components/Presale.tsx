@@ -100,11 +100,7 @@ const Presale: React.FC = (props: Props) => {
   const loadTokenUSDInfo = findTokenFromAddress(inputUSDAddress);
 
   useEffect(() => {
-    console.log("=========use effect==================");
-
     if (tokenSupplyRemaining && tokenSupply) {
-      console.log("=========use effect===working===============");
-
       setRemainingTokens(
         Number((tokenSupplyRemaining * 10000n) / tokenSupply) / 100,
       );
@@ -168,13 +164,13 @@ const Presale: React.FC = (props: Props) => {
     setDDSymbol(!showDropdownSymbol);
   };
 
-  console.log(
-    "Render Presale",
-    remaingTokens,
-    tokenSupply,
-    tokenSupplyRemaining,
-    presaleTokenAddress,
-  );
+  // console.log(
+  //   "Render Presale",
+  //   remaingTokens,
+  //   tokenSupply,
+  //   tokenSupplyRemaining,
+  //   presaleTokenAddress,
+  // );
 
   return (
     <div>
@@ -183,7 +179,9 @@ const Presale: React.FC = (props: Props) => {
           {presaleTokenAddress ? "" : "Loading"}
 
           <span className={styles.text_bd}> Next Raise </span>
-          <PresaleTokenInfo props={presaleTokenAddress}></PresaleTokenInfo>
+          <PresaleTokenInfo
+            {...{ address: presaleTokenAddress }}
+          ></PresaleTokenInfo>
 
           <div className={styles.container_flex_tokens}>
             {" "}

@@ -7,6 +7,7 @@ import { formatUnits, parseUnits } from "viem";
 /*
   AquasTrade components
 */
+import TokenFDV from "@/app/Components/TokenFDV";
 import TokenBalanceOf from "@/app/Components/TokenBalanceOf";
 import TokenSupply from "@/app/Components/TokenSupply";
 /*
@@ -14,6 +15,7 @@ import TokenSupply from "@/app/Components/TokenSupply";
 */
 
 import { usePresale } from "@/app/Hooks/usePresale";
+import { useERC20Token } from "@/app/Hooks/useAMM";
 
 /*
   AquasTrade config
@@ -30,46 +32,42 @@ import {
 import styles from "@/app/Styles/Presale.module.css";
 
 type Props = {
-  _address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
   address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
 };
 
+// Presale Contract
+export const contractPresale = findContractInfo("presale");
+
 const PresaleTokenInfo: React.FC = (props: Props) => {
-  const presaleTokenAddress = props?.props;
+  const presaleTokenAddress = props?.address;
 
-  const tokenSupply = useRef();
-
-  const [divTest, setDomElement] = useState();
-
+  const [fdv, setFDV] = useState();
   const { data: isPresalePaused } = usePresale("isPaused");
   const { data: maxAllocation } = usePresale("maxAllocation");
   const { data: priceInUSD } = usePresale("price");
-  const { data: presaleOwner } = usePresale("presaleOwner");
+  //  const { data: presaleOwner } = usePresale("presaleOwner");
 
-  // Presale Contract
-  const contractPresale = findContractInfo("presale");
+  // new
+
+  const [tokenSupply, setBalance] = useState(BigInt(0));
+
+  const { data: token_balance, isLoading } = useERC20Token(
+    presaleTokenAddress,
+    "totalSupply",
+    [],
+  );
 
   const loadTokenPresaleInfo = findTokenFromAddress(presaleTokenAddress);
 
-  console.log("Render PresaleTokenInfo", props, tokenSupply);
-
   const _domElement = window.document.getElementById("token_supply")?.innerText;
 
-  // nothing important here. just testing
   useEffect(() => {
-    if (_domElement) {
-      setDomElement(_domElement);
-      tokenSupply.current = getFDV(_domElement, priceInUSD);
+    if (token_balance) {
+      setBalance(token_balance);
     }
-  }, [_domElement]);
+  }, [token_balance]);
 
-  const getFDV = (_supply: string, _price: bigint) => {
-    const normSupply = Number(_supply) * Number(formatUnits(_price, 18));
-
-    return normSupply.toFixed(2);
-  };
-
-  console.log("TEST", divTest, _domElement, priceInUSD, tokenSupply.current);
+  // priceInUSD,tokenSupply: tokenSupply
 
   return (
     <div>
@@ -123,7 +121,12 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
           </li>
           <li>
             <span className={styles.text_sm}> FDV : {"$"} </span>{" "}
-            {tokenSupply.current}
+            <span>
+              {" "}
+              <TokenFDV {...{ price: priceInUSD, tokenSupply: tokenSupply }}>
+                {" "}
+              </TokenFDV>
+            </span>
           </li>
         </ul>
       </div>
@@ -190,4 +193,4 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
   );
 };
 
-export default memo(PresaleTokenInfo);
+export default PresaleTokenInfo;
