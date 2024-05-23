@@ -1,6 +1,6 @@
 // @ts-nocheck
 "use client";
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { formatUnits } from "viem";
 
 import { useERC20Token } from "@/app/Hooks/useAMM";

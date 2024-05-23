@@ -58,12 +58,10 @@ const Presale: React.FC = (props: Props) => {
   // but this never needs to change : mod to useRef
   const inputSymbolsInDropdown = useRef(["USDC", "USDT", "USDP", "DAI"]);
 
-  const [inputUSDAddress, setUSDAddress] = useState<string>(
-    "Select USDC, USDT, USDP, DAI",
-  );
+  const [inputUSDAddress, setUSDAddress] = useState<string>();
 
   // how much in USD to use for purchasing preale
-  const [inputTokenAmount, setTokenAmount] = useState<string>("");
+  const [inputTokenAmount, setTokenAmount] = useState<number>();
 
   // HOOKS
 
@@ -142,7 +140,7 @@ const Presale: React.FC = (props: Props) => {
       functionName: "buy",
       args: [
         loadTokenUSDInfo?.address,
-        parseUnits(inputTokenAmount, loadTokenUSDInfo?.decimals),
+        parseUnits(inputTokenAmount?.toString(), loadTokenUSDInfo?.decimals),
       ],
     });
   };
@@ -171,6 +169,10 @@ const Presale: React.FC = (props: Props) => {
   //   tokenSupplyRemaining,
   //   presaleTokenAddress,
   // );
+
+  function setTwoNumberDecimal(event) {
+    this.value = parseFloat(this.value).toFixed(2);
+  }
 
   return (
     <div>
@@ -219,6 +221,7 @@ const Presale: React.FC = (props: Props) => {
             <input
               type="text"
               value={inputUSDAddress}
+              placeholder="Select USDC, USDT, USDP, DAI"
               onClick={handleMenuState}
               onChange={() => {
                 setDDSymbol(false);
@@ -269,27 +272,36 @@ const Presale: React.FC = (props: Props) => {
               )}{" "}
           </span>
           <span className={styles.text_center}>
-            <input
-              type="text"
-              placeholder="Input USD Amount"
+
+      
+
+            {inputUSDAddress ? <input
+              type="number"
+              placeholder="100"
+              min="0"
+              step="0.01"
               value={inputTokenAmount}
-              onChange={(e) => setTokenAmount(e.target.value)}
+              onChange={(e) => setTokenAmount(Number(e.target.value))}
               className={styles.input_token_amount}
-            />{" "}
+            /> : <span></span>}
+
+
+
+
           </span>
           {inputUSDAddress && inputTokenAmount ? (
             <TokenApprove
               props={[
                 "allowance",
                 inputUSDAddress,
-                parseUnits(inputTokenAmount, loadTokenUSDInfo?.decimals),
+                parseUnits(inputTokenAmount.toString(), loadTokenUSDInfo?.decimals),
                 [address, contractPresale?.address],
               ]}
             />
           ) : (
             <span> </span>
           )}
-          {isPresalePaused === false ? (
+          {inputUSDAddress && isPresalePaused === false ? (
             <span className={styles.container_margin}>
               <button className={styles.button_presale} onClick={doTokenLaunch}>
                 Buy Token
@@ -309,7 +321,7 @@ const Presale: React.FC = (props: Props) => {
                   className={styles.button_presale}
                   onClick={doTokenLaunch}
                 >
-                  Input Values
+                  Select USD
                 </button>
               )}
             </span>
