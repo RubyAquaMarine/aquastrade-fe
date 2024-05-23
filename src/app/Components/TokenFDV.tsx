@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect, memo, useRef } from "react";
 import { formatUnits } from "viem";
@@ -16,7 +15,7 @@ const TokenFDV = (params: Props) => {
     if (_price && _supply) {
       const normSupply =
         Number(formatUnits(_supply, 18)) * Number(formatUnits(_price, 18));
-   
+
       if (normSupply) {
         return normSupply.toFixed(2);
       }

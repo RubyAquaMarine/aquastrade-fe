@@ -88,48 +88,43 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
           </span>{" "}
         </span>
 
-        <ul>
-          <li className={styles.item_cell_top}>
-            <span className={styles.text_bd}>
-              {" "}
-              {loadTokenPresaleInfo.name}{" "}
-            </span>{" "}
-            <span>
-              {" "}
-              <Image
-                src="/EUROPA.png"
-                alt="IDO: presale skale network"
-                width={18}
-                height={18}
-                priority
-              />
-            </span>
-          </li>
-
-          <li>
-            <span className={styles.text_sm}> Symbol :</span>{" "}
-            {loadTokenPresaleInfo.symbol}{" "}
-          </li>
-
-          <li className={styles.text_sm}>
-            <span> Max Supply :</span>
-            <span>
-              <TokenSupply
-                props={[presaleTokenAddress, 18, contractPresale?.address]}
-              ></TokenSupply>{" "}
-            </span>
-          </li>
-          <li>
-            <span className={styles.text_sm}> FDV : {"$"} </span>{" "}
-            <span>
-              {" "}
-              <TokenFDV {...{ price: priceInUSD, tokenSupply: tokenSupply }}>
+        <span className={styles.container_left}>
+          <ul>
+            <li className={styles.item_cell_top}>
+              <span className={styles.text_bd}>
                 {" "}
-              </TokenFDV>
-            </span>
-          </li>
-        </ul>
+                {loadTokenPresaleInfo.name}{" "}
+              </span>{" "}
+              <span className={styles.icon_chain}>
+                {" "}
+                <Image
+                  src="/EUROPA.png"
+                  alt="IDO: presale skale network"
+                  width={25}
+                  height={25}
+                  priority
+                />
+              </span>
+            </li>
+
+            <li>
+              <span className={styles.text_sm}> Symbol :</span>{" "}
+              {loadTokenPresaleInfo.symbol}{" "}
+            </li>
+
+            <li className={styles.item_cell}>
+              <span className={styles.text_sm}> FDV : {"$"} </span>{" "}
+              <span>
+                {" "}
+                <TokenFDV {...{ price: priceInUSD, tokenSupply: tokenSupply }}>
+                  {" "}
+                </TokenFDV>
+              </span>
+            </li>
+          </ul>
+        </span>
       </div>
+
       <div className={styles.container_flex}>
         <ul>
           <li className={styles.text_border_bottom}> Presale Information </li>
@@ -142,11 +137,8 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
             )}
           </li>
 
-          <li>
-            <span className={styles.text_sm}>
-              {" "}
-              Price per {loadTokenPresaleInfo.symbol} : ${" "}
-            </span>
+          <li className={styles.text_sm}>
+            <span> Price per {loadTokenPresaleInfo.symbol} : $ </span>
             {priceInUSD ? (
               <span> {formatUnits(priceInUSD, 18)}</span>
             ) : (
@@ -154,20 +146,20 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
             )}
           </li>
 
-          <li>
-            <span className={styles.text_sm}> Max Allocation : </span>
+          <li className={styles.text_sm}>
+            <span> Max Allocation : </span>
             {maxAllocation ? (
               <span>
                 {" "}
-                {formatUnits(maxAllocation, 18)} {" token"}
+                {formatUnits(maxAllocation, 18)} {loadTokenPresaleInfo.symbol}
               </span>
             ) : (
               <span> </span>
             )}
           </li>
 
-          <li>
-            <span className={styles.text_sm}> Max USD Amount : $</span>
+          <li className={styles.text_sm}>
+            <span> Max USD Amount : $</span>
 
             {priceInUSD && maxAllocation ? (
               <span>
@@ -181,11 +173,12 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
           </li>
 
           <li className={styles.text_sm}>
-            {" "}
-            <span> Remaining Tokens: </span>{" "}
-            <TokenBalanceOf
-              props={[presaleTokenAddress, 18, contractPresale?.address]}
-            ></TokenBalanceOf>
+            <span> Max Supply :</span>
+            <span>
+              <TokenSupply
+                props={[presaleTokenAddress, 18, contractPresale?.address]}
+              ></TokenSupply>{" "}
+            </span>
           </li>
         </ul>
       </div>
