@@ -29,7 +29,7 @@ type ADDRESS = {
 
 const TokenInfoBox = (props: ADDRESS) => {
   const { address, isConnected, chain, addresses } = useAccount();
-  const logo_url = useRef();
+  const logo_url = useRef<string>();
 
   const [savedData, setData] = useState<any>();
 
@@ -38,17 +38,22 @@ const TokenInfoBox = (props: ADDRESS) => {
 
   useEffect(() => {
     if (token) {
-      console.log("Render: TokenInfoBox: preConfig: ", token, " Fetched Data", data);
-      setData(token);// set token info from the preConfigs , otherwise use the feteched data
+      console.log(
+        "Render: TokenInfoBox: preConfig: ",
+        token,
+        " Fetched Data",
+        data,
+      );
+      setData(token); // set token info from the preConfigs , otherwise use the feteched data
       logo_url.current = token.logo;
     } else {
       // No logo exists for this token
+      logo_url.current = '/EUROPA.png' as string;
       setData(data);
     }
   }, [token]);
 
-
- // console.log("TokenInfoBox  Saved Token ", savedData)
+  // console.log("TokenInfoBox  Saved Token ", savedData)
 
   return (
     <div>

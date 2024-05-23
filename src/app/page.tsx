@@ -83,17 +83,17 @@ const Home = ({ children, params }: any) => {
                       text_size="13"
                       text_size_to="16"
                     ></TextSizeAdjuster>
-                    
-                      <Image
-              className={styles.image_invert_center}
-              src={`/SKL.svg`}
-              alt="AquasTrade Logo outbound external links"
-              width={30}
-              height={30}
-              priority
-            />
+
+                    <Image
+                      className={styles.image_invert_center}
+                      src={`/SKL.svg`}
+                      alt="AquasTrade Logo outbound external links"
+                      width={30}
+                      height={30}
+                      priority
+                    />
                   </span>
-                 
+
                   <span>
                     <ConnectWallet></ConnectWallet>
                   </span>
