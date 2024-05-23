@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import TextSizeAdjuster from "@/app/Components/ViewPort";
 import ConnectWallet from "@/app/Components/ConnectWallet";
@@ -79,11 +79,21 @@ const Home = ({ children, params }: any) => {
                   </span>
                   <span className={styles.text_body}>
                     <TextSizeAdjuster
-                      text={"Reimagine 0 gas fees"}
+                      text={"Reimagine 0 gas fees on"}
                       text_size="13"
                       text_size_to="16"
                     ></TextSizeAdjuster>
+                    
+                      <Image
+              className={styles.image_invert_center}
+              src={`/SKL.svg`}
+              alt="AquasTrade Logo outbound external links"
+              width={30}
+              height={30}
+              priority
+            />
                   </span>
+                 
                   <span>
                     <ConnectWallet></ConnectWallet>
                   </span>
