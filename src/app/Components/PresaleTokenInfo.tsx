@@ -2,7 +2,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import React, { memo } from "react";
+import React, { memo, useRef, useEffect, useState } from "react";
 import { formatUnits, parseUnits } from "viem";
 /*
   AquasTrade components
@@ -37,6 +37,10 @@ type Props = {
 const PresaleTokenInfo: React.FC = (props: Props) => {
   const presaleTokenAddress = props?.props;
 
+  const tokenSupply = useRef();
+
+  const [divTest, setDomElement] = useState();
+
   const { data: isPresalePaused } = usePresale("isPaused");
   const { data: maxAllocation } = usePresale("maxAllocation");
   const { data: priceInUSD } = usePresale("price");
@@ -47,17 +51,61 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
 
   const loadTokenPresaleInfo = findTokenFromAddress(presaleTokenAddress);
 
-  console.log("Render PresaleTokenInfo", props);
+  console.log("Render PresaleTokenInfo", props, tokenSupply);
+
+  const _domElement = window.document.getElementById("token_supply")?.innerText;
+
+  // nothing important here. just testing
+  useEffect(() => {
+    if (_domElement) {
+      setDomElement(_domElement);
+      tokenSupply.current = getFDV(_domElement, priceInUSD);
+    }
+  }, [_domElement]);
+
+  const getFDV = (_supply: string, _price: bigint) => {
+    const normSupply = Number(_supply) * Number(formatUnits(_price, 18));
+
+    return normSupply.toFixed(2);
+  };
+
+  console.log("TEST", divTest, _domElement, priceInUSD, tokenSupply.current);
 
   return (
     <div>
       <div className={styles.container_flex}>
-        <ul>
-          <li className={styles.text_border_bottom}> Token Information </li>
+        <span className={styles.container_left}>
+          <span className={styles.button_kyc}>
+            <spaan className={styles.icon_info}>
+              {" "}
+              <Image
+                src="/info.svg"
+                alt="info"
+                width={18}
+                height={18}
+                priority
+              />{" "}
+            </spaan>
+            <spaan> No KYC Required</spaan>
+          </span>{" "}
+        </span>
 
-          <li>
-            <span className={styles.text_sm}> Name: </span>{" "}
-            {loadTokenPresaleInfo.name}{" "}
+        <ul>
+          <li className={styles.item_cell_top}>
+            <span className={styles.text_bd}>
+              {" "}
+              {loadTokenPresaleInfo.name}{" "}
+            </span>{" "}
+            <span>
+              {" "}
+              <Image
+                src="/EUROPA.png"
+                alt="IDO: presale skale network"
+                width={18}
+                height={18}
+                priority
+              />
+            </span>
           </li>
 
           <li>
@@ -66,27 +114,14 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
           </li>
 
           <li>
-            {" "}
             <span className={styles.text_sm}> Max Supply : </span>{" "}
             <TokenSupply
               props={[presaleTokenAddress, 18, contractPresale?.address]}
             ></TokenSupply>{" "}
           </li>
           <li>
-            {" "}
-            <span className={styles.text_sm}> FDV : </span>{" "}
-            <TokenSupply
-              props={[presaleTokenAddress, 18, contractPresale?.address]}
-            ></TokenSupply>{" "}
-          </li>
-          <li>
-            <span className={styles.text_sm}> CA :</span>{" "}
-            {loadTokenPresaleInfo.address}{" "}
-          </li>
-
-          <li>
-            <span className={styles.text_sm}> CO :</span>{" "}
-            {presaleOwner && presaleOwner}{" "}
+            <span className={styles.text_sm}> FDV : </span> {"$"}{" "}
+            {tokenSupply.current}
           </li>
         </ul>
       </div>

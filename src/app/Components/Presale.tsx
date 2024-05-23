@@ -171,6 +171,7 @@ const Presale: React.FC = (props: Props) => {
         <div>
           {presaleTokenAddress ? "" : "Loading"}
 
+          <span className={styles.text_bd}> Next Raise </span>
           <PresaleTokenInfo props={presaleTokenAddress}></PresaleTokenInfo>
 
           <div className={styles.container_flex_tokens}>
@@ -264,7 +265,7 @@ const Presale: React.FC = (props: Props) => {
               placeholder="Input USD Amount"
               value={inputTokenAmount}
               onChange={(e) => setTokenAmount(e.target.value)}
-              className={styles.input_token_address}
+              className={styles.input_token_amount}
             />{" "}
           </span>
           {inputUSDAddress && inputTokenAmount ? (

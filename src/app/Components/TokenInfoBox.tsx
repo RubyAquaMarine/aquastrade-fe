@@ -48,7 +48,7 @@ const TokenInfoBox = (props: ADDRESS) => {
       logo_url.current = token.logo;
     } else {
       // No logo exists for this token
-      logo_url.current = '/EUROPA.png' as string;
+      logo_url.current = "/EUROPA.png" as string;
       setData(data);
     }
   }, [token]);

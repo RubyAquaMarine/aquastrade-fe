@@ -1,3 +1,7 @@
+# Icons
+
+https://flowbite.com/icons/
+
 # buttons
 
 Clickable actions

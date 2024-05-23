@@ -1,11 +1,8 @@
 // @ts-nocheck
 "use client";
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useRef } from "react";
 import { formatUnits } from "viem";
-
 import { useERC20Token } from "@/app/Hooks/useAMM";
-
-import styles from "@/app/Styles/TokenBalance.module.css";
 
 interface Props {
   tokenAddress: string;
@@ -14,6 +11,7 @@ interface Props {
 }
 
 const TokenSupply = (params: Props) => {
+  const divRef = useRef<HTMLDivElement>(null);
   const [amount, setBalance] = useState(BigInt(0));
 
   const { data: token_balance, isLoading } = useERC20Token(
@@ -28,10 +26,8 @@ const TokenSupply = (params: Props) => {
     }
   }, [token_balance]);
 
-  console.log("Render TokenSupply", params);
-
   return (
-    <>
+    <div id="token_supply" ref={divRef}>
       <span>
         {!amount || isLoading ? (
           <span> 0.0</span>
@@ -45,7 +41,7 @@ const TokenSupply = (params: Props) => {
           )
         )}
       </span>
-    </>
+    </div>
   );
 };
 

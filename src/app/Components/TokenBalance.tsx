@@ -1,6 +1,6 @@
 // @ts-nocheck
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { formatUnits } from "viem";
 
 import { useERC20Token } from "@/app/Hooks/useAMM";
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const TokenBalance = (params: Props) => {
+  const divRef = useRef<HTMLDivElement>(null);
   const [amount, setBalance] = useState(BigInt(0));
 
   const { data: token_balance, isLoading } = useERC20Token(
@@ -37,7 +38,7 @@ const TokenBalance = (params: Props) => {
   }, [token_balance]);
 
   return (
-    <>
+    <div id="token_balance" ref={divRef}>
       <span>
         {!amount || isLoading ? (
           <span className={styles.container_token_balance}> 0.0</span>
@@ -51,8 +52,8 @@ const TokenBalance = (params: Props) => {
           )
         )}
       </span>
-    </>
+    </div>
   );
 };
 
-export default TokenBalance;
+export default memo(TokenBalance);
