@@ -3,7 +3,7 @@
   padding: 0.1rem;
   width: 600px;
   background-color: #141618;
-  border: 1px solid #475384;
+  border: 1px solid #141618;
   font-size: 1rem;
 }
 
@@ -12,6 +12,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
+}
+
+.card_desc {
+  color: #475384;
 }
 
 .card_footer {
@@ -24,8 +28,15 @@
 
   padding: 0.4rem 0.6rem;
   border-radius: 12px;
-  background-color: #242629;
+  background-color: #050506;
   border: 1px solid #475384;
+}
+
+.image_invert_center {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 /* Media Queries */

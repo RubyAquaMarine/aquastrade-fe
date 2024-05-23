@@ -10,7 +10,7 @@ import { formatUnits } from "viem";
 import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
 // then create an array with only the unique Asset addresses
 // fetch TokenInfo from explorer
-import TokenInfoBox from "@/app/Components/TokenInfoBoxOld";
+import TokenInfoBox from "@/app/Components/TokenInfoBox";
 
 import styles from "@/app/Styles/TokenApprove.module.css";
 

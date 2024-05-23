@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, memo, useRef } from "react";
 import { formatUnits } from "viem";
+import { useAccount, useSwitchChain } from "wagmi";
 import {
   Card,
   CardContent,
@@ -27,7 +28,8 @@ type ADDRESS = {
 };
 
 const TokenInfoBox = (props: ADDRESS) => {
-  const logo_url = useRef();
+  const { address, isConnected, chain, addresses } = useAccount();
+  const logo_url = useRef<string>();
 
   const [savedData, setData] = useState<any>();
 
@@ -36,14 +38,22 @@ const TokenInfoBox = (props: ADDRESS) => {
 
   useEffect(() => {
     if (token) {
-      console.log("Render: TokenInfoBox: ", token);
-      setData(token);
+      console.log(
+        "Render: TokenInfoBox: preConfig: ",
+        token,
+        " Fetched Data",
+        data,
+      );
+      setData(token); // set token info from the preConfigs , otherwise use the feteched data
       logo_url.current = token.logo;
     } else {
-      // No logo exists for this token 
+      // No logo exists for this token
+      logo_url.current = '/EUROPA.png' as string;
       setData(data);
     }
   }, [token]);
+
+  // console.log("TokenInfoBox  Saved Token ", savedData)
 
   return (
     <div>
@@ -52,7 +62,6 @@ const TokenInfoBox = (props: ADDRESS) => {
           <Card className={styles.card}>
             <CardHeader>
               <CardTitle className={styles.card_title}>
-                <span> {savedData?.symbol} </span>
                 <span>
                   {" "}
                   {logo_url.current && (
@@ -65,13 +74,43 @@ const TokenInfoBox = (props: ADDRESS) => {
                     />
                   )}{" "}
                 </span>
+                <span>
+                  {" "}
+                  {savedData?.symbol}
+                  <CardDescription className={styles.card_desc}>
+                    {savedData?.name}
+                  </CardDescription>
+                </span>
               </CardTitle>
-              <CardDescription>{savedData?.name}</CardDescription>
-              <CardDescription>{savedData?.address}</CardDescription>
+
+              <CardDescription>
+                {" "}
+                <Link
+                  href={
+                    chain?.blockExplorers?.default.url +
+                    "/address/" +
+                    savedData?.address
+                  }
+                  target="_blank"
+                >
+                  <Image
+                    className={styles.image_invert_center}
+                    src={`/outbound.svg`}
+                    alt="AquasTrade Logo outbound external links"
+                    width={14}
+                    height={14}
+                    priority
+                  />
+                </Link>
+              </CardDescription>
             </CardHeader>
+
+            <CardDescription>Holders: {savedData?.holders}</CardDescription>
+
             <CardContent>
-              <span>Holders: {savedData?.holders}</span>
+              <span>{savedData?.address}</span>
             </CardContent>
+
             <CardContent>
               <span>
                 Max Supply:{" "}
@@ -82,9 +121,6 @@ const TokenInfoBox = (props: ADDRESS) => {
               </span>
             </CardContent>
 
-            <CardContent>
-              <span>Decimals: {savedData?.decimals}</span>
-            </CardContent>
             <CardFooter className={styles.card_footer}>
               <span>
                 <Link href="/swap/amm">Trade</Link>{" "}
@@ -105,7 +141,6 @@ const TokenInfoBox = (props: ADDRESS) => {
           <Card className={styles.card}>
             <CardHeader>
               <CardTitle className={styles.card_title}>
-                <span> {savedData?.symbol} </span>
                 <span>
                   {" "}
                   {logo_url.current && (
@@ -118,14 +153,41 @@ const TokenInfoBox = (props: ADDRESS) => {
                     />
                   )}{" "}
                 </span>
+                <span>
+                  {" "}
+                  {savedData?.symbol}
+                  <CardDescription className={styles.card_desc}>
+                    {savedData?.name}
+                  </CardDescription>
+                </span>
               </CardTitle>
-              <CardDescription>{savedData?.name}</CardDescription>
-              <CardDescription>{savedData?.address}</CardDescription>
+
+              <CardDescription>
+                {" "}
+                <Link
+                  href={
+                    chain?.blockExplorers?.default.url +
+                    "/address/" +
+                    savedData?.address
+                  }
+                  target="_blank"
+                >
+                  <Image
+                    className={styles.image_invert_center}
+                    src={`/outbound.svg`}
+                    alt="AquasTrade Logo outbound external links"
+                    width={14}
+                    height={14}
+                    priority
+                  />
+                </Link>
+              </CardDescription>
             </CardHeader>
 
             <CardContent>
-              <span>Decimals: {savedData?.decimals}</span>
+              <span>{savedData?.address}</span>
             </CardContent>
+
             <CardFooter className={styles.card_footer}>
               <span>
                 <Link href="/swap/amm">Trade</Link>{" "}

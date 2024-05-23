@@ -3,7 +3,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import { formatUnits } from "viem";
+import { formatUnits, parseUnits } from "viem";
 import {
   useAccount,
   useSwitchChain,
