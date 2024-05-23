@@ -49,7 +49,7 @@ type Props = {
 const Presale: React.FC = (props: Props) => {
   const presaleTokenAddress = props?.props;
 
-  const percentOfTokens = useRef();
+  const [remaingTokens, setRemainingTokens] = useState<number>();
 
   // dropdown menu state
   const [showDropdownSymbol, setDDSymbol] = useState<boolean>(false);
@@ -100,9 +100,14 @@ const Presale: React.FC = (props: Props) => {
   const loadTokenUSDInfo = findTokenFromAddress(inputUSDAddress);
 
   useEffect(() => {
+    console.log("=========use effect==================");
+
     if (tokenSupplyRemaining && tokenSupply) {
-      percentOfTokens.current =
-        Number((tokenSupplyRemaining * 10000n) / tokenSupply) / 100;
+      console.log("=========use effect===working===============");
+
+      setRemainingTokens(
+        Number((tokenSupplyRemaining * 10000n) / tokenSupply) / 100,
+      );
     }
   }, [tokenSupplyRemaining, tokenSupply]);
 
@@ -163,7 +168,13 @@ const Presale: React.FC = (props: Props) => {
     setDDSymbol(!showDropdownSymbol);
   };
 
-  console.log("Render Presale", props);
+  console.log(
+    "Render Presale",
+    remaingTokens,
+    tokenSupply,
+    tokenSupplyRemaining,
+    presaleTokenAddress,
+  );
 
   return (
     <div>
@@ -191,10 +202,10 @@ const Presale: React.FC = (props: Props) => {
                 presaleTokenAddress &&
                 formatUnits(tokenSupplyRemaining, 18)}{" "}
             </span>
-            {percentOfTokens.current && tokenSupply && presaleTokenAddress ? (
+            {remaingTokens && tokenSupply && presaleTokenAddress ? (
               <Slider
                 aria-label="Small steps"
-                defaultValue={100 - percentOfTokens.current}
+                defaultValue={100 - remaingTokens}
                 step={0.1}
                 marks
                 min={0}

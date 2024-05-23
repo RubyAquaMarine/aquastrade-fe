@@ -16,7 +16,7 @@
   width: 600px;
   margin-top: 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
   border-radius: 12px;

@@ -113,14 +113,16 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
             {loadTokenPresaleInfo.symbol}{" "}
           </li>
 
-          <li>
-            <span className={styles.text_sm}> Max Supply : </span>{" "}
-            <TokenSupply
-              props={[presaleTokenAddress, 18, contractPresale?.address]}
-            ></TokenSupply>{" "}
+          <li className={styles.text_sm}>
+            <span> Max Supply :</span>
+            <span>
+              <TokenSupply
+                props={[presaleTokenAddress, 18, contractPresale?.address]}
+              ></TokenSupply>{" "}
+            </span>
           </li>
           <li>
-            <span className={styles.text_sm}> FDV : </span> {"$"}{" "}
+            <span className={styles.text_sm}> FDV : {"$"} </span>{" "}
             {tokenSupply.current}
           </li>
         </ul>
@@ -175,9 +177,9 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
             )}
           </li>
 
-          <li>
+          <li className={styles.text_sm}>
             {" "}
-            <span className={styles.text_sm}> Remaining Tokens: </span>{" "}
+            <span> Remaining Tokens: </span>{" "}
             <TokenBalanceOf
               props={[presaleTokenAddress, 18, contractPresale?.address]}
             ></TokenBalanceOf>
