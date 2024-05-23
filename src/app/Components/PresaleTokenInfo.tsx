@@ -2,11 +2,12 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import React, { memo } from "react";
+import React, { memo, useRef, useEffect, useState } from "react";
 import { formatUnits, parseUnits } from "viem";
 /*
   AquasTrade components
 */
+import TokenFDV from "@/app/Components/TokenFDV";
 import TokenBalanceOf from "@/app/Components/TokenBalanceOf";
 import TokenSupply from "@/app/Components/TokenSupply";
 /*
@@ -14,6 +15,7 @@ import TokenSupply from "@/app/Components/TokenSupply";
 */
 
 import { usePresale } from "@/app/Hooks/usePresale";
+import { useERC20Token } from "@/app/Hooks/useAMM";
 
 /*
   AquasTrade config
@@ -30,66 +32,99 @@ import {
 import styles from "@/app/Styles/Presale.module.css";
 
 type Props = {
-  _address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
   address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
 };
 
-const PresaleTokenInfo: React.FC = (props: Props) => {
-  const presaleTokenAddress = props?.props;
+// Presale Contract
+export const contractPresale = findContractInfo("presale");
 
+const PresaleTokenInfo: React.FC = (props: Props) => {
+  const presaleTokenAddress = props?.address;
+
+  const [fdv, setFDV] = useState();
   const { data: isPresalePaused } = usePresale("isPaused");
   const { data: maxAllocation } = usePresale("maxAllocation");
   const { data: priceInUSD } = usePresale("price");
-  const { data: presaleOwner } = usePresale("presaleOwner");
+  //  const { data: presaleOwner } = usePresale("presaleOwner");
 
-  // Presale Contract
-  const contractPresale = findContractInfo("presale");
+  // new
+
+  const [tokenSupply, setBalance] = useState(BigInt(0));
+
+  const { data: token_balance, isLoading } = useERC20Token(
+    presaleTokenAddress,
+    "totalSupply",
+    [],
+  );
 
   const loadTokenPresaleInfo = findTokenFromAddress(presaleTokenAddress);
 
-  console.log("Render PresaleTokenInfo", props);
+  const _domElement = window.document.getElementById("token_supply")?.innerText;
+
+  useEffect(() => {
+    if (token_balance) {
+      setBalance(token_balance);
+    }
+  }, [token_balance]);
+
+  // priceInUSD,tokenSupply: tokenSupply
 
   return (
     <div>
       <div className={styles.container_flex}>
-        <ul>
-          <li className={styles.text_border_bottom}> Token Information </li>
+        <span className={styles.container_left}>
+          <span className={styles.button_kyc}>
+            <spaan className={styles.icon_info}>
+              {" "}
+              <Image
+                src="/info.svg"
+                alt="info"
+                width={18}
+                height={18}
+                priority
+              />{" "}
+            </spaan>
+            <spaan> No KYC Required</spaan>
+          </span>{" "}
+        </span>
 
-          <li>
-            <span className={styles.text_sm}> Name: </span>{" "}
-            {loadTokenPresaleInfo.name}{" "}
-          </li>
+        <span className={styles.container_left}>
+          <ul>
+            <li className={styles.item_cell_top}>
+              <span className={styles.text_bd}>
+                {" "}
+                {loadTokenPresaleInfo.name}{" "}
+              </span>{" "}
+              <span className={styles.icon_chain}>
+                {" "}
+                <Image
+                  src="/EUROPA.png"
+                  alt="IDO: presale skale network"
+                  width={25}
+                  height={25}
+                  priority
+                />
+              </span>
+            </li>
 
-          <li>
-            <span className={styles.text_sm}> Symbol :</span>{" "}
-            {loadTokenPresaleInfo.symbol}{" "}
-          </li>
+            <li>
+              <span className={styles.text_sm}> Symbol :</span>{" "}
+              {loadTokenPresaleInfo.symbol}{" "}
+            </li>
 
-          <li>
-            {" "}
-            <span className={styles.text_sm}> Max Supply : </span>{" "}
-            <TokenSupply
-              props={[presaleTokenAddress, 18, contractPresale?.address]}
-            ></TokenSupply>{" "}
-          </li>
-          <li>
-            {" "}
-            <span className={styles.text_sm}> FDV : </span>{" "}
-            <TokenSupply
-              props={[presaleTokenAddress, 18, contractPresale?.address]}
-            ></TokenSupply>{" "}
-          </li>
-          <li>
-            <span className={styles.text_sm}> CA :</span>{" "}
-            {loadTokenPresaleInfo.address}{" "}
-          </li>
-
-          <li>
-            <span className={styles.text_sm}> CO :</span>{" "}
-            {presaleOwner && presaleOwner}{" "}
-          </li>
-        </ul>
+            <li className={styles.item_cell}>
+              <span className={styles.text_sm}> FDV : {"$"} </span>{" "}
+              <span>
+                {" "}
+                <TokenFDV {...{ price: priceInUSD, tokenSupply: tokenSupply }}>
+                  {" "}
+                </TokenFDV>
+              </span>
+            </li>
+          </ul>
+        </span>
       </div>
+
       <div className={styles.container_flex}>
         <ul>
           <li className={styles.text_border_bottom}> Presale Information </li>
@@ -102,11 +137,8 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
             )}
           </li>
 
-          <li>
-            <span className={styles.text_sm}>
-              {" "}
-              Price per {loadTokenPresaleInfo.symbol} : ${" "}
-            </span>
+          <li className={styles.text_sm}>
+            <span> Price per {loadTokenPresaleInfo.symbol} : $ </span>
             {priceInUSD ? (
               <span> {formatUnits(priceInUSD, 18)}</span>
             ) : (
@@ -114,20 +146,20 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
             )}
           </li>
 
-          <li>
-            <span className={styles.text_sm}> Max Allocation : </span>
+          <li className={styles.text_sm}>
+            <span> Max Allocation : </span>
             {maxAllocation ? (
               <span>
                 {" "}
-                {formatUnits(maxAllocation, 18)} {" token"}
+                {formatUnits(maxAllocation, 18)} {loadTokenPresaleInfo.symbol}
               </span>
             ) : (
               <span> </span>
             )}
           </li>
 
-          <li>
-            <span className={styles.text_sm}> Max USD Amount : $</span>
+          <li className={styles.text_sm}>
+            <span> Max USD Amount : $</span>
 
             {priceInUSD && maxAllocation ? (
               <span>
@@ -140,12 +172,13 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
             )}
           </li>
 
-          <li>
-            {" "}
-            <span className={styles.text_sm}> Remaining Tokens: </span>{" "}
-            <TokenBalanceOf
-              props={[presaleTokenAddress, 18, contractPresale?.address]}
-            ></TokenBalanceOf>
+          <li className={styles.text_sm}>
+            <span> Max Supply :</span>
+            <span>
+              <TokenSupply
+                props={[presaleTokenAddress, 18, contractPresale?.address]}
+              ></TokenSupply>{" "}
+            </span>
           </li>
         </ul>
       </div>
@@ -153,4 +186,4 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
   );
 };
 
-export default memo(PresaleTokenInfo);
+export default PresaleTokenInfo;

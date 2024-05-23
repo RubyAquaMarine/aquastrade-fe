@@ -35,7 +35,7 @@ const Home = ({ children, params }: any) => {
           </ul>
         </div>
       ) : (
-        <div className={styles.container_margin}>
+        <div>
           <Presale props={presaleTokenAddress}></Presale>
         </div>
       )}
