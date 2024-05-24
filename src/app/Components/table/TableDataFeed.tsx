@@ -191,12 +191,12 @@ export default function TableDataFeed(dataFeed: any) {
           className={styles.input}
         />
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger asChild className={styles.menu}>
             <Button variant="outline" className={styles.button_column}>
               Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className={styles.menu}>
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
@@ -275,6 +275,7 @@ export default function TableDataFeed(dataFeed: any) {
         </div>
         <div className="space-x-2">
           <Button
+            className={styles.input}
             variant="outline"
             size="sm"
             onClick={() => table.previousPage()}
@@ -283,6 +284,7 @@ export default function TableDataFeed(dataFeed: any) {
             Previous
           </Button>
           <Button
+            className={styles.input}
             variant="outline"
             size="sm"
             onClick={() => table.nextPage()}

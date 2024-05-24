@@ -73,7 +73,7 @@
   border-radius: 12px;
   border: none;
   background-color: #007bff;
-  color: #fff;
+  color: #f4f4f4;
   cursor: pointer;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .button_detailed {
-  color: white;
+  color: #f4f4f4;
   cursor: pointer;
   border-radius: 12px;
   border: 0.5px solid #475384;

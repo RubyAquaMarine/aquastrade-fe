@@ -1,7 +1,7 @@
 # How to add your erc20 token
 
 - A. deploy token on ETH (Bridge to SKALE).
-- B. deploy on SKALE with Aquas.Trade [Launch Pad](https://aquas.trade/dashboard/create).
+- B. deploy on SKALE with Aquas.Trade [read docs](./LaunchPad.md) | [Launch Pad: Create Token](https://aquas.trade/dashboard/create).
 
 ## Step 1
 

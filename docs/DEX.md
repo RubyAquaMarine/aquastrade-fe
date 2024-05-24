@@ -64,3 +64,7 @@ AMM : Automated Market Maker provides equal amounts of liquity for both the Quot
 - Max fee trader pays is 0.30% from input token.
 - 75% of fee goes to you (Liquidity Provider)
 - 25% of fee goes to AquasDevFund : [Treasury](./AQUA.md#treasury)
+
+DCA Orders:
+
+- 1 [$AQUA](/docs/AQUA.md)

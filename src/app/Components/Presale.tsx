@@ -272,29 +272,29 @@ const Presale: React.FC = (props: Props) => {
               )}{" "}
           </span>
           <span className={styles.text_center}>
-
-      
-
-            {inputUSDAddress ? <input
-              type="number"
-              placeholder="100"
-              min="0"
-              step="0.01"
-              value={inputTokenAmount}
-              onChange={(e) => setTokenAmount(Number(e.target.value))}
-              className={styles.input_token_amount}
-            /> : <span></span>}
-
-
-
-
+            {inputUSDAddress ? (
+              <input
+                type="number"
+                placeholder="100"
+                min="0"
+                step="0.01"
+                value={inputTokenAmount}
+                onChange={(e) => setTokenAmount(Number(e.target.value))}
+                className={styles.input_token_amount}
+              />
+            ) : (
+              <span></span>
+            )}
           </span>
           {inputUSDAddress && inputTokenAmount ? (
             <TokenApprove
               props={[
                 "allowance",
                 inputUSDAddress,
-                parseUnits(inputTokenAmount.toString(), loadTokenUSDInfo?.decimals),
+                parseUnits(
+                  inputTokenAmount.toString(),
+                  loadTokenUSDInfo?.decimals,
+                ),
                 [address, contractPresale?.address],
               ]}
             />

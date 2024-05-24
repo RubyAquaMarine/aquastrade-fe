@@ -12,11 +12,11 @@ Welcome to [Aquas.Trade](https://aquas.trade/)
 
 Deflationary tokenomics for the AQUA token.
 
-- No VC's, no IDOs, and no unlock schedules. Only AQUA airdrops.
+- No VC's and no unlock schedules. Only AQUA airdrops and community IDO. [read docs](/docs/LaunchPad#ido--initial-dex-offering---token-presales.md)
 
 * - airdrop $AQUA to all nft holders : bullish for nft holders
 * - after NFTS are sold out, NFT Market Place requires AQUA => Bullish for AQUA
-* - AQUA powers AquasTrade by being the base asset on all major AMM pools, works as a marketplace utility token, and revenue [fees](./AMM.md#fees) burn AQUA. Bullish for AQUA and nft holders.
+* - AQUA powers AquasTrade by being the base asset on all major AMM pools, works as a marketplace utility token, and revenue [fees](./DEX.md#fees) burn AQUA. Bullish for AQUA and nft holders.
 
 ## 10% - Airdrop
 

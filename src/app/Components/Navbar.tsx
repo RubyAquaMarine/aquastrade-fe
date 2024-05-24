@@ -52,7 +52,10 @@ const Navbar = () => {
             <NavigationMenu className={styles.nav_menu}>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Bridge</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    {" "}
+                    <Link href="/dashboard/metaport">Bridge</Link>
+                  </NavigationMenuTrigger>
                   <span className={styles.nav_menu_br}>
                     <NavigationMenuContent className={styles.nav_menu_bg}>
                       <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -141,7 +144,10 @@ const Navbar = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>IDO</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    {" "}
+                    <Link href="/dashboard/presale">IDO</Link>
+                  </NavigationMenuTrigger>
                   <span className={styles.nav_menu_br}>
                     <NavigationMenuContent className={styles.nav_menu_dd}>
                       <Link href="/dashboard/presale" legacyBehavior passHref>
@@ -172,7 +178,10 @@ const Navbar = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Trade</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    {" "}
+                    <Link href="/swap/amm">Trade</Link>
+                  </NavigationMenuTrigger>
 
                   <span className={styles.nav_menu_br}>
                     {" "}
@@ -205,7 +214,10 @@ const Navbar = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Games</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    {" "}
+                    <Link href="/dashboard/games">Games</Link>
+                  </NavigationMenuTrigger>
 
                   <span className={styles.nav_menu_br}>
                     {" "}
@@ -242,7 +254,7 @@ const Navbar = () => {
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
-                      NFT
+                      <b>NFT</b>
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>

@@ -18,6 +18,10 @@
   color: #475384;
 }
 
+.card_address {
+  margin-left: 1rem;
+}
+
 .card_footer {
   margin-right: 6rem;
   margin-left: 6rem;

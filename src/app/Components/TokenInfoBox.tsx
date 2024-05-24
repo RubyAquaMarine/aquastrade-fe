@@ -37,7 +37,7 @@ const TokenInfoBox = (props: ADDRESS) => {
   const data: any = useSkaleExplorerAddresses(props.address as WALLET);
 
   useEffect(() => {
-    if (token) {
+    if (token && data) {
       console.log(
         "Render: TokenInfoBox: preConfig: ",
         token,
@@ -51,7 +51,7 @@ const TokenInfoBox = (props: ADDRESS) => {
       logo_url.current = "/EUROPA.png" as string;
       setData(data);
     }
-  }, [token]);
+  }, [token, data]);
 
   // console.log("TokenInfoBox  Saved Token ", savedData)
 
@@ -107,8 +107,20 @@ const TokenInfoBox = (props: ADDRESS) => {
 
             <CardDescription>Holders: {savedData?.holders}</CardDescription>
 
-            <CardContent>
-              <span>{savedData?.address}</span>
+            <CardContent className={styles.card_address}>
+              <span>
+                {" "}
+                <Link
+                  href={
+                    chain?.blockExplorers?.default.url +
+                    "/address/" +
+                    savedData?.address
+                  }
+                  target="_blank"
+                >
+                  {savedData?.address}
+                </Link>
+              </span>
             </CardContent>
 
             <CardContent>
@@ -184,8 +196,20 @@ const TokenInfoBox = (props: ADDRESS) => {
               </CardDescription>
             </CardHeader>
 
-            <CardContent>
-              <span>{savedData?.address}</span>
+            <CardContent className={styles.card_address}>
+              <span>
+                {" "}
+                <Link
+                  href={
+                    chain?.blockExplorers?.default.url +
+                    "/address/" +
+                    savedData?.address
+                  }
+                  target="_blank"
+                >
+                  {savedData?.address}
+                </Link>
+              </span>
             </CardContent>
 
             <CardFooter className={styles.card_footer}>

@@ -5,8 +5,15 @@
 
 .input {
   border: 1px solid #475384;
+  background-color: #181a1d;
   max-width: 10rem;
   padding: 1rem;
+}
+
+.menu {
+  color: #8f8f8f;
+  background-color: #181a1d;
+  border: 1px solid #475384;
 }
 
 .button_column {
@@ -24,11 +31,13 @@
 
 .table_header {
   background-color: #181a1d;
-  color: #fff;
-  border: 1px solid #181a1d;
+  color: #f4f4f4;
+  padding: 0.3rem;
+  border-radius: 12px;
+  border-bottom: 2px solid #181a1d;
 }
 
 .table_body {
   border: 1px solid #181a1d;
-  color: #bdb8b8;
+  color: #8f8f8f;
 }
