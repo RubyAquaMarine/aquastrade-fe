@@ -2,20 +2,23 @@
 
 0 gas fees, NFT-powered AMM DEX, NFT Market Place, and leveraged trading on the SKALE Network
 
-- AQUA: [read docs](/docs/AQUA.md)
-- AMM (v2): [list token](/docs/addNewTokens.md)
-- ERC20 Airdrop: [read docs](/docs/Airdrop.md)
+- $AQUA: [read docs](/docs/AQUA.md)
+- AMM (v2): [list token docs](/docs/addNewTokens.md) | [AMM : Cast ](https://aquas.trade/swap/amm) (add or create pool liquidity)
+- DCA: on chain:[read docs](/docs/DCA.md) | [AMM : DCA ](https://aquas.trade/swap/amm) Dollar Cost Average made easy: 1 [$AQUA](/docs/AQUA.md) fee per order
+- ERC20 Airdrop: [read docs](/docs/Airdrop.md) | [Token Airdrop UI](https://aquas.trade/dashboard/airdrop)
+- Games: [Coinflip: prizepool betting UI](https://aquas.trade/dashboard/coinflip) |
+- IDO:[read docs](/docs/LaunchPad.md) | [Token Presale UI](https://aquas.trade/dashboard/presale) | [Token LaunchPad UI](https://aquas.trade/dashboard/create) (create your own ERC20 token with instant AQUA liquidity: YOUR_TOKEN/AQUA )
 - Perps: coming soon
-- Games: [coinflip](https://aquas.trade/dashboard/coinflip)
-- NFT Market Place: coming after [NFT Sales](https://aquas.trade/dashboard/nft)
+
+- NFT with utility: [read docs](/docs/NFT.md) | [NFT Sales](https://aquas.trade/dashboard/nft)
 - sFuel automatic distribution
 
 ## tech
 
 - next 14.1.2 : file based routing
-- viem: 2.8.13
-- wagmi: 2.5.7
-- [react ](react_.md)
+- viem: 2.10.5
+- wagmi: 2.8.8
+- react: 18.2.0 (metaport dependant)
 
 # Getting Started
 

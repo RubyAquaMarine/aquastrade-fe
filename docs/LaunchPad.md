@@ -1,4 +1,4 @@
-# Token Create
+# LaunchPad: Create Tokens
 
 https://aquas.trade/dashboard/create
 
@@ -19,15 +19,15 @@ At Aquas.Trade its easy, so let's LFG!
 - Presale - IDO 50% to 80%
 - Use Token [Airdrop](./Airdrop.md) (Gold Members have access only) and airdrop 20-50% tokens to your selected audience/target/community
 
-# Initial DEX Offering (IDO)
+# IDO : Initial DEX Offering : Token Presales
 
 https://aquas.trade/dashboard/presale
 
 - CA: `0xA88b25EBb3cb5B0f08124e8FFBc6249aE026cB07`
 - Purchase Presale Tokens with `USDC, USDT, USDP, and DAI`
-- No whitelisting, No expiration, Just Ape what you can, when you can, and without slippage.
+- No whitelisting, No expiration, buy what you can, when you can, and without slippage.
 
-Functions:
+## Admin Functions:
 
 - `setToken` : can be called by public when `isPaused` is true
 - `isPaused` : is true when the presale owner removes the tokens or the admin restarts the presale contract.
