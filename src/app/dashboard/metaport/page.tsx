@@ -85,7 +85,6 @@ const Home = () => {
               alt="AquasTrade Logo outbound external links"
               width={20}
               height={20}
-              priority
             />{" "}
           </span>{" "}
           below to open Metaport bridge{" "}
@@ -222,7 +221,6 @@ const Home = () => {
                     alt="AquasTrade Logo outbound external links"
                     width={14}
                     height={14}
-                    priority
                   />
                 </Link>
               </div>

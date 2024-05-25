@@ -142,7 +142,6 @@ const Home = ({ children, params }: any) => {
                   alt="Skale: Perpertual Assets Menu"
                   width={22}
                   height={22}
-                  priority
                 />{" "}
               </span>{" "}
               <span className={styles.tradeAvailAssetsMargin}>

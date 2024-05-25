@@ -274,7 +274,6 @@ const Home = () => {
                     width={300}
                     height={300}
                     className={styles.image_align}
-                    priority
                   />
                 </Link>
 

@@ -14,6 +14,20 @@
   font-size: 1.2rem;
 }
 
+.toggle_button {
+  color: white;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1px solid #475384;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(82, 86, 109, 0.47),
+    transparent
+  );
+  font-size: 1rem;
+  padding: 0.2rem 0.3rem;
+}
+
 /* Media Queries */
 @media (max-width: 48em) {
   /* Using em for media query */

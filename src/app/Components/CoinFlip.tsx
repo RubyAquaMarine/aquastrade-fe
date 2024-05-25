@@ -16,10 +16,7 @@ import TokenApprove from "@/app/Components/TokenApprove";
 import TokenBalance from "@/app/Components/TokenBalance";
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
 import { CHAIN } from "@/app/Utils/config";
-import {
-  findTokenAddressFromSymbol,
-  findTokenFromSymbol,
-} from "@/app/Utils/findTokens";
+import { findTokenFromSymbol } from "@/app/Utils/findTokens";
 import { COIN_FLIP_ABI } from "@/app/Abi/europaCoinflip";
 import styles from "@/app/Styles/Coinflip.module.css";
 
@@ -29,12 +26,11 @@ interface Props {
 }
 
 const CoinFlip = (params: Props) => {
-  const allowancesTest = useRef(undefined);
   const [inputs, setInputs] = useState([""]);
 
-  const [totalWins, setTotalWins] = useState("");
-  const [totalLosses, setTotalLosses] = useState("");
-  const [totalBalance, setTotalBalance] = useState("");
+  const [totalWins, setTotalWins] = useState();
+  const [totalLosses, setTotalLosses] = useState();
+  const [totalBalance, setTotalBalance] = useState();
 
   const { address, isConnected, chain } = useAccount();
   const { chains, switchChain } = useSwitchChain();
@@ -45,29 +41,22 @@ const CoinFlip = (params: Props) => {
 
   // Use the Symbol to find the Token Address || or use PayToken (RPC)
   // const token_address_erc20 = findTokenAddressFromSymbol(params?.props?.[1]);
-  const token_address_erc20 = findTokenFromSymbol(params?.props?.[1]);
+  const token_erc20 = findTokenFromSymbol(params.symbol);
 
   // todo Promiseall
-  const {
-    data: loss,
-    isLoading,
-    isError,
-  } = useCoinflip(params?.props?.[0], "totalLoss", [address]);
-  const { data: win } = useCoinflip(params?.props?.[0], "totalWins", [address]);
-  const { data: bal } = useCoinflip(params?.props?.[0], "balances", [address]);
+  const { data: loss } = useCoinflip(params.address, "totalLoss", [address]);
 
-  const array: any[any] = [address, params?.props?.[0]];
+  const { data: win } = useCoinflip(params.address, "totalWins", [address]);
+  const { data: bal } = useCoinflip(params.address, "balances", [address]);
 
-  const buttonDescriptions = [params?.props?.[1]];
-  const buttonLogicTexts = [`flip ${params?.props?.[1]}`];
+  const buttonDescriptions = [params.symbol];
+  const buttonLogicTexts = [`flip ${params.symbol}`];
 
   useEffect(() => {
     if (win && loss && bal) {
       setTotalWins(win);
       setTotalLosses(loss);
       setTotalBalance(bal);
-      console.log(" Update Win / Loss ", win, loss);
-      console.log(" Update Balance", bal);
     }
   }, [win, loss, bal]);
 
@@ -77,19 +66,19 @@ const CoinFlip = (params: Props) => {
     setInputs(newInputs);
   };
 
-  const handleButtonClick = (index: number) => {
-    console.log(" this is the button to Flip Aqua", index);
+  const handleButtonClick = () => {
+    console.log(" this is the button to Flip Aqua", params.address, inputs[0]);
 
-    switch (index) {
-      case 0:
-        writeContract({
-          abi: COIN_FLIP_ABI,
-          address: params?.props?.[0],
-          functionName: "flipCoin",
-          args: [parseUnits(inputs[0], "wei")],
-        });
-        break;
-    }
+    const flipAmount = parseUnits(inputs[0], "wei");
+
+    // Check for the Min and MAX values within the SC ,  and prevent the TX from going through.
+    // show in UI the MIN and MAX values.
+    writeContract({
+      abi: COIN_FLIP_ABI,
+      address: params.address,
+      functionName: "flipCoin",
+      args: [flipAmount],
+    });
   };
 
   const handleButtonClickWithdraw = (index: number) => {
@@ -98,7 +87,7 @@ const CoinFlip = (params: Props) => {
       case 0:
         writeContract({
           abi: COIN_FLIP_ABI,
-          address: params?.props?.[0],
+          address: params.address,
           functionName: "WithdrawAll",
           args: [],
         });
@@ -148,6 +137,8 @@ const CoinFlip = (params: Props) => {
     }
   }, [contractCallDataConfirmed, hash]);
 
+  console.log(" COIN FLIP PROPS ", params);
+
   return (
     <div>
       {address ? (
@@ -168,12 +159,12 @@ const CoinFlip = (params: Props) => {
                 {" "}
                 <span className={styles.text_center}>Prize Pool: </span>
                 <span className={styles.text_center}>
-                  {token_address_erc20 && (
+                  {token_erc20 && (
                     <TokenBalance
                       props={[
-                        token_address_erc20?.address,
-                        token_address_erc20?.decimals,
-                        params?.props?.[0],
+                        token_erc20?.address,
+                        token_erc20?.decimals,
+                        params.address,
                       ]}
                     ></TokenBalance>
                   )}
@@ -202,7 +193,7 @@ const CoinFlip = (params: Props) => {
                     {" "}
                     <button
                       className={styles.button_field}
-                      onClick={() => handleButtonClick(0)}
+                      onClick={() => handleButtonClick()}
                     >
                       {buttonLogicTexts[0]}
                     </button>{" "}
@@ -211,18 +202,15 @@ const CoinFlip = (params: Props) => {
                   <span className={styles.text_center_sm}> Approved: </span>
 
                   <span className={styles.text_center}>
-                    {token_address_erc20 ? (
+                    {token_erc20 ? (
                       <span>
                         {" "}
                         <TokenApprove
                           props={[
                             "allowance",
-                            token_address_erc20?.address,
-                            parseUnits(
-                              inputs[0],
-                              token_address_erc20?.decimals,
-                            ),
-                            [address, params?.props?.[0]],
+                            token_erc20?.address,
+                            parseUnits(inputs[0], token_erc20?.decimals),
+                            [address, params.address],
                           ]}
                         ></TokenApprove>
                       </span>
@@ -236,9 +224,9 @@ const CoinFlip = (params: Props) => {
               <div className="p-4">
                 <div className="space-y-2">
                   <span className={styles.text_center}>
-                    {address && win ? (
+                    {address && totalWins ? (
                       <span className={styles.buttonDisplay}>
-                        Wins: {win?.toString()}
+                        Wins: {totalWins?.toString()}
                       </span>
                     ) : (
                       <span className={styles.buttonDisplay}>Wins:</span>
@@ -250,9 +238,9 @@ const CoinFlip = (params: Props) => {
               <div className="p-4">
                 <div className="space-y-2">
                   <span className={styles.text_center}>
-                    {address && loss && !isLoading ? (
+                    {address && totalLosses ? (
                       <span className={styles.buttonDisplay}>
-                        Losses: {loss?.toString()}
+                        Losses: {totalLosses?.toString()}
                       </span>
                     ) : (
                       <span className={styles.buttonDisplay}>Losses:</span>
@@ -265,13 +253,13 @@ const CoinFlip = (params: Props) => {
                 <div className="space-y-2">
                   <span className={styles.text_center}>
                     {address &&
-                    typeof bal === "bigint" &&
-                    bal <
+                    typeof totalBalance === "bigint" &&
+                    totalBalance <
                       BigInt(
                         "115792089237316195423570985008687907853269984665640564039057",
                       ) ? (
                       <span className={styles.buttonDisplay}>
-                        You Won: {formatUnits(bal, 18)}
+                        You Won: {formatUnits(totalBalance, 18)}
                       </span>
                     ) : (
                       <span className={styles.buttonDisplay}> No rewards</span>

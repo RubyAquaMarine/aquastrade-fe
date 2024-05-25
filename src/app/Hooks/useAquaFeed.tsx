@@ -2,11 +2,13 @@
 
 import { useReadContract } from "wagmi";
 
-import { AQUAFEED_ABI } from "@/app/Abi/europaAquaFeed";
+import { AQUAFEED_ABI, AQUAFEED_HELPER_ABI } from "@/app/Abi/europaAquaFeed";
 
 import { findContractInfo } from "@/app/Utils/findTokens";
 
 const AQUAFEED = findContractInfo("aquafeed");
+
+const HELPER = findContractInfo("aquafeedhelper");
 
 export const useAquaFeed = (functionName: string, args?: [any]) => {
   console.log("useAquaFeed Fetch ", functionName, args);
@@ -14,7 +16,19 @@ export const useAquaFeed = (functionName: string, args?: [any]) => {
     abi: AQUAFEED_ABI,
     address: AQUAFEED?.address,
     functionName: functionName as unknown as undefined,
-    args: args,
+    args: args as unknown as undefined,
+  });
+
+  return { data, isError, isLoading };
+};
+
+export const useAquaFeedHelper = (functionName: string, args?: [any]) => {
+  console.log("useAquaFeedHelper Fetch ", functionName, args);
+  const { data, isError, isLoading } = useReadContract({
+    abi: AQUAFEED_HELPER_ABI,
+    address: HELPER?.address,
+    functionName: functionName as unknown as undefined,
+    args: args as unknown as undefined,
   });
 
   return { data, isError, isLoading };

@@ -89,26 +89,14 @@ export default function TableDataFeed(dataFeed: any) {
       header: "Exchange Rate",
       accessorKey: "pricePool",
       cell: ({ row }: any) => {
-        const base: string = row.getValue("base");
-        const dec = findTokenFromAddress(base)?.decimals;
-        const inAmount: bigint = row.getValue("pricePool");
-        // todo
-        // need to normalize all data based on the  base token decimals  ..
-        // this is a bug....  working for btc and eth but not on skl
-        let value;
-        const cc = parseUnits("1", dec);
+        // const base: string = row.getValue("base");
+        // const dec = findTokenFromAddress(base)?.decimals;
+        // const inAmount: bigint = row.getValue("pricePool");
 
-        if (inAmount && BigInt(inAmount) < cc) {
-          value = parseFloat(
-            formatUnits(row.getValue("pricePool"), dec),
-          ).toFixed(18);
-        }
+        const value = parseFloat(
+          formatUnits(row.getValue("pricePool"), 0),
+        ).toFixed(0);
 
-        if (inAmount && inAmount > cc) {
-          value = parseFloat(
-            formatUnits(row.getValue("pricePool"), dec),
-          ).toFixed(2);
-        }
         const formatted = value;
         return <div className="text-right font-medium">{formatted}</div>;
       },

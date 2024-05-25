@@ -35,6 +35,7 @@ const DarkModeToggle: React.FC = () => {
         height={22}
         priority
         onClick={toggleTheme}
+        placeholder="blur"
       />
     </div>
   );
