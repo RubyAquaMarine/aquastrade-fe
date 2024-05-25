@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, memo, useRef } from "react";
 import { formatUnits } from "viem";
-import { useAccount, useSwitchChain } from "wagmi";
+import { useAccount } from "wagmi";
 import {
   Card,
   CardContent,
@@ -28,7 +28,7 @@ type ADDRESS = {
 };
 
 const TokenInfoBox = (props: ADDRESS) => {
-  const { address, isConnected, chain, addresses } = useAccount();
+  const { chain } = useAccount();
   const logo_url = useRef<string>();
 
   const [savedData, setData] = useState<any>();
@@ -36,24 +36,23 @@ const TokenInfoBox = (props: ADDRESS) => {
   const token = findTokenFromAddress(props.address);
   const data: any = useSkaleExplorerAddresses(props.address as WALLET);
 
+  // New Token listing logic , will load the EUROPA LOGO first: then PR >
   useEffect(() => {
-    if (token && data) {
-      console.log(
-        "Render: TokenInfoBox: preConfig: ",
-        token,
-        " Fetched Data",
-        data,
-      );
+    if (token !== "false") {
       setData(token); // set token info from the preConfigs , otherwise use the feteched data
       logo_url.current = token.logo;
-    } else {
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (data && token === "false") {
       // No logo exists for this token
       logo_url.current = "/EUROPA.png" as string;
       setData(data);
     }
-  }, [token, data]);
+  }, [data]);
 
-  // console.log("TokenInfoBox  Saved Token ", savedData)
+  console.log("TokenInfoBox  Saved Token ", savedData);
 
   return (
     <div>
@@ -105,9 +104,9 @@ const TokenInfoBox = (props: ADDRESS) => {
               </CardDescription>
             </CardHeader>
 
-            <CardDescription>Holders: {savedData?.holders}</CardDescription>
-
             <CardContent className={styles.card_address}>
+              <span> Holders: {savedData?.holders}</span>
+
               <span>
                 {" "}
                 <Link
@@ -232,4 +231,4 @@ const TokenInfoBox = (props: ADDRESS) => {
   );
 };
 
-export default TokenInfoBox;
+export default memo(TokenInfoBox);

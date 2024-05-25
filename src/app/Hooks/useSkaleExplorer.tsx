@@ -1,6 +1,6 @@
 // @ts-nocheck
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, memo } from "react";
 
 export type WALLET = {
   address?: `0x${string}`;
@@ -12,7 +12,7 @@ export const useSkaleExplorer = (params: WALLET) => {
 
   console.log("useSkaleExplorer ");
 
-  const wallet = useRef([]);
+  const wallet = useRef();
 
   const getDataCallBack = () => {
     const fetchData = async () => {
