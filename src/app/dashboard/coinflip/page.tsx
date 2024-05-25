@@ -43,7 +43,9 @@ const Home = () => {
           <span className={styles.midText_sm}>AQUA </span>
 
           {isConnected && (
-            <CoinFlip props={[aqua_coinflip_address, "AQUA"]}></CoinFlip>
+            <CoinFlip
+              {...{ address: aqua_coinflip_address, symbol: "AQUA" }}
+            ></CoinFlip>
           )}
         </div>
       )}

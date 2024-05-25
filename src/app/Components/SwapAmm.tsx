@@ -35,7 +35,15 @@ import AMMPools from "@/app/Components/AMMPools";
 
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 import { useFactory, useGetAmountInQuote } from "@/app/Hooks/useAMM";
-import { tokenAddresses } from "@/app/Utils/config";
+
+import { tokenAddresses } from "@/app/Utils/config"; // atm the tokenList doesn't have all the tokens, while the explorer is returning more.....  wait,
+
+console.log(
+  " -------------------------------TPE OF ",
+  typeof tokenAddresses,
+  tokenAddresses,
+);
+
 import { findContractInfo } from "@/app/Utils/findTokens";
 
 import styles from "@/app/Styles/AMM.module.css";
@@ -506,7 +514,6 @@ const SwapAmm = () => {
               alt="menu"
               width={26}
               height={26}
-              priority
               className={styles.imageInvert}
               onClick={handleFlipTokens}
             />
@@ -572,7 +579,7 @@ const SwapAmm = () => {
                 />
               </span>
             </span>
-            {showTokenListA && (
+            {showTokenListA && walletTokenList && tokenAddresses?.length > 0 ? (
               <div className={styles_pop.popup_container}>
                 <div className={styles_pop.popup_content}>
                   {tokenAddresses.map((_token, index) => (
@@ -607,6 +614,8 @@ const SwapAmm = () => {
                   ))}
                 </div>
               </div>
+            ) : (
+              <span></span>
             )}
             <span className={styles.container_margin}>
               <span className={styles.text_space_right_12}>
@@ -668,7 +677,6 @@ const SwapAmm = () => {
                 alt="menu"
                 width={30}
                 height={30}
-                priority
                 className={styles.imageInvertToggle_sm}
                 onClick={handleFlipTokens}
               />
@@ -710,7 +718,7 @@ const SwapAmm = () => {
                   />
                 </span>
 
-                {showTokenListB && (
+                {showTokenListB && tokenAddresses?.length > 0 ? (
                   <span className={styles_pop.popup_container}>
                     <span className={styles_pop.popup_content}>
                       {tokenAddresses.map((_token, index) => (
@@ -745,6 +753,8 @@ const SwapAmm = () => {
                       ))}
                     </span>
                   </span>
+                ) : (
+                  <span></span>
                 )}
               </span>
             </span>
@@ -936,7 +946,7 @@ const SwapAmm = () => {
                   />{" "}
                 </span>
 
-                {showTokenListA && (
+                {showTokenListA && tokenAddresses?.length > 0 ? (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
                       {tokenAddresses.map((_token, index) => (
@@ -971,6 +981,8 @@ const SwapAmm = () => {
                       ))}
                     </div>
                   </div>
+                ) : (
+                  <span></span>
                 )}
               </div>
 
@@ -1032,7 +1044,6 @@ const SwapAmm = () => {
                 alt="menu"
                 width={30}
                 height={30}
-                priority
                 className={styles.imageInvertToggle_sm}
                 onClick={handleFlipTokens}
               />
@@ -1074,7 +1085,7 @@ const SwapAmm = () => {
                   />
                 </span>
 
-                {showTokenListB && (
+                {showTokenListB && tokenAddresses?.length > 0 ? (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
                       {tokenAddresses.map((_token, index) => (
@@ -1107,6 +1118,8 @@ const SwapAmm = () => {
                       ))}
                     </div>
                   </div>
+                ) : (
+                  <span></span>
                 )}
               </div>
 
@@ -1203,7 +1216,7 @@ const SwapAmm = () => {
                 />
               </span>
 
-              {showTokenListA && (
+              {showTokenListA && tokenAddresses?.length > 0 ? (
                 <div className={styles_pop.popup_container}>
                   <div className={styles_pop.popup_content}>
                     {tokenAddresses.map((_token, index) => (
@@ -1236,6 +1249,8 @@ const SwapAmm = () => {
                     ))}
                   </div>
                 </div>
+              ) : (
+                <span></span>
               )}
             </div>
             <p className={styles.container_margin}>
@@ -1289,7 +1304,6 @@ const SwapAmm = () => {
                 alt="menu"
                 width={30}
                 height={30}
-                priority
                 className={styles.imageInvertToggle_sm}
                 onClick={handleFlipTokens}
               />
@@ -1312,7 +1326,7 @@ const SwapAmm = () => {
                   onClick={() => setShowTokenListB(true)}
                 />
               </span>
-              {showTokenListB && (
+              {showTokenListB && tokenAddresses?.length > 0 ? (
                 <div className={styles_pop.popup_container}>
                   <div className={styles_pop.popup_content}>
                     {tokenAddresses.map((_token, index) => (
@@ -1347,6 +1361,8 @@ const SwapAmm = () => {
                     ))}
                   </div>
                 </div>
+              ) : (
+                <span></span>
               )}
             </div>
           </div>

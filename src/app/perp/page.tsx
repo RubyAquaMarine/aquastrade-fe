@@ -117,7 +117,6 @@ const Home = () => {
                   className={styles.imageInvert}
                   width={33}
                   height={50}
-                  priority
                   style={{ width: "66px", height: "36px" }}
                 />
               </Link>

@@ -12,7 +12,7 @@ export const tokenSymbolList = [
   "RUBY",
   "PROSPECT",
   "SHISH",
-  // "WIFO",
+  "WIFO",
 ] as const;
 /*
 {
@@ -144,12 +144,12 @@ export const tokenList = [
     decimals: 18,
     logo: "/TGOLD.png",
   },
-  // {
-  //   id: 16,
-  //   name: "Cat Wif Out Hair",
-  //   symbol: "WIFO",
-  //   address: "0x68EdC1A0aaA90e0471adB84d0f21d78a80C7C90d",
-  //   decimals: 18,
-  //   logo: "/EUROPA.png",
-  // },
+  {
+    id: 16,
+    name: "Cat Wif Out Hair",
+    symbol: "WIFO",
+    address: "0x68EdC1A0aaA90e0471adB84d0f21d78a80C7C90d",
+    decimals: 18,
+    logo: "/WIFO.png",
+  },
 ] as const;

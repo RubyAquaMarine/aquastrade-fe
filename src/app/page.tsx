@@ -6,6 +6,8 @@ import ConnectWallet from "@/app/Components/ConnectWallet";
 import dynamic from "next/dynamic";
 import styles from "./Styles/Home.module.css";
 
+import SKL from "../../public/SKL.svg";
+
 // build static chart for homepage
 import ChartCandles from "@/app/api/binance";
 const ChartComponent = dynamic(() => import("@/app/Components/ChartTV2"), {
@@ -86,7 +88,7 @@ const Home = ({ children, params }: any) => {
 
                     <Image
                       className={styles.image_invert_center}
-                      src={`/SKL.svg`}
+                      src={SKL}
                       alt="AquasTrade Logo outbound external links"
                       width={30}
                       height={30}

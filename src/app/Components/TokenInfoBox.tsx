@@ -69,7 +69,6 @@ const TokenInfoBox = (props: ADDRESS) => {
                       alt="Spinning Image"
                       width={50}
                       height={50}
-                      priority
                     />
                   )}{" "}
                 </span>
@@ -98,7 +97,6 @@ const TokenInfoBox = (props: ADDRESS) => {
                     alt="AquasTrade Logo outbound external links"
                     width={14}
                     height={14}
-                    priority
                   />
                 </Link>
               </CardDescription>
@@ -160,7 +158,6 @@ const TokenInfoBox = (props: ADDRESS) => {
                       alt="Spinning Image"
                       width={50}
                       height={50}
-                      priority
                     />
                   )}{" "}
                 </span>
@@ -189,7 +186,6 @@ const TokenInfoBox = (props: ADDRESS) => {
                     alt="AquasTrade Logo outbound external links"
                     width={14}
                     height={14}
-                    priority
                   />
                 </Link>
               </CardDescription>

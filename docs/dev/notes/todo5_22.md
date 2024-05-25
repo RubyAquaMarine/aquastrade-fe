@@ -1,3 +1,7 @@
+# images
+
+https://nextjs.org/docs/pages/building-your-application/optimizing/images#background-image
+
 FDV calculation ....
 presale page token_approve button feels smoothier than the rest of the site...... um copy that code.
 

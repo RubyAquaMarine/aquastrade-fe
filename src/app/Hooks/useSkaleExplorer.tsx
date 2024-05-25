@@ -12,7 +12,7 @@ export const useSkaleExplorer = (params: WALLET) => {
 
   console.log("useSkaleExplorer ");
 
-  const wallet = useRef();
+  const wallet = useRef([]);
 
   const getDataCallBack = () => {
     const fetchData = async () => {
@@ -42,7 +42,7 @@ export const useSkaleExplorerAddresses = (params: WALLET) => {
 
   console.log("useSkaleExplorer TokenInfo Lookup: ", addressWallet);
 
-  const wallet = useRef();
+  const wallet = useRef([]);
   // client-side: async functions
   const getDataCallBack = () => {
     const fetchData = async () => {
