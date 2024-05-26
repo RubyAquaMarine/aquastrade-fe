@@ -41,6 +41,8 @@ import {
   TableRow,
 } from "@/app/Components/ui/Table";
 
+import { findTokenFromAddress, switchQuoteBase } from "@/app/Utils/findTokens";
+
 // 5 Columns
 export type DataFeed = {
   id: string;
@@ -48,6 +50,8 @@ export type DataFeed = {
   poolPrice: string;
   feedPrice: string;
   assets: string[];
+  assets1: string;
+  assets2: string;
 };
 
 const accessorKeyAssets = "assets";
@@ -62,6 +66,8 @@ const dataFeed: DataFeed[] = [
     poolPrice: "123",
     feedPrice: "343",
     assets: ["ETH", "USD"],
+    assets1: "0xF7F957D88768126916dAF3C1705D13C291d2B7D8",
+    assets2: "0x5F795bb52dAC3085f578f4877D450e2929D2F13d",
   },
   {
     id: "1",
@@ -69,27 +75,8 @@ const dataFeed: DataFeed[] = [
     poolPrice: "123",
     feedPrice: "343",
     assets: ["ETH", "USDT"],
-  },
-  {
-    id: "2",
-    poolAddress: "0x",
-    poolPrice: "123",
-    feedPrice: "343",
-    assets: ["ETH", "USDC"],
-  },
-  {
-    id: "3",
-    poolAddress: "0x",
-    poolPrice: "123",
-    feedPrice: "343",
-    assets: ["ETH", "USDP"],
-  },
-  {
-    id: "4",
-    poolAddress: "0x",
-    poolPrice: "123",
-    feedPrice: "343",
-    assets: ["ETH", "USD"],
+    assets2: "0xF7F957D88768126916dAF3C1705D13C291d2B7D8",
+    assets1: "0x5F795bb52dAC3085f578f4877D450e2929D2F13d",
   },
 ];
 
@@ -119,6 +106,43 @@ export default function BasicTable() {
     {
       header: "Pair",
       accessorKey: "assets",
+      cell: ({ row }: any) => {
+        const addrQ = row.getValue("assets2");
+        const quote = findTokenFromAddress(addrQ)?.symbol;
+
+        const addrB = row.getValue("assets1");
+        const base = findTokenFromAddress(addrB)?.symbol;
+
+        const switchAssets = switchQuoteBase(addrQ, addrB);
+        // switch the assets if
+        // const pair = switchAssets === true ? `${base}/${quote}` : `${quote}/${base}`
+        console.log("  switich QuoteBase ", switchAssets);
+        if (switchAssets) {
+          console.log("  switichED QuoteBase ");
+          return (
+            <div className="text-right font-medium">{` ${base}/${quote}`}</div>
+          );
+        } else {
+          console.log("  NO switich QuoteBase ");
+          return (
+            <div className="text-right font-medium">{`${quote}/${base}`}</div>
+          );
+        }
+
+        // console.log("  switich QuoteBase ", pairOK, pair)
+
+        // return (
+        //   <div className="text-right font-medium">{pair}</div>
+        // );
+      },
+    },
+    {
+      header: "Token A",
+      accessorKey: "assets1",
+    },
+    {
+      header: "Token b",
+      accessorKey: "assets2",
     },
   ];
 

@@ -48,10 +48,13 @@ import styles from "@/app/Styles/Table.module.css";
 
 const accessorKeyAssets = "pool";
 
+const DECIMALS = 8;
+
 export type DataFeed = {
   id: string;
   pool: string;
   poolPrice: string;
+  poolPriceInverse: string;
   feedPrice: string;
   assets: string[];
   quote: string;
@@ -86,37 +89,26 @@ export default function TableDataFeed(dataFeed: any) {
     },
 
     {
-      header: "Exchange Rate",
+      header: "Base/Quote",
       accessorKey: "pricePool",
       cell: ({ row }: any) => {
-        // const base: string = row.getValue("base");
-        // const dec = findTokenFromAddress(base)?.decimals;
-        // const inAmount: bigint = row.getValue("pricePool");
-
-        const value = parseFloat(
-          formatUnits(row.getValue("pricePool"), 0),
-        ).toFixed(0);
-
-        const formatted = value;
+        const formatted = formatPrice(row.getValue("pricePool"));
         return <div className="text-right font-medium">{formatted}</div>;
       },
     },
     {
-      header: "Feed Price",
+      header: "Quote/Base",
+      accessorKey: "pricePoolInverse",
+      cell: ({ row }: any) => {
+        const formatted = formatPrice(row.getValue("pricePoolInverse"));
+        return <div className="text-right font-medium">{formatted}</div>;
+      },
+    },
+    {
+      header: "Oracle",
       accessorKey: "priceFeed",
       cell: ({ row }: any) => {
-        const inAmount: bigint = row.getValue("priceFeed");
-        const cc = parseUnits("1", 18);
-        let value;
-        if (inAmount && BigInt(inAmount) < cc) {
-          value = parseFloat(formatUnits(inAmount, 18)).toFixed(18);
-        }
-
-        if (inAmount && inAmount >= cc) {
-          value = parseFloat(formatUnits(inAmount, 18)).toFixed(2);
-        }
-        const formatted = value;
-
+        const formatted = formatPrice(row.getValue("priceFeed"));
         return <div className="text-right font-medium">{formatted}</div>;
       },
     },
@@ -149,6 +141,46 @@ export default function TableDataFeed(dataFeed: any) {
       accessorKey: "id",
     },
   ];
+
+  // big to string
+  const formatPrice = (_value: bigint) => {
+    const one = parseUnits("1", 18);
+
+    const oneM = parseUnits("1000000", 18);
+
+    const onefourth = parseUnits("0.0001", 18);
+
+    const oneeight = parseUnits("0.00000001", 18);
+
+    const onetwelve = parseUnits("0.000000000001", 18);
+
+    let value;
+
+    if (_value >= oneM) {
+      value = parseFloat(formatUnits(_value, 18)).toFixed(0);
+    }
+
+    if (_value >= one && _value < oneM) {
+      value = parseFloat(formatUnits(_value, 18)).toFixed(2);
+    }
+
+    if (_value < one && _value >= onefourth) {
+      value = parseFloat(formatUnits(_value, 18)).toFixed(4);
+    }
+
+    if (_value < onefourth && _value >= oneeight) {
+      value = parseFloat(formatUnits(_value, 18)).toFixed(8);
+    }
+
+    if (_value < oneeight && _value >= onetwelve) {
+      value = parseFloat(formatUnits(_value, 18)).toFixed(12);
+    }
+
+    if (_value < onetwelve) {
+      value = parseFloat(formatUnits(_value, 18)).toFixed(18);
+    }
+    return value;
+  };
 
   const table = useReactTable({
     data,

@@ -1,22 +1,5 @@
-# images
-
-https://nextjs.org/docs/pages/building-your-application/optimizing/images#background-image
-
-FDV calculation ....
-presale page token_approve button feels smoothier than the rest of the site...... um copy that code.
-
-<TokenInfoBox>
-
-# search daily
-
-// todo
-// client-side: async functions
-
 ## overview
 
-bug in sklusdt , sklusdt
-
-- need link to blockexplorer LP pool addresses
 - fetch stale data 24 hours : current_block - 6 tpm \* 1440 (min in day) and out 24% price changes
 - load missing tokens?
 

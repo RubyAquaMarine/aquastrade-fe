@@ -7,6 +7,7 @@ export type DataFeedV = {
   id: string;
   pool: string;
   pricePool: string;
+  pricePoolInverse: string;
   priceFeed: string;
   assets: string[];
   quote: string;

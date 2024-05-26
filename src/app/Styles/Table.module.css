@@ -35,9 +35,11 @@
   padding: 0.3rem;
   border-radius: 12px;
   border-bottom: 2px solid #181a1d;
+  font-size: 0.8rem;
 }
 
 .table_body {
   border: 1px solid #181a1d;
-  color: #8f8f8f;
+  color: #b4b0b0;
+  font-size: 0.8rem;
 }
