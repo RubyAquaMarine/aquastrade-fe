@@ -4,10 +4,12 @@ An example
 
 Sell 1 BTC (QUOTE) = 70,000 USD (BASE)
 
+Inverse Pricing is avaible within the same object.
+
 ## Functions
 
+- `DigitPrecision` : 0 outputs whole numbers only. Use value `18` for proper pricing on both Qoute/Base and Base/Quote pricing. In most cases, the Quote/Base pricing is only returned when using whole numbers since the inverse often requires decimal precision. In the frontend, wei : bigint : 18 decimals : toFixed(0-18) depending on what we want to show.
 - `FeedID` : total number of live datafeeds available now
-- `FeedMaximum` : Total number of AMM pools available for price feed creations (Tokens on Europa must exist to create a datafeed)
 - `Feeds[i]` : enter an index to fetch the feed
 - `consumeFeed[i]` : enter an index to fetch the feed (same as above)
 
@@ -19,9 +21,12 @@ Sell 1 BTC (QUOTE) = 70,000 USD (BASE)
   quote (address) : 0xe0595a049d02b7674572b0d59cd4880db60edc50 (SKL)
   base (address) : 0x5f795bb52dac3085f578f4877d450e2929d2f13d (USDC)
   priceFeed (uint256) : 999999111
-  pricePool (uint256) : 99000
+  pricePool (uint256) : 990000000
+  pricePoolInverse (uint256) : 9
 ]
 ```
+
+- `consumeFeeds[]` : returns all data: powers the
 
 # Pools
 

@@ -12,7 +12,8 @@ import {
 } from "wagmi";
 import { ToastContainer, Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import TokenApprove from "@/app/Components/TokenApprove";
+
+import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import TokenBalance from "@/app/Components/TokenBalance";
 import { useCoinflip, useERC20Token } from "@/app/Hooks/useCoinflip";
 import { CHAIN } from "@/app/Utils/config";
@@ -188,7 +189,6 @@ const CoinFlip = (params: Props) => {
                       </span>
                     ))}
                   </span>
-
                   <span className={styles.text_center}>
                     {" "}
                     <button
@@ -198,21 +198,22 @@ const CoinFlip = (params: Props) => {
                       {buttonLogicTexts[0]}
                     </button>{" "}
                   </span>
-
                   <span className={styles.text_center_sm}> Approved: </span>
-
                   <span className={styles.text_center}>
                     {token_erc20 ? (
                       <span>
                         {" "}
-                        <TokenApprove
-                          props={[
-                            "allowance",
-                            token_erc20?.address,
-                            parseUnits(inputs[0], token_erc20?.decimals),
-                            [address, params.address],
-                          ]}
-                        ></TokenApprove>
+                        <TokenApproveProps
+                          {...{
+                            name: "allowance",
+                            address: token_erc20.address,
+                            approve: parseUnits(
+                              inputs[0],
+                              token_erc20?.decimals,
+                            ),
+                            args: [address, params.address],
+                          }}
+                        ></TokenApproveProps>
                       </span>
                     ) : (
                       <span> </span>

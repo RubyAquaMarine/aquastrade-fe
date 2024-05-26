@@ -47,20 +47,20 @@ const TokenApprove = (params: Props) => {
     }
   }, [params?.props[1]]);
 
-  console.log(
-    "Token Approval Props",
-    params.props[0],
-    params.props[1],
-    params.props[2],
-    "Input Args",
-    params.props[3],
+  // console.log(
+  //   "Token Approval Props",
+  //   params.props[0],
+  //   params.props[1],
+  //   params.props[2],
+  //   "Input Args",
+  //   params.props[3],
 
-    " Approve This Contract: ",
-    token_transfer_allowance,
+  //   " Approve This Contract: ",
+  //   token_transfer_allowance,
 
-    " TokenInfo Contract: ",
-    inputToken,
-  );
+  //   " TokenInfo Contract: ",
+  //   inputToken,
+  // );
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
