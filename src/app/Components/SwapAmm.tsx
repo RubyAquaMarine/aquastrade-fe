@@ -1,5 +1,6 @@
 // @ts-nocheck
 "use client";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -8,58 +9,45 @@ import {
   useBlock,
   useWaitForTransactionReceipt,
 } from "wagmi";
-import React, { useState, useEffect, useRef } from "react";
+
 import { formatUnits, parseUnits } from "viem";
 
 import { ToastContainer, Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// Make components for better rendering functionality: move hooks into these new components
-import NFTBalance from "@/app/Components/NFTBalance";
-import GetAmountsOut from "@/app/Components/GetAmountsOut";
-
-import TokenBalance from "@/app/Components/TokenBalance";
-
-import DCAInterface from "@/app/Components/DCA";
-
+import { tokenAddresses } from "@/app/Utils/config";
+import { findContractInfo } from "@/app/Utils/findTokens";
 import {
   findTokenAddressFromSymbol,
   findTokenLogoFromAddress,
   findTokenDecimalsFromSymbol,
 } from "@/app/Utils/findTokens";
 
-// test
-import TokenApprove from "@/app/Components/TokenApprove";
+// Make components for better rendering functionality: move hooks into these new components
 
+import NFTBalance from "@/app/Components/NFTBalance";
+import GetAmountsOut from "@/app/Components/GetAmountsOut";
+import DCAInterface from "@/app/Components/DCA";
+import TokenBalance from "@/app/Components/TokenBalance";
+import TokenApprove from "@/app/Components/TokenApprove";
+import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import AMMPools from "@/app/Components/AMMPools";
 
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
+
+import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
 import { useFactory, useGetAmountInQuote } from "@/app/Hooks/useAMM";
-
-import { tokenAddresses } from "@/app/Utils/config"; // atm the tokenList doesn't have all the tokens, while the explorer is returning more.....  wait,
-
-console.log(
-  " -------------------------------TPE OF ",
-  typeof tokenAddresses,
-  tokenAddresses,
-);
-
-import { findContractInfo } from "@/app/Utils/findTokens";
 
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
-import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
 
-const ROUTER_AQUADEX = findContractInfo("router")?.address;
+const ROUTER_AQUADEX: `0x${string}` = findContractInfo("router")?.address;
 //
-const FACTORY_AQUADEX = findContractInfo("factory")?.address;
+const FACTORY_AQUADEX: `0x${string}` = findContractInfo("factory")?.address;
 
 const SwapAmm = () => {
   // Save state without rendering
   const divRef = useRef(null);
-
-  const lpTokenBalance = useRef("9999999999999.0");
-
   const [amountLPRemove, setAmountLPRemove] = useState(100);
   const [amountLP, setAmountLP] = useState(BigInt(0));
 
@@ -74,7 +62,6 @@ const SwapAmm = () => {
   const tokenBAddress = useRef(aqua_token_address);
 
   const feeNFT = useRef(BigInt(997));
-  const swap_feeNFT = useRef(BigInt(0)); //todo: fetch nft  ceate a value to est the swap fee
 
   const tokenADecimal = useRef(BigInt(18));
   const tokenBDecimal = useRef(BigInt(18));
@@ -187,7 +174,10 @@ const SwapAmm = () => {
   };
 
   const handleGetMaxAmount = (index: number) => {
-    const text: string = divRef.current.innerText;
+    let text: string = "0";
+    if (divRef?.current) {
+      text = divRef?.current?.innerText;
+    }
 
     const _amount = text; // types tpdp
 
@@ -235,7 +225,7 @@ const SwapAmm = () => {
     ) {
       setMultihop(false);
       setSwapPath([_tokenA, _tokenB]);
-      console.log(`LOGIC 1 ${false} ${multihop}`);
+      // console.log(`LOGIC 1 ${false} ${multihop}`);
       return;
     }
 
@@ -247,7 +237,7 @@ const SwapAmm = () => {
       setMultihop(true);
       setSwapPath([_tokenA, aqua_token_address, _tokenB]);
       setMultihopBaseToken("AQUA"); // later add some logic to find other base assets like usdc
-      console.log(`LOGIC 2 ${true} ${multihop}`);
+      // console.log(`LOGIC 2 ${true} ${multihop}`);
       return;
     }
 
@@ -258,13 +248,13 @@ const SwapAmm = () => {
       setMultihop(true);
       setSwapPath([_tokenA, aqua_token_address, _tokenB]);
       setMultihopBaseToken("AQUA"); // later add some logic to find other base assets like usdc
-      console.log(`LOGIC 3 ${true} ${multihop}`);
+      // console.log(`LOGIC 3 ${true} ${multihop}`);
       return;
     }
 
     setMultihop(false);
     setSwapPath([_tokenA, _tokenB]);
-    console.log(`LOGIC 4 ${false} ${multihop}`);
+    // console.log(`LOGIC 4 ${false} ${multihop}`);
   };
 
   // insert Token Addresses
@@ -483,7 +473,7 @@ const SwapAmm = () => {
     }
   };
 
-  console.log(`"AMM Features: is Multihop", ${multihop} isPool ${poolAddress}`);
+  // console.log(`"AMM Features: is Multihop", ${multihop} isPool ${poolAddress}`);
 
   return (
     <div className={styles.container}>
@@ -657,14 +647,14 @@ const SwapAmm = () => {
             amountA &&
             tokenAAddress.current &&
             tokenADecimal.current ? (
-              <TokenApprove
-                props={[
-                  "allowance",
-                  tokenAAddress.current,
-                  parseUnits(amountA, Number(tokenADecimal?.current)),
-                  [address, ROUTER_AQUADEX],
-                ]}
-              ></TokenApprove>
+              <TokenApproveProps
+                {...{
+                  name: "allowance",
+                  address: tokenAAddress.current,
+                  approve: parseUnits(amountA, Number(tokenADecimal?.current)),
+                  args: [address, ROUTER_AQUADEX],
+                }}
+              ></TokenApproveProps>
             ) : (
               <span className={styles.text_center}> error </span>
             )}
@@ -1024,14 +1014,17 @@ const SwapAmm = () => {
               amountA &&
               tokenAAddress.current &&
               tokenADecimal.current ? (
-                <TokenApprove
-                  props={[
-                    "allowance",
-                    tokenAAddress.current,
-                    parseUnits(amountA, Number(tokenADecimal?.current)),
-                    [address, ROUTER_AQUADEX],
-                  ]}
-                ></TokenApprove>
+                <TokenApproveProps
+                  {...{
+                    name: "allowance",
+                    address: tokenAAddress.current,
+                    approve: parseUnits(
+                      amountA,
+                      Number(tokenADecimal?.current),
+                    ),
+                    args: [address, ROUTER_AQUADEX],
+                  }}
+                ></TokenApproveProps>
               ) : (
                 <span className={styles.text_center}> error </span>
               )}
@@ -1147,14 +1140,17 @@ const SwapAmm = () => {
               amountB &&
               tokenBAddress.current &&
               tokenBDecimal.current ? (
-                <TokenApprove
-                  props={[
-                    "allowance",
-                    tokenBAddress.current,
-                    parseUnits(amountB, Number(tokenBDecimal?.current)),
-                    [address, ROUTER_AQUADEX],
-                  ]}
-                ></TokenApprove>
+                <TokenApproveProps
+                  {...{
+                    name: "allowance",
+                    address: tokenBAddress.current,
+                    approve: parseUnits(
+                      amountB,
+                      Number(tokenBDecimal?.current),
+                    ),
+                    args: [address, ROUTER_AQUADEX],
+                  }}
+                ></TokenApproveProps>
               ) : (
                 <div></div>
               )}
@@ -1285,14 +1281,14 @@ const SwapAmm = () => {
             </p>
             <span className={styles.text_center}> Approved: </span>
             {address && poolAddress && amountLP ? (
-              <TokenApprove
-                props={[
-                  "allowance",
-                  poolAddress,
-                  amountLP,
-                  [address, ROUTER_AQUADEX],
-                ]}
-              ></TokenApprove>
+              <TokenApproveProps
+                {...{
+                  name: "allowance",
+                  address: poolAddress,
+                  approve: amountLP,
+                  args: [address, ROUTER_AQUADEX],
+                }}
+              ></TokenApproveProps>
             ) : (
               <span className={styles.text_center}> error </span>
             )}

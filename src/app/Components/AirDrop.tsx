@@ -15,7 +15,7 @@ import { formatUnits, parseUnits } from "viem";
 import { CHAIN } from "@/app/Utils/config";
 import { findContractInfo } from "@/app//Utils/findTokens";
 import TokenBalance from "@/app/Components/TokenBalance";
-import TokenApprove from "@/app/Components/TokenApprove";
+import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import { AIRDROP_ABI } from "@/app/Abi/airdropErc20";
 import styles from "@/app/Styles/Airdrop.module.css";
 
@@ -265,14 +265,14 @@ const AirDrop: React.FC = () => {
             {setAirdropped.current === false &&
             setTotalAmounts.current !== BigInt(0) &&
             token ? (
-              <TokenApprove
-                props={[
-                  "allowance",
-                  token,
-                  setTotalAmounts.current,
-                  [address, contractAirdrop?.address],
-                ]}
-              />
+              <TokenApproveProps
+                {...{
+                  name: "allowance",
+                  address: token,
+                  approve: setTotalAmounts.current,
+                  args: [address, contractAirdrop?.address],
+                }}
+              ></TokenApproveProps>
             ) : (
               <span></span>
             )}

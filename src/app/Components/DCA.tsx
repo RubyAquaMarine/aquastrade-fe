@@ -30,6 +30,7 @@ import {
 
 import PoolPrice from "@/app/Components/PoolPrice";
 import TokenApprove from "@/app/Components/TokenApprove";
+import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import DCATotalOrders from "@/app/Components/DCATotalOrders";
 import { DCA_ABI } from "@/app/Abi/dca";
 import { useDCA } from "@/app/Hooks/useDCA";
@@ -429,41 +430,42 @@ const DCAInterface: React.FC = () => {
             {contractDCAMulti &&
               inputTokenAmount &&
               tokenAddress_b !== token_address_aqua?.address && (
-                <TokenApprove
-                  props={[
-                    "allowance",
-                    inputIsBuying ? tokenAddress_b : tokenAddress_a,
-                    parseUnits(
+                <TokenApproveProps
+                  {...{
+                    name: "allowance",
+                    address: inputIsBuying ? tokenAddress_b : tokenAddress_a,
+                    approve: parseUnits(
                       inputTokenAmount,
                       inputIsBuying ? token_decimal_b : token_decimal_a,
                     ),
-                    [
+                    args: [
                       address,
                       contractDCAMulti.address,
                       inputIsBuying ? token_decimal_b : token_decimal_a,
                     ],
-                  ]}
-                ></TokenApprove>
+                  }}
+                ></TokenApproveProps>
               )}
             {/** adding one AQUA to the approval amount when selling AQUA for the QUOTE asset  */}
             {contractDCAMulti &&
               inputTokenAmount &&
               tokenAddress_b === token_address_aqua?.address && (
-                <TokenApprove
-                  props={[
-                    "allowance",
-                    inputIsBuying ? tokenAddress_b : tokenAddress_a,
-                    parseUnits(
-                      inputTokenAmount,
-                      inputIsBuying ? token_decimal_b : token_decimal_a,
-                    ) + BigInt(1000000000000000000n),
-                    [
+                <TokenApproveProps
+                  {...{
+                    name: "allowance",
+                    address: inputIsBuying ? tokenAddress_b : tokenAddress_a,
+                    approve:
+                      parseUnits(
+                        inputTokenAmount,
+                        inputIsBuying ? token_decimal_b : token_decimal_a,
+                      ) + BigInt(1000000000000000000n),
+                    args: [
                       address,
                       contractDCAMulti.address,
                       inputIsBuying ? token_decimal_b : token_decimal_a,
                     ],
-                  ]}
-                ></TokenApprove>
+                  }}
+                ></TokenApproveProps>
               )}
 
             {contractDCAMulti &&
@@ -475,18 +477,18 @@ const DCAInterface: React.FC = () => {
                   Approve 1 AQUA (fee){" "}
                 </span>{" "}
                 <span>
-                  <TokenApprove
-                    props={[
-                      "allowance",
-                      token_address_aqua?.address,
-                      parseUnits("1.0", token_address_aqua?.decimals),
-                      [
+                  <TokenApproveProps
+                    {...{
+                      name: "allowance",
+                      address: token_address_aqua?.address,
+                      approve: parseUnits("1.0", token_address_aqua?.decimals),
+                      args: [
                         address,
                         contractDCAMulti.address,
                         token_address_aqua?.decimals,
                       ],
-                    ]}
-                  ></TokenApprove>{" "}
+                    }}
+                  ></TokenApproveProps>
                 </span>
               </span>
             ) : (
@@ -497,18 +499,18 @@ const DCAInterface: React.FC = () => {
             !inputIsBuying &&
             tokenAddress_a !== token_address_aqua?.address ? (
               <span className={styles.text_center}>
-                <TokenApprove
-                  props={[
-                    "allowance",
-                    token_address_aqua?.address,
-                    parseUnits("1.0", token_address_aqua?.decimals),
-                    [
+                <TokenApproveProps
+                  {...{
+                    name: "allowance",
+                    address: token_address_aqua?.address,
+                    approve: parseUnits("1.0", token_address_aqua?.decimals),
+                    args: [
                       address,
                       contractDCAMulti.address,
                       token_address_aqua?.decimals,
                     ],
-                  ]}
-                ></TokenApprove>
+                  }}
+                ></TokenApproveProps>
               </span>
             ) : (
               <span> </span>

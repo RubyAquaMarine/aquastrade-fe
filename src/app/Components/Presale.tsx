@@ -18,7 +18,8 @@ import { formatUnits, parseUnits } from "viem";
 /*
   AquasTrade components
 */
-import TokenApprove from "@/app/Components/TokenApprove";
+
+import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import PresaleTokenInfo from "@/app/Components/PresaleTokenInfo";
 /*
   AquasTrade hooks
@@ -287,17 +288,17 @@ const Presale: React.FC = (props: Props) => {
             )}
           </span>
           {inputUSDAddress && inputTokenAmount ? (
-            <TokenApprove
-              props={[
-                "allowance",
-                inputUSDAddress,
-                parseUnits(
+            <TokenApproveProps
+              {...{
+                name: "allowance",
+                address: inputUSDAddress,
+                approve: parseUnits(
                   inputTokenAmount.toString(),
                   loadTokenUSDInfo?.decimals,
                 ),
-                [address, contractPresale?.address],
-              ]}
-            />
+                args: [address, contractPresale?.address],
+              }}
+            ></TokenApproveProps>
           ) : (
             <span> </span>
           )}
