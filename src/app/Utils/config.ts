@@ -76,12 +76,12 @@ export const contractAddresses = [
   {
     id: 10,
     name: "aquafeed",
-    address: "0x3AD7E423724537cDBA207429890511D224de009C",
+    address: "0x4c8F8868CBf433C0f10527214Acc6a84cFEFB716",
   },
   {
     id: 11,
     name: "aquafeedhelper",
-    address: "0xd4de3beb18019FaD305D1F6BA8f82Bbfb90f5e8F",
+    address: "0x9E445066489df23427bC3bACcD7a3026BCfB2E0B",
   },
   {
     id: 12,

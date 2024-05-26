@@ -1,5 +1,11 @@
 import { tokenAddresses, contractAddresses } from "@/app/Utils/config";
 
+// If false, the QuoteBase is correct, if returns true, Flip the Symbols/Addresses for UI
+export const switchQuoteBase = (_addressA: string, _addressB: string) => {
+  const switchTokens = BigInt(_addressB) > BigInt(_addressA) ? true : false;
+  return switchTokens;
+};
+
 export const findTokenAddressFromSymbol = (_symbol: string) => {
   let save;
   if (tokenAddresses) {

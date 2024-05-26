@@ -33,7 +33,6 @@ For now, use these defaults within the UI:
 ### WIP
 
 - add number of swaps and the expected amount size per swap in UI to check for errors, swap_minimums_getAmountsOut,etc
-- bug in approval amounts , the 1 AQUA about is being added to usdt, etc and messes up the amounts by \*\*12
 
 # tldr
 

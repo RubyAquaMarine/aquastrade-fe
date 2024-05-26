@@ -2,16 +2,6 @@ export const AQUAFEED_ABI = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_router",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_factory",
-        type: "address",
-      },
-      {
         internalType: "contract INFTAdmin",
         name: "_nftAdmin",
         type: "address",
@@ -84,6 +74,19 @@ export const AQUAFEED_ABI = [
   },
   {
     inputs: [],
+    name: "DigitPrecision",
+    outputs: [
+      {
+        internalType: "uint8",
+        name: "",
+        type: "uint8",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "EXCHANGE_RATES",
     outputs: [
       {
@@ -98,19 +101,6 @@ export const AQUAFEED_ABI = [
   {
     inputs: [],
     name: "FeedID",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "FeedMaximum",
     outputs: [
       {
         internalType: "uint256",
@@ -164,6 +154,11 @@ export const AQUAFEED_ABI = [
       {
         internalType: "uint256",
         name: "pricePool",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "pricePoolInverse",
         type: "uint256",
       },
     ],
@@ -228,38 +223,18 @@ export const AQUAFEED_ABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "UNISWAP_V2_FACTORY",
-    outputs: [
+    inputs: [
       {
-        internalType: "address",
+        internalType: "uint256",
         name: "",
-        type: "address",
+        type: "uint256",
       },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "UNISWAP_V2_ROUTER",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "_itemCounter",
+    name: "PoolFeed",
     outputs: [
       {
         internalType: "uint256",
-        name: "_value",
+        name: "",
         type: "uint256",
       },
     ],
@@ -268,6 +243,73 @@ export const AQUAFEED_ABI = [
   },
   {
     inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "PoolPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "PoolPriceInverse",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "PoolRouter",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_router",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_factoryV2",
+        type: "address",
+      },
       {
         internalType: "address",
         name: "_ammPoolAddress",
@@ -336,6 +378,11 @@ export const AQUAFEED_ABI = [
             name: "pricePool",
             type: "uint256",
           },
+          {
+            internalType: "uint256",
+            name: "pricePoolInverse",
+            type: "uint256",
+          },
         ],
         internalType: "struct AquasFeed.Feed",
         name: "",
@@ -386,6 +433,11 @@ export const AQUAFEED_ABI = [
             name: "pricePool",
             type: "uint256",
           },
+          {
+            internalType: "uint256",
+            name: "pricePoolInverse",
+            type: "uint256",
+          },
         ],
         internalType: "struct AquasFeed.Feed[]",
         name: "",
@@ -415,65 +467,34 @@ export const AQUAFEED_ABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "europaMAJORTVL",
-    outputs: [
+    inputs: [
       {
-        internalType: "uint256",
-        name: "_majorTVL",
-        type: "uint256",
+        internalType: "address",
+        name: "_usdc",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_usdt",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_usdp",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_dai",
+        type: "address",
       },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "europaMINORTVL",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "europaUSDTVL",
     outputs: [
       {
         internalType: "uint256",
         name: "_stableTVL",
         type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getAllBaseAssets",
-    outputs: [
-      {
-        internalType: "address[]",
-        name: "_symbolList",
-        type: "address[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getAllQuoteAssets",
-    outputs: [
-      {
-        internalType: "address[]",
-        name: "_symbolList",
-        type: "address[]",
       },
     ],
     stateMutability: "view",
@@ -491,7 +512,12 @@ export const AQUAFEED_ABI = [
     outputs: [
       {
         internalType: "uint256",
-        name: "_price",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
         type: "uint256",
       },
     ],
@@ -546,6 +572,19 @@ export const AQUAFEED_ABI = [
   {
     inputs: [],
     name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint8",
+        name: "_decimals",
+        type: "uint8",
+      },
+    ],
+    name: "setPricePrecision",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -633,6 +672,32 @@ export const AQUAFEED_HELPER_ABI = [
     type: "event",
   },
   {
+    inputs: [],
+    name: "UNISWAP_V2_FACTORY",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "UNISWAP_V2_ROUTER",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -645,7 +710,7 @@ export const AQUAFEED_HELPER_ABI = [
         type: "address",
       },
     ],
-    name: "ExchangeRate",
+    name: "exchangeRate",
     outputs: [
       {
         internalType: "uint256",
@@ -679,7 +744,7 @@ export const AQUAFEED_HELPER_ABI = [
         type: "uint8",
       },
     ],
-    name: "ExchangeRate",
+    name: "exchangeRate",
     outputs: [
       {
         internalType: "uint256",
@@ -690,6 +755,19 @@ export const AQUAFEED_HELPER_ABI = [
         internalType: "uint256",
         name: "",
         type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -708,56 +786,17 @@ export const AQUAFEED_HELPER_ABI = [
         type: "address",
       },
       {
-        internalType: "uint256",
+        internalType: "uint8",
         name: "_factor",
-        type: "uint256",
+        type: "uint8",
       },
     ],
-    name: "QuoteToBase",
+    name: "quoteToBase",
     outputs: [
       {
         internalType: "uint256",
         name: "",
         type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "UNISWAP_V2_FACTORY",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "UNISWAP_V2_ROUTER",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
       },
     ],
     stateMutability: "view",
