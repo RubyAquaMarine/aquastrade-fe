@@ -10,22 +10,6 @@
 
 - use this for the different Order types on the Perps page : https://ui.shadcn.com/docs/components/drawer
 
-# UX : spinning buttons
-
-```
- <span className={styles.spinner_padding}>
-                      {isConnecting ? (
-                        <span>
-                          {" "}
-                          {<FaSpinner className={styles.spinner_icon} />}
-                        </span>
-                      ) : (
-                        <span> </span>
-                      )}
-                    </span>
-
-```
-
 # MUI
 
 https://mui.com/material-ui/getting-started/installation/

@@ -759,7 +759,11 @@ const SwapAmm = () => {
           <div className={styles.input_container_column}>
             <div className={styles.column}>
               <p className={styles.routing}>
-                Fee: <span className={styles.fee_balance}> {feeForTrade} </span>{" "}
+                Fee:{" "}
+                <span className={styles.fee_balance}>
+                  {" "}
+                  {Number(feeForTrade).toFixed(4)}{" "}
+                </span>{" "}
                 <span className={styles.fee_balance}> {tokenA}</span>
               </p>
               <p className={styles.routing}> Exchange Rate:</p>
@@ -826,8 +830,6 @@ const SwapAmm = () => {
                   </span>
                 )}
               </p>
-
-              <p className={styles.routing}> Slippage:</p>
             </div>
           </div>
           {/**  Add AMM Pool Reserves */}

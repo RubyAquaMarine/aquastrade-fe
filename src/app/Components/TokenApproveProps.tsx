@@ -9,6 +9,8 @@ import { formatUnits } from "viem";
 import { Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { FaSpinner } from "react-icons/fa6";
+
 import { useERC20Token } from "@/app/Hooks/useAMM";
 import { ERC20_ABI } from "@/app/Abi/erc20";
 
@@ -25,6 +27,14 @@ interface Props {
 }
 
 const TokenApproveProps = (params: Props) => {
+  // spinner
+
+  const spinTimer = useRef(false);
+
+  // the time they click the button until notify toast popup
+
+  // about 10 seconds ; boring. how to make this better?
+
   // check the difference : if the allowance is already 5, and the approve is 5 , then
 
   const trueApprovalAmount = useRef(BigInt(1));
@@ -61,6 +71,7 @@ const TokenApproveProps = (params: Props) => {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
       setTrigger(true);
+      spinTimer.current = false; // turn off the spinner
     }
   }, [contractCallDataConfirmed, hash]);
 
@@ -102,6 +113,8 @@ const TokenApproveProps = (params: Props) => {
     });
 
   const handleApprove = () => {
+    spinTimer.current = true;
+
     writeContract({
       abi: ERC20_ABI,
       address: params.address,
@@ -164,12 +177,25 @@ const TokenApproveProps = (params: Props) => {
               {" "}
               {inputTrigger === false || allowance_amount < params.approve ? (
                 <span>
-                  {" "}
                   <button
                     className={styles.token_approve}
                     onClick={handleApprove}
                   >
-                    Approve {" : "} {inputToken ? inputToken?.symbol : "LP"}
+                    <span className={styles.add_spinner}>
+                      {" "}
+                      <span className={styles.spinner_padding}>
+                        {" "}
+                        {spinTimer && spinTimer.current === true ? (
+                          <FaSpinner className={styles.spinner_icon} />
+                        ) : (
+                          ""
+                        )}{" "}
+                      </span>
+                      <span>
+                        {" "}
+                        Approve {" : "} {inputToken ? inputToken?.symbol : "LP"}
+                      </span>
+                    </span>
                   </button>
                 </span>
               ) : (

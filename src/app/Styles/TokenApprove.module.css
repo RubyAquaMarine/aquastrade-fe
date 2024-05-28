@@ -23,3 +23,29 @@
   font-size: 0.8rem;
   color: #bdb8b8;
 }
+
+.add_spinner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.spinner_padding {
+  margin-right: 0.1rem;
+}
+
+.spinner_icon {
+  font-size: 1rem;
+  animation: spin 1s linear infinite;
+  /* Adjust animation duration */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

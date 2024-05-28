@@ -113,6 +113,7 @@
 .routing {
   display: flex;
   justify-content: space-between;
+  padding-top: 0.2rem;
   max-height: 30px;
   font-size: 0.7rem;
   color: #bdb8b8;
@@ -280,7 +281,7 @@
 .token_list_symbol_space {
   margin-right: 10px;
   margin-left: 10px;
-  max-height: 26px;
+  max-height: 30px;
 }
 
 .menu {
