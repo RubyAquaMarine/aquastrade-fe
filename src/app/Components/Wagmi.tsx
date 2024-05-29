@@ -54,13 +54,7 @@ export const config = createConfig({
   ssr: true,
   transports: {
     [mainnet.id]: http(),
-    [skaleEuropa.id]: fallback([
-      webSocket("wss://mainnet.skalenodes.com/v1/ws/elated-tan-skat", {
-        retryCount: 10,
-        retryDelay: 500,
-      }),
-      http("https://mainnet.skalenodes.com/v1/elated-tan-skat"),
-    ]),
+    [skaleEuropa.id]: http(),
     [skaleBlockBrawlers.id]: http(),
     [skaleCalypso.id]: http(),
     [skaleCryptoBlades.id]: http(),
@@ -78,3 +72,15 @@ declare module "wagmi" {
     config: typeof config;
   }
 }
+
+/*
+fallback([
+      webSocket("wss://mainnet.skalenodes.com/v1/ws/elated-tan-skat", {
+        retryCount: 10,
+        retryDelay: 500,
+      }),
+      http("https://mainnet.skalenodes.com/v1/elated-tan-skat"),
+    ]),
+
+
+*/

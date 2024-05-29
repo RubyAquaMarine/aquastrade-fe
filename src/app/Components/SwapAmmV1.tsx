@@ -31,14 +31,17 @@ import DCAInterface from "@/app/Components/DCA";
 import TokenBalance from "@/app/Components/TokenBalance";
 import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import AMMPools from "@/app/Components/AMMPools";
+import SwapAdd from "@/app/Components/SwapAdd";
+import { SwapAddProps } from "../Types/types";
 
-import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
+// HOOKS
 
 import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
-import { useFactory, useGetAmountInQuote } from "@/app/Hooks/useAMM";
+import { useFactory } from "@/app/Hooks/useAMM";
 
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
+import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 
 const ROUTER_AQUADEX: `0x${string}` = findContractInfo("router")?.address;
 //
@@ -46,6 +49,7 @@ const FACTORY_AQUADEX: `0x${string}` = findContractInfo("factory")?.address;
 
 const SwapAmm = () => {
   // Save state without rendering
+  const addLiqProps = useRef<SwapAddProps>();
   const divRef = useRef(null);
   const [amountLPRemove, setAmountLPRemove] = useState(100);
   const [amountLP, setAmountLP] = useState(BigInt(0));
@@ -85,8 +89,8 @@ const SwapAmm = () => {
 
   const [tokenA, setTokenA] = useState("USDC");
   const [tokenB, setTokenB] = useState("AQUA");
-  const [amountA, setAmountA] = useState("1");
-  const [amountB, setAmountB] = useState("1");
+  const [amountA, setAmountA] = useState<string>();
+  const [amountB, setAmountB] = useState<string>("1");
 
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
@@ -102,17 +106,10 @@ const SwapAmm = () => {
   const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
   const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
 
-  // todo Adding Liqudity : can be removed when refactoring into ammFeature Components
-  const addTokenBAmount = useGetAmountInQuote(
-    amountA,
-    poolAddress,
-    tokenAAddress.current,
-    tokenADecimal.current,
-  );
-
   useEffect(() => {
     if (address && isConnected) {
       if (tokenA && tokenB) {
+        // todo this can be simplified
         tokenAAddress.current = findTokenAddressFromSymbol(tokenA);
         tokenBAddress.current = findTokenAddressFromSymbol(tokenB);
 
@@ -124,16 +121,32 @@ const SwapAmm = () => {
     }
   }, [address, isConnected, tokenA, tokenB]);
 
-  // test
   useEffect(() => {
-    findPathForPools(tokenAAddress.current, tokenBAddress.current);
+    if (poolAddress) {
+      if (amountA) {
+        addLiqProps.current = {
+          amountInputA: amountA,
+          amountInputB: amountB,
+          tokenAAddress: tokenAAddress.current,
+          tokenBAddress: tokenBAddress.current,
+          ammPoolAddress: poolAddress,
+        };
+        handleFeeCalculations(amountA);
+      }
+    }
+  }, [poolAddress, amountA, amountB]);
+
+  useEffect(() => {
+    if (poolAddress) {
+      findPathForPools(tokenAAddress.current, tokenBAddress.current);
+    }
   }, [poolAddress]);
 
   useEffect(() => {
-    if (amountA) {
-      handleFeeCalculations();
+    if (amountLPRemove && poolAddress) {
+      handleLPCalculations();
     }
-  }, [amountA]);
+  }, [amountLPRemove, poolAddress]);
 
   useEffect(() => {
     if (amountLPRemove && poolAddress) {
@@ -326,44 +339,6 @@ const SwapAmm = () => {
   };
 
   // Function to handle liquidity provision
-  const handleProvideLiquidity = () => {
-    // Implement liquidity provision logic here
-    const timeIs = resultBlock?.data?.timestamp
-      ? resultBlock?.data?.timestamp + BigInt(20000)
-      : BigInt(404);
-
-    console.log(
-      "timestamp for add Liquidity ",
-      timeIs,
-      tokenAAddress.current,
-      tokenBAddress.current,
-      address,
-      parseUnits(amountA, Number(tokenADecimal?.current)),
-      parseUnits(amountB, Number(tokenBDecimal?.current)),
-    );
-
-    if (timeIs) {
-      writeContract({
-        abi: EUROPA_AMM_ROUTER_ABI,
-        address: ROUTER_AQUADEX,
-        functionName: "addLiquidity",
-        args: [
-          tokenAAddress.current,
-          tokenBAddress.current,
-          parseUnits(amountA, Number(tokenADecimal?.current)),
-          addTokenBAmount
-            ? addTokenBAmount
-            : parseUnits(amountB, Number(tokenBDecimal?.current)), // Create new pool
-          BigInt(0),
-          BigInt(0),
-          address,
-          timeIs,
-        ],
-      });
-    }
-  };
-
-  // Function to handle liquidity provision
   const handleRemoveLiquidity = () => {
     // Implement liquidity provision logic here
     const timeIs = resultBlock?.data?.timestamp
@@ -415,10 +390,10 @@ const SwapAmm = () => {
     setTradeFeature(_feature);
   };
 
-  const handleFeeCalculations = () => {
+  const handleFeeCalculations = (_amount: string) => {
     const _fee = feeNFT.current;
     const nftCheck = BigInt(1000) - _fee;
-    const input = parseUnits(amountA, 18); // string to big
+    const input = parseUnits(_amount, 18); // string to big
     const oneTenth = input / BigInt(1000);
     let fee = BigInt(0);
     switch (Number(nftCheck)) {
@@ -679,7 +654,7 @@ const SwapAmm = () => {
           <div className={styles.input_container}>
             <span className={styles.input_box}>
               <span className={styles.box_space}>
-                {swap_path !== [""] && amountA !== "0.0" ? (
+                {amountA && swap_path !== [""] ? (
                   <GetAmountsOut
                     props={[
                       amountA,
@@ -1047,140 +1022,7 @@ const SwapAmm = () => {
           ) : (
             <div></div>
           )}
-          <div className={styles.container_wrap}>
-            {" "}
-            <div className={styles.input_container_sm}>
-              <div className={styles.input_box}>
-                {poolAddress &&
-                addTokenBAmount &&
-                poolAddress !== "0x0000000000000000000000000000000000000000" ? (
-                  <input
-                    className={styles.input_amount}
-                    type="text"
-                    placeholder="0.0"
-                    value={formatUnits(addTokenBAmount, tokenBDecimal.current)}
-                  />
-                ) : (
-                  <input
-                    className={styles.input_amount}
-                    type="text"
-                    placeholder="0.0"
-                    value={amountB}
-                    onChange={(e) => setAmountB(e.target.value)}
-                  />
-                )}
-                <span className={styles.box_space}>
-                  {" "}
-                  <input
-                    className={styles.input_symbol}
-                    type="text"
-                    placeholder="Select Token"
-                    value={tokenB}
-                    onChange={(e) => setTokenB(e.target.value)}
-                    onClick={() => setShowTokenListB(true)}
-                  />
-                </span>
-
-                {showTokenListB && tokenAddresses?.length > 0 ? (
-                  <div className={styles_pop.popup_container}>
-                    <div className={styles_pop.popup_content}>
-                      {tokenAddresses.map((_token, index) => (
-                        <div
-                          className={styles.token_list_symbol}
-                          key={index}
-                          onClick={() => handleTokenSelectionB(_token.symbol)}
-                        >
-                          {_token.symbol} {"  "}
-                          <Image
-                            className={styles.token_list_symbol_space}
-                            src={_token.logo}
-                            alt="Aquas.Trade Crypto Assets On SKALE Network"
-                            width={18}
-                            height={18}
-                          />
-                          {"  "}{" "}
-                          {walletTokenList.map((_balance, index) => (
-                            <span key={index} className={styles.amount_balance}>
-                              {" "}
-                              {_balance.contractAddress.toUpperCase() ===
-                                _token.address.toUpperCase() &&
-                                formatUnits(
-                                  _balance.balance,
-                                  Number(_balance.decimals),
-                                )}
-                            </span>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <span></span>
-                )}
-              </div>
-
-              <p className={styles.container_margin}>
-                <span className={styles.text_space_right_12}>
-                  {" "}
-                  Wallet balance{" "}
-                </span>
-
-                {tokenBAddress.current !== "" ? (
-                  <TokenBalance
-                    props={[
-                      tokenBAddress.current,
-                      tokenBDecimal.current,
-                      address,
-                    ]}
-                  ></TokenBalance>
-                ) : (
-                  <div></div>
-                )}
-              </p>
-
-              <span className={styles.text_center}> Approved: </span>
-              {address &&
-              amountB &&
-              tokenBAddress.current &&
-              tokenBDecimal.current ? (
-                <TokenApproveProps
-                  {...{
-                    name: "allowance",
-                    address: tokenBAddress.current,
-                    approve: parseUnits(
-                      amountB,
-                      Number(tokenBDecimal?.current),
-                    ),
-                    args: [address, ROUTER_AQUADEX],
-                  }}
-                ></TokenApproveProps>
-              ) : (
-                <div></div>
-              )}
-            </div>
-          </div>
-          <div className={styles.button_container}>
-            <button
-              className={styles.button_field}
-              onClick={handleProvideLiquidity}
-            >
-              {poolAddress !== "0x0000000000000000000000000000000000000000"
-                ? "Cast Line"
-                : "Build Boat"}
-            </button>
-          </div>
-          <div className={styles.input_container_column}>
-            <div className={styles.column}>
-              <p>
-                {" "}
-                {poolAddress !== "0x0000000000000000000000000000000000000000"
-                  ? "Whale Size:"
-                  : "100% Ownership"}
-              </p>
-              <p> Exchange Rate:</p>
-            </div>
-            <div className={styles.column}></div>
-          </div>
+          <SwapAdd {...addLiqProps.current}> </SwapAdd>
         </div>
       ) : (
         <div> </div>

@@ -4,10 +4,6 @@ import React, { useRef } from "react";
 import { formatUnits, parseUnits } from "viem";
 
 import { ButtonSpinner, Props } from "@/app/Components/ButtonSpinner";
-
-import SwapAdd from "@/app/Components/SwapAdd";
-import { SwapAddProps } from "@/app/Types/types";
-
 import {
   findContractInfo,
   findTokenAddressFromSymbol,
@@ -23,9 +19,6 @@ const Home = ({ params }: any) => {
   const token_address = findTokenAddressFromSymbol(
     "AQUA",
   ) as unknown as `0x${string}`;
-  const token_addressB = findTokenAddressFromSymbol(
-    "WIFO",
-  ) as unknown as `0x${string}`;
   // wagmi
   const { address, isConnected, chain } = useAccount();
 
@@ -37,14 +30,6 @@ const Home = ({ params }: any) => {
     args: [address, parseUnits("1", 18)] as any,
   };
 
-  const add: SwapAddProps = {
-    amountInputA: "1",
-    amountInputB: "1",
-    tokenAAddress: token_address,
-    tokenBAddress: token_addressB,
-    ammPoolAddress: token_address // this is just a demo.  fix later if ever needed. 
-  };
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {address ? (
@@ -52,8 +37,6 @@ const Home = ({ params }: any) => {
       ) : (
         <span> Connect Wallet </span>
       )}
-
-      <SwapAdd {...add}> </SwapAdd>
     </main>
   );
 };

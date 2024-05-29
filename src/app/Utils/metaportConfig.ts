@@ -551,12 +551,12 @@ export const AquaConfig: interfaces.MetaportConfig = {
       erc20: {
         razor: {
           address: "0xcbf70914fae03b3acb91e953de60cfdaaca8145f",
-
           chains: {
-            "elated-tan-skat": {},
+            "elated-tan-skat": {
+              wrapper: "0x1c566a47e1baC535Ca616373146e3BE024F8DeAd",
+            },
             mainnet: {
               clone: true,
-              hub: "turbulent-unique-scheat",
             },
           },
         },

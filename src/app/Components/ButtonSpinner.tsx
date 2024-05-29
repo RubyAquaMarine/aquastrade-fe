@@ -1,10 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import {
+  useAccount,
+  useSwitchChain,
+  useWriteContract,
+  useWaitForTransactionReceipt,
+} from "wagmi";
 import React, { useState, useEffect, memo, useRef } from "react";
 import { formatUnits } from "viem";
-
+import { CHAIN } from "@/app/Utils/config";
 import { Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,17 +24,18 @@ export interface Props {
   abi: any;
   args: any;
 }
-
+let spinCounter = 0;
 export const ButtonSpinner = (params: Props) => {
-  console.log(" BUTTON SPINNER Function name", params?.name);
+  spinCounter++;
 
-  console.log(" BUTTON SPINNER Function arg", params?.args);
+  const { address, isConnected, chain } = useAccount();
+  const { chains, switchChain } = useSwitchChain();
 
-  // spinner
+  const isButton = useRef<HTMLDivElement>(null);
+
+  const [inputButton, setButton] = useState("");
 
   const spinTimer = useRef(false);
-
-  const [inputTrigger, setTrigger] = useState<boolean>(false); // todo : only triggers once and doesn't reset :
 
   const { data: hash, isError, writeContract } = useWriteContract();
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
@@ -37,20 +43,21 @@ export const ButtonSpinner = (params: Props) => {
   });
 
   useEffect(() => {
+    console.log("Button Renders  isButton", isButton);
+    if (isButton.current) {
+      setButton(isButton.current?.children[0]?.id);
+    }
+  }, [isButton]);
+
+  useEffect(() => {
+    console.log("Button Renders  hash", hash);
+
     if (contractCallDataConfirmed) {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
-      setTrigger(true);
       spinTimer.current = false; // turn off the spinner
     }
   }, [contractCallDataConfirmed, hash]);
-
-  useEffect(() => {
-    if (inputTrigger === true) {
-      console.log("RENDER AFTER TX TEST ++++++++++");
-    }
-    console.log("RENDER AFTER TX TEST ----------");
-  }, [inputTrigger]);
 
   const CustomToastWithLink = (_url: string) => (
     <div>
@@ -86,24 +93,52 @@ export const ButtonSpinner = (params: Props) => {
     });
   };
 
-  console.log(" WRITE Function is Error? ", isError);
+  const handleEuropa = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    targetChainId: number,
+  ) => {
+    if (chain) {
+      if (chain.id !== targetChainId) {
+        event.preventDefault();
+        // @ts-ignore: Unreachable code error
+        switchChain({ chainId: targetChainId });
+      }
+    } else {
+      // chain doesn't exist : not a whitelisted wagmi config chain.id
+      // therefore just prompt injected Wallet to switch networks.
+      event.preventDefault();
+      // @ts-ignore: Unreachable code error
+      switchChain({ chainId: targetChainId });
+    }
+  };
+
+  console.log("Button Renders ", spinCounter, " spinner", spinTimer.current);
 
   return (
-    <div>
-      <button onClick={handleOnClick}>
-        <span className={styles.add_spinner}>
-          {" "}
-          <span className={styles.spinner_padding}>
+    <div ref={isButton}>
+      {address && isConnected && chain && chain.id === CHAIN.id ? (
+        <button onClick={handleOnClick}>
+          <span className={styles.add_spinner}>
             {" "}
-            {spinTimer && spinTimer.current === true ? (
-              <FaSpinner className={styles.spinner_icon} />
-            ) : (
-              ""
-            )}{" "}
+            <span className={styles.spinner_padding}>
+              {" "}
+              {spinTimer && spinTimer.current === true ? (
+                <FaSpinner className={styles.spinner_icon} />
+              ) : (
+                ""
+              )}{" "}
+            </span>
+            <span> {params.buttonText} </span>
           </span>
-          <span> {params.buttonText} </span>
+        </button>
+      ) : (
+        <span>
+          {" "}
+          <button onClick={(event) => handleEuropa(event, 2046399126)}>
+            Connect Wallet
+          </button>
         </span>
-      </button>
+      )}
     </div>
   );
 };

@@ -109,7 +109,8 @@ export const useGetAmountInQuote = (
   _inputTokenAddress: `0x${string}`,
   _decimalA: bigint,
 ) => {
-  //  console.log("useGetAmountInQuote:Props: ", _amount, _addressPair, _decimalA);
+  console.log("useGetAmountInQuote:Props: ", _amount, _addressPair, _decimalA);
+
   let flip = false;
 
   const { data: reserves } = useAMMPairs(_addressPair, "getReserves");
@@ -126,7 +127,7 @@ export const useGetAmountInQuote = (
   const routerContract = findContractInfo("router");
 
   const data = [
-    parseUnits(_amount, Number(_decimalA)),
+    parseUnits(_amount ? _amount : "1", Number(_decimalA ? _decimalA : 18)),
     flip === false ? reserves?.[0] : reserves?.[1],
     flip === false ? reserves?.[1] : reserves?.[0],
   ];
@@ -139,5 +140,5 @@ export const useGetAmountInQuote = (
 
   // console.log("GetAmountInQuote: ", swap_out);
 
-  return swap_out;
+  return swap_out as unknown as bigint;
 };
