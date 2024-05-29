@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useAccount, useSwitchChain } from "wagmi";
 import styles from "@/app/Styles/NFT.module.css";
+import styles_container from "@/app/Styles/Home.module.css";
 import { MARKETPLACE_AQUADEX, CHAIN } from "@/app/Utils/config";
 
 import {
@@ -42,7 +43,7 @@ const Home = () => {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className={styles_container.container}>
       <div className="max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <span> </span>
         <span> NFT MarketPlace Coming Soon</span>

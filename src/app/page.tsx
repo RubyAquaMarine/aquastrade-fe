@@ -4,7 +4,7 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import TextSizeAdjuster from "@/app/Components/ViewPort";
 import ConnectWallet from "@/app/Components/ConnectWallet";
 import dynamic from "next/dynamic";
-import styles from "./Styles/Home.module.css";
+import styles from "./Styles/Landing.module.css";
 
 import SKL from "../../public/SKL.svg";
 

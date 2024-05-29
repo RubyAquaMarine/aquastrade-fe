@@ -1,44 +1,27 @@
-.tradingView {
+.container {
   display: flex;
-}
-/* 100% view window to prevent the chart scrol bar from activating*/
-.container_positioning {
-  z-index: 2;
-  width: 99vw;
-
-  height: fit-content;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  flex-direction: column;
   align-items: center;
-  padding: 3rem;
-  position: absolute;
-  left: 0;
-}
-/** reomve border on chart container*/
-.chart {
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
-.text_container {
-  max-width: 380px;
-
-  color: aliceblue;
-
-  width: 99vw;
-  height: 80vh;
-}
-
-.text_title {
-  max-width: 200px;
-}
-
-.text_body {
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: 1rem;
-  height: 30px;
-  max-width: 14rem;
-  color: #29ff94;
+  padding: 2rem;
+}
+
+.p_styled {
+  margin-top: 2rem;
+  position: static;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: auto;
+  min-width: 200px;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #2196f3;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(82, 86, 109, 0.47),
+    transparent
+  );
+  padding-bottom: 6px;
+  padding-top: 8px;
 }

@@ -18,6 +18,11 @@ Deflationary tokenomics for the AQUA token.
 * - after NFTS are sold out, NFT Market Place requires AQUA => Bullish for AQUA
 * - AQUA powers AquasTrade by being the base asset on all major AMM pools, works as a marketplace utility token, and revenue [fees](./DEX.md#fees) burn AQUA. Bullish for AQUA and nft holders.
 
+# Deflationary mechanism
+
+- DCA Orders require $AQUA as an entry fee per order placement. 100% of $AQUA are burned.
+- All Revenue from [DEX](./DEX.md) are used to buy back $AQUA and burn. (After Liquidity BootStrap Phase)
+
 ## 10% - Airdrop
 
 Airdrop 10% of the token supply over a 10 year period. This will result in an one percent inflation for the next 10 years.
