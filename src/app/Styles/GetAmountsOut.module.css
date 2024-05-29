@@ -1,0 +1,9 @@
+.input_amount {
+  max-width: 9rem;
+  display: flex;
+  margin-right: 2px;
+  padding: 0.2rem 0.8rem;
+  color: #f4f4f4;
+  background-color: #242629;
+  border-radius: 12px;
+}

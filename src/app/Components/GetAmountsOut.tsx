@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { formatUnits, parseUnits } from "viem";
 import { useAMMRouter } from "@/app/Hooks/useAMM";
-import styles from "@/app/Styles/AMM.module.css";
+import styles from "@/app/Styles/GetAmountsOut.module.css";
 import { findTokenFromAddress, findContractInfo } from "@/app/Utils/findTokens";
 const ROUTER_AQUADEX = findContractInfo("router")?.address;
 
@@ -41,7 +41,7 @@ const GetAmountsOut = (params: Props) => {
       setAmountOut(swap_out);
     }
   }, [swap_out]);
-
+  // Handles Multihop outputs
   return (
     <div>
       {amount_out.length === 0 ? (
@@ -59,8 +59,12 @@ const GetAmountsOut = (params: Props) => {
             placeholder="Select Token"
             value={
               !amount_out[2]
-                ? formatUnits(amount_out[1], Number(params.props[4]))
-                : formatUnits(amount_out[2], Number(params.props[4]))
+                ? parseFloat(
+                    formatUnits(amount_out[1], Number(params.props[4])),
+                  ).toFixed(8)
+                : parseFloat(
+                    formatUnits(amount_out[2], Number(params.props[4])),
+                  ).toFixed(8)
             }
           />
         )

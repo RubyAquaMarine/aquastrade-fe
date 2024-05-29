@@ -675,79 +675,82 @@ const SwapAmm = () => {
           ) : (
             <span></span>
           )}
-          {/**  */}
+          {/** input_container : has no color : input_box has  background-color: #242629;
+           * box_space : no color
+           *
+           *
+           */}
           <div className={styles.input_container}>
             <span className={styles.input_box}>
+              {swap_path !== [""] && amountA !== "0.0" ? (
+                <GetAmountsOut
+                  props={[
+                    amountA,
+                    swap_path,
+                    feeNFT.current,
+                    tokenADecimal.current,
+                    tokenBDecimal.current,
+                  ]}
+                ></GetAmountsOut>
+              ) : (
+                <input
+                  className={styles.input_amount}
+                  type="text"
+                  placeholder="0.0"
+                  value={"0.0"}
+                />
+              )}
+
               <span className={styles.box_space}>
-                {swap_path !== [""] && amountA !== "0.0" ? (
-                  <GetAmountsOut
-                    props={[
-                      amountA,
-                      swap_path,
-                      feeNFT.current,
-                      tokenADecimal.current,
-                      tokenBDecimal.current,
-                    ]}
-                  ></GetAmountsOut>
-                ) : (
-                  <input
-                    type="text"
-                    placeholder="Get Amounts Out"
-                    value={"0.0"}
-                  />
-                )}
-
-                <span className={styles.box_space}>
-                  {" "}
-                  <input
-                    className={styles.input_symbol}
-                    type="text"
-                    placeholder="Select Token"
-                    value={tokenB}
-                    onChange={(e) => setTokenB(e.target.value)}
-                    onClick={() => setShowTokenListB(true)}
-                  />
-                </span>
-
-                {showTokenListB && tokenAddresses?.length > 0 ? (
-                  <span className={styles_pop.popup_container}>
-                    <span className={styles_pop.popup_content}>
-                      {tokenAddresses.map((_token, index) => (
-                        <span
-                          className={styles.token_list_symbol}
-                          key={index}
-                          onClick={() => handleTokenSelectionB(_token.symbol)}
-                        >
-                          {_token.symbol} {"  "}
-                          <Image
-                            className={styles.token_list_symbol_space}
-                            src={_token.logo}
-                            alt="Aquas.Trade Crypto Assets On SKALE Network"
-                            width={18}
-                            height={18}
-                          />
-                          {"  "}{" "}
-                          {walletTokenList.map((_balance, index) => (
-                            <span key={index} className={styles.amount_balance}>
-                              {" "}
-                              {_balance.contractAddress.toUpperCase() ===
-                                _token.address.toUpperCase() &&
-                                parseFloat(
-                                  formatUnits(
-                                    _balance.balance,
-                                    Number(_balance.decimals),
-                                  ),
-                                ).toFixed(8)}
-                            </span>
-                          ))}
-                        </span>
-                      ))}
-                    </span>
-                  </span>
-                ) : (
-                  <span></span>
-                )}
+                {" "}
+                <input
+                  className={styles.input_symbol}
+                  type="text"
+                  placeholder="Select Token"
+                  value={tokenB}
+                  onChange={(e) => setTokenB(e.target.value)}
+                  onClick={() => setShowTokenListB(true)}
+                />
               </span>
+
+              {showTokenListB && tokenAddresses?.length > 0 ? (
+                <span className={styles_pop.popup_container}>
+                  <span className={styles_pop.popup_content}>
+                    {tokenAddresses.map((_token, index) => (
+                      <span
+                        className={styles.token_list_symbol}
+                        key={index}
+                        onClick={() => handleTokenSelectionB(_token.symbol)}
+                      >
+                        {_token.symbol} {"  "}
+                        <Image
+                          className={styles.token_list_symbol_space}
+                          src={_token.logo}
+                          alt="Aquas.Trade Crypto Assets On SKALE Network"
+                          width={18}
+                          height={18}
+                        />
+                        {"  "}{" "}
+                        {walletTokenList.map((_balance, index) => (
+                          <span key={index} className={styles.amount_balance}>
+                            {" "}
+                            {_balance.contractAddress.toUpperCase() ===
+                              _token.address.toUpperCase() &&
+                              parseFloat(
+                                formatUnits(
+                                  _balance.balance,
+                                  Number(_balance.decimals),
+                                ),
+                              ).toFixed(8)}
+                          </span>
+                        ))}
+                      </span>
+                    ))}
+                  </span>
+                </span>
+              ) : (
+                <span></span>
+              )}
             </span>
           </div>
           {/**  Swap and Approve button  */}

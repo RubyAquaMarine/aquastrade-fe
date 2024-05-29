@@ -42,7 +42,7 @@ const Home = ({ params }: any) => {
     amountInputB: "1",
     tokenAAddress: token_address,
     tokenBAddress: token_addressB,
-    ammPoolAddress: token_address // this is just a demo.  fix later if ever needed. 
+    ammPoolAddress: token_address, // this is just a demo.  fix later if ever needed.
   };
 
   return (
