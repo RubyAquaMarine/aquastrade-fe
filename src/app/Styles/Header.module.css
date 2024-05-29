@@ -59,6 +59,7 @@ background-color: #03bada;
   background-color: #181a1d;
   color: #f4f4f4;
   height: 52px;
+  width: 100%;
   font-family: monospace;
   border-bottom: 1px solid #475384;
 }
@@ -69,7 +70,6 @@ background-color: #03bada;
 }
 
 .versionMenu {
-  background-color: #2196f3;
   color: #070707;
   width: 16px;
   height: 42px;
@@ -90,7 +90,7 @@ background-color: #03bada;
   /* Ensuring the container has a defined height for vertical alignment */
 }
 
-.navListTight {
+.nav_logo {
   list-style: none;
   display: flex;
   gap: 0.8rem;
@@ -103,10 +103,6 @@ background-color: #03bada;
   /* Ensuring the container has a defined height for vertical alignment */
 }
 
-/*
- border-bottom: 1px solid rgb(213, 213, 245); 
-*/
-
 .navItem {
   font-size: 0.9rem;
   padding: 0.2rem 0.2rem;
@@ -114,7 +110,6 @@ background-color: #03bada;
 
 /* #03bada    #2196f3; (new)  */
 .navItem:hover {
-  background-color: #2196f3;
   border-radius: 8px;
   cursor: pointer;
   transition:
@@ -122,31 +117,9 @@ background-color: #03bada;
     color 0.3s;
 }
 
-.navItemInvert {
-  font-size: 0.9rem;
-  -webkit-filter: invert(0.75);
-  /* safari 6.0 - 9.0 */
-  filter: invert(0.75);
-}
-
-.navItemInvert:hover {
-  background-color: #2196f3;
-  padding: 0.2rem 0.2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-}
-
-.navItemLogo {
+.nav_logo_title {
   font-size: 18px;
   font-weight: bold;
-}
-
-.connectButton:hover {
-  background-color: #2196f3;
 }
 
 .align_test {
@@ -259,14 +232,14 @@ className={styles.popup}  openOnHover={true}
 /* Media Queries */
 @media (max-width: 48em) {
   /* Using em for media query */
-  .navItemLogo {
-    display: block;
+  .nav_logo_title {
+    display: none;
   }
 }
 
 @media (max-width: 36em) {
   /* Using em for media query */
-  .navItemLogo {
+  .nav_logo_title {
     display: none;
   }
 }

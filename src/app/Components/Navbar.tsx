@@ -10,7 +10,7 @@ import SKL from "../../../public/SKL.svg";
 import MENU from "../../../public/menu1.svg";
 
 // THeme Dark Mode Switching works : but theming needs work
-import { ThemeToggle } from "@/app/Components/ui/ThemeToggle";
+//import { ThemeToggle } from "@/app/Components/ui/ThemeToggle";
 //     <ThemeToggle></ThemeToggle>
 
 import {
@@ -24,7 +24,6 @@ import {
   navigationMenuTriggerStyle,
   NavigationMenuViewport,
 } from "@/app/Components/ui/NavigationMenu";
-import ListItem from "@mui/material/ListItem";
 
 const Navbar = () => {
   return (
@@ -32,7 +31,7 @@ const Navbar = () => {
       <nav>
         <div className={styles.align_test}>
           <div className={styles.float_left}>
-            <ul className={styles.navListTight}>
+            <ul className={styles.nav_logo}>
               <li>
                 <Link href="/">
                   <Image
@@ -46,11 +45,18 @@ const Navbar = () => {
                 </Link>
               </li>
 
-              <li className={styles.navItemLogo}>
+              <li className={styles.nav_logo_title}>
                 <Link href="/">AquasTrade</Link>
               </li>
             </ul>
           </div>
+
+          {/**
+           * header :  background-color: #181a1d;
+           *
+           *
+           *
+           */}
 
           <div className={styles.float_center}>
             {" "}
@@ -219,42 +225,6 @@ const Navbar = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>
-                    {" "}
-                    <Link href="/dashboard/games">Games</Link>
-                  </NavigationMenuTrigger>
-
-                  <span className={styles.nav_menu_br}>
-                    {" "}
-                    <NavigationMenuContent className={styles.nav_menu_dd}>
-                      <Link href="/dashboard/coinflip" legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={navigationMenuTriggerStyle()}
-                        >
-                          Coinflip
-                        </NavigationMenuLink>
-                      </Link>
-
-                      <Link href="/dashboard/games" legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={navigationMenuTriggerStyle()}
-                        >
-                          Directory
-                        </NavigationMenuLink>
-                      </Link>
-
-                      <Link href="/dashboard/games" legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={navigationMenuTriggerStyle()}
-                        >
-                          WhaleEatFish
-                        </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>{" "}
-                  </span>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
                   <Link href="/dashboard/nft" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
@@ -299,14 +269,6 @@ const Navbar = () => {
 
               <Dropdown.Item className={styles.popup_item}>
                 <Link
-                  href={`/dashboard/support/`}
-                  className={styles.popup_item_link}
-                >
-                  Support &emsp; &ensp; &ensp; &ensp;
-                </Link>
-              </Dropdown.Item>
-              <Dropdown.Item className={styles.popup_item}>
-                <Link
                   href={`https://github.com/RubyAquaMarine/aquastrade-fe/issues`}
                   target="_blank"
                   className={styles.popup_item_link}
@@ -324,6 +286,15 @@ const Navbar = () => {
                       className={styles.popup_item_sub_link}
                     >
                       Chain RPC
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item className={styles.popup_item}>
+                    <Link
+                      href="https://dappradar.com/dapp/aquas-trade"
+                      target="_blank"
+                      className={styles.popup_item_sub_link}
+                    >
+                      DappRadar
                     </Link>
                   </Dropdown.Item>
                   <Dropdown.Item className={styles.popup_item}>
@@ -359,7 +330,7 @@ const Navbar = () => {
                       target="_blank"
                       className={styles.popup_item_sub_link}
                     >
-                      Twitter &nbsp;
+                      X.com &nbsp;
                     </Link>
                   </Dropdown.Item>
                 </Dropdown.Submenu>
@@ -373,3 +344,40 @@ const Navbar = () => {
 };
 
 export default Navbar;
+/*
+ <NavigationMenuItem>
+                  <NavigationMenuTrigger>
+                    {" "}
+                    <Link href="/dashboard/games">Games</Link>
+                  </NavigationMenuTrigger>
+
+                  <span className={styles.nav_menu_br}>
+                    {" "}
+                    <NavigationMenuContent className={styles.nav_menu_dd}>
+                      <Link href="/dashboard/coinflip" legacyBehavior passHref>
+                        <NavigationMenuLink
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          Coinflip
+                        </NavigationMenuLink>
+                      </Link>
+
+                      <Link href="/dashboard/games" legacyBehavior passHref>
+                        <NavigationMenuLink
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          Directory
+                        </NavigationMenuLink>
+                      </Link>
+
+                      <Link href="/dashboard/games" legacyBehavior passHref>
+                        <NavigationMenuLink
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          WhaleEatFish
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuContent>{" "}
+                  </span>
+                </NavigationMenuItem>
+*/
