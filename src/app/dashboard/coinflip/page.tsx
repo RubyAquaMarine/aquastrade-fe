@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useAccount } from "wagmi";
 import CoinFlip from "@/app/Components/CoinFlip";
 import styles from "@/app/Styles/Coinflip.module.css";
+import styles_container from "@/app/Styles/Home.module.css";
 import { CHAIN } from "@/app/Utils/config";
 import { findContractInfo } from "@/app/Utils/findTokens";
 
@@ -13,7 +14,7 @@ const Home = () => {
   const { address, isConnected, chain } = useAccount();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className={styles_container.container}>
       <h1 className={styles.midText}>Flip to Up your Stack</h1>
       <span>Powered by on-chain</span>{" "}
       <span className={styles.action_link}>

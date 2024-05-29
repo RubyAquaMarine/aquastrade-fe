@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useAccount, useSwitchChain } from "wagmi";
 import { CHAIN } from "@/app/Utils/config";
 import styles from "@/app/Styles/Airdrop.module.css";
+import styles_container from "@/app/Styles/Home.module.css";
 import SpinImage from "@/app/Components/SpinImage";
 import NFTHolderLaunchPad from "@/app/Components/NFTHoldersLaunchPad";
 
@@ -23,7 +24,7 @@ const Home = ({ children, params }: any) => {
   }, [address, isConnected, test]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className={styles_container.container}>
       <h1 className={styles.text_title}>Token Launch Pad </h1>
       <span className={styles.text_border_bottom}>
         {" "}

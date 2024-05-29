@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import styles from "@/app/Styles/Dashboard.module.css";
+import styles_container from "@/app/Styles/Home.module.css";
 import { useAccount, useSwitchChain } from "wagmi";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +38,7 @@ if the user doesn't have the network within the MM already, then switching doesn
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className={styles_container.container}>
       <h1 className={styles.midText}>Games on SKALE </h1>
 
       {!addr ? (

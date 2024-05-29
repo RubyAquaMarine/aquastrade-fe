@@ -497,21 +497,6 @@ const SwapAmm = () => {
         <button className={styles.nav} onClick={() => handleAMMFeatures("nft")}>
           NFT
         </button>
-
-        {ammFeature !== "nft" && tradeFeature === "swap" ? (
-          <button className={styles.nav}>
-            <Image
-              src="/gear.svg"
-              alt="menu"
-              width={26}
-              height={26}
-              className={styles.imageInvert}
-              onClick={handleFlipTokens}
-            />
-          </button>
-        ) : (
-          <span></span>
-        )}
       </div>
 
       {ammFeature === "swap" ? (
@@ -770,7 +755,12 @@ const SwapAmm = () => {
                 </span>{" "}
                 <span className={styles.fee_balance}> {tokenA}</span>
               </p>
-              <p className={styles.routing}> Exchange Rate:</p>
+              <p className={styles.routing}>
+                {" "}
+                <Link href="/dashboard/overview" target="_blank">
+                  Exchange Rate:{" "}
+                </Link>{" "}
+              </p>
             </div>
             <div className={styles.column}>
               <p>
@@ -1409,3 +1399,19 @@ const SwapAmm = () => {
 };
 
 export default SwapAmm;
+/*
+ {ammFeature !== "nft" && tradeFeature === "swap" ? (
+          <button className={styles.nav}>
+            <Image
+              src="/gear.svg"
+              alt="menu"
+              width={26}
+              height={26}
+              className={styles.imageInvert}
+              onClick={handleFlipTokens}
+            />
+          </button>
+        ) : (
+          <span></span>
+        )}
+*/

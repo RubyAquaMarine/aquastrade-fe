@@ -5,6 +5,7 @@ import { useAccount } from "wagmi";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "../../Styles/TokenList.module.css";
+import styles_c from "@/app/Styles/Home.module.css";
 
 /* http://localhost:3000/user/0xCDeb7F7974D89Fd71089487D65AA9731d7E846F5
  - if wallet is connected, change the explorer url
@@ -73,7 +74,7 @@ const TokenList = ({ params }: any) => {
   }, [addressWallet, chain]);
   // todo : this surely has hydration errors, redo the logic
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className={styles_c.container}>
       <h4 className={styles.text_sm}>
         Showing all you{"'"}re tokens in one place
       </h4>

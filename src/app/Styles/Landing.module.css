@@ -1,0 +1,44 @@
+.tradingView {
+  display: flex;
+}
+/* 100% view window to prevent the chart scrol bar from activating*/
+.container_positioning {
+  z-index: 2;
+  width: 99vw;
+
+  height: fit-content;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3rem;
+  position: absolute;
+  left: 0;
+}
+/** reomve border on chart container*/
+.chart {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.text_container {
+  max-width: 380px;
+
+  color: aliceblue;
+
+  width: 99vw;
+  height: 80vh;
+}
+
+.text_title {
+  max-width: 200px;
+}
+
+.text_body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  height: 30px;
+  max-width: 14rem;
+  color: #29ff94;
+}
