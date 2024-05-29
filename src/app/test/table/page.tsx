@@ -18,8 +18,6 @@ export type DataFeed = {
 };
 
 const TokenList = ({ params }: any) => {
-  const [savedData, setData] = useState<DataFeed[]>([]);
-
   const data: DataFeed[] = React.useMemo(
     () => [
       {
@@ -98,10 +96,6 @@ const TokenList = ({ params }: any) => {
       assets: ["ETH", "USD"],
     },
   ];
-
-  const dataTwo = useCallback(() => {
-    setData(dataOne);
-  }, [savedData]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

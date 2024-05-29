@@ -68,3 +68,11 @@ AMM : Automated Market Maker provides equal amounts of liquity for both the Quot
 DCA Orders:
 
 - 1 [$AQUA](/docs/AQUA.md)
+
+# Admin Core
+
+- Public key that calls the `AquasFeed` : 0x7256Bfa487B3A259849E4DAa6364652f8555e6a3
+
+- Public key that calls the `AqiasDCAMulti` : 0x6441BA5Ae36BcC9094bb85D50f3d1e08C2b0D887
+
+- Public key that calls the `FaucetEuropa` : 0xb0e40A08c28b8BDF09AA2b1c5A17cb5230f42Eed
