@@ -65,7 +65,13 @@ if these values change in ui, then re-render
 onClick ={ () => setStateValue(new.value)}
 ```
 
-Arrays
+- `useRef` when using with div elements , This should work for `onClick` and `onTouchStart` situations.
+
+```js
+onFocus ={ () => setStateValue(new.value)}
+```
+
+- Arrays
 
 ```
 useState<Array<CandlestickData>>([]);

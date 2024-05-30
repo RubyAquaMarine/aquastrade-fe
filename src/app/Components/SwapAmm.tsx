@@ -174,15 +174,17 @@ const SwapAmm = () => {
     //  }
   };
 
-  const handleGetMaxAmount = (index: number) => {
+  const handleGetMaxAmount = (_index: number) => {
+    console.log("CLICKED:ON _FOCUS");
+
     let text: string = "0";
     if (divRef?.current) {
-      text = divRef?.current?.innerText;
+      text = divRef?.current?.innerText; // string
     }
 
     const _amount = text; // types tpdp
 
-    switch (index) {
+    switch (_index) {
       case 0:
         getMaxAmounts("25", _amount);
         break;
@@ -207,6 +209,15 @@ const SwapAmm = () => {
     const math = (bigAmount * bigPerc) / BigInt(10000);
     // then back to string for UI
     const amount = formatUnits(math, Number(dec));
+
+    // compare current values
+
+    if (amount === amountA) {
+      console.log(" DONT UPDATE amountA");
+
+      return;
+    }
+
     if (amount) {
       setAmountA(amount);
     } else {
@@ -547,10 +558,15 @@ const SwapAmm = () => {
             <span className={styles.input_box}>
               <input
                 className={styles.input_amount}
-                type="text"
-                placeholder="0.0"
-                value={amountA}
-                onChange={(e) => setAmountA(e.target.value)}
+                type="number"
+                value={Number(amountA)}
+                onChange={(e) =>
+                  setAmountA(
+                    e.target.value === "string"
+                      ? Number(e.target.value)
+                      : e.target.value,
+                  )
+                }
               />
               <span className={styles.box_space}>
                 <input
@@ -604,22 +620,22 @@ const SwapAmm = () => {
             <span className={styles.container_margin}>
               <span className={styles.text_space_right_12}>
                 <span className={styles.button_field_xs}>
-                  <button type="button" onClick={() => handleGetMaxAmount(3)}>
+                  <button type="button" onFocus={() => handleGetMaxAmount(3)}>
                     10%
                   </button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button type="button" onClick={() => handleGetMaxAmount(0)}>
+                  <button type="button" onFocus={() => handleGetMaxAmount(0)}>
                     25%
                   </button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button type="button" onClick={() => handleGetMaxAmount(1)}>
+                  <button type="button" onFocus={() => handleGetMaxAmount(1)}>
                     50%
                   </button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button type="button" onClick={() => handleGetMaxAmount(2)}>
+                  <button type="button" onFocus={() => handleGetMaxAmount(2)}>
                     Wallet balance
                   </button>
                 </span>
@@ -933,10 +949,15 @@ const SwapAmm = () => {
               <div className={styles.input_box}>
                 <input
                   className={styles.input_amount}
-                  type="text"
-                  placeholder="0.0"
-                  value={amountA}
-                  onChange={(e) => setAmountA(e.target.value)}
+                  type="number"
+                  value={Number(amountA)}
+                  onChange={(e) =>
+                    setAmountA(
+                      e.target.value === "string"
+                        ? Number(e.target.value)
+                        : e.target.value,
+                    )
+                  }
                 />
                 <span className={styles.box_space}>
                   {" "}
@@ -993,22 +1014,22 @@ const SwapAmm = () => {
               <p className={styles.container_margin}>
                 <span className={styles.text_space_right_12}>
                   <span className={styles.button_field_xs}>
-                    <button type="button" onClick={() => handleGetMaxAmount(3)}>
+                    <button type="button" onFocus={() => handleGetMaxAmount(3)}>
                       10%
                     </button>
                   </span>{" "}
                   <span className={styles.button_field_xs}>
-                    <button type="button" onClick={() => handleGetMaxAmount(0)}>
+                    <button type="button" onFocus={() => handleGetMaxAmount(0)}>
                       25%
                     </button>
                   </span>{" "}
                   <span className={styles.button_field_xs}>
-                    <button type="button" onClick={() => handleGetMaxAmount(1)}>
+                    <button type="button" onFocus={() => handleGetMaxAmount(1)}>
                       50%
                     </button>
                   </span>{" "}
                   <span className={styles.button_field_xs}>
-                    <button type="button" onClick={() => handleGetMaxAmount(2)}>
+                    <button type="button" onFocus={() => handleGetMaxAmount(2)}>
                       Wallet balance
                     </button>
                   </span>
