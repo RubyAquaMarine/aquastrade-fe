@@ -117,7 +117,7 @@ export const ButtonSpinner = (params: Props) => {
   return (
     <div ref={isButton}>
       {address && isConnected && chain && chain.id === CHAIN.id ? (
-        <button onClick={handleOnClick}>
+        <button type="button" onClick={handleOnClick}>
           <span className={styles.add_spinner}>
             {" "}
             <span className={styles.spinner_padding}>
@@ -134,7 +134,10 @@ export const ButtonSpinner = (params: Props) => {
       ) : (
         <span>
           {" "}
-          <button onClick={(event) => handleEuropa(event, 2046399126)}>
+          <button
+            type="button"
+            onClick={(event) => handleEuropa(event, 2046399126)}
+          >
             Connect Wallet
           </button>
         </span>

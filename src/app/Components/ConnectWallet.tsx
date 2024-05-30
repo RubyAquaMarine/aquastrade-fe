@@ -89,11 +89,11 @@ const ConnectWallet = () => {
             ) : (
               <span>
                 {!chain ? (
-                  <button className={styles.button_login}>
+                  <button type="button" className={styles.button_login}>
                     <Link href="/dashboard">Switch Network</Link>
                   </button>
                 ) : (
-                  <button className={styles.button_login}>
+                  <button type="button" className={styles.button_login}>
                     <Link href="/swap/amm">Start Trading</Link>
                   </button>
                 )}
@@ -103,7 +103,11 @@ const ConnectWallet = () => {
 
           <span className={styles.margin_med}>
             {" "}
-            <button className={styles.logout} onClick={() => disconnect()}>
+            <button
+              type="button"
+              className={styles.logout}
+              onClick={() => disconnect()}
+            >
               logout
             </button>{" "}
           </span>

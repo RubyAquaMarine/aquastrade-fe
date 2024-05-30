@@ -146,13 +146,19 @@ const LaunchPad: React.FC = () => {
           />
           {tokenSymbol && tokenMax && tokenDecimal && tokenName ? (
             <span>
-              <button className={styles.airdrop} onClick={doTokenLaunch}>
+              <button
+                type="button"
+                className={styles.airdrop}
+                onClick={doTokenLaunch}
+              >
                 Deploy Token
               </button>
             </span>
           ) : (
             <span>
-              <button className={styles.airdrop}>Input Values</button>
+              <button type="button" className={styles.airdrop}>
+                Input Values
+              </button>
             </span>
           )}
         </div>

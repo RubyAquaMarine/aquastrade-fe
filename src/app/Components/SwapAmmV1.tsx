@@ -460,7 +460,11 @@ const SwapAmm = () => {
         >
           Trade
         </button>
-        <button className={styles.nav} onClick={() => handleAMMFeatures("add")}>
+        <button
+          type="button"
+          className={styles.nav}
+          onClick={() => handleAMMFeatures("add")}
+        >
           Cast
         </button>
         <button
@@ -469,12 +473,16 @@ const SwapAmm = () => {
         >
           Ship
         </button>
-        <button className={styles.nav} onClick={() => handleAMMFeatures("nft")}>
+        <button
+          type="button"
+          className={styles.nav}
+          onClick={() => handleAMMFeatures("nft")}
+        >
           NFT
         </button>
 
         {ammFeature !== "nft" && tradeFeature === "swap" ? (
-          <button className={styles.nav}>
+          <button type="button" className={styles.nav}>
             <Image
               src="/gear.svg"
               alt="menu"
@@ -586,16 +594,22 @@ const SwapAmm = () => {
             <span className={styles.container_margin}>
               <span className={styles.text_space_right_12}>
                 <span className={styles.button_field_xs}>
-                  <button onClick={() => handleGetMaxAmount(3)}>10%</button>
+                  <button type="button" onClick={() => handleGetMaxAmount(3)}>
+                    10%
+                  </button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button onClick={() => handleGetMaxAmount(0)}>25%</button>
+                  <button type="button" onClick={() => handleGetMaxAmount(0)}>
+                    25%
+                  </button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button onClick={() => handleGetMaxAmount(1)}>50%</button>
+                  <button type="button" onClick={() => handleGetMaxAmount(1)}>
+                    50%
+                  </button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button onClick={() => handleGetMaxAmount(2)}>
+                  <button type="button" onClick={() => handleGetMaxAmount(2)}>
                     Wallet balance
                   </button>
                 </span>
@@ -727,7 +741,11 @@ const SwapAmm = () => {
           </div>
           {/**  Swap and Approve button  */}
           <span className={styles.button_container}>
-            <button className={styles.button_field} onClick={handleSwap}>
+            <button
+              type="button"
+              className={styles.button_field}
+              onClick={handleSwap}
+            >
               Swap
             </button>
           </span>
@@ -957,16 +975,22 @@ const SwapAmm = () => {
               <p className={styles.container_margin}>
                 <span className={styles.text_space_right_12}>
                   <span className={styles.button_field_xs}>
-                    <button onClick={() => handleGetMaxAmount(3)}>10%</button>
+                    <button type="button" onClick={() => handleGetMaxAmount(3)}>
+                      10%
+                    </button>
                   </span>{" "}
                   <span className={styles.button_field_xs}>
-                    <button onClick={() => handleGetMaxAmount(0)}>25%</button>
+                    <button type="button" onClick={() => handleGetMaxAmount(0)}>
+                      25%
+                    </button>
                   </span>{" "}
                   <span className={styles.button_field_xs}>
-                    <button onClick={() => handleGetMaxAmount(1)}>50%</button>
+                    <button type="button" onClick={() => handleGetMaxAmount(1)}>
+                      50%
+                    </button>
                   </span>{" "}
                   <span className={styles.button_field_xs}>
-                    <button onClick={() => handleGetMaxAmount(2)}>
+                    <button type="button" onClick={() => handleGetMaxAmount(2)}>
                       Wallet balance
                     </button>
                   </span>
@@ -1231,7 +1255,7 @@ const SwapAmm = () => {
           <NFTBalance> </NFTBalance>
           <p className={styles.center}>
             {" "}
-            <button className={styles.button_field}>
+            <button type="button" className={styles.button_field}>
               <Link href="/dashboard/nft">Buy NFT</Link>
             </button>
           </p>

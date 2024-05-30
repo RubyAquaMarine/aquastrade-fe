@@ -304,7 +304,11 @@ const Presale: React.FC = (props: Props) => {
           )}
           {inputUSDAddress && isPresalePaused === false ? (
             <span className={styles.container_margin}>
-              <button className={styles.button_presale} onClick={doTokenLaunch}>
+              <button
+                type="button"
+                className={styles.button_presale}
+                onClick={doTokenLaunch}
+              >
                 Buy Token
               </button>
             </span>

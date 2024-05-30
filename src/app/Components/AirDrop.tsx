@@ -329,7 +329,11 @@ const AirDrop: React.FC = () => {
             <span>
               {isCommaAtEndOfAmounts.current === true ? (
                 <span>
-                  <button className={styles.airdrop} onClick={doAirdrop}>
+                  <button
+                    type="button"
+                    className={styles.airdrop}
+                    onClick={doAirdrop}
+                  >
                     {" "}
                     Airdrop{" "}
                     {formatUnits(
