@@ -81,7 +81,21 @@ const Home = ({ children, params }: any) => {
                   </span>
                   <span className={styles.text_body}>
                     <TextSizeAdjuster
-                      text={"Reimagine 0 gas fees on"}
+                      text={"Reimagine"}
+                      text_size="13"
+                      text_size_to="16"
+                    ></TextSizeAdjuster>
+                    <span className={styles.text_highlight}>
+                      {" "}
+                      <TextSizeAdjuster
+                        text={"0"}
+                        text_size="15"
+                        text_size_to="18"
+                      ></TextSizeAdjuster>
+                    </span>
+
+                    <TextSizeAdjuster
+                      text={"gas fees on"}
                       text_size="13"
                       text_size_to="16"
                     ></TextSizeAdjuster>

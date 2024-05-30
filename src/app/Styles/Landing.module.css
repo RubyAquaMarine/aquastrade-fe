@@ -22,9 +22,6 @@
 
 .text_container {
   max-width: 380px;
-
-  color: aliceblue;
-
   width: 99vw;
   height: 80vh;
 }
@@ -40,5 +37,8 @@
   margin: 1rem;
   height: 30px;
   max-width: 14rem;
-  color: #29ff94;
 }
+.text_highlight {
+  color: #d7de0a;
+}
+/** #29ff94; **/

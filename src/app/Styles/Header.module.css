@@ -28,7 +28,7 @@
   height: 52px;
   width: 100%;
   font-family: monospace;
-  border-bottom: 1px solid #475384;
+  border-bottom: 1px solid #5a80b4;
 }
 
 .nav_logo {
@@ -66,13 +66,8 @@
   margin-bottom: -32px;
 }
 
-.dropdownmenu {
-  color: #265eb2;
-  background-color: #5ea283;
-}
-
 .dropdownmenuBlue {
-  background-color: #1a1b1f;
+  background-color: #1a191c;
 }
 
 /** 
@@ -83,27 +78,35 @@
 .nav_menu_dd {
   min-width: 370px;
   z-index: 9998;
-  background-color: #1a1b1f;
+  background-color: #1a191c;
   padding: 0.6rem;
   position: sticky;
 }
 
+/** 
+this is the Vert lines within the Nav menu 
+**/
 .nav_menu_br {
-  border-bottom: 1px solid #475384;
-  background-color: #1737b4;
-  border-radius: 0;
+  border: 2px solid #5a80b4;
+  border-radius: 2px;
 }
 
 .nav_menu_bg {
-  background-color: #1a1b1f;
+  background-color: #1a191c;
   border-radius: 0;
 }
 
 /** these are for the Right Nav Menu Drop down bar **/
+
+.popup_submenu {
+  margin-top: -12px;
+  color: #f4f4f4;
+  background-color: #242629;
+}
 .popup_item {
   color: #f4f4f4;
   background-color: #242629;
-  border-bottom: 1px solid #475384;
+  border-bottom: 1px solid #5a80b4;
 }
 
 .popup_item_top {
@@ -112,6 +115,7 @@
   margin-top: -12px;
   padding-right: 10px;
   padding-left: 10px;
+  border-bottom: 1px solid #5a80b4;
 }
 
 .popup_item_link {
@@ -121,7 +125,6 @@
   text-align: center;
   padding-right: 5px;
   padding-left: 5px;
-  border-bottom: 1px solid #475384;
 }
 
 .popup_item_sub_link {
@@ -131,7 +134,6 @@
   text-align: center;
   padding-right: 35px;
   padding-left: 35px;
-  border-bottom: 1px solid #475384;
 }
 
 .popup_item_bottom {

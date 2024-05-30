@@ -282,15 +282,6 @@ const Navbar = () => {
                 </Link>
               </Dropdown.Item>
 
-              <Dropdown.Item className={styles.popup_item}>
-                <Link
-                  href={`https://github.com/RubyAquaMarine/aquastrade-fe/issues`}
-                  target="_blank"
-                  className={styles.popup_item_link}
-                >
-                  Report Bug &nbsp; &nbsp;
-                </Link>
-              </Dropdown.Item>
               <Dropdown.Item className={styles.popup_item_bottom}>
                 {"<"}- Socials
                 <Dropdown.Submenu className={styles.popup_submenu}>
@@ -330,6 +321,17 @@ const Navbar = () => {
                       Github &nbsp;&nbsp;
                     </Link>
                   </Dropdown.Item>
+
+                  <Dropdown.Item className={styles.popup_item}>
+                    <Link
+                      href={`https://github.com/RubyAquaMarine/aquastrade-fe/issues`}
+                      target="_blank"
+                      className={styles.popup_item_sub_link}
+                    >
+                      Report Bug &nbsp; &nbsp;
+                    </Link>
+                  </Dropdown.Item>
+
                   <Dropdown.Item className={styles.popup_item}>
                     <Link
                       href="https://t.me/AquasTrade"
