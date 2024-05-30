@@ -50,6 +50,8 @@ type Props = {
 const Presale: React.FC = (props: Props) => {
   const presaleTokenAddress = props?.props;
 
+  const inputMinAmount = useRef<number>();
+
   const [remaingTokens, setRemainingTokens] = useState<number>();
 
   // dropdown menu state
@@ -97,6 +99,7 @@ const Presale: React.FC = (props: Props) => {
   ); // $AQUA
 
   const loadTokenUSDInfo = findTokenFromAddress(inputUSDAddress);
+  inputMinAmount.current = 2; //  loadTokenUSDInfo?.decimals && loadTokenUSDInfo.decimals === 18 ? 8 : 6;
 
   useEffect(() => {
     if (tokenSupplyRemaining && tokenSupply) {
@@ -277,8 +280,8 @@ const Presale: React.FC = (props: Props) => {
               <input
                 type="number"
                 placeholder="100"
-                min="0"
-                step="0.01"
+                min={Number(formatUnits(1n, inputMinAmount.current))}
+                step={Number(formatUnits(1n, inputMinAmount.current))}
                 value={inputTokenAmount}
                 onChange={(e) => setTokenAmount(Number(e.target.value))}
                 className={styles.input_token_amount}
