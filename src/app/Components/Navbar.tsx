@@ -40,37 +40,25 @@ const Navbar = () => {
   return (
     <header className={styles.header}>
       <nav>
-        <div className={styles.align_test}>
-          <div className={styles.float_left}>
-            <ul className={styles.nav_logo}>
-              <li>
-                <Link href="/">
-                  <Image
-                    src={AQUA}
-                    alt="AquasTrade Logo"
-                    width={44}
-                    height={44}
-                    priority
-                    placeholder="blur"
-                  />
-                </Link>
-              </li>
+        <ul className={styles.nav}>
+          <li>
+            <span>
+              {" "}
+              <Link href="/">
+                <Image
+                  className={styles.logo_aqua}
+                  src={AQUA}
+                  alt="AquasTrade Logo"
+                  width={50}
+                  height={50}
+                  priority
+                  placeholder="blur"
+                />
+              </Link>
+            </span>
+          </li>
 
-              <li className={styles.nav_logo_title}>
-                <Link href="/">AquasTrade</Link>
-              </li>
-            </ul>
-          </div>
-
-          {/**
-           * header :  background-color: #181a1d;
-           *
-           *
-           *
-           */}
-
-          <div className={styles.float_center}>
-            {" "}
+          <li>
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem
@@ -250,9 +238,9 @@ const Navbar = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>{" "}
-          </div>
+          </li>
 
-          <div className={styles.dropdownmenuBlue}>
+          <li>
             {" "}
             <Dropdown
               buttonVariant="tertiary"
@@ -353,8 +341,8 @@ const Navbar = () => {
                 </Dropdown.Submenu>
               </Dropdown.Item>
             </Dropdown>
-          </div>
-        </div>
+          </li>
+        </ul>
       </nav>
     </header>
   );

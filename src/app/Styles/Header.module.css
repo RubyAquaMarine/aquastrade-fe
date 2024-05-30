@@ -1,7 +1,27 @@
-.active_link {
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  border-bottom: 1px solid #73b226;
+.header {
+  background-color: #181a1d;
+  color: #f4f4f4;
+  height: 52px;
+  width: 100%;
+  font-family: monospace;
+  border-bottom: 1px solid #5a80b4;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: space-between;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 52px;
+
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+.logo_aqua {
+  padding-left: 10px;
 }
 
 .imageInvert {
@@ -22,42 +42,13 @@
   margin-left: 1.4rem;
 }
 
-.header {
-  background-color: #181a1d;
-  color: #f4f4f4;
-  height: 52px;
-  width: 100%;
-  font-family: monospace;
-  border-bottom: 1px solid #5a80b4;
-}
-
-.nav_logo {
-  list-style: none;
-  display: flex;
-  gap: 0.8rem;
-  justify-content: center;
-  /* Center horizontally */
-  align-items: center;
-  /* Center vertically */
-  height: 100%;
-  margin-right: 10px;
-  /* Ensuring the container has a defined height for vertical alignment */
-}
-
 .nav_logo_title {
   font-size: 18px;
   font-weight: bold;
 }
 
-.align_test {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 52px;
-}
-
-.float_center {
-  float: center;
+.nav_logo_left {
+  position: relative;
 }
 
 .nav_button {
