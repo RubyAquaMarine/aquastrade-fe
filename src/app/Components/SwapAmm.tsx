@@ -620,22 +620,38 @@ const SwapAmm = () => {
             <span className={styles.container_margin}>
               <span className={styles.text_space_right_12}>
                 <span className={styles.button_field_xs}>
-                  <button type="button" onFocus={() => handleGetMaxAmount(3)}>
+                  <button
+                    type="button"
+                    onTouchStart={() => handleGetMaxAmount(3)}
+                    onClick={() => handleGetMaxAmount(3)}
+                  >
                     10%
                   </button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button type="button" onFocus={() => handleGetMaxAmount(0)}>
+                  <button
+                    type="button"
+                    onTouchStart={() => handleGetMaxAmount(0)}
+                    onClick={() => handleGetMaxAmount(0)}
+                  >
                     25%
                   </button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button type="button" onFocus={() => handleGetMaxAmount(1)}>
+                  <button
+                    type="button"
+                    onTouchStart={() => handleGetMaxAmount(1)}
+                    onClick={() => handleGetMaxAmount(1)}
+                  >
                     50%
                   </button>
                 </span>{" "}
                 <span className={styles.button_field_xs}>
-                  <button type="button" onFocus={() => handleGetMaxAmount(2)}>
+                  <button
+                    type="button"
+                    onTouchStart={() => handleGetMaxAmount(2)}
+                    onClick={() => handleGetMaxAmount(2)}
+                  >
                     Wallet balance
                   </button>
                 </span>
@@ -1014,22 +1030,38 @@ const SwapAmm = () => {
               <p className={styles.container_margin}>
                 <span className={styles.text_space_right_12}>
                   <span className={styles.button_field_xs}>
-                    <button type="button" onFocus={() => handleGetMaxAmount(3)}>
+                    <button
+                      type="button"
+                      onTouchStart={() => handleGetMaxAmount(3)}
+                      onClick={() => handleGetMaxAmount(3)}
+                    >
                       10%
                     </button>
                   </span>{" "}
                   <span className={styles.button_field_xs}>
-                    <button type="button" onFocus={() => handleGetMaxAmount(0)}>
+                    <button
+                      type="button"
+                      onTouchStart={() => handleGetMaxAmount(0)}
+                      onClick={() => handleGetMaxAmount(0)}
+                    >
                       25%
                     </button>
                   </span>{" "}
                   <span className={styles.button_field_xs}>
-                    <button type="button" onFocus={() => handleGetMaxAmount(1)}>
+                    <button
+                      type="button"
+                      onTouchStart={() => handleGetMaxAmount(1)}
+                      onClick={() => handleGetMaxAmount(1)}
+                    >
                       50%
                     </button>
                   </span>{" "}
                   <span className={styles.button_field_xs}>
-                    <button type="button" onFocus={() => handleGetMaxAmount(2)}>
+                    <button
+                      type="button"
+                      onTouchStart={() => handleGetMaxAmount(2)}
+                      onClick={() => handleGetMaxAmount(2)}
+                    >
                       Wallet balance
                     </button>
                   </span>
