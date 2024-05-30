@@ -131,7 +131,11 @@ const TokenApprove = (params: Props) => {
               ).toFixed(8)}
             </span>
           ) : (
-            <button className={styles.token_approve} onClick={handleApprove}>
+            <button
+              type="button"
+              className={styles.token_approve}
+              onClick={handleApprove}
+            >
               Approve {" : "} {inputToken ? inputToken?.symbol : "LP"}
             </button>
           )}

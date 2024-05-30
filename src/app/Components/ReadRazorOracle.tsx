@@ -63,11 +63,13 @@ function Oracle({ name }: ReadProps) {
   return (
     <div>
       {isConnected && chain?.id === 2046399126 ? (
-        <button className={styles.buttonDisplay}>
+        <button type="button" className={styles.buttonDisplay}>
           {name?.toUpperCase()} : {valueOfString}
         </button>
       ) : (
-        <button className={styles.buttonDisplay}>ETHUSD: </button>
+        <button type="button" className={styles.buttonDisplay}>
+          ETHUSD:{" "}
+        </button>
       )}
     </div>
   );

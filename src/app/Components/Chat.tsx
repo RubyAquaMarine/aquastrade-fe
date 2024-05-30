@@ -97,7 +97,9 @@ const Chats = (props: Props) => {
           value={currMessage}
           onChange={(e) => setCurrMessage(e.target.value)}
         />
-        <button onClick={sendMessage}>&#9658;</button>
+        <button type="button" onClick={sendMessage}>
+          &#9658;
+        </button>
       </div>
     </>
   );

@@ -112,7 +112,11 @@ const RubyExchange = ({ children, params }: any) => {
 
           <span className={styles.text_padding}>
             {" "}
-            <button className={styles.p_styled_button} onClick={handleApprove}>
+            <button
+              type="button"
+              className={styles.p_styled_button}
+              onClick={handleApprove}
+            >
               {" "}
               Click Here
             </button>

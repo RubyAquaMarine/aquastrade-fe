@@ -46,7 +46,9 @@ function App() {
             />
             <br />
 
-            <button onClick={joinRoom}>Join a Room</button>
+            <button type="button" onClick={joinRoom}>
+              Join a Room
+            </button>
           </div>
         )}
 

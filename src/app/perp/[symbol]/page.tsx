@@ -209,10 +209,16 @@ const Home = ({ children, params }: any) => {
                           </Link>
                           <span className={styles.panel_text}>
                             {" "}
-                            <button className={styles.tradeBalance}>
+                            <button
+                              type="button"
+                              className={styles.tradeBalance}
+                            >
                               Deposit
                             </button>{" "}
-                            <button className={styles.tradeBalance}>
+                            <button
+                              type="button"
+                              className={styles.tradeBalance}
+                            >
                               Withdraw
                             </button>
                           </span>
@@ -233,14 +239,30 @@ const Home = ({ children, params }: any) => {
                           </Link>
                           <span className={styles.trade_panel}>
                             {" "}
-                            <button className={styles.tradeBalance}>
+                            <button
+                              type="button"
+                              className={styles.tradeBalance}
+                            >
                               Limit
                             </button>{" "}
-                            <button className={styles.tradeBalance}>
+                            <button
+                              type="button"
+                              className={styles.tradeBalance}
+                            >
                               Stop
                             </button>
-                            <button className={styles.tradeBalance}>TP</button>
-                            <button className={styles.tradeBalance}>SL</button>
+                            <button
+                              type="button"
+                              className={styles.tradeBalance}
+                            >
+                              TP
+                            </button>
+                            <button
+                              type="button"
+                              className={styles.tradeBalance}
+                            >
+                              SL
+                            </button>
                           </span>
                         </li>
                       ) : (
