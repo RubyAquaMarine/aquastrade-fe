@@ -1,33 +1,7 @@
-.example {
-  image-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-  font-family:
-    Roboto,
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Oxygen-Sans,
-    Ubuntu,
-    Cantarell,
-    Helvetica Neue,
-    sans-serif;
-  color: #f4f4f4;
-  font-size: 1em;
-  font-weight: 400;
-  line-height: 1.5;
-  box-sizing: inherit;
-  position: relative;
-  /*absolute;*/
-  display: flex;
-  -webkit-box-pack: center;
-  justify-content: center;
-  width: 100%;
-  height: 52px;
-  left: calc(50% - 7px);
-  background: rgb(0, 108, 255);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px 0px;
+.active_link {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #73b226;
 }
 
 .imageInvert {
@@ -48,13 +22,6 @@
   margin-left: 1.4rem;
 }
 
-/* 
-
-background-color: #03bada;
-  color: rgb(2, 2, 2);
-
-*/
-
 .header {
   background-color: #181a1d;
   color: #f4f4f4;
@@ -62,32 +29,6 @@ background-color: #03bada;
   width: 100%;
   font-family: monospace;
   border-bottom: 1px solid #475384;
-}
-
-.versionMenuNew {
-  margin-right: 8px;
-  cursor: pointer;
-}
-
-.versionMenu {
-  color: #070707;
-  width: 16px;
-  height: 42px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.navListWide {
-  list-style: none;
-  display: flex;
-  gap: 3.5rem;
-  justify-content: center;
-  /* Center horizontally */
-  align-items: center;
-  /* Center vertically */
-  height: 100%;
-  /* Ensuring the container has a defined height for vertical alignment */
 }
 
 .nav_logo {
@@ -103,20 +44,6 @@ background-color: #03bada;
   /* Ensuring the container has a defined height for vertical alignment */
 }
 
-.navItem {
-  font-size: 0.9rem;
-  padding: 0.2rem 0.2rem;
-}
-
-/* #03bada    #2196f3; (new)  */
-.navItem:hover {
-  border-radius: 8px;
-  cursor: pointer;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-}
-
 .nav_logo_title {
   font-size: 18px;
   font-weight: bold;
@@ -129,32 +56,54 @@ background-color: #03bada;
   height: 52px;
 }
 
-.float_left {
-  float: left;
-}
-
-.float_right {
-  float: right;
-}
-
 .float_center {
   float: center;
 }
 
-/*
-className={styles.popup}  openOnHover={true}
-*/
-.popup_menu {
+.nav_button {
+  color: #242629;
   background-color: #242629;
+  margin-bottom: -32px;
 }
 
-.popup_submenu {
-  background-color: #242629;
+.dropdownmenu {
+  color: #265eb2;
+  background-color: #5ea283;
 }
 
+.dropdownmenuBlue {
+  background-color: #1a1b1f;
+}
+
+/** 
+* <NavigationMenuContent 
+* contains a white border that I can't over write
+**/
+
+.nav_menu_dd {
+  min-width: 370px;
+  z-index: 9998;
+  background-color: #1a1b1f;
+  padding: 0.6rem;
+  position: sticky;
+}
+
+.nav_menu_br {
+  border-bottom: 1px solid #475384;
+  background-color: #1737b4;
+  border-radius: 0;
+}
+
+.nav_menu_bg {
+  background-color: #1a1b1f;
+  border-radius: 0;
+}
+
+/** these are for the Right Nav Menu Drop down bar **/
 .popup_item {
   color: #f4f4f4;
   background-color: #242629;
+  border-bottom: 1px solid #475384;
 }
 
 .popup_item_top {
@@ -189,44 +138,6 @@ className={styles.popup}  openOnHover={true}
   color: #f4f4f4;
   background-color: #242629;
   margin-bottom: -12px;
-}
-
-.nav_button {
-  color: #242629;
-  background-color: #242629;
-  margin-bottom: -32px;
-}
-
-.dropdownmenu {
-  color: #265eb2;
-  background-color: #5ea283;
-}
-
-.dropdownmenuBlue {
-  border-radius: 6px;
-  background-color: #1a1b1f;
-}
-
-.nav_menu {
-  border-radius: 12px;
-}
-
-.nav_menu_dd {
-  min-width: 370px;
-  z-index: 9998;
-  background-color: #1a1b1f;
-  padding: 0.6rem;
-  position: sticky;
-}
-
-.nav_menu_br {
-  border-radius: 12px;
-  border: 2px solid #475384;
-}
-
-.nav_menu_bg {
-  border-radius: 6px;
-  background-color: #1a1b1f;
 }
 
 /* Media Queries */

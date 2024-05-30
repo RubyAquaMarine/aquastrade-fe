@@ -23,6 +23,7 @@
   src: url("../app/Fonts/Medium.otf");
 }
 
+/**  hardcode dark theme until button is added **/
 body {
   scrollbar-width: none;
   color: rgb(var(--foreground-rgb));
@@ -38,8 +39,8 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
-  background-color: white;
-  color: #0d0d10;
+  background-color: #0d0d10;
+  color: white;
 }
 
 [data-theme="dark"] body {

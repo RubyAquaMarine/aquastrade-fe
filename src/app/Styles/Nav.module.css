@@ -1,0 +1,13 @@
+/*   Todo : elimate the border radius within the nav button 
+*    border-radius: 0;
+* 
+*
+*/
+
+.active_link {
+  border-bottom: 1px solid #5c26b2;
+}
+
+.not_active_link {
+  border: 1px solid #1a1b1f;
+}
