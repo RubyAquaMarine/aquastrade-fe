@@ -1,9 +1,9 @@
 "use client";
-import React, { useRef } from "react";
-
+import React, { useRef, useEffect, useState } from "react";
 import { formatUnits, parseUnits } from "viem";
-
 import { ButtonSpinner, Props } from "@/app/Components/ButtonSpinner";
+import InputNumber from "@/app/Components/InputNumber";
+
 import {
   findContractInfo,
   findTokenAddressFromSymbol,
@@ -30,8 +30,25 @@ const Home = ({ params }: any) => {
     args: [address, parseUnits("1", 18)] as any,
   };
 
+  // const isInput = useRef<HTMLDivElement>(null);
+
+  // const [inputValue, setInput ] = useState();
+
+  // console.log(" DEBUG element", inputValue)
+
+  // useEffect(() => {
+
+  //   if (isInput.current) {
+  //     setInput(isInput.current?.children[0]?.id);
+  //   }
+  // }, [isInput]);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <InputNumber {...{ id: "tokenA", amount: "0.1", decimals: 8 }}>
+        {" "}
+      </InputNumber>
+
       {address ? (
         <ButtonSpinner {...data}></ButtonSpinner>
       ) : (

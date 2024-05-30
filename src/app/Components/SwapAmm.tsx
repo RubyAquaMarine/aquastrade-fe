@@ -32,6 +32,8 @@ import TokenBalance from "@/app/Components/TokenBalance";
 import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import AMMPools from "@/app/Components/AMMPools";
 
+import { isNumber } from "@/app/Utils/utils";
+
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 
 import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
@@ -101,6 +103,21 @@ const SwapAmm = () => {
   const swap_path_logos1 = findTokenLogoFromAddress(swap_path[0]);
   const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
   const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
+
+  // COPY PASTE THIS INTO COMPONEBTS
+  const filterStringInput = (_value: string, _decimals: number) => {
+    if (_value === "") {
+      setAmountA(_value);
+    }
+    if (isNumber(_value)) {
+      // prevent update after certain decimals
+      const lengthValue = _value.split(".")[1]?.length;
+      if (_decimals >= lengthValue || typeof lengthValue === "undefined") {
+        setAmountA(_value);
+      }
+    }
+  };
+  // COPY PASTE THIS INTO COMPONEBTS
 
   // todo Adding Liqudity : can be removed when refactoring into ammFeature Components
   const addTokenBAmount = useGetAmountInQuote(
@@ -558,17 +575,10 @@ const SwapAmm = () => {
             <span className={styles.input_box}>
               <input
                 className={styles.input_amount}
-                type="number"
-                min={Number(formatUnits(1n, 8))}
-                step={Number(formatUnits(1n, 8))}
-                value={Number(amountA)}
-                onChange={(e) =>
-                  setAmountA(
-                    e.target.value === "string"
-                      ? Number(e.target.value)
-                      : e.target.value,
-                  )
-                }
+                type="text"
+                placeholder="Input Amount"
+                value={amountA}
+                onChange={(e) => filterStringInput(e.target.value, 8)}
               />
               <span className={styles.box_space}>
                 <input
@@ -967,17 +977,10 @@ const SwapAmm = () => {
               <div className={styles.input_box}>
                 <input
                   className={styles.input_amount}
-                  type="number"
-                  min={Number(formatUnits(1n, 8))}
-                  step={Number(formatUnits(1n, 8))}
-                  value={Number(amountA)}
-                  onChange={(e) =>
-                    setAmountA(
-                      e.target.value === "string"
-                        ? Number(e.target.value)
-                        : e.target.value,
-                    )
-                  }
+                  type="text"
+                  placeholder="Input Amount"
+                  value={amountA}
+                  onChange={(e) => filterStringInput(e.target.value, 8)}
                 />
                 <span className={styles.box_space}>
                   {" "}

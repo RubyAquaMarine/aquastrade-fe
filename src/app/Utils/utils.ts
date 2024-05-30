@@ -18,3 +18,13 @@ export function formatDate(input: string | number): string {
 export function absoluteUrl(path: string) {
   return `${process.env.NEXT_PUBLIC_APP_URL}${path}`;
 }
+
+// validation before formatting input strings
+export const isNumber = (s: string): boolean => {
+  // const reg = /^-?\d+\.?\d*$/
+  // const regb =/^[0-9]+\.?[0-9]+.*$/
+  const regc = /^[0-9]+\.?\d*$/;
+  return regc.test(s) && !isNaN(parseFloat(s)) && isFinite(parseFloat(s));
+};
+
+1.0;
