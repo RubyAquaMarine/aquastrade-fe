@@ -559,6 +559,8 @@ const SwapAmm = () => {
               <input
                 className={styles.input_amount}
                 type="number"
+                min={Number(formatUnits(1n, 8))}
+                step={Number(formatUnits(1n, 8))}
                 value={Number(amountA)}
                 onChange={(e) =>
                   setAmountA(
@@ -966,6 +968,8 @@ const SwapAmm = () => {
                 <input
                   className={styles.input_amount}
                   type="number"
+                  min={Number(formatUnits(1n, 8))}
+                  step={Number(formatUnits(1n, 8))}
                   value={Number(amountA)}
                   onChange={(e) =>
                     setAmountA(
@@ -1270,6 +1274,8 @@ const SwapAmm = () => {
                 className={styles.input_amount}
                 type="number"
                 placeholder="100"
+                min={1}
+                step={1}
                 max={100}
                 value={amountLPRemove}
                 onChange={(e) => setAmountLPRemove(Number(e.target.value))}
