@@ -36,6 +36,7 @@ import styles from "@/app/Styles/Presale.module.css";
 /*
   AquasTrade utils
 */
+import { isNumber } from "@/app/Utils/utils";
 import {
   findTokenAddressFromSymbol,
   findContractInfo,
@@ -50,6 +51,20 @@ type Props = {
 const Presale: React.FC = (props: Props) => {
   const presaleTokenAddress = props?.props;
 
+  const [inputTokenAmount, setTokenAmount] = useState<string>();
+  const filterStringInput = (_value: string, _decimals: number) => {
+    if (_value === "") {
+      setTokenAmount(_value);
+    }
+    if (isNumber(_value)) {
+      // prevent update after certain decimals
+      const lengthValue = _value.split(".")[1]?.length;
+      if (_decimals >= lengthValue || typeof lengthValue === "undefined") {
+        setTokenAmount(_value);
+      }
+    }
+  };
+
   const inputMinAmount = useRef<number>();
 
   const [remaingTokens, setRemainingTokens] = useState<number>();
@@ -62,9 +77,6 @@ const Presale: React.FC = (props: Props) => {
   const inputSymbolsInDropdown = useRef(["USDC", "USDT", "USDP", "DAI"]);
 
   const [inputUSDAddress, setUSDAddress] = useState<string>();
-
-  // how much in USD to use for purchasing preale
-  const [inputTokenAmount, setTokenAmount] = useState<number>();
 
   // HOOKS
 
@@ -144,7 +156,7 @@ const Presale: React.FC = (props: Props) => {
       functionName: "buy",
       args: [
         loadTokenUSDInfo?.address,
-        parseUnits(inputTokenAmount?.toString(), loadTokenUSDInfo?.decimals),
+        parseUnits(inputTokenAmount, loadTokenUSDInfo?.decimals),
       ],
     });
   };
@@ -278,13 +290,11 @@ const Presale: React.FC = (props: Props) => {
           <span className={styles.text_center}>
             {inputUSDAddress ? (
               <input
-                type="number"
-                placeholder="100"
-                min={Number(formatUnits(1n, inputMinAmount.current))}
-                step={Number(formatUnits(1n, inputMinAmount.current))}
-                value={inputTokenAmount}
-                onChange={(e) => setTokenAmount(Number(e.target.value))}
                 className={styles.input_token_amount}
+                type="text"
+                placeholder="Input Token Amount"
+                value={inputTokenAmount}
+                onChange={(e) => filterStringInput(e.target.value, 2)}
               />
             ) : (
               <span></span>

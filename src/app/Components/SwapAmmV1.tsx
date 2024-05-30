@@ -39,6 +39,8 @@ import { SwapAddProps } from "../Types/types";
 import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
 import { useFactory } from "@/app/Hooks/useAMM";
 
+import { isNumber } from "@/app/Utils/utils";
+
 import styles from "@/app/Styles/AMM.module.css";
 import styles_pop from "@/app/Styles/Popup.module.css";
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
@@ -105,6 +107,21 @@ const SwapAmm = () => {
   const swap_path_logos1 = findTokenLogoFromAddress(swap_path[0]);
   const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
   const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
+
+  // COPY PASTE THIS INTO COMPONEBTS
+  const filterStringInput = (_value: string, _decimals: number) => {
+    if (_value === "") {
+      setAmountA(_value);
+    }
+    if (isNumber(_value)) {
+      // prevent update after certain decimals
+      const lengthValue = _value.split(".")[1]?.length;
+      if (_decimals >= lengthValue || typeof lengthValue === "undefined") {
+        setAmountA(_value);
+      }
+    }
+  };
+  // COPY PASTE THIS INTO COMPONEBTS
 
   useEffect(() => {
     if (address && isConnected) {
@@ -540,7 +557,7 @@ const SwapAmm = () => {
                 type="text"
                 placeholder="0.0"
                 value={amountA}
-                onChange={(e) => setAmountA(e.target.value)}
+                onChange={(e) => filterStringInput(e.target.value, 8)}
               />
               <span className={styles.box_space}>
                 <input
@@ -918,7 +935,7 @@ const SwapAmm = () => {
                   type="text"
                   placeholder="0.0"
                   value={amountA}
-                  onChange={(e) => setAmountA(e.target.value)}
+                  onChange={(e) => filterStringInput(e.target.value, 8)}
                 />
                 <span className={styles.box_space}>
                   {" "}
