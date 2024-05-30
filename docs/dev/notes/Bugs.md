@@ -3,6 +3,19 @@
 - Did abi change?
 - did data types change?
 
+# buttons
+
+<button type="button"> - fixed the issue
+
+# screen height on mobile
+
+.body {
+flex-direction:column;
+flex: 1;
+height: -webkit-fill-available
+overflow: scroll
+}
+
 ## Home
 
 - regEx on all inputs : prevent ui crash from entering non number

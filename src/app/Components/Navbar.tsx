@@ -1,7 +1,10 @@
 "use client";
+//import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 import styles from "../Styles/Header.module.css"; // You can create a CSS module for styling
+import styles_nav from "../Styles/Nav.module.css"; // You can create a CSS module for styling
 import Image from "next/image";
 import Dropdown from "react-multilevel-dropdown";
 
@@ -26,6 +29,14 @@ import {
 } from "@/app/Components/ui/NavigationMenu";
 
 const Navbar = () => {
+  const path = usePathname();
+
+  const isPageActive = (pathUrl: string) => {
+    return path === pathUrl
+      ? styles_nav.active_link
+      : styles_nav.not_active_link;
+  };
+
   return (
     <header className={styles.header}>
       <nav>
@@ -60,9 +71,11 @@ const Navbar = () => {
 
           <div className={styles.float_center}>
             {" "}
-            <NavigationMenu className={styles.nav_menu}>
+            <NavigationMenu>
               <NavigationMenuList>
-                <NavigationMenuItem>
+                <NavigationMenuItem
+                  className={isPageActive("/dashboard/metaport")}
+                >
                   <NavigationMenuTrigger>
                     {" "}
                     <Link href="/dashboard/metaport">Bridge</Link>
@@ -154,7 +167,9 @@ const Navbar = () => {
                   </span>
                 </NavigationMenuItem>
 
-                <NavigationMenuItem>
+                <NavigationMenuItem
+                  className={isPageActive("/dashboard/presale")}
+                >
                   <NavigationMenuTrigger>
                     {" "}
                     <Link href="/dashboard/presale">IDO</Link>
@@ -188,7 +203,7 @@ const Navbar = () => {
                   </span>
                 </NavigationMenuItem>
 
-                <NavigationMenuItem>
+                <NavigationMenuItem className={isPageActive("/swap/amm")}>
                   <NavigationMenuTrigger>
                     {" "}
                     <Link href="/swap/amm">Trade</Link>
@@ -224,7 +239,7 @@ const Navbar = () => {
                   </span>
                 </NavigationMenuItem>
 
-                <NavigationMenuItem>
+                <NavigationMenuItem className={isPageActive("/dashboard/nft")}>
                   <Link href="/dashboard/nft" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
@@ -267,15 +282,6 @@ const Navbar = () => {
                 </Link>
               </Dropdown.Item>
 
-              <Dropdown.Item className={styles.popup_item}>
-                <Link
-                  href={`https://github.com/RubyAquaMarine/aquastrade-fe/issues`}
-                  target="_blank"
-                  className={styles.popup_item_link}
-                >
-                  Report Bug &nbsp; &nbsp;
-                </Link>
-              </Dropdown.Item>
               <Dropdown.Item className={styles.popup_item_bottom}>
                 {"<"}- Socials
                 <Dropdown.Submenu className={styles.popup_submenu}>
@@ -315,6 +321,17 @@ const Navbar = () => {
                       Github &nbsp;&nbsp;
                     </Link>
                   </Dropdown.Item>
+
+                  <Dropdown.Item className={styles.popup_item}>
+                    <Link
+                      href={`https://github.com/RubyAquaMarine/aquastrade-fe/issues`}
+                      target="_blank"
+                      className={styles.popup_item_sub_link}
+                    >
+                      Report Bug &nbsp; &nbsp;
+                    </Link>
+                  </Dropdown.Item>
+
                   <Dropdown.Item className={styles.popup_item}>
                     <Link
                       href="https://t.me/AquasTrade"
