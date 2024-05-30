@@ -415,10 +415,16 @@ const DCAInterface: React.FC = () => {
           <div className={styles.container}>
             <span className={styles.text_center}>
               <input
-                type="text"
+                type="number"
                 placeholder="Input Token Amount"
-                value={inputTokenAmount}
-                onChange={(e) => setTokenAmount(e.target.value)}
+                value={Number(inputTokenAmount)}
+                onChange={(e) =>
+                  setTokenAmount(
+                    e.target.value === "string"
+                      ? Number(e.target.value)
+                      : e.target.value,
+                  )
+                }
                 className={styles.input_token_address}
               />{" "}
             </span>
