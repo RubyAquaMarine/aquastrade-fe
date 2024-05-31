@@ -86,3 +86,8 @@ solution :
 
 - Deleting .next folder
 - yarn add -D encoding
+
+## Old Ideas
+
+- `switchAccount` : this can only change the connector. like metamask to Brave wallet....
+- - const { chains, switchChain } = useSwitchChain();

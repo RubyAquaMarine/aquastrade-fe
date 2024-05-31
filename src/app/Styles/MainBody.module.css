@@ -12,14 +12,12 @@
 }
 /* 
 
+Hide scroll bars
+
 overflow: hidden; 
 overflow-y: scroll;
 overflow-x: hidden;
 */
-.p_body {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
 
 .imageInvert {
   -webkit-filter: invert(100%);

@@ -11,3 +11,15 @@
 .not_active_link {
   border: 1px solid #1a191c;
 }
+
+/** mb-2 mt-4 text-lg font-medium **/
+.metaport {
+  font-size: 1.3rem;
+  font-weight: 600;
+  writing-mode: vertical-lr;
+  padding-bottom: 1rem;
+}
+
+.icon_skl {
+  padding-bottom: 1rem;
+}

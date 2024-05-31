@@ -5,7 +5,7 @@
 
 # buttons
 
-<button type="button"> - fixed the issue
+<button type="button"> - fixed the issue : didn't fix the issue on in Wallet broswers
 
 # screen height on mobile
 
@@ -15,10 +15,6 @@ flex: 1;
 height: -webkit-fill-available
 overflow: scroll
 }
-
-## Home
-
-- regEx on all inputs : prevent ui crash from entering non number
 
 ## Metaport
 
@@ -33,18 +29,12 @@ MP => "@emotion/react": "^11.11.1",
 - How to show the best routing? Or default to multihop 100% of time, or check for what Pool has the best rates (liquidity amounts, getAmountsOut logic)
 - maybe make a smart contract routing for the frontend to do computations ^^
 
-## Token Approve
-
-- doesn't reset after successful tx. user needs to switch assets ( toggle), or menu toggle to reset the TokenApprove componment
-
 ## Cast : UX
 
 - Cast : approve token B logic doesn't work correctly. should use the GetAmountsOut value
 - after adding liquidity, the tokenB approved amount is asking for approval again even though its already been approved
 - after adding LP : refetch the Balances
 - `% whale_size` size of users position compared to the reserves :
-
-## Wallet Address switching on Token List page
 
 ## AMM :
 
