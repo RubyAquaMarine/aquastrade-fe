@@ -132,12 +132,6 @@
   padding-top: 6px;
 }
 
-.p_body {
-  overflow: hidden;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
 .toggleButton:hover {
   background-color: #2196f3;
 }

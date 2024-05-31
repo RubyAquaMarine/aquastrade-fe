@@ -4,7 +4,7 @@ import Image from "next/image";
 import { formatUnits } from "viem";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useAccount, useSwitchChain } from "wagmi";
+import { useAccount, useSwitchChain, useSwitchAccount } from "wagmi";
 import styles from "@/app/Styles/Metaport.module.css";
 import MetaportWidgetV2 from "@/app/Components/MetaportWidgetV2.0";
 
@@ -42,6 +42,7 @@ const chainNames: Record<number, string> = {
 
 const Home = () => {
   const { address, isConnected, chain, addresses } = useAccount();
+  const { connectors, switchAccount } = useSwitchAccount();
 
   const { chains, switchChain } = useSwitchChain();
   const [assetArray, setAsset] = useState<any>(null);
@@ -101,12 +102,15 @@ const Home = () => {
             {" "}
             <DropdownMenu>
               <DropdownMenuTrigger className={styles.text_style}>
-                Connected Wallets:{" "}
+                Connected wallets:{" "}
                 {addresses ? addresses?.length.toString() : ""}
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className={styles.dropdown_bd}>
-                <DropdownMenuLabel>Select Wallet</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                  Switch wallets within{" "}
+                  {connectors?.length >= 1 && connectors?.[0]?.name}{" "}
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
 
                 {addresses &&
@@ -159,7 +163,7 @@ const Home = () => {
             {" "}
             <DropdownMenu>
               <DropdownMenuTrigger className={styles.text_style}>
-                Switch between skale chains
+                Switch between chains
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className={styles.dropdown_bd}>

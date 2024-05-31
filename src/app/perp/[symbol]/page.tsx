@@ -131,8 +131,9 @@ const Home = ({ children, params }: any) => {
           {children}
           {/** Note: idk why this is required since  <Chart> contains the ws connection  */}
           <WebSocketConnection></WebSocketConnection>
+
           {/** Notes top navigation  and add li for new columns  */}
-          <ul className={styles.tradeNav}>
+          <ul className={styles.trade_nav_top}>
             <li className={styles.tradeAvailAssets}>
               {/** Not ready for Asset  navigation yet: need functional chart component  */}
               <span>
@@ -177,7 +178,7 @@ const Home = ({ children, params }: any) => {
           )}
 
           {/** Note: for nav here - tf -   */}
-          <span className={styles.tradeNav}>
+          <span className={styles.trade_nav_tf}>
             {" "}
             <span className={styles.tradeTF}>M1 </span>{" "}
             <span className={styles.tradeTF}>M5 </span>{" "}
@@ -187,113 +188,87 @@ const Home = ({ children, params }: any) => {
             <span className={styles.tradeTF}> H12</span>
           </span>
           {/** this is kinda of a mess :  */}
-          <ul className={styles.tradeButtons}>
+          <ul className={styles.panel_trading}>
+            <li></li>
+            <li></li>
+
             <li className={styles.tradeButtonSell}>
               <button>Sell</button>
             </li>
-
+            {/** Recode  */}
             {/** Note: This should maintain center viewport  */}
-            <span className={styles.trade_panel}>
-              <li>
-                {" "}
-                {inputs.map((value, index) => (
-                  <div key={index} className="mb-4">
-                    <p>
-                      <span> {`${desctwo[index]}`} </span>
-
-                      {desctwo[index] === "PAY" ? (
-                        <li className={styles.tradeBalance}>
-                          <Link href={`/user/${address}`}>
-                            {" "}
-                            {/* add balance input here */} Balance: $94.0493{" "}
-                          </Link>
-                          <span className={styles.panel_text}>
-                            {" "}
-                            <button
-                              type="button"
-                              className={styles.tradeBalance}
-                            >
-                              Deposit
-                            </button>{" "}
-                            <button
-                              type="button"
-                              className={styles.tradeBalance}
-                            >
-                              Withdraw
-                            </button>
-                          </span>
-                        </li>
-                      ) : (
-                        <li></li>
-                      )}
-                    </p>
-
-                    <p>
-                      {" "}
-                      {desctwo[index] === "POSITION" ? (
-                        <li className={styles.tradeBalance}>
-                          <Link href={`/user/${address}`}>
-                            {" "}
-                            {/* add liq price input here */} Liq Price: 0.23 |
-                            0.08{" "}
-                          </Link>
-                          <span className={styles.trade_panel}>
-                            {" "}
-                            <button
-                              type="button"
-                              className={styles.tradeBalance}
-                            >
-                              Limit
-                            </button>{" "}
-                            <button
-                              type="button"
-                              className={styles.tradeBalance}
-                            >
-                              Stop
-                            </button>
-                            <button
-                              type="button"
-                              className={styles.tradeBalance}
-                            >
-                              TP
-                            </button>
-                            <button
-                              type="button"
-                              className={styles.tradeBalance}
-                            >
-                              SL
-                            </button>
-                          </span>
-                        </li>
-                      ) : (
-                        <li></li>
-                      )}
-                    </p>
+            <li className={styles.panel_center}>
+              {" "}
+              {inputs.map((value, index) => (
+                <div key={index} className="mb-4">
+                  <p>
+                    <span> {`${desctwo[index]}`} </span>
 
                     {desctwo[index] === "PAY" ? (
-                      <li>
-                        <input
-                          className={styles.tradeInput}
-                          type="text"
-                          value={getInputValue(index)} // Call a function to get the appropriate value
-                          onChange={(e) =>
-                            handleInputChange(index, e.target.value)
-                          }
-                          placeholder={`${desc[index]}`}
-                        />
-                      </li>
+                      <span className={styles.panel_balance}>
+                        <Link href={`/user/${address}`}>
+                          {" "}
+                          {/* add balance input here */} Balance: $94.0493{" "}
+                        </Link>
+                        <span className={styles.panel_text}>
+                          {" "}
+                          <button type="button">Deposit</button>{" "}
+                          <button type="button">Withdraw</button>
+                        </span>
+                      </span>
                     ) : (
-                      <li></li>
+                      <span></span>
                     )}
-                  </div>
-                ))}
-              </li>
-            </span>
+                  </p>
+
+                  <p>
+                    {" "}
+                    {desctwo[index] === "POSITION" ? (
+                      <span className={styles.panel_position}>
+                        <Link href={`/user/${address}`}>
+                          {" "}
+                          {/* add liq price input here */} Liq Price: 0.23 |
+                          0.08{" "}
+                        </Link>
+                        <span className={styles.panel_order_type}>
+                          {" "}
+                          <button type="button">Limit</button>{" "}
+                          <button type="button">Stop</button>
+                          <button type="button">TP</button>
+                          <button type="button">SL</button>
+                        </span>
+                      </span>
+                    ) : (
+                      <span></span>
+                    )}
+                  </p>
+
+                  {desctwo[index] === "PAY" ? (
+                    <span>
+                      <input
+                        className={styles.trade_input}
+                        type="text"
+                        value={getInputValue(index)} // Call a function to get the appropriate value
+                        onChange={(e) =>
+                          handleInputChange(index, e.target.value)
+                        }
+                        placeholder={` Enter USD Amount ${desc[index]}`}
+                      />
+                    </span>
+                  ) : (
+                    <span></span>
+                  )}
+                </div>
+              ))}
+            </li>
+            {/** Note: This should maintain center viewport  */}
+
             <li className={styles.tradeButtonBuy}>
               <button>Buy</button>
             </li>
 
-            <li className={styles.tradeSlider}> </li>
+            <li></li>
+            <li></li>
           </ul>
         </div>
       )}
