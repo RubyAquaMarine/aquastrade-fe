@@ -1,8 +1,8 @@
-// components/Header.tsx
+"use client";
 import React from "react";
 import styles from "@/app/Styles/Telegram.module.css";
 
-const Header: React.FC = () => {
+const TelegramHeader: React.FC = () => {
   return (
     <header className={styles.header}>
       <h1>My Mobile App</h1>
@@ -10,4 +10,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default TelegramHeader;

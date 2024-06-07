@@ -4,6 +4,44 @@
 *
 */
 
+.header {
+  background-color: #181a1d;
+  color: #f4f4f4;
+  height: 52px;
+  width: 100%;
+  font-family: monospace;
+  border-bottom: 1px solid #5a80b4;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 52px;
+
+  /* Ensuring the container has a defined height for vertical alignment */
+}
+
+/** 
+this is the Vert lines within the Nav menu 
+**/
+.nav_menu_br {
+  border: 2px solid #5a80b4;
+  border-radius: 2px;
+}
+
+.nav_menu_bg {
+  background-color: #1a191c;
+  border-radius: 0;
+}
+
+.logo_aqua {
+  padding-left: 10px;
+}
+
 .active_link {
   border-bottom: 1px solid #d7de0a;
 }
@@ -22,4 +60,83 @@
 
 .icon_skl {
   padding-bottom: 1rem;
+}
+
+.image_invert_center {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  margin-left: 1.4rem;
+}
+
+/** 
+* Menu ICON
+* 
+**/
+.image_invert {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  text-align: right;
+}
+
+/** 
+* <NavigationMenuContent 
+* contains a white border that I can't over write
+**/
+
+.nav_menu_dd {
+  min-width: 370px;
+  z-index: 9998;
+  background-color: #1a191c;
+  padding: 0.6rem;
+  position: sticky;
+}
+
+.dropdown_menu {
+  background-color: #1a191c;
+}
+
+/** these are for the Right Nav Menu Drop down bar **/
+
+.popup_submenu {
+  margin-top: -12px;
+  color: #f4f4f4;
+  background-color: #242629;
+}
+.popup_item {
+  color: #f4f4f4;
+  background-color: #242629;
+  border-bottom: 1px solid #5a80b4;
+}
+
+.popup_item_top {
+  color: #f4f4f4;
+  background-color: #242629;
+  margin-top: -12px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-bottom: 1px solid #5a80b4;
+}
+
+.popup_item_link {
+  word-spacing: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.popup_item_sub_link {
+  word-spacing: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-right: 35px;
+  padding-left: 35px;
+}
+
+.popup_item_bottom {
+  color: #f4f4f4;
+  background-color: #242629;
+  margin-bottom: -12px;
 }

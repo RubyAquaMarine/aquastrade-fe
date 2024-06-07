@@ -7,6 +7,8 @@ import React, {
   useCallback,
 } from "react";
 
+import { LoginButton } from "@telegram-auth/react";
+
 import MobileLayout from "@/app/Components/TelegramLayout";
 
 import {
@@ -111,9 +113,27 @@ const TelegramMenu = ({ params }: any) => {
 
   return (
     <MobileLayout>
-      {" "}
+      <div>
+        {" "}
+        <LoginButton
+          botUsername={"AquasTradeBot" as string}
+          authCallbackUrl="/swap/amm"
+          buttonSize="medium" // "large" | "medium" | "small"
+          cornerRadius={5} // 0 - 20
+          showAvatar={true} // true | false
+          lang="en"
+        />
+      </div>{" "}
       <TelegramCard {...projectData1} {...project1}></TelegramCard>
       <TelegramCard {...projectData2} {...project2}></TelegramCard>
+      <TelegramCard {...projectData3} {...project3}></TelegramCard>
+      <TelegramCard {...projectData3} {...project3}></TelegramCard>
+      <TelegramCard {...projectData3} {...project3}></TelegramCard>
+      <TelegramCard {...projectData3} {...project3}></TelegramCard>
+      <TelegramCard {...projectData3} {...project3}></TelegramCard>
+      <TelegramCard {...projectData3} {...project3}></TelegramCard>
+      <TelegramCard {...projectData3} {...project3}></TelegramCard>
+      <TelegramCard {...projectData3} {...project3}></TelegramCard>
       <TelegramCard {...projectData3} {...project3}></TelegramCard>
     </MobileLayout>
   );

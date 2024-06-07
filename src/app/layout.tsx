@@ -18,7 +18,6 @@ export const metadata: Metadata = {
     "Fastest growing defi hub on the l2 modular scaling network: SKALE $SKL",
 };
 // React Componenet
-// add Nav - Footer - Header here - or any seo - build consistent layout for app
 // nested layout.tsx within other folders to customize
 export default function RootLayout(props: { children: ReactNode }) {
   return (

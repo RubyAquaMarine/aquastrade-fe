@@ -2,10 +2,9 @@
 "use client";
 import React, { ReactNode } from "react";
 
-import Navbar from "./Navbar";
+import Navbar from "./NavbarHover";
 
 import styles from "@/app/Styles/Telegram.module.css";
-import Header from "./Header";
 
 type MobileLayoutProps = {
   children: ReactNode;
