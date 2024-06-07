@@ -50,7 +50,7 @@ const Home = ({ children, params }: any) => {
           <p>
             <span className={styles.text_center}> Connected to:</span>{" "}
           </p>
-          <span className={styles.text_border}>{chain?.name} </span>
+          <span className={styles.text_title_sm}>{chain?.name}</span>
         </div>
       )}
     </main>

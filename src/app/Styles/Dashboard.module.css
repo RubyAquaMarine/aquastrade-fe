@@ -83,7 +83,7 @@
   margin-bottom: 0.6rem;
   justify-content: center;
   display: flex;
-  padding: 0.2rem 0.3rem;
+  padding: 1.2rem 1.3rem;
   border-radius: 12px;
   border: 1px solid #2196f3;
 }
@@ -216,7 +216,7 @@
 }
 
 .toggle_network:hover {
-  font-size: 1.2rem;
+  background-color: #2196f3;
 }
 
 /* Media Queries */
