@@ -1,4 +1,8 @@
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
   background-color: #181a1d;
   color: #f4f4f4;
   height: 52px;
@@ -10,7 +14,6 @@
 .nav {
   list-style: none;
   display: flex;
-  gap: 0.8rem;
   justify-content: space-between;
   /* Center horizontally */
   align-items: center;

@@ -1,28 +1,19 @@
 # UX UI
 
-- fix min h- screen in tailwinds : creating unneeded Vert. Scroll
-- - fixed on amm dex widget
-- - fixed on ido presale
-- - fixed on launchpad token create
-
-- remove Gear Icon : or finish the functionality (slippage params)
-
 - spinner icons on all buttons - consideration of layout, typography, and color schemes
 
 - exchange_rate: have link to overview_page
 
 - https://github.com/RubyAquaMarine/yak-aggregator/blob/master/src/contracts/adapters/UniswapV2Adapter.sol
 
-# decentralize
+- - <TokenApprove> click to revoke (if value is shown) : else approve
 
-https://code.visualstudio.com/docs/containers/quickstart-node
+- <TokenInfoBox > : styled
 
-- Make docker
+- `${address?.slice(0, 4)} ... ${address?.slice(38, 42)}`
 
-https://help.runonflux.io/docs/how-to-whitelist-a-docker-namespace-for-flux-cloud-deployments/
+# Meson fi
 
-- Launch docker on flux : https://home.runonflux.io/apps/registerapp
+- doesn't work with mobile Brave wallet : therefore bridging funds doesn't work (what other options?)
 
-## get amounts out
-
-- at 0 , background is black
+- SC on Europa, Calypso, Nebula : USDT and USDC amounts available for bridging

@@ -14,7 +14,6 @@ http://localhost:3000/dashboard/coinflip
 - coinflip still returns `115792089237316195423570985008687907853269984665640564039057.584007913129639936`
 - coinflip : userAllowance move into a components ( atm button click fetches allowance twice )
 - this `typeof token_balance === 'bigint' ? (` fixes the issue with showing the MAX_INT when object is undefined (coinFlip)
-- <TokenApprove> click to revoke (if value is shown) : else approve
 
 ## Charts
 

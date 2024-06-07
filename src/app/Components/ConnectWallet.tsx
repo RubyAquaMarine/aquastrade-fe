@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
+import { LoginButton } from "@telegram-auth/react";
 import Link from "next/link";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { FaSpinner } from "react-icons/fa6";
@@ -115,6 +116,16 @@ const ConnectWallet = () => {
       ) : (
         <>
           {error && <div>Error: {error.message}</div>}
+
+          <LoginButton
+            botUsername={"AquasTradeBot" as string}
+            authCallbackUrl="/swap/amm"
+            buttonSize="medium" // "large" | "medium" | "small"
+            cornerRadius={5} // 0 - 20
+            showAvatar={true} // true | false
+            lang="en"
+          />
+
           {uniqueList.map((connector) => (
             <div key={connector.id}>
               <ul>
