@@ -11,6 +11,6 @@
 
 - Our core dev stack relies on features only possible on the skale network making SKALE our aquarium . Most websites rely on 3rd party services, apis, and mostly a centralized database. We're using smartcontracts for our database, public rpcs (fire up your own node for lightning-speed) for api data, and run everything on the client-side eliminating any centralization.
 
-- Aquas.Trade is am open-source defi protocol with self-hosting capabilities for a true grassroots crypto experience. Open-source at its core, ready for community builders and ready for next wave of web3 users. Get ready to experience the SKALE space.
+- Aquas.Trade is an open-source defi protocol with self-hosting capabilities for a true grassroots crypto experience. Open-source at its core, ready for community builders and ready for next wave of web3 users. Get ready to experience the SKALE space.
 
 -

@@ -22,21 +22,6 @@ const Dashbaord = ({ children, params }: any) => {
   // min-h-screen
   return (
     <main className="flex  flex-col items-center justify-between p-24">
-      <span className={styles.midText}> NFT-powered DEX, Market Place, </span>
-
-      <span className={styles.top_text}> and leveraged trading on the</span>
-      <span>
-        {" "}
-        <Link
-          href="https://skale.space"
-          target="_blank"
-          className={styles.top_text_link}
-        >
-          {" "}
-          <b>SKALE</b> Network
-        </Link>
-      </span>
-
       {!addr || !isConnected ? (
         <div className={styledContainer.container}>
           <div className={styles.p_styled_button}>
@@ -52,14 +37,15 @@ const Dashbaord = ({ children, params }: any) => {
         </div>
       ) : (
         <div className={styledContainer.container}>
+          {/** Handle all unknown networks on the dashboard page */}
+
           {!chain ? (
             <span className={styles.text_style_border}>
               <ul>
                 <li>
-                  {" "}
-                  Unsupported Network : Recommended Network is Europa Liquidity
-                  Hub
+                  <span> Unsupported Network</span>
                 </li>
+                <li> Recommended Network is Europa SKALE Chain</li>
 
                 <li className={styles.text_center}>
                   {" "}
