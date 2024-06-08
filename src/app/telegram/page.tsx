@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import React, {
   useRef,
   useEffect,
@@ -24,32 +24,19 @@ import styles from "@/app/Styles/Telegram.module.css";
 const TelegramMenu = ({ params }: any) => {
   const path = usePathname();
 
+  const params_ = useParams();
+
   const [userID, setUserID] = useState<string>();
 
   useEffect(() => {
     if (path) {
-      console.log("Load API KEYS |", path);
-      // slice the string and return the user id
-
-      const id = path.slice(12, 20);
-
-      console.log("Load API KEYS |  USER0 | ", id);
-
-      const id1 = path.slice(12, 22);
-
-      console.log("Load API KEYS |  USER1 | ", id1);
-
-      const first = path.search("=");
-      const end = path.search("&");
-
-      const id2 = path.slice(first, end);
-
-      console.log("Load API KEYS |  USER2 | ", id2);
+      console.log("Load API KEYS |", path, params_);
 
       //   /telegram?id=
       //https://aquas.trade/telegram?id=93383397
-
-      setUserID(id2);
+      if (params_?.id) {
+        setUserID(params_.id as `0x${string}`);
+      }
     }
   }, [path]);
 
