@@ -117,9 +117,9 @@ const TelegramMenu = ({ params }: any) => {
         {" "}
         <LoginButton
           botUsername={"AquasTradeBot" as string}
-          authCallbackUrl="/swap/amm"
+          authCallbackUrl="/telegram"
           buttonSize="medium" // "large" | "medium" | "small"
-          cornerRadius={5} // 0 - 20
+          cornerRadius={12} // 0 - 20
           showAvatar={true} // true | false
           lang="en"
         />
