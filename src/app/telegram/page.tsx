@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import React, {
   useRef,
   useEffect,
@@ -24,21 +24,19 @@ import styles from "@/app/Styles/Telegram.module.css";
 const TelegramMenu = ({ params }: any) => {
   const path = usePathname();
 
-  const params_ = useParams();
+  const searchParams = useSearchParams();
+
+  const id = searchParams.get("id");
 
   const [userID, setUserID] = useState<string>();
 
   useEffect(() => {
-    if (path) {
-      console.log("Load API KEYS |", path, params_);
-
-      //   /telegram?id=
-      //https://aquas.trade/telegram?id=93383397
-      if (params_?.id) {
-        setUserID(params_.id as `0x${string}`);
+    if (path && id) {
+      if (id) {
+        setUserID(id as string);
       }
     }
-  }, [path]);
+  }, [path, id]);
 
   const projectData1: TelegramCardProps = [
     {
@@ -145,8 +143,7 @@ const TelegramMenu = ({ params }: any) => {
   return (
     <MobileLayout>
       <div>
-        <span>
-          {" "}
+        <span className={styles.input}>
           <PrivateKeyInput></PrivateKeyInput>{" "}
         </span>
 

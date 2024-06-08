@@ -55,3 +55,10 @@
 .button:hover {
   background-color: #0a80e0;
 }
+
+.input {
+  display: flex;
+
+  margin-bottom: 1rem;
+  padding: 0.2rem;
+}
