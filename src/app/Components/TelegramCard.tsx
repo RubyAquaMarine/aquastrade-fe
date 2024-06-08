@@ -66,9 +66,9 @@ export type TelegramCardProps = [
 export const TelegramCard = (params: TelegramCardProps, project: CardProps) => {
   const testArray = Object.values(params);
 
-  console.log("props", testArray, project);
+  // console.log("props", testArray, project);
 
-  console.log("props", testArray?.length);
+  // console.log("props", testArray?.length);
 
   const divRef = useRef<HTMLDivElement>(null);
 
