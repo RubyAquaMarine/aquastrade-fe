@@ -1,5 +1,4 @@
 "use client";
-import { usePathname } from "next/navigation";
 import React, {
   useRef,
   useEffect,
@@ -22,24 +21,6 @@ import {
 import styles from "@/app/Styles/Telegram.module.css";
 
 const TelegramMenu = ({ params }: any) => {
-  const path = usePathname();
-
-  const [userID, setUserID] = useState<string>();
-
-  useEffect(() => {
-    if (path) {
-      console.log("Load API KEYS |  USER | ", path);
-      // slice the string and return the user id
-
-      const id = path.slice(12, 20);
-
-      //   /telegram?id=
-      //https://aquas.trade/telegram?id=93383397
-
-      setUserID(id);
-    }
-  }, [path]);
-
   const projectData1: TelegramCardProps = [
     {
       logo: "/SKL.svg",
@@ -137,9 +118,6 @@ const TelegramMenu = ({ params }: any) => {
 
   Get the pasth Name url and retreive the users ID , then pass down the user id through the componenent props
 
-
-  if the  pathname has a user id , then don't show the telegram login button 
-
   */
 
   return (
@@ -150,21 +128,17 @@ const TelegramMenu = ({ params }: any) => {
           <PrivateKeyInput></PrivateKeyInput>{" "}
         </span>
 
-        {!userID ? (
-          <span>
-            {" "}
-            <LoginButton
-              botUsername={"AquasTradeBot" as string}
-              authCallbackUrl="/telegram"
-              buttonSize="medium" // "large" | "medium" | "small"
-              cornerRadius={12} // 0 - 20
-              showAvatar={true} // true | false
-              lang="en"
-            />
-          </span>
-        ) : (
-          <span> </span>
-        )}
+        <span>
+          {" "}
+          <LoginButton
+            botUsername={"AquasTradeBot" as string}
+            authCallbackUrl="/telegram"
+            buttonSize="medium" // "large" | "medium" | "small"
+            cornerRadius={12} // 0 - 20
+            showAvatar={true} // true | false
+            lang="en"
+          />
+        </span>
       </div>{" "}
       <TelegramCard {...projectData1} {...project1}></TelegramCard>
       <TelegramCard {...projectData2} {...project2}></TelegramCard>

@@ -20,6 +20,10 @@
   width: 100%;
 }
 
+.content_right {
+  margin-left: 10rem;
+}
+
 /** 
 * float the header when on mobile telegram
 **/
@@ -36,4 +40,18 @@
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+}
+
+.button {
+  color: white;
+  padding: 0.1rem 0.3rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  margin: 0.1rem;
+  text-align: right;
+}
+
+.button:hover {
+  background-color: #0a80e0;
 }
