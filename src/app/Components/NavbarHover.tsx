@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 import styles_header from "../Styles/Telegram.module.css"; // You can create a CSS module for styling
-import styles from "../Styles/Nav.module.css"; // You can create a CSS module for styling
+import styles from "../Styles/NavHover.module.css"; // You can create a CSS module for styling
 import Image from "next/image";
 import Dropdown from "react-multilevel-dropdown";
 
@@ -36,7 +36,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className={styles_header.header}>
+    <header className={styles.header}>
       <nav>
         <ul className={styles.nav}>
           <li>

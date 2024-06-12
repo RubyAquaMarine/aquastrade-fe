@@ -12,3 +12,6 @@
 # 6-12
 
 - USDT SHISH pool : done
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient
+https://www.svgrepo.com/vectors/github/
