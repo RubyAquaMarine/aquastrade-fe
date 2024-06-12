@@ -36,9 +36,9 @@ const PrivateKeyInput: React.FC = () => {
         transport: http(),
       });
 
-      console.log(" Account : Wallet Details ", account);
+      // console.log(" Account : Wallet Details ", account);
 
-      console.log(" Provider Details ", provider);
+      // console.log(" Provider Details ", provider);
 
       //  const connectedWallet = wallet.connect(provider);
 
@@ -90,7 +90,7 @@ const PrivateKeyInput: React.FC = () => {
             {" "}
             <Link
               className={styles.button}
-              href="https://t.me/aquastradechat_bot"
+              href="https://t.me/AquasTradeBot"
               target="_blank"
             >
               get keys
