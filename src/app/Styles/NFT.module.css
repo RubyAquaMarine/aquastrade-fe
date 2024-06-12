@@ -40,7 +40,12 @@
 .container {
   width: auto;
   border-radius: 12px;
-  background-color: #121111;
+  border: 4px solid #12194978;
+  background-image: linear-gradient(
+    to top,
+    rgba(10, 14, 39, 0.47),
+    transparent
+  );
 }
 
 .container_text {

@@ -24,7 +24,7 @@ const Home = ({ children, params }: any) => {
       <SpinImage imageUrl="/AQUA.png" />
 
       {!address || !isConnected || (chain && chain.id !== CHAIN.id) ? (
-        <div className={styles.button_back}>
+        <div className="button_back">
           <ul>
             <li>
               <Link href="/">

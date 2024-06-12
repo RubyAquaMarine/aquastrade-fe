@@ -12,7 +12,6 @@ import {
   MARKETPLACE_BRONZE_NFT,
   MARKETPLACE_SILVER_NFT,
 } from "@/app/Utils/config";
-import styles from "@/app/Styles/AMM.module.css";
 
 const NFTHolder = () => {
   const isNFTHolder = useRef(false);
@@ -86,13 +85,13 @@ const NFTHolder = () => {
   return (
     <>
       {address && isConnected && nftHolder && nftHolder === true ? (
-        <div id="PASS" className={styles.input_container}>
+        <div id="PASS" className="input_container">
           <AirDrop></AirDrop>
         </div>
       ) : (
         <div id="FAIL">
           {nftHolder === false ? (
-            <span className={styles.input_container}>
+            <span className="button_back">
               <Link href="/dashboard/nft">
                 {" "}
                 <b>Back </b>(Buy any NFT to unlock features)
