@@ -11,6 +11,10 @@
 
 # 6-12
 
+start making a globals.css and start using tailwinds
+
+- `className='input_container'>` created and .button_back
+
 - USDT SHISH pool : done
 
 https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient

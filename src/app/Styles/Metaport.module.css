@@ -41,6 +41,15 @@
   border-radius: 12px;
   padding: 0.6rem 1rem;
   border: 1px solid #2196f3;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(82, 86, 109, 0.47),
+    transparent
+  );
+}
+
+.text_style:hover {
+  background-color: #007bff;
 }
 
 .text_style_bottom:hover {

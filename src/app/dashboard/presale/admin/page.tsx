@@ -26,7 +26,7 @@ const Home = ({ children, params }: any) => {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className={styles.text_title}>IDO Admin Panel</h1>
       {!address || !isConnected || (chain && chain.id !== CHAIN.id) ? (
-        <div className={styles.button_back}>
+        <div className="button_back">
           <ul>
             <li>
               <Link href="/">

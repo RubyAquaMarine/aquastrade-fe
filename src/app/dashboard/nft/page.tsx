@@ -316,7 +316,7 @@ const Home = () => {
                         BigInt(allowance[index]) ? (
                         <span>
                           <button
-                            className={styles.button_nft}
+                            className="button_back"
                             onClick={() => handleButtonClick(index)}
                           >
                             {buttonLogicTexts[index]}
@@ -325,7 +325,7 @@ const Home = () => {
                       ) : (
                         <span>
                           <button
-                            className={styles.button_nft}
+                            className="button_back"
                             onClick={() => handleButtonClick(index)}
                           >
                             Approve

@@ -50,7 +50,7 @@ const Home = ({ params }: any) => {
             {" "}
             <Overview {...tableData}></Overview>
           </span>
-          <span className={styles.button_back}>
+          <span className="button_back">
             {" "}
             <Link href="/dashboard/tokeninfo">
               {" "}
@@ -59,7 +59,7 @@ const Home = ({ params }: any) => {
           </span>
         </span>
       ) : (
-        <span className={styles.button_back}>
+        <span className="button_back">
           <span>Loading OverView </span>
         </span>
       )}
