@@ -84,7 +84,7 @@ const PrivateKeyInput: React.FC = () => {
             value={privateKey}
             onChange={handleInputChange}
             placeholder="Enter your private key"
-            className={styles.content}
+            className={styles.input_keys}
           />
           <span className={styles.content_right}>
             {" "}
