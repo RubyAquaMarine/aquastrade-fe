@@ -44,7 +44,7 @@ const Home = ({ params }: any) => {
 
   return (
     <main className={styles.container}>
-      {inputWallet && tableData && chain && chain.id === CHAIN.id ? (
+      {tableData ? (
         <span>
           <span>
             {" "}
@@ -60,18 +60,7 @@ const Home = ({ params }: any) => {
         </span>
       ) : (
         <span className={styles.button_back}>
-          {!tableData && inputWallet && chain && chain.id === CHAIN.id ? (
-            <span>Loading OverView </span>
-          ) : (
-            <span>
-              {" "}
-              <Link href="/">
-                {" "}
-                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
-                features)
-              </Link>{" "}
-            </span>
-          )}
+          <span>Loading OverView </span>
         </span>
       )}
     </main>
@@ -79,5 +68,3 @@ const Home = ({ params }: any) => {
 };
 
 export default Home;
-//    {address && isConnected && tableData ? <Overview {...tableData}></Overview> : <span> </span>}
-//   <Overview {...{ params: tableData }}></Overview>

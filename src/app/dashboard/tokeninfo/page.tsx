@@ -13,21 +13,7 @@ const Home = () => {
   const { address, isConnected, chain } = useAccount();
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {!address || !isConnected || (chain && chain.id !== CHAIN.id) ? (
-        <div className={styles.toggle_button}>
-          <ul>
-            <li>
-              <Link href="/">
-                {" "}
-                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
-                features)
-              </Link>
-            </li>
-          </ul>
-        </div>
-      ) : (
-        <TokenCards></TokenCards>
-      )}
+      <TokenCards></TokenCards>
     </main>
   );
 };

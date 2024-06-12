@@ -250,6 +250,16 @@ export const poolListAqua = [
     logoQuote: "/AQUA.png",
     logoBase: "/TGOLD.png",
   },
+  {
+    id: 50,
+    symbol: "SHISH-USDT",
+    address: "0xd51c8DD61A7211218602071Fd05677B0a2d2F4B6",
+    tokenA: "USDT",
+    tokenB: "SHISH",
+    decimals: 18,
+    logoQuote: "/SHISH.png",
+    logoBase: "/USDT.svg",
+  },
 ] as const;
 
 // 6 pools
