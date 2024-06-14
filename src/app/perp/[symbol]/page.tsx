@@ -114,17 +114,13 @@ const Home = ({ children, params }: any) => {
   }
 
   return (
-    <main className="">
+    <main>
       {!address ? (
-        <div className={styles.p_styled}>
-          <ul>
-            <li>
-              <Link href="/">
-                {" "}
-                <b>Back </b>(use web3 login to unlock features)
-              </Link>
-            </li>
-          </ul>
+        <div className="button_back">
+          <Link href="/">
+            {" "}
+            <b>Back </b>(use web3 login to unlock features)
+          </Link>
         </div>
       ) : (
         <div className={styles.tradeContainer}>

@@ -94,7 +94,9 @@ const Home = () => {
                 <DropdownMenuContent className={styles.dropdown_bd}>
                   <DropdownMenuLabel>
                     Switch wallets within{" "}
-                    {connectors?.length >= 1 && connectors?.[0]?.name}{" "}
+                    {connectors &&
+                      connectors?.length >= 1 &&
+                      connectors?.[0]?.name}{" "}
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
 
@@ -246,7 +248,7 @@ const Home = () => {
             </div>
           ))}
 
-        {assetArray.length == 0 ? "No Assets" : ""}
+        {assetArray?.length == 0 ? "No Assets" : ""}
       </div>
     </main>
   );
