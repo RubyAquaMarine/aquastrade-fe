@@ -10,7 +10,7 @@ import SKL from "../../public/SKL.svg";
 
 // build static chart for homepage
 import ChartCandles from "@/app/api/binance";
-const ChartComponent = dynamic(() => import("@/app/Components/ChartTV2"), {
+const ChartComponent = dynamic(() => import("@/app/Components/ChartStatic"), {
   ssr: false,
 });
 

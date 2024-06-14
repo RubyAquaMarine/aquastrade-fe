@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation"; // for client side
 
 import WebSocketConnection from "@/app/Components/WebSocketConnection";
 import { getWebSocket } from "@/app/Utils/web-socket";
-import Chart from "@/app/Components/Chart6.2"; // 6.2 resize to original,,,
+import Chart from "@/app/Components/ChartWSS";
 
 import { useAccount, useSwitchChain } from "wagmi";
 
@@ -35,7 +35,7 @@ const Home = ({ children, params }: any) => {
   const { address } = useAccount();
   const [inputs, setInputs] = useState(["", ""]);
   const [sliderValue, setSliderValue] = useState([30, 60]);
-  // Add Chart.6.1
+
   const domElement = useRef();
   const dataIs = useRef<any>({});
   const [renderAgain, setRenderAgain] = useState<any>();
@@ -49,19 +49,24 @@ const Home = ({ children, params }: any) => {
   // nothing important here. just testing
   useEffect(() => {
     const _domElement = window.document.getElementById("btc");
-    console.log(" Dom is ", _domElement);
+    console.log(" Perps : getElementById  ", _domElement);
     // btc is no longer found and now wow chart is being assigned
     const _domElementChart = window.document.getElementById("wow-chart");
-    console.log(" Chart  is ", _domElementChart);
+    console.log(" Perps : getElementById  ", _domElementChart);
   });
 
   // Connect to websocket
   useEffect(() => {
-    const websocket = getWebSocket();
+    const websocket = getWebSocket(); // todo how to pass in 'Asset'
+
+    console.log(" Perps : use Effect websocket", websocket);
+
     if (websocket) {
+      console.log(" Perps : web wss ");
       websocket.onmessage = (event) => {
         const out = JSON.parse(event.data);
         if (out) {
+          console.log(" Perps : onmessage ", out);
           dataIs.current = out;
           setChartPrice(Number(dataIs.current?.k?.c));
           const dataFormatted = configDataToSend(dataIs.current);
@@ -173,7 +178,7 @@ const Home = ({ children, params }: any) => {
             <div>no chart error?</div>
           )}
 
-          {/** Note: for nav here - tf -   */}
+          {/** Note: for nav here - tf -  flex - centered with chart at all times   */}
           <span className={styles.trade_nav_tf}>
             {" "}
             <span className={styles.tradeTF}>M1 </span>{" "}
@@ -185,8 +190,8 @@ const Home = ({ children, params }: any) => {
           </span>
           {/** this is kinda of a mess :  */}
           <ul className={styles.panel_trading}>
-            <li></li>
-            <li></li>
+            <li>| Column |</li>
+            <li>| Column |</li>
 
             <li className={styles.tradeButtonSell}>
               <button>Sell</button>

@@ -82,18 +82,20 @@ const ConnectWallet = () => {
 
       {/** Handle case where user is using an unknown EVM network */}
       {isConnected ? (
-        <div className={styles.tradingViewText}>
-          <span>
+        <div>
+          <span className={styles.telegram}>
             {" "}
             {chain && chain.id !== CHAIN.id ? (
-              <button
-                className={styles.button_login}
-                onClick={(event) => handleToEuropa(event, 2046399126)}
-              >
-                Switch Network
-              </button>
-            ) : (
               <span>
+                <button
+                  className={styles.button_login}
+                  onClick={(event) => handleToEuropa(event, 2046399126)}
+                >
+                  Switch Network
+                </button>{" "}
+              </span>
+            ) : (
+              <span className={styles.telegram}>
                 {!chain ? (
                   <button type="button" className={styles.button_login}>
                     <Link href="/dashboard">Switch Network</Link>
@@ -107,7 +109,7 @@ const ConnectWallet = () => {
             )}
           </span>
 
-          <span className={styles.margin_med}>
+          <span className={styles.telegram}>
             {" "}
             <button
               type="button"

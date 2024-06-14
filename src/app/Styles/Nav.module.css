@@ -24,19 +24,6 @@
   /* Ensuring the container has a defined height for vertical alignment */
 }
 
-/** 
-this is the Vert lines within the Nav menu 
-**/
-.nav_menu_br {
-  border: 2px solid #5a80b4;
-  border-radius: 2px;
-}
-
-.nav_menu_bg {
-  background-color: #1a191c;
-  border-radius: 0;
-}
-
 .logo_aqua {
   padding-left: 10px;
 }
@@ -81,14 +68,6 @@ this is the Vert lines within the Nav menu
 * <NavigationMenuContent 
 * contains a white border that I can't over write
 **/
-
-.nav_menu_dd {
-  min-width: 370px;
-  z-index: 9998;
-  background-color: #1a191c;
-  padding: 0.6rem;
-  position: sticky;
-}
 
 .dropdown_menu {
   background-color: #1a191c;
@@ -138,4 +117,36 @@ this is the Vert lines within the Nav menu
   color: #f4f4f4;
   background-color: #242629;
   margin-bottom: -12px;
+}
+
+/** 
+this is the Vert lines within the Nav menu 
+**/
+.nav_menu_br {
+  border: 2px solid #5a80b4;
+  border-radius: 2px;
+  backdrop-filter: opacity(20%);
+}
+
+.nav_menu_bg {
+  backdrop-filter: opacity(20%);
+
+  background-color: #242629;
+  border-radius: 2rem;
+  border: 2px solid #475384;
+}
+
+/**darker
+ background-color: #1a191c;
+**/
+.nav_menu_dd {
+  z-index: 999999;
+  backdrop-filter: opacity(20%);
+
+  min-width: 370px;
+  background-color: #242629;
+  padding: 0.6rem;
+  position: sticky;
+  border-radius: 2rem;
+  border: 2px solid #475384;
 }
