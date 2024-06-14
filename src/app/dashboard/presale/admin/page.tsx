@@ -27,15 +27,11 @@ const Home = ({ children, params }: any) => {
       <h1 className={styles.text_title}>IDO Admin Panel</h1>
       {!address || !isConnected || (chain && chain.id !== CHAIN.id) ? (
         <div className="button_back">
-          <ul>
-            <li>
-              <Link href="/">
-                {" "}
-                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
-                features)
-              </Link>
-            </li>
-          </ul>
+          <Link href="/">
+            {" "}
+            <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+            features)
+          </Link>
         </div>
       ) : (
         <div>

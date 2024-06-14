@@ -28,16 +28,12 @@ const Home = () => {
       </span>{" "}
       <span> providing fair odds in winning and losing!</span>
       {!address || (chain && chain.id !== CHAIN.id) ? (
-        <div className={styles.toggle_button}>
-          <ul>
-            <li>
-              <Link href="/">
-                {" "}
-                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
-                features)
-              </Link>
-            </li>
-          </ul>
+        <div className="button_back">
+          <Link href="/">
+            {" "}
+            <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+            features)
+          </Link>
         </div>
       ) : (
         <div>

@@ -354,16 +354,12 @@ const Home = () => {
           </span>
         </div>
       ) : (
-        <div className={styles.p_styled_button}>
-          <ul>
-            <li>
-              <Link href="/">
-                {" "}
-                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
-                features)
-              </Link>
-            </li>
-          </ul>
+        <div className="button_back">
+          <Link href="/">
+            {" "}
+            <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+            features)
+          </Link>
         </div>
       )}
       <span>

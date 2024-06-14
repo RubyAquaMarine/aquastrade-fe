@@ -23,16 +23,12 @@ const Home = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {!addr || (chain && chain.id !== CHAIN.id) ? (
-        <div className={styles.p_styled}>
-          <ul>
-            <li>
-              <Link href="/">
-                {" "}
-                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
-                features)
-              </Link>
-            </li>
-          </ul>
+        <div className="button_back">
+          <Link href="/">
+            {" "}
+            <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+            features)
+          </Link>
         </div>
       ) : (
         <div>
