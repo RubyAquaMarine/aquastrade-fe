@@ -93,13 +93,12 @@
 
 /* smaller than min-width */
 .connectButtons {
-  padding: 0.9rem 2rem;
-  padding-bottom: 2rem;
-  padding-top: 2rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
   z-index: 1000;
   overflow-y: hidden;
 
-  border-radius: 1rem;
+  border-radius: 2rem;
   max-width: 300px;
   max-height: 240px;
   background-color: #141618;
@@ -109,4 +108,28 @@
 
 .connectButtons:hover {
   overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.line {
+  border-top: 1px solid #007bff;
+}
+
+.container_padding {
+  padding-top: 1rem;
+  margin-left: 1rem;
+}
+
+.text_connect {
+  padding-left: 6rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.text_border {
+  display: flex;
+  border-bottom: 1px solid #202325;
 }

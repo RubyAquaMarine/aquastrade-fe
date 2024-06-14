@@ -71,6 +71,11 @@ const ConnectWallet = () => {
 
   return (
     <div className={styles.connectButtons}>
+      <span className={styles.text_border}>
+        {" "}
+        <span className={styles.text_connect}> Connect Wallet</span>{" "}
+      </span>
+
       {!isConnected && status !== "idle" && (
         <div className={styles.text_flex}>{message}</div>
       )}
@@ -114,52 +119,53 @@ const ConnectWallet = () => {
           </span>
         </div>
       ) : (
-        <>
+        <div className={styles.container_padding}>
           {error && <div>Error: {error.message}</div>}
-
-          <span>
+          <span className={styles.line}>
             {" "}
-            <LoginButton
-              botUsername={"AquasTradeBot" as string}
-              authCallbackUrl="/telegram"
-              buttonSize="medium" // "large" | "medium" | "small"
-              cornerRadius={12} // 0 - 20
-              showAvatar={true} // true | false
-              lang="en"
-            />
+            <span>
+              {" "}
+              <LoginButton
+                botUsername={"AquasTradeBot" as string}
+                authCallbackUrl="/telegram"
+                buttonSize="medium" // "large" | "medium" | "small"
+                cornerRadius={12} // 0 - 20
+                showAvatar={true} // true | false
+                lang="en"
+              />
+            </span>
+            {uniqueList.map((connector) => (
+              <div key={connector.id}>
+                <ul>
+                  <li className={styles.connectorButton}>
+                    <button
+                      className={styles.button_login}
+                      onClick={() => {
+                        connect({ connector });
+                      }}
+                    >
+                      <span className={styles.spinner_padding}>
+                        {isConnecting ? (
+                          <span>
+                            {" "}
+                            {<FaSpinner className={styles.spinner_icon} />}
+                          </span>
+                        ) : (
+                          <span> </span>
+                        )}
+                      </span>
+                      <span className={styles.spinner_padding}>
+                        {" "}
+                        {isConnected && address}
+                        {connector.name}
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ))}
           </span>
-
-          {uniqueList.map((connector) => (
-            <div key={connector.id}>
-              <ul>
-                <li className={styles.connectorButton}>
-                  <button
-                    className={styles.button_login}
-                    onClick={() => {
-                      connect({ connector });
-                    }}
-                  >
-                    <span className={styles.spinner_padding}>
-                      {isConnecting ? (
-                        <span>
-                          {" "}
-                          {<FaSpinner className={styles.spinner_icon} />}
-                        </span>
-                      ) : (
-                        <span> </span>
-                      )}
-                    </span>
-                    <span className={styles.spinner_padding}>
-                      {" "}
-                      {isConnected && address}
-                      {connector.name}
-                    </span>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          ))}
-        </>
+        </div>
       )}
     </div>
   );
