@@ -74,7 +74,7 @@ const Home = ({ children, params }: any) => {
                 <div className={styles.text_container}>
                   <span className={styles.text_title}>
                     <TextSizeAdjuster
-                      text={" Connect Wallet to Start Trading"}
+                      text={"A Complete DeFi Suite"}
                       text_size="28"
                       text_size_to="48"
                     ></TextSizeAdjuster>

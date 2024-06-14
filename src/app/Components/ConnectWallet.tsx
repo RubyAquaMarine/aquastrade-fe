@@ -70,7 +70,7 @@ const ConnectWallet = () => {
   };
 
   return (
-    <div className={styles.connectButtons}>
+    <div className={styles.connect_wallet}>
       <span className={styles.text_border}>
         {" "}
         <span className={styles.text_connect}> Connect Wallet</span>{" "}
@@ -119,11 +119,11 @@ const ConnectWallet = () => {
           </span>
         </div>
       ) : (
-        <div className={styles.container_padding}>
+        <div>
           {error && <div>Error: {error.message}</div>}
           <span className={styles.line}>
             {" "}
-            <span>
+            <span className={styles.telegram}>
               {" "}
               <LoginButton
                 botUsername={"AquasTradeBot" as string}
@@ -134,36 +134,38 @@ const ConnectWallet = () => {
                 lang="en"
               />
             </span>
-            {uniqueList.map((connector) => (
-              <div key={connector.id}>
-                <ul>
-                  <li className={styles.connectorButton}>
-                    <button
-                      className={styles.button_login}
-                      onClick={() => {
-                        connect({ connector });
-                      }}
-                    >
-                      <span className={styles.spinner_padding}>
-                        {isConnecting ? (
-                          <span>
-                            {" "}
-                            {<FaSpinner className={styles.spinner_icon} />}
-                          </span>
-                        ) : (
-                          <span> </span>
-                        )}
-                      </span>
-                      <span className={styles.spinner_padding}>
-                        {" "}
-                        {isConnected && address}
-                        {connector.name}
-                      </span>
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            ))}
+            <span className={styles.telegram}>
+              {uniqueList.map((connector) => (
+                <div key={connector.id}>
+                  <ul>
+                    <li className={styles.connectorButton}>
+                      <button
+                        className={styles.button_login}
+                        onClick={() => {
+                          connect({ connector });
+                        }}
+                      >
+                        <span className={styles.spinner_padding}>
+                          {isConnecting ? (
+                            <span>
+                              {" "}
+                              {<FaSpinner className={styles.spinner_icon} />}
+                            </span>
+                          ) : (
+                            <span> </span>
+                          )}
+                        </span>
+                        <span className={styles.spinner_padding}>
+                          {" "}
+                          {isConnected && address}
+                          {connector.name}
+                        </span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              ))}{" "}
+            </span>
           </span>
         </div>
       )}
