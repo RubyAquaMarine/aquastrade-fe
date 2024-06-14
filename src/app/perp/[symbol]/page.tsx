@@ -178,7 +178,7 @@ const Home = ({ children, params }: any) => {
             <div>no chart error?</div>
           )}
 
-          {/** Note: for nav here - tf -   */}
+          {/** Note: for nav here - tf -  flex - centered with chart at all times   */}
           <span className={styles.trade_nav_tf}>
             {" "}
             <span className={styles.tradeTF}>M1 </span>{" "}
@@ -190,8 +190,8 @@ const Home = ({ children, params }: any) => {
           </span>
           {/** this is kinda of a mess :  */}
           <ul className={styles.panel_trading}>
-            <li></li>
-            <li></li>
+            <li>| Column |</li>
+            <li>| Column |</li>
 
             <li className={styles.tradeButtonSell}>
               <button>Sell</button>

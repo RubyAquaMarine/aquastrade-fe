@@ -125,24 +125,28 @@ this is the Vert lines within the Nav menu
 .nav_menu_br {
   border: 2px solid #5a80b4;
   border-radius: 2px;
+  backdrop-filter: opacity(20%);
 }
 
 .nav_menu_bg {
+  backdrop-filter: opacity(20%);
+
   background-color: #242629;
   border-radius: 2rem;
   border: 2px solid #475384;
-  box-shadow: rgba(255, 255, 255, 0.15) 5px 5px 15px 0px;
 }
 
 /**darker
  background-color: #1a191c;
 **/
 .nav_menu_dd {
+  z-index: 999999;
+  backdrop-filter: opacity(20%);
+
   min-width: 370px;
   background-color: #242629;
   padding: 0.6rem;
   position: sticky;
   border-radius: 2rem;
   border: 2px solid #475384;
-  box-shadow: rgba(255, 255, 255, 0.15) 5px 5px 15px 0px;
 }
