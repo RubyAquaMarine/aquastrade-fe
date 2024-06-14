@@ -116,10 +116,21 @@ Need two designs. flex : stacked
 }
 
 .tradeContainer {
-  background-color: #181a1d;
+  background-color: #0d0d10;
   border-radius: 6px;
   padding-top: 16px;
   padding-bottom: 16px;
+}
+
+/*
+cells rounded with padding to fit the cell around the text better
+margin top and bottom to center the cell within the nav etter
+*/
+
+.tradeContainerLight {
+  background-color: #475384;
+  border-radius: 6px;
+  padding: 0.2rem 1rem;
 }
 
 /*
@@ -148,17 +159,6 @@ perps v1 : done
   max-width: 200px;
   padding: 0.5rem 0.2rem;
   color: #161618;
-}
-
-/*
-cells rounded with padding to fit the cell around the text better
-margin top and bottom to center the cell within the nav etter
-*/
-
-.tradeContainerLight {
-  background-color: #475384;
-  border-radius: 6px;
-  padding: 0.2rem 1rem;
 }
 
 .tradeAvailAssets {

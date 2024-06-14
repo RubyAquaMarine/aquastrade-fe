@@ -13,17 +13,12 @@ const SwapAMMV2 = ({ params }: any) => {
   return (
     <main className={styles.container}>
       {!address || (chain && chain.id !== CHAIN.id) ? (
-        <div className={styles.p_styled}>
-          <ul>
+        <div className="button_back">
+          <Link href="/">
             {" "}
-            <li>
-              <Link href="/">
-                {" "}
-                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
-                features)
-              </Link>
-            </li>
-          </ul>
+            <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+            features)
+          </Link>
         </div>
       ) : (
         <div>

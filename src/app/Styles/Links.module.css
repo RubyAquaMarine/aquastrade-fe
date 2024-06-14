@@ -503,27 +503,6 @@
   text-align: right;
 }
 
-/*
-trading ui 
-*/
-
-.tradeContainer {
-  background-color: #2b355c;
-  border-radius: 6px;
-  padding: 0.2rem 1rem;
-}
-
-/*
-cells rounded with padding to fit the cell around the text better
-margin top and bottom to center the cell within the nav etter
-*/
-
-.tradeContainerLight {
-  background-color: #475384;
-  border-radius: 6px;
-  padding: 0.2rem 1rem;
-}
-
 .tradeAvailAssets {
   position: static;
   min-width: 60px;

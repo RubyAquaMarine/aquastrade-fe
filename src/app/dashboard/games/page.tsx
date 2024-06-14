@@ -43,16 +43,12 @@ if the user doesn't have the network within the MM already, then switching doesn
 
       {!addr ? (
         <div>
-          <div className={styles.p_styled}>
-            <ul>
-              <li>
-                <Link href="/">
-                  {" "}
-                  <b>Back </b> (Connect to SKALE: Europa Liquidity Hub to unlock
-                  features)
-                </Link>
-              </li>
-            </ul>
+          <div className="button_back">
+            <Link href="/">
+              {" "}
+              <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+              features)
+            </Link>
           </div>
         </div>
       ) : (

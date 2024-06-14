@@ -67,16 +67,12 @@ const NFTBalance = () => {
           </div>
         </div>
       ) : (
-        <div>
-          <ul>
-            <li>
-              <Link href="/">
-                {" "}
-                <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
-                features)
-              </Link>
-            </li>
-          </ul>
+        <div className="button_back">
+          <Link href="/">
+            {" "}
+            <b>Back </b>(Connect to SKALE: Europa Liquidity Hub to unlock
+            features)
+          </Link>
         </div>
       )}
     </div>

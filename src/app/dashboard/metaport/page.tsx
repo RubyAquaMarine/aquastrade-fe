@@ -75,22 +75,6 @@ const Home = () => {
   return (
     <main className="flex flex-col items-center justify-between p-6">
       <div className="max-w-5xl  items-center justify-between font-mono text-sm lg:flex">
-        <div className={styles.container_sm}>
-          {" "}
-          Click{" "}
-          <span>
-            {" "}
-            <Image
-              className={styles.image_invert_center}
-              src={`/SKL.svg`}
-              alt="AquasTrade Logo outbound external links"
-              width={20}
-              height={20}
-            />{" "}
-          </span>{" "}
-          below to open Metaport bridge{" "}
-        </div>
-
         <div>
           <MetaportWidgetV2 />
         </div>
@@ -98,65 +82,96 @@ const Home = () => {
 
       <div className={styles.container}>
         <p>
-          <span>
-            {" "}
-            <DropdownMenu>
-              <DropdownMenuTrigger className={styles.text_style}>
-                Connected wallets:{" "}
-                {addresses ? addresses?.length.toString() : ""}
-              </DropdownMenuTrigger>
+          {chainName ? (
+            <span>
+              {" "}
+              <DropdownMenu>
+                <DropdownMenuTrigger className={styles.text_style}>
+                  Connected wallets:{" "}
+                  {addresses ? addresses?.length.toString() : ""}
+                </DropdownMenuTrigger>
 
-              <DropdownMenuContent className={styles.dropdown_bd}>
-                <DropdownMenuLabel>
-                  Switch wallets within{" "}
-                  {connectors?.length >= 1 && connectors?.[0]?.name}{" "}
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
+                <DropdownMenuContent className={styles.dropdown_bd}>
+                  <DropdownMenuLabel>
+                    Switch wallets within{" "}
+                    {connectors &&
+                      connectors?.length >= 1 &&
+                      connectors?.[0]?.name}{" "}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
 
-                {addresses &&
-                  addresses.map((wallet_address, index) => (
-                    <DropdownMenuItem key={index}>
-                      {" "}
-                      <button
-                        className={styles.text_style_bottom_sm}
-                        // @ts-ignore: Unreachable code error
-                      >
-                        {wallet_address}
-                      </button>
-                    </DropdownMenuItem>
-                  ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </span>{" "}
+                  {addresses &&
+                    addresses.map((wallet_address, index) => (
+                      <DropdownMenuItem key={index}>
+                        {" "}
+                        <button
+                          className={styles.text_style_bottom_sm}
+                          // @ts-ignore: Unreachable code error
+                        >
+                          {wallet_address}
+                        </button>
+                      </DropdownMenuItem>
+                    ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </span>
+          ) : (
+            <span> </span>
+          )}
         </p>
 
         <p className={styles.dropdown}>
-          {" "}
-          <span className={styles.text_style_bottom}>
-            {" "}
-            <Link
-              href={` https://etherscan.io/address/0x588801cA36558310D91234aFC2511502282b1621#writeProxyContract`}
-              target="_blank"
-            >
+          {chainName ? (
+            <span>
               {" "}
-              Top Up{" "}
-            </Link>{" "}
-          </span>
-          <span className={styles.container_sm}>
-            <span className={styles.amount_title}> L1 GasWallet: </span>
-            <span className={styles.amount_eth}> 0.005 </span>
-          </span>
+              <span className={styles.text_style_bottom}>
+                {" "}
+                <Link
+                  href={` https://etherscan.io/address/0x588801cA36558310D91234aFC2511502282b1621#writeProxyContract`}
+                  target="_blank"
+                >
+                  {" "}
+                  Top Up{" "}
+                </Link>{" "}
+              </span>
+              <span className={styles.container_sm}>
+                <span className={styles.amount_title}> L1 GasWallet: </span>
+                <span className={styles.amount_eth}> 0.005 </span>
+              </span>
+            </span>
+          ) : (
+            <span></span>
+          )}
+
           <span className={styles.container_sm}>
             {" "}
             <Link
               href={chain?.blockExplorers?.default.url + "/address/" + address}
               target="_blank"
             >
-              Connected to {chainName}
+              {chainName ? (
+                `Connected to  ${chainName}`
+              ) : (
+                <div className={styles.container_sm}>
+                  {" "}
+                  Click{" "}
+                  <span>
+                    {" "}
+                    <Image
+                      className={styles.image_invert_center}
+                      src={`/SKL.svg`}
+                      alt="AquasTrade Logo outbound external links"
+                      width={20}
+                      height={20}
+                    />{" "}
+                  </span>{" "}
+                  to connect
+                </div>
+              )}
             </Link>{" "}
           </span>
         </p>
-
+        {/** SKALE NETWORKS  */}
         <p className={styles.container_sm}>
           {" "}
           <span>
@@ -187,7 +202,7 @@ const Home = () => {
           </span>
         </p>
       </div>
-
+      {/** USER BALANCES  */}
       <div>
         {/* @ts-ignore: Unreachable code error*/}
         {assetArray &&
@@ -232,6 +247,8 @@ const Home = () => {
               {item.type == "ERC-721" ? <div>Type: {item.type}</div> : null}
             </div>
           ))}
+
+        {assetArray?.length == 0 ? "No Assets" : ""}
       </div>
     </main>
   );
