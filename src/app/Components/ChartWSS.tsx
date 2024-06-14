@@ -40,6 +40,8 @@ interface CandleConfig {
 }
 
 const Chart = (props: CandleConfig) => {
+  console.log("ChartWSS: Props", props);
+
   const ref = useRef();
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartProperties = {
@@ -75,16 +77,16 @@ const Chart = (props: CandleConfig) => {
       borderColor: "#222224",
     },
     layout: {
-      background: { color: "#181a1d" },
+      background: { color: "#0d0d10" },
 
       textColor: "#d9d9d9",
     },
     grid: {
       vertLines: {
-        color: "#181a1d",
+        color: "#0d0d10",
       },
       horzLines: {
-        color: "#181a1d",
+        color: "#0d0d10",
       },
     },
   };

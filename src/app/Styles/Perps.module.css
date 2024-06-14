@@ -112,7 +112,7 @@ Need two designs. flex : stacked
 }
 
 .tradeTF {
-  background-color: #181a1d;
+  background-color: #0d0d10;
 }
 
 .tradeContainer {
@@ -137,13 +137,13 @@ margin top and bottom to center the cell within the nav etter
 perps v1 : done
 */
 .tradeChart {
-  background-color: #181a1d;
+  background-color: #0d0d10;
   padding-bottom: 4px;
   padding-left: 14px;
 }
 
 .trade_input {
-  background-color: #181a1d;
+  background-color: #0d0d10;
   border: 2px solid #222224;
   min-width: 20px;
   max-width: 240px;
@@ -182,16 +182,16 @@ perps v1 : done
 }
 
 .tradeAvailAssetsPrice {
-  font-size: 44px;
+  font-size: 32px;
 }
 
 .tradeAvailAssetsPriceUp {
-  font-size: 48px;
+  font-size: 32px;
   color: #a6f86d;
 }
 
 .tradeAvailAssetsPriceDown {
-  font-size: 48px;
+  font-size: 32px;
   color: #ff5c66;
 }
 
