@@ -13,8 +13,7 @@
 }
 
 .connect_wallet:hover {
-  overflow-y: auto;
-  padding-left: 15px;
+  overflow-y: scroll;
 }
 
 .connect_wallet_logout {
