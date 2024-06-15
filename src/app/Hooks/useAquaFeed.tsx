@@ -10,6 +10,17 @@ const AQUAFEED = findContractInfo("aquafeed");
 
 const HELPER = findContractInfo("aquafeedhelper");
 
+export type DataFeedV = {
+  id: string;
+  pool: string;
+  pricePool: string;
+  pricePoolInverse: string;
+  priceFeed: string;
+  assets: string[];
+  quote: string;
+  base: string;
+};
+
 export const useAquaFeed = (functionName: string, args?: [any]) => {
   console.log("useAquaFeed Fetch ", functionName, args);
   const { data, isError, isLoading } = useReadContract({
