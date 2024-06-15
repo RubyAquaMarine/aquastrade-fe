@@ -38,14 +38,11 @@ const StockTicker = () => {
         {() => (
           <div className={styles.flex}>
             {stocks.map((stock, index) => (
-              <div
-                key={index}
-                style={{ margin: "0 20px", display: "inline-block" }}
-              >
+              <div key={index} className={styles.block}>
                 {/**  White text : green/red : grey (symbol :change : price) */}
 
-                <span>{stock?.symbol}: </span>
-                <span>{stock?.decimals}</span>
+                <span className={styles.tick_symbol}>{stock?.symbol}: </span>
+                <span className={styles.tick_price}>{stock?.decimals}</span>
               </div>
             ))}
           </div>
