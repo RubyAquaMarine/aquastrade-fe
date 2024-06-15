@@ -21,7 +21,7 @@ const ChartComponent: React.FC<{
   } = props;
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const CHART_WIDTH_OFFSET = 0;
-  const CHART_HEIGHT_OFFSET = 52; // removes the header height
+  const CHART_HEIGHT_OFFSET = 74; // removes the header height 52 for header :
 
   useLayoutEffect(() => {
     const handleResize = () => {
