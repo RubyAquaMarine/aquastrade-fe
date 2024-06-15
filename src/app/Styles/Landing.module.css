@@ -1,5 +1,12 @@
+/** reomve border on chart container*/
+.chart {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
 .tradingView {
   display: flex;
+  width: 100%;
 }
 /* 100% view window to prevent the chart scrol bar from activating*/
 .container_positioning {
@@ -13,11 +20,6 @@
   padding: 3rem;
   position: absolute;
   left: 0;
-}
-/** reomve border on chart container*/
-.chart {
-  overflow-y: hidden;
-  overflow-x: hidden;
 }
 
 .text_container {
@@ -43,3 +45,21 @@
   color: #d7de0a;
 }
 /** #29ff94; **/
+
+.footer {
+  height: 22px;
+  z-index: auto;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #141618;
+  border-top: 1px solid #475384;
+
+  color: aqua;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.flex {
+  display: flex;
+}

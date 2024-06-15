@@ -8,6 +8,8 @@ import styles from "./Styles/Landing.module.css";
 
 import SKL from "../../public/SKL.svg";
 
+import Footer from "@/app/Components/ai/Footer";
+
 // build static chart for homepage
 import ChartCandles from "@/app/api/binance";
 const ChartComponent = dynamic(() => import("@/app/Components/ChartStatic"), {

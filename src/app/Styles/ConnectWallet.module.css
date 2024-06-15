@@ -1,4 +1,4 @@
-/* smaller than min-width */
+/* Switch the css based on whether the user is connected to the wallet or */
 .connect_wallet {
   overflow-y: hidden;
   padding-top: 0.1rem;
@@ -14,6 +14,24 @@
 
 .connect_wallet:hover {
   overflow-y: scroll;
+  padding-left: 15px;
+}
+
+.connect_wallet_logout {
+  overflow-y: hidden;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  z-index: 1000;
+  border-radius: 2rem;
+  max-width: 280px;
+  max-height: 280px;
+  background-color: #141618;
+  border: 4px solid #475384;
+  box-shadow: rgba(255, 255, 255, 0.15) 5px 5px 15px 0px;
+}
+
+.connect_wallet_logout:hover {
+  overflow-y: hidden;
 }
 
 .telegram {
@@ -21,8 +39,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.6rem;
 }
 
 .spinner_container {
@@ -123,15 +140,16 @@
 }
 
 .text_connect {
-  padding-left: 6rem;
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
-
   font-size: 0.8rem;
   font-weight: 600;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
 }
 
 .text_border {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   border-bottom: 1px solid #202325;
 }

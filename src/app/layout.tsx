@@ -7,7 +7,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import Navbar from "@/app/Components/Navbar";
 import NavbarBottom from "./Components/navbarBottom";
-
+import Footer from "@/app/Components/ai/Footer";
 import HandleThemes from "./Components/HandleTheme";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,6 +28,7 @@ export default function RootLayout(props: { children: ReactNode }) {
           <Providers>
             <AppRouterCacheProvider>{props.children}</AppRouterCacheProvider>
           </Providers>
+          <Footer></Footer>
         </HandleThemes>
       </body>
     </html>

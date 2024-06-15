@@ -70,19 +70,9 @@ const ConnectWallet = () => {
   };
 
   return (
-    <div className={styles.connect_wallet}>
-      <span className={styles.text_border}>
-        {" "}
-        <span className={styles.text_connect}> Connect Wallet</span>{" "}
-      </span>
-
-      {!isConnected && status !== "idle" && (
-        <div className={styles.text_flex}>{message}</div>
-      )}
-
-      {/** Handle case where user is using an unknown EVM network */}
+    <div>
       {isConnected ? (
-        <div>
+        <div className={styles.connect_wallet_logout}>
           <span className={styles.telegram}>
             {" "}
             {chain && chain.id !== CHAIN.id ? (
@@ -121,7 +111,16 @@ const ConnectWallet = () => {
           </span>
         </div>
       ) : (
-        <div>
+        <div className={styles.connect_wallet}>
+          <span className={styles.text_border}>
+            {" "}
+            <span className={styles.text_connect}> Connect Wallet</span>{" "}
+          </span>
+
+          {!isConnected && status !== "idle" && (
+            <div className={styles.text_flex}>{message}</div>
+          )}
+
           {error && <div>Error: {error.message}</div>}
           <span className={styles.line}>
             {" "}
