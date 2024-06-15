@@ -45,38 +45,3 @@
   color: #d7de0a;
 }
 /** #29ff94; **/
-
-.footer {
-  height: 22px;
-  z-index: auto;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #141618;
-  border-top: 1px solid #5a80b4;
-
-  color: aqua;
-  font-size: 0.7rem;
-  font-weight: 500;
-}
-
-.flex {
-  display: flex;
-}
-
-.block {
-  display: inline-block;
-  margin-left: 1.3rem;
-  padding-top: 2px;
-}
-
-.tick_symbol {
-  color: aqua;
-  font-weight: 500;
-}
-
-.tick_price {
-  color: #5d5f60;
-  font-weight: 500;
-  padding-left: 4px;
-}

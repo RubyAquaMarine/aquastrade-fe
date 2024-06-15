@@ -1,8 +1,8 @@
 // components/Footer.js
 "use client";
 import React from "react";
-import StockTicker from "./StockTicker";
-import styles from "@/app/Styles/Landing.module.css";
+import StockTicker from "./StockTickerV";
+import styles from "@/app/Styles/StockTicker.module.css";
 const Footer = () => {
   return (
     <footer className={styles.footer}>

@@ -27,8 +27,8 @@ export default function RootLayout(props: { children: ReactNode }) {
           <Navbar />
           <Providers>
             <AppRouterCacheProvider>{props.children}</AppRouterCacheProvider>
+            <Footer></Footer>
           </Providers>
-          <Footer></Footer>
         </HandleThemes>
       </body>
     </html>

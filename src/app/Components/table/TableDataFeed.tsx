@@ -89,14 +89,6 @@ export default function TableDataFeed(dataFeed: any) {
     },
 
     {
-      header: "Base/Quote",
-      accessorKey: "pricePool",
-      cell: ({ row }: any) => {
-        const formatted = formatPrice(row.getValue("pricePool"));
-        return <div className="text-right font-medium">{formatted}</div>;
-      },
-    },
-    {
       header: "Quote/Base",
       accessorKey: "pricePoolInverse",
       cell: ({ row }: any) => {
@@ -104,6 +96,16 @@ export default function TableDataFeed(dataFeed: any) {
         return <div className="text-right font-medium">{formatted}</div>;
       },
     },
+
+    {
+      header: "Base/Quote",
+      accessorKey: "pricePool",
+      cell: ({ row }: any) => {
+        const formatted = formatPrice(row.getValue("pricePool"));
+        return <div className="text-right font-medium">{formatted}</div>;
+      },
+    },
+
     {
       header: "Oracle",
       accessorKey: "priceFeed",
