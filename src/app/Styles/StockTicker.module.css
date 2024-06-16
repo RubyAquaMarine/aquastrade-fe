@@ -7,7 +7,6 @@
   background-color: #141618;
   border-top: 1px solid #5a80b4;
   font-size: 0.8rem;
-  font-weight: 500;
 }
 
 .flex {
@@ -21,8 +20,9 @@
 }
 
 .tick_symbol {
-  color: #ffffff;
-  font-weight: 300;
+  font-family: sans-serif;
+  color: #93eee8;
+  font-weight: 600;
 }
 
 .tick_price {
@@ -30,7 +30,6 @@
   color: #848e9c;
   font-weight: 400;
   padding-left: 4px;
-  font-size: 0.8rem;
 }
 
 .tick_change {
