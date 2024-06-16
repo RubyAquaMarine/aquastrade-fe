@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { LoginButton } from "@telegram-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 import { FaSpinner } from "react-icons/fa6";
 import styles from "@/app/Styles/ConnectWallet.module.css";
@@ -126,14 +127,23 @@ const ConnectWallet = () => {
             {" "}
             <span className={styles.telegram}>
               {" "}
-              <LoginButton
-                botUsername={"AquasTradeBot" as string}
-                authCallbackUrl="/telegram"
-                buttonSize="medium" // "large" | "medium" | "small"
-                cornerRadius={12} // 0 - 20
-                showAvatar={true} // true | false
-                lang="en"
-              />
+              <Link
+                className={styles.button_kyc}
+                href="https://t.me/AquasTradeBot"
+                target="_blank"
+              >
+                <span className="image_invert">
+                  {" "}
+                  <Image
+                    src="/telegram.svg"
+                    alt="menu"
+                    width={22}
+                    height={22}
+                    priority
+                  />
+                </span>
+                <span> Login with Telegram</span>
+              </Link>
             </span>
             <span className={styles.telegram}>
               {uniqueList.map((connector) => (

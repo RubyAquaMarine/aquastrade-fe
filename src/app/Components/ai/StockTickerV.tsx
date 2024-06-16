@@ -13,15 +13,12 @@ import { findTokenFromAddress, findContractInfo } from "@/app/Utils/findTokens";
 import { formatPriceBigToHuman } from "@/app/Utils/utils";
 
 const StockTicker = () => {
-  const [stocks, setStocks] = useState([]);
-
-  const [tableData, setTableData] = useState<DataFeedV[]>();
+  const [stocks, setStocks] = useState<DataFeedV[]>();
 
   const objectFeeds: any = useAquaFeed("consumeFeeds")?.data;
 
   useEffect(() => {
     if (objectFeeds && objectFeeds?.length > 1) {
-      setTableData(objectFeeds);
       setStocks(objectFeeds);
       console.log(" Render useEffect(() | TICKERS ", objectFeeds);
     }

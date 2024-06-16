@@ -148,3 +148,25 @@
   text-align: center;
   border-bottom: 1px solid #202325;
 }
+
+.button_kyc {
+  display: flex;
+  justify-content: space-between;
+
+  height: 44px;
+  min-width: 100px;
+
+  font-size: 0.9rem;
+  border-radius: 12px;
+
+  background-color: #2196f3;
+  margin-top: 0.2rem;
+
+  padding-top: 0.7rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.button_kyc:hover {
+  background-color: #007bff;
+}
