@@ -65,7 +65,7 @@ export const contractAddresses = [
   {
     id: 8,
     name: "memecreator",
-    address: "0xbcc547797C52f798de4abA3542Ce6e559613866c",
+    address: "0x8EE33944408Fe088f5d67D403fFe47f83B9d0cC5",
   },
 
   {
