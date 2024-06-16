@@ -142,7 +142,7 @@ const ConnectWallet = () => {
                     priority
                   />
                 </span>
-                <span> Login with Telegram</span>
+                <span> Trade via Telegram</span>
               </Link>
             </span>
             <span className={styles.telegram}>
