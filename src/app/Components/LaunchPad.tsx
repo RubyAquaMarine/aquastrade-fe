@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import React, { useState, ChangeEvent, useEffect, useRef } from "react";
 import { ToastContainer, Slide, toast } from "react-toastify";
@@ -7,11 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   useAccount,
   useWriteContract,
-  useBlock,
   useWaitForTransactionReceipt,
   useSwitchChain,
 } from "wagmi";
-import { formatUnits, parseUnits } from "viem";
+
 import { CHAIN } from "@/app/Utils/config";
 import { findContractInfo } from "@/app//Utils/findTokens";
 
@@ -27,7 +25,6 @@ export interface Amount {
 }
 
 const LaunchPad: React.FC = () => {
-
   const [tokenSymbol, setTokenSymbol] = useState<string>("");
 
   const [tokenName, setTokenName] = useState<string>("");
@@ -72,20 +69,15 @@ const LaunchPad: React.FC = () => {
       tokenSymbol,
       tokenDecimal,
       tokenMax,
-      contractMemeCreator?.address
+      contractMemeCreator?.address,
     );
 
-    // console.log(" Deploy Token with CA: ", contractMemeCreator?.address);
-    // const amount = parseUnits(tokenMax.toString(), tokenDecimal)
-    // console.log(" AMount : ", amount , typeof amount);
-    // Input is HUMAN ETHER VALUE , and in the SC will be converted to BigInt ** 18 
     writeContract({
       abi: MEME_CREATOR_ABI,
       address: contractMemeCreator.address,
       functionName: "deployToken",
-      args: [tokenName, tokenSymbol, tokenDecimal, tokenMax]
+      args: [tokenName, tokenSymbol, tokenDecimal, BigInt(tokenMax)], // Input is HUMAN ETHER VALUE , and in the SC will be converted to BigInt ** 18
     });
-
   };
 
   const handleToEuropa = (
@@ -105,7 +97,7 @@ const LaunchPad: React.FC = () => {
 
   return (
     <div>
-      {address && chain && chain.id === CHAIN.id ? (
+      {isConnected && address && chain && chain.id === CHAIN.id ? (
         <div>
           {" "}
           <div className={styles.container_flex}>
