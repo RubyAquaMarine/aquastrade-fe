@@ -18,8 +18,6 @@ import { findContractInfo } from "@/app//Utils/findTokens";
 import { MEME_CREATOR_ABI } from "@/app/Abi/memeCreator";
 import styles from "@/app/Styles/LaunchPad.module.css";
 
-import { findTokenAddressFromSymbol } from "@/app/Utils/findTokens";
-
 export interface Wallet {
   wallet?: `0x${string}`;
 }
@@ -29,14 +27,14 @@ export interface Amount {
 }
 
 const LaunchPad: React.FC = () => {
-  // enter symbol to get token address
-  const [tokenSymbol, setTokenSymbol] = useState("");
 
-  const [tokenName, setTokenName] = useState("");
+  const [tokenSymbol, setTokenSymbol] = useState<string>("");
 
-  const [tokenDecimal, setTokenDecimal] = useState(18);
+  const [tokenName, setTokenName] = useState<string>("");
 
-  const [tokenMax, setTokenMax] = useState(8000000000);
+  const [tokenDecimal, setTokenDecimal] = useState<number>(18);
+
+  const [tokenMax, setTokenMax] = useState<number>(1000000000);
 
   //wagmi
   const { address, isConnected, chain } = useAccount();
@@ -49,7 +47,7 @@ const LaunchPad: React.FC = () => {
   const contractMemeCreator = findContractInfo("memecreator");
 
   const notify = () =>
-    toast.success(`Token Created ${tokenSymbol} from 🌊 AquasTrade!`, {
+    toast.success(`Token Created ${tokenSymbol} on 🌊 AquasTrade!`, {
       position: "bottom-left",
       autoClose: 4000,
       hideProgressBar: false,
@@ -74,16 +72,20 @@ const LaunchPad: React.FC = () => {
       tokenSymbol,
       tokenDecimal,
       tokenMax,
+      contractMemeCreator?.address
     );
 
-    console.log(" Deploy Token with CA: ", contractMemeCreator?.address);
-
+    // console.log(" Deploy Token with CA: ", contractMemeCreator?.address);
+    // const amount = parseUnits(tokenMax.toString(), tokenDecimal)
+    // console.log(" AMount : ", amount , typeof amount);
+    // Input is HUMAN ETHER VALUE , and in the SC will be converted to BigInt ** 18 
     writeContract({
       abi: MEME_CREATOR_ABI,
-      address: contractMemeCreator?.address,
+      address: contractMemeCreator.address,
       functionName: "deployToken",
-      args: [tokenName, tokenSymbol, BigInt(tokenDecimal), BigInt(tokenMax)],
+      args: [tokenName, tokenSymbol, tokenDecimal, tokenMax]
     });
+
   };
 
   const handleToEuropa = (
@@ -141,7 +143,8 @@ const LaunchPad: React.FC = () => {
           <input
             type="number"
             value={tokenMax}
-            onChange={(e) => setTokenMax(e.target.value)}
+            min={100000}
+            onChange={(e) => setTokenMax(Number(e.target.value))}
             className={styles.input_token_address}
           />
           {tokenSymbol && tokenMax && tokenDecimal && tokenName ? (
