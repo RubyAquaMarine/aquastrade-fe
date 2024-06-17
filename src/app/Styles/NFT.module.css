@@ -40,12 +40,8 @@
 .container {
   width: auto;
   border-radius: 12px;
-  border: 4px solid #12194978;
-  background-image: linear-gradient(
-    to top,
-    rgba(10, 14, 39, 0.47),
-    transparent
-  );
+  border: 4px solid #181a1d;
+  background-image: linear-gradient(to top, #181a1d, transparent);
 }
 
 .container_text {
@@ -70,9 +66,10 @@
   border-radius: 12px;
   padding: 1rem 1rem;
   margin: 1rem;
-  background-color: #040404;
-  border: 1px solid #d7de0a;
+  background-color: #242629;
+  border: 4px solid #475384;
   max-width: 350px;
+  box-shadow: 10px 15px 12px rgba(34, 40, 156, 0.1);
 }
 
 .text_title_nft {
@@ -108,6 +105,7 @@
 }
 
 .text_grey {
+  padding: 0.2rem 0.3rem;
   border: rounded;
   color: rgb(194, 187, 187);
   border-radius: 6px;
@@ -116,11 +114,16 @@
 }
 
 .text_white {
+  padding: 0.2rem 0.3rem;
   border: rounded;
   color: floralwhite;
   border-radius: 6px;
   text-align: center;
   font-size: 0.9rem;
+}
+
+.button_padding {
+  padding: 1.2rem 0.3rem;
 }
 
 .image_align {
@@ -129,6 +132,7 @@
   box-sizing: border-box;
   width: auto;
   max-width: 100%;
+  box-shadow: 10px 10px 12px rgba(114, 116, 136, 0.1);
 }
 
 .balance {
@@ -156,7 +160,7 @@
     transparent
   );
   padding-bottom: 6px;
-  padding-top: 8px;
+  padding-top: 1rem;
   padding-right: 6px;
   padding-left: 12px;
 }

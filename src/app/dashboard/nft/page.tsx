@@ -310,7 +310,7 @@ const Home = () => {
                       </span>{" "}
                     </li>
 
-                    <li>
+                    <li className={styles.button_padding}>
                       {allowancesTest.current &&
                       BigInt(allowancesTest.current) >=
                         BigInt(allowance[index]) ? (

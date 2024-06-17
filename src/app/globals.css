@@ -73,7 +73,6 @@ body::-webkit-scrollbar {
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 0.3rem;
-    box-shadow: 10px 15px 12px rgba(34, 40, 156, 0.1);
   }
   .button_back:hover {
     background-color: #007bff;

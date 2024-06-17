@@ -16,12 +16,35 @@ Clickable text: links
 - hover effect with `border-radius: 12px; `
 - `padding: 0.2rem 0.3rem;` and largest `padding: 0.5rem;`
 
+# text
+
+.text_highlight {
+color: #d7de0a;
+}
+
+# layout
+
+layout bg:darkest: 0d0d10
+
 # AMM
 
-bg-container-main : 181a1d
-bg-container-darker : 141618
+new design
+background-color: #141618;
+border: 0.1rem solid #242629;
 
-bg-inputs : 242629
+bg-container-main : 181a1d : border : #475384;
+bg-container-darker : 141618 : border : #475384;
+
+bg-inputs |nav-bg grey : 242629
+text-grey: bdb8b8  
+border : #475384;
+
 button-inside-inputs : 181a1d
 
 feature-selected : 475384
+
+amm grey : bdb8b8
+over-view-grey : b4b0b0
+ticker-grey:darker : 848e9c
+
+#0a0e2778,

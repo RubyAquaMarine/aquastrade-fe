@@ -13,6 +13,14 @@ hover - and Fixed Buttons
 Need two designs. flex : stacked 
 1080 min-width vs max-width 600px (mobile)
 */
+
+.chart {
+  display: flex;
+
+  justify-content: flex-start;
+  resize: both;
+}
+
 .panel_center {
   border: #a6f86d;
 }
@@ -236,6 +244,7 @@ cells  not used yet */
   min-width: 50px;
   max-width: 130px;
   text-align: center;
+  box-shadow: 0 2px 14px #a6f86d;
   /* Ensuring the container has a defined height for vertical alignment */
 }
 
@@ -254,6 +263,7 @@ cells  not used yet */
   min-width: 50px;
   max-width: 130px;
   text-align: center;
+  box-shadow: 0 2px 14px #ff5c66;
   /* Ensuring the container has a defined height for vertical alignment */
 }
 

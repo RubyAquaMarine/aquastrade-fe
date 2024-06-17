@@ -1,6 +1,7 @@
+/** Orignally used with a razor oracle feeds  */
 .footer {
   background-color: #0d0d10;
-  color: white;
+  color: #fffaf0;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
