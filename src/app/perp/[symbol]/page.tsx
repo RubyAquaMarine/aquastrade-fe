@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation"; // for client side
 
+import { CenterPanel } from "@/app/Components/perp/CenterPanel";
+
 import WebSocketConnection from "@/app/Components/WebSocketConnection";
 import { getWebSocket } from "@/app/Utils/web-socket";
 import Chart from "@/app/Components/ChartWSS";
@@ -160,7 +162,7 @@ const Home = ({ children, params }: any) => {
           </ul>
           {/** Note: render chart : load historical data: connect ws:  */}
           {dataIs.current?.E ? (
-            <div id="wow-chart">
+            <div id="wow-chart" className={styles.chart}>
               <Chart
                 props={[
                   dataIs.current?.s,
@@ -189,88 +191,7 @@ const Home = ({ children, params }: any) => {
             <span className={styles.tradeTF}> H12</span>
           </span>
           {/** this is kinda of a mess :  */}
-          <ul className={styles.panel_trading}>
-            <li>| Column |</li>
-            <li>| Column |</li>
-
-            <li className={styles.tradeButtonSell}>
-              <button>Sell</button>
-            </li>
-            {/** Recode  */}
-            {/** Note: This should maintain center viewport  */}
-            <li className={styles.panel_center}>
-              {" "}
-              {inputs.map((value, index) => (
-                <div key={index} className="mb-4">
-                  <p>
-                    <span> {`${desctwo[index]}`} </span>
-
-                    {desctwo[index] === "PAY" ? (
-                      <span className={styles.panel_balance}>
-                        <Link href={`/user/${address}`}>
-                          {" "}
-                          {/* add balance input here */} Balance: $94.0493{" "}
-                        </Link>
-                        <span className={styles.panel_text}>
-                          {" "}
-                          <button type="button">Deposit</button>{" "}
-                          <button type="button">Withdraw</button>
-                        </span>
-                      </span>
-                    ) : (
-                      <span></span>
-                    )}
-                  </p>
-
-                  <p>
-                    {" "}
-                    {desctwo[index] === "POSITION" ? (
-                      <span className={styles.panel_position}>
-                        <Link href={`/user/${address}`}>
-                          {" "}
-                          {/* add liq price input here */} Liq Price: 0.23 |
-                          0.08{" "}
-                        </Link>
-                        <span className={styles.panel_order_type}>
-                          {" "}
-                          <button type="button">Limit</button>{" "}
-                          <button type="button">Stop</button>
-                          <button type="button">TP</button>
-                          <button type="button">SL</button>
-                        </span>
-                      </span>
-                    ) : (
-                      <span></span>
-                    )}
-                  </p>
-
-                  {desctwo[index] === "PAY" ? (
-                    <span>
-                      <input
-                        className={styles.trade_input}
-                        type="text"
-                        value={getInputValue(index)} // Call a function to get the appropriate value
-                        onChange={(e) =>
-                          handleInputChange(index, e.target.value)
-                        }
-                        placeholder={` Enter USD Amount ${desc[index]}`}
-                      />
-                    </span>
-                  ) : (
-                    <span></span>
-                  )}
-                </div>
-              ))}
-            </li>
-            {/** Note: This should maintain center viewport  */}
-
-            <li className={styles.tradeButtonBuy}>
-              <button>Buy</button>
-            </li>
-
-            <li></li>
-            <li></li>
-          </ul>
+          <CenterPanel {...{ data: "ok" }}></CenterPanel>
         </div>
       )}
     </main>

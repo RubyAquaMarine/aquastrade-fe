@@ -1,3 +1,8 @@
+/** inspired by CEX
+
+#5a80b4;
+#475384;
+*/
 .footer {
   height: 22px;
   z-index: auto;
@@ -5,7 +10,7 @@
   bottom: 0;
   width: 100%;
   background-color: #141618;
-  border-top: 1px solid #5a80b4;
+  border-top: 1px solid #475384;
   font-size: 0.8rem;
 }
 
@@ -27,7 +32,7 @@
 
 .tick_price {
   font-family: sans-serif;
-  color: #848e9c;
+  color: #bdb8b8;
   font-weight: 400;
   padding-left: 4px;
 }

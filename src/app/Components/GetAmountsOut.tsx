@@ -43,7 +43,7 @@ const GetAmountsOut = (params: Props) => {
   }, [swap_out]);
   // Handles Multihop outputs
   return (
-    <div>
+    <>
       {amount_out.length === 0 ? (
         <input
           className={styles.input_amount}
@@ -69,7 +69,7 @@ const GetAmountsOut = (params: Props) => {
           />
         )
       )}
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,8 @@
 .input_amount {
-  max-width: 9rem;
-  display: flex;
-  margin-right: 2px;
+  font-size: 1.6rem;
+  max-width: 200px;
+  overflow-x: hidden;
+  margin-right: 5px;
   padding: 0.2rem 0.8rem;
   color: #f4f4f4;
   background-color: #242629;

@@ -3,6 +3,10 @@
 - Did abi change?
 - did data types change?
 
+# add Liq
+
+- tokenB approval amount not correct
+
 # buttons
 
 <button type="button"> - fixed the issue : didn't fix the issue on in Wallet broswers

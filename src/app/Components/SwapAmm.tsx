@@ -571,16 +571,16 @@ const SwapAmm = () => {
       {ammFeature === "swap" && tradeFeature === "swap" ? (
         <div>
           <div className={styles.container_wrap}>
-            {" "}
-            <span className={styles.input_box}>
-              <input
-                className={styles.input_amount}
-                type="text"
-                placeholder="Input Amount"
-                value={amountA}
-                onChange={(e) => filterStringInput(e.target.value, 8)}
-              />
-              <span className={styles.box_space}>
+            <div className={styles.input_container}>
+              <span className={styles.input_box}>
+                <input
+                  className={styles.input_amount}
+                  type="text"
+                  placeholder="Input Amount"
+                  value={amountA}
+                  onChange={(e) => filterStringInput(e.target.value, 8)}
+                />
+
                 <input
                   className={styles.input_symbol}
                   type="text"
@@ -590,180 +590,16 @@ const SwapAmm = () => {
                   onClick={() => setShowTokenListA(true)}
                 />
               </span>
-            </span>
-            {showTokenListA && walletTokenList && tokenAddresses?.length > 0 ? (
-              <div className={styles_pop.popup_container}>
-                <div className={styles_pop.popup_content}>
-                  {tokenAddresses.map((_token, index) => (
-                    <div
-                      className={styles.token_list_symbol}
-                      key={index}
-                      onClick={() => handleTokenSelectionA(_token.symbol)}
-                    >
-                      {_token.symbol} {"  "}
-                      <Image
-                        className={styles.token_list_symbol_space}
-                        src={_token.logo}
-                        alt="Aquas.Trade Crypto Assets On SKALE Network"
-                        width={18}
-                        height={18}
-                      />
-                      {"  "}{" "}
-                      {walletTokenList.map((_balance, index) => (
-                        <span key={index} className={styles.amount_balance}>
-                          {" "}
-                          {_balance.contractAddress.toUpperCase() ===
-                            _token.address.toUpperCase() &&
-                            parseFloat(
-                              formatUnits(
-                                _balance.balance,
-                                Number(_balance.decimals),
-                              ),
-                            ).toFixed(8)}
-                        </span>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <span></span>
-            )}
-            <span className={styles.container_margin}>
-              <span className={styles.text_space_right_12}>
-                <span className={styles.button_field_xs}>
-                  <button
-                    type="button"
-                    onTouchStart={() => handleGetMaxAmount(3)}
-                    onClick={() => handleGetMaxAmount(3)}
-                  >
-                    10%
-                  </button>
-                </span>{" "}
-                <span className={styles.button_field_xs}>
-                  <button
-                    type="button"
-                    onTouchStart={() => handleGetMaxAmount(0)}
-                    onClick={() => handleGetMaxAmount(0)}
-                  >
-                    25%
-                  </button>
-                </span>{" "}
-                <span className={styles.button_field_xs}>
-                  <button
-                    type="button"
-                    onTouchStart={() => handleGetMaxAmount(1)}
-                    onClick={() => handleGetMaxAmount(1)}
-                  >
-                    50%
-                  </button>
-                </span>{" "}
-                <span className={styles.button_field_xs}>
-                  <button
-                    type="button"
-                    onTouchStart={() => handleGetMaxAmount(2)}
-                    onClick={() => handleGetMaxAmount(2)}
-                  >
-                    Wallet balance
-                  </button>
-                </span>
-              </span>
-
-              <span ref={divRef} className={styles.container_token_balance}>
-                {tokenAAddress.current !== "" &&
-                  walletTokenList.map((_balance, index) => (
-                    <span key={index} className={styles.amount_balance}>
-                      {" "}
-                      {_balance.contractAddress.toUpperCase() ===
-                        tokenAAddress.current.toUpperCase() &&
-                        parseFloat(
-                          formatUnits(
-                            _balance.balance,
-                            Number(_balance.decimals),
-                          ),
-                        ).toFixed(8)}
-                    </span>
-                  ))}
-              </span>
-            </span>
-            <span className={styles.text_center}> Approved: </span>
-            {address &&
-            amountA &&
-            tokenAAddress.current &&
-            tokenADecimal.current ? (
-              <TokenApproveProps
-                {...{
-                  name: "allowance",
-                  address: tokenAAddress.current,
-                  approve: parseUnits(amountA, Number(tokenADecimal?.current)),
-                  args: [address, ROUTER_AQUADEX],
-                }}
-              ></TokenApproveProps>
-            ) : (
-              <span className={styles.text_center}> error </span>
-            )}
-          </div>
-
-          {!showTokenListA && !showTokenListB ? (
-            <span className={styles.button_container_sm}>
-              <Image
-                src="/flip.svg"
-                alt="menu"
-                width={30}
-                height={30}
-                className={styles.imageInvertToggle_sm}
-                onClick={handleFlipTokens}
-              />
-            </span>
-          ) : (
-            <span></span>
-          )}
-          {/** input_container : has no color : input_box has  background-color: #242629;
-           * box_space : no color
-           *
-           *
-           */}
-          <div className={styles.input_container}>
-            <span className={styles.input_box}>
-              {swap_path !== [""] && amountA !== "0.0" ? (
-                <GetAmountsOut
-                  props={[
-                    amountA,
-                    swap_path,
-                    feeNFT.current,
-                    tokenADecimal.current,
-                    tokenBDecimal.current,
-                  ]}
-                ></GetAmountsOut>
-              ) : (
-                <input
-                  className={styles.input_amount}
-                  type="text"
-                  placeholder="0.0"
-                  value={"0.0"}
-                />
-              )}
-
-              <span className={styles.box_space}>
-                {" "}
-                <input
-                  className={styles.input_symbol}
-                  type="text"
-                  placeholder="Select Token"
-                  value={tokenB}
-                  onChange={(e) => setTokenB(e.target.value)}
-                  onClick={() => setShowTokenListB(true)}
-                />
-              </span>
-
-              {showTokenListB && tokenAddresses?.length > 0 ? (
-                <span className={styles_pop.popup_container}>
-                  <span className={styles_pop.popup_content}>
+              {showTokenListA &&
+              walletTokenList &&
+              tokenAddresses?.length > 0 ? (
+                <div className={styles_pop.popup_container}>
+                  <div className={styles_pop.popup_content}>
                     {tokenAddresses.map((_token, index) => (
-                      <span
+                      <div
                         className={styles.token_list_symbol}
                         key={index}
-                        onClick={() => handleTokenSelectionB(_token.symbol)}
+                        onClick={() => handleTokenSelectionA(_token.symbol)}
                       >
                         {_token.symbol} {"  "}
                         <Image
@@ -787,14 +623,180 @@ const SwapAmm = () => {
                               ).toFixed(8)}
                           </span>
                         ))}
-                      </span>
+                      </div>
                     ))}
-                  </span>
-                </span>
+                  </div>
+                </div>
               ) : (
                 <span></span>
               )}
+              <p className={styles.container_margin}>
+                <span className={styles.text_space_right_12}>
+                  <span className={styles.button_field_xs}>
+                    <button
+                      type="button"
+                      onTouchStart={() => handleGetMaxAmount(3)}
+                      onClick={() => handleGetMaxAmount(3)}
+                    >
+                      10%
+                    </button>
+                  </span>{" "}
+                  <span className={styles.button_field_xs}>
+                    <button
+                      type="button"
+                      onTouchStart={() => handleGetMaxAmount(0)}
+                      onClick={() => handleGetMaxAmount(0)}
+                    >
+                      25%
+                    </button>
+                  </span>{" "}
+                  <span className={styles.button_field_xs}>
+                    <button
+                      type="button"
+                      onTouchStart={() => handleGetMaxAmount(1)}
+                      onClick={() => handleGetMaxAmount(1)}
+                    >
+                      50%
+                    </button>
+                  </span>{" "}
+                  <span className={styles.button_field_xs}>
+                    <button
+                      type="button"
+                      onTouchStart={() => handleGetMaxAmount(2)}
+                      onClick={() => handleGetMaxAmount(2)}
+                    >
+                      Wallet balance
+                    </button>
+                  </span>
+                </span>
+
+                <span ref={divRef} className={styles.container_token_balance}>
+                  {tokenAAddress.current !== "" &&
+                    walletTokenList.map((_balance, index) => (
+                      <span key={index} className={styles.amount_balance}>
+                        {" "}
+                        {_balance.contractAddress.toUpperCase() ===
+                          tokenAAddress.current.toUpperCase() &&
+                          parseFloat(
+                            formatUnits(
+                              _balance.balance,
+                              Number(_balance.decimals),
+                            ),
+                          ).toFixed(8)}
+                      </span>
+                    ))}
+                </span>
+              </p>
+              <span className={styles.text_center}> Approved: </span>
+              {address &&
+              amountA &&
+              tokenAAddress.current &&
+              tokenADecimal.current ? (
+                <TokenApproveProps
+                  {...{
+                    name: "allowance",
+                    address: tokenAAddress.current,
+                    approve: parseUnits(
+                      amountA,
+                      Number(tokenADecimal?.current),
+                    ),
+                    args: [address, ROUTER_AQUADEX],
+                  }}
+                ></TokenApproveProps>
+              ) : (
+                <span className={styles.text_center}> error </span>
+              )}
+            </div>
+          </div>
+          {!showTokenListA && !showTokenListB ? (
+            <span className={styles.button_container_sm}>
+              <Image
+                src="/flip.svg"
+                alt="menu"
+                width={30}
+                height={30}
+                className={styles.imageInvertToggle_sm}
+                onClick={handleFlipTokens}
+              />
             </span>
+          ) : (
+            <span></span>
+          )}
+          {/** input_container : has no color : input_box has  background-color: #242629;
+           * box_space : no color
+           *
+           *
+           */}
+
+          <div className={styles.container_wrap}>
+            <div className={styles.input_container}>
+              <span className={styles.input_box}>
+                {swap_path !== [""] && amountA !== "0.0" ? (
+                  <GetAmountsOut
+                    props={[
+                      amountA,
+                      swap_path,
+                      feeNFT.current,
+                      tokenADecimal.current,
+                      tokenBDecimal.current,
+                    ]}
+                  ></GetAmountsOut>
+                ) : (
+                  <input
+                    className={styles.input_amount}
+                    type="text"
+                    placeholder="0.0"
+                    value={"0.0"}
+                  />
+                )}{" "}
+                <input
+                  className={styles.input_symbol}
+                  type="text"
+                  placeholder="Select Token"
+                  value={tokenB}
+                  onChange={(e) => setTokenB(e.target.value)}
+                  onClick={() => setShowTokenListB(true)}
+                />
+                {showTokenListB && tokenAddresses?.length > 0 ? (
+                  <span className={styles_pop.popup_container}>
+                    <span className={styles_pop.popup_content}>
+                      {tokenAddresses.map((_token, index) => (
+                        <span
+                          className={styles.token_list_symbol}
+                          key={index}
+                          onClick={() => handleTokenSelectionB(_token.symbol)}
+                        >
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
+                          {"  "}{" "}
+                          {walletTokenList.map((_balance, index) => (
+                            <span key={index} className={styles.amount_balance}>
+                              {" "}
+                              {_balance.contractAddress.toUpperCase() ===
+                                _token.address.toUpperCase() &&
+                                parseFloat(
+                                  formatUnits(
+                                    _balance.balance,
+                                    Number(_balance.decimals),
+                                  ),
+                                ).toFixed(8)}
+                            </span>
+                          ))}
+                        </span>
+                      ))}
+                    </span>
+                  </span>
+                ) : (
+                  <span></span>
+                )}
+              </span>
+            </div>
           </div>
           {/**  Swap and Approve button  */}
           <span className={styles.button_container}>
@@ -1264,78 +1266,167 @@ const SwapAmm = () => {
       )}
 
       {ammFeature === "remove" ? (
-        <div>
+        <div className={styles.container_wrap}>
           {" "}
           <div className={styles.input_container_sm}>
+            <span className={styles.text_space_left_sm}> Find AMM Pool </span>{" "}
+            <span className={styles.text_space_right_1}>
+              LP: {poolAddress ? poolAddress : " Pool not found"}
+            </span>
+            {/** TOKEN A AND TOKEN B SELECTOR  */}
+            <div className={styles.input_container}>
+              <div className={styles.input_box}>
+                <span className={styles.box_space_center}>
+                  <input
+                    className={styles.input_symbol}
+                    type="text"
+                    placeholder="Select Token"
+                    value={tokenA}
+                    onChange={(e) => setTokenA(e.target.value)}
+                    onClick={() => setShowTokenListA(true)}
+                  />
+                </span>
+
+                <span>
+                  {" "}
+                  {!showTokenListA && !showTokenListB ? (
+                    <Image
+                      src="/plus.svg"
+                      alt="menu"
+                      width={30}
+                      height={30}
+                      className={styles.image_invert}
+                    />
+                  ) : (
+                    <div></div>
+                  )}
+                </span>
+
+                <span className={styles.box_space}>
+                  <input
+                    className={styles.input_symbol}
+                    type="text"
+                    placeholder="Select Token"
+                    value={tokenB}
+                    onChange={(e) => setTokenB(e.target.value)}
+                    onClick={() => setShowTokenListB(true)}
+                  />
+                </span>
+
+                {showTokenListB && tokenAddresses?.length > 0 ? (
+                  <div className={styles_pop.popup_container}>
+                    <div className={styles_pop.popup_content}>
+                      {tokenAddresses.map((_token, index) => (
+                        <div
+                          className={styles.token_list_symbol}
+                          key={index}
+                          onClick={() => handleTokenSelectionB(_token.symbol)}
+                        >
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
+                          {"  "}{" "}
+                          {walletTokenList.map((_balance, index) => (
+                            <span key={index} className={styles.amount_balance}>
+                              {" "}
+                              {_balance.contractAddress.toUpperCase() ===
+                                _token.address.toUpperCase() &&
+                                parseFloat(
+                                  formatUnits(
+                                    _balance.balance,
+                                    Number(_balance.decimals),
+                                  ),
+                                ).toFixed(8)}
+                            </span>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <span></span>
+                )}
+              </div>
+            </div>
             <span className={styles.text_space_left_sm}>
               {" "}
               Select Percentage{" "}
             </span>{" "}
-            <span className={styles.text_space_left}> Select Token A </span>
-            <div className={styles.input_box}>
-              <input
-                className={styles.input_amount}
-                type="number"
-                placeholder="100"
-                min={1}
-                step={1}
-                max={100}
-                value={amountLPRemove}
-                onChange={(e) => setAmountLPRemove(Number(e.target.value))}
-              />
-              <span className={styles.box_space_xl}>
-                <input
-                  className={styles.input_symbol}
-                  type="text"
-                  placeholder="Select Token"
-                  value={tokenA}
-                  onChange={(e) => setTokenA(e.target.value)}
-                  onClick={() => setShowTokenListA(true)}
-                />
-              </span>
+            <div className={styles.input_container}>
+              <div className={styles.input_box}>
+                <span className={styles.box_space}>
+                  {" "}
+                  <input
+                    className={styles.input_amount}
+                    type="number"
+                    placeholder="100"
+                    min={1}
+                    step={1}
+                    max={100}
+                    value={amountLPRemove}
+                    onChange={(e) => setAmountLPRemove(Number(e.target.value))}
+                  />{" "}
+                </span>
 
-              {showTokenListA && tokenAddresses?.length > 0 ? (
-                <div className={styles_pop.popup_container}>
-                  <div className={styles_pop.popup_content}>
-                    {tokenAddresses.map((_token, index) => (
-                      <div
-                        className={styles.token_list_symbol}
-                        key={index}
-                        onClick={() => handleTokenSelectionA(_token.symbol)}
-                      >
-                        {_token.symbol} {"  "}
-                        <Image
-                          className={styles.token_list_symbol_space}
-                          src={_token.logo}
-                          alt="Aquas.Trade Crypto Assets On SKALE Network"
-                          width={18}
-                          height={18}
-                        />
-                        {"  "}{" "}
-                        {walletTokenList.map((_balance, index) => (
-                          <span key={index} className={styles.amount_balance}>
-                            {" "}
-                            {_balance.contractAddress.toUpperCase() ===
-                              _token.address.toUpperCase() &&
-                              formatUnits(
-                                _balance.balance,
-                                Number(_balance.decimals),
-                              )}
-                          </span>
-                        ))}
-                      </div>
-                    ))}
+                <span className={styles.box_space}>
+                  {address && poolAddress && amountLP ? (
+                    <TokenApproveProps
+                      {...{
+                        name: "allowance",
+                        address: poolAddress,
+                        approve: amountLP,
+                        args: [address, ROUTER_AQUADEX],
+                      }}
+                    ></TokenApproveProps>
+                  ) : (
+                    <span className={styles.text_center}> error </span>
+                  )}
+                </span>
+
+                {showTokenListA && tokenAddresses?.length > 0 ? (
+                  <div className={styles_pop.popup_container}>
+                    <div className={styles_pop.popup_content}>
+                      {tokenAddresses.map((_token, index) => (
+                        <div
+                          className={styles.token_list_symbol}
+                          key={index}
+                          onClick={() => handleTokenSelectionA(_token.symbol)}
+                        >
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
+                          {"  "}{" "}
+                          {walletTokenList.map((_balance, index) => (
+                            <span key={index} className={styles.amount_balance}>
+                              {" "}
+                              {_balance.contractAddress.toUpperCase() ===
+                                _token.address.toUpperCase() &&
+                                formatUnits(
+                                  _balance.balance,
+                                  Number(_balance.decimals),
+                                )}
+                            </span>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <span></span>
-              )}
+                ) : (
+                  <span></span>
+                )}
+              </div>
             </div>
             <p className={styles.container_margin}>
-              <span className={styles.text_space_right_12}>
-                LP: {poolAddress ? poolAddress : " Pool not found"}
-              </span>
-
               <span className={styles.text_space_right_12}>
                 {" "}
                 Wallet balance{" "}
@@ -1361,88 +1452,6 @@ const SwapAmm = () => {
                   ))}
               </span>
             </p>
-            <span className={styles.text_center}> Approved: </span>
-            {address && poolAddress && amountLP ? (
-              <TokenApproveProps
-                {...{
-                  name: "allowance",
-                  address: poolAddress,
-                  approve: amountLP,
-                  args: [address, ROUTER_AQUADEX],
-                }}
-              ></TokenApproveProps>
-            ) : (
-              <span className={styles.text_center}> error </span>
-            )}
-          </div>
-          {!showTokenListA && !showTokenListB ? (
-            <div className={styles.button_container_sm}>
-              <Image
-                src="/flip.svg"
-                alt="menu"
-                width={30}
-                height={30}
-                className={styles.imageInvertToggle_sm}
-                onClick={handleFlipTokens}
-              />
-            </div>
-          ) : (
-            <div></div>
-          )}
-          <div className={styles.input_container}>
-            <span className={styles.text_space_left_xl}>Select Token B</span>
-
-            <div className={styles.token_inputs}>
-              {" "}
-              <span className={styles.box_space}>
-                <input
-                  className={styles.input_symbol}
-                  type="text"
-                  placeholder="Select Token"
-                  value={tokenB}
-                  onChange={(e) => setTokenB(e.target.value)}
-                  onClick={() => setShowTokenListB(true)}
-                />
-              </span>
-              {showTokenListB && tokenAddresses?.length > 0 ? (
-                <div className={styles_pop.popup_container}>
-                  <div className={styles_pop.popup_content}>
-                    {tokenAddresses.map((_token, index) => (
-                      <div
-                        className={styles.token_list_symbol}
-                        key={index}
-                        onClick={() => handleTokenSelectionB(_token.symbol)}
-                      >
-                        {_token.symbol} {"  "}
-                        <Image
-                          className={styles.token_list_symbol_space}
-                          src={_token.logo}
-                          alt="Aquas.Trade Crypto Assets On SKALE Network"
-                          width={18}
-                          height={18}
-                        />
-                        {"  "}{" "}
-                        {walletTokenList.map((_balance, index) => (
-                          <span key={index} className={styles.amount_balance}>
-                            {" "}
-                            {_balance.contractAddress.toUpperCase() ===
-                              _token.address.toUpperCase() &&
-                              parseFloat(
-                                formatUnits(
-                                  _balance.balance,
-                                  Number(_balance.decimals),
-                                ),
-                              ).toFixed(8)}
-                          </span>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <span></span>
-              )}
-            </div>
           </div>
           <div className={styles.button_container}>
             <button
