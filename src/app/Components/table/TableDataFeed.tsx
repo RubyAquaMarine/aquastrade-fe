@@ -2,8 +2,12 @@
 
 import React, { useRef, useEffect, useState, useMemo } from "react";
 import { formatUnits, parseUnits } from "viem";
-
+import Link from "next/link";
+import Image from "next/image";
 import { findTokenFromAddress } from "@/app/Utils/findTokens";
+
+import { formatPriceBigToHuman } from "@/app/Utils/utils";
+
 import {
   CaretSortIcon,
   ChevronDownIcon,
@@ -92,7 +96,9 @@ export default function TableDataFeed(dataFeed: any) {
       header: "Quote/Base",
       accessorKey: "pricePoolInverse",
       cell: ({ row }: any) => {
-        const formatted = formatPrice(row.getValue("pricePoolInverse"));
+        const formatted = formatPriceBigToHuman(
+          row.getValue("pricePoolInverse"),
+        );
         return <div className="text-right font-medium">{formatted}</div>;
       },
     },
@@ -101,7 +107,7 @@ export default function TableDataFeed(dataFeed: any) {
       header: "Base/Quote",
       accessorKey: "pricePool",
       cell: ({ row }: any) => {
-        const formatted = formatPrice(row.getValue("pricePool"));
+        const formatted = formatPriceBigToHuman(row.getValue("pricePool"));
         return <div className="text-right font-medium">{formatted}</div>;
       },
     },
@@ -110,7 +116,7 @@ export default function TableDataFeed(dataFeed: any) {
       header: "Oracle",
       accessorKey: "priceFeed",
       cell: ({ row }: any) => {
-        const formatted = formatPrice(row.getValue("priceFeed"));
+        const formatted = formatPriceBigToHuman(row.getValue("priceFeed"));
         return <div className="text-right font-medium">{formatted}</div>;
       },
     },
@@ -144,46 +150,6 @@ export default function TableDataFeed(dataFeed: any) {
     },
   ];
 
-  // big to string
-  const formatPrice = (_value: bigint) => {
-    const one = parseUnits("1", 18);
-
-    const oneM = parseUnits("1000000", 18);
-
-    const onefourth = parseUnits("0.0001", 18);
-
-    const oneeight = parseUnits("0.00000001", 18);
-
-    const onetwelve = parseUnits("0.000000000001", 18);
-
-    let value;
-
-    if (_value >= oneM) {
-      value = parseFloat(formatUnits(_value, 18)).toFixed(0);
-    }
-
-    if (_value >= one && _value < oneM) {
-      value = parseFloat(formatUnits(_value, 18)).toFixed(2);
-    }
-
-    if (_value < one && _value >= onefourth) {
-      value = parseFloat(formatUnits(_value, 18)).toFixed(4);
-    }
-
-    if (_value < onefourth && _value >= oneeight) {
-      value = parseFloat(formatUnits(_value, 18)).toFixed(8);
-    }
-
-    if (_value < oneeight && _value >= onetwelve) {
-      value = parseFloat(formatUnits(_value, 18)).toFixed(12);
-    }
-
-    if (_value < onetwelve) {
-      value = parseFloat(formatUnits(_value, 18)).toFixed(18);
-    }
-    return value;
-  };
-
   const table = useReactTable({
     data,
     columns,
@@ -199,19 +165,42 @@ export default function TableDataFeed(dataFeed: any) {
   return (
     <div className={styles.container}>
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter Pools"
-          value={
-            (table.getColumn(accessorKeyAssets)?.getFilterValue() as string) ??
-            ""
-          }
-          onChange={(event) =>
-            table
-              .getColumn(accessorKeyAssets)
-              ?.setFilterValue(event.target.value)
-          }
-          className={styles.input}
-        />
+        <span className={styles.container_flex}>
+          <Input
+            placeholder="Filter Pools"
+            value={
+              (table
+                .getColumn(accessorKeyAssets)
+                ?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table
+                .getColumn(accessorKeyAssets)
+                ?.setFilterValue(event.target.value)
+            }
+            className={styles.input}
+          />
+          {/** Button to add new data feeds  */}
+        </span>
+        <span className={styles.container_flex}>
+          <Button className={styles.input_button} variant="outline" size="sm">
+            <Image
+              className="image_invert"
+              src="/info.svg"
+              alt="info"
+              width={24}
+              height={24}
+              priority
+            />{" "}
+            New DataFeed
+          </Button>
+        </span>
+        <span className={styles.container_flex}>
+          <Link className="button_back" href="/dashboard/tokeninfo">
+            {" "}
+            <b>Token List </b>
+          </Link>{" "}
+        </span>
         <DropdownMenu>
           <DropdownMenuTrigger asChild className={styles.menu}>
             <Button variant="outline" className={styles.button_column}>

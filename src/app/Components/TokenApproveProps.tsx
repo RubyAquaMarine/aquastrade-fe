@@ -29,6 +29,8 @@ interface Props {
 const TokenApproveProps = (params: Props) => {
   // spinner
 
+  console.log(" Debug Token Approval Props amounts", params);
+
   const spinTimer = useRef(false);
 
   // the time they click the button until notify toast popup
@@ -36,8 +38,6 @@ const TokenApproveProps = (params: Props) => {
   // about 10 seconds ; boring. how to make this better?
 
   // check the difference : if the allowance is already 5, and the approve is 5 , then
-
-  const trueApprovalAmount = useRef(BigInt(1));
 
   // save the last approved amount
   const [allowance_amount, setAllowance] = useState(BigInt(0));
@@ -52,6 +52,7 @@ const TokenApproveProps = (params: Props) => {
 
   const [inputToken, setToken] = useState(false); // todo : only triggers once and doesn't reset :
 
+  // Get Allowance Amounts already approved for contract sender
   const { data: token_transfer_allowance } = useERC20Token(
     params.address,
     params.name,
@@ -123,19 +124,16 @@ const TokenApproveProps = (params: Props) => {
     });
   };
 
-  // console.log(
-  //   "Token Approval Props",
-  //   params,
+  console.log(
+    "Token Approval Props",
+    params,
 
-  //   " Allowance: Already Approved Amount on this Contract: ",
-  //   token_transfer_allowance,
+    " Allowance: Already Approved Amount on this Contract: ",
+    token_transfer_allowance,
 
-  //   " TokenInfo Contract: ",
-  //   inputToken,
-
-  //   " True amount ",
-  //   trueApprovalAmount.current
-  // );
+    " TokenInfo Contract: ",
+    inputToken,
+  );
 
   return (
     <div className={styles.token_approve_container}>

@@ -24,7 +24,7 @@ const StockTicker = () => {
     }
   }, [objectFeeds]);
 
-  console.log(" Render TICKERS ", stocks);
+  // console.log(" Render TICKERS ", stocks);
 
   return (
     <div

@@ -19,7 +19,7 @@ export const findTokenAddressFromSymbol = (_symbol: string) => {
   }
 
   if (save) {
-    return save;
+    return save as `0x${string}`;
   }
 };
 

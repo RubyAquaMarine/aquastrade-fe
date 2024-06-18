@@ -1,3 +1,5 @@
+// Jun e 2024 : Not using... atm
+
 // to fix ,, th etokenA and tokeB must hae state, since the porops will change from the FLIP icon.
 
 // also when use uses the Token List, the token SYM will change, and then we need to to use the latest address

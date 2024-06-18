@@ -2,6 +2,10 @@
 
 https://flowbite.com/icons/
 
+# info incon
+
+- click icon, button, for pop up with instructions
+
 # buttons
 
 Clickable actions
