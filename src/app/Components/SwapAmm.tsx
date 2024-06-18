@@ -32,7 +32,7 @@ import GetAmountsOut from "@/app/Components/GetAmountsOut";
 import DCAInterface from "@/app/Components/DCA";
 
 import TokenApproveProps from "@/app/Components/TokenApproveProps";
-import AMMPools from "@/app/Components/AMMPools";
+import ShowAMMPoolReserves from "@/app/Components/ShowAMMPoolReserves";
 
 import { isNumber } from "@/app/Utils/utils";
 
@@ -77,30 +77,36 @@ const SwapAmm = () => {
     hash,
   });
 
-  // default swapping pair
-  const [tradeFeature, setTradeFeature] = useState<string>("swap");
-  const [ammFeature, setAMMFeature] = useState<string>("swap");
-  const [feeForTrade, setFeeForTrade] = useState<string>("0.0");
-  const [multihop, setMultihop] = useState(false);
+  // ROUTING
+  // is multihop or does amm pool exist?
+  const [multiHop, setMultihop] = useState(false);
+  // make a multi hop route with AQUA as the BASE if the LP pool doesn't exist
+  // Display the Reservers in UI of both pools on multihop
   const [multihopBaseToken, setMultihopBaseToken] = useState<string>("AQUA");
-
   //contains token addresses:  logic shows the routing asset logos , can be two or three items , alos used for the GetAmounts Out
   const [swap_path, setSwapPath] = useState([""]);
 
+  // AMM FEATURES
+  const [tradeFeature, setTradeFeature] = useState<string>("swap");
+  const [ammFeature, setAMMFeature] = useState<string>("swap");
+  const [feeForTrade, setFeeForTrade] = useState<string>("0.0");
+
+  // UI DEFAULTS
   const [tokenA, setTokenA] = useState<string>("USDC");
   const [tokenB, setTokenB] = useState<string>("AQUA");
   const [amountA, setAmountA] = useState<string>("1");
   const [amountB, setAmountB] = useState<string>("0.0");
 
-  // NEW EST
+  // WALLETS and BALANCES
+  const [showTokenListA, setShowTokenListA] = useState<boolean>(false);
+  const [showTokenListB, setShowTokenListB] = useState<boolean>(false);
+  const walletTokenList = useSkaleExplorer(address as WALLET);
+
+  // NEWEST : Not using yet: just an idea when refactoring the Add Liq functionality to new componenent
+  // The pool address is required in All three AMM functionalities.
   const [savePoolAddress, setPoolAddress] = useState(
     "0x0000000000000000000000000000000000000000" as `0x${string}`,
   );
-
-  const [showTokenListA, setShowTokenListA] = useState(false);
-  const [showTokenListB, setShowTokenListB] = useState(false);
-
-  const walletTokenList = useSkaleExplorer(address as WALLET);
 
   // anythnig that I dont show in the UI can be used as useREF
 
@@ -109,9 +115,13 @@ const SwapAmm = () => {
     tokenBAddress.current,
   ]);
 
-  const swap_path_logos1 = findTokenLogoFromAddress(swap_path[0]);
-  const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
-  const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
+  // refactor this .... only run these functions within useEffect
+  const swap_path_logos0 = useRef("");
+  const swap_path_logos1 = useRef("");
+  const swap_path_logos2 = useRef("");
+  // const swap_path_logos0 = findTokenLogoFromAddress(swap_path[0]);
+  // const swap_path_logos2 = findTokenLogoFromAddress(swap_path[1]);
+  // const swap_path_logos3 = findTokenLogoFromAddress(swap_path?.[2]);
 
   // COPY PASTE THIS INTO COMPONEBTS
   const filterStringInput = (_value: string, _decimals: number) => {
@@ -140,6 +150,15 @@ const SwapAmm = () => {
 
   // test
   useEffect(() => {
+    if (swap_path) {
+      swap_path_logos0.current = findTokenLogoFromAddress(swap_path[0]);
+      swap_path_logos1.current = findTokenLogoFromAddress(swap_path[1]);
+      swap_path_logos2.current = findTokenLogoFromAddress(swap_path?.[2]);
+    }
+  }, [swap_path]);
+
+  // test
+  useEffect(() => {
     // ensure this is amm feature Add Liquidity Only and Not the Swap functionality
     if (
       addTokenBAmount &&
@@ -149,11 +168,9 @@ const SwapAmm = () => {
       console.log(" MAKE DINNER");
 
       setAmountB(formatUnits(addTokenBAmount, Number(tokenBDecimal.current))); // convert big to human amount string
-    }else{
-
+    } else {
       console.log(" MAKE LUNCH  BUG");
-      setAmountB('0.0')
-
+      setAmountB("0.0");
     }
   }, [addTokenBAmount]);
 
@@ -277,9 +294,8 @@ const SwapAmm = () => {
 
   // pass in the token addresses
   const findPathForPools = (_tokenA: string, _tokenB: string) => {
-    // Having No Aqua base means a MultiHop is required
-
-    // does pool address exist with current TokenA and TokenB ?
+    // Checking logic
+    // LP address exists
     if (
       poolAddress !== "0x0000000000000000000000000000000000000000" &&
       tokenA !== "AQUA" &&
@@ -287,10 +303,13 @@ const SwapAmm = () => {
     ) {
       setMultihop(false);
       setSwapPath([_tokenA, _tokenB]);
-      // console.log(`LOGIC 1 ${false} ${multihop}`);
+      console.log(`LOGIC 1:  LP address exists:  ${false} ${multiHop}`);
       return;
     }
 
+    // Checking logic
+    // LP address doesn't exist
+    // Create a multip hop route
     if (
       poolAddress === "0x0000000000000000000000000000000000000000" &&
       tokenA !== "AQUA" &&
@@ -298,37 +317,48 @@ const SwapAmm = () => {
     ) {
       setMultihop(true);
       setSwapPath([_tokenA, aqua_token_address, _tokenB]);
+
       setMultihopBaseToken("AQUA"); // later add some logic to find other base assets like usdc
-      // console.log(`LOGIC 2 ${true} ${multihop}`);
+      console.log(`LOGIC 2:  LP address doesn't exists:  ${true} ${multiHop}`);
       return;
     }
 
+    // What is this
     if (
-      multihop === false &&
+      multiHop === false &&
       poolAddress === "0x0000000000000000000000000000000000000000"
     ) {
       setMultihop(true);
       setSwapPath([_tokenA, aqua_token_address, _tokenB]);
+
       setMultihopBaseToken("AQUA"); // later add some logic to find other base assets like usdc
-      // console.log(`LOGIC 3 ${true} ${multihop}`);
+
+      console.log(`LOGIC 3 ${true} ${multiHop}`);
       return;
     }
 
     setMultihop(false);
     setSwapPath([_tokenA, _tokenB]);
-    // console.log(`LOGIC 4 ${false} ${multihop}`);
+    console.log(`LOGIC 4 ${false} ${multiHop}`);
   };
 
   // insert Token Addresses
-  const pathForPools = (_tokenA: string, _tokenB: string) => {
-    if (tokenA !== "AQUA" && tokenB !== "AQUA") {
+  // only create the Multihop if multi hop  aka =>  no LP address exists
+  const pathForPools = (
+    _multiHop: boolean,
+    _tokenA: string,
+    _tokenB: string,
+  ) => {
+    if (_multiHop) {
       return [_tokenA, aqua_token_address, _tokenB];
+    } else {
+      return [_tokenA, _tokenB];
     }
-    return [_tokenA, _tokenB];
   };
 
-  // path for swapping
-  const getSwapPath = (tokenA: string, tokenB: string) => {
+  // This function should be able to
+  // select the router , such as AMM or Stable Swap, or Other, etc
+  const isStableSwapPath = (tokenA: string, tokenB: string) => {
     let pathAmm = true; // default AMM
 
     if (
@@ -361,7 +391,7 @@ const SwapAmm = () => {
       parseUnits("0.0", 18),
     );
 
-    if (getSwapPath(tokenA, tokenB)) {
+    if (isStableSwapPath(tokenA, tokenB)) {
       writeContract({
         abi: EUROPA_AMM_ROUTER_ABI,
         address: ROUTER_AQUADEX,
@@ -369,7 +399,7 @@ const SwapAmm = () => {
         args: [
           parseUnits(amountA, Number(tokenADecimal?.current)),
           parseUnits("0.0", 18),
-          pathForPools(tokenAAddress.current, tokenBAddress.current),
+          pathForPools(multiHop, tokenAAddress.current, tokenBAddress.current),
           address,
           timeIs,
         ],
@@ -540,7 +570,7 @@ const SwapAmm = () => {
     }
   };
 
-  // console.log(`"AMM Features: is Multihop", ${multihop} isPool ${poolAddress}`);
+  // console.log(`"AMM Features: is Multihop", ${multiHop} isPool ${poolAddress}`);
 
   return (
     <div className={styles.container}>
@@ -866,7 +896,7 @@ const SwapAmm = () => {
             </div>
             <div className={styles.column}>
               <p>
-                {swap_path_logos3 ? (
+                {swap_path_logos2.current ? (
                   <span className={styles.routing}>
                     {" "}
                     Best Route:{" "}
@@ -874,7 +904,7 @@ const SwapAmm = () => {
                       {" "}
                       <Image
                         className={styles.token_list_symbol_space}
-                        src={swap_path_logos1}
+                        src={swap_path_logos0.current}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
                         width={30}
                         height={30}
@@ -883,7 +913,7 @@ const SwapAmm = () => {
                     <span>
                       <Image
                         className={styles.token_list_symbol_space}
-                        src={swap_path_logos2}
+                        src={swap_path_logos1.current}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
                         width={30}
                         height={30}
@@ -892,7 +922,7 @@ const SwapAmm = () => {
                     <span>
                       <Image
                         className={styles.token_list_symbol_space}
-                        src={swap_path_logos3}
+                        src={swap_path_logos2.current}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
                         width={30}
                         height={30}
@@ -907,7 +937,7 @@ const SwapAmm = () => {
                       {" "}
                       <Image
                         className={styles.token_list_symbol_space}
-                        src={swap_path_logos1}
+                        src={swap_path_logos0.current}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
                         width={30}
                         height={30}
@@ -917,7 +947,7 @@ const SwapAmm = () => {
                       {" "}
                       <Image
                         className={styles.token_list_symbol_space}
-                        src={swap_path_logos2}
+                        src={swap_path_logos1.current}
                         alt="Aquas.Trade Crypto Assets On SKALE Network"
                         width={30}
                         height={30}
@@ -933,58 +963,45 @@ const SwapAmm = () => {
             <div className={styles.column}>
               {/**  is Multihop, Show reserves from both pools */}
 
-              {multihop ? (
+              {multiHop ? (
                 <span>
                   {multihopBaseToken &&
                     tokenADecimal.current &&
                     tokenBDecimal.current && (
-                      <AMMPools
+                      <ShowAMMPoolReserves
                         props={[
                           poolAddress,
                           "getReserves",
                           [],
-                          tokenADecimal.current,
-                          18,
 
                           tokenA,
                           multihopBaseToken,
                         ]}
-                      ></AMMPools>
+                      ></ShowAMMPoolReserves>
                     )}
 
                   {multihopBaseToken &&
                     tokenADecimal.current &&
                     tokenBDecimal.current && (
-                      <AMMPools
+                      <ShowAMMPoolReserves
                         props={[
                           poolAddress,
                           "getReserves",
                           [],
-                          tokenADecimal.current,
-                          18,
 
                           tokenB,
-                          multihopBaseToken,
+                          multihopBaseToken, //  todo why use this hardcode value here? and not the direct token address?
                         ]}
-                      ></AMMPools>
+                      ></ShowAMMPoolReserves>
                     )}
                 </span>
               ) : (
                 <span>
-                  {" "}
+                  {/**  is not Multihop, Show reserves from AMM  pool */}
                   {tokenADecimal.current && tokenBDecimal.current && (
-                    <AMMPools
-                      props={[
-                        poolAddress,
-                        "getReserves",
-                        [],
-                        tokenADecimal.current,
-                        tokenBDecimal.current,
-
-                        tokenA,
-                        tokenB,
-                      ]}
-                    ></AMMPools>
+                    <ShowAMMPoolReserves
+                      props={[poolAddress, "getReserves", [], tokenA, tokenB]}
+                    ></ShowAMMPoolReserves>
                   )}
                 </span>
               )}

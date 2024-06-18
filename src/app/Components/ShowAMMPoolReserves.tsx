@@ -10,29 +10,28 @@ import { useAMMPairs, useFactory } from "@/app/Hooks/useAMM";
 import styles from "@/app/Styles/AMM.module.css";
 
 const FACTORY = findContractInfo("factory")?.address;
-
+// todo : refeactor  with
+//  type = {}
 interface Props {
-  _address?: `0x${string}`; // AMM POOL ADDRESS, but maybe change to factory address : multi DEX support
+  _address?: `0x${string}`; //  AMM POOL ADDRESS, (not being used in the componenet) but maybe change to factory address : multi DEX support :
   _functionName?: string;
   _args?: [any];
 
-  _decimalsA?: bigint; // CAN BE REMOVED
-  _decimalsB?: bigint; // CAN BE REMOVED
-
-  _symbolA?: string;
-  _symbolB?: string;
+  _symbolA?: string; // 5 = 3
+  _symbolB?: string; // 6 = 4
 }
 
-const AmmPools = (props: Props) => {
-  const erc20_in = findTokenFromSymbol(props?.props?.[5]);
-  const erc20_out = findTokenFromSymbol(props?.props?.[6]);
+// Return the AMM POOL Reerses.
+const ShowAMMPoolReserves = (props: Props) => {
+  const erc20_in = findTokenFromSymbol(props?.props?.[3]);
+  const erc20_out = findTokenFromSymbol(props?.props?.[4]);
 
   const { data: poolAddress } = useFactory(FACTORY, "getPair", [
     erc20_in?.address,
     erc20_out?.address,
   ]);
 
-  // can be used for the amm pool reserves
+  // fetch amm pool reserves
   const {
     data: reserves,
     isError,
@@ -43,12 +42,10 @@ const AmmPools = (props: Props) => {
     props?.props?.[2], // ifArgs are required
   );
 
-  // token symbols
+  // fetch the token0 and then figure out what reserves belong to what asset : uniswapLibrary.sort
   const { data: sym0 } = useAMMPairs(poolAddress, "token0", []);
-  //  const { data: sym1 } = useAMMPairs(props?.props?.[0], "token1", []);
 
-  // Now compare , with Token Address , with token symbol, match or switched? if switched : reverse Decimals and Symbols in return<>
-
+  // Compare Token Addresses , with token symbol, match or switched? if switched : reverse Decimals and Symbols in return<>
   return (
     <div>
       {reserves ? (
@@ -65,11 +62,11 @@ const AmmPools = (props: Props) => {
             <div>
               <p className={styles.pool_balance}>
                 {/**Token  */}
-                {props?.props?.[5]}:{" "}
+                {props?.props?.[3]}:{" "}
                 {formatUnits(reserves?.[0], Number(erc20_in?.decimals))}
               </p>
               <p className={styles.pool_balance}>
-                {props?.props?.[6]}:{" "}
+                {props?.props?.[4]}:{" "}
                 {formatUnits(reserves?.[1], Number(erc20_out?.decimals))}
               </p>
             </div>
@@ -78,11 +75,11 @@ const AmmPools = (props: Props) => {
             <div>
               {" "}
               <p className={styles.pool_balance}>
-                {props?.props?.[6]}:{" "}
+                {props?.props?.[4]}:{" "}
                 {formatUnits(reserves?.[0], Number(erc20_out?.decimals))}
               </p>
               <p className={styles.pool_balance}>
-                {props?.props?.[5]}:{" "}
+                {props?.props?.[3]}:{" "}
                 {formatUnits(reserves?.[1], Number(erc20_in?.decimals))}
               </p>
             </div>
@@ -103,4 +100,4 @@ const AmmPools = (props: Props) => {
   );
 };
 
-export default AmmPools;
+export default ShowAMMPoolReserves;
