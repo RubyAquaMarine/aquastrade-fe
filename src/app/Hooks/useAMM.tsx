@@ -113,7 +113,6 @@ export const useGetAmountInQuote = (
 
   const amountIn = parseUnits(_amount, Number(_decimalA ? _decimalA : 18));
 
-
   let flip = false;
 
   const { data: reserves } = useAMMPairs(_addressPair, "getReserves");
