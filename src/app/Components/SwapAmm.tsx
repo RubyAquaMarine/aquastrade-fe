@@ -1,5 +1,7 @@
 // @ts-nocheck
 "use client";
+// bug in Adding Liquiditiy with the approval amounts
+// --- // // @ts-nocheck
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +30,7 @@ import {
 import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
 import DCAInterface from "@/app/Components/DCA";
-import TokenBalance from "@/app/Components/TokenBalance";
+
 import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import AMMPools from "@/app/Components/AMMPools";
 
@@ -36,7 +38,7 @@ import { isNumber } from "@/app/Utils/utils";
 
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 
-import { useSkaleExplorer } from "@/app/Hooks/useSkaleExplorer";
+import { useSkaleExplorer, WALLET } from "@/app/Hooks/useSkaleExplorer";
 import { useFactory, useGetAmountInQuote } from "@/app/Hooks/useAMM";
 
 import styles from "@/app/Styles/AMM.module.css";
@@ -76,24 +78,31 @@ const SwapAmm = () => {
   });
 
   // default swapping pair
-  const [tradeFeature, setTradeFeature] = useState("swap");
-  const [ammFeature, setAMMFeature] = useState("swap");
-  const [feeForTrade, setFeeForTrade] = useState("0.0");
+  const [tradeFeature, setTradeFeature] = useState<string>("swap");
+  const [ammFeature, setAMMFeature] = useState<string>("swap");
+  const [feeForTrade, setFeeForTrade] = useState<string>("0.0");
   const [multihop, setMultihop] = useState(false);
-  const [multihopBaseToken, setMultihopBaseToken] = useState("AQUA");
+  const [multihopBaseToken, setMultihopBaseToken] = useState<string>("AQUA");
 
   //contains token addresses:  logic shows the routing asset logos , can be two or three items , alos used for the GetAmounts Out
   const [swap_path, setSwapPath] = useState([""]);
 
-  const [tokenA, setTokenA] = useState("USDC");
-  const [tokenB, setTokenB] = useState("AQUA");
-  const [amountA, setAmountA] = useState("1");
-  const [amountB, setAmountB] = useState("1");
+  const [tokenA, setTokenA] = useState<string>("USDC");
+  const [tokenB, setTokenB] = useState<string>("AQUA");
+  const [amountA, setAmountA] = useState<string>("1");
+  const [amountB, setAmountB] = useState<string>("0.0");
+
+  // NEW EST
+  const [savePoolAddress, setPoolAddress] = useState(
+    "0x0000000000000000000000000000000000000000" as `0x${string}`,
+  );
 
   const [showTokenListA, setShowTokenListA] = useState(false);
   const [showTokenListB, setShowTokenListB] = useState(false);
 
-  const walletTokenList = useSkaleExplorer(address);
+  const walletTokenList = useSkaleExplorer(address as WALLET);
+
+  // anythnig that I dont show in the UI can be used as useREF
 
   const { data: poolAddress } = useFactory(FACTORY_AQUADEX, "getPair", [
     tokenAAddress.current,
@@ -120,12 +129,33 @@ const SwapAmm = () => {
   // COPY PASTE THIS INTO COMPONEBTS
 
   // todo Adding Liqudity : can be removed when refactoring into ammFeature Components
+
+  // setAmountB   need to this once this value exist
   const addTokenBAmount = useGetAmountInQuote(
     amountA,
     poolAddress,
     tokenAAddress.current,
     tokenADecimal.current,
   );
+
+  // test
+  useEffect(() => {
+    // ensure this is amm feature Add Liquidity Only and Not the Swap functionality
+    if (
+      addTokenBAmount &&
+      addTokenBAmount >= BigInt(1) &&
+      ammFeature !== "swap"
+    ) {
+      console.log(" MAKE DINNER");
+
+      setAmountB(formatUnits(addTokenBAmount, Number(tokenBDecimal.current))); // convert big to human amount string
+    }else{
+
+      console.log(" MAKE LUNCH  BUG");
+      setAmountB('0.0')
+
+    }
+  }, [addTokenBAmount]);
 
   useEffect(() => {
     if (address && isConnected) {
@@ -143,7 +173,10 @@ const SwapAmm = () => {
 
   // test
   useEffect(() => {
-    findPathForPools(tokenAAddress.current, tokenBAddress.current);
+    if (poolAddress) {
+      setPoolAddress(poolAddress);
+      findPathForPools(tokenAAddress.current, tokenBAddress.current);
+    }
   }, [poolAddress]);
 
   useEffect(() => {
@@ -321,7 +354,12 @@ const SwapAmm = () => {
     const timeIs = resultBlock?.data?.timestamp
       ? resultBlock?.data?.timestamp + BigInt(20000)
       : BigInt(404);
-    console.log("timestamp for swap ", timeIs);
+    console.log(
+      "timestamp for swap ",
+      timeIs,
+      " Double check ",
+      parseUnits("0.0", 18),
+    );
 
     if (getSwapPath(tokenA, tokenB)) {
       writeContract({
@@ -446,7 +484,7 @@ const SwapAmm = () => {
   const handleFeeCalculations = () => {
     const _fee = feeNFT.current;
     const nftCheck = BigInt(1000) - _fee;
-    const input = parseUnits(amountA, 18); // string to big
+    const input = parseUnits(amountA, Number(tokenADecimal?.current));
     const oneTenth = input / BigInt(1000);
     let fee = BigInt(0);
     switch (Number(nftCheck)) {
@@ -1076,19 +1114,22 @@ const SwapAmm = () => {
                   </span>
                 </span>
 
-                <div ref={divRef}>
-                  {tokenAAddress.current !== "" ? (
-                    <TokenBalance
-                      props={[
-                        tokenAAddress.current,
-                        tokenADecimal.current,
-                        address,
-                      ]}
-                    ></TokenBalance>
-                  ) : (
-                    <span></span>
-                  )}
-                </div>
+                <span ref={divRef} className={styles.container_token_balance}>
+                  {tokenAAddress.current !== "" &&
+                    walletTokenList.map((_balance, index) => (
+                      <span key={index} className={styles.amount_balance}>
+                        {" "}
+                        {_balance.contractAddress.toUpperCase() ===
+                          tokenAAddress.current.toUpperCase() &&
+                          parseFloat(
+                            formatUnits(
+                              _balance.balance,
+                              Number(_balance.decimals),
+                            ),
+                          ).toFixed(8)}
+                      </span>
+                    ))}
+                </span>
               </p>
 
               <span className={styles.text_center}> Approved: </span>
@@ -1204,19 +1245,24 @@ const SwapAmm = () => {
                   Wallet balance{" "}
                 </span>
 
-                {tokenBAddress.current !== "" ? (
-                  <TokenBalance
-                    props={[
-                      tokenBAddress.current,
-                      tokenBDecimal.current,
-                      address,
-                    ]}
-                  ></TokenBalance>
-                ) : (
-                  <div></div>
-                )}
+                <span className={styles.container_token_balance}>
+                  {tokenBAddress.current !== "" &&
+                    walletTokenList.map((_balance, index) => (
+                      <span key={index} className={styles.amount_balance}>
+                        {" "}
+                        {_balance.contractAddress.toUpperCase() ===
+                          tokenBAddress.current.toUpperCase() &&
+                          parseFloat(
+                            formatUnits(
+                              _balance.balance,
+                              Number(_balance.decimals),
+                            ),
+                          ).toFixed(8)}
+                      </span>
+                    ))}
+                </span>
               </p>
-
+              {/** Bug in amountB when adding liquidity. the value is defaulted to 1.0 ^ 18 */}
               <span className={styles.text_center}> Approved: </span>
               {address &&
               amountB &&
@@ -1387,7 +1433,7 @@ const SwapAmm = () => {
                     <span className={styles.text_center}> error </span>
                   )}
                 </span>
-
+                {/** Show the Token List and map Token balances  */}
                 {showTokenListA && tokenAddresses?.length > 0 ? (
                   <div className={styles_pop.popup_container}>
                     <div className={styles_pop.popup_content}>
@@ -1405,18 +1451,22 @@ const SwapAmm = () => {
                             width={18}
                             height={18}
                           />
-                          {"  "}{" "}
-                          {walletTokenList.map((_balance, index) => (
-                            <span key={index} className={styles.amount_balance}>
-                              {" "}
-                              {_balance.contractAddress.toUpperCase() ===
-                                _token.address.toUpperCase() &&
-                                formatUnits(
-                                  _balance.balance,
-                                  Number(_balance.decimals),
-                                )}
-                            </span>
-                          ))}
+                          {/** Does the user have any assets within their wallet  */}
+                          {walletTokenList &&
+                            walletTokenList.map((_balance, index) => (
+                              <span
+                                key={index}
+                                className={styles.amount_balance}
+                              >
+                                {" "}
+                                {_balance.contractAddress.toUpperCase() ===
+                                  _token.address.toUpperCase() &&
+                                  formatUnits(
+                                    _balance.balance,
+                                    Number(_balance.decimals),
+                                  )}
+                              </span>
+                            ))}
                         </div>
                       ))}
                     </div>
@@ -1434,6 +1484,7 @@ const SwapAmm = () => {
 
               <span ref={divRef} className={styles.container_token_balance}>
                 {poolAddress &&
+                  walletTokenList &&
                   poolAddress !==
                     "0x0000000000000000000000000000000000000000" &&
                   poolAddress !== "" &&

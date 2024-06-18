@@ -24,7 +24,7 @@ const TokenBalance = (params: Props) => {
   );
 
   console.log(
-    "TokenBalance",
+    "REMOVE ME: TokenBalance",
     token_balance,
     params.props?.[0],
     " ALL data: ",

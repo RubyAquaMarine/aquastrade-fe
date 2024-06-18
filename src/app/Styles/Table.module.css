@@ -3,11 +3,32 @@
   padding: 1rem;
 }
 
+.container_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1rem;
+}
+
 .input {
   border: 1px solid #475384;
   background-color: #181a1d;
   max-width: 10rem;
   padding: 1rem;
+  border-radius: 12px;
+}
+
+.input_button {
+  border: 1px solid #475384;
+  background-color: #181a1d;
+  max-width: 10rem;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 14px #475384;
+}
+
+.input_button:hover {
+  background-color: #475384;
 }
 
 .menu {

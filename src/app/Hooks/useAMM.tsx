@@ -111,6 +111,9 @@ export const useGetAmountInQuote = (
 ) => {
   console.log("useGetAmountInQuote:Props: ", _amount, _addressPair, _decimalA);
 
+  const amountIn = parseUnits(_amount, Number(_decimalA ? _decimalA : 18));
+
+
   let flip = false;
 
   const { data: reserves } = useAMMPairs(_addressPair, "getReserves");
@@ -127,7 +130,7 @@ export const useGetAmountInQuote = (
   const routerContract = findContractInfo("router");
 
   const data = [
-    parseUnits(_amount ? _amount : "1", Number(_decimalA ? _decimalA : 18)),
+    parseUnits(_amount ? _amount : "0", Number(_decimalA ? _decimalA : 18)),
     flip === false ? reserves?.[0] : reserves?.[1],
     flip === false ? reserves?.[1] : reserves?.[0],
   ];

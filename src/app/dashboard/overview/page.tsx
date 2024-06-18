@@ -46,17 +46,7 @@ const Home = ({ params }: any) => {
     <main className={styles.container}>
       {tableData ? (
         <span>
-          <span>
-            {" "}
-            <Overview {...tableData}></Overview>
-          </span>
-          <span className="button_back">
-            {" "}
-            <Link href="/dashboard/tokeninfo">
-              {" "}
-              <b>Tokens </b> (Europa Liquidity Hub)
-            </Link>{" "}
-          </span>
+          <Overview {...tableData}></Overview>
         </span>
       ) : (
         <span className="button_back">

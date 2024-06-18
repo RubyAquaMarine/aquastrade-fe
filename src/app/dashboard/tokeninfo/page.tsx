@@ -12,7 +12,13 @@ import { CHAIN } from "@/app/Utils/config";
 const Home = () => {
   const { address, isConnected, chain } = useAccount();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className={styles.container}>
+      <span>
+        <Link className="button_back" href="/dashboard/overview">
+          {" "}
+          <b>Back</b>
+        </Link>{" "}
+      </span>
       <TokenCards></TokenCards>
     </main>
   );
