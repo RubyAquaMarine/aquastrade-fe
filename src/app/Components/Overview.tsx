@@ -16,7 +16,7 @@ export type DataFeedV = {
 
 export const Overview = (params: DataFeedV[]) => {
   const newArray = Object.values(params);
-  const data: DataFeedV[] = useMemo(() => newArray, []);
+  const data: DataFeedV[] = useMemo(() => newArray, [newArray]);
   return (
     <div>
       <TableDataFeed {...data}></TableDataFeed>

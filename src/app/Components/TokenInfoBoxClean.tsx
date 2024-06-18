@@ -50,7 +50,7 @@ const TokenInfoBox = (props: ADDRESS) => {
       logo_url.current = "/EUROPA.png" as string;
       setData(data);
     }
-  }, [data]);
+  }, [data, token]);
 
   console.log("TokenInfoBox  Saved Token ", savedData);
 
