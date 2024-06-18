@@ -29,9 +29,9 @@ interface Props {
 const TokenApproveProps = (params: Props) => {
   // spinner
 
-  console.log(" Debug Token Approval Props amounts", params);
-
   const spinTimer = useRef(false);
+  // Doesn't work with LP tokens
+  const token = findTokenFromAddress(params.address);
 
   // the time they click the button until notify toast popup
 
@@ -41,7 +41,6 @@ const TokenApproveProps = (params: Props) => {
 
   // save the last approved amount
   const [allowance_amount, setAllowance] = useState(BigInt(0));
-  //const [inputToken, setToken] = useState<bigint>();
 
   const { data: hash, writeContract } = useWriteContract();
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
@@ -50,7 +49,7 @@ const TokenApproveProps = (params: Props) => {
 
   const [inputTrigger, setTrigger] = useState<boolean>(false); // todo : only triggers once and doesn't reset :
 
-  const [inputToken, setToken] = useState(false); // todo : only triggers once and doesn't reset :
+  const [inputToken, setToken] = useState<any>(); // can be false if its an LP token
 
   // Get Allowance Amounts already approved for contract sender
   const { data: token_transfer_allowance } = useERC20Token(
@@ -58,14 +57,6 @@ const TokenApproveProps = (params: Props) => {
     params.name,
     params.args,
   );
-
-  // May 26
-  useEffect(() => {
-    if (params?.address) {
-      const token = findTokenFromAddress(params.address);
-      setToken(token);
-    }
-  }, [params?.address]);
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
@@ -78,19 +69,19 @@ const TokenApproveProps = (params: Props) => {
 
   useEffect(() => {
     if (token_transfer_allowance) {
-      //< params.approve
+      setToken(token);
       setAllowance(token_transfer_allowance);
       setTrigger(false);
     }
-  }, [token_transfer_allowance]); //params.approve
+  }, [token_transfer_allowance]);
 
   useEffect(() => {
     if (inputTrigger === true) {
-      console.log("RENDER AFTER TX TEST ++++++++++");
+      console.log("DEBUG TOKEN APPROVAL: RENDER AFTER TX TEST ++++++++++");
       setAllowance(params.approve);
     }
-    console.log("RENDER AFTER TX TEST ----------");
-  }, [inputTrigger]);
+    console.log("DEBUG TOKEN APPROVAL: RENDER AFTER TX TEST ----------");
+  }, [inputTrigger, params.approve]);
 
   const CustomToastWithLink = (_url: string) => (
     <div>
@@ -124,16 +115,19 @@ const TokenApproveProps = (params: Props) => {
     });
   };
 
-  console.log(
-    "Token Approval Props",
-    params,
+  // console.log(
+  //   "Token Approval Props",
+  //   params,
 
-    " Allowance: Already Approved Amount on this Contract: ",
-    token_transfer_allowance,
+  //   " Allowance: Already Approved Amount on this Contract: ",
+  //   token_transfer_allowance,
 
-    " TokenInfo Contract: ",
-    inputToken,
-  );
+  //   " TokenInfo Contract in Storage: ",
+  //   inputToken,
+
+  //   " TokenInfo Address: ",
+  //   params?.address,
+  // );
 
   return (
     <div className={styles.token_approve_container}>
@@ -144,7 +138,7 @@ const TokenApproveProps = (params: Props) => {
             {parseFloat(
               formatUnits(
                 allowance_amount,
-                Number(inputToken ? inputToken?.decimals : 18),
+                Number(inputToken !== false ? inputToken?.decimals : 18), // defaults to 18 if its not found == LP token
               ),
             ).toFixed(8)}
           </span>{" "}
@@ -166,7 +160,7 @@ const TokenApproveProps = (params: Props) => {
               {parseFloat(
                 formatUnits(
                   allowance_amount,
-                  Number(inputToken ? inputToken?.decimals : 18),
+                  Number(inputToken !== false ? inputToken?.decimals : 18), // defaults to 18 if its not found == LP token
                 ),
               ).toFixed(8)}
             </span>
@@ -191,7 +185,8 @@ const TokenApproveProps = (params: Props) => {
                       </span>
                       <span>
                         {" "}
-                        Approve {" : "} {inputToken ? inputToken?.symbol : "LP"}
+                        Approve{" "}
+                        {inputToken !== false ? inputToken?.symbol : " : LP"}
                       </span>
                     </span>
                   </button>

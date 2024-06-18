@@ -35,10 +35,10 @@ export const findTokenFromAddress = (_address: string) => {
   if (save) {
     return save;
   } else {
-    console.log(
-      "Token Not Found within Aquas.Trade Ecosystem as of yet",
-      _address,
-    );
+    // console.log(
+    //   "Token Not Found within Aquas.Trade Ecosystem as of yet",
+    //   _address,
+    // );
     const failed: any = "false";
     return failed;
   }

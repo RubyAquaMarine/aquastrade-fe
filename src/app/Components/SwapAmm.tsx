@@ -172,7 +172,7 @@ const SwapAmm = () => {
       console.log(" MAKE LUNCH  BUG");
       setAmountB("0.0");
     }
-  }, [addTokenBAmount]);
+  }, [addTokenBAmount, ammFeature]);
 
   useEffect(() => {
     if (address && isConnected) {
@@ -280,14 +280,16 @@ const SwapAmm = () => {
     // compare current values
 
     if (amount === amountA) {
-      console.log(" DONT UPDATE amountA");
+      console.log(" getMaxAmounts: DONT UPDATE amountA");
 
       return;
     }
 
     if (amount) {
+      console.log(" getMaxAmounts: UPDATE amountA");
       setAmountA(amount);
     } else {
+      console.log(" getMaxAmounts: NOT UPDATED amountA");
       setAmountA(_amount);
     }
   };
@@ -867,15 +869,12 @@ const SwapAmm = () => {
             </div>
           </div>
           {/**  Swap and Approve button  */}
-          <span className={styles.button_container}>
-            <button
-              type="button"
-              className={styles.button_field}
-              onClick={handleSwap}
-            >
-              Swap
+
+          <div className={styles.button_container_img}>
+            <button className={styles.button_swap} onClick={handleSwap}>
+              <span> Swap Tokens</span>
             </button>
-          </span>
+          </div>
 
           <div className={styles.input_container_column}>
             <div className={styles.column}>
@@ -1301,25 +1300,51 @@ const SwapAmm = () => {
               )}
             </div>
           </div>
-          <div className={styles.button_container}>
+          <div className={styles.button_container_img}>
             <button
-              className={styles.button_field}
+              className={styles.button_img}
               onClick={handleProvideLiquidity}
             >
-              {poolAddress !== "0x0000000000000000000000000000000000000000"
-                ? "Cast Line"
-                : "Build Boat"}
+              <span>
+                {" "}
+                <Image
+                  src={`/cast.svg`}
+                  alt="AquasTrade Logo outbound external links"
+                  width={20}
+                  height={20}
+                  priority
+                />
+              </span>
+
+              <span>
+                {" "}
+                {poolAddress !== "0x0000000000000000000000000000000000000000"
+                  ? "Cast Line"
+                  : "Build Boat"}{" "}
+              </span>
             </button>
           </div>
           <div className={styles.input_container_column}>
             <div className={styles.column}>
               <p>
-                {" "}
-                {poolAddress !== "0x0000000000000000000000000000000000000000"
-                  ? "Whale Size:"
-                  : "100% Ownership"}
+                <span className={styles.button_field_med}>
+                  {" "}
+                  {poolAddress !== "0x0000000000000000000000000000000000000000"
+                    ? "Whale Size:"
+                    : "100% Ownership!"}{" "}
+                </span>
+                <span className={styles.pool_balance}> %</span>
               </p>
-              <p> Exchange Rate:</p>
+              <p>
+                <span className={styles.button_field_med}>
+                  {" "}
+                  Adding Liquidity to{" "}
+                </span>
+                <span className={styles.pool_balance}>
+                  {" "}
+                  {tokenA} - {tokenB}
+                </span>
+              </p>
             </div>
             <div className={styles.column}></div>
           </div>
@@ -1365,7 +1390,7 @@ const SwapAmm = () => {
                   )}
                 </span>
 
-                <span className={styles.box_space}>
+                <span className={styles.box_space_center}>
                   <input
                     className={styles.input_symbol}
                     type="text"
@@ -1375,6 +1400,48 @@ const SwapAmm = () => {
                     onClick={() => setShowTokenListB(true)}
                   />
                 </span>
+
+                {/** Show the Token List and map Token balances  */}
+                {showTokenListA && tokenAddresses?.length > 0 ? (
+                  <div className={styles_pop.popup_container}>
+                    <div className={styles_pop.popup_content}>
+                      {tokenAddresses.map((_token, index) => (
+                        <div
+                          className={styles.token_list_symbol}
+                          key={index}
+                          onClick={() => handleTokenSelectionA(_token.symbol)}
+                        >
+                          {_token.symbol} {"  "}
+                          <Image
+                            className={styles.token_list_symbol_space}
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={18}
+                            height={18}
+                          />
+                          {/** Does the user have any assets within their wallet  */}
+                          {walletTokenList &&
+                            walletTokenList.map((_balance, index) => (
+                              <span
+                                key={index}
+                                className={styles.amount_balance}
+                              >
+                                {" "}
+                                {_balance.contractAddress.toUpperCase() ===
+                                  _token.address.toUpperCase() &&
+                                  formatUnits(
+                                    _balance.balance,
+                                    Number(_balance.decimals),
+                                  )}
+                              </span>
+                            ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <span></span>
+                )}
 
                 {showTokenListB && tokenAddresses?.length > 0 ? (
                   <div className={styles_pop.popup_container}>
@@ -1425,7 +1492,7 @@ const SwapAmm = () => {
                 <span className={styles.box_space}>
                   {" "}
                   <input
-                    className={styles.input_amount}
+                    className={styles.input_amount_sm}
                     type="number"
                     placeholder="100"
                     min={1}
@@ -1450,47 +1517,6 @@ const SwapAmm = () => {
                     <span className={styles.text_center}> error </span>
                   )}
                 </span>
-                {/** Show the Token List and map Token balances  */}
-                {showTokenListA && tokenAddresses?.length > 0 ? (
-                  <div className={styles_pop.popup_container}>
-                    <div className={styles_pop.popup_content}>
-                      {tokenAddresses.map((_token, index) => (
-                        <div
-                          className={styles.token_list_symbol}
-                          key={index}
-                          onClick={() => handleTokenSelectionA(_token.symbol)}
-                        >
-                          {_token.symbol} {"  "}
-                          <Image
-                            className={styles.token_list_symbol_space}
-                            src={_token.logo}
-                            alt="Aquas.Trade Crypto Assets On SKALE Network"
-                            width={18}
-                            height={18}
-                          />
-                          {/** Does the user have any assets within their wallet  */}
-                          {walletTokenList &&
-                            walletTokenList.map((_balance, index) => (
-                              <span
-                                key={index}
-                                className={styles.amount_balance}
-                              >
-                                {" "}
-                                {_balance.contractAddress.toUpperCase() ===
-                                  _token.address.toUpperCase() &&
-                                  formatUnits(
-                                    _balance.balance,
-                                    Number(_balance.decimals),
-                                  )}
-                              </span>
-                            ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <span></span>
-                )}
               </div>
             </div>
             <p className={styles.container_margin}>
@@ -1521,20 +1547,37 @@ const SwapAmm = () => {
               </span>
             </p>
           </div>
-          <div className={styles.button_container}>
+          <div className={styles.button_container_img}>
             <button
-              className={styles.button_field}
+              className={styles.button_img}
               onClick={handleRemoveLiquidity}
             >
-              Set Sail
+              <span>
+                {" "}
+                <Image
+                  src={`/sailboat.svg`}
+                  alt="AquasTrade Logo outbound external links"
+                  width={20}
+                  height={20}
+                  priority
+                />
+              </span>
+
+              <span> Set Sail </span>
             </button>
           </div>
-          <div className={styles.input_container_column}>
+          {/**
+           
+             <div className={styles.input_container_column}>
             <div className={styles.column}>
               <p> Token A Out:</p>
               <p> Token B Out:</p>
             </div>
           </div>
+           
+           
+           
+            */}
         </div>
       ) : (
         <div> </div>
