@@ -415,17 +415,17 @@ const SwapAmm = () => {
   // Function to handle token selection from the list
   // ensure the token is not the same as tokenB visa versa
   const handleTokenSelectionA = (token: string) => {
-    if(token !== tokenB){
+    if (token !== tokenB) {
       setTokenA(token);
     }
     setShowTokenListA(false);
   };
 
   const handleTokenSelectionB = (token: string) => {
-    if(token !== tokenA){
+    if (token !== tokenA) {
       setTokenB(token);
     }
-  
+
     setShowTokenListB(false);
   };
 
