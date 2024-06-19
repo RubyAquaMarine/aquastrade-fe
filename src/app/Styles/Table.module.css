@@ -64,3 +64,45 @@
   color: #b4b0b0;
   font-size: 0.8rem;
 }
+
+.table_body:hover {
+  color: #f4f4f4;
+}
+
+.popover {
+  border: 1px solid #181a1d;
+  color: #b4b0b0;
+  font-size: 0.8rem;
+}
+
+.popover_container {
+  margin-top: 0.5rem;
+
+  font-family: monospace;
+
+  backdrop-filter: opacity(20%);
+
+  min-width: 370px;
+  background-color: #242629;
+  padding: 0.6rem;
+  position: sticky;
+  border-radius: 2rem;
+  border: 2px solid #475384;
+}
+
+.popover_input {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.6rem;
+}
+
+.popover_padding {
+  padding: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.popover_margin {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}

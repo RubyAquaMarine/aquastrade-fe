@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useMemo } from "react";
-import { formatUnits, parseUnits } from "viem";
+import React, { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { findTokenFromAddress } from "@/app/Utils/findTokens";
@@ -28,7 +27,11 @@ import {
 } from "@tanstack/react-table";
 
 import { Button } from "@/app/Components/ui/Button";
+
 import { Checkbox } from "@/app/Components/ui/Checkbox";
+
+import { AddDataFeed } from "@/app/Components/table/AddDataFeed";
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -52,8 +55,6 @@ import styles from "@/app/Styles/Table.module.css";
 
 const accessorKeyAssets = "pool";
 
-const DECIMALS = 8;
-
 export type DataFeed = {
   id: string;
   pool: string;
@@ -66,16 +67,12 @@ export type DataFeed = {
 };
 
 export default function TableDataFeed(dataFeed: any) {
-  console.log("TableDataFeed params", dataFeed);
-
   const dataNow = Object.values(dataFeed);
 
   // These object name must be [data,columns]
 
   const data = useMemo(() => dataNow, []);
 
-  //  const columns = [{'title':'test'},{'title':'test'}];
-  //const columns: ColumnDef<DataFeed>[] =
   const columns = [
     {
       header: "Pair",
@@ -87,7 +84,7 @@ export default function TableDataFeed(dataFeed: any) {
         const base = findTokenFromAddress(addrB)?.symbol;
 
         return (
-          <div className="text-right font-medium">{`${quote}/${base}`}</div>
+          <div className="text-left font-medium">{`${quote}/${base}`}</div>
         );
       },
     },
@@ -99,7 +96,7 @@ export default function TableDataFeed(dataFeed: any) {
         const formatted = formatPriceBigToHuman(
           row.getValue("pricePoolInverse"),
         );
-        return <div className="text-right font-medium">{formatted}</div>;
+        return <div className="text-left font-medium">{formatted}</div>;
       },
     },
 
@@ -108,7 +105,7 @@ export default function TableDataFeed(dataFeed: any) {
       accessorKey: "pricePool",
       cell: ({ row }: any) => {
         const formatted = formatPriceBigToHuman(row.getValue("pricePool"));
-        return <div className="text-right font-medium">{formatted}</div>;
+        return <div className="text-left font-medium">{formatted}</div>;
       },
     },
 
@@ -117,12 +114,16 @@ export default function TableDataFeed(dataFeed: any) {
       accessorKey: "priceFeed",
       cell: ({ row }: any) => {
         const formatted = formatPriceBigToHuman(row.getValue("priceFeed"));
-        return <div className="text-right font-medium">{formatted}</div>;
+        return <div className="text-left font-medium">{formatted}</div>;
       },
     },
     {
       header: "Pool",
       accessorKey: "pool",
+      cell: ({ row }: any) => {
+        const formatted = row.getValue("pool");
+        return <div className="text-left font-medium">{formatted}</div>;
+      },
     },
     {
       header: "Quote",
@@ -131,7 +132,7 @@ export default function TableDataFeed(dataFeed: any) {
         const addr = row.getValue("quote");
         const formatted = findTokenFromAddress(addr)?.symbol;
 
-        return <div className="text-right font-medium">{formatted}</div>;
+        return <div className="text-left font-medium">{formatted}</div>;
       },
     },
     {
@@ -141,7 +142,7 @@ export default function TableDataFeed(dataFeed: any) {
         const addr = row.getValue("base");
         const formatted = findTokenFromAddress(addr)?.symbol;
 
-        return <div className="text-right font-medium">{formatted}</div>;
+        return <div className="text-left font-medium">{formatted}</div>;
       },
     },
     {
@@ -183,17 +184,7 @@ export default function TableDataFeed(dataFeed: any) {
           {/** Button to add new data feeds  */}
         </span>
         <span className={styles.container_flex}>
-          <Button className={styles.input_button} variant="outline" size="sm">
-            <Image
-              className="image_invert"
-              src="/info.svg"
-              alt="info"
-              width={24}
-              height={24}
-              priority
-            />{" "}
-            New DataFeed
-          </Button>
+          <AddDataFeed></AddDataFeed>
         </span>
         <span className={styles.container_flex}>
           <Link className="button_back" href="/dashboard/tokeninfo">
