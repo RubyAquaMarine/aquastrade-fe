@@ -27,7 +27,11 @@ import {
 } from "@tanstack/react-table";
 
 import { Button } from "@/app/Components/ui/Button";
+
 import { Checkbox } from "@/app/Components/ui/Checkbox";
+
+import { AddDataFeed } from "@/app/Components/table/AddDataFeed";
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -63,8 +67,6 @@ export type DataFeed = {
 };
 
 export default function TableDataFeed(dataFeed: any) {
-  console.log("TableDataFeed params", dataFeed);
-
   const dataNow = Object.values(dataFeed);
 
   // These object name must be [data,columns]
@@ -182,17 +184,7 @@ export default function TableDataFeed(dataFeed: any) {
           {/** Button to add new data feeds  */}
         </span>
         <span className={styles.container_flex}>
-          <Button className={styles.input_button} variant="outline" size="sm">
-            <Image
-              className="image_invert"
-              src="/info.svg"
-              alt="info"
-              width={24}
-              height={24}
-              priority
-            />{" "}
-            New DataFeed
-          </Button>
+          <AddDataFeed></AddDataFeed>
         </span>
         <span className={styles.container_flex}>
           <Link className="button_back" href="/dashboard/tokeninfo">
