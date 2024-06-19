@@ -74,7 +74,7 @@ export function AddDataFeed() {
   const CustomToastWithLink = (_url: string) => (
     <div>
       <Link href={_url} target="_blank">
-        Presale Token Purchased: Tx Hash on 🌊 AquasTrade
+        DataFeed Created: Tx Hash on 🌊 AquasTrade
       </Link>
     </div>
   );
@@ -93,7 +93,13 @@ export function AddDataFeed() {
     });
 
   const txCreateDataFeed = () => {
+    console.log(" debug button click ");
+
     if (tokenA.current && tokenB.current) {
+      // console.log(" debug button click  tokenA", tokenA.current)
+      // console.log(" debug button click  AQUAFEED", AQUAFEED)
+      // console.log(" debug button click  ROUTER", ROUTER)
+      // console.log(" debug button click   FACTORY",  FACTORY)
       writeContract({
         abi: AQUAFEED_ABI,
         address: AQUAFEED,
@@ -101,7 +107,7 @@ export function AddDataFeed() {
         args: [
           ROUTER,
           FACTORY,
-          "0x0000000000000000000000000000000000000000",
+          "0xc318a82CB7c2B0faf7e355BB8F285016956aBF55",
           tokenA.current?.address
             ? (tokenA.current.address as unknown as `0x${string} `)
             : "0x0000000000000000000000000000000000000000",
