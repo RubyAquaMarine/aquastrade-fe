@@ -88,11 +88,11 @@ const ConnectWallet = () => {
             ) : (
               <span className={styles.telegram}>
                 {!chain ? (
-                  <button type="button" className={styles.button_login}>
+                  <button type="button" className={styles.button_trade}>
                     <Link href="/dashboard">Switch Network</Link>
                   </button>
                 ) : (
-                  <button type="button" className={styles.button_login}>
+                  <button type="button" className={styles.button_trade}>
                     <Link href="/swap/amm">Start Trading</Link>
                   </button>
                 )}
@@ -112,72 +112,74 @@ const ConnectWallet = () => {
           </span>
         </div>
       ) : (
-        <div className={styles.connect_wallet}>
+        <div className={styles.container}>
           <span className={styles.text_border}>
             {" "}
             <span className={styles.text_connect}> Connect Wallet</span>{" "}
           </span>
 
-          {!isConnected && status !== "idle" && (
-            <div className={styles.text_flex}>{message}</div>
-          )}
+          <div className={styles.container_connector}>
+            {!isConnected && status !== "idle" && (
+              <div className={styles.text_flex}>{message}</div>
+            )}
 
-          {error && <div>Error: {error.message}</div>}
-          <span className={styles.line}>
-            {" "}
-            <span className={styles.telegram}>
+            {error && <div>Error: {error.message}</div>}
+            <span className={styles.line}>
               {" "}
-              <Link
-                className={styles.button_kyc}
-                href="https://t.me/AquasTradeBot"
-                target="_blank"
-              >
-                <span className="image_invert">
-                  {" "}
-                  <Image
-                    src="/telegram.svg"
-                    alt="menu"
-                    width={22}
-                    height={22}
-                    priority
-                  />
-                </span>
-                <span> Trade via Telegram</span>
-              </Link>
+              <span className={styles.telegram}>
+                {" "}
+                <Link
+                  className={styles.button_kyc}
+                  href="https://t.me/AquasTradeBot"
+                  target="_blank"
+                >
+                  <span className="image_invert">
+                    {" "}
+                    <Image
+                      src="/telegram.svg"
+                      alt="menu"
+                      width={22}
+                      height={22}
+                      priority
+                    />
+                  </span>
+                  <span> Trade via Telegram</span>
+                </Link>
+              </span>
+              <span className={styles.telegram}>
+                {uniqueList.map((connector) => (
+                  <div key={connector.id}>
+                    <ul className={styles.connectorButton}>
+                      <li>
+                        <button
+                          className={styles.button_login}
+                          onClick={() => {
+                            connect({ connector });
+                          }}
+                        >
+                          <span className={styles.spinner_padding}>
+                            {isConnecting ? (
+                              <span>
+                                {" "}
+                                {<FaSpinner className={styles.spinner_icon} />}
+                              </span>
+                            ) : (
+                              <span> </span>
+                            )}
+                          </span>
+                          <span className={styles.spinner_padding}>
+                            {" "}
+                            {isConnected && address}
+                            {connector.name}
+                          </span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                ))}{" "}
+              </span>
             </span>
-            <span className={styles.telegram}>
-              {uniqueList.map((connector) => (
-                <div key={connector.id}>
-                  <ul>
-                    <li className={styles.connectorButton}>
-                      <button
-                        className={styles.button_login}
-                        onClick={() => {
-                          connect({ connector });
-                        }}
-                      >
-                        <span className={styles.spinner_padding}>
-                          {isConnecting ? (
-                            <span>
-                              {" "}
-                              {<FaSpinner className={styles.spinner_icon} />}
-                            </span>
-                          ) : (
-                            <span> </span>
-                          )}
-                        </span>
-                        <span className={styles.spinner_padding}>
-                          {" "}
-                          {isConnected && address}
-                          {connector.name}
-                        </span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              ))}{" "}
-            </span>
-          </span>
+          </div>
         </div>
       )}
     </div>

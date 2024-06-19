@@ -1,6 +1,8 @@
-/* Switch the css based on whether the user is connected to the wallet or */
-.connect_wallet {
-  overflow-y: hidden;
+/** 
+
+*/
+
+.container {
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
   z-index: 1000;
@@ -12,15 +14,83 @@
   box-shadow: rgba(255, 255, 255, 0.15) 5px 5px 15px 0px;
 }
 
-.connect_wallet:hover {
-  overflow-y: scroll;
+/** 
+ Holds all the wagmin connector buttons 
+*/
+
+.container_connector {
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+
+  border-radius: 2rem;
+  max-width: 280px;
+  max-height: 220px;
+}
+
+.container_connector:hover {
+  overflow-y: auto;
+  padding-left: 15px;
+}
+/** 
+ Actual List of buttons : paddings around the buttons etc 
+*/
+.connectorButton {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 265px;
+
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.button_login {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  margin-left: 15px;
+
+  display: flex;
+  justify-content: left;
+  text-align: left;
+
+  font-size: 1rem;
+  padding: 0.1rem 1rem;
+  width: 235px;
+  border-radius: 0.2rem;
+  border: 1px solid #242629;
+}
+.button_trade {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+
+  display: flex;
+
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+
+  padding: 0.1rem 1rem;
+
+  width: 265px;
+  border: 1px solid #242629;
+}
+
+.button_trade:hover {
+  box-shadow: 0 2px 14px #6d8ef8;
+}
+
+.button_login:hover {
+  box-shadow: 0 2px 14px #6d8ef8;
 }
 
 .connect_wallet_logout {
   overflow-y: hidden;
   padding-top: 0.1rem;
   padding-bottom: 1.2rem;
-  z-index: 1000;
+
   border-radius: 2rem;
   max-width: 280px;
   max-height: 280px;
@@ -61,39 +131,8 @@
   margin: 0.5rem;
 }
 
-.connectorButton {
-  padding: 0.3rem 0.5rem;
-}
-
 .spinner_padding {
   padding: 6px;
-}
-
-.button_login {
-  margin-top: 0.1rem;
-  margin-bottom: 0.1rem;
-  position: static;
-  left: 0;
-  top: 0;
-  display: flex;
-  width: auto;
-  min-width: 100px;
-  justify-content: center;
-  text-align: center;
-  font-size: 1rem;
-  border-radius: 12px;
-  border: 1px solid #2196f3;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(82, 86, 109, 0.47),
-    transparent
-  );
-  padding: 0.1rem 1rem;
-  box-shadow: 10px 15px 12px rgba(34, 40, 156, 0.1);
-}
-
-.button_login:hover {
-  background-color: #007bff;
 }
 
 .logout {
