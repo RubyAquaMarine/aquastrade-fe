@@ -21,7 +21,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/app/Utils/utils";
 import { Button } from "@/app/Components/ui/Button";
 
-import styles from "@/app/Styles/Table.module.css";
+import styles from "@/app/Styles/GetStarted.module.css";
 
 import {
   Popover,
@@ -37,7 +37,11 @@ import { findContractInfo, findTokenFromSymbol } from "@/app/Utils/findTokens";
 
 import { AQUAFEED_ABI } from "@/app/Abi/europaAquaFeed";
 
-export function AddDataFeed() {
+/*
+
+*/
+
+export function GetStarted() {
   const [open, setOpen] = useState(false);
   const [inputTokenA, setTokenA] = useState("");
   const [inputTokenB, setTokenB] = useState("");
@@ -120,59 +124,31 @@ export function AddDataFeed() {
   };
 
   return (
-    <div className={styles.popover}>
+    <>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button className={styles.input_button} variant="outline" size="sm">
-            <Image
-              className="image_invert"
-              src="/info.svg"
-              alt="info"
-              width={24}
-              height={24}
-              priority
-            />{" "}
-            New DataFeed
-          </Button>
+          <span className={styles.container}>
+            <span className={styles.badge_connected}>
+              {isConnected ? "Connected" : "Disconnected"}
+            </span>
+            <span className={styles.badge}> Get started </span>
+          </span>
         </PopoverTrigger>
+
         <PopoverContent className={styles.popover_container}>
           <div className={styles.popover_padding}>
             <p className="text-sm leading-tight text-muted-foreground">
-              Enter token symbols to create a new datafeed. You must be a NFT
-              holder to activate new datafeeds.
+              <Link
+                className={styles.title}
+                href="https://meson.fi/skale-europa"
+                target="_blank"
+              >
+                Bridge from other networks
+              </Link>
             </p>
-
-            <h1>
-              {inputTokenA} - {inputTokenB}
-            </h1>
-            <input
-              type="text"
-              placeholder="Token Symbol Quote"
-              value={inputTokenA}
-              onChange={(e) => setTokenA(e.target.value.toUpperCase())}
-              className={styles.popover_input}
-            />
-
-            <input
-              type="text"
-              placeholder="Token Symbol Base"
-              value={inputTokenB}
-              onChange={(e) => setTokenB(e.target.value.toUpperCase())}
-              className={styles.popover_input}
-            />
-
-            <button
-              className={styles.input_button}
-              onClick={() => txCreateDataFeed()}
-            >
-              {" "}
-              Create NewFeed
-            </button>
           </div>
         </PopoverContent>
       </Popover>
-    </div>
+    </>
   );
 }
-
-//   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
