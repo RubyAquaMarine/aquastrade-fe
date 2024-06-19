@@ -142,12 +142,12 @@ export function AddDataFeed() {
               holder to activate new datafeeds.
             </p>
 
-            <h1>--</h1>
+            <h1>{inputTokenA}{' '} -{' '} {inputTokenB}</h1>
             <input
               type="text"
               placeholder="Token Symbol Quote"
               value={inputTokenA}
-              onChange={(e) => setTokenA(e.target.value)}
+              onChange={(e) => setTokenA(e.target.value.toUpperCase())}
               className={styles.popover_input}
             />
 
@@ -155,7 +155,7 @@ export function AddDataFeed() {
               type="text"
               placeholder="Token Symbol Base"
               value={inputTokenB}
-              onChange={(e) => setTokenB(e.target.value)}
+              onChange={(e) => setTokenB(e.target.value.toUpperCase())}
               className={styles.popover_input}
             />
 
