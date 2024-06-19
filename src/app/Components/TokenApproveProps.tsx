@@ -59,6 +59,12 @@ const TokenApproveProps = (params: Props) => {
   );
 
   useEffect(() => {
+    if (token) {
+      setToken(token);
+    }
+  }, [token]);
+
+  useEffect(() => {
     if (contractCallDataConfirmed) {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
@@ -69,7 +75,7 @@ const TokenApproveProps = (params: Props) => {
 
   useEffect(() => {
     if (token_transfer_allowance) {
-      setToken(token);
+     
       setAllowance(token_transfer_allowance);
       setTrigger(false);
     }
@@ -77,10 +83,10 @@ const TokenApproveProps = (params: Props) => {
 
   useEffect(() => {
     if (inputTrigger === true) {
-      console.log("DEBUG TOKEN APPROVAL: RENDER AFTER TX TEST ++++++++++");
+      // console.log("DEBUG TOKEN APPROVAL: RENDER AFTER TX TEST ++++++++++");
       setAllowance(params.approve);
     }
-    console.log("DEBUG TOKEN APPROVAL: RENDER AFTER TX TEST ----------");
+    // console.log("DEBUG TOKEN APPROVAL: RENDER AFTER TX TEST ----------");
   }, [inputTrigger, params.approve]);
 
   const CustomToastWithLink = (_url: string) => (

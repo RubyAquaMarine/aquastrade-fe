@@ -109,7 +109,7 @@ export const useGetAmountInQuote = (
   _inputTokenAddress: `0x${string}`,
   _decimalA: bigint,
 ) => {
-  console.log("useGetAmountInQuote:Props: ", _amount, _addressPair, _decimalA);
+  // console.log("useGetAmountInQuote:Props: ", _amount, _addressPair, _decimalA);
 
   const amountIn = parseUnits(_amount, Number(_decimalA ? _decimalA : 18));
 

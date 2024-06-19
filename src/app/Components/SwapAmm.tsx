@@ -165,11 +165,11 @@ const SwapAmm = () => {
       addTokenBAmount >= BigInt(1) &&
       ammFeature !== "swap"
     ) {
-      console.log(" MAKE DINNER");
+    
 
       setAmountB(formatUnits(addTokenBAmount, Number(tokenBDecimal.current))); // convert big to human amount string
     } else {
-      console.log(" MAKE LUNCH  BUG");
+    
       setAmountB("0.0");
     }
   }, [addTokenBAmount, ammFeature]);
@@ -280,16 +280,16 @@ const SwapAmm = () => {
     // compare current values
 
     if (amount === amountA) {
-      console.log(" getMaxAmounts: DONT UPDATE amountA");
+      // console.log(" getMaxAmounts: DONT UPDATE amountA");
 
       return;
     }
 
     if (amount) {
-      console.log(" getMaxAmounts: UPDATE amountA");
+      // console.log(" getMaxAmounts: UPDATE amountA");
       setAmountA(amount);
     } else {
-      console.log(" getMaxAmounts: NOT UPDATED amountA");
+      // console.log(" getMaxAmounts: NOT UPDATED amountA");
       setAmountA(_amount);
     }
   };
@@ -341,7 +341,7 @@ const SwapAmm = () => {
 
     setMultihop(false);
     setSwapPath([_tokenA, _tokenB]);
-    console.log(`LOGIC 4 ${false} ${multiHop}`);
+    // console.log(`LOGIC 4 ${false} ${multiHop}`);
   };
 
   // insert Token Addresses
