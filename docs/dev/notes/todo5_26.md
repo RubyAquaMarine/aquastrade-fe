@@ -6,7 +6,6 @@
 
 - https://github.com/RubyAquaMarine/yak-aggregator/blob/master/src/contracts/adapters/UniswapV2Adapter.sol
 
-
 - <TokenInfoBox > : styled
 
 - `${address?.slice(0, 4)} ... ${address?.slice(38, 42)}`

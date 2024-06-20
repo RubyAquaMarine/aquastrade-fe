@@ -1,4 +1,3 @@
-// components/Footer.js
 "use client";
 import React from "react";
 import StockTicker from "./StockTickerV";
@@ -20,19 +19,4 @@ const Footer = () => {
     </footer>
   );
 };
-// style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: '#333', color: '#fff', textAlign: 'center', padding: '10px 0' }
-
 export default Footer;
-
-/*
- <footer className={styles.footer}>
-
-<ul>
-<li> </li>
-
-</ul>
-      <span>  <StockTicker /> </span>
-      <span><GetStarted></GetStarted></span>
-    
-    </footer>
-*/

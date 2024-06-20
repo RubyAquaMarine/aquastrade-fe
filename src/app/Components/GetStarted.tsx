@@ -140,6 +140,14 @@ export function GetStarted() {
             <p className="text-sm leading-tight text-muted-foreground">
               <Link
                 className={styles.title}
+                href="https://aquas.trade/dashboard/metaport"
+              >
+                Bridge from Ethereum
+              </Link>
+            </p>
+            <p className="text-sm leading-tight text-muted-foreground">
+              <Link
+                className={styles.title}
                 href="https://meson.fi/skale-europa"
                 target="_blank"
               >

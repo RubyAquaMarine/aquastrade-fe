@@ -23,7 +23,14 @@
   padding: 0.6rem;
   position: sticky;
   background-color: #141618;
-  border: 1px solid #475384;
+  border: none;
+  border-radius: 2rem;
+}
+
+.popover_padding {
+  padding: 0.2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .title {
@@ -44,12 +51,6 @@
   box-shadow: 0 2px 14px #6d8ef8;
 }
 
-.popover_padding {
-  padding: 0.2rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
 .title_sub {
   margin: 1rem;
   padding: 1rem;
@@ -57,25 +58,25 @@
 
 .badge_connected {
   background-color: #141618;
-  border: 0.1rem solid #242629;
+
   font-size: 0.6rem;
   padding-left: 1rem;
   padding-right: 0.2rem;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
-  border-radius: 0.1rem;
+
   cursor: default;
 }
 
 .badge {
   background-color: #141618;
-  border: 0.1rem solid #242629;
+
   font-size: 0.7rem;
   padding-left: 1rem;
   padding-right: 0.2rem;
-  padding-top: 0.2rem;
+  padding-top: 0.1rem;
   padding-bottom: 0.2rem;
-  border-radius: 0.1rem;
+
   cursor: pointer;
 }
 
@@ -108,4 +109,9 @@
 .popover_margin {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.column {
+  flex: 1;
+  padding: 0 1rem;
 }

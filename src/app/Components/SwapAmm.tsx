@@ -1,6 +1,6 @@
 // @ts-nocheck
 "use client";
-// bug in Adding Liquiditiy with the approval amounts
+
 // --- // // @ts-nocheck
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
