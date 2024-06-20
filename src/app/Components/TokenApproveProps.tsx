@@ -56,7 +56,7 @@ const TokenApproveProps = (params: Props) => {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
       setSpinTimer(false);
-      setAllowance(BigInt(0)); // force render
+      setAllowance(params.approve); // force render
       console.log(" TOKEN APPROVAL CONFIRMATION ");
     }
   }, [contractCallDataConfirmed, hash]);
@@ -94,8 +94,9 @@ const TokenApproveProps = (params: Props) => {
   };
 
   console.log(
-    "DEBUG TOKEN APPROVAL vs APPROVED:  ----------",
+    "DEBUG TOKEN APPROVAL vs APPROVED(0,0):  ----------",
     params.approve,
+    allowance_amount,
     token_transfer_allowance,
   );
 
