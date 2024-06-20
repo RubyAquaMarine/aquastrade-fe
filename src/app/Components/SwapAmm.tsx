@@ -165,11 +165,8 @@ const SwapAmm = () => {
       addTokenBAmount >= BigInt(1) &&
       ammFeature !== "swap"
     ) {
-    
-
       setAmountB(formatUnits(addTokenBAmount, Number(tokenBDecimal.current))); // convert big to human amount string
     } else {
-    
       setAmountB("0.0");
     }
   }, [addTokenBAmount, ammFeature]);

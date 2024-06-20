@@ -27,14 +27,12 @@
 }
 
 .title {
- 
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
   display: flex;
   font-size: 0.8rem;
   justify-content: center;
   text-align: center;
-
 
   padding: 0.5rem 1rem;
 
