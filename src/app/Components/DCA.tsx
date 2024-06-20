@@ -29,7 +29,6 @@ import {
 } from "@/app/Utils/config";
 
 import PoolPrice from "@/app/Components/PoolPrice";
-import TokenApprove from "@/app/Components/TokenApprove";
 import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import DCATotalOrders from "@/app/Components/DCATotalOrders";
 import { DCA_ABI } from "@/app/Abi/dca";

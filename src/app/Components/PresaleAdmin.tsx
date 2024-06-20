@@ -17,7 +17,6 @@ import { parseUnits } from "viem";
 /*
   AquasTrade components
 */
-import TokenApprove from "@/app/Components/TokenApprove";
 import { CHAIN } from "@/app/Utils/config";
 import { PRESALE_ABI } from "@/app/Abi/presale";
 import {

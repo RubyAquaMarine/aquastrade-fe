@@ -6,7 +6,6 @@
 
 - https://github.com/RubyAquaMarine/yak-aggregator/blob/master/src/contracts/adapters/UniswapV2Adapter.sol
 
-- - <TokenApprove> click to revoke (if value is shown) : else approve
 
 - <TokenInfoBox > : styled
 
