@@ -18,7 +18,6 @@ import styles from "@/app/Styles/TokenApprove.module.css";
 import { findTokenFromAddress } from "@/app/Utils/findTokens";
 import { bigint } from "zod";
 
-// todo recode with , to use names within code. using ; isn't correct
 interface Props {
   name: string;
   address: `0x${string}`; // 1
@@ -27,7 +26,6 @@ interface Props {
 }
 
 const TokenApproveProps = (params: Props) => {
-  //  const spinTimer = useRef(false);
   const [spinTimer, setSpinTimer] = useState<boolean>(false);
   // Doesn't work with LP tokens
   const token = findTokenFromAddress(params.address);
@@ -57,10 +55,9 @@ const TokenApproveProps = (params: Props) => {
     if (contractCallDataConfirmed) {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
-
-      //  spinTimer.current = false; // turn off the spinner
       setSpinTimer(false);
-      console.log(" TOKEN CONFIRMATION ");
+      setAllowance(BigInt(0)); // force render
+      console.log(" TOKEN APPROVAL CONFIRMATION ");
     }
   }, [contractCallDataConfirmed, hash]);
 
@@ -96,23 +93,9 @@ const TokenApproveProps = (params: Props) => {
     });
   };
 
-  // console.log(
-  //   "Token Approval Props",
-  //   params,
-
-  //   " Allowance: Already Approved Amount on this Contract: ",
-  //   token_transfer_allowance,
-
-  //   " TokenInfo Contract in Storage: ",
-  //   inputToken,
-
-  //   " TokenInfo Address: ",
-  //   params?.address,
-  // );
-
   console.log(
-    "DEBUG TOKEN APPROVED:  ----------",
-    allowance_amount,
+    "DEBUG TOKEN APPROVAL vs APPROVED:  ----------",
+    params.approve,
     token_transfer_allowance,
   );
 
