@@ -102,7 +102,7 @@ const TokenApproveProps = (params: Props) => {
   return (
     <div className={styles.token_approve_container}>
       {/** Show the approved amounts  */}
-      {typeof allowance_amount === "bigint" &&
+      {token_transfer_allowance >= params.approve ||
       allowance_amount >= params.approve ? (
         <span>
           {" "}
@@ -118,7 +118,8 @@ const TokenApproveProps = (params: Props) => {
       ) : (
         <span>
           {" "}
-          {allowance_amount < params.approve ? (
+          {allowance_amount < params.approve ||
+          token_transfer_allowance < params.approve ? (
             <span>
               <button className={styles.token_approve} onClick={handleApprove}>
                 <span className={styles.add_spinner}>
