@@ -126,12 +126,18 @@ const Navbar = () => {
                         <li>
                           {" "}
                           <span className="mb-2 mt-4 text-lg font-medium">
-                            <Link href="https://meson.fi" target="_blank">
+                            <Link
+                              href="https://meson.fi/skale-europa"
+                              target="_blank"
+                            >
                               Meson.fi
                             </Link>
                           </span>
                           <p className="text-sm leading-tight text-muted-foreground">
-                            <Link href="https://meson.fi" target="_blank">
+                            <Link
+                              href="https://meson.fi/skale-europa"
+                              target="_blank"
+                            >
                               Looking to bridge $USD from other L2's via 3rd
                               party bridge?
                             </Link>

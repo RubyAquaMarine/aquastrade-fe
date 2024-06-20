@@ -22,7 +22,7 @@ export type DataFeedV = {
 };
 
 export const useAquaFeed = (functionName: string, args?: [any]) => {
-  console.log("useAquaFeed Fetch ", functionName, args);
+  // console.log("useAquaFeed Fetch ", functionName, args);
   const { data, isError, isLoading } = useReadContract({
     abi: AQUAFEED_ABI,
     address: AQUAFEED?.address,

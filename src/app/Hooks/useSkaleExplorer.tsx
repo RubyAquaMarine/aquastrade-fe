@@ -10,8 +10,6 @@ export type WALLET = {
 export const useSkaleExplorer = (params: WALLET) => {
   const addressWallet = params;
 
-  console.log("useSkaleExplorer ");
-
   const wallet = useRef([]);
 
   const getDataCallBack = () => {

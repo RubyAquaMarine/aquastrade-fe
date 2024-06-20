@@ -18,7 +18,6 @@ import styles from "@/app/Styles/TokenApprove.module.css";
 import { findTokenFromAddress } from "@/app/Utils/findTokens";
 import { bigint } from "zod";
 
-// todo recode with , to use names within code. using ; isn't correct
 interface Props {
   name: string;
   address: `0x${string}`; // 1
@@ -27,61 +26,40 @@ interface Props {
 }
 
 const TokenApproveProps = (params: Props) => {
-  // spinner
-
-  const spinTimer = useRef(false);
+  const [spinTimer, setSpinTimer] = useState<boolean>(false);
   // Doesn't work with LP tokens
   const token = findTokenFromAddress(params.address);
 
-  // the time they click the button until notify toast popup
-
-  // about 10 seconds ; boring. how to make this better?
-
-  // check the difference : if the allowance is already 5, and the approve is 5 , then
-
-  // save the last approved amount
-  const [allowance_amount, setAllowance] = useState(BigInt(0));
+  // RENDERED VALUE
+  const [allowance_amount, setAllowance] = useState<bigint>(BigInt(0));
 
   const { data: hash, writeContract } = useWriteContract();
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
 
-  const [inputTrigger, setTrigger] = useState<boolean>(false); // todo : only triggers once and doesn't reset :
-
-  const [inputToken, setToken] = useState<any>(); // can be false if its an LP token
-
   // Get Allowance Amounts already approved for contract sender
-  const { data: token_transfer_allowance } = useERC20Token(
-    params.address,
-    params.name,
-    params.args,
-  );
+  const {
+    data: token_transfer_allowance,
+    isLoading,
+    isError,
+  } = useERC20Token(params.address, params.name, params.args);
+
+  useEffect(() => {
+    if (typeof token_transfer_allowance === "bigint") {
+      setAllowance(token_transfer_allowance);
+    }
+  }, [token_transfer_allowance]);
 
   useEffect(() => {
     if (contractCallDataConfirmed) {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
-      setTrigger(true);
-      spinTimer.current = false; // turn off the spinner
+      setSpinTimer(false);
+      setAllowance(params.approve); // force render
+      console.log(" TOKEN APPROVAL CONFIRMATION ");
     }
   }, [contractCallDataConfirmed, hash]);
-
-  useEffect(() => {
-    if (token_transfer_allowance) {
-      setToken(token);
-      setAllowance(token_transfer_allowance);
-      setTrigger(false);
-    }
-  }, [token_transfer_allowance]);
-
-  useEffect(() => {
-    if (inputTrigger === true) {
-      console.log("DEBUG TOKEN APPROVAL: RENDER AFTER TX TEST ++++++++++");
-      setAllowance(params.approve);
-    }
-    console.log("DEBUG TOKEN APPROVAL: RENDER AFTER TX TEST ----------");
-  }, [inputTrigger, params.approve]);
 
   const CustomToastWithLink = (_url: string) => (
     <div>
@@ -105,8 +83,8 @@ const TokenApproveProps = (params: Props) => {
     });
 
   const handleApprove = () => {
-    spinTimer.current = true;
-
+    // spinTimer.current = true;
+    setSpinTimer(true);
     writeContract({
       abi: ERC20_ABI,
       address: params.address,
@@ -115,93 +93,60 @@ const TokenApproveProps = (params: Props) => {
     });
   };
 
-  // console.log(
-  //   "Token Approval Props",
-  //   params,
-
-  //   " Allowance: Already Approved Amount on this Contract: ",
-  //   token_transfer_allowance,
-
-  //   " TokenInfo Contract in Storage: ",
-  //   inputToken,
-
-  //   " TokenInfo Address: ",
-  //   params?.address,
-  // );
+  console.log(
+    "DEBUG TOKEN APPROVAL vs APPROVED(0,0):  ----------",
+    params.approve,
+    allowance_amount,
+    token_transfer_allowance,
+  );
 
   return (
     <div className={styles.token_approve_container}>
-      {inputTrigger === true && allowance_amount >= params.approve ? (
+      {/** Show the approved amounts  */}
+      {token_transfer_allowance >= params.approve ||
+      allowance_amount >= params.approve ? (
         <span>
           {" "}
           <span className={styles.token_approve_amount}>
             {parseFloat(
               formatUnits(
                 allowance_amount,
-                Number(inputToken !== false ? inputToken?.decimals : 18), // defaults to 18 if its not found == LP token
+                Number(token !== false ? token?.decimals : 18), // defaults to 18 if its not found == LP token
               ),
             ).toFixed(8)}
           </span>{" "}
         </span>
       ) : (
-        <span> </span>
-      )}
-
-      {typeof allowance_amount === "bigint" ? (
-        <div>
-          {inputTrigger === false &&
-          allowance_amount >= params.approve &&
-          typeof allowance_amount === "bigint" &&
-          allowance_amount <
-            BigInt(
-              "115792089237316195423570985008687907853269984665640564039057",
-            ) ? (
-            <span className={styles.token_approve_amount}>
-              {parseFloat(
-                formatUnits(
-                  allowance_amount,
-                  Number(inputToken !== false ? inputToken?.decimals : 18), // defaults to 18 if its not found == LP token
-                ),
-              ).toFixed(8)}
+        <span>
+          {" "}
+          {allowance_amount < params.approve ||
+          token_transfer_allowance < params.approve ? (
+            <span>
+              <button className={styles.token_approve} onClick={handleApprove}>
+                <span className={styles.add_spinner}>
+                  {" "}
+                  <span className={styles.spinner_padding}>
+                    {" "}
+                    {spinTimer ? (
+                      <FaSpinner className={styles.spinner_icon} />
+                    ) : (
+                      ""
+                    )}{" "}
+                  </span>
+                  <span>
+                    {" "}
+                    Approve {token !== false ? token?.symbol : " : LP"}
+                  </span>
+                </span>
+              </button>
             </span>
           ) : (
-            <span>
-              {" "}
-              {inputTrigger === false || allowance_amount < params.approve ? (
-                <span>
-                  <button
-                    className={styles.token_approve}
-                    onClick={handleApprove}
-                  >
-                    <span className={styles.add_spinner}>
-                      {" "}
-                      <span className={styles.spinner_padding}>
-                        {" "}
-                        {spinTimer && spinTimer.current === true ? (
-                          <FaSpinner className={styles.spinner_icon} />
-                        ) : (
-                          ""
-                        )}{" "}
-                      </span>
-                      <span>
-                        {" "}
-                        Approve{" "}
-                        {inputToken !== false ? inputToken?.symbol : " : LP"}
-                      </span>
-                    </span>
-                  </button>
-                </span>
-              ) : (
-                <span></span>
-              )}{" "}
-            </span>
-          )}
-        </div>
-      ) : (
-        <div></div>
+            <span></span>
+          )}{" "}
+        </span>
       )}
     </div>
   );
 };
 
-export default TokenApproveProps;
+export default memo(TokenApproveProps);

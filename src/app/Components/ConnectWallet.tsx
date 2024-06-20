@@ -79,7 +79,7 @@ const ConnectWallet = () => {
             {chain && chain.id !== CHAIN.id ? (
               <span>
                 <button
-                  className={styles.button_login}
+                  className={styles.button_trade}
                   onClick={(event) => handleToEuropa(event, 2046399126)}
                 >
                   Switch Network

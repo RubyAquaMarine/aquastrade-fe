@@ -25,44 +25,46 @@ const StockTicker = () => {
   }, [objectFeeds]);
 
   // console.log(" Render TICKERS ", stocks);
+  // style={{
+  //   width: "100%",
+  //   overflow: "hidden",
+  //   whiteSpace: "nowrap",
+  // }}
 
   return (
-    <div
-      style={{
-        width: "100%",
-        overflow: "hidden",
-        whiteSpace: "nowrap",
-      }}
-    >
+    <>
       {stocks ? (
-        <Ticker speed={1} direction={"toLeft"} mode={"smooth"}>
-          {() => (
-            <div className={styles.flex}>
-              {stocks.map((stock, index) => (
-                <div key={index} className={styles.block}>
-                  {/**  White text : green/red : grey (symbol :change : price) */}
+        <span>
+          {" "}
+          <Ticker speed={1} direction={"toLeft"} mode={"smooth"}>
+            {() => (
+              <div className={styles.flex}>
+                {stocks.map((stock, index) => (
+                  <div key={index} className={styles.block}>
+                    {/**  White text : green/red : grey (symbol :change : price) */}
 
-                  <span className={styles.tick_symbol}>
-                    {findTokenFromAddress(stock?.quote)?.symbol}-
-                    {findTokenFromAddress(stock?.base)?.symbol}{" "}
-                  </span>
+                    <span className={styles.tick_symbol}>
+                      {findTokenFromAddress(stock?.quote)?.symbol}-
+                      {findTokenFromAddress(stock?.base)?.symbol}{" "}
+                    </span>
 
-                  <span className={styles.tick_price}>
-                    {formatPriceBigToHuman(stock?.pricePoolInverse)}{" "}
-                  </span>
+                    <span className={styles.tick_price}>
+                      {formatPriceBigToHuman(stock?.pricePoolInverse)}{" "}
+                    </span>
 
-                  <span className={styles.tick_price}>
-                    {`(${formatPriceBigToHuman(stock?.pricePool)})`}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-        </Ticker>
+                    <span className={styles.tick_price}>
+                      {`(${formatPriceBigToHuman(stock?.pricePool)})`}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Ticker>
+        </span>
       ) : (
-        <div> </div>
+        <span></span>
       )}
-    </div>
+    </>
   );
 };
 

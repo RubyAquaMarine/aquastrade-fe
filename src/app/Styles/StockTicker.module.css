@@ -14,8 +14,30 @@
   font-size: 0.8rem;
 }
 
+.datafeed {
+  width: 100vw;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 0.5rem;
+  padding-right: 0.1rem;
+}
+
+.dashboard {
+  min-width: 12rem;
+  max-width: 12rem;
+
+  overflow: hidden;
+  padding-left: 1rem;
+  padding-right: 0.1rem;
+}
+
 .flex {
   display: flex;
+}
+
+.flex_more {
+  display: flex;
+  flex: 1;
 }
 
 .block {
