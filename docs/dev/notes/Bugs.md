@@ -22,10 +22,10 @@ AQUA => "@emotion/react": "^11.11.4",
 
 MP => "@emotion/react": "^11.11.1",
 
-# AMM 
+# AMM
 
-- fee per swap. 
-- exchange rate 
+- fee per swap.
+- exchange rate
 
 ## AMM routing
 

@@ -73,6 +73,7 @@
   height: 36px;
   border-radius: 12px;
   border: 0.1rem solid #242629;
+  box-shadow: 1px 2px 4px #a6f86d;
 }
 
 .button_swap {
@@ -90,14 +91,15 @@
   height: 36px;
   border-radius: 12px;
   border: 0.1rem solid #242629;
+  box-shadow: 1px 2px 4px #6d8ef8;
 }
 
 .button_img:hover {
-  box-shadow: 1px 2px 4px #a6f86d;
+  box-shadow: 1px 2px 14px #a6f86d;
 }
 
 .button_swap:hover {
-  box-shadow: 1px 2px 4px #6d8ef8;
+  box-shadow: 0 2px 14px #6d8ef8;
 }
 
 /** amount_inputs  and input_box same  */
@@ -119,7 +121,7 @@
   margin-right: 5px;
   padding: 0.2rem 0.8rem;
   color: #f4f4f4;
-  background-color: #242629;
+  background-color: #181a1d;
   border-radius: 12px;
 }
 
@@ -131,14 +133,16 @@
   margin-right: 5px;
   padding: 0.2rem 0.8rem;
   color: #f4f4f4;
-  background-color: #242629;
+  background-color: #181a1d;
   border-radius: 12px;
 }
 
 .input_symbol {
   max-width: 100px;
-  background-color: #181a1d;
   border-radius: 12px;
+  background-color: #181a1d;
+  border: 0.1rem solid #242629;
+
   padding: 0.2rem 0.4rem;
 
   text-align: center;

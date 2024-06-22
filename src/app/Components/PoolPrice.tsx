@@ -10,7 +10,7 @@ import { formatPriceBigToHuman } from "@/app/Utils/utils";
 
 type Data = {
   id: string;
-  pool: string;// amm pool address
+  pool: string; // amm pool address
 };
 
 const PoolPrice = (params: Data) => {

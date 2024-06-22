@@ -34,7 +34,7 @@ import DCAInterface from "@/app/Components/DCA";
 import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import ShowAMMPoolReserves from "@/app/Components/ShowAMMPoolReserves";
 
-import { isNumber , formatPriceBigToHuman } from "@/app/Utils/utils";
+import { isNumber, formatPriceBigToHuman } from "@/app/Utils/utils";
 
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 
@@ -64,7 +64,7 @@ const SwapAmm = () => {
 
   const tokenBAddress = useRef(aqua_token_address);
 
-  const feeNFT = useRef(BigInt(997));// todo nft calculation support
+  const feeNFT = useRef(BigInt(997)); // todo nft calculation support
 
   const tokenADecimal = useRef(BigInt(18));
   const tokenBDecimal = useRef(BigInt(18));
@@ -544,7 +544,7 @@ const SwapAmm = () => {
 
     if (tokenADecimal.current && fee) {
       console.log(" FEE CALC", fee);
-      const fees = formatUnits(fee,tokenADecimal.current );
+      const fees = formatUnits(fee, tokenADecimal.current);
       setFeeForTrade(fees);
     } else {
       setFeeForTrade("0.0");
@@ -885,26 +885,17 @@ const SwapAmm = () => {
           <div className={styles.input_container_column}>
             <div className={styles.column}>
               <p className={styles.routing}>
-                Fee:{" "}
-                <span className={styles.fee_balance}>
-                {feeForTrade} 
-                </span>{" "}
+                Fee: <span className={styles.fee_balance}>{feeForTrade}</span>{" "}
                 <span className={styles.fee_balance}> {tokenA}</span>
               </p>
 
               <p className={styles.routing}>
-               
-          
-            
                 <PoolPrice
-                        {...{
-                          id: savePoolAddress,
-                          pool: savePoolAddress,
-                        }}
-                      ></PoolPrice>{" "}
-              
-             
-             
+                  {...{
+                    id: savePoolAddress,
+                    pool: savePoolAddress,
+                  }}
+                ></PoolPrice>{" "}
               </p>
             </div>
             <div className={styles.column}>
