@@ -1,5 +1,5 @@
 /*
-- TokenA and TokenB hardcode 
+- DCA Orders : Add New DEX AMM ROUTER
 */
 
 export const europaRouters = [
@@ -14,6 +14,12 @@ export const europaRouters = [
     name: "Ruby.Exchange",
     address: "0xd4C0828FC3C50B75eBdcEE209c7423A7398C4d72",
     logo: "/RUBY.svg",
+  },
+  {
+    id: 2,
+    name: "Sushi.com",
+    address: "0x4cddf8D1473df386b926ec14b23bfbD566CE827a",
+    logo: "/SUSHI.svg",
   },
 ] as const;
 /*
@@ -337,5 +343,66 @@ export const poolListSushi = [
     decimals: 18,
     logoQuote: "/ETH.svg",
     logoBase: "/USDC.svg",
+  },
+  {
+    id: 1,
+    symbol: "SKL-USDC",
+    address: "0xca2701dafdfb33e3dc8b5c5dadbf908de6d7ed3e",
+    tokenA: "SKL",
+    tokenB: "USDC",
+    decimals: 18,
+    logoQuote: "/SKL.svg",
+    logoBase: "/USDC.svg",
+  },
+  {
+    id: 2,
+    symbol: "SKL-ETH",
+    address: "0xdcD2B4b7e5187fc9689bd23febBF9c45c8DB66d3",
+    tokenA: "SKL",
+    tokenB: "ETH",
+    decimals: 18,
+    logoQuote: "/SKL.svg",
+    logoBase: "/ETH.svg",
+  },
+
+  {
+    id: 3,
+    symbol: "USDC-USDT",
+    address: "0xBDEb2783098f00Be56ff3104157CE96dC36889Eb",
+    tokenA: "USDC",
+    tokenB: "USDT",
+    decimals: 18,
+    logoQuote: "/USDC.svg",
+    logoBase: "/USDT.svg",
+  },
+  {
+    id: 4,
+    symbol: "SKL-DAI",
+    address: "0x50532e00f696dE2baFC3E91a1170cD2C6634e7a0",
+    tokenA: "SKL",
+    tokenB: "DAI",
+    decimals: 18,
+    logoQuote: "/SKL.svg",
+    logoBase: "/DAI.svg",
+  },
+  {
+    id: 5,
+    symbol: "AQUA-USDC",
+    address: "0x20c066e858afe8c414922e2a7e12c607aa41f8df",
+    tokenA: "AQUA",
+    tokenB: "USDC",
+    decimals: 18,
+    logoQuote: "/AQUA.png",
+    logoBase: "/USDC.svg",
+  },
+  {
+    id: 6,
+    symbol: "AQUA-SKL",
+    address: "0x544542ec58a9a2908c3debf33d12c7669ed83479",
+    tokenA: "AQUA",
+    tokenB: "SKL",
+    decimals: 18,
+    logoQuote: "/AQUA.png",
+    logoBase: "/SKL.svg",
   },
 ] as const;

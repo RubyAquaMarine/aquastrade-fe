@@ -137,21 +137,56 @@ export function GetStarted() {
 
         <PopoverContent className={styles.popover_container}>
           <div className={styles.popover_padding}>
-            <p className="text-sm leading-tight text-muted-foreground">
+            <p className="text-sm leading-tight text-muted-foreground p-2">
               <Link
                 className={styles.title}
                 href="https://aquas.trade/dashboard/metaport"
               >
-                Bridge from Ethereum
+                <span className={styles.column}>Bridge from Ethereum </span>
               </Link>
             </p>
-            <p className="text-sm leading-tight text-muted-foreground">
+
+            <p className="text-sm leading-tight text-muted-foreground p-2">
+              <Link
+                className={styles.title}
+                href="https://portal.skale.space/onramp"
+                target="_blank"
+              >
+                <span className={styles.column}>Fiat On-ramp to Skale </span>
+                <span>
+                  {" "}
+                  <Image
+                    className={styles.image_color}
+                    src="/outbound.svg"
+                    alt="menu"
+                    width={18}
+                    height={18}
+                    priority
+                  />{" "}
+                </span>
+              </Link>
+            </p>
+
+            <p className="text-sm leading-tight text-muted-foreground p-2">
               <Link
                 className={styles.title}
                 href="https://meson.fi/skale-europa"
                 target="_blank"
               >
-                Bridge from other networks
+                <span className={styles.column}>
+                  Bridge from other networks{" "}
+                </span>
+                <span>
+                  {" "}
+                  <Image
+                    className={styles.image_color}
+                    src="/outbound.svg"
+                    alt="menu"
+                    width={18}
+                    height={18}
+                    priority
+                  />{" "}
+                </span>
               </Link>
             </p>
           </div>

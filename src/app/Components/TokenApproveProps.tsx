@@ -149,4 +149,4 @@ const TokenApproveProps = (params: Props) => {
   );
 };
 
-export default memo(TokenApproveProps);
+export default TokenApproveProps;

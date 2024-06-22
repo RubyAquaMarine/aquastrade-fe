@@ -30,7 +30,6 @@ MP => "@emotion/react": "^11.11.1",
 ## Cast : UX
 
 - Cast :
-- after adding liquidity, the tokenB approved amount is asking for approval again even though its already been approved
 - after adding LP : refetch the Balances
 - `Whale Size:`
 
