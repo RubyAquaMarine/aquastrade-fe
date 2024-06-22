@@ -7,7 +7,8 @@
 }
 
 .container_wrap {
-  padding: 0.4rem 0.6rem;
+  padding-right: 0.4rem;
+  padding-left: 0.4rem;
   margin: 0.6rem;
   border-radius: 12px;
   background-color: #141618;
@@ -16,8 +17,8 @@
 
 /** wraps the balance 25/50max buttons  */
 .container_margin {
-  margin-top: 0.8rem;
-  margin-bottom: 0.3rem;
+  margin-top: 0.5rem;
+
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -234,10 +235,10 @@
 .routing {
   display: flex;
   justify-content: space-between;
-  padding-top: 0.2rem;
-  max-height: 30px;
+  max-height: 40px;
   font-size: 0.6rem;
   color: #bdb8b8;
+  cursor: default;
 }
 
 .center {

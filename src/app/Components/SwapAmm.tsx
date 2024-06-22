@@ -26,7 +26,7 @@ import {
 } from "@/app/Utils/findTokens";
 
 // Make components for better rendering functionality: move hooks into these new components
-
+import PoolPrice from "@/app/Components/PoolPrice";
 import NFTBalance from "@/app/Components/NFTBalance";
 import GetAmountsOut from "@/app/Components/GetAmountsOut";
 import DCAInterface from "@/app/Components/DCA";
@@ -34,7 +34,7 @@ import DCAInterface from "@/app/Components/DCA";
 import TokenApproveProps from "@/app/Components/TokenApproveProps";
 import ShowAMMPoolReserves from "@/app/Components/ShowAMMPoolReserves";
 
-import { isNumber } from "@/app/Utils/utils";
+import { isNumber , formatPriceBigToHuman } from "@/app/Utils/utils";
 
 import { EUROPA_AMM_ROUTER_ABI } from "@/app/Abi/europaAMMRouter";
 
@@ -64,7 +64,7 @@ const SwapAmm = () => {
 
   const tokenBAddress = useRef(aqua_token_address);
 
-  const feeNFT = useRef(BigInt(997));
+  const feeNFT = useRef(BigInt(997));// todo nft calculation support
 
   const tokenADecimal = useRef(BigInt(18));
   const tokenBDecimal = useRef(BigInt(18));
@@ -543,7 +543,9 @@ const SwapAmm = () => {
     }
 
     if (tokenADecimal.current && fee) {
-      setFeeForTrade(formatUnits(fee, 18));
+      console.log(" FEE CALC", fee);
+      const fees = formatUnits(fee,tokenADecimal.current );
+      setFeeForTrade(fees);
     } else {
       setFeeForTrade("0.0");
     }
@@ -663,6 +665,7 @@ const SwapAmm = () => {
                   onClick={() => setShowTokenListA(true)}
                 />
               </span>
+
               {showTokenListA &&
               walletTokenList &&
               tokenAddresses?.length > 0 ? (
@@ -884,16 +887,24 @@ const SwapAmm = () => {
               <p className={styles.routing}>
                 Fee:{" "}
                 <span className={styles.fee_balance}>
-                  {" "}
-                  {Number(feeForTrade).toFixed(4)}{" "}
+                {feeForTrade} 
                 </span>{" "}
                 <span className={styles.fee_balance}> {tokenA}</span>
               </p>
+
               <p className={styles.routing}>
-                {" "}
-                <Link href="/dashboard/overview" target="_blank">
-                  Exchange Rate:{" "}
-                </Link>{" "}
+               
+          
+            
+                <PoolPrice
+                        {...{
+                          id: savePoolAddress,
+                          pool: savePoolAddress,
+                        }}
+                      ></PoolPrice>{" "}
+              
+             
+             
               </p>
             </div>
             <div className={styles.column}>
@@ -1032,7 +1043,7 @@ const SwapAmm = () => {
         <div>
           {" "}
           <div className={styles.container_wrap}>
-            <div className={styles.input_container_sm}>
+            <div className={styles.input_container}>
               <div className={styles.input_box}>
                 <input
                   className={styles.input_amount}
@@ -1188,7 +1199,7 @@ const SwapAmm = () => {
           )}
           <div className={styles.container_wrap}>
             {" "}
-            <div className={styles.input_container_sm}>
+            <div className={styles.input_container}>
               <div className={styles.input_box}>
                 {poolAddress &&
                 addTokenBAmount &&
@@ -1359,7 +1370,7 @@ const SwapAmm = () => {
       {ammFeature === "remove" ? (
         <div className={styles.container_wrap}>
           {" "}
-          <div className={styles.input_container_sm}>
+          <div className={styles.input_container}>
             <span className={styles.text_space_left_sm}> Find AMM Pool </span>{" "}
             <span className={styles.text_space_right_1}>
               LP: {poolAddress ? poolAddress : " Pool not found"}
