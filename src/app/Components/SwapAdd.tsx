@@ -178,7 +178,7 @@ const SwapAdd = (params: SwapAddProps) => {
 
         <div className={styles.container_wrap}>
           {" "}
-          <div className={styles.input_container_sm}>
+          <div className={styles.input_container}>
             <div className={styles.input_box}>
               {poolAddress &&
               addTokenBAmount &&

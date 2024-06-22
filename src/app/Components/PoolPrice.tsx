@@ -5,12 +5,12 @@ import React, { useState, useEffect, useRef, memo } from "react";
 import Link from "next/link";
 import { formatUnits, parseUnits } from "viem";
 import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
-
+import styles from "@/app/Styles/PoolPrice.module.css";
 import { formatPriceBigToHuman } from "@/app/Utils/utils";
 
 type Data = {
   id: string;
-  pool: string;
+  pool: string;// amm pool address
 };
 
 const PoolPrice = (params: Data) => {
@@ -34,7 +34,7 @@ const PoolPrice = (params: Data) => {
   return (
     <span className="flex_row">
       {inputPrice !== BigInt(0) ? (
-        <span>
+        <span className={styles.routing}>
           {" "}
           <span> {`Pool Price: ${formatPriceBigToHuman(inputPrice)}  `} </span>
           <span>
@@ -46,7 +46,7 @@ const PoolPrice = (params: Data) => {
         <span className="button_link">
           {" "}
           <Link href="/dashboard/overview" target="_blank">
-            Make DataFeed
+            DeployFeed
           </Link>
         </span>
       )}

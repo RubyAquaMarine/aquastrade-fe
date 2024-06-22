@@ -22,6 +22,11 @@ AQUA => "@emotion/react": "^11.11.4",
 
 MP => "@emotion/react": "^11.11.1",
 
+# AMM 
+
+- fee per swap. 
+- exchange rate 
+
 ## AMM routing
 
 - How to show the best routing? Or default to multihop 100% of time, or check for what Pool has the best rates (liquidity amounts, getAmountsOut logic)
