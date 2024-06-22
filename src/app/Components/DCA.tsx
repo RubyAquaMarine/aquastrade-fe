@@ -542,13 +542,6 @@ const DCAInterface: React.FC = () => {
               {" "}
               Submit Order{" "}
             </button>
-            <button
-              className={styles.button_field}
-              onClick={() => submitDCAOrder(1)}
-            >
-              {" "}
-              NFT{" "}
-            </button>
           </span>
 
           <div className={styles.container}>
