@@ -11,6 +11,11 @@ export const DCA_ABI = [
         name: "_aqua",
         type: "address",
       },
+      {
+        internalType: "address",
+        name: "_aquasFeedHelper",
+        type: "address",
+      },
     ],
     stateMutability: "nonpayable",
     type: "constructor",
@@ -86,6 +91,19 @@ export const DCA_ABI = [
   },
   {
     inputs: [],
+    name: "AquasFeedHelper",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "BurnAqua",
     outputs: [],
     stateMutability: "nonpayable",
@@ -146,6 +164,19 @@ export const DCA_ABI = [
     name: "DeleteOrder",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "DigitPrecision",
+    outputs: [
+      {
+        internalType: "uint8",
+        name: "",
+        type: "uint8",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -551,6 +582,24 @@ export const DCA_ABI = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_dcaStorageID",
+        type: "uint256",
+      },
+      {
+        internalType: "uint8",
+        name: "_digits",
+        type: "uint8",
+      },
+    ],
+    name: "SetStorageDigitPrecision",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "StorageID",
     outputs: [
@@ -662,6 +711,19 @@ export const DCA_ABI = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+    ],
+    name: "checkNFTSupport",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "owner",
     outputs: [
@@ -677,6 +739,19 @@ export const DCA_ABI = [
   {
     inputs: [],
     name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint8",
+        name: "_decimals",
+        type: "uint8",
+      },
+    ],
+    name: "setDigitPrecision",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

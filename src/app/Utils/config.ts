@@ -9,7 +9,7 @@ import {
 // Add Tokens here
 export const tokenSymbols = tokenSymbolList;
 export const tokenAddresses = tokenList;
-// DEX uniswap v2
+// DEX uniswap v2 routers:
 export const uniswapRouters = europaRouters;
 // DEX POOLS
 export const poolsAtAqua = poolListAqua;
@@ -71,17 +71,17 @@ export const contractAddresses = [
   {
     id: 9,
     name: "dcamulti",
-    address: "0xa099229c5Ed1649c069381af8D3851304EcFBb69",
+    address: "0xf8817121565613e52319CC36f3ed281d58dD88f5",
   },
   {
     id: 10,
     name: "aquafeed",
-    address: "0x4c8F8868CBf433C0f10527214Acc6a84cFEFB716",
+    address: "0x846Fbb82568B62ab9f9B8D396043C59A4AaE12Fa",
   },
   {
     id: 11,
     name: "aquafeedhelper",
-    address: "0x9E445066489df23427bC3bACcD7a3026BCfB2E0B",
+    address: "0x91FF71875FCA2c25b2cBe16c3AF3C75Ed55bA9cc",
   },
   {
     id: 12,

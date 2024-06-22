@@ -50,3 +50,7 @@ For now, use these defaults within the UI:
 # Advanced Traders
 
 At AquasTrade we enjoy trading as much as a trading bot, but we're human and get tired.
+
+# ADMIN
+
+- DCA Orders : Add New DEX AMM ROUTER

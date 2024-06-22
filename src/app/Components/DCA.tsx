@@ -246,30 +246,41 @@ const DCAInterface: React.FC = () => {
 
   const submitDCAOrder = (index: number) => {
     // fixed bug : BUYING TOKEN QUOTE means you are using the decimals from token B for the input amount
-    const dec = inputIsBuying ? token_decimal_b : token_decimal_a;
-    const data = [
-      inputRouterAddress,
-      tokenAddress_a,
-      tokenAddress_b,
 
-      BigInt(inputSwapSpeed * 60), // convert seconds to minutes
-      BigInt(inputInvestmentDuration),
-
-      parseUnits(inputMinPrice, dec), // The bug
-      parseUnits(inputMaxPrice, dec),
-
-      parseUnits(inputTokenAmount, dec),
-      inputIsBuying,
-    ];
-    console.log("Sumbit DCA Order: data input: ", data);
     // todo : need to figure out the LastPoolPrice value (show in UI first)
     switch (index) {
       case 0:
+        const dec = inputIsBuying ? token_decimal_b : token_decimal_a;
+        const data = [
+          inputRouterAddress,
+          tokenAddress_a,
+          tokenAddress_b,
+
+          BigInt(inputSwapSpeed * 60), // convert seconds to minutes
+          BigInt(inputInvestmentDuration),
+
+          parseUnits(inputMinPrice, 18), // 18 decimals since pricing is now normalized
+          parseUnits(inputMaxPrice, 18),
+
+          parseUnits(inputTokenAmount, dec),
+          inputIsBuying,
+        ];
+        console.log("Sumbit DCA Order: data input: ", data);
+
         writeContract({
           abi: DCA_ABI,
           address: contractDCAMulti.address,
           functionName: "SubmitDCAOrder",
           args: data,
+        });
+
+      case 1:
+        console.log("checkNFTSupport");
+        writeContract({
+          abi: DCA_ABI,
+          address: contractDCAMulti.address,
+          functionName: "checkNFTSupport",
+          args: [BigInt(4)],
         });
         break;
     }
@@ -531,6 +542,13 @@ const DCAInterface: React.FC = () => {
               {" "}
               Submit Order{" "}
             </button>
+            <button
+              className={styles.button_field}
+              onClick={() => submitDCAOrder(1)}
+            >
+              {" "}
+              NFT{" "}
+            </button>
           </span>
 
           <div className={styles.container}>
@@ -606,15 +624,12 @@ const DCAInterface: React.FC = () => {
                 </span>{" "}
                 {/** */}
                 <span className={styles.text_center_sm}>
-                  {inputPoolAddress && token_decimal_b ? (
+                  {inputPoolAddress ? (
                     <span>
-                      {" "}
-                      PoolPrice:{" "}
                       <PoolPrice
                         {...{
                           id: inputPoolAddress,
                           pool: inputPoolAddress,
-                          base_decimal: token_decimal_b,
                         }}
                       ></PoolPrice>{" "}
                     </span>

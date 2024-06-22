@@ -18,19 +18,21 @@
 
   backdrop-filter: opacity(20%);
 
-  min-width: 370px;
+  min-width: 360px;
 
   padding: 0.6rem;
   position: sticky;
   background-color: #141618;
   border: none;
   border-radius: 2rem;
+  border: 1px solid #475384;
 }
 
 .popover_padding {
-  padding: 0.2rem;
+  padding: 1rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  margin-left: 1rem;
 }
 
 .title {
@@ -113,5 +115,11 @@
 
 .column {
   flex: 1;
-  padding: 0 1rem;
+  padding: 0.4rem;
+  margin-top: 1rem;
+}
+
+.image_color {
+  border-radius: 4px;
+  background-color: #475384;
 }
