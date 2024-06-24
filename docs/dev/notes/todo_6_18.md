@@ -12,6 +12,6 @@ make PROPS
 
 # Overivew
 
-page (useAquaFeed) -> OverView => TableDataFeed 
+page (useAquaFeed) -> OverView => TableDataFeed
 
 - adding datafeeds only for AQUA DEX to public: We can't create new pools on Ruby, so no point in offering this feature

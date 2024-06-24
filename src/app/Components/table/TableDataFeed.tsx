@@ -3,7 +3,11 @@
 import React, { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { findTokenFromAddress, findRouterFromAddress, ROUTER } from "@/app/Utils/findTokens";
+import {
+  findTokenFromAddress,
+  findRouterFromAddress,
+  ROUTER,
+} from "@/app/Utils/findTokens";
 
 import { formatPriceBigToHuman } from "@/app/Utils/utils";
 
@@ -74,8 +78,6 @@ export const TableDataFeed = (dataFeed: any) => {
 
   const data = useMemo(() => dataNow, []);
 
- 
-
   const columns = [
     {
       header: "DEX",
@@ -85,17 +87,23 @@ export const TableDataFeed = (dataFeed: any) => {
 
         const router: ROUTER = findRouterFromAddress(router_address);
 
-
         return (
           <div className="text-left font-medium">
-            {router?.logo ? <span>  <Image
-              className={styles.image_color}
-              src={router.logo}
-              alt="menu"
-              width={22}
-              height={22}
-              priority
-            /></span> : <span> </span>}
+            {router?.logo ? (
+              <span>
+                {" "}
+                <Image
+                  className={styles.image_color}
+                  src={router.logo}
+                  alt="menu"
+                  width={22}
+                  height={22}
+                  priority
+                />
+              </span>
+            ) : (
+              <span> </span>
+            )}
           </div>
         );
       },
@@ -256,9 +264,9 @@ export const TableDataFeed = (dataFeed: any) => {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
                     </TableHead>
                   );
                 })}
@@ -324,5 +332,4 @@ export const TableDataFeed = (dataFeed: any) => {
       </div>
     </div>
   );
-}
-                                                                                                                                                      
+};

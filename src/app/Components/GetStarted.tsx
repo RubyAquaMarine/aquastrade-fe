@@ -137,15 +137,12 @@ export function GetStarted() {
                   Utility driven:
                   <ul>
                     <li> - DCA Orders</li>
-
                   </ul>
                 </p>
 
                 <p className="text-sm leading-tight text-muted-foreground p-2">
                   All protocol fees are collected to buy and Burn AQUA
                 </p>
-
-
               </Link>
               <p className="text-sm leading-tight text-muted-foreground p-2">
                 <span className="flex_row">
@@ -192,7 +189,6 @@ export function GetStarted() {
 
                   <span>
                     {" "}
-
                     <Image
                       className={styles.icon_skl}
                       src="/AQUA.png"
@@ -201,21 +197,14 @@ export function GetStarted() {
                       height={30}
                     />
                   </span>
-
-
-
-
                 </span>
               </p>
-
 
               <p className="text-sm leading-tight text-muted-foreground p-2">
                 <Link className={styles.title} href="/dashboard/presale">
                   <span className={styles.button_aqua}>Buy Aqua here </span>
                 </Link>
               </p>
-
-
             </div>
           </PopoverContent>
         </Popover>
@@ -263,4 +252,5 @@ export function GetStarted() {
                           />{" "}
                         </span>
                       </Link>
-                    
+                    </span>
+*/
