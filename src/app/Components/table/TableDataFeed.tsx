@@ -3,7 +3,11 @@
 import React, { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { findTokenFromAddress } from "@/app/Utils/findTokens";
+import {
+  findTokenFromAddress,
+  findRouterFromAddress,
+  ROUTER,
+} from "@/app/Utils/findTokens";
 
 import { formatPriceBigToHuman } from "@/app/Utils/utils";
 
@@ -57,6 +61,7 @@ const accessorKeyAssets = "pool";
 
 export type DataFeed = {
   id: string;
+  router: string;
   pool: string;
   poolPrice: string;
   poolPriceInverse: string;
@@ -66,7 +71,7 @@ export type DataFeed = {
   base: string;
 };
 
-export default function TableDataFeed(dataFeed: any) {
+export const TableDataFeed = (dataFeed: any) => {
   const dataNow = Object.values(dataFeed);
 
   // These object name must be [data,columns]
@@ -74,6 +79,35 @@ export default function TableDataFeed(dataFeed: any) {
   const data = useMemo(() => dataNow, []);
 
   const columns = [
+    {
+      header: "DEX",
+      accessorKey: "router",
+      cell: ({ row }: any) => {
+        const router_address = row.getValue("router");
+
+        const router: ROUTER = findRouterFromAddress(router_address);
+
+        return (
+          <div className="text-left font-medium">
+            {router?.logo ? (
+              <span>
+                {" "}
+                <Image
+                  className={styles.image_color}
+                  src={router.logo}
+                  alt="menu"
+                  width={22}
+                  height={22}
+                  priority
+                />
+              </span>
+            ) : (
+              <span> </span>
+            )}
+          </div>
+        );
+      },
+    },
     {
       header: "Pair",
       accessorKey: "assets",
@@ -298,4 +332,4 @@ export default function TableDataFeed(dataFeed: any) {
       </div>
     </div>
   );
-}
+};

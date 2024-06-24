@@ -2,14 +2,24 @@ export const PRESALE_ABI = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-      {
         internalType: "address[]",
         name: "_stables",
         type: "address[]",
+      },
+      {
+        internalType: "address",
+        name: "_router",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_baseToken",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_dcaMulti",
+        type: "address",
       },
     ],
     stateMutability: "nonpayable",
@@ -52,6 +62,32 @@ export const PRESALE_ABI = [
     ],
     name: "OwnershipTransferred",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "AQUA",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "BURNER",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [
@@ -136,6 +172,19 @@ export const PRESALE_ABI = [
         internalType: "uint8",
         name: "",
         type: "uint8",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "factory",
+    outputs: [
+      {
+        internalType: "contract IUniswapV2Factory",
+        name: "",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -238,6 +287,19 @@ export const PRESALE_ABI = [
     name: "restartSale",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "router",
+    outputs: [
+      {
+        internalType: "contract IUniswapV2Router02",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {

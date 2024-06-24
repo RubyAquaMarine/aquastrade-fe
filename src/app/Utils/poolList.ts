@@ -19,17 +19,9 @@ export const europaRouters = [
     id: 2,
     name: "Sushi.com",
     address: "0x4cddf8D1473df386b926ec14b23bfbD566CE827a",
-    logo: "/SUSHI.svg",
+    logo: "/SUSHI.png",
   },
 ] as const;
-/*
-  {
-    id: 2,
-    name: "Sushi.com",
-    address: "0x4cddf8D1473df386b926ec14b23bfbD566CE827a",
-    logo: "/ETH.svg",
-  },
-*/
 
 // 41 pools
 
@@ -404,5 +396,25 @@ export const poolListSushi = [
     decimals: 18,
     logoQuote: "/AQUA.png",
     logoBase: "/SKL.svg",
+  },
+  {
+    id: 7,
+    symbol: "BTC-USDC",
+    address: "0xbF97C8DC5BB5e300BBBc7785D9160AC598b948E6",
+    tokenA: "USDC",
+    tokenB: "BTC",
+    decimals: 18,
+    logoQuote: "/BTC.svg",
+    logoBase: "/USDC.svg",
+  },
+  {
+    id: 8,
+    symbol: "SHISH-USDP",
+    address: "0x4959E5257116c6E61a44b561687FA2d1A7001804",
+    tokenA: "USDP",
+    tokenB: "SHISH",
+    decimals: 18,
+    logoQuote: "/SHISH.png",
+    logoBase: "/USDP.svg",
   },
 ] as const;
