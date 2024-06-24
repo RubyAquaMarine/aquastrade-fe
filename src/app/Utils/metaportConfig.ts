@@ -121,6 +121,10 @@ export const AquaConfig: interfaces.MetaportConfig = {
         eth: {
           chains: {
             "elated-tan-skat": {},
+            "adorable-quaint-bellatrix": {},
+            "honorable-steel-rasalhague": {
+              hub: "elated-tan-skat",
+            },
           },
         },
       },
@@ -180,6 +184,12 @@ export const AquaConfig: interfaces.MetaportConfig = {
           address: "0xcb011E86DF014a46F4e3AC3F3cbB114A4EB80870",
           chains: {
             "elated-tan-skat": {},
+            "green-giddy-denebola": {
+              hub: "elated-tan-skat",
+            },
+            "honorable-steel-rasalhague": {
+              hub: "elated-tan-skat",
+            },
           },
         },
         // 200,000,000
@@ -271,6 +281,12 @@ export const AquaConfig: interfaces.MetaportConfig = {
           chains: {
             mainnet: {
               clone: true,
+            },
+            "green-giddy-denebola": {
+              wrapper: "0x497C476bcABB2F7D50afF99ca3Ae9354451Ff7d0",
+            },
+            "honorable-steel-rasalhague": {
+              wrapper: "0x497C476bcABB2F7D50afF99ca3Ae9354451Ff7d0",
             },
           },
         },
@@ -388,6 +404,20 @@ export const AquaConfig: interfaces.MetaportConfig = {
       },
     },
     "honorable-steel-rasalhague": {
+      eth: {
+        eth: {
+          address: "0x59ab97Ee239e02112652587F9Ef86CB6F762983b",
+          chains: {
+            "elated-tan-skat": {
+              clone: true,
+            },
+            mainnet: {
+              clone: true,
+              hub: "elated-tan-skat",
+            },
+          },
+        },
+      },
       erc20: {
         skl: {
           address: "0x4048C4dd6eccF1Dc23b068211fDf20AD19602e50",
@@ -430,6 +460,18 @@ export const AquaConfig: interfaces.MetaportConfig = {
           chains: {
             "elated-tan-skat": {
               clone: true,
+            },
+          },
+        },
+        btc: {
+          address: "0x98f7d76CfFaD0263Ddb30B10244C02530Ba704c4",
+          chains: {
+            "elated-tan-skat": {
+              clone: true,
+            },
+            mainnet: {
+              clone: true,
+              hub: "elated-tan-skat",
             },
           },
         },
@@ -490,6 +532,18 @@ export const AquaConfig: interfaces.MetaportConfig = {
           chains: {
             "elated-tan-skat": {
               clone: true,
+            },
+          },
+        },
+        btc: {
+          address: "0x64d2EebA8B02f2aB19e2238f1655A8409dB64817",
+          chains: {
+            "elated-tan-skat": {
+              clone: true,
+            },
+            mainnet: {
+              clone: true,
+              hub: "elated-tan-skat",
             },
           },
         },

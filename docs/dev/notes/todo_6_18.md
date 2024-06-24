@@ -15,3 +15,9 @@ make PROPS
 page (useAquaFeed) -> OverView => TableDataFeed
 
 - adding datafeeds only for AQUA DEX to public: We can't create new pools on Ruby, so no point in offering this feature
+
+# metaport and node versions
+
+"engines": {
+"node": ">=18.18.0 <19.0.0"
+},

@@ -85,7 +85,7 @@ export const contractAddresses = [
   {
     id: 12,
     name: "presale",
-    address: "0x58c9Ce6EbFB56Ea9Cff00Df49c446cB68f6E5Ca9",
+    address: "0xD8d4a9C27640BD234C5967FE7A2235c4F72248aE",
   },
 ] as const;
 // WIP : remove any CA: below
