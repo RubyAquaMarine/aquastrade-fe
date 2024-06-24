@@ -263,5 +263,4 @@ export function GetStarted() {
                           />{" "}
                         </span>
                       </Link>
-                    </span>
-*/
+                    
