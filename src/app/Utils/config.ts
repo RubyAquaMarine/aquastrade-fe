@@ -67,7 +67,6 @@ export const contractAddresses = [
     name: "memecreator",
     address: "0x672c68B2F8959793e9A9533CE2791aCa33742076",
   },
-
   {
     id: 9,
     name: "dcamulti",
@@ -86,7 +85,7 @@ export const contractAddresses = [
   {
     id: 12,
     name: "presale",
-    address: "0xA88b25EBb3cb5B0f08124e8FFBc6249aE026cB07",
+    address: "0x58c9Ce6EbFB56Ea9Cff00Df49c446cB68f6E5Ca9",
   },
 ] as const;
 // WIP : remove any CA: below

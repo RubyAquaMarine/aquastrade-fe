@@ -117,7 +117,7 @@ body::-webkit-scrollbar {
   .flex_row {
     display: flex;
     flex: 1;
-    gap: 0.4rem;
+    gap: 1rem;
   }
   /* ... */
 }

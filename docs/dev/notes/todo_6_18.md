@@ -10,9 +10,8 @@ make PROPS
 - math function for 100% removal of LP tokens : `setAmountLPRemove`
 - set two tokens via SYMBOL
 
-# Sushi
+# Overivew
 
-- routerv2 : 0x4cddf8D1473df386b926ec14b23bfbD566CE827a
-- factory : 0x1aaF6eB4F85F8775400C1B10E6BbbD98b2FF8483
+page (useAquaFeed) -> OverView => TableDataFeed 
 
-add to DCA Orders
+- adding datafeeds only for AQUA DEX to public: We can't create new pools on Ruby, so no point in offering this feature

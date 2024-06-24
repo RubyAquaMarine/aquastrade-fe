@@ -50,8 +50,11 @@ adjust fotter get started dashboard
 
 .tick_symbol {
   font-family: sans-serif;
-  color: #93eee8;
+  color: #fcfcfc;
   font-weight: 600;
+  font-size: 12px;
+  border-left: 2px solid #475384;
+  padding-left: 4px;
 }
 
 .tick_price {
@@ -59,10 +62,12 @@ adjust fotter get started dashboard
   color: #bdb8b8;
   font-weight: 400;
   padding-left: 4px;
+  font-size: 10px;
 }
 
 .tick_change {
   color: #044362;
   font-weight: 500;
   padding-left: 4px;
+  border-right: 1px solid #475384;
 }

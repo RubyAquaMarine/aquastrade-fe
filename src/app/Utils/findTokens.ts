@@ -1,4 +1,4 @@
-import { tokenAddresses, contractAddresses } from "@/app/Utils/config";
+import { tokenAddresses, contractAddresses, uniswapRouters } from "@/app/Utils/config";
 
 // import the abis here and then exort which ever is needed
 
@@ -7,6 +7,36 @@ export const switchQuoteBase = (_addressA: string, _addressB: string) => {
   const switchTokens = BigInt(_addressB) > BigInt(_addressA) ? true : false;
   return switchTokens;
 };
+
+
+export type ROUTER = {
+  id: number;
+  name: string;
+  address: string;
+  logo: string;
+
+}
+
+export const findRouterFromAddress = (_address: string) => {
+  let save: ROUTER = {
+    id: 0,
+    name: '',
+    address: '',
+    logo: ''
+  };
+  if (uniswapRouters) {
+    uniswapRouters.forEach((element) => {
+      if (_address === element?.address) {
+        save = element;
+      }
+    });
+  }
+
+  return save;
+
+};
+
+
 
 export const findTokenAddressFromSymbol = (_symbol: string) => {
   let save;

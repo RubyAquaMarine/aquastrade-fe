@@ -14,7 +14,9 @@ import { CHAIN } from "@/app/Utils/config";
 
 import { useAccount, useSwitchChain } from "wagmi";
 
-import { Overview, DataFeedV } from "@/app/Components/Overview";
+import { Overview } from "@/app/Components/Overview";
+import {DataFeed} from "@/app/Components/table/TableDataFeed";
+
 
 import { useAquaFeed } from "@/app/Hooks/useAquaFeed";
 
@@ -24,7 +26,7 @@ const Home = ({ params }: any) => {
   const [inputWallet, setWallet] = useState<`0x${string}`>();
 
   const { address, isConnected, chain } = useAccount();
-  const [tableData, setTableData] = useState<DataFeedV[]>();
+  const [tableData, setTableData] = useState<DataFeed[]>();
 
   const objectFeeds: any = useAquaFeed("consumeFeeds")?.data;
 
@@ -38,13 +40,13 @@ const Home = ({ params }: any) => {
   useEffect(() => {
     if (address) {
       setWallet(address);
-      console.log(" Render | OverView", address);
+      console.log(" Render | OverView: Address : Why is this here again?", address);
     }
   }, [address]);
 
   return (
     <main className={styles.container}>
-      {tableData ? (
+      {tableData && inputWallet ? (
         <span>
           <Overview {...tableData}></Overview>
         </span>

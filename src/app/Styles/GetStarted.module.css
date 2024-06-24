@@ -74,6 +74,7 @@
 
   width: 265px;
   border: 1px solid #242629;
+  border-radius: 0.6rem;
 }
 
 .title:hover {
@@ -120,9 +121,22 @@
   flex: 1;
   padding: 0.4rem;
   margin-top: 1rem;
+  border-radius: 4px;
 }
 
 .image_color {
   border-radius: 4px;
   background-color: #475384;
+}
+
+.metaport {
+  font-size: 1.3rem;
+  font-weight: 600;
+  writing-mode: vertical-lr;
+  padding-bottom: 1rem;
+}
+
+.button_aqua {
+  border-radius: 4px;
+  padding: 0.6rem;
 }

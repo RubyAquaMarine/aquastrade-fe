@@ -1,22 +1,10 @@
 "use client";
 import React, { useMemo } from "react";
+import {TableDataFeed, DataFeed} from "@/app/Components/table/TableDataFeed";
 
-import TableDataFeed from "@/app/Components/table/TableDataFeed";
-
-export type DataFeedV = {
-  id: string;
-  pool: string;
-  pricePool: string;
-  pricePoolInverse: string;
-  priceFeed: string;
-  assets: string[];
-  quote: string;
-  base: string;
-};
-
-export const Overview = (params: DataFeedV[]) => {
+export const Overview = (params: DataFeed[]) => {
   const newArray = Object.values(params);
-  const data: DataFeedV[] = useMemo(() => newArray, [newArray]);
+  const data: DataFeed[] = useMemo(() => newArray, [newArray]);
   return (
     <div>
       <TableDataFeed {...data}></TableDataFeed>

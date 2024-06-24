@@ -22,11 +22,6 @@ AQUA => "@emotion/react": "^11.11.4",
 
 MP => "@emotion/react": "^11.11.1",
 
-# AMM
-
-- fee per swap.
-- exchange rate
-
 ## AMM routing
 
 - How to show the best routing? Or default to multihop 100% of time, or check for what Pool has the best rates (liquidity amounts, getAmountsOut logic)
@@ -42,4 +37,5 @@ MP => "@emotion/react": "^11.11.1",
 
 - tokens out when removing liquidity " user amount in relation to whole pool " reserves and total lp token amounts
 - `% whale_size` size of users position compared to the reserves :
+- lp token value
 - BUYING TOKEN QUOTE means you are using the decimals from token B for the input amount
