@@ -42,6 +42,8 @@ export function AddDataFeed() {
   const [inputTokenA, setTokenA] = useState("");
   const [inputTokenB, setTokenB] = useState("");
 
+  const [inputPool, setPool] = useState("");
+
   const tokenA = useRef();
   const tokenB = useRef();
 
@@ -55,7 +57,6 @@ export function AddDataFeed() {
 
   const AQUAFEED = findContractInfo("aquafeed")?.address;
   const ROUTER = findContractInfo("router")?.address;
-  const FACTORY = findContractInfo("factory")?.address;
 
   useEffect(() => {
     if (inputTokenA && inputTokenB) {
@@ -96,9 +97,10 @@ export function AddDataFeed() {
     console.log(" debug button click ");
 
     if (tokenA.current && tokenB.current) {
-      // console.log(" debug button click  tokenA", tokenA.current)
-      // console.log(" debug button click  AQUAFEED", AQUAFEED)
-      // console.log(" debug button click  ROUTER", ROUTER)
+      console.log(" debug button click  tokenA", tokenA.current);
+      console.log(" debug button click  tokenB", tokenB.current);
+      console.log(" debug button click  AQUAFEED", AQUAFEED);
+      console.log(" debug button click  ROUTER", ROUTER);
       // console.log(" debug button click   FACTORY",  FACTORY)
       writeContract({
         abi: AQUAFEED_ABI,
@@ -106,8 +108,9 @@ export function AddDataFeed() {
         functionName: "addDataFeed",
         args: [
           ROUTER,
-          FACTORY,
-          "0xc318a82CB7c2B0faf7e355BB8F285016956aBF55",
+          inputPool !== ""
+            ? inputPool
+            : "0x0000000000000000000000000000000000000000", // if pool already exists, pass in the pool address
           tokenA.current?.address
             ? (tokenA.current.address as unknown as `0x${string} `)
             : "0x0000000000000000000000000000000000000000",
@@ -158,6 +161,14 @@ export function AddDataFeed() {
               placeholder="Token Symbol Base"
               value={inputTokenB}
               onChange={(e) => setTokenB(e.target.value.toUpperCase())}
+              className={styles.popover_input}
+            />
+
+            <input
+              type="text"
+              placeholder="Pool Address (!exist)"
+              value={inputPool}
+              onChange={(e) => setPool(e.target.value.toUpperCase())}
               className={styles.popover_input}
             />
 

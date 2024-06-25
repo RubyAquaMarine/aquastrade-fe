@@ -74,12 +74,12 @@ export const AQUAFEED_ABI = [
   },
   {
     inputs: [],
-    name: "DigitPrecision",
+    name: "DATAFEED_HELPER",
     outputs: [
       {
-        internalType: "uint8",
+        internalType: "address",
         name: "",
-        type: "uint8",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -87,12 +87,12 @@ export const AQUAFEED_ABI = [
   },
   {
     inputs: [],
-    name: "EXCHANGE_RATES",
+    name: "DigitPrecision",
     outputs: [
       {
-        internalType: "address",
+        internalType: "uint8",
         name: "",
-        type: "address",
+        type: "uint8",
       },
     ],
     stateMutability: "view",
@@ -307,22 +307,17 @@ export const AQUAFEED_ABI = [
       },
       {
         internalType: "address",
-        name: "_factoryV2",
-        type: "address",
-      },
-      {
-        internalType: "address",
         name: "_ammPoolAddress",
         type: "address",
       },
       {
         internalType: "address",
-        name: "newTokenQuote",
+        name: "_newTokenQuote",
         type: "address",
       },
       {
         internalType: "address",
-        name: "newTokenBase",
+        name: "_newTokenBase",
         type: "address",
       },
     ],
@@ -384,7 +379,7 @@ export const AQUAFEED_ABI = [
             type: "uint256",
           },
         ],
-        internalType: "struct AquasFeed.Feed",
+        internalType: "struct AquasFeedV2.Feed",
         name: "",
         type: "tuple",
       },
@@ -439,7 +434,7 @@ export const AQUAFEED_ABI = [
             type: "uint256",
           },
         ],
-        internalType: "struct AquasFeed.Feed[]",
+        internalType: "struct AquasFeedV2.Feed[]",
         name: "",
         type: "tuple[]",
       },
