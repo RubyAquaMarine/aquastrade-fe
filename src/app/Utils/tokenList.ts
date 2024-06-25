@@ -14,6 +14,7 @@ export const tokenSymbolList = [
   "SHISH",
   "WIFO",
   "QXP",
+  "HMT",
 ] as const;
 /*
 {
@@ -160,5 +161,13 @@ export const tokenList = [
     address: "0x8688C231A74862Cb414966260C8A8eAec7BeAC88",
     decimals: 18,
     logo: "/QXP.png",
+  },
+  {
+    id: 18,
+    name: "Human",
+    symbol: "HMT",
+    address: "0xBE3530a3eDf9472693065041B8c9155C7FeCB8e5",
+    decimals: 18,
+    logo: "/HMT.png",
   },
 ] as const;
