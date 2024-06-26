@@ -150,3 +150,8 @@ this is the Vert lines within the Nav menu
   border-radius: 2rem;
   border: 2px solid #475384;
 }
+
+.image_color {
+  border-radius: 4px;
+  background-color: #475384;
+}

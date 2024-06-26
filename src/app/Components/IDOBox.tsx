@@ -22,7 +22,7 @@ export type IDOBoxProps = {
   banner: string;
   project_name: string;
 
-  symbol: string; // logo and symbol should allows be the same. aka SKL, BTC etc
+  symbol: string; // logo and symbol should allows be the same. aka SKL,
   token_address: string;
   decimals: number;
   price: string;
@@ -42,7 +42,7 @@ export type IDOBoxProps = {
 export type IDOBoxSC = {
   // TOKEN : 5
   name: string; // bann er will the project name  banner: string;  aka AquasTrade, AQUASTRADE  .toUPPERCASE
-  symbol: string; // logo and symbol should allows be the same. aka SKL, BTC etc
+  symbol: string; // logo and symbol should allows be the same. aka SKL,
   token_address: string;
   decimals: number;
   max_supply: string;

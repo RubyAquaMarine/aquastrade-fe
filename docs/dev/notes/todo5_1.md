@@ -21,8 +21,6 @@ clean up
 
 - Cast : if balance is zero after adding all liquidity , the balance doesn't refresh and stays the same, then switching assets then injects the other asset for both balance values. if value doesn't exist : '0'
 
-- `useGetAmountInQuote` : bug on mulit hop calculations when asset is not 18 decimals such as USDC to BTC : USDP to BTC works,
-- Trade: exchange rate and slippage
 - deploy:token-Deployer-Factory
 - - - slippage stuff : routing stuff : actually hold off on this until new router is deployed : uniswap : universal smart router that allows 7 paths .
 - https://playground.li.fi/ ( post on twitter : design the prettiest swap panel for aquas.trade and earn 10000 $aqua )

@@ -140,3 +140,11 @@
   border-radius: 4px;
   padding: 0.6rem;
 }
+
+.text_burn {
+  color: #475384;
+}
+
+.text_link {
+  border-bottom: 1px solid #475384;
+}
