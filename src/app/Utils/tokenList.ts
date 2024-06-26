@@ -1,6 +1,6 @@
 export const tokenSymbolList = [
   "ETH",
-  "BTC",
+  "WBTC",
   "SKL",
   "AQUA",
   "USDC",
@@ -69,10 +69,10 @@ export const tokenList = [
   {
     id: 6,
     name: "Bitcoin",
-    symbol: "BTC",
+    symbol: "WBTC",
     address: "0xcb011E86DF014a46F4e3AC3F3cbB114A4EB80870",
     decimals: 8,
-    logo: "/BTC.svg",
+    logo: "/WBTC.svg",
   },
   {
     id: 7,

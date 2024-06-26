@@ -126,24 +126,54 @@ export function GetStarted() {
 
           <PopoverContent className={styles.popover_container}>
             <div className={styles.popover_padding}>
-              <Link
-                className="flex h-full w-full select-none flex-col justify-end  p-2 focus:shadow-md"
-                href="/dashboard/metaport"
-              >
+              <div className="flex h-full w-full select-none flex-col justify-end  p-2 focus:shadow-md">
                 {/** rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none */}
                 <div className={styles.metaport}>$AQUA</div>
 
-                <p className="text-sm leading-tight text-muted-foreground p-2">
+                <span> 200 Mil Max Token Supply</span>
+                <p className="text-ssm leading-tight text-muted-foreground">
+                  <Link href="https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0xf8817121565613e52319CC36f3ed281d58dD88f5?tab=write_contract">
+                    <span className="flex_row">
+                      <span className={styles.text_link}> with Burner </span>
+                      <span>
+                        {" "}
+                        <Image
+                          className={styles.image_color}
+                          src="/outbound.svg"
+                          alt="menu"
+                          width={14}
+                          height={14}
+                          priority
+                        />{" "}
+                      </span>
+                    </span>
+                  </Link>
+                </p>
+
+                <p className="text-sm leading-tight text-muted-foreground p-4">
                   Utility driven:
                   <ul>
                     <li> - DCA Orders</li>
+                    <li> - Token Launchpad Liquidity</li>
                   </ul>
                 </p>
 
                 <p className="text-sm leading-tight text-muted-foreground p-2">
-                  All protocol fees are collected to buy and Burn AQUA
+                  <span className={styles.text_burn}>
+                    All protocol fees are collected to buy and burn AQUA
+                  </span>
                 </p>
-              </Link>
+
+                <p className="text-xsm leading-tight text-muted-foreground p-2">
+                  <ul>
+                    <li> 1. AMM Fee: 0.05%</li>
+                    <li> 2. IDO platform: 0.30%</li>
+                    <li> 3. MarketPlace: 0.30% {"(coming soon)"}</li>
+                    <li> 4. TelegramBot: 0.30% {"(coming soon)"}</li>
+                  </ul>
+                </p>
+              </div>
+
               <p className="text-sm leading-tight text-muted-foreground p-2">
                 <span className="flex_row">
                   <span>
@@ -159,8 +189,8 @@ export function GetStarted() {
                           className={styles.image_color}
                           src="/outbound.svg"
                           alt="menu"
-                          width={18}
-                          height={18}
+                          width={14}
+                          height={14}
                           priority
                         />{" "}
                       </span>
@@ -179,8 +209,8 @@ export function GetStarted() {
                           className={styles.image_color}
                           src="/outbound.svg"
                           alt="menu"
-                          width={18}
-                          height={18}
+                          width={14}
+                          height={14}
                           priority
                         />{" "}
                       </span>

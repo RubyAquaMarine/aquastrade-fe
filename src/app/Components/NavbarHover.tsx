@@ -120,7 +120,7 @@ const Navbar = () => {
                           </span>
                           <p className="text-sm leading-tight text-muted-foreground">
                             {" "}
-                            ETH, USDT, USDC, USDP, DAI, BTC, SKL and more{" "}
+                            ETH, USDT, USDC, USDP, DAI, WBTC, SKL and more{" "}
                           </p>
                         </li>
                         <li>
@@ -207,14 +207,6 @@ const Navbar = () => {
                           className={navigationMenuTriggerStyle()}
                         >
                           Swap Tokens
-                        </NavigationMenuLink>
-                      </Link>
-
-                      <Link href="/perp/ethusdt" legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={navigationMenuTriggerStyle()}
-                        >
-                          Perpetuals
                         </NavigationMenuLink>
                       </Link>
 

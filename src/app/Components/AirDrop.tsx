@@ -256,7 +256,7 @@ const AirDrop: React.FC = () => {
           />
           <input
             type="text"
-            placeholder="or input token symbol such as ETH, BTC, SKL, AQUA, etc"
+            placeholder="or input token symbol such as ETH, WBTC, SKL, AQUA, etc"
             value={tokenSymbol}
             onChange={(e) => setAirdropTokenSymbol(e.target.value)}
             className={styles.input_token_address}

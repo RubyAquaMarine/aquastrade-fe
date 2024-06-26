@@ -23,12 +23,27 @@ At Aquas.Trade its easy, so let's LFG!
 
 https://aquas.trade/dashboard/presale
 
-- CA: `0xA88b25EBb3cb5B0f08124e8FFBc6249aE026cB07`
+- CA: [presale](../src/app/Utils/config.ts#88)
 - Purchase Presale Tokens with `USDC, USDT, USDP, and DAI`
 - No whitelisting, No expiration, buy what you can, when you can, and without slippage.
+- 0.3% of proceeds are automatically used to purchase AQUA and sent to BURNER
+
+## Public Functions
+
+To create a new IDO
+
+- 1. pause and withdraw tokens from the current IDO with function call: `withdrawTokens` (current IDO owner)
+- 2. `setToken` : Enter Token address : `isPaused` becomes false: and New IDO Owner exists
+- 3. `setTokenPrice` : Enter Token price in wei ( if using block explorer ) or Human amount (Website UI, TelegramBot)
+- 4. `setMaxAllocation` : Enter Max Amount of Tokens a user can buy at once in wei ( if using block explorer ) or Human amount (Website UI, TelegramBot)
+
+Pause and Restart IDO:
+
+- 1. `withdrawlTokens`: pauses the IDO and sends tokens back to IDO owner.
+- 2. transfer tokens back to Smart Contract.
+- 3. `startSale` : `token-price` and `token-max-allocation` are saved in state. Adjust if neccasry.
 
 ## Admin Functions:
 
-- `setToken` : can be called by public when `isPaused` is true
-- `isPaused` : is true when the presale owner removes the tokens or the admin restarts the presale contract.
-- `restartPresale` : returns the remaining tokens to the presaleOwner and makes the next listing available to public.
+- 1. `restartSale` : returns the remaining tokens to the presaleOwner , resets presale owner to admin
+- 2. `pauseSale` : make listing available to public.

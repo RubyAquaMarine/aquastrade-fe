@@ -98,8 +98,8 @@ export const AquaConfig: interfaces.MetaportConfig = {
     },
     btc: {
       decimals: "8",
-      symbol: "BTC",
-      name: "Wrapped BTC",
+      symbol: "WBTC",
+      name: "Wrapped WBTC",
     },
     untitled: {
       decimals: "18",

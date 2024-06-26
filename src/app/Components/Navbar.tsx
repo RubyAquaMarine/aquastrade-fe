@@ -120,37 +120,32 @@ const Navbar = () => {
                           </span>
                           <p className="text-sm leading-tight text-muted-foreground">
                             {" "}
-                            ETH, USDT, USDC, USDP, DAI, BTC, SKL and more{" "}
+                            ETH, USDT, USDC, USDP, DAI, WBTC, SKL and more{" "}
                           </p>
                         </li>
                         <li>
                           {" "}
-                          <span className="mb-2 mt-4 text-lg font-medium">
+                          <span className="mb-2 mt-4 text-sm">
                             <Link
-                              href="https://meson.fi/skale-europa"
+                              href="https://t.me/AquasTrade"
                               target="_blank"
                             >
-                              Meson.fi
+                              <span className="flex_row">
+                                <span> Need help bridging? </span>
+                                <span>
+                                  {" "}
+                                  <Image
+                                    className={styles.image_color}
+                                    src="/outbound.svg"
+                                    alt="menu"
+                                    width={14}
+                                    height={14}
+                                    priority
+                                  />{" "}
+                                </span>
+                              </span>
                             </Link>
                           </span>
-                          <p className="text-sm leading-tight text-muted-foreground">
-                            <Link
-                              href="https://meson.fi/skale-europa"
-                              target="_blank"
-                            >
-                              Looking to bridge $USD from other L2's via 3rd
-                              party bridge?
-                            </Link>
-                          </p>
-                          <p>
-                            {" "}
-                            <Link
-                              href="https://docs.meson.fi/references/audit-reports"
-                              target="_blank"
-                            >
-                              {"-- audits"}
-                            </Link>
-                          </p>
                         </li>
                       </ul>
                     </NavigationMenuContent>
@@ -165,30 +160,64 @@ const Navbar = () => {
                     <Link href="/dashboard/presale">IDO</Link>
                   </NavigationMenuTrigger>
                   <span className={styles.nav_menu_br}>
-                    <NavigationMenuContent className={styles.nav_menu_dd}>
-                      <Link href="/dashboard/presale" legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={navigationMenuTriggerStyle()}
-                        >
-                          Presale Tokens
-                        </NavigationMenuLink>
-                      </Link>
-
-                      <Link href="/dashboard/create" legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={navigationMenuTriggerStyle()}
-                        >
-                          Create Tokens
-                        </NavigationMenuLink>
-                      </Link>
-
-                      <Link href="/dashboard/airdrop" legacyBehavior passHref>
-                        <NavigationMenuLink
-                          className={navigationMenuTriggerStyle()}
-                        >
-                          Airdrop Tokens
-                        </NavigationMenuLink>
-                      </Link>
+                    <NavigationMenuContent className={styles.nav_menu_bg}>
+                      <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                        <li className="row-span-3">
+                          <NavigationMenuLink asChild>
+                            <a
+                              className="flex h-full w-full select-none flex-col justify-end  p-6 focus:shadow-md"
+                              href="/dashboard/metaport"
+                            >
+                              {/** rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none */}
+                              <div className={styles.metaport}>Join IDO</div>
+                              <div className={styles.image_invert_center}></div>
+                              <p className="text-sm leading-tight text-muted-foreground">
+                                A revolutionary token launch platform, bringing
+                                the value back into the hands of the early
+                                communities.
+                              </p>
+                            </a>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          {" "}
+                          <span className="mb-2 mt-4 text-lg font-medium">
+                            <Link
+                              href="https://www.workforms.com"
+                              target="_blank"
+                            >
+                              Create IDO
+                            </Link>
+                          </span>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            {" "}
+                            List your token to raise funds for your project.
+                          </p>
+                        </li>
+                        <li>
+                          {" "}
+                          <span className="mb-2 mt-4 text-lg font-medium">
+                            <Link href="/dashboard/create">Create Token</Link>
+                          </span>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            <Link href="/dashboard/create">
+                              Create your token and launch with instant
+                              liquidity. NFT grants access to liquidity tiers.
+                              <ul className="mb-2 mt-4 text-xsm">
+                                <li> Bronze NFT: 5000 AQUA</li>
+                                <li> Silver NFT: 50000 AQUA</li>
+                                <li> Gold NFT: 150000 AQUA</li>
+                              </ul>
+                            </Link>
+                          </p>
+                        </li>
+                        <li>
+                          {" "}
+                          <span className="mb-2 mt-4 text-lg font-medium">
+                            <Link href="/dashboard/create">Airdrop Tokens</Link>
+                          </span>
+                        </li>
+                      </ul>
                     </NavigationMenuContent>
                   </span>
                 </NavigationMenuItem>
@@ -210,11 +239,11 @@ const Navbar = () => {
                         </NavigationMenuLink>
                       </Link>
 
-                      <Link href="/perp/ethusdt" legacyBehavior passHref>
+                      <Link href="/dashboard/tokeninfo" legacyBehavior passHref>
                         <NavigationMenuLink
                           className={navigationMenuTriggerStyle()}
                         >
-                          Perpetuals
+                          Token List
                         </NavigationMenuLink>
                       </Link>
 
@@ -387,4 +416,42 @@ export default Navbar;
                     </NavigationMenuContent>{" "}
                   </span>
                 </NavigationMenuItem>
+
+                 <li>
+                          {" "}
+                          <span className="mb-2 mt-4 text-lg font-medium">
+                            <Link
+                              href="https://meson.fi/skale-europa"
+                              target="_blank"
+                            >
+                              Meson.fi
+                            </Link>
+                          </span>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            <Link
+                              href="https://meson.fi/skale-europa"
+                              target="_blank"
+                            >
+                              Looking to bridge $USD from other L2's via 3rd
+                              party bridge?
+                            </Link>
+                          </p>
+                          <p>
+                            {" "}
+                            <Link
+                              href="https://docs.meson.fi/references/audit-reports"
+                              target="_blank"
+                            >
+                              {"-- audits"}
+                            </Link>
+                          </p>
+                        </li>
+
+                         <Link href="/perp/ethusdt" legacyBehavior passHref>
+                        <NavigationMenuLink
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          Perpetuals
+                        </NavigationMenuLink>
+                      </Link>
 */
