@@ -9,17 +9,41 @@
   border-radius: 12px;
   border: 1px solid #475384;
   font-size: 0.8rem;
-  padding: 0.6rem 1rem;
+  padding-bottom: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.4rem;
 }
 
 .token_approve:hover {
-  background-color: #007bff;
+  background-color: #475384;
 }
 
 .token_approve_amount {
   display: flex;
   font-size: 0.8rem;
   color: #bdb8b8;
+}
+/*
+
+token erc20 revoke 
+
+*/
+
+.token_revoke {
+  color: #f4f4f4;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1px solid #7c4784;
+  font-size: 0.8rem;
+  padding-bottom: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.4rem;
+}
+
+.token_revoke:hover {
+  background-color: #7c4784;
 }
 
 .add_spinner {

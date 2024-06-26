@@ -18,20 +18,17 @@ import styles from "@/app/Styles/TokenApprove.module.css";
 import { findTokenFromAddress } from "@/app/Utils/findTokens";
 import { bigint } from "zod";
 
-interface Props {
+type Props = {
   name: string;
   address: `0x${string}`; // 1
   approve: bigint;
   args: [any];
-}
+};
 
 const TokenApproveProps = (params: Props) => {
+  const toastMessage = useRef();
   const [spinTimer, setSpinTimer] = useState<boolean>(false);
-  // Doesn't work with LP tokens
-  const token = findTokenFromAddress(params.address);
-
-  // RENDERED VALUE
-  const [allowance_amount, setAllowance] = useState<bigint>(BigInt(0));
+  const [allowance_amount, setAllowance] = useState<bigint>();
 
   const { data: hash, writeContract } = useWriteContract();
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
@@ -45,26 +42,42 @@ const TokenApproveProps = (params: Props) => {
     isError,
   } = useERC20Token(params.address, params.name, params.args);
 
+  // Doesn't work with LP tokens
+  const token = findTokenFromAddress(params.address);
+
+  // When fetch is completed
   useEffect(() => {
-    if (typeof token_transfer_allowance === "bigint") {
+    if (
+      typeof token_transfer_allowance === "bigint" &&
+      !isLoading &&
+      !isError
+    ) {
       setAllowance(token_transfer_allowance);
     }
   }, [token_transfer_allowance]);
 
+  // On Approval or revoke
   useEffect(() => {
     if (contractCallDataConfirmed) {
       const isLink = `https://elated-tan-skat.explorer.mainnet.skalenodes.com/tx/${hash}`;
       notify(isLink);
       setSpinTimer(false);
-      setAllowance(params.approve); // force render
-      console.log(" TOKEN APPROVAL CONFIRMATION ");
+      if (toastMessage.current === "Approved") {
+        setAllowance(params.approve); // force render
+        toastMessage.current = "";
+      }
+
+      if (toastMessage.current === "Revoked") {
+        setAllowance(BigInt(0)); // force render
+        toastMessage.current = "";
+      }
     }
   }, [contractCallDataConfirmed, hash]);
 
   const CustomToastWithLink = (_url: string) => (
     <div>
       <Link href={_url} target="_blank">
-        Token Approved Tx Hash on 🌊 AquasTrade
+        Token {toastMessage.current} Tx Hash on 🌊 AquasTrade
       </Link>
     </div>
   );
@@ -83,6 +96,7 @@ const TokenApproveProps = (params: Props) => {
     });
 
   const handleApprove = () => {
+    toastMessage.current = "Approved";
     // spinTimer.current = true;
     setSpinTimer(true);
     writeContract({
@@ -93,34 +107,58 @@ const TokenApproveProps = (params: Props) => {
     });
   };
 
-  console.log(
-    "DEBUG TOKEN APPROVAL vs APPROVED(0,0):  ----------",
-    params.approve,
-    allowance_amount,
-    token_transfer_allowance,
-  );
+  const handleRevoke = () => {
+    toastMessage.current = "Revoked";
+    // spinTimer.current = true;
+    setSpinTimer(true);
+    writeContract({
+      abi: ERC20_ABI,
+      address: params.address,
+      functionName: "approve",
+      args: [params.args[1], BigInt(0)],
+    });
+  };
+
+  // console.log(
+  //   "DEBUG TOKEN APPROVAL vs APPROVED(0,0):  ----------",
+  //   params.approve,
+  //   allowance_amount,
+  //   token_transfer_allowance,
+  //   isLoading,
+  //   isError
+  // );
 
   return (
     <div className={styles.token_approve_container}>
       {/** Show the approved amounts  */}
-      {token_transfer_allowance >= params.approve ||
-      allowance_amount >= params.approve ? (
+      {params.approve && allowance_amount >= params.approve ? (
         <span>
-          {" "}
-          <span className={styles.token_approve_amount}>
-            {parseFloat(
-              formatUnits(
-                allowance_amount,
-                Number(token !== false ? token?.decimals : 18), // defaults to 18 if its not found == LP token
-              ),
-            ).toFixed(8)}
-          </span>{" "}
+          <button className={styles.token_revoke} onClick={handleRevoke}>
+            <span className={styles.add_spinner}>
+              {" "}
+              <span className={styles.spinner_padding}>
+                {" "}
+                {spinTimer ? (
+                  <FaSpinner className={styles.spinner_icon} />
+                ) : (
+                  ""
+                )}{" "}
+              </span>
+              <span>
+                {parseFloat(
+                  formatUnits(
+                    allowance_amount,
+                    Number(token !== false ? token?.decimals : 18), // defaults to 18 if its not found == LP token
+                  ),
+                ).toFixed(token && token?.decimals > 8 ? 8 : token?.decimals)}
+              </span>{" "}
+            </span>
+          </button>
         </span>
       ) : (
         <span>
           {" "}
-          {allowance_amount < params.approve ||
-          token_transfer_allowance < params.approve ? (
+          {params.approve && allowance_amount < params.approve ? (
             <span>
               <button className={styles.token_approve} onClick={handleApprove}>
                 <span className={styles.add_spinner}>
