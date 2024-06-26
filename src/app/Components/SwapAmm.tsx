@@ -159,7 +159,7 @@ const SwapAmm = () => {
 
   // test
   useEffect(() => {
-    // ensure this is amm feature Add Liquidity Only and Not the Swap functionality
+    // ensure this is amm feature Add Liquidity and Not the Swap functionality
     if (
       addTokenBAmount &&
       addTokenBAmount >= BigInt(1) &&
@@ -167,6 +167,9 @@ const SwapAmm = () => {
     ) {
       setAmountB(formatUnits(addTokenBAmount, Number(tokenBDecimal.current))); // convert big to human amount string
     } else {
+      console.log(
+        " Test useEffect setAmountB .. When is this being triggered? ",
+      );
       setAmountB("0.0");
     }
   }, [addTokenBAmount, ammFeature]);
@@ -498,9 +501,29 @@ const SwapAmm = () => {
   };
 
   const handleFlipTokens = () => {
+    /*
+    Token consists of several param
+
+    amountA = human value: string such as 1.0 = 1*10**Decimals in Solidity
+
+    tokenA = SYMBOL: string such as WBTC , ETH 
+
+    tokenA Address 
+
+    TokenA decimals 
+
+
+    Below logic 
+    sets tokenB as tokenA 
+    sets tokenA as tokenB 
+    and amounts.... but not decimals 
+
+
+    */
     const tempTokenA = tokenA;
     setTokenA(tokenB);
     setTokenB(tempTokenA);
+
     const tempAmountA = amountA;
     setAmountA(amountB);
     setAmountB(tempAmountA);
