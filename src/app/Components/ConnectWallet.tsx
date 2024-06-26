@@ -88,13 +88,17 @@ const ConnectWallet = () => {
             ) : (
               <span className={styles.telegram}>
                 {!chain ? (
-                  <button type="button" className={styles.button_trade}>
-                    <Link href="/dashboard">Switch Network</Link>
-                  </button>
+                  <Link href="/dashboard">
+                    <button type="button" className={styles.button_trade}>
+                      Switch Network
+                    </button>
+                  </Link>
                 ) : (
-                  <button type="button" className={styles.button_trade}>
-                    <Link href="/swap/amm">Start Trading</Link>
-                  </button>
+                  <Link href="/swap/amm">
+                    <button type="button" className={styles.button_trade}>
+                      Start Trading
+                    </button>
+                  </Link>
                 )}
               </span>
             )}

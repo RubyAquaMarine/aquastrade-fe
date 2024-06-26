@@ -166,7 +166,7 @@ const Navbar = () => {
                           <NavigationMenuLink asChild>
                             <a
                               className="flex h-full w-full select-none flex-col justify-end  p-6 focus:shadow-md"
-                              href="/dashboard/metaport"
+                              href="/dashboard/presale"
                             >
                               {/** rounded-md bg-gradient-to-b from-muted/50 to-muted no-underline outline-none */}
                               <div className={styles.metaport}>Join IDO</div>
@@ -180,18 +180,21 @@ const Navbar = () => {
                           </NavigationMenuLink>
                         </li>
                         <li>
-                          {" "}
                           <span className="mb-2 mt-4 text-lg font-medium">
                             <Link
-                              href="https://www.workforms.com"
+                              href="https://forms.monday.com/forms/5784bdcbbde2aafb4c556666ef98777a?r=apse2"
                               target="_blank"
                             >
                               Create IDO
                             </Link>
                           </span>
                           <p className="text-sm leading-tight text-muted-foreground">
-                            {" "}
-                            List your token to raise funds for your project.
+                            <Link
+                              href="https://forms.monday.com/forms/5784bdcbbde2aafb4c556666ef98777a?r=apse2"
+                              target="_blank"
+                            >
+                              List your token to raise $USD for your project.
+                            </Link>
                           </p>
                         </li>
                         <li>
