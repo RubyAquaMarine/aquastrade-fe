@@ -74,9 +74,9 @@ const Home = () => {
   const supplyDescriptions = ["500", "50", "5000"];
   const feeDescriptions = ["66%", "100%", "33.3%"];
   const utilityDescriptions = [
-    "Token Create",
+    "Token Create, Token Airdrop",
     "Free DCA Orders, Token Create, Token Airdrop",
-    "Token Create",
+    "Token Create, Token Airdrop",
   ];
   const allowance = [
     "300000000000000000",
