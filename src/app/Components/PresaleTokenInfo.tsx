@@ -74,7 +74,7 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
       <div className={styles.container_flex}>
         <span className={styles.container_left}>
           <span className={styles.button_kyc}>
-            <spaan className={styles.icon_info}>
+            <span className={styles.icon_info}>
               {" "}
               <Image
                 src="/info.svg"
@@ -83,8 +83,8 @@ const PresaleTokenInfo: React.FC = (props: Props) => {
                 height={18}
                 priority
               />{" "}
-            </spaan>
-            <spaan> No KYC Required</spaan>
+            </span>
+            <span> No KYC Required</span>
           </span>{" "}
         </span>
 

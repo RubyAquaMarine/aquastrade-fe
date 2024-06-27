@@ -4,19 +4,27 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useAccount } from "wagmi";
-import { formatUnits } from "viem";
-import LaunchPad from "@/app/Components/LaunchPad";
+
+import AirDrop from "@/app/Components/AirDrop";
 import { useNFTs } from "@/app/Hooks/useAMM";
 import {
   MARKETPLACE_GOLD_NFT,
   MARKETPLACE_BRONZE_NFT,
   MARKETPLACE_SILVER_NFT,
 } from "@/app/Utils/config";
-import styles from "@/app/Styles/AMM.module.css";
 
-const NFTHolderLaunchPad = () => {
+/*
+ What nft does the wallet contain? and if more than 1 tier, return the highest tier 
+*/
+const NFTHolder = () => {
   const isNFTHolder = useRef(false);
-  const [nftHolder, setNFTHolder] = useState(false);
+  const nftType = useRef("No NFT");
+
+  const isNFTHolderBronze = useRef(false);
+  const isNFTHolderSilver = useRef(false);
+  const isNFTHolderGold = useRef(false);
+
+  const [nftHolder, setNFTHolder] = useState<boolean>();
 
   const { address, isConnected, chain } = useAccount();
 
@@ -38,8 +46,6 @@ const NFTHolderLaunchPad = () => {
   );
 
   useEffect(() => {
-    isNFTHolder.current = false;
-
     if (
       isConnected &&
       address &&
@@ -47,27 +53,25 @@ const NFTHolderLaunchPad = () => {
       !loadingSilver &&
       !loadingGold
     ) {
-      if (nft_gold_balance && typeof nft_gold_balance === "bigint") {
+      if (nft_bronze_balance && typeof nft_bronze_balance === "bigint") {
         isNFTHolder.current = true;
+        isNFTHolderBronze.current = true;
+        nftType.current = "Bronze Member";
       }
 
       if (nft_silver_balance && typeof nft_silver_balance === "bigint") {
         isNFTHolder.current = true;
+        isNFTHolderSilver.current = true;
+        nftType.current = "Silver Member";
       }
 
-      if (nft_bronze_balance && typeof nft_bronze_balance === "bigint") {
+      if (nft_gold_balance && typeof nft_gold_balance === "bigint") {
         isNFTHolder.current = true;
+        isNFTHolderGold.current = true;
+        nftType.current = "Gold Member";
       }
 
       setNFTHolder(isNFTHolder.current);
-
-      console.log(
-        "NFT Holder: ",
-        isNFTHolder.current,
-        address,
-        " is connected: ",
-        isConnected,
-      );
     }
   }, [
     address,
@@ -78,36 +82,39 @@ const NFTHolderLaunchPad = () => {
   ]);
 
   console.log(
-    "Rending: NFT Holder Component: ",
+    "NFT Holder: ",
     isNFTHolder.current,
-    nftHolder,
+
+    " Gold ",
+    isNFTHolderGold.current,
+    " Silver ",
+    isNFTHolderSilver.current,
+    " Bronze ",
+    isNFTHolderBronze.current,
   );
 
   return (
     <>
-      {address && isConnected && nftHolder && nftHolder === true ? (
-        <div id="PASS" className={styles.input_container}>
-          <LaunchPad></LaunchPad>
+      {(address &&
+        isConnected &&
+        isNFTHolderGold.current &&
+        isNFTHolderGold.current === true) ||
+      (address &&
+        isConnected &&
+        isNFTHolderSilver.current &&
+        isNFTHolderSilver.current === true) ||
+      (address &&
+        isConnected &&
+        isNFTHolderBronze.current &&
+        isNFTHolderBronze.current === true) ? (
+        <div id="PASS" className="input_container">
+          {nftType.current}
         </div>
       ) : (
-        <div id="FAIL">
-          {nftHolder === false ? (
-            <span className={styles.input_container}>
-              {" "}
-              <span className="button_back">
-                <Link href="/dashboard/nft">
-                  {" "}
-                  <b>Back </b>(Buy any NFT to unlock features)
-                </Link>
-              </span>
-            </span>
-          ) : (
-            <span></span>
-          )}
-        </div>
+        <div id="FAIL"> {nftType.current}</div>
       )}
     </>
   );
 };
 
-export default NFTHolderLaunchPad;
+export default NFTHolder;

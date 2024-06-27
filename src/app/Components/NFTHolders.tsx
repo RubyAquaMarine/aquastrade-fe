@@ -13,7 +13,7 @@ import {
   MARKETPLACE_SILVER_NFT,
 } from "@/app/Utils/config";
 
-const NFTHolder = () => {
+const NFTHolders = () => {
   const isNFTHolder = useRef(false);
   const [nftHolder, setNFTHolder] = useState(false);
 
@@ -106,4 +106,4 @@ const NFTHolder = () => {
   );
 };
 
-export default NFTHolder;
+export default NFTHolders;

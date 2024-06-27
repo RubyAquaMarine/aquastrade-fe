@@ -217,7 +217,9 @@ const Navbar = () => {
                         <li>
                           {" "}
                           <span className="mb-2 mt-4 text-lg font-medium">
-                            <Link href="/dashboard/create">Airdrop Tokens</Link>
+                            <Link href="/dashboard/airdrop">
+                              Airdrop Tokens
+                            </Link>
                           </span>
                         </li>
                       </ul>
