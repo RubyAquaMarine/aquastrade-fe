@@ -15,6 +15,9 @@ export const tokenSymbolList = [
   "WIFO",
   "QXP",
   "HMT",
+  "PAXG",
+  "SUSHI",
+  "CMPS",
 ] as const;
 /*
 {
@@ -26,6 +29,13 @@ export const tokenSymbolList = [
   },
 */
 export const tokenList = [
+  {
+    id: 0,
+    symbol: "PAXG",
+    address: "0x18478516f526b7947d995e04871562adbeeaa62d",
+    decimals: 18,
+    logo: "/PAXG.png",
+  },
   {
     id: 1,
     name: "Circle USD",
@@ -169,5 +179,29 @@ export const tokenList = [
     address: "0xBE3530a3eDf9472693065041B8c9155C7FeCB8e5",
     decimals: 18,
     logo: "/HMT.png",
+  },
+  {
+    id: 19,
+    name: "Compass",
+    symbol: "CMPS",
+    address: "0x31E0B85Eff93fc3cb5423cd3E23868F5B18fF0bB",
+    decimals: 18,
+    logo: "/CMPS.png",
+  },
+  {
+    id: 20,
+    name: "SushiToken",
+    symbol: "SUSHI",
+    address: "0xCEC20381ac92D610AC444f6D73c1D40726650259",
+    decimals: 18,
+    logo: "/SUSHI.png",
+  },
+  {
+    id: 21,
+    name: "HitMakr",
+    symbol: "HMKR",
+    address: "0x57a3d5faa172f5984cdcd4885fd4f0baac88e558",
+    decimals: 18,
+    logo: "/HMKR.png",
   },
 ] as const;
