@@ -14,6 +14,8 @@ import TokenInfoBox from "@/app/Components/TokenInfoBox";
 
 import styles from "@/app/Styles/TokenApprove.module.css";
 
+import styles_text from "@/app/Styles/TokenCard.module.css";
+
 const TokenCard = () => {
   const feeds = useRef(0);
 
@@ -76,7 +78,9 @@ const TokenCard = () => {
 
   return (
     <div className={styles.container}>
-      {" "}
+      <span className={styles_text.container}>
+        Your token will appear here if there is a datafeed
+      </span>{" "}
       {addressList &&
         addressList.length >= 1 &&
         addressList.map((component: any, index) => (

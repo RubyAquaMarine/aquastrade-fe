@@ -689,6 +689,7 @@ const SwapAmm = () => {
                 />
               </span>
 
+              {/** Wallet Token List inside AMM Select Token UI */}
               {showTokenListA &&
               walletTokenList &&
               tokenAddresses?.length > 0 ? (
@@ -700,28 +701,38 @@ const SwapAmm = () => {
                         key={index}
                         onClick={() => handleTokenSelectionA(_token.symbol)}
                       >
-                        {_token.symbol} {"  "}
-                        <Image
-                          className={styles.token_list_symbol_space}
-                          src={_token.logo}
-                          alt="Aquas.Trade Crypto Assets On SKALE Network"
-                          width={18}
-                          height={18}
-                        />
-                        {"  "}{" "}
-                        {walletTokenList.map((_balance, index) => (
-                          <span key={index} className={styles.amount_balance}>
-                            {" "}
-                            {_balance.contractAddress.toUpperCase() ===
-                              _token.address.toUpperCase() &&
-                              parseFloat(
-                                formatUnits(
-                                  _balance.balance,
-                                  Number(_balance.decimals),
-                                ),
-                              ).toFixed(8)}
+                        <span>
+                          {" "}
+                          <Image
+                            src={_token.logo}
+                            alt="Aquas.Trade Crypto Assets On SKALE Network"
+                            width={35}
+                            height={35}
+                          />
+                        </span>
+
+                        <span className="flex_box">
+                          <span className={styles.token_list_symbol_space}>
+                            {_token.symbol}{" "}
                           </span>
-                        ))}
+
+                          {walletTokenList.map((_balance, index) => (
+                            <span
+                              key={index}
+                              className={styles.token_list_amount_balance}
+                            >
+                              {" "}
+                              {_balance.contractAddress.toUpperCase() ===
+                                _token.address.toUpperCase() &&
+                                parseFloat(
+                                  formatUnits(
+                                    _balance.balance,
+                                    Number(_balance.decimals),
+                                  ),
+                                ).toFixed(8)}
+                            </span>
+                          ))}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -857,40 +868,50 @@ const SwapAmm = () => {
                   onClick={() => setShowTokenListB(true)}
                 />
                 {showTokenListB && tokenAddresses?.length > 0 ? (
-                  <span className={styles_pop.popup_container}>
-                    <span className={styles_pop.popup_content}>
+                  <div className={styles_pop.popup_container}>
+                    <div className={styles_pop.popup_content}>
                       {tokenAddresses.map((_token, index) => (
-                        <span
+                        <div
                           className={styles.token_list_symbol}
                           key={index}
                           onClick={() => handleTokenSelectionB(_token.symbol)}
                         >
-                          {_token.symbol} {"  "}
-                          <Image
-                            className={styles.token_list_symbol_space}
-                            src={_token.logo}
-                            alt="Aquas.Trade Crypto Assets On SKALE Network"
-                            width={18}
-                            height={18}
-                          />
-                          {"  "}{" "}
-                          {walletTokenList.map((_balance, index) => (
-                            <span key={index} className={styles.amount_balance}>
-                              {" "}
-                              {_balance.contractAddress.toUpperCase() ===
-                                _token.address.toUpperCase() &&
-                                parseFloat(
-                                  formatUnits(
-                                    _balance.balance,
-                                    Number(_balance.decimals),
-                                  ),
-                                ).toFixed(8)}
+                          <span>
+                            {" "}
+                            <Image
+                              src={_token.logo}
+                              alt="Aquas.Trade Crypto Assets On SKALE Network"
+                              width={35}
+                              height={35}
+                            />
+                          </span>
+
+                          <span className="flex_box">
+                            <span className={styles.token_list_symbol_space}>
+                              {_token.symbol}{" "}
                             </span>
-                          ))}
-                        </span>
+
+                            {walletTokenList.map((_balance, index) => (
+                              <span
+                                key={index}
+                                className={styles.token_list_amount_balance}
+                              >
+                                {" "}
+                                {_balance.contractAddress.toUpperCase() ===
+                                  _token.address.toUpperCase() &&
+                                  parseFloat(
+                                    formatUnits(
+                                      _balance.balance,
+                                      Number(_balance.decimals),
+                                    ),
+                                  ).toFixed(8)}
+                              </span>
+                            ))}
+                          </span>
+                        </div>
                       ))}
-                    </span>
-                  </span>
+                    </div>
+                  </div>
                 ) : (
                   <span></span>
                 )}
@@ -1087,28 +1108,38 @@ const SwapAmm = () => {
                           key={index}
                           onClick={() => handleTokenSelectionA(_token.symbol)}
                         >
-                          {_token.symbol} {"  "}
-                          <Image
-                            className={styles.token_list_symbol_space}
-                            src={_token.logo}
-                            alt="Aquas.Trade Crypto Assets On SKALE Network"
-                            width={18}
-                            height={18}
-                          />
-                          {"  "}{" "}
-                          {walletTokenList.map((_balance, index) => (
-                            <span key={index} className={styles.amount_balance}>
-                              {" "}
-                              {_balance.contractAddress.toUpperCase() ===
-                                _token.address.toUpperCase() &&
-                                parseFloat(
-                                  formatUnits(
-                                    _balance.balance,
-                                    Number(_balance.decimals),
-                                  ),
-                                ).toFixed(8)}
+                          <span>
+                            {" "}
+                            <Image
+                              src={_token.logo}
+                              alt="Aquas.Trade Crypto Assets On SKALE Network"
+                              width={35}
+                              height={35}
+                            />
+                          </span>
+
+                          <span className="flex_box">
+                            <span className={styles.token_list_symbol_space}>
+                              {_token.symbol}{" "}
                             </span>
-                          ))}
+
+                            {walletTokenList.map((_balance, index) => (
+                              <span
+                                key={index}
+                                className={styles.token_list_amount_balance}
+                              >
+                                {" "}
+                                {_balance.contractAddress.toUpperCase() ===
+                                  _token.address.toUpperCase() &&
+                                  parseFloat(
+                                    formatUnits(
+                                      _balance.balance,
+                                      Number(_balance.decimals),
+                                    ),
+                                  ).toFixed(8)}
+                              </span>
+                            ))}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -1254,26 +1285,38 @@ const SwapAmm = () => {
                           key={index}
                           onClick={() => handleTokenSelectionB(_token.symbol)}
                         >
-                          {_token.symbol} {"  "}
-                          <Image
-                            className={styles.token_list_symbol_space}
-                            src={_token.logo}
-                            alt="Aquas.Trade Crypto Assets On SKALE Network"
-                            width={18}
-                            height={18}
-                          />
-                          {"  "}{" "}
-                          {walletTokenList.map((_balance, index) => (
-                            <span key={index} className={styles.amount_balance}>
-                              {" "}
-                              {_balance.contractAddress.toUpperCase() ===
-                                _token.address.toUpperCase() &&
-                                formatUnits(
-                                  _balance.balance,
-                                  Number(_balance.decimals),
-                                )}
+                          <span>
+                            {" "}
+                            <Image
+                              src={_token.logo}
+                              alt="Aquas.Trade Crypto Assets On SKALE Network"
+                              width={35}
+                              height={35}
+                            />
+                          </span>
+
+                          <span className="flex_box">
+                            <span className={styles.token_list_symbol_space}>
+                              {_token.symbol}{" "}
                             </span>
-                          ))}
+
+                            {walletTokenList.map((_balance, index) => (
+                              <span
+                                key={index}
+                                className={styles.token_list_amount_balance}
+                              >
+                                {" "}
+                                {_balance.contractAddress.toUpperCase() ===
+                                  _token.address.toUpperCase() &&
+                                  parseFloat(
+                                    formatUnits(
+                                      _balance.balance,
+                                      Number(_balance.decimals),
+                                    ),
+                                  ).toFixed(8)}
+                              </span>
+                            ))}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -1439,30 +1482,38 @@ const SwapAmm = () => {
                           key={index}
                           onClick={() => handleTokenSelectionA(_token.symbol)}
                         >
-                          {_token.symbol} {"  "}
-                          <Image
-                            className={styles.token_list_symbol_space}
-                            src={_token.logo}
-                            alt="Aquas.Trade Crypto Assets On SKALE Network"
-                            width={18}
-                            height={18}
-                          />
-                          {/** Does the user have any assets within their wallet  */}
-                          {walletTokenList &&
-                            walletTokenList.map((_balance, index) => (
+                          <span>
+                            {" "}
+                            <Image
+                              src={_token.logo}
+                              alt="Aquas.Trade Crypto Assets On SKALE Network"
+                              width={35}
+                              height={35}
+                            />
+                          </span>
+
+                          <span className="flex_box">
+                            <span className={styles.token_list_symbol_space}>
+                              {_token.symbol}{" "}
+                            </span>
+
+                            {walletTokenList.map((_balance, index) => (
                               <span
                                 key={index}
-                                className={styles.amount_balance}
+                                className={styles.token_list_amount_balance}
                               >
                                 {" "}
                                 {_balance.contractAddress.toUpperCase() ===
                                   _token.address.toUpperCase() &&
-                                  formatUnits(
-                                    _balance.balance,
-                                    Number(_balance.decimals),
-                                  )}
+                                  parseFloat(
+                                    formatUnits(
+                                      _balance.balance,
+                                      Number(_balance.decimals),
+                                    ),
+                                  ).toFixed(8)}
                               </span>
                             ))}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -1480,28 +1531,38 @@ const SwapAmm = () => {
                           key={index}
                           onClick={() => handleTokenSelectionB(_token.symbol)}
                         >
-                          {_token.symbol} {"  "}
-                          <Image
-                            className={styles.token_list_symbol_space}
-                            src={_token.logo}
-                            alt="Aquas.Trade Crypto Assets On SKALE Network"
-                            width={18}
-                            height={18}
-                          />
-                          {"  "}{" "}
-                          {walletTokenList.map((_balance, index) => (
-                            <span key={index} className={styles.amount_balance}>
-                              {" "}
-                              {_balance.contractAddress.toUpperCase() ===
-                                _token.address.toUpperCase() &&
-                                parseFloat(
-                                  formatUnits(
-                                    _balance.balance,
-                                    Number(_balance.decimals),
-                                  ),
-                                ).toFixed(8)}
+                          <span>
+                            {" "}
+                            <Image
+                              src={_token.logo}
+                              alt="Aquas.Trade Crypto Assets On SKALE Network"
+                              width={35}
+                              height={35}
+                            />
+                          </span>
+
+                          <span className="flex_box">
+                            <span className={styles.token_list_symbol_space}>
+                              {_token.symbol}{" "}
                             </span>
-                          ))}
+
+                            {walletTokenList.map((_balance, index) => (
+                              <span
+                                key={index}
+                                className={styles.token_list_amount_balance}
+                              >
+                                {" "}
+                                {_balance.contractAddress.toUpperCase() ===
+                                  _token.address.toUpperCase() &&
+                                  parseFloat(
+                                    formatUnits(
+                                      _balance.balance,
+                                      Number(_balance.decimals),
+                                    ),
+                                  ).toFixed(8)}
+                              </span>
+                            ))}
+                          </span>
                         </div>
                       ))}
                     </div>
