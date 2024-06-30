@@ -1,6 +1,10 @@
-NFT Gated (Gold NFT) ERC20 Token Airdropper. Can send up to 1000 transfers within 1 tx.
-
 # Airdrop
+
+Welcome to [Aquas.Trade](https://aquas.trade/)
+
+- NFT Gated (Gold NFT) ERC20 Token Airdropper. Can send up to 1000 transfers within 1 tx.
+
+# settings
 
 Supports: SKALE | Europa Hub
 

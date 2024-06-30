@@ -1,8 +1,14 @@
-# LaunchPad: Create Tokens
+# LaunchPad:
 
-https://aquas.trade/dashboard/create
+Welcome to [Aquas.Trade](https://aquas.trade/)
 
-Tokens are automatically listed on the exchange and are ready for trading. A datafeed is created when new tokens are deployed through Aquas.Trade Token Launch Pad
+- Tokens are automatically listed on the exchange and are ready for trading.
+
+## Create Tokens
+
+- https://aquas.trade/dashboard/create
+
+- A datafeed is created when new tokens are deployed through Aquas.Trade Token Launch Pad
 
 ## Access
 

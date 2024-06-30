@@ -1,5 +1,7 @@
 # Contributors
 
+Welcome to [Aquas.Trade](https://aquas.trade/)
+
 DEX's are a target for governments worldwide. Be smart, be safe, be aquas.
 
 ## OpSec it utmost important

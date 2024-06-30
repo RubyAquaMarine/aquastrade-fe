@@ -6,6 +6,12 @@
   padding: 2rem;
 }
 
+.container_center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .p_styled {
   margin-top: 2rem;
   position: static;
