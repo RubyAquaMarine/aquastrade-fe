@@ -1,10 +1,16 @@
+# DataFeed
+
+Welcome to [Aquas.Trade](https://aquas.trade/)
+
+## Pricing
+
 A simple datafeed to power the defi ecosystem. All prices are in form of selling 1 Quote asset for the Base asset.
 
 An example
 
 Sell 1 BTC (QUOTE) = 70,000 USD (BASE)
 
-Inverse Pricing is avaible within the same object.
+Inverse pricing is available within the same object.
 
 ## Functions
 

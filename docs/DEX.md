@@ -8,7 +8,7 @@ Welcome to [Aquas.Trade](https://aquas.trade/)
 
 # Uniswap v2 AMM
 
-AMM : Automated Market Maker provides equal amounts of liquity for both the Quote and Base Asset.
+AMM : Automated Market Maker provides equal amounts of liquidity for both the Quote and Base Asset.
 
 - Mostly a simple `single hop` (ANY->AQUA and AQUA->ANY) or `multi hop` (ANY -> AQUA -> ANY)
   \*\* `ANY` represents all tokens within the `token-list`

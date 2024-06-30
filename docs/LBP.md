@@ -1,4 +1,8 @@
+# Liquidity
+
+Welcome to [Aquas.Trade](https://aquas.trade/)
+
 # Liquidity BootStrap Phase
 
-- assets used to purcahse the NFT Collections are used to create addtional pools of liquidity on aquas.trade
--
+- Revenue from NFT sales are used to add addtional liquidity to Pools.
+- - See [Aqua Tokenomics](AQUA.md)
