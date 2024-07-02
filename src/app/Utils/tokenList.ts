@@ -201,7 +201,7 @@ export const tokenList = [
     name: "HitMakr",
     symbol: "HMKR",
     address: "0x57a3d5faa172f5984cdcd4885fd4f0baac88e558",
-    decimals: 18,
+    decimals: 9,
     logo: "/HMKR.png",
   },
 ] as const;
