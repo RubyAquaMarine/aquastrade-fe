@@ -49,15 +49,11 @@ const ROUTER_AQUADEX: `0x${string}` = findContractInfo("router")?.address;
 const FACTORY_AQUADEX: `0x${string}` = findContractInfo("factory")?.address;
 
 const SwapAmm = () => {
-  // Save state without rendering
   const divRef = useRef(null);
-  const [amountLPRemove, setAmountLPRemove] = useState(100);
-  const [amountLP, setAmountLP] = useState(BigInt(0));
 
   const tokenAAddress = useRef(
     "0xD2Aaa00700000000000000000000000000000000" as `0x${string}`,
   );
-
   const aqua_token_address = findTokenAddressFromSymbol(
     "AQUA",
   ) as unknown as `0x${string}`;
@@ -65,17 +61,11 @@ const SwapAmm = () => {
   const tokenBAddress = useRef(aqua_token_address);
 
   const feeNFT = useRef(BigInt(997)); // todo nft calculation support
-
   const tokenADecimal = useRef(BigInt(18));
   const tokenBDecimal = useRef(BigInt(18));
 
-  // wagmi
-  const { address, isConnected, chain } = useAccount();
-  const resultBlock = useBlock();
-  const { data: hash, writeContract } = useWriteContract();
-  const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  });
+  const [amountLPRemove, setAmountLPRemove] = useState(100);
+  const [amountLP, setAmountLP] = useState(BigInt(0));
 
   // ROUTING
   // is multihop or does amm pool exist?
@@ -100,6 +90,15 @@ const SwapAmm = () => {
   // WALLETS and BALANCES
   const [showTokenListA, setShowTokenListA] = useState<boolean>(false);
   const [showTokenListB, setShowTokenListB] = useState<boolean>(false);
+
+  // wagmi
+  const { address, isConnected, chain } = useAccount();
+  const resultBlock = useBlock();
+  const { data: hash, writeContract } = useWriteContract();
+  const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
+
   const walletTokenList = useSkaleExplorer(address as WALLET);
 
   // NEWEST : Not using yet: just an idea when refactoring the Add Liq functionality to new componenent
@@ -527,6 +526,9 @@ const SwapAmm = () => {
     const tempAmountA = amountA;
     setAmountA(amountB);
     setAmountB(tempAmountA);
+
+    console.log(` Token A : decimals ${tokenADecimal?.current}`);
+    console.log(` Token B : decimals ${tokenBDecimal?.current}`);
   };
 
   const handleAMMFeatures = (_feature: string) => {
@@ -601,7 +603,7 @@ const SwapAmm = () => {
   };
 
   // console.log(`"AMM Features: is Multihop", ${multiHop} isPool ${poolAddress}`);
-
+  // console.log(`Token Info A is ${tokenADecimal.current} and Token Info B is ${tokenBDecimal.current}`)
   return (
     <div className={styles.container}>
       <div className={styles.menu}>

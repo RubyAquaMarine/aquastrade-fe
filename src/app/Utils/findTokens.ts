@@ -28,7 +28,7 @@ export const findRouterFromAddress = (_address: string) => {
   };
   if (uniswapRouters) {
     uniswapRouters.forEach((element) => {
-      if (_address === element?.address) {
+      if (_address?.toLowerCase() === element?.address.toLowerCase()) {
         save = element;
       }
     });
@@ -41,7 +41,7 @@ export const findTokenAddressFromSymbol = (_symbol: string) => {
   let save;
   if (tokenAddresses) {
     tokenAddresses.forEach((element) => {
-      if (_symbol === element?.symbol) {
+      if (_symbol?.toLowerCase() === element?.symbol.toLowerCase()) {
         save = element?.address;
       }
     });
@@ -56,7 +56,7 @@ export const findTokenFromAddress = (_address: string) => {
   let save;
   if (tokenAddresses) {
     tokenAddresses.forEach((element) => {
-      if (_address === element?.address) {
+      if (_address?.toLowerCase() === element?.address.toLowerCase()) {
         save = element;
       }
     });
@@ -64,10 +64,10 @@ export const findTokenFromAddress = (_address: string) => {
   if (save) {
     return save;
   } else {
-    // console.log(
-    //   "Token Not Found within Aquas.Trade Ecosystem as of yet",
-    //   _address,
-    // );
+    console.log(
+      "Token Not Found within Aquas.Trade Ecosystem as of yet",
+      _address,
+    );
     const failed: any = "false";
     return failed;
   }
@@ -77,7 +77,7 @@ export const findTokenFromSymbol = (_symbol: string) => {
   let save;
   if (tokenAddresses) {
     tokenAddresses.forEach((element) => {
-      if (_symbol === element?.symbol) {
+      if (_symbol?.toLowerCase() === element?.symbol.toLowerCase()) {
         save = element;
       }
     });
@@ -91,7 +91,7 @@ export const findTokenLogoFromAddress = (_address: string) => {
   let save;
   if (tokenAddresses) {
     tokenAddresses.forEach((element) => {
-      if (_address === element?.address) {
+      if (_address?.toLowerCase() === element?.address.toLowerCase()) {
         save = element?.logo;
       }
     });
@@ -105,7 +105,7 @@ export const findContractInfo = (_name: string) => {
   let save;
   if (contractAddresses) {
     contractAddresses.forEach((element) => {
-      if (_name === element.name) {
+      if (_name?.toLowerCase() === element?.name.toLowerCase()) {
         save = element;
       }
     });
@@ -120,7 +120,7 @@ export const findTokenDecimalsFromSymbol = (_symbol: string) => {
   let save;
   if (tokenAddresses) {
     tokenAddresses.forEach((element) => {
-      if (_symbol === element.symbol) {
+      if (_symbol?.toLowerCase() === element?.symbol.toLowerCase()) {
         save = element?.decimals;
       }
     });

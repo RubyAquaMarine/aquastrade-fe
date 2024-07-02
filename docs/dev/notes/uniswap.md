@@ -1,5 +1,7 @@
 # Token Sorting
 
+- `switchQuoteBase`
+
 ##
 
 if Token B value is greater than Token A , return (Base/Quote )

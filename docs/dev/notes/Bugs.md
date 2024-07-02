@@ -30,6 +30,7 @@ MP => "@emotion/react": "^11.11.1",
 ## Cast : UX
 
 - Cast :
+- decomals when switching /flip
 - after adding LP : refetch the Balances
 - `Whale Size:`
 

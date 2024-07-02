@@ -10,7 +10,7 @@ import { EUROPA_NFT_ABI } from "@/app/Abi/europaAquaNFT";
 import { PAIRS_ABI } from "@/app/Abi/pairs";
 import { FACTORY_ABI } from "@/app/Abi/factory";
 import { MARKETPLACE_AQUADEX } from "@/app/Utils/config";
-import { findContractInfo } from "../Utils/findTokens";
+import { findContractInfo, findTokenFromAddress } from "../Utils/findTokens";
 
 export const useMarketPlace = (functionName: string, args?: [any]) => {
   const { data, isError, isLoading } = useReadContract({
@@ -77,7 +77,7 @@ export const useAMMPairs = (
   _functionName: string,
   _args?: [any],
 ) => {
-  //  console.log(`use AMM Pairs ${_address}  with name ${_functionName}  with params: ${_args}`);
+  // console.log(`useAMMPairs ${_address}  with functionName() ${_functionName}  with params: ${_args}`);
   const { data, isError, isLoading } = useReadContract({
     abi: PAIRS_ABI,
     address: _address,
@@ -109,17 +109,15 @@ export const useGetAmountInQuote = (
   _inputTokenAddress: `0x${string}`,
   _decimalA: bigint,
 ) => {
-  // console.log("useGetAmountInQuote:Props: ", _amount, _addressPair, _decimalA);
-
-  const amountIn = parseUnits(_amount, Number(_decimalA ? _decimalA : 18));
-
   let flip = false;
 
   const { data: reserves } = useAMMPairs(_addressPair, "getReserves");
   const { data: addrA } = useAMMPairs(_addressPair, "token0");
+  const inputToken = findTokenFromAddress(_inputTokenAddress);
 
-  if (_addressPair && addrA && _inputTokenAddress) {
-    if (addrA === _inputTokenAddress) {
+  // Logic to flip reserves based on the TokenA addresses (uniswap)
+  if (addrA && _inputTokenAddress) {
+    if (addrA?.toLowerCase() === _inputTokenAddress.toLowerCase()) {
       flip = false;
     } else {
       flip = true;
@@ -127,20 +125,23 @@ export const useGetAmountInQuote = (
   }
 
   const routerContract = findContractInfo("router");
-
+  const amountIn = parseUnits(
+    _amount ? _amount : "0",
+    Number(_decimalA ? _decimalA : 18),
+  );
   const data = [
-    parseUnits(_amount ? _amount : "0", Number(_decimalA ? _decimalA : 18)),
-    flip === false ? reserves?.[0] : reserves?.[1],
-    flip === false ? reserves?.[1] : reserves?.[0],
+    amountIn,
+    flip == false ? reserves?.[0] : reserves?.[1],
+    flip == false ? reserves?.[1] : reserves?.[0],
   ];
 
+  // Get the quote from the router
+  // returns the correct TokenB input amounts
   const { data: swap_out } = useAMMRouter(
     routerContract.address,
     "quote",
     data as any,
   );
-
-  // console.log("GetAmountInQuote: ", swap_out);
 
   return swap_out as unknown as bigint;
 };

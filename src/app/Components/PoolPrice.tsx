@@ -20,9 +20,9 @@ const PoolPrice = (params: Data) => {
     params?.pool,
   ]);
 
-  console.log("Get Pool Price from AquaFeed: Params ", params);
+  // console.log("Get Pool Price from AquaFeed: Params ", params);
 
-  console.log("Get Pool Price", price);
+  // console.log("Get Pool Price", price);
 
   useEffect(() => {
     if (price && price.length > 0) {
