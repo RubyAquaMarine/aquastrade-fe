@@ -28,6 +28,8 @@ export const useERC20Token = (
   _functionName: string,
   _args?: [any],
 ) => {
+  // console.log(`use ERC20 on CA: ${_address} | functionName(): ${_functionName}  with params: ${_args}`);
+
   const { data, isError, isLoading } = useReadContract({
     abi: ERC20_ABI,
     address: _address,
