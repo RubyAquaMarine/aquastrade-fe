@@ -2,20 +2,11 @@
 "use client";
 import Link from "next/link";
 import React, { memo } from "react";
-
 import { useDCA } from "@/app/Hooks/useDCA";
-
 import DCAUserOrders from "@/app/Components/DCAUserOrders";
 
-type TotalOrders = {
-  globalID: bigint;
-};
-
-const DCATotalOrders: React.FC = (props: TotalOrders) => {
-  console.log("DCATotalOrders props ", props);
-
+const DCATotalOrders: React.FC = () => {
   const total_dca_storages = useDCA("StorageID");
-
   //// todo  : get the pool address and map a Pair to this DCAUserOrders , to display the Pair instead of the Index of the storage
 
   const loopOrders = () => {

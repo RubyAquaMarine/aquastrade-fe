@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import React, { useState, useEffect, memo, useRef } from "react";
-import { formatUnits } from "viem";
+import { formatUnits, parseUnits } from "viem";
 
 import { Slide, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,22 +17,25 @@ import { ERC20_ABI } from "@/app/Abi/erc20";
 import styles from "@/app/Styles/TokenApprove.module.css";
 import { findTokenFromAddress } from "@/app/Utils/findTokens";
 import { bigint } from "zod";
-
 /*
- amount is in bigint 
+ amount is in string then converted to bigint using the token/decimals
 */
-
 type Props = {
   name: string;
   address: `0x${string}`; // 1
-  approve: bigint;
+  approve: string;
   args: [any];
 };
 
 const TokenApproveProps = (params: Props) => {
+  const token = findTokenFromAddress(params.address);
+
+  const amount = parseUnits(params.approve, token?.decimals);
+
   const toastMessage = useRef();
   const [spinTimer, setSpinTimer] = useState<boolean>(false);
-  const [allowance_amount, setAllowance] = useState<bigint>();
+
+  const [allowance_amount, setAllowance] = useState<bigint>(BigInt(0));
 
   const { data: hash, writeContract } = useWriteContract();
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
@@ -41,14 +44,16 @@ const TokenApproveProps = (params: Props) => {
 
   // Get Allowance Amounts already approved for contract sender
 
-  // Doesn't work with LP tokens
-  const token = findTokenFromAddress(params.address);
-
+  /*
+   Token Allowance input is two strings...... 
+  */
+  const newArgs = [params.args[0], params.args[1]];
+  const newArgsApprove = [params.args[1], params.args[2]];
   const {
     data: token_transfer_allowance,
     isLoading,
     isError,
-  } = useERC20Token(params.address, params.name, params.args);
+  } = useERC20Token(params.address, params.name, newArgs);
 
   // When fetch is completed
   useEffect(() => {
@@ -58,6 +63,9 @@ const TokenApproveProps = (params: Props) => {
       !isError
     ) {
       setAllowance(token_transfer_allowance);
+      console.log("  setAllowance", token_transfer_allowance);
+    } else {
+      console.log(" Not  setAllowance", token_transfer_allowance);
     }
   }, [token_transfer_allowance]);
 
@@ -108,7 +116,7 @@ const TokenApproveProps = (params: Props) => {
       abi: ERC20_ABI,
       address: params.address,
       functionName: "approve",
-      args: [params.args[1], params.approve],
+      args: newArgsApprove,
     });
   };
 
@@ -124,48 +132,16 @@ const TokenApproveProps = (params: Props) => {
     });
   };
 
-  // console.log(
-  //   "DEBUG TOKEN APPROVAL vs APPROVED(0,0):  ----------",
-  //   params.approve,
-  //   allowance_amount,
-  //   token_transfer_allowance,
-  //   isLoading,
-  //   isError
-  // );
+  console.log(" Already Approved Amounts ",  allowance_amount);
 
   return (
     <div className={styles.token_approve_container}>
-      {/** Show the approved amounts  */}
-      {params.approve && allowance_amount >= params.approve ? (
-        <span>
-          <button className={styles.token_revoke} onClick={handleRevoke}>
-            <span className={styles.add_spinner}>
-              {" "}
-              <span className={styles.spinner_padding}>
-                {" "}
-                {spinTimer ? (
-                  <FaSpinner className={styles.spinner_icon} />
-                ) : (
-                  ""
-                )}{" "}
-              </span>
-              <span>
-                {parseFloat(
-                  formatUnits(
-                    allowance_amount,
-                    Number(token !== false ? token?.decimals : 18), // defaults to 18 if its not found == LP token
-                  ),
-                ).toFixed(token && token?.decimals > 8 ? 8 : token?.decimals)}
-              </span>{" "}
-            </span>
-          </button>
-        </span>
-      ) : (
+      {!isLoading && !isError ? (
         <span>
           {" "}
-          {params.approve && allowance_amount < params.approve ? (
+          {amount && allowance_amount >= amount ? (
             <span>
-              <button className={styles.token_approve} onClick={handleApprove}>
+              <button className={styles.token_revoke} onClick={handleRevoke}>
                 <span className={styles.add_spinner}>
                   {" "}
                   <span className={styles.spinner_padding}>
@@ -177,16 +153,52 @@ const TokenApproveProps = (params: Props) => {
                     )}{" "}
                   </span>
                   <span>
-                    {" "}
-                    Approve {token !== false ? token?.symbol : " : LP"}
-                  </span>
+                    {parseFloat(
+                      formatUnits(
+                        allowance_amount,
+                        Number(token !== false ? token?.decimals : 18), // defaults to 18 if its not found == LP token
+                      ),
+                    ).toFixed(
+                      token && token?.decimals > 8 ? 8 : token?.decimals,
+                    )}
+                  </span>{" "}
                 </span>
               </button>
             </span>
           ) : (
-            <span></span>
-          )}{" "}
+            <span>
+              {" "}
+              {amount && allowance_amount < amount ? (
+                <span>
+                  <button
+                    className={styles.token_approve}
+                    onClick={handleApprove}
+                  >
+                    <span className={styles.add_spinner}>
+                      {" "}
+                      <span className={styles.spinner_padding}>
+                        {" "}
+                        {spinTimer ? (
+                          <FaSpinner className={styles.spinner_icon} />
+                        ) : (
+                          ""
+                        )}{" "}
+                      </span>
+                      <span>
+                        {" "}
+                        Approve {token !== false ? token?.symbol : " : LP"}
+                      </span>
+                    </span>
+                  </button>
+                </span>
+              ) : (
+                <span></span>
+              )}{" "}
+            </span>
+          )}
         </span>
+      ) : (
+        <span> </span>
       )}
     </div>
   );
