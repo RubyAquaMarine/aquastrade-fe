@@ -268,6 +268,7 @@ const DCAInterface: React.FC = () => {
           functionName: "SubmitDCAOrder",
           args: data,
         });
+        break;
 
       case 1:
         console.log("checkNFTSupport");
