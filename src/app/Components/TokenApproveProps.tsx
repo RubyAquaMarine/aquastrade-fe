@@ -132,7 +132,6 @@ const TokenApproveProps = (params: Props) => {
   //   isLoading,
   //   isError
   // );
-
   return (
     <div className={styles.token_approve_container}>
       {/** Show the approved amounts  */}

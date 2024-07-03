@@ -35,7 +35,7 @@ const TokenApproveProps = (params: Props) => {
   const toastMessage = useRef();
   const [spinTimer, setSpinTimer] = useState<boolean>(false);
 
-  const [allowance_amount, setAllowance] = useState<bigint>(BigInt(0));
+  const [allowance_amount, setAllowance] = useState<bigint>();
 
   const { data: hash, writeContract } = useWriteContract();
   const { data: contractCallDataConfirmed } = useWaitForTransactionReceipt({
@@ -48,7 +48,7 @@ const TokenApproveProps = (params: Props) => {
    Token Allowance input is two strings...... 
   */
   const newArgs = [params.args[0], params.args[1]];
-  const newArgsApprove = [params.args[1], params.args[2]];
+  const newArgsApprove = [params.args[1], amount];
   const {
     data: token_transfer_allowance,
     isLoading,
@@ -63,9 +63,6 @@ const TokenApproveProps = (params: Props) => {
       !isError
     ) {
       setAllowance(token_transfer_allowance);
-      console.log("  setAllowance", token_transfer_allowance);
-    } else {
-      console.log(" Not  setAllowance", token_transfer_allowance);
     }
   }, [token_transfer_allowance]);
 
@@ -132,8 +129,14 @@ const TokenApproveProps = (params: Props) => {
     });
   };
 
-  console.log(" Already Approved Amounts ",  allowance_amount);
-
+  // console.log(
+  //   "DEBUG TOKEN APPROVAL vs APPROVED(0,0):  ----------",
+  //   params.approve,
+  //   allowance_amount,
+  //   token_transfer_allowance,
+  //   isLoading,
+  //   isError
+  // );
   return (
     <div className={styles.token_approve_container}>
       {!isLoading && !isError ? (
