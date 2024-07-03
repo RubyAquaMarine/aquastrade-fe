@@ -18,6 +18,7 @@ import styles from "@/app/Styles/TokenApprove.module.css";
 import { findTokenFromAddress } from "@/app/Utils/findTokens";
 import { bigint } from "zod";
 /*
+DCA Token Approval 
  amount is in string then converted to bigint using the token/decimals
 */
 type Props = {
@@ -34,7 +35,6 @@ const TokenApproveProps = (params: Props) => {
 
   const toastMessage = useRef();
   const [spinTimer, setSpinTimer] = useState<boolean>(false);
-
   const [allowance_amount, setAllowance] = useState<bigint>();
 
   const { data: hash, writeContract } = useWriteContract();
@@ -73,7 +73,7 @@ const TokenApproveProps = (params: Props) => {
       notify(isLink);
       setSpinTimer(false);
       if (toastMessage.current === "Approved") {
-        setAllowance(params.approve); // force render
+        setAllowance(amount); // force render
         toastMessage.current = "";
       }
 
