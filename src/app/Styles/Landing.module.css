@@ -45,3 +45,15 @@
   color: #d7de0a;
 }
 /** #29ff94; **/
+
+.image_invert_center {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+
+.image_center {
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
