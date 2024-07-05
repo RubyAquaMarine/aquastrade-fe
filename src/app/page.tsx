@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import TextSizeAdjuster from "@/app/Components/ViewPort";
 import ConnectWallet from "@/app/Components/ConnectWallet";
@@ -90,38 +91,101 @@ const Home = ({ children, params }: any) => {
                     <span className={styles.text_highlight}>
                       {" "}
                       <TextSizeAdjuster
-                        text={"0"}
+                        text={"Zero"}
                         text_size="15"
                         text_size_to="18"
                       ></TextSizeAdjuster>
                     </span>
 
                     <TextSizeAdjuster
-                      text={"gas fees on"}
+                      text={"gas fees"}
                       text_size="13"
                       text_size_to="16"
                     ></TextSizeAdjuster>
-
-                    <Image
-                      className={styles.image_invert_center}
-                      src={SKL}
-                      alt="AquasTrade Logo outbound external links"
-                      width={30}
-                      height={30}
-                      priority
-                    />
                   </span>
 
                   <span>
                     <ConnectWallet></ConnectWallet>
+                  </span>
+                  <span className={styles.text_body}>
+                    <span className="flex_row">
+                      <span className="box_padding">
+                        {" "}
+                        <Link href="https://t.me/aquastrade" target="_blank">
+                          <Image
+                            className={styles.image_invert_center}
+                            src="/TELEGRAM.png"
+                            alt="AquasTrade outbound external links"
+                            width={34}
+                            height={34}
+                            priority
+                          />
+                        </Link>{" "}
+                      </span>
+
+                      <span className="box_padding">
+                        {" "}
+                        <Link href="https://x.com/aquastrade" target="_blank">
+                          <Image
+                            className={styles.image_invert_center}
+                            src="/X.png"
+                            alt="AquasTrade outbound external links"
+                            width={34}
+                            height={34}
+                            priority
+                          />
+                        </Link>{" "}
+                      </span>
+                      <span className="box_padding">
+                        <Link
+                          href="https://defillama.com/protocol/aquas-trade#information"
+                          target="_blank"
+                        >
+                          <Image
+                            className={styles.image_center}
+                            src="/DEFILLAMA.png"
+                            alt="AquasTrade outbound external links"
+                            width={35}
+                            height={35}
+                            priority
+                          />
+                        </Link>
+                      </span>
+                      <span className="box_padding">
+                        {" "}
+                        <Link
+                          href="https://github.com/aquastrade"
+                          target="_blank"
+                        >
+                          <Image
+                            className={styles.image_invert_center}
+                            src={`./GITHUB.svg`}
+                            alt="AquasTrade outbound external links"
+                            width={28}
+                            height={28}
+                            priority
+                          />
+                        </Link>
+                      </span>
+                      <span className="box_padding">
+                        <Link href="https://skale.space" target="_blank">
+                          <Image
+                            className={styles.image_invert_center}
+                            src={`./SKL.svg`}
+                            alt="AquasTrade outbound external links"
+                            width={28}
+                            height={28}
+                            priority
+                          />
+                        </Link>
+                      </span>
+                    </span>
                   </span>
                 </div>
               </div>
             </ChartComponent>
           ) : (
             <div>
-              <span> check blockers: no internet ? wss</span>
-
               <span>
                 <ConnectWallet></ConnectWallet>{" "}
               </span>

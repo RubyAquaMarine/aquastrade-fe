@@ -119,6 +119,10 @@ body::-webkit-scrollbar {
     flex: 1;
     gap: 1rem;
   }
+  .box_padding {
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+  }
   /* ... */
 }
 
