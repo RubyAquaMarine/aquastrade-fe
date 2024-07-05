@@ -6,8 +6,6 @@ import React from "react";
 import styles_header from "../Styles/Telegram.module.css"; // You can create a CSS module for styling
 import styles from "../Styles/NavHover.module.css"; // You can create a CSS module for styling
 import Image from "next/image";
-import Dropdown from "react-multilevel-dropdown";
-
 import AQUA from "../../../public/AQUA.png";
 import SKL from "../../../public/SKL.svg";
 import MENU from "../../../public/menu1.svg";
@@ -236,105 +234,7 @@ const Navbar = () => {
 
           <li>
             {" "}
-            <Dropdown
-              buttonVariant="tertiary"
-              buttonClassName={styles.dropdown_menu}
-              title={
-                <Image
-                  src={MENU}
-                  alt="AquasTrade Menu"
-                  width={30}
-                  height={30}
-                  className={styles.image_invert}
-                />
-              }
-            >
-              <Dropdown.Item className={styles.popup_item_top}>
-                <Link href="/" className={styles.popup_item_link}>
-                  Connect Wallet&emsp;&nbsp;
-                </Link>
-              </Dropdown.Item>
-
-              <Dropdown.Item className={styles.popup_item}>
-                <Link
-                  href={`/user/0x4f01C97785a62Cd0f4a33993B090DADe0F44e4F4`}
-                  className={styles.popup_item_link}
-                >
-                  Search Wallets &emsp; &emsp;{" "}
-                </Link>
-              </Dropdown.Item>
-
-              <Dropdown.Item className={styles.popup_item_bottom}>
-                {"<"}- Socials
-                <Dropdown.Submenu className={styles.popup_submenu}>
-                  <Dropdown.Item className={styles.popup_item}>
-                    <Link
-                      href="https://chainlist.org/?search=skale+europa"
-                      target="_blank"
-                      className={styles.popup_item_sub_link}
-                    >
-                      Chain RPC
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item className={styles.popup_item}>
-                    <Link
-                      href="https://dappradar.com/dapp/aquas-trade"
-                      target="_blank"
-                      className={styles.popup_item_sub_link}
-                    >
-                      DappRadar
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item className={styles.popup_item}>
-                    <Link
-                      href="https://defillama.com/protocol/aquas-trade#information"
-                      target="_blank"
-                      className={styles.popup_item_sub_link}
-                    >
-                      Defi Llama
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item className={styles.popup_item}>
-                    <Link
-                      href="https://github.com/aquastrade"
-                      target="_blank"
-                      className={styles.popup_item_sub_link}
-                    >
-                      Github &nbsp;&nbsp;
-                    </Link>
-                  </Dropdown.Item>
-
-                  <Dropdown.Item className={styles.popup_item}>
-                    <Link
-                      href={`https://github.com/RubyAquaMarine/aquastrade-fe/issues`}
-                      target="_blank"
-                      className={styles.popup_item_sub_link}
-                    >
-                      Report Bug &nbsp; &nbsp;
-                    </Link>
-                  </Dropdown.Item>
-
-                  <Dropdown.Item className={styles.popup_item}>
-                    <Link
-                      href="https://t.me/AquasTrade"
-                      target="_blank"
-                      className={styles.popup_item_sub_link}
-                    >
-                      Telegram &nbsp;
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item className={styles.popup_item}>
-                    <Link
-                      href="https://x.com/Aquastrade"
-                      target="_blank"
-                      className={styles.popup_item_sub_link}
-                    >
-                      X.com &nbsp;
-                    </Link>
-                  </Dropdown.Item>
-                </Dropdown.Submenu>
-              </Dropdown.Item>
-            </Dropdown>
+          
           </li>
         </ul>
       </nav>
